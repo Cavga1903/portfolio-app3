@@ -1,54 +1,67 @@
-# React + TypeScript + Vite
+# Tolga Çavga | Kişisel Portfolyo Web Sitesi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Merhaba! 👋  
+Bu proje, kendi yazılım geliştirme yolculuğumu ve becerilerimi sergilemek için oluşturduğum kişisel portfolyo websitesidir.  
+React, TypeScript ve TailwindCSS kullanılarak modern ve responsive bir tasarımla geliştirilmiştir.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Kullanılan Teknolojiler
 
-## Expanding the ESLint configuration
+- **React** (Vite ile hızlı başlatıldı)
+- **TypeScript**
+- **TailwindCSS** (Responsive tasarım için)
+- **DaisyUI** ve **React-Icons** (Şık UI ve ikonlar için)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🎯 Özellikler
+
+- Responsive (Mobil, tablet ve masaüstü uyumlu)
+- Dark Mode desteği 🌙
+- Smooth Scroll (Yumuşak kaydırma)
+- Hamburger Menü (mobil uyumlu açılır/kapanır sistem)
+- Kendi özel ikon sistemi (React-Icons kullanılarak)
+- Proje ve İletişim kartları
+- Temiz, sade ve modern arayüz tasarımı
+
+---
+
+## 📸 Sayfa Yapısı
+
+- **Navbar:** Site genelinde gezinme
+- **Hero:** Hoşgeldin bölümü
+- **About:** Kendim hakkında bilgiler
+- **Technologies:** Bildiğim teknolojiler listesi
+- **Projects:** Geliştirdiğim projeler
+- **Contact:** İletişim bilgileri
+- **Footer:** Site kapanış bölümü
+
+---
+
+## 🔗 Online Yayın
+
+Web sitesine şu linkten ulaşabilirsiniz:  
+👉 [https://portfolio-app3.vercel.app](https://portfolio-app3.vercel.app)  
+(**Not:** Kendi deploy linkinle değiştirirsin!)
+
+---
+
+## 📜 Kurulum ve Çalıştırma
+
+Projeyi kendi bilgisayarınızda çalıştırmak için:
+
+```bash
+git clone https://github.com/Cavga1903/portfolio-app3.git
+cd portfolio-app3
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📧 İletişim
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Eğer bana ulaşmak isterseniz:
+	•	📩 E-posta: tolga@example.com
+	•	🔗 LinkedIn: linkedin.com/in/tolga
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
