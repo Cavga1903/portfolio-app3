@@ -61,7 +61,7 @@ npm run dev
 ## 📧 İletişim
 
 ### Eğer bana ulaşmak isterseniz:
--	📩 E-posta: cavgaa228@gmail.com
-- 🔗 Linkedin: [tolgaacavgaa](linkedin.com/in/tolgaacavgaa) 
+- 📩 E-posta: cavgaa228@gmail.com
+- 🔗 Linkedin: [tolgaacavgaa](https://linkedin.com/in/tolgaacavgaa)
 
 ---
