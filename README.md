@@ -43,7 +43,7 @@ React, TypeScript ve TailwindCSS kullanılarak modern ve responsive bir tasarım
 
 Web sitesine şu linkten ulaşabilirsiniz:  
 👉 [https://portfolio-app3.vercel.app](https://portfolio-app3.vercel.app)  
-(**Not:** Kendi deploy linkinle değiştirirsin!)
+
 
 ---
 
