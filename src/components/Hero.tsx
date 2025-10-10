@@ -1,9 +1,49 @@
 import React from 'react';
 import { FaArrowDown } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { TypeAnimation } from 'react-type-animation';
 
 const Hero: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  
+  // Typing animation sequences based on language
+  const getTypingSequence = () => {
+    if (i18n.language === 'en') {
+      return [
+        'Frontend Developer',
+        2000,
+        'React Specialist',
+        2000,
+        'UI/UX Enthusiast',
+        2000,
+        'Creative Coder',
+        2000,
+      ];
+    } else if (i18n.language === 'de') {
+      return [
+        'Frontend-Entwickler',
+        2000,
+        'React-Spezialist',
+        2000,
+        'UI/UX-Enthusiast',
+        2000,
+        'Kreativer Programmierer',
+        2000,
+      ];
+    } else {
+      // Turkish (default)
+      return [
+        'Frontend Developer',
+        2000,
+        'React Uzmanı',
+        2000,
+        'UI/UX Meraklısı',
+        2000,
+        'Yaratıcı Kodlayıcı',
+        2000,
+      ];
+    }
+  };
   
   return (
     <section id="hero" className="relative flex flex-col items-center justify-center text-center min-h-screen bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
@@ -18,7 +58,21 @@ const Hero: React.FC = () => {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-300% hover:scale-105 transition-transform duration-300">
           {t('hero.greeting')}
         </h1>
-        <p className="text-lg md:text-2xl mb-8 text-gray-300 max-w-2xl mx-auto hover:text-white transition-colors duration-300">
+        
+        {/* Typing Animation */}
+        <div className="text-2xl md:text-4xl font-semibold mb-8 text-cyan-400 h-16 flex items-center justify-center">
+          <TypeAnimation
+            key={i18n.language} // Re-render when language changes
+            sequence={getTypingSequence()}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+            cursor={true}
+            className="inline-block"
+          />
+        </div>
+        
+        <p className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto hover:text-white transition-colors duration-300">
           {t('hero.description')}
         </p>
         
