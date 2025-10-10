@@ -17,6 +17,23 @@
     "title": "Über mich",
     "description": "Hallo! Ich bin Tolga. Ich bin mit großer Leidenschaft in die Welt der Softwareentwicklung eingetreten. Als Frontend-Entwickler genieße ich es, kreative und benutzerfreundliche Webanwendungen zu erstellen. In meiner Freizeit interessiere ich mich für das Lernen neuer Technologien, das Lesen von Büchern und Sport."
   },
+  "experience": {
+    "title": "Erfahrung & Bildung",
+    "education": {
+      "degree": "Frontend-Entwicklung",
+      "school": "Selbststudium",
+      "location": "Online",
+      "period": "2023 - Heute",
+      "description": "Umfassende Ausbildung in modernen Webtechnologien und Frontend-Entwicklung erhalten. Fokus auf React, TypeScript und moderne Webstandards."
+    },
+    "work1": {
+      "title": "Frontend-Entwickler",
+      "company": "Freiberufliche Projekte",
+      "location": "Remote",
+      "period": "2024 - Heute",
+      "description": "Entwickelte moderne und responsive Webanwendungen für verschiedene Kunden. Erstellte benutzerfreundliche Oberflächen mit React und TypeScript."
+    }
+  },
   "technologies": {
     "title": "Meine Fähigkeiten",
     "html": "HTML",

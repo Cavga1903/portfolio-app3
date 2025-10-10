@@ -17,6 +17,23 @@
     "title": "Hakkımda",
     "description": "Merhaba! Ben Tolga. Yazılım geliştirme dünyasına büyük bir tutku ile adım attım. Frontend Developer olarak yaratıcı ve kullanıcı dostu web uygulamaları geliştirmekten büyük keyif alıyorum. Boş zamanlarımda yeni teknolojiler öğrenmek, kitap okumak ve spor yapmakla ilgileniyorum."
   },
+  "experience": {
+    "title": "Deneyim & Eğitim",
+    "education": {
+      "degree": "Frontend Development",
+      "school": "Kendi Kendine Öğrenme",
+      "location": "Online",
+      "period": "2023 - Devam Ediyor",
+      "description": "Modern web teknolojileri ve frontend development konusunda kapsamlı eğitim aldım. React, TypeScript ve modern web standartları üzerine yoğunlaştım."
+    },
+    "work1": {
+      "title": "Frontend Developer",
+      "company": "Freelance Projeler",
+      "location": "Uzaktan",
+      "period": "2024 - Devam Ediyor",
+      "description": "Çeşitli müşteriler için modern ve responsive web uygulamaları geliştirdim. React ve TypeScript kullanarak kullanıcı dostu arayüzler oluşturdum."
+    }
+  },
   "technologies": {
     "title": "Bildiklerim",
     "html": "HTML",

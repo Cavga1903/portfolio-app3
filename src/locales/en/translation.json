@@ -17,6 +17,23 @@
     "title": "About Me",
     "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports."
   },
+  "experience": {
+    "title": "Experience & Education",
+    "education": {
+      "degree": "Frontend Development",
+      "school": "Self-Learning",
+      "location": "Online",
+      "period": "2023 - Present",
+      "description": "Received comprehensive training in modern web technologies and frontend development. Focused on React, TypeScript and modern web standards."
+    },
+    "work1": {
+      "title": "Frontend Developer",
+      "company": "Freelance Projects",
+      "location": "Remote",
+      "period": "2024 - Present",
+      "description": "Developed modern and responsive web applications for various clients. Created user-friendly interfaces using React and TypeScript."
+    }
+  },
   "technologies": {
     "title": "My Skills",
     "html": "HTML",
