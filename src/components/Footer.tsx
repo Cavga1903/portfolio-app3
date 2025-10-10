@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
           aria-label="Instagram"
           title="Instagram - @codewithcavga"
         >
-          <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-pink-500 group-hover:text-pink-600" />
+          <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-white group-hover:text-pink-500" />
         </a>
       </div>
 
