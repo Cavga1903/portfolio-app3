@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { FaLinkedin, FaFacebook, FaWhatsapp, FaLink } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
+import Toast from './Toast';
+import { useToast } from '../hooks/useToast';
 
 interface ShareButtonsProps {
   url: string;
@@ -19,11 +21,11 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
   showLabel = true
 }) => {
   const { t } = useTranslation();
+  const { isVisible, message, type, showToast, hideToast } = useToast();
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(url);
-    // Toast notification eklenebilir
-    alert(t('share.linkCopied'));
+    showToast(t('share.linkCopied'), 'success');
   };
 
   const shareLinks = {
@@ -65,12 +67,22 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
   ];
 
   return (
-    <div className="flex flex-col gap-3">
-      {showLabel && (
-        <p className="text-sm text-gray-400 font-medium">{t('share.title')}</p>
-      )}
-      
-      <div className="flex flex-wrap gap-2">
+    <>
+      {/* Toast Notification */}
+      <Toast 
+        message={message}
+        isVisible={isVisible}
+        onClose={hideToast}
+        type={type}
+        duration={3000}
+      />
+
+      <div className="flex flex-col gap-3">
+        {showLabel && (
+          <p className="text-sm text-gray-400 font-medium">{t('share.title')}</p>
+        )}
+        
+        <div className="flex flex-wrap gap-2">
         {buttons.map((button, index) => (
           <motion.a
             key={button.name}
@@ -104,6 +116,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
         </motion.button>
       </div>
     </div>
+    </>
   );
 };
 
