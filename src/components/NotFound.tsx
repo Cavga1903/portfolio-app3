@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaHome, FaSearch, FaRocket, FaGhost } from 'react-icons/fa';
+import { FaHome, FaRocket, FaGhost } from 'react-icons/fa';
 
 const NotFound: React.FC = () => {
   const { t } = useTranslation();
-  const [rotation, setRotation] = useState(0);
-
-  // Floating animation için
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation(prev => (prev + 1) % 360);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
 
   const emojis = ['🤷‍♂️', '🔍', '🗺️', '🧭', '🚀', '👻', '🤖', '🛸'];
   const [currentEmoji, setCurrentEmoji] = useState(emojis[0]);
