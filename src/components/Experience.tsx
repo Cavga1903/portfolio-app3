@@ -95,7 +95,7 @@ const Experience: React.FC = () => {
           {experiences.map((item, index) => (
             <div key={index} className={`relative mb-12 ${index % 2 === 0 ? 'md:pr-1/2' : 'md:pl-1/2 md:text-right'} fade-in-up group`}>
               {/* Timeline dot - On timeline center */}
-              <div className="hidden md:block absolute top-[19px] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full border-4 border-gray-900 shadow-lg shadow-emerald-500/50 z-30 group-hover:scale-125 transition-transform duration-300"></div>
+              <div className="hidden md:block absolute top-[-15px] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full border-4 border-gray-900 shadow-lg shadow-emerald-500/50 z-30 group-hover:scale-125 transition-transform duration-300"></div>
 
               {/* Content card */}
               <div className={`card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-6 hover:scale-[1.02] ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'} relative`}>

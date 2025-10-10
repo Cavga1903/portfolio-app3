@@ -84,8 +84,8 @@ const About: React.FC = () => {
                 <FaCode className="text-3xl text-blue-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-sm">Focus</p>
-                <p className="text-xl font-bold text-white">Frontend Dev</p>
+                <p className="text-gray-400 text-sm">{t('about.stats.focus.label')}</p>
+                <p className="text-xl font-bold text-white">{t('about.stats.focus.value')}</p>
               </div>
             </div>
           </div>
@@ -97,8 +97,8 @@ const About: React.FC = () => {
                 <FaRocket className="text-3xl text-cyan-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-sm">Passion</p>
-                <p className="text-xl font-bold text-white">Innovation</p>
+                <p className="text-gray-400 text-sm">{t('about.stats.passion.label')}</p>
+                <p className="text-xl font-bold text-white">{t('about.stats.passion.value')}</p>
               </div>
             </div>
           </div>
@@ -110,8 +110,8 @@ const About: React.FC = () => {
                 <FaHeart className="text-3xl text-purple-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-sm">Love</p>
-                <p className="text-xl font-bold text-white">Clean Code</p>
+                <p className="text-gray-400 text-sm">{t('about.stats.love.label')}</p>
+                <p className="text-xl font-bold text-white">{t('about.stats.love.value')}</p>
               </div>
             </div>
           </div>

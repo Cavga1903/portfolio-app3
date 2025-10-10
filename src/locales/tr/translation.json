@@ -15,7 +15,21 @@
   },
   "about": {
     "title": "Hakkımda",
-    "description": "Merhaba! Ben Tolga. Yazılım geliştirme dünyasına büyük bir tutku ile adım attım. Frontend Developer olarak yaratıcı ve kullanıcı dostu web uygulamaları geliştirmekten büyük keyif alıyorum. Boş zamanlarımda yeni teknolojiler öğrenmek, kitap okumak ve spor yapmakla ilgileniyorum."
+    "description": "Merhaba! Ben Tolga. Yazılım geliştirme dünyasına büyük bir tutku ile adım attım. Frontend Developer olarak yaratıcı ve kullanıcı dostu web uygulamaları geliştirmekten büyük keyif alıyorum. Boş zamanlarımda yeni teknolojiler öğrenmek, kitap okumak ve spor yapmakla ilgileniyorum.",
+    "stats": {
+      "focus": {
+        "label": "Odak",
+        "value": "Frontend Dev"
+      },
+      "passion": {
+        "label": "Tutku",
+        "value": "İnovasyon"
+      },
+      "love": {
+        "label": "Sevgi",
+        "value": "Temiz Kod"
+      }
+    }
   },
   "experience": {
     "title": "Deneyim & Eğitim",
