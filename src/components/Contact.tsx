@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
       // EmailJS ile e-posta gönder
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bc4c1qr';
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ow0vkmg';
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'EaLO_KojjN4ucFgXf';
 
       // Dil bilgisini al
       const languageNames: { [key: string]: string } = {
