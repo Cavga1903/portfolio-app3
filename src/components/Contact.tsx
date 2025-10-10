@@ -189,7 +189,7 @@ const Contact: React.FC = () => {
               href="https://www.linkedin.com/in/tolgaacavgaa"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:text-[#0A66C2] hover:border-[#0A66C2] w-full hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 group flex items-center justify-center gap-2"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:text-[#0A66C2] hover:border-[#0A66C2] w-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
               <FaLinkedin className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
               {t('contact.linkedin')}
@@ -200,7 +200,7 @@ const Contact: React.FC = () => {
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:text-white hover:border-gray-300 w-full hover:scale-105 hover:shadow-lg hover:shadow-gray-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:text-white hover:border-gray-300 w-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
               <FaGithub className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
               GitHub
@@ -211,7 +211,7 @@ const Contact: React.FC = () => {
               href="https://www.instagram.com/codewithcavga"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:text-pink-500 hover:border-pink-500 w-full hover:scale-105 hover:shadow-lg hover:shadow-pink-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:text-pink-500 hover:border-pink-500 w-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
               <FaInstagram className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
               Instagram
