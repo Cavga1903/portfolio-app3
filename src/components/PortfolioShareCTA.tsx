@@ -72,12 +72,12 @@ const PortfolioShareCTA: React.FC = () => {
 
         {/* Thank You Message */}
         <motion.div
-          className="inline-flex items-center gap-2 text-pink-300 font-semibold drop-shadow-md"
+          className="inline-flex items-center gap-2 text-emerald-300 font-semibold drop-shadow-md"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <FaHeart className="text-xl animate-pulse" />
+          <FaHeart className="text-xl text-emerald-400 animate-pulse" />
           <span>{t('portfolioShare.thankYou')}</span>
         </motion.div>
       </motion.div>
