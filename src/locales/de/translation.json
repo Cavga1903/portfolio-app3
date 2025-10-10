@@ -23,8 +23,10 @@
     "css": "CSS",
     "javascript": "JavaScript",
     "react": "React",
-    "git": "Git & GitHub",
-    "typescript": "TypeScript"
+    "git": "Git",
+    "typescript": "TypeScript",
+    "tailwind": "Tailwind CSS",
+    "npm": "NPM"
   },
   "projects": {
     "title": "Meine Projekte",
