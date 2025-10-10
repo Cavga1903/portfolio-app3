@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaTwitter, FaFacebook, FaWhatsapp, FaLink } from 'react-icons/fa';
+import { FaLinkedin, FaFacebook, FaWhatsapp, FaLink } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
 
 interface ShareButtonsProps {
@@ -41,10 +42,10 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
       link: shareLinks.linkedin 
     },
     { 
-      name: 'Twitter', 
-      icon: FaTwitter, 
-      color: '#1DA1F2', 
-      hoverColor: 'hover:bg-[#1DA1F2]',
+      name: 'X (Twitter)', 
+      icon: FaXTwitter, 
+      color: '#000000', 
+      hoverColor: 'hover:bg-black',
       link: shareLinks.twitter 
     },
     { 

@@ -50,12 +50,12 @@ const PortfolioShareCTA: React.FC = () => {
         </motion.div>
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">
           {t('portfolioShare.title')}
         </h2>
 
         {/* Description */}
-        <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-white text-lg mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
           {t('portfolioShare.description')}
         </p>
 
@@ -72,7 +72,7 @@ const PortfolioShareCTA: React.FC = () => {
 
         {/* Thank You Message */}
         <motion.div
-          className="inline-flex items-center gap-2 text-pink-400 font-medium"
+          className="inline-flex items-center gap-2 text-pink-300 font-semibold drop-shadow-md"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
