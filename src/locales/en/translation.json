@@ -182,6 +182,38 @@
     "buyMeACoffee": "Buy Me a Coffee ☕"
   },
   "scrollToTop": "Scroll to top",
+  "share": {
+    "title": "Share",
+    "shareOn": "Share on",
+    "copyLink": "Copy Link",
+    "linkCopied": "Link copied! ✅"
+  },
+  "socialProof": {
+    "title": "Follow Me on Social Media",
+    "subtitle": "Follow my projects, stay updated, and connect with me!",
+    "followMe": "Follow",
+    "cta": "Want to stay updated with new projects and content?",
+    "followGitHub": "Follow on GitHub",
+    "connectLinkedIn": "Connect on LinkedIn",
+    "github": {
+      "stats": "20+ Repos",
+      "description": "Open source projects and code examples"
+    },
+    "linkedin": {
+      "stats": "500+ Connections",
+      "description": "Professional network and career development"
+    },
+    "instagram": {
+      "description": "Coding tips and daily development content"
+    }
+  },
+  "portfolioShare": {
+    "title": "Like My Portfolio?",
+    "description": "If you enjoyed this portfolio and want to share it with your friends, feel free to use the buttons below. Every share motivates me! 🚀",
+    "shareTitle": "Check out Tolga Çavga's amazing portfolio!",
+    "shareDescription": "Modern and creative frontend developer portfolio - React, TypeScript and more!",
+    "thankYou": "Thank you for your support!"
+  },
   "notFound": {
     "title": "Oops! You Seem Lost! 🗺️",
     "message": "The page you're looking for might be in a parallel universe... Or it never existed. Who knows? 🤷‍♂️",

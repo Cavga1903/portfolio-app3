@@ -182,6 +182,38 @@
     "buyMeACoffee": "Kauf mir einen Kaffee ☕"
   },
   "scrollToTop": "Nach oben scrollen",
+  "share": {
+    "title": "Teilen",
+    "shareOn": "Teilen auf",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Link kopiert! ✅"
+  },
+  "socialProof": {
+    "title": "Folge mir in den sozialen Medien",
+    "subtitle": "Verfolge meine Projekte, bleibe auf dem Laufenden und verbinde dich mit mir!",
+    "followMe": "Folgen",
+    "cta": "Möchtest du über neue Projekte und Inhalte informiert bleiben?",
+    "followGitHub": "Auf GitHub folgen",
+    "connectLinkedIn": "Auf LinkedIn verbinden",
+    "github": {
+      "stats": "20+ Repos",
+      "description": "Open-Source-Projekte und Code-Beispiele"
+    },
+    "linkedin": {
+      "stats": "500+ Verbindungen",
+      "description": "Professionelles Netzwerk und Karriereentwicklung"
+    },
+    "instagram": {
+      "description": "Programmier-Tipps und tägliche Entwicklungsinhalte"
+    }
+  },
+  "portfolioShare": {
+    "title": "Gefällt dir mein Portfolio?",
+    "description": "Wenn dir dieses Portfolio gefallen hat und du es mit deinen Freunden teilen möchtest, kannst du gerne die Schaltflächen unten verwenden. Jedes Teilen motiviert mich! 🚀",
+    "shareTitle": "Schau dir Tolga Çavgas großartiges Portfolio an!",
+    "shareDescription": "Modernes und kreatives Frontend-Entwickler-Portfolio - React, TypeScript und mehr!",
+    "thankYou": "Vielen Dank für deine Unterstützung!"
+  },
   "notFound": {
     "title": "Hoppla! Du scheinst verloren zu sein! 🗺️",
     "message": "Die Seite, die du suchst, könnte in einem Paralleluniversum sein... Oder sie hat nie existiert. Wer weiß? 🤷‍♂️",

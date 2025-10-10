@@ -182,6 +182,38 @@
     "buyMeACoffee": "Bana Bir Kahve Ismarla ☕"
   },
   "scrollToTop": "Yukarı çık",
+  "share": {
+    "title": "Paylaş",
+    "shareOn": "Şurada paylaş:",
+    "copyLink": "Linki Kopyala",
+    "linkCopied": "Link kopyalandı! ✅"
+  },
+  "socialProof": {
+    "title": "Sosyal Medyada Takip Edin",
+    "subtitle": "Projelerimi takip edin, güncellemelerden haberdar olun ve benimle bağlantıda kalın!",
+    "followMe": "Takip Et",
+    "cta": "Yeni projeler ve içeriklerden haberdar olmak ister misiniz?",
+    "followGitHub": "GitHub'da Takip Et",
+    "connectLinkedIn": "LinkedIn'de Bağlan",
+    "github": {
+      "stats": "20+ Repo",
+      "description": "Açık kaynak projeleri ve kod örnekleri"
+    },
+    "linkedin": {
+      "stats": "500+ Bağlantı",
+      "description": "Profesyonel network ve kariyer gelişimi"
+    },
+    "instagram": {
+      "description": "Kodlama ipuçları ve günlük geliştirme içerikleri"
+    }
+  },
+  "portfolioShare": {
+    "title": "Portfolyomu Beğendin mi?",
+    "description": "Eğer bu portfolyoyu beğendiyseniz ve arkadaşlarınızla paylaşmak isterseniz, aşağıdaki butonları kullanabilirsiniz. Her paylaşım beni motive ediyor! 🚀",
+    "shareTitle": "Tolga Çavga'nın harika portfolyosuna göz atın!",
+    "shareDescription": "Modern ve yaratıcı bir frontend developer portfolyosu - React, TypeScript ve daha fazlası!",
+    "thankYou": "Desteğiniz için teşekkürler!"
+  },
   "notFound": {
     "title": "Oops! Kaybolmuş gibisin! 🗺️",
     "message": "Aradığın sayfa paralel evrende olabilir... Ya da hiç var olmamıştır. Kim bilebilir ki? 🤷‍♂️",
