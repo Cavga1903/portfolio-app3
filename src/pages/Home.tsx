@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
 import ScrollProgress from '../components/ScrollProgress';
@@ -15,8 +16,22 @@ const Contact = lazy(() => import('../components/Contact'));
 const Footer = lazy(() => import('../components/Footer'));
 
 const Home: React.FC = () => {
+  // Page transition animation
+  const pageVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0 }
+  };
+
   return (
-    <div className="relative">
+    <motion.div 
+      className="relative"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.5 }}
+    >
       <ScrollProgress />
       <Navbar />
       
@@ -53,7 +68,7 @@ const Home: React.FC = () => {
       </Suspense>
       
       <ScrollToTop />
-    </div>
+    </motion.div>
   );
 };
 
