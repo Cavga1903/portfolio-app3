@@ -184,12 +184,12 @@ const Contact: React.FC = () => {
           
           <div className="flex flex-col gap-4">
             {/* E-posta Butonu */}
-            <a
+            {/* <a
               href="mailto:cavgaa228@gmail.com"
               className="btn btn-outline border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900 hover:border-teal-400 w-full hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 group"
             >
               <span className="group-hover:scale-110 transition-transform duration-300">📧</span> {t('contact.email')}
-            </a>
+            </a> */}
 
             {/* LinkedIn Butonu */}
             <a
@@ -209,6 +209,16 @@ const Contact: React.FC = () => {
               className="btn btn-outline border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900 hover:border-teal-400 w-full hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 group"
             >
               <span className="group-hover:scale-110 transition-transform duration-300">💻</span> GitHub
+            </a>
+
+            {/* Instagram Butonu */}
+            <a
+              href="https://www.instagram.com/codewithcavga"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 hover:text-white hover:border-transparent w-full hover:scale-105 hover:shadow-lg hover:shadow-pink-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 group"
+            >
+              <span className="group-hover:scale-110 transition-transform duration-300">📸</span> Instagram
             </a>
           </div>
         </div>

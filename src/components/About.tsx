@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
@@ -49,17 +49,28 @@ const About: React.FC = () => {
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-700/50 hover:bg-blue-500/20 rounded-lg transition-all duration-300 hover:scale-110 group"
+              className="p-3 bg-gray-700/50 hover:bg-gray-900/50 rounded-lg transition-all duration-300 hover:scale-110 group"
+              title="GitHub - @Cavga1903"
             >
-              <FaGithub className="text-2xl text-gray-300 group-hover:text-blue-400 transition-colors" />
+              <FaGithub className="text-2xl text-gray-300 group-hover:text-white transition-colors group-hover:rotate-12" />
             </a>
             <a
               href="https://www.linkedin.com/in/tolgaacavgaa"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-700/50 hover:bg-blue-500/20 rounded-lg transition-all duration-300 hover:scale-110 group"
+              className="p-3 bg-gray-700/50 hover:bg-[#0A66C2]/20 rounded-lg transition-all duration-300 hover:scale-110 group"
+              title="LinkedIn - @tolgaacavgaa"
             >
-              <FaLinkedin className="text-2xl text-gray-300 group-hover:text-blue-400 transition-colors" />
+              <FaLinkedin className="text-2xl text-gray-300 group-hover:text-[#0A66C2] transition-colors group-hover:rotate-12" />
+            </a>
+            <a
+              href="https://www.instagram.com/codewithcavga"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-gray-700/50 hover:bg-gradient-to-br hover:from-purple-600/20 hover:via-pink-600/20 hover:to-orange-500/20 rounded-lg transition-all duration-300 hover:scale-110 group relative overflow-hidden"
+              title="Instagram - @codewithcavga"
+            >
+              <FaInstagram className="text-2xl text-gray-300 group-hover:text-pink-500 transition-colors group-hover:rotate-12 relative z-10" />
             </a>
           </div>
         </div>
