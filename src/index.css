@@ -1,0 +1,43 @@
+html {
+    scroll-behavior: smooth;
+  }
+@import "tailwindcss";
+
+/* Gradient Animation for Hero Title */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 6s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* Fade In Up Animation for Sections */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Pulse Animation Delay */
+.delay-1000 {
+  animation-delay: 1s;
+}

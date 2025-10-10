@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "technologies": "Technologies",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm Tolga! 👋",
+    "description": "As a Frontend Developer, I build creative and modern web projects.",
+    "ctaAbout": "Learn More About Me",
+    "ctaProjects": "View My Projects"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports."
+  },
+  "technologies": {
+    "title": "My Skills",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "git": "Git & GitHub",
+    "typescript": "TypeScript"
+  },
+  "projects": {
+    "title": "My Projects",
+    "details": "Details",
+    "tech": "Technologies:",
+    "github": "GitHub",
+    "demo": "Demo",
+    "items": {
+      "todo": {
+        "title": "Todo List Application",
+        "description": "A simple task management application with add, complete, and delete features."
+      },
+      "portfolio": {
+        "title": "Portfolio Website",
+        "description": "My personal portfolio site. Features responsive design and modern UI."
+      },
+      "blog": {
+        "title": "Blog Website",
+        "description": "A simple blog platform with create, edit, and delete post functionality."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "You can reach me through the following channels:",
+    "email": "Send Email",
+    "linkedin": "LinkedIn Profile"
+  },
+  "footer": {
+    "rights": "All Rights Reserved.",
+    "madeWith": "Made with",
+    "by": "by Tolga | Frontend Developer"
+  },
+  "scrollToTop": "Scroll to top"
+}
+

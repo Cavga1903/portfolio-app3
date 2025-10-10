@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Anasayfa",
+    "about": "Hakkımda",
+    "technologies": "Teknolojiler",
+    "projects": "Projeler",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "greeting": "Merhaba, ben Tolga! 👋",
+    "description": "Frontend Developer olarak yaratıcı ve modern web projeleri geliştiriyorum.",
+    "ctaAbout": "Hakkımda Daha Fazla",
+    "ctaProjects": "Projelerimi İncele"
+  },
+  "about": {
+    "title": "Hakkımda",
+    "description": "Merhaba! Ben Tolga. Yazılım geliştirme dünyasına büyük bir tutku ile adım attım. Frontend Developer olarak yaratıcı ve kullanıcı dostu web uygulamaları geliştirmekten büyük keyif alıyorum. Boş zamanlarımda yeni teknolojiler öğrenmek, kitap okumak ve spor yapmakla ilgileniyorum."
+  },
+  "technologies": {
+    "title": "Bildiklerim",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "git": "Git & GitHub",
+    "typescript": "TypeScript"
+  },
+  "projects": {
+    "title": "Projelerim",
+    "details": "Detaylar",
+    "tech": "Teknolojiler:",
+    "github": "GitHub",
+    "demo": "Demo",
+    "items": {
+      "todo": {
+        "title": "Todo List Uygulaması",
+        "description": "Görev ekleme, tamamlama ve silme özellikli basit bir görev yönetim uygulaması."
+      },
+      "portfolio": {
+        "title": "Portfolyo Websitesi",
+        "description": "Kişisel portfolyo sitem. Responsive tasarım ve modern UI içeriyor."
+      },
+      "blog": {
+        "title": "Blog Sitesi",
+        "description": "Basit bir blog platformu. Yazı ekleme, düzenleme ve silme fonksiyonları ile."
+      }
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "description": "Bana ulaşmak için aşağıdaki kanalları kullanabilirsiniz:",
+    "email": "E-posta Gönder",
+    "linkedin": "LinkedIn Profilim"
+  },
+  "footer": {
+    "rights": "Tüm Hakları Saklıdır.",
+    "madeWith": "Made with",
+    "by": "by Tolga | Frontend Developer"
+  },
+  "scrollToTop": "Yukarı çık"
+}
+

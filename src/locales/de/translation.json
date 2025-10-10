@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über mich",
+    "technologies": "Technologien",
+    "projects": "Projekte",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "greeting": "Hallo, ich bin Tolga! 👋",
+    "description": "Als Frontend-Entwickler erstelle ich kreative und moderne Webprojekte.",
+    "ctaAbout": "Mehr über mich erfahren",
+    "ctaProjects": "Meine Projekte ansehen"
+  },
+  "about": {
+    "title": "Über mich",
+    "description": "Hallo! Ich bin Tolga. Ich bin mit großer Leidenschaft in die Welt der Softwareentwicklung eingetreten. Als Frontend-Entwickler genieße ich es, kreative und benutzerfreundliche Webanwendungen zu erstellen. In meiner Freizeit interessiere ich mich für das Lernen neuer Technologien, das Lesen von Büchern und Sport."
+  },
+  "technologies": {
+    "title": "Meine Fähigkeiten",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "git": "Git & GitHub",
+    "typescript": "TypeScript"
+  },
+  "projects": {
+    "title": "Meine Projekte",
+    "details": "Details",
+    "tech": "Technologien:",
+    "github": "GitHub",
+    "demo": "Demo",
+    "items": {
+      "todo": {
+        "title": "Todo-Listen-App",
+        "description": "Eine einfache Aufgabenverwaltungsanwendung mit Hinzufügen-, Abschließen- und Löschen-Funktionen."
+      },
+      "portfolio": {
+        "title": "Portfolio-Website",
+        "description": "Meine persönliche Portfolio-Website. Mit responsivem Design und moderner Benutzeroberfläche."
+      },
+      "blog": {
+        "title": "Blog-Website",
+        "description": "Eine einfache Blog-Plattform mit Erstellen-, Bearbeiten- und Löschen-Funktionen für Beiträge."
+      }
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Sie können mich über die folgenden Kanäle erreichen:",
+    "email": "E-Mail senden",
+    "linkedin": "LinkedIn-Profil"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "madeWith": "Erstellt mit",
+    "by": "von Tolga | Frontend-Entwickler"
+  },
+  "scrollToTop": "Nach oben scrollen"
+}
+
