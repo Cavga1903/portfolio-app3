@@ -15,7 +15,9 @@ const Hero: React.FC = () => {
   
   // Typing animation sequences based on language
   const getTypingSequence = () => {
-    if (i18n.language === 'en') {
+    const lang = i18n.language.split('-')[0].toLowerCase(); // Normalize language code
+    
+    if (lang === 'en') {
       return [
         'Frontend Developer',
         2000,
@@ -26,7 +28,7 @@ const Hero: React.FC = () => {
         'Creative Coder',
         2000,
       ];
-    } else if (i18n.language === 'de') {
+    } else if (lang === 'de') {
       return [
         'Frontend-Entwickler',
         2000,
@@ -35,6 +37,18 @@ const Hero: React.FC = () => {
         'UI/UX-Enthusiast',
         2000,
         'Kreativer Programmierer',
+        2000,
+      ];
+    } else if (lang === 'az') {
+      // Azerbaijani
+      return [
+        'Frontend Developer',
+        2000,
+        'React Mütəxəssisi',
+        2000,
+        'UI/UX Həvəskarı',
+        2000,
+        'Yaradıcı Proqramçı',
         2000,
       ];
     } else {
