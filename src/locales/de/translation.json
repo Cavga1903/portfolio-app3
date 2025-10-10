@@ -181,6 +181,14 @@
     "by": "von Tolga | Frontend-Entwickler",
     "buyMeACoffee": "Kauf mir einen Kaffee ☕"
   },
-  "scrollToTop": "Nach oben scrollen"
+  "scrollToTop": "Nach oben scrollen",
+  "notFound": {
+    "title": "Hoppla! Du scheinst verloren zu sein! 🗺️",
+    "message": "Die Seite, die du suchst, könnte in einem Paralleluniversum sein... Oder sie hat nie existiert. Wer weiß? 🤷‍♂️",
+    "funFact": "💡 Wusstest du: Du hast eine geheime Auszeichnung freigeschaltet, indem du diese 404-Seite gefunden hast!",
+    "goHome": "Zur Startseite",
+    "goBack": "Zurück",
+    "tip": "Versuche den Konami-Code, vielleicht passiert etwas..."
+  }
 }
 

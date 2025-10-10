@@ -181,6 +181,14 @@
     "by": "by Tolga | Frontend Developer",
     "buyMeACoffee": "Bana Bir Kahve Ismarla ☕"
   },
-  "scrollToTop": "Yukarı çık"
+  "scrollToTop": "Yukarı çık",
+  "notFound": {
+    "title": "Oops! Kaybolmuş gibisin! 🗺️",
+    "message": "Aradığın sayfa paralel evrende olabilir... Ya da hiç var olmamıştır. Kim bilebilir ki? 🤷‍♂️",
+    "funFact": "💡 Eğlenceli Bilgi: Bu 404 sayfasını bularak gizli bir başarı kazandın!",
+    "goHome": "Ana Sayfaya Dön",
+    "goBack": "Geri Dön",
+    "tip": "Konami kodunu dene belki bir şeyler olur..."
+  }
 }
 

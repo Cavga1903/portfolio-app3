@@ -181,6 +181,14 @@
     "by": "by Tolga | Frontend Developer",
     "buyMeACoffee": "Buy Me a Coffee ☕"
   },
-  "scrollToTop": "Scroll to top"
+  "scrollToTop": "Scroll to top",
+  "notFound": {
+    "title": "Oops! You Seem Lost! 🗺️",
+    "message": "The page you're looking for might be in a parallel universe... Or it never existed. Who knows? 🤷‍♂️",
+    "funFact": "💡 Fun Fact: You unlocked a secret achievement by finding this 404 page!",
+    "goHome": "Go Home",
+    "goBack": "Go Back",
+    "tip": "Try the Konami code, something might happen..."
+  }
 }
 
