@@ -15,7 +15,21 @@
   },
   "about": {
     "title": "About Me",
-    "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports."
+    "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports.",
+    "stats": {
+      "focus": {
+        "label": "Focus",
+        "value": "Frontend Dev"
+      },
+      "passion": {
+        "label": "Passion",
+        "value": "Innovation"
+      },
+      "love": {
+        "label": "Love",
+        "value": "Clean Code"
+      }
+    }
   },
   "experience": {
     "title": "Experience & Education",

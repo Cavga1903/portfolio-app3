@@ -15,7 +15,21 @@
   },
   "about": {
     "title": "Über mich",
-    "description": "Hallo! Ich bin Tolga. Ich bin mit großer Leidenschaft in die Welt der Softwareentwicklung eingetreten. Als Frontend-Entwickler genieße ich es, kreative und benutzerfreundliche Webanwendungen zu erstellen. In meiner Freizeit interessiere ich mich für das Lernen neuer Technologien, das Lesen von Büchern und Sport."
+    "description": "Hallo! Ich bin Tolga. Ich bin mit großer Leidenschaft in die Welt der Softwareentwicklung eingetreten. Als Frontend-Entwickler genieße ich es, kreative und benutzerfreundliche Webanwendungen zu erstellen. In meiner Freizeit interessiere ich mich für das Lernen neuer Technologien, das Lesen von Büchern und Sport.",
+    "stats": {
+      "focus": {
+        "label": "Fokus",
+        "value": "Frontend-Dev"
+      },
+      "passion": {
+        "label": "Leidenschaft",
+        "value": "Innovation"
+      },
+      "love": {
+        "label": "Liebe",
+        "value": "Sauberer Code"
+      }
+    }
   },
   "experience": {
     "title": "Erfahrung & Bildung",
