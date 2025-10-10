@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -11,6 +12,13 @@ import ScrollToTop from './components/ScrollToTop';
 
 
 const App: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  // Dil değiştiğinde sayfa başlığını güncelle
+  useEffect(() => {
+    document.title = t('pageTitle');
+  }, [i18n.language, t]);
+
   return (
     <div className="relative">
       <Navbar />
