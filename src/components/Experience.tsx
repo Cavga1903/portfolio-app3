@@ -89,7 +89,7 @@ const Experience: React.FC = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Center line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 via-teal-500 to-cyan-500 opacity-30"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 via-teal-500 to-cyan-500 opacity-30 z-10"></div>
 
           {/* Timeline items */}
           {experiences.map((item, index) => (
@@ -98,8 +98,8 @@ const Experience: React.FC = () => {
 
               {/* Content card */}
               <div className={`card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-6 group hover:scale-[1.02] ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'} relative`}>
-                {/* Timeline dot - On top center of the card */}
-                <div className="hidden md:block absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full border-4 border-gray-900 shadow-lg shadow-emerald-500/50 z-20 group-hover:scale-125 transition-transform duration-300"></div>
+                {/* Timeline dot - Above card and on top of timeline */}
+                <div className="hidden md:block absolute -top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full border-4 border-gray-900 shadow-lg shadow-emerald-500/50 z-30 group-hover:scale-125 transition-transform duration-300"></div>
                 {/* Icon */}
                 <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? 'flex-row' : 'md:flex-row-reverse'}`}>
                   <div className={`p-4 bg-gradient-to-br ${item.type === 'work' ? 'from-emerald-500 to-teal-500' : 'from-blue-500 to-cyan-500'} rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
