@@ -19,19 +19,47 @@
   },
   "experience": {
     "title": "Experience & Education",
-    "education": {
-      "degree": "Frontend Development",
-      "school": "Self-Learning",
-      "location": "Online",
-      "period": "2023 - Present",
-      "description": "Received comprehensive training in modern web technologies and frontend development. Focused on React, TypeScript and modern web standards."
+    "turkcell": {
+      "title": "Customer Service Representative",
+      "company": "Turkcell Global Bilgi",
+      "location": "Bornova, Izmir, Türkiye",
+      "period": "August 2025 - Present",
+      "description": "Supporting customers and resolving issues at Turkcell Global Bilgi, with a focus on clear communication, problem-solving, and technical support."
     },
-    "work1": {
-      "title": "Frontend Developer",
-      "company": "Freelance Projects",
-      "location": "Remote",
-      "period": "2024 - Present",
-      "description": "Developed modern and responsive web applications for various clients. Created user-friendly interfaces using React and TypeScript."
+    "upwork": {
+      "title": "React Native Developer | Freelance Frontend Developer",
+      "company": "Upwork",
+      "location": "İzmir, Türkiye",
+      "period": "July 2025 - Present",
+      "description": "Built cross-platform mobile apps with React Native. Integrated RESTful APIs & Supabase. Designed dynamic UIs with Tailwind CSS, improving user retention by 30%."
+    },
+    "siliconmade": {
+      "title": "Mobile and Frontend Development Trainee",
+      "company": "Siliconmade Academy",
+      "location": "İzmir, Türkiye",
+      "period": "February 2025 - July 2025",
+      "description": "Completed 6-month / 184-hour traineeship. Developed real-world projects. Gained hands-on expertise in React, React Native, REST API, Supabase, Tailwind CSS, and Firebase."
+    },
+    "concentrix": {
+      "title": "Customer Service Representative – Banking Sector",
+      "company": "Concentrix",
+      "location": "İzmir, Türkiye",
+      "period": "December 2022 - October 2024",
+      "description": "Provided front-line banking support. Maintained 95% customer satisfaction. Managed service tickets with Salesforce CRM."
+    },
+    "uopeople": {
+      "title": "Bachelor of Science, Computer Science (In Progress)",
+      "company": "University of the People",
+      "location": "Online",
+      "period": "June 2025 - June 2029",
+      "description": "Currently pursuing a Bachelor of Science in Computer Science. Studying algorithms, data structures, and software engineering principles."
+    },
+    "anadolu": {
+      "title": "Associate's Degree, Computer Programming",
+      "company": "Anadolu Üniversitesi",
+      "location": "Eskişehir, Türkiye",
+      "period": "Completed",
+      "description": "Completed Associate's Degree in Computer Programming. Learned programming fundamentals and software development processes."
     }
   },
   "technologies": {

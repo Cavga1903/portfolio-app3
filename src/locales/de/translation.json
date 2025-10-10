@@ -19,19 +19,47 @@
   },
   "experience": {
     "title": "Erfahrung & Bildung",
-    "education": {
-      "degree": "Frontend-Entwicklung",
-      "school": "Selbststudium",
-      "location": "Online",
-      "period": "2023 - Heute",
-      "description": "Umfassende Ausbildung in modernen Webtechnologien und Frontend-Entwicklung erhalten. Fokus auf React, TypeScript und moderne Webstandards."
+    "turkcell": {
+      "title": "Kundendienstmitarbeiter",
+      "company": "Turkcell Global Bilgi",
+      "location": "Bornova, Izmir, Türkei",
+      "period": "August 2025 - Heute",
+      "description": "Unterstützung von Kunden und Lösung von Problemen bei Turkcell Global Bilgi, mit Schwerpunkt auf klarer Kommunikation, Problemlösung und technischem Support."
     },
-    "work1": {
-      "title": "Frontend-Entwickler",
-      "company": "Freiberufliche Projekte",
-      "location": "Remote",
-      "period": "2024 - Heute",
-      "description": "Entwickelte moderne und responsive Webanwendungen für verschiedene Kunden. Erstellte benutzerfreundliche Oberflächen mit React und TypeScript."
+    "upwork": {
+      "title": "React Native Entwickler | Freiberuflicher Frontend-Entwickler",
+      "company": "Upwork",
+      "location": "İzmir, Türkei",
+      "period": "Juli 2025 - Heute",
+      "description": "Entwickelte plattformübergreifende mobile Apps mit React Native. Integrierte RESTful APIs und Supabase. Gestaltete dynamische UIs mit Tailwind CSS und verbesserte die Benutzerbindung um 30%."
+    },
+    "siliconmade": {
+      "title": "Praktikant für Mobile- und Frontend-Entwicklung",
+      "company": "Siliconmade Academy",
+      "location": "İzmir, Türkei",
+      "period": "Februar 2025 - Juli 2025",
+      "description": "Abgeschlossenes 6-monatiges / 184-stündiges Praktikum. Entwickelte reale Projekte. Praktische Erfahrung in React, React Native, REST API, Supabase, Tailwind CSS und Firebase gesammelt."
+    },
+    "concentrix": {
+      "title": "Kundendienstmitarbeiter – Bankensektor",
+      "company": "Concentrix",
+      "location": "İzmir, Türkei",
+      "period": "Dezember 2022 - Oktober 2024",
+      "description": "Frontline-Banking-Support bereitgestellt. 95% Kundenzufriedenheit beibehalten. Service-Tickets mit Salesforce CRM verwaltet."
+    },
+    "uopeople": {
+      "title": "Bachelor of Science, Informatik (In Progress)",
+      "company": "University of the People",
+      "location": "Online",
+      "period": "Juni 2025 - Juni 2029",
+      "description": "Derzeit Bachelor of Science in Informatik. Studium von Algorithmen, Datenstrukturen und Software-Engineering-Prinzipien."
+    },
+    "anadolu": {
+      "title": "Associate-Abschluss, Computerprogrammierung",
+      "company": "Anadolu Üniversitesi",
+      "location": "Eskişehir, Türkei",
+      "period": "Abgeschlossen",
+      "description": "Abgeschlossener Associate-Abschluss in Computerprogrammierung. Grundlagen der Programmierung und Softwareentwicklungsprozesse erlernt."
     }
   },
   "technologies": {

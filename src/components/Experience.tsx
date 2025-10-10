@@ -17,22 +17,58 @@ const Experience: React.FC = () => {
 
   const experiences: TimelineItem[] = [
     {
-      type: 'education',
-      title: t('experience.education.degree'),
-      company: t('experience.education.school'),
-      location: t('experience.education.location'),
-      period: t('experience.education.period'),
-      description: t('experience.education.description'),
-      skills: ['HTML', 'CSS', 'JavaScript', 'React', 'TypeScript']
+      type: 'work',
+      title: t('experience.turkcell.title'),
+      company: t('experience.turkcell.company'),
+      location: t('experience.turkcell.location'),
+      period: t('experience.turkcell.period'),
+      description: t('experience.turkcell.description'),
+      skills: ['Customer Service', 'Problem Solving', 'Communication']
     },
     {
       type: 'work',
-      title: t('experience.work1.title'),
-      company: t('experience.work1.company'),
-      location: t('experience.work1.location'),
-      period: t('experience.work1.period'),
-      description: t('experience.work1.description'),
-      skills: ['React', 'TypeScript', 'Tailwind CSS', 'Git']
+      title: t('experience.upwork.title'),
+      company: t('experience.upwork.company'),
+      location: t('experience.upwork.location'),
+      period: t('experience.upwork.period'),
+      description: t('experience.upwork.description'),
+      skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT']
+    },
+    {
+      type: 'education',
+      title: t('experience.siliconmade.title'),
+      company: t('experience.siliconmade.company'),
+      location: t('experience.siliconmade.location'),
+      period: t('experience.siliconmade.period'),
+      description: t('experience.siliconmade.description'),
+      skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git']
+    },
+    {
+      type: 'work',
+      title: t('experience.concentrix.title'),
+      company: t('experience.concentrix.company'),
+      location: t('experience.concentrix.location'),
+      period: t('experience.concentrix.period'),
+      description: t('experience.concentrix.description'),
+      skills: ['Salesforce CRM', 'Customer Satisfaction', 'Banking']
+    },
+    {
+      type: 'education',
+      title: t('experience.uopeople.title'),
+      company: t('experience.uopeople.company'),
+      location: t('experience.uopeople.location'),
+      period: t('experience.uopeople.period'),
+      description: t('experience.uopeople.description'),
+      skills: ['Computer Science', 'Algorithms', 'Data Structures']
+    },
+    {
+      type: 'education',
+      title: t('experience.anadolu.title'),
+      company: t('experience.anadolu.company'),
+      location: t('experience.anadolu.location'),
+      period: t('experience.anadolu.period'),
+      description: t('experience.anadolu.description'),
+      skills: ['Computer Programming', 'Software Development']
     }
   ];
 

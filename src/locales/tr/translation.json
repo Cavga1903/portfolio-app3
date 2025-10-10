@@ -19,19 +19,47 @@
   },
   "experience": {
     "title": "Deneyim & Eğitim",
-    "education": {
-      "degree": "Frontend Development",
-      "school": "Kendi Kendine Öğrenme",
-      "location": "Online",
-      "period": "2023 - Devam Ediyor",
-      "description": "Modern web teknolojileri ve frontend development konusunda kapsamlı eğitim aldım. React, TypeScript ve modern web standartları üzerine yoğunlaştım."
+    "turkcell": {
+      "title": "Müşteri Hizmetleri Temsilcisi",
+      "company": "Turkcell Global Bilgi",
+      "location": "Bornova, İzmir, Türkiye",
+      "period": "Ağustos 2025 - Devam Ediyor",
+      "description": "Turkcell Global Bilgi'de müşterileri destekliyor ve sorunları çözüyorum. Net iletişim, problem çözme ve teknik destek konularında uzmanlaşıyorum."
     },
-    "work1": {
-      "title": "Frontend Developer",
-      "company": "Freelance Projeler",
-      "location": "Uzaktan",
-      "period": "2024 - Devam Ediyor",
-      "description": "Çeşitli müşteriler için modern ve responsive web uygulamaları geliştirdim. React ve TypeScript kullanarak kullanıcı dostu arayüzler oluşturdum."
+    "upwork": {
+      "title": "React Native Developer | Freelance Frontend Developer",
+      "company": "Upwork",
+      "location": "İzmir, Türkiye",
+      "period": "Temmuz 2025 - Devam Ediyor",
+      "description": "Cross-platform mobil uygulamalar geliştirdim. RESTful API'ler ve Supabase entegrasyonu yaptım. Tailwind CSS ile dinamik UI'lar tasarlayarak kullanıcı elde tutma oranını %30 artırdım."
+    },
+    "siliconmade": {
+      "title": "Mobil ve Frontend Development Stajyeri",
+      "company": "Siliconmade Academy",
+      "location": "İzmir, Türkiye",
+      "period": "Şubat 2025 - Temmuz 2025",
+      "description": "6 aylık / 184 saatlik staj programını tamamladım. Gerçek dünya projeleri geliştirdim. React, React Native, REST API, Supabase, Tailwind CSS ve Firebase konularında pratik deneyim kazandım."
+    },
+    "concentrix": {
+      "title": "Müşteri Hizmetleri Temsilcisi - Bankacılık Sektörü",
+      "company": "Concentrix",
+      "location": "İzmir, Türkiye",
+      "period": "Aralık 2022 - Ekim 2024",
+      "description": "Bankacılık sektöründe ön hat destek sağladım. %95 müşteri memnuniyeti oranı sağladım. Salesforce CRM ile hizmet biletlerini yönettim."
+    },
+    "uopeople": {
+      "title": "Bilgisayar Bilimi Lisans (Devam Ediyor)",
+      "company": "University of the People",
+      "location": "Online",
+      "period": "Haziran 2025 - Haziran 2029",
+      "description": "Bilgisayar Bilimi alanında lisans eğitimine devam ediyorum. Algoritmalar, veri yapıları ve yazılım mühendisliği prensipleri üzerine çalışıyorum."
+    },
+    "anadolu": {
+      "title": "Bilgisayar Programcılığı Ön Lisans",
+      "company": "Anadolu Üniversitesi",
+      "location": "Eskişehir, Türkiye",
+      "period": "Tamamlandı",
+      "description": "Bilgisayar programcılığı ve yazılım geliştirme temellerini öğrendim. Programlama dillerini ve yazılım geliştirme süreçlerini kavradım."
     }
   },
   "technologies": {
