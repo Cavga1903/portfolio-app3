@@ -157,7 +157,7 @@
   },
   "contact": {
     "title": "Contact",
-    "description": "Get in touch with me! You can send a message through the form or reach me via social media.",
+    "description": "Get in touch with me! Fill out the form below to send me a direct email.",
     "form": {
       "title": "Send a Message",
       "name": "Your Name",

@@ -157,7 +157,7 @@
   },
   "contact": {
     "title": "Kontakt",
-    "description": "Nehmen Sie Kontakt mit mir auf! Sie können eine Nachricht über das Formular senden oder mich über soziale Medien erreichen.",
+    "description": "Nehmen Sie Kontakt mit mir auf! Füllen Sie das untenstehende Formular aus, um mir direkt eine E-Mail zu senden.",
     "form": {
       "title": "Nachricht senden",
       "name": "Ihr Name",

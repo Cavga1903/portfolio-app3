@@ -1,7 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
-import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -26,9 +25,10 @@ const Contact: React.FC = () => {
       const languageNames: { [key: string]: string } = {
         'tr': 'Türkçe 🇹🇷',
         'en': 'English 🇬🇧',
-        'de': 'Deutsch 🇩🇪'
+        'de': 'Deutsch 🇩🇪',
+        'az': 'Azərbaycan Türkcəsi 🇦🇿'
       };
-      const currentLanguage = languageNames[i18n.language] || i18n.language;
+      const currentLanguage = languageNames[i18n.language.split('-')[0]] || i18n.language;
 
       await emailjs.send(
         serviceId,
@@ -84,10 +84,10 @@ const Contact: React.FC = () => {
         {t('contact.description')}
       </p>
 
-      <div className="relative z-10 w-full max-w-4xl grid md:grid-cols-2 gap-8">
+      <div className="relative z-10 w-full max-w-2xl">
         {/* Contact Form */}
         <div className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 p-8">
-          <h3 className="text-2xl font-bold mb-6 text-teal-400">{t('contact.form.title')}</h3>
+          <h3 className="text-2xl font-bold mb-6 text-teal-400 text-center">{t('contact.form.title')}</h3>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Input */}
@@ -162,61 +162,6 @@ const Contact: React.FC = () => {
               </div>
             )}
           </form>
-        </div>
-
-        {/* Social Links */}
-        <div className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 p-8 flex flex-col justify-center">
-          {/* Elegant OR Divider */}
-          <div className="relative flex items-center justify-center mb-8">
-            {/* Left Line */}
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-teal-500/30 to-teal-500/60"></div>
-            
-            {/* Center Badge */}
-            <div className="mx-4 relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full px-6 py-3 shadow-lg shadow-teal-500/30 group-hover:shadow-teal-500/50 transition-all duration-300">
-                <span className="text-white font-bold text-sm uppercase tracking-widest">{t('contact.or')}</span>
-              </div>
-            </div>
-            
-            {/* Right Line */}
-            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-teal-500/30 to-teal-500/60"></div>
-          </div>
-          
-          <div className="flex flex-col gap-4">
-            {/* LinkedIn Butonu */}
-            <a
-              href="https://www.linkedin.com/in/tolgaacavgaa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:text-[#0A66C2] hover:border-[#0A66C2] w-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 group flex items-center justify-center gap-2"
-            >
-              <FaLinkedin className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
-              {t('contact.linkedin')}
-            </a>
-
-            {/* GitHub Butonu */}
-            <a
-              href="https://github.com/Cavga1903"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:text-white hover:border-gray-300 w-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
-            >
-              <FaGithub className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
-              GitHub
-            </a>
-
-            {/* Instagram Butonu */}
-            <a
-              href="https://www.instagram.com/codewithcavga"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:text-pink-500 hover:border-pink-500 w-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
-            >
-              <FaInstagram className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
-              Instagram
-            </a>
-          </div>
         </div>
       </div>
     </section>

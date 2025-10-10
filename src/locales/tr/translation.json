@@ -157,7 +157,7 @@
   },
   "contact": {
     "title": "İletişim",
-    "description": "Benimle iletişime geçin! Form aracılığıyla mesaj gönderebilir veya sosyal medya hesaplarımdan ulaşabilirsiniz.",
+    "description": "Benimle iletişime geçin! Aşağıdaki formu doldurarak doğrudan e-posta gönderebilirsiniz.",
     "form": {
       "title": "Mesaj Gönderin",
       "name": "Adınız",
