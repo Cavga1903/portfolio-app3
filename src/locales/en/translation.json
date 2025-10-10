@@ -49,7 +49,21 @@
   },
   "contact": {
     "title": "Contact",
-    "description": "You can reach me through the following channels:",
+    "description": "Get in touch with me! You can send a message through the form or reach me via social media.",
+    "form": {
+      "title": "Send a Message",
+      "name": "Your Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Your Email",
+      "emailPlaceholder": "example@email.com",
+      "message": "Your Message",
+      "messagePlaceholder": "Write your message here...",
+      "send": "Send",
+      "sending": "Sending...",
+      "success": "✅ Your message was sent successfully!",
+      "error": "❌ An error occurred. Please try again."
+    },
+    "or": "or",
     "email": "Send Email",
     "linkedin": "LinkedIn Profile"
   },

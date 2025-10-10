@@ -49,7 +49,21 @@
   },
   "contact": {
     "title": "İletişim",
-    "description": "Bana ulaşmak için aşağıdaki kanalları kullanabilirsiniz:",
+    "description": "Benimle iletişime geçin! Form aracılığıyla mesaj gönderebilir veya sosyal medya hesaplarımdan ulaşabilirsiniz.",
+    "form": {
+      "title": "Mesaj Gönderin",
+      "name": "Adınız",
+      "namePlaceholder": "Adınızı yazın",
+      "email": "E-posta Adresiniz",
+      "emailPlaceholder": "ornek@email.com",
+      "message": "Mesajınız",
+      "messagePlaceholder": "Mesajınızı buraya yazın...",
+      "send": "Gönder",
+      "sending": "Gönderiliyor...",
+      "success": "✅ Mesajınız başarıyla gönderildi!",
+      "error": "❌ Bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "or": "veya",
     "email": "E-posta Gönder",
     "linkedin": "LinkedIn Profilim"
   },

@@ -49,7 +49,21 @@
   },
   "contact": {
     "title": "Kontakt",
-    "description": "Sie können mich über die folgenden Kanäle erreichen:",
+    "description": "Nehmen Sie Kontakt mit mir auf! Sie können eine Nachricht über das Formular senden oder mich über soziale Medien erreichen.",
+    "form": {
+      "title": "Nachricht senden",
+      "name": "Ihr Name",
+      "namePlaceholder": "Geben Sie Ihren Namen ein",
+      "email": "Ihre E-Mail",
+      "emailPlaceholder": "beispiel@email.com",
+      "message": "Ihre Nachricht",
+      "messagePlaceholder": "Schreiben Sie Ihre Nachricht hier...",
+      "send": "Senden",
+      "sending": "Wird gesendet...",
+      "success": "✅ Ihre Nachricht wurde erfolgreich gesendet!",
+      "error": "❌ Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    },
+    "or": "oder",
     "email": "E-Mail senden",
     "linkedin": "LinkedIn-Profil"
   },
