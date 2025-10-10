@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
     { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-    { code: 'az', name: 'Azərbaycanca', flag: '🇦🇿' },
+    { code: 'az', name: 'Azərbaycan Türkcəsi', flag: '🇦🇿' },
   ];
 
   // i18n.language'i normalize et (en-US -> en)
