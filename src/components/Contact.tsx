@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
+import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -184,21 +185,23 @@ const Contact: React.FC = () => {
           
           <div className="flex flex-col gap-4">
             {/* E-posta Butonu */}
-            {/* <a
+            <a
               href="mailto:cavgaa228@gmail.com"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900 hover:border-teal-400 w-full hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 group"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-red-500 hover:text-white hover:border-red-500 w-full hover:scale-105 hover:shadow-lg hover:shadow-red-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
-              <span className="group-hover:scale-110 transition-transform duration-300">📧</span> {t('contact.email')}
-            </a> */}
+              <FaEnvelope className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
+              {t('contact.email')}
+            </a>
 
             {/* LinkedIn Butonu */}
             <a
               href="https://www.linkedin.com/in/tolgaacavgaa"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900 hover:border-teal-400 w-full hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 group"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] w-full hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
-              <span className="group-hover:scale-110 transition-transform duration-300">🔗</span> {t('contact.linkedin')}
+              <FaLinkedin className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
+              {t('contact.linkedin')}
             </a>
 
             {/* GitHub Butonu */}
@@ -206,9 +209,10 @@ const Contact: React.FC = () => {
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900 hover:border-teal-400 w-full hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 group"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-gray-900 hover:text-white hover:border-gray-900 w-full hover:scale-105 hover:shadow-lg hover:shadow-gray-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
-              <span className="group-hover:scale-110 transition-transform duration-300">💻</span> GitHub
+              <FaGithub className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
+              GitHub
             </a>
 
             {/* Instagram Butonu */}
@@ -216,9 +220,10 @@ const Contact: React.FC = () => {
               href="https://www.instagram.com/codewithcavga"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 hover:text-white hover:border-transparent w-full hover:scale-105 hover:shadow-lg hover:shadow-pink-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 group"
+              className="btn btn-outline border-teal-400 text-teal-400 hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 hover:text-white hover:border-transparent w-full hover:scale-105 hover:shadow-lg hover:shadow-pink-500/50 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 group flex items-center justify-center gap-2"
             >
-              <span className="group-hover:scale-110 transition-transform duration-300">📸</span> Instagram
+              <FaInstagram className="text-xl group-hover:rotate-12 transition-transform duration-300" /> 
+              Instagram
             </a>
           </div>
         </div>
