@@ -165,7 +165,22 @@ const Contact: React.FC = () => {
 
         {/* Social Links */}
         <div className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 p-8 flex flex-col justify-center">
-          <h3 className="text-2xl font-bold mb-6 text-teal-400 text-center">{t('contact.or')}</h3>
+          {/* Elegant OR Divider */}
+          <div className="relative flex items-center justify-center mb-8">
+            {/* Left Line */}
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-teal-500/30 to-teal-500/60"></div>
+            
+            {/* Center Badge */}
+            <div className="mx-4 relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full px-6 py-3 shadow-lg shadow-teal-500/30 group-hover:shadow-teal-500/50 transition-all duration-300">
+                <span className="text-white font-bold text-sm uppercase tracking-widest">{t('contact.or')}</span>
+              </div>
+            </div>
+            
+            {/* Right Line */}
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-teal-500/30 to-teal-500/60"></div>
+          </div>
           
           <div className="flex flex-col gap-4">
             {/* E-posta Butonu */}
