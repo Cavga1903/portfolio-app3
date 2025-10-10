@@ -8,6 +8,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollProgress from './components/ScrollProgress';
 
 
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
 
   return (
     <div className="relative">
+      <ScrollProgress />
       <Navbar />
       <Hero />
       <About />
