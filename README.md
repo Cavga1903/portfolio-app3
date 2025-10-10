@@ -34,7 +34,7 @@
 - ✅ Page transitions
 
 ### 🌍 **Internationalization (i18n)**
-- ✅ 3 dil desteği: **Türkçe**, **English**, **Deutsch**
+- ✅ 4 dil desteği: **Türkçe**, **English**, **Deutsch**, **Azərbaycanca** 🇦🇿
 - ✅ Otomatik tarayıcı dili algılama
 - ✅ Dinamik dil değiştirme
 - ✅ LocalStorage persistence
@@ -134,7 +134,8 @@ portfolio-app3-main/
 │   ├── locales/
 │   │   ├── tr/translation.json
 │   │   ├── en/translation.json
-│   │   └── de/translation.json
+│   │   ├── de/translation.json
+│   │   └── az/translation.json
 │   ├── pages/
 │   │   └── Home.tsx
 │   ├── App.tsx
@@ -322,7 +323,7 @@ If you like this project, please consider:
 - ✨ Created Social Proof section
 - ✨ Implemented custom Toast notifications
 - ✨ Added custom scrollbar
-- ✨ i18n support (TR/EN/DE)
+- ✨ i18n support (TR/EN/DE/AZ) - 4 languages 🌍
 - ✨ Experience Timeline
 - ✨ Certificates section
 - ✨ 404 Not Found page
