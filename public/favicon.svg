@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#1e293b"/>
+  
+  <!-- Code Icon -->
+  <g transform="translate(12, 16)">
+    <!-- Left bracket -->
+    <path d="M 14 4 L 4 16 L 14 28" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    
+    <!-- Right bracket -->
+    <path d="M 26 4 L 36 16 L 26 28" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    
+    <!-- Slash in middle -->
+    <path d="M 23 2 L 17 30" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
+
