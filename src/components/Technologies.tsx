@@ -87,7 +87,7 @@ const Technologies: React.FC = () => {
       </h2>
 
       <p className="relative z-10 text-gray-400 text-center mb-12 max-w-2xl">
-        Technologies I work with and my proficiency levels
+        {t('technologies.subtitle')}
       </p>
 
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6">

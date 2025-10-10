@@ -77,7 +77,8 @@
     }
   },
   "technologies": {
-    "title": "My Skills",
+    "title": "Tech Stack",
+    "subtitle": "Technologies I work with and my proficiency levels",
     "html": "HTML",
     "css": "CSS",
     "javascript": "JavaScript",

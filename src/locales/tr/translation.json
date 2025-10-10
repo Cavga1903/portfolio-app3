@@ -77,7 +77,8 @@
     }
   },
   "technologies": {
-    "title": "Bildiklerim",
+    "title": "Tech Stack",
+    "subtitle": "Kullandığım teknolojiler ve yeterlilik seviyelerim",
     "html": "HTML",
     "css": "CSS",
     "javascript": "JavaScript",

@@ -77,7 +77,8 @@
     }
   },
   "technologies": {
-    "title": "Meine Fähigkeiten",
+    "title": "Tech Stack",
+    "subtitle": "Technologien, mit denen ich arbeite, und meine Kompetenzniveaus",
     "html": "HTML",
     "css": "CSS",
     "javascript": "JavaScript",
