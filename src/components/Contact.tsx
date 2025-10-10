@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,10 +17,17 @@ const Contact: React.FC = () => {
 
     try {
       // EmailJS ile e-posta gönder
-      // EMAILJS_SETUP.md dosyasını okuyarak EmailJS kurulumunu yapın
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_portfolio';
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_contact';
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bc4c1qr';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ow0vkmg';
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+      // Dil bilgisini al
+      const languageNames: { [key: string]: string } = {
+        'tr': 'Türkçe 🇹🇷',
+        'en': 'English 🇬🇧',
+        'de': 'Deutsch 🇩🇪'
+      };
+      const currentLanguage = languageNames[i18n.language] || i18n.language;
 
       await emailjs.send(
         serviceId,
@@ -29,7 +36,11 @@ const Contact: React.FC = () => {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_email: 'cavgaa228@gmail.com',
+          language: currentLanguage,
+          time: new Date().toLocaleString('tr-TR', { 
+            dateStyle: 'full', 
+            timeStyle: 'short' 
+          }),
         },
         publicKey
       );
