@@ -110,10 +110,10 @@ const Experience: React.FC = () => {
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300">
+                    <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300 break-words">
                       {item.title}
                     </h3>
-                    <p className="text-lg text-emerald-400 font-semibold">{item.company}</p>
+                    <p className="text-base md:text-lg text-emerald-400 font-semibold">{item.company}</p>
                   </div>
                 </div>
 

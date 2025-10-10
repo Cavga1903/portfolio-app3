@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaHeart, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaHeart, FaInstagram, FaCoffee } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
@@ -40,6 +40,17 @@ const Footer: React.FC = () => {
           <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-white group-hover:text-pink-500" />
         </a>
       </div>
+
+      {/* Buy Me a Coffee Button */}
+      <a
+        href="https://buymeacoffee.com/cavga228"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 mb-6 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
+      >
+        <FaCoffee className="text-xl group-hover:rotate-12 transition-transform duration-300" />
+        <span>{t('footer.buyMeACoffee')}</span>
+      </a>
 
       {/* Copyright */}
       <p className="text-center text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
