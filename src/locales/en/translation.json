@@ -73,6 +73,52 @@
     "tailwind": "Tailwind CSS",
     "npm": "NPM"
   },
+  "certificates": {
+    "title": "Certificates & Achievements",
+    "subtitle": "Certifications and achievements earned during my learning journey",
+    "siliconmade": {
+      "title": "Mobile & Frontend Development Certificate",
+      "issuer": "Siliconmade Academy",
+      "date": "July 2025",
+      "description": "184-hour intensive training program. Mobile app development with React and React Native."
+    },
+    "frontend": {
+      "title": "Frontend Development Fundamentals",
+      "issuer": "Online Learning Platform",
+      "date": "2024",
+      "description": "Comprehensive training covering HTML, CSS, and JavaScript fundamentals."
+    },
+    "react": {
+      "title": "React.js Mastery",
+      "issuer": "Online Learning Platform",
+      "date": "2024",
+      "description": "Advanced training in React components, hooks, and state management."
+    },
+    "responsive": {
+      "title": "Responsive Web Design",
+      "issuer": "Online Learning Platform",
+      "date": "2024",
+      "description": "Mobile-first approach and responsive design principles."
+    },
+    "javascript": {
+      "title": "Modern JavaScript (ES6+)",
+      "issuer": "Online Learning Platform",
+      "date": "2024",
+      "description": "ES6+ features, async/await, and modern JavaScript techniques."
+    },
+    "git": {
+      "title": "Git & GitHub Mastery",
+      "issuer": "Online Learning Platform",
+      "date": "2024",
+      "description": "Version control, branching strategies, and collaborative development."
+    },
+    "stats": {
+      "certificates": "Certificates",
+      "hours": "Training Hours",
+      "projects": "Projects",
+      "experience": "Years Experience"
+    }
+  },
   "projects": {
     "title": "My Projects",
     "details": "Details",

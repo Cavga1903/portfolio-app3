@@ -73,6 +73,52 @@
     "tailwind": "Tailwind CSS",
     "npm": "NPM"
   },
+  "certificates": {
+    "title": "Zertifikate & Erfolge",
+    "subtitle": "Zertifizierungen und Erfolge auf meiner Lernreise",
+    "siliconmade": {
+      "title": "Mobil- & Frontend-Entwicklungszertifikat",
+      "issuer": "Siliconmade Academy",
+      "date": "Juli 2025",
+      "description": "184-stündiges intensives Schulungsprogramm. Mobile App-Entwicklung mit React und React Native."
+    },
+    "frontend": {
+      "title": "Frontend-Entwicklungsgrundlagen",
+      "issuer": "Online-Lernplattform",
+      "date": "2024",
+      "description": "Umfassende Schulung zu HTML-, CSS- und JavaScript-Grundlagen."
+    },
+    "react": {
+      "title": "React.js Beherrschung",
+      "issuer": "Online-Lernplattform",
+      "date": "2024",
+      "description": "Fortgeschrittene Schulung in React-Komponenten, Hooks und State Management."
+    },
+    "responsive": {
+      "title": "Responsive Webdesign",
+      "issuer": "Online-Lernplattform",
+      "date": "2024",
+      "description": "Mobile-First-Ansatz und responsive Designprinzipien."
+    },
+    "javascript": {
+      "title": "Modernes JavaScript (ES6+)",
+      "issuer": "Online-Lernplattform",
+      "date": "2024",
+      "description": "ES6+-Funktionen, async/await und moderne JavaScript-Techniken."
+    },
+    "git": {
+      "title": "Git & GitHub Beherrschung",
+      "issuer": "Online-Lernplattform",
+      "date": "2024",
+      "description": "Versionskontrolle, Branching-Strategien und kollaborative Entwicklung."
+    },
+    "stats": {
+      "certificates": "Zertifikate",
+      "hours": "Schulungsstunden",
+      "projects": "Projekte",
+      "experience": "Jahre Erfahrung"
+    }
+  },
   "projects": {
     "title": "Meine Projekte",
     "details": "Details",

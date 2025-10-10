@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaCode, FaGlobe } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import ThemeToggle from './ThemeToggle';
 
 type NavLink = {
   id: string;
@@ -65,11 +64,8 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* Right Side - Theme + Desktop Language + Mobile Controls */}
+          {/* Right Side - Desktop Language + Mobile Controls */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle - Always visible */}
-            <ThemeToggle />
-            
             {/* Desktop Language Selector */}
             <div className="hidden md:block relative">
               <button

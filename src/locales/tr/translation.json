@@ -73,6 +73,52 @@
     "tailwind": "Tailwind CSS",
     "npm": "NPM"
   },
+  "certificates": {
+    "title": "Sertifikalar & Başarılar",
+    "subtitle": "Eğitim yolculuğumda kazandığım sertifikalar ve başarılar",
+    "siliconmade": {
+      "title": "Mobil & Frontend Geliştirme Sertifikası",
+      "issuer": "Siliconmade Academy",
+      "date": "Temmuz 2025",
+      "description": "184 saatlik yoğun eğitim programı. React ve React Native ile mobil uygulama geliştirme."
+    },
+    "frontend": {
+      "title": "Frontend Development Fundamentals",
+      "issuer": "Online Eğitim Platformu",
+      "date": "2024",
+      "description": "HTML, CSS ve JavaScript temellerini kapsayan kapsamlı eğitim."
+    },
+    "react": {
+      "title": "React.js Mastery",
+      "issuer": "Online Eğitim Platformu",
+      "date": "2024",
+      "description": "React component'leri, hooks ve state management konularında ileri seviye eğitim."
+    },
+    "responsive": {
+      "title": "Responsive Web Design",
+      "issuer": "Online Eğitim Platformu",
+      "date": "2024",
+      "description": "Mobile-first yaklaşım ve responsive tasarım prensipleri."
+    },
+    "javascript": {
+      "title": "Modern JavaScript (ES6+)",
+      "issuer": "Online Eğitim Platformu",
+      "date": "2024",
+      "description": "ES6+ özellikleri, async/await ve modern JavaScript teknikleri."
+    },
+    "git": {
+      "title": "Git & GitHub Mastery",
+      "issuer": "Online Eğitim Platformu",
+      "date": "2024",
+      "description": "Version control, branching strategies ve collaborative development."
+    },
+    "stats": {
+      "certificates": "Sertifika",
+      "hours": "Eğitim Saati",
+      "projects": "Proje",
+      "experience": "Yıl Deneyim"
+    }
+  },
   "projects": {
     "title": "Projelerim",
     "details": "Detaylar",
