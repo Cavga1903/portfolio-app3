@@ -34,10 +34,11 @@
 - ✅ Page transitions
 
 ### 🌍 **Internationalization (i18n)**
-- ✅ 4 dil desteği: **Türkçe**, **English**, **Deutsch**, **Azərbaycanca** 🇦🇿
+- ✅ 4 dil desteği: **Türkçe**, **English**, **Deutsch**, **Azərbaycan Türkcəsi** 🇦🇿
 - ✅ Otomatik tarayıcı dili algılama
 - ✅ Dinamik dil değiştirme
 - ✅ LocalStorage persistence
+- ✅ Browser language detection (TR → Turkish, DE → German, AZ → Azerbaijani, Others → English)
 
 ### 📈 **SEO & Marketing**
 - ✅ Advanced SEO meta tags
@@ -48,17 +49,18 @@
 - ✅ Dynamic meta tag updates
 
 ### 🌐 **Social Features**
-- ✅ Social Proof section (GitHub, LinkedIn, Instagram)
-- ✅ Share buttons (LinkedIn, X/Twitter, Facebook, WhatsApp)
-- ✅ Copy link functionality
-- ✅ Custom Toast notifications
-- ✅ Social media integrations
+- ✅ Dedicated Social Proof section (GitHub, LinkedIn, Instagram stats & links)
+- ✅ Portfolio share buttons (LinkedIn, X/Twitter, Facebook, WhatsApp)
+- ✅ Copy link functionality with custom toast
+- ✅ Social media cards with animated hover effects
+- ✅ Buy Me a Coffee integration in footer
 
 ### 📧 **Contact & Communication**
 - ✅ EmailJS integration (direct email sending)
 - ✅ Contact form with validation
-- ✅ Social media links
-- ✅ Buy Me a Coffee integration
+- ✅ Multi-language email template support
+- ✅ Real-time form status feedback
+- ✅ Buy Me a Coffee integration (Footer)
 
 ### 🎯 **Additional Features**
 - ✅ Experience Timeline
@@ -215,7 +217,10 @@ Vertical timeline for work experience and education with animated dots.
 Display achievements and certifications with stats cards.
 
 ### **Hero.tsx**
-Landing section with parallax background, typing animation, and smooth scroll indicator.
+Landing section with parallax background, multi-language typing animation (TR/EN/DE/AZ), and smooth scroll indicator.
+
+### **Contact.tsx**
+Streamlined contact form with EmailJS integration. Direct email sending with multi-language support. Clean, focused UI without redundant social media links.
 
 ---
 
@@ -316,6 +321,14 @@ If you like this project, please consider:
 
 ## 📜 Changelog
 
+### v3.1.0 (2025-01-10)
+- 🌍 **Azerbaijani language support** - Azərbaycan Türkcəsi added
+- ♻️ **Streamlined Contact section** - Removed redundant social media buttons, focused on email form
+- 🎨 **Multi-language typing animation** - Hero section supports TR/EN/DE/AZ
+- ✨ **Enhanced i18n** - Browser language auto-detection (TR/DE/AZ → respective languages, Others → EN)
+- 📧 **Improved EmailJS** - Multi-language template support
+- 🎯 **Better UX** - Cleaner, more focused contact form
+
 ### v3.0.0 (2025-01-10)
 - ✨ Added Framer Motion animations
 - ✨ Implemented smooth scroll & parallax effects
@@ -323,7 +336,7 @@ If you like this project, please consider:
 - ✨ Created Social Proof section
 - ✨ Implemented custom Toast notifications
 - ✨ Added custom scrollbar
-- ✨ i18n support (TR/EN/DE/AZ) - 4 languages 🌍
+- ✨ i18n support (TR/EN/DE) - 3 languages
 - ✨ Experience Timeline
 - ✨ Certificates section
 - ✨ 404 Not Found page
