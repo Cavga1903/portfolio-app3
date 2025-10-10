@@ -64,7 +64,12 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     updateMetaTag('og:url', url);
     updateMetaTag('og:type', type);
     updateMetaTag('og:site_name', 'Tolga Çavga Portfolio');
-    updateMetaTag('og:locale', i18n.language === 'tr' ? 'tr_TR' : i18n.language === 'de' ? 'de_DE' : 'en_US');
+    updateMetaTag('og:locale', 
+      i18n.language === 'tr' ? 'tr_TR' : 
+      i18n.language === 'de' ? 'de_DE' : 
+      i18n.language === 'az' ? 'az_AZ' : 
+      'en_US'
+    );
 
     // Twitter Card Meta Tags
     updateMetaTag('twitter:card', 'summary_large_image', true);

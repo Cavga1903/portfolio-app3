@@ -1,0 +1,226 @@
+{
+  "pageTitle": "Tolqa Çavqa | Frontend Developer - Portfolio",
+  "nav": {
+    "home": "Ana Səhifə",
+    "about": "Haqqımda",
+    "technologies": "Texnologiyalar",
+    "projects": "Layihələr",
+    "contact": "Əlaqə"
+  },
+  "hero": {
+    "greeting": "Salam, mən Tolqa! 👋",
+    "description": "Frontend Developer olaraq yaradıcı və müasir veb layihələri hazırlayıram.",
+    "ctaAbout": "Haqqımda Ətraflı",
+    "ctaProjects": "Layihələrimə Bax"
+  },
+  "about": {
+    "title": "Haqqımda",
+    "description": "Salam! Mən Tolqa. Proqram təminatı inkişafı dünyasına böyük bir ehtiras ilə addım atdım. Frontend Developer olaraq yaradıcı və istifadəçi dostu veb tətbiqləri hazırlamaqdan böyük həzz alıram. Boş vaxtlarımda yeni texnologiyalar öyrənmək, kitab oxumaq və idmanla məşğul olmaqla maraqlanıram.",
+    "stats": {
+      "focus": {
+        "label": "Fokus",
+        "value": "Frontend Dev"
+      },
+      "passion": {
+        "label": "Ehtiras",
+        "value": "İnnovasiya"
+      },
+      "love": {
+        "label": "Sevgi",
+        "value": "Təmiz Kod"
+      }
+    }
+  },
+  "experience": {
+    "title": "Təcrübə & Təhsil",
+    "turkcell": {
+      "title": "Müştəri Xidmətləri Nümayəndəsi",
+      "company": "Turkcell Global Bilgi",
+      "location": "Bornova, İzmir, Türkiyə",
+      "period": "Avqust 2025 - Davam edir",
+      "description": "Turkcell Global Bilgi-də müştərilərə dəstək oluram və problemləri həll edirəm. Aydın ünsiyyət, problem həlli və texniki dəstək sahələrində ixtisaslaşıram."
+    },
+    "upwork": {
+      "title": "React Native Developer | Freelance Frontend Developer",
+      "company": "Upwork",
+      "location": "İzmir, Türkiyə",
+      "period": "İyul 2025 - Davam edir",
+      "description": "Cross-platform mobil tətbiqlər hazırladım. RESTful API və Supabase inteqrasiyası etdim. Tailwind CSS ilə dinamik UI-lar dizayn edərək istifadəçi saxlama nisbətini 30% artırdım."
+    },
+    "siliconmade": {
+      "title": "Mobil və Frontend İnkişaf Stajyeri",
+      "company": "Siliconmade Academy",
+      "location": "İzmir, Türkiyə",
+      "period": "Fevral 2025 - İyul 2025",
+      "description": "6 aylıq / 184 saatlıq staj proqramını tamamladım. Real dünya layihələri hazırladım. React, React Native, REST API, Supabase, Tailwind CSS və Firebase sahələrində praktik təcrübə qazandım."
+    },
+    "concentrix": {
+      "title": "Müştəri Xidmətləri Nümayəndəsi - Bank Sektoru",
+      "company": "Concentrix",
+      "location": "İzmir, Türkiyə",
+      "period": "Dekabr 2022 - Oktyabr 2024",
+      "description": "Bank sektorunda ön xətt dəstəyi təqdim etdim. 95% müştəri məmnuniyyəti nisbəti təmin etdim. Salesforce CRM ilə xidmət biletlərini idarə etdim."
+    },
+    "uopeople": {
+      "title": "Kompüter Elmləri Bakalavr (Davam edir)",
+      "company": "University of the People",
+      "location": "Onlayn",
+      "period": "İyun 2025 - İyun 2029",
+      "description": "Kompüter Elmləri sahəsində bakalavr təhsilimi davam etdirirəm. Alqoritmlər, məlumat strukturları və proqram təminatı mühəndisliyi prinsipləri üzərində işləyirəm."
+    },
+    "anadolu": {
+      "title": "Kompüter Proqramlaşdırma Ön Lisans",
+      "company": "Anadolu Universiteti",
+      "location": "Eskişehir, Türkiyə",
+      "period": "Tamamlandı",
+      "description": "Kompüter proqramlaşdırması və proqram təminatı inkişafı əsaslarını öyrəndim. Proqramlaşdırma dillərini və proqram təminatı inkişaf proseslərini mənimsədim."
+    }
+  },
+  "technologies": {
+    "title": "Texnologiya Yığını",
+    "subtitle": "İstifadə etdiyim texnologiyalar və bacarıq səviyyələrim",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "git": "Git",
+    "typescript": "TypeScript",
+    "tailwind": "Tailwind CSS",
+    "npm": "NPM"
+  },
+  "certificates": {
+    "title": "Sertifikatlar & Nailiyyətlər",
+    "subtitle": "Təhsil səyahətimdə qazandığım sertifikatlar və nailiyyətlər",
+    "siliconmade": {
+      "title": "Mobil & Frontend İnkişaf Sertifikatı",
+      "issuer": "Siliconmade Academy",
+      "date": "İyul 2025",
+      "description": "184 saatlıq intensiv təlim proqramı. React və React Native ilə mobil tətbiq hazırlama."
+    },
+    "frontend": {
+      "title": "Frontend Development Fundamentals",
+      "issuer": "Onlayn Təlim Platforması",
+      "date": "2024",
+      "description": "HTML, CSS və JavaScript əsaslarını əhatə edən hərtərəfli təlim."
+    },
+    "react": {
+      "title": "React.js Mastery",
+      "issuer": "Onlayn Təlim Platforması",
+      "date": "2024",
+      "description": "React komponentləri, hooks və state management mövzularında qabaqcıl səviyyə təlim."
+    },
+    "responsive": {
+      "title": "Responsive Web Design",
+      "issuer": "Onlayn Təlim Platforması",
+      "date": "2024",
+      "description": "Mobile-first yanaşma və responsive dizayn prinsipləri."
+    },
+    "javascript": {
+      "title": "Modern JavaScript (ES6+)",
+      "issuer": "Onlayn Təlim Platforması",
+      "date": "2024",
+      "description": "ES6+ xüsusiyyətləri, async/await və müasir JavaScript texnikaları."
+    },
+    "git": {
+      "title": "Git & GitHub Mastery",
+      "issuer": "Onlayn Təlim Platforması",
+      "date": "2024",
+      "description": "Versiya nəzarəti, branch strategiyaları və birgə inkişaf."
+    },
+    "stats": {
+      "certificates": "Sertifikat",
+      "hours": "Təlim Saatı",
+      "projects": "Layihə",
+      "experience": "İl Təcrübə"
+    }
+  },
+  "projects": {
+    "title": "Layihələrim",
+    "details": "Təfərrüatlar",
+    "tech": "Texnologiyalar:",
+    "github": "GitHub",
+    "demo": "Demo",
+    "items": {
+      "todo": {
+        "title": "Todo List Tətbiqi",
+        "description": "Tapşırıq əlavə etmə, tamamlama və silmə xüsusiyyətli sadə tapşırıq idarəetmə tətbiqi."
+      },
+      "portfolio": {
+        "title": "Portfolio Veb Saytı",
+        "description": "Şəxsi portfolio saytım. Responsive dizayn və müasir UI ehtiva edir."
+      },
+      "blog": {
+        "title": "Bloq Saytı",
+        "description": "Sadə bloq platforması. Yazı əlavə etmə, redaktə etmə və silmə funksiyaları ilə."
+      }
+    }
+  },
+  "contact": {
+    "title": "Əlaqə",
+    "description": "Mənimlə əlaqə saxlayın! Forma vasitəsilə mesaj göndərə və ya sosial media hesablarımdan əlaqə saxlaya bilərsiniz.",
+    "form": {
+      "title": "Mesaj Göndərin",
+      "name": "Adınız",
+      "namePlaceholder": "Adınızı yazın",
+      "email": "E-poçt Ünvanınız",
+      "emailPlaceholder": "misal@email.com",
+      "message": "Mesajınız",
+      "messagePlaceholder": "Mesajınızı buraya yazın...",
+      "send": "Göndər",
+      "sending": "Göndərilir...",
+      "success": "✅ Mesajınız uğurla göndərildi!",
+      "error": "❌ Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin."
+    },
+    "or": "və ya",
+    "email": "E-poçt Göndər",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "rights": "Bütün Hüquqlar Qorunur.",
+    "madeWith": "Hazırlanıb",
+    "by": "Tolqa tərəfindən | Frontend Developer",
+    "buyMeACoffee": "Mənə Kofe Al ☕"
+  },
+  "scrollToTop": "Yuxarı qalx",
+  "share": {
+    "title": "Paylaş",
+    "shareOn": "Burada paylaş:",
+    "copyLink": "Linki Kopyala",
+    "linkCopied": "Link kopyalandı! ✅"
+  },
+  "socialProof": {
+    "title": "Sosial Mediada İzləyin",
+    "subtitle": "Layihələrimi izləyin, yeniliklərdən xəbərdar olun və mənimlə əlaqə saxlayın!",
+    "followMe": "İzlə",
+    "cta": "Yeni layihələr və məzmunlardan xəbərdar olmaq istəyirsiniz?",
+    "followGitHub": "GitHub-da İzlə",
+    "connectLinkedIn": "LinkedIn-də Bağlan",
+    "github": {
+      "stats": "20+ Repo",
+      "description": "Açıq mənbə layihələri və kod nümunələri"
+    },
+    "linkedin": {
+      "stats": "500+ Əlaqə",
+      "description": "Peşəkar şəbəkə və karyera inkişafı"
+    },
+    "instagram": {
+      "description": "Kodlaşdırma məsləhətləri və gündəlik inkişaf məzmunları"
+    }
+  },
+  "portfolioShare": {
+    "title": "Portfoliomu Bəyəndiniz?",
+    "description": "Əgər bu portfolionu bəyəndinizsə və dostlarınızla paylaşmaq istəyirsinizsə, aşağıdakı düymələri istifadə edə bilərsiniz. Hər paylaşım məni motivasiya edir! 🚀",
+    "shareTitle": "Tolqa Çavqanın gözəl portfoliosuna baxın!",
+    "shareDescription": "Müasir və yaradıcı frontend developer portfoliosu - React, TypeScript və daha çoxu!",
+    "thankYou": "Dəstəyiniz üçün təşəkkür edirik!"
+  },
+  "notFound": {
+    "title": "Vay! İtmiş kimi görünürsən! 🗺️",
+    "message": "Axtardığın səhifə paralel kainatda ola bilər... Və ya heç mövcud olmayıb. Kim bilir? 🤷‍♂️",
+    "funFact": "💡 Maraqlı Fakt: Bu 404 səhifəsini taparaq gizli nailiyyət qazandın!",
+    "goHome": "Ana Səhifəyə Qayıt",
+    "goBack": "Geri Qayıt",
+    "tip": "Konami kodunu sına bəlkə nəsə olar..."
+  }
+}
+
