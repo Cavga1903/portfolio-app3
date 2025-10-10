@@ -73,7 +73,6 @@ const Navbar: React.FC = () => {
                 className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 <FaGlobe className="text-lg" />
-                <span className="text-lg">{currentLanguage.flag}</span>
                 <span className="text-sm font-medium">{currentLanguage.code.toUpperCase()}</span>
               </button>
               
@@ -87,7 +86,6 @@ const Navbar: React.FC = () => {
                         i18n.language === lang.code ? 'bg-blue-50 dark:bg-gray-700' : ''
                       } first:rounded-t-lg last:rounded-b-lg`}
                     >
-                      <span className="text-2xl">{lang.flag}</span>
                       <span className="font-medium text-gray-800 dark:text-white">{lang.name}</span>
                     </button>
                   ))}
@@ -99,10 +97,11 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-2 md:hidden">
               <button
                 onClick={toggleLangMenu}
-                className="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 aria-label="Change language"
               >
-                <span className="text-xl">{currentLanguage.flag}</span>
+                <FaGlobe className="inline mr-1" />
+                {currentLanguage.code.toUpperCase()}
               </button>
               
               <button
@@ -152,11 +151,10 @@ const Navbar: React.FC = () => {
               <button
                 key={lang.code}
                 onClick={() => changeLanguage(lang.code)}
-                className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+                className={`w-full flex items-center justify-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
                   i18n.language === lang.code ? 'bg-blue-50 dark:bg-gray-700' : ''
                 } first:rounded-t-lg last:rounded-b-lg`}
               >
-                <span className="text-2xl">{lang.flag}</span>
                 <span className="font-medium text-gray-800 dark:text-white">{lang.name}</span>
               </button>
             ))}
