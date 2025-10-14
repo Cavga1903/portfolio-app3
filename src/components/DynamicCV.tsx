@@ -41,6 +41,26 @@ const DynamicCV: React.FC = () => {
         backgroundColor: '#ffffff',
         width: 794, // A4 genişliği (pixel)
         height: 1123, // A4 yüksekliği (pixel)
+        ignoreElements: (element) => {
+          // OKLCH renklerini içeren elementleri atla
+          const style = window.getComputedStyle(element);
+          const color = style.color;
+          const backgroundColor = style.backgroundColor;
+          return color.includes('oklch') || backgroundColor.includes('oklch');
+        },
+        onclone: (clonedDoc) => {
+          // OKLCH renklerini hex'e çevir
+          const elements = clonedDoc.querySelectorAll('*');
+          elements.forEach((element: any) => {
+            const style = element.style;
+            if (style.color && style.color.includes('oklch')) {
+              style.color = '#000000'; // Siyah yap
+            }
+            if (style.backgroundColor && style.backgroundColor.includes('oklch')) {
+              style.backgroundColor = '#ffffff'; // Beyaz yap
+            }
+          });
+        }
       });
 
       console.log('Canvas oluşturuldu');
@@ -88,8 +108,8 @@ const DynamicCV: React.FC = () => {
       >
         {/* Header */}
         <div className="text-center mb-8 border-b-2 border-blue-500 pb-6">
-          <h1 className="text-4xl font-bold text-blue-600 mb-2">Tolga Çavga</h1>
-          <h2 className="text-2xl text-gray-700 mb-4">Frontend Developer</h2>
+          <h1 className="text-4xl font-bold mb-2" style={{ color: '#2563eb' }}>Tolga Çavga</h1>
+          <h2 className="text-2xl mb-4" style={{ color: '#374151' }}>Frontend Developer</h2>
           <div className="flex justify-center gap-6 text-sm">
             <span>📧 cavgaa228@gmail.com</span>
             <span>🌐 www.tolgacavga.com</span>
@@ -103,55 +123,55 @@ const DynamicCV: React.FC = () => {
 
         {/* Professional Summary */}
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-3">
+          <h3 className="text-xl font-bold mb-3 border-l-4 border-blue-500 pl-3" style={{ color: '#2563eb' }}>
             {t('cv.professionalSummary')}
           </h3>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="leading-relaxed" style={{ color: '#374151' }}>
             {t('cv.summaryText')}
           </p>
         </div>
 
         {/* Technical Skills */}
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-3">
+          <h3 className="text-xl font-bold mb-3 border-l-4 border-blue-500 pl-3" style={{ color: '#2563eb' }}>
             {t('cv.technicalSkills')}
           </h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Frontend Technologies:</h4>
-              <p className="text-gray-700">React, TypeScript, JavaScript, HTML5, CSS3, TailwindCSS</p>
+              <h4 className="font-semibold mb-2" style={{ color: '#1f2937' }}>Frontend Technologies:</h4>
+              <p style={{ color: '#374151' }}>React, TypeScript, JavaScript, HTML5, CSS3, TailwindCSS</p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Tools & Libraries:</h4>
-              <p className="text-gray-700">Git, npm, Vite, Framer Motion, React Router</p>
+              <h4 className="font-semibold mb-2" style={{ color: '#1f2937' }}>Tools & Libraries:</h4>
+              <p style={{ color: '#374151' }}>Git, npm, Vite, Framer Motion, React Router</p>
             </div>
           </div>
         </div>
 
         {/* Work Experience */}
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-3">
+          <h3 className="text-xl font-bold mb-3 border-l-4 border-blue-500 pl-3" style={{ color: '#2563eb' }}>
             {t('cv.workExperience')}
           </h3>
           
           <div className="mb-4">
             <div className="flex justify-between items-start mb-2">
-              <h4 className="font-semibold text-gray-800">Müşteri Hizmetleri Temsilcisi</h4>
-              <span className="text-sm text-gray-600">Ağustos 2025 - Devam Ediyor</span>
+              <h4 className="font-semibold" style={{ color: '#1f2937' }}>Müşteri Hizmetleri Temsilcisi</h4>
+              <span className="text-sm" style={{ color: '#6b7280' }}>Ağustos 2025 - Devam Ediyor</span>
             </div>
-            <p className="text-blue-600 font-medium">Turkcell Global Bilgi</p>
-            <p className="text-gray-700 text-sm mt-1">
+            <p className="font-medium" style={{ color: '#2563eb' }}>Turkcell Global Bilgi</p>
+            <p className="text-sm mt-1" style={{ color: '#374151' }}>
               {t('cv.turkcellDescription')}
             </p>
           </div>
 
           <div className="mb-4">
             <div className="flex justify-between items-start mb-2">
-              <h4 className="font-semibold text-gray-800">React Native Developer | Freelance Frontend Developer</h4>
-              <span className="text-sm text-gray-600">Temmuz 2025 - Devam Ediyor</span>
+              <h4 className="font-semibold" style={{ color: '#1f2937' }}>React Native Developer | Freelance Frontend Developer</h4>
+              <span className="text-sm" style={{ color: '#6b7280' }}>Temmuz 2025 - Devam Ediyor</span>
             </div>
-            <p className="text-blue-600 font-medium">Upwork</p>
-            <p className="text-gray-700 text-sm mt-1">
+            <p className="font-medium" style={{ color: '#2563eb' }}>Upwork</p>
+            <p className="text-sm mt-1" style={{ color: '#374151' }}>
               {t('cv.upworkDescription')}
             </p>
           </div>
@@ -159,35 +179,35 @@ const DynamicCV: React.FC = () => {
 
         {/* Education */}
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-3">
+          <h3 className="text-xl font-bold mb-3 border-l-4 border-blue-500 pl-3" style={{ color: '#2563eb' }}>
             {t('cv.education')}
           </h3>
           
           <div className="mb-4">
             <div className="flex justify-between items-start mb-2">
-              <h4 className="font-semibold text-gray-800">Computer Science</h4>
-              <span className="text-sm text-gray-600">2022 - 2026</span>
+              <h4 className="font-semibold" style={{ color: '#1f2937' }}>Computer Science</h4>
+              <span className="text-sm" style={{ color: '#6b7280' }}>2022 - 2026</span>
             </div>
-            <p className="text-blue-600 font-medium">University of the People</p>
-            <p className="text-gray-700 text-sm">Bachelor's Degree</p>
+            <p className="font-medium" style={{ color: '#2563eb' }}>University of the People</p>
+            <p className="text-sm" style={{ color: '#374151' }}>Bachelor's Degree</p>
           </div>
 
           <div className="mb-4">
             <div className="flex justify-between items-start mb-2">
-              <h4 className="font-semibold text-gray-800">Computer Programming</h4>
-              <span className="text-sm text-gray-600">2021 - 2023</span>
+              <h4 className="font-semibold" style={{ color: '#1f2937' }}>Computer Programming</h4>
+              <span className="text-sm" style={{ color: '#6b7280' }}>2021 - 2023</span>
             </div>
-            <p className="text-blue-600 font-medium">Anadolu Üniversitesi</p>
-            <p className="text-gray-700 text-sm">Associate Degree</p>
+            <p className="font-medium" style={{ color: '#2563eb' }}>Anadolu Üniversitesi</p>
+            <p className="text-sm" style={{ color: '#374151' }}>Associate Degree</p>
           </div>
         </div>
 
         {/* Certificates */}
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-3">
+          <h3 className="text-xl font-bold mb-3 border-l-4 border-blue-500 pl-3" style={{ color: '#2563eb' }}>
             {t('cv.certificates')}
           </h3>
-          <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <ul className="list-disc list-inside space-y-1" style={{ color: '#374151' }}>
             <li>React Native Bootcamp - Siliconmade Academy (2024)</li>
             <li>Frontend Development Certificate - Online Platform</li>
             <li>JavaScript Fundamentals - Codecademy</li>
@@ -196,10 +216,10 @@ const DynamicCV: React.FC = () => {
 
         {/* Languages */}
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-3">
+          <h3 className="text-xl font-bold mb-3 border-l-4 border-blue-500 pl-3" style={{ color: '#2563eb' }}>
             {t('cv.languages')}
           </h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4" style={{ color: '#374151' }}>
             <div>
               <span className="font-semibold">Turkish:</span> Native
             </div>
