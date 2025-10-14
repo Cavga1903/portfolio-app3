@@ -118,15 +118,7 @@ const Services: React.FC = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    }),
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -195,10 +187,13 @@ const Services: React.FC = () => {
             {b2bServices.map((service, index) => (
               <motion.div
                 key={service.titleKey}
-                custom={index}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 variants={cardVariants}
+                transition={{
+                  delay: index * 0.1,
+                  duration: 0.5,
+                }}
                 className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer"
                 whileHover={{ 
                   scale: 1.05,
@@ -242,10 +237,13 @@ const Services: React.FC = () => {
             {b2cServices.map((service, index) => (
               <motion.div
                 key={service.titleKey}
-                custom={index + b2bServices.length}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 variants={cardVariants}
+                transition={{
+                  delay: (index + b2bServices.length) * 0.1,
+                  duration: 0.5,
+                }}
                 className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer"
                 whileHover={{ 
                   scale: 1.05,
