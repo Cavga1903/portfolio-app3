@@ -45,7 +45,8 @@ const Footer: React.FC = () => {
       <div className="flex flex-col sm:flex-row gap-4 mt-6 mb-6">
         {/* Download CV Button */}
         <a
-          href="/cv"
+          href="/Tolga_Cavga_CV.pdf"
+          download="Tolga_Cavga_CV.pdf"
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
         >
           <FaDownload className="text-xl group-hover:translate-y-1 transition-transform duration-300" />
