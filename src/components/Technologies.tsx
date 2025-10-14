@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNpm } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss } from 'react-icons/si';
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 interface Technology {
   iconKey: string;
@@ -14,7 +13,6 @@ interface Technology {
 
 const Technologies: React.FC = () => {
   const { t } = useTranslation();
-  const [viewMode, setViewMode] = useState<'cards' | 'radar'>('cards');
   
   const technologies: Technology[] = [
     {
@@ -74,13 +72,6 @@ const Technologies: React.FC = () => {
       icon: <FaNpm className="text-5xl" />
     },
   ];
-
-  // Prepare data for radar chart
-  const radarData = technologies.map(tech => ({
-    skill: t(tech.nameKey),
-    level: tech.level,
-    fullMark: 100,
-  }));
   
   return (
     <section id="technologies" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
@@ -95,37 +86,11 @@ const Technologies: React.FC = () => {
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-purple-400 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
-      <p className="relative z-10 text-gray-400 text-center mb-8 max-w-2xl">
+      <p className="relative z-10 text-gray-400 text-center mb-12 max-w-2xl">
         {t('technologies.subtitle')}
       </p>
 
-      {/* View Switcher */}
-      <div className="relative z-10 flex gap-4 mb-12">
-        <button
-          onClick={() => setViewMode('cards')}
-          className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-            viewMode === 'cards'
-              ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/50'
-              : 'bg-gray-800/50 text-gray-400 hover:text-white border border-gray-700'
-          }`}
-        >
-          📊 Card View
-        </button>
-        <button
-          onClick={() => setViewMode('radar')}
-          className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-            viewMode === 'radar'
-              ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/50'
-              : 'bg-gray-800/50 text-gray-400 hover:text-white border border-gray-700'
-          }`}
-        >
-          🎯 Radar Chart
-        </button>
-      </div>
-
-      {/* Cards View */}
-      {viewMode === 'cards' && (
-        <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 fade-in-up">
+      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6">
         {technologies.map((tech, index) => (
           <div 
             key={tech.iconKey}
@@ -167,93 +132,7 @@ const Technologies: React.FC = () => {
             </div>
           </div>
         ))}
-        </div>
-      )}
-
-      {/* Radar Chart View */}
-      {viewMode === 'radar' && (
-        <div className="relative z-10 w-full max-w-5xl fade-in-up">
-          <div className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl p-8">
-            <ResponsiveContainer width="100%" height={500}>
-              <RadarChart data={radarData}>
-                <PolarGrid 
-                  stroke="#6b7280" 
-                  strokeWidth={1}
-                />
-                <PolarAngleAxis 
-                  dataKey="skill" 
-                  tick={{ fill: '#e5e7eb', fontSize: 14, fontWeight: 600 }}
-                  stroke="#6b7280"
-                />
-                <PolarRadiusAxis 
-                  angle={90} 
-                  domain={[0, 100]} 
-                  tick={{ fill: '#9ca3af', fontSize: 12 }}
-                  stroke="#6b7280"
-                />
-                <Radar
-                  name="Skill Level"
-                  dataKey="level"
-                  stroke="#a855f7"
-                  fill="#a855f7"
-                  fillOpacity={0.6}
-                  strokeWidth={2}
-                  dot={{
-                    fill: '#ec4899',
-                    stroke: '#ffffff',
-                    strokeWidth: 2,
-                    r: 5,
-                  }}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: '#1f2937',
-                    border: '1px solid #374151',
-                    borderRadius: '0.5rem',
-                    color: '#fff',
-                  }}
-                  itemStyle={{ color: '#a855f7' }}
-                  formatter={(value: number) => [`${value}%`, 'Level']}
-                />
-                <Legend
-                  wrapperStyle={{
-                    paddingTop: '20px',
-                    color: '#e5e7eb',
-                  }}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
-
-            {/* Stats Summary */}
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700/50">
-                <p className="text-2xl font-bold text-purple-400">
-                  {Math.round(technologies.reduce((acc, tech) => acc + tech.level, 0) / technologies.length)}%
-                </p>
-                <p className="text-sm text-gray-400 mt-1">Ortalama</p>
-              </div>
-              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700/50">
-                <p className="text-2xl font-bold text-pink-400">
-                  {Math.max(...technologies.map(t => t.level))}%
-                </p>
-                <p className="text-sm text-gray-400 mt-1">En Yüksek</p>
-              </div>
-              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700/50">
-                <p className="text-2xl font-bold text-cyan-400">
-                  {Math.min(...technologies.map(t => t.level))}%
-                </p>
-                <p className="text-sm text-gray-400 mt-1">En Düşük</p>
-              </div>
-              <div className="text-center p-4 bg-gray-900/50 rounded-lg border border-gray-700/50">
-                <p className="text-2xl font-bold text-emerald-400">
-                  {technologies.length}
-                </p>
-                <p className="text-sm text-gray-400 mt-1">Teknoloji</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </section>
   );
 };
