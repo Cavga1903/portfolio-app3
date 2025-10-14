@@ -4,6 +4,7 @@
     "home": "Home",
     "about": "About",
     "technologies": "Technologies",
+    "services": "Services",
     "projects": "Projects",
     "contact": "Contact"
   },
@@ -132,6 +133,54 @@
       "hours": "Training Hours",
       "projects": "Projects",
       "experience": "Years Experience"
+    }
+  },
+  "services": {
+    "title": "My Services",
+    "subtitle": "Creative and user-friendly web solutions with modern technologies",
+    "b2b": "Business Services",
+    "b2c": "Personal Services",
+    "cta": "Want to work with me on your project?",
+    "contactButton": "Get In Touch",
+    "corporate": {
+      "title": "Corporate Website",
+      "description": "Modern, professional and responsive corporate websites. Secure and scalable solutions with React and TypeScript."
+    },
+    "landing": {
+      "title": "Landing Page",
+      "description": "High-conversion landing pages that load fast and are SEO-friendly. Impressive animations with Framer Motion."
+    },
+    "ecommerce": {
+      "title": "E-Commerce Frontend",
+      "description": "User-friendly e-commerce interfaces. Payment integrations, product catalogs and cart management."
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "description": "Interactive dashboards for data-driven decision making. Charts, tables and real-time updates."
+    },
+    "redesign": {
+      "title": "Website Redesign",
+      "description": "Renew your existing website with modern technologies. Performance optimization and UX improvements."
+    },
+    "responsive": {
+      "title": "Responsive Design",
+      "description": "Responsive websites that look perfect on mobile, tablet and desktop. Mobile-first approach."
+    },
+    "portfolio": {
+      "title": "Portfolio Website",
+      "description": "Personal portfolio and CV websites. Stand out with modern design, animations and SEO optimization."
+    },
+    "smallBusiness": {
+      "title": "Small Business Website",
+      "description": "Affordable, effective websites for local businesses. Google My Business integration and local SEO."
+    },
+    "restaurant": {
+      "title": "Restaurant/Cafe Website",
+      "description": "Restaurant websites with digital menu, reservation system and photo gallery. QR code menu support."
+    },
+    "personal": {
+      "title": "Personal Website",
+      "description": "Custom designed websites for blog, CV or personal brand. Content management and social media integration."
     }
   },
   "projects": {

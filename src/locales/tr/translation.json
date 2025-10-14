@@ -4,6 +4,7 @@
     "home": "Anasayfa",
     "about": "Hakkımda",
     "technologies": "Teknolojiler",
+    "services": "Hizmetler",
     "projects": "Projeler",
     "contact": "İletişim"
   },
@@ -132,6 +133,54 @@
       "hours": "Eğitim Saati",
       "projects": "Proje",
       "experience": "Yıl Deneyim"
+    }
+  },
+  "services": {
+    "title": "Hizmetlerim",
+    "subtitle": "Modern teknolojilerle yaratıcı ve kullanıcı dostu web çözümleri sunuyorum",
+    "b2b": "Kurumsal Hizmetler",
+    "b2c": "Bireysel Hizmetler",
+    "cta": "Projeniz için benimle çalışmak ister misiniz?",
+    "contactButton": "İletişime Geçin",
+    "corporate": {
+      "title": "Kurumsal Web Sitesi",
+      "description": "Modern, profesyonel ve responsive kurumsal web siteleri. React ve TypeScript ile güvenli ve ölçeklenebilir çözümler."
+    },
+    "landing": {
+      "title": "Landing Page",
+      "description": "Yüksek dönüşüm odaklı, hızlı yüklenen ve SEO uyumlu landing page'ler. Framer Motion ile etkileyici animasyonlar."
+    },
+    "ecommerce": {
+      "title": "E-Ticaret Frontend",
+      "description": "Kullanıcı dostu e-ticaret arayüzleri. Ödeme entegrasyonları, ürün katalogları ve sepet yönetimi."
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "description": "Veriye dayalı karar almanızı sağlayan interaktif dashboard'lar. Grafikler, tablolar ve gerçek zamanlı güncellemeler."
+    },
+    "redesign": {
+      "title": "Web Sitesi Yenileme",
+      "description": "Mevcut web sitenizi modern teknolojilerle yenileyin. Performance optimizasyonu ve kullanıcı deneyimi iyileştirmeleri."
+    },
+    "responsive": {
+      "title": "Responsive Tasarım",
+      "description": "Mobil, tablet ve desktop'ta mükemmel görünen responsive web siteleri. Mobile-first yaklaşım."
+    },
+    "portfolio": {
+      "title": "Portfolyo Web Sitesi",
+      "description": "Kişisel portfolyo ve CV web siteleri. Modern tasarım, animasyonlar ve SEO optimizasyonu ile öne çıkın."
+    },
+    "smallBusiness": {
+      "title": "Küçük İşletme Sitesi",
+      "description": "Yerel işletmeler için uygun fiyatlı, etkili web siteleri. Google My Business entegrasyonu ve yerel SEO."
+    },
+    "restaurant": {
+      "title": "Restaurant/Kafe Sitesi",
+      "description": "Dijital menü, rezervasyon sistemi ve fotoğraf galerisi ile restaurant web siteleri. QR kod menü desteği."
+    },
+    "personal": {
+      "title": "Kişisel Web Sitesi",
+      "description": "Blog, CV veya kişisel marka için özel tasarlanmış web siteleri. İçerik yönetimi ve sosyal medya entegrasyonu."
     }
   },
   "projects": {

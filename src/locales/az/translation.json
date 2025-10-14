@@ -4,6 +4,7 @@
     "home": "Ana Səhifə",
     "about": "Haqqımda",
     "technologies": "Texnologiyalar",
+    "services": "Xidmətlər",
     "projects": "Layihələr",
     "contact": "Əlaqə"
   },
@@ -132,6 +133,54 @@
       "hours": "Təlim Saatı",
       "projects": "Layihə",
       "experience": "İl Təcrübə"
+    }
+  },
+  "services": {
+    "title": "Xidmətlərim",
+    "subtitle": "Müasir texnologiyalarla yaradıcı və istifadəçi dostu veb həlləri təqdim edirəm",
+    "b2b": "Korporativ Xidmətlər",
+    "b2c": "Fərdi Xidmətlər",
+    "cta": "Layihəniz üçün mənimlə işləmək istəyirsiniz?",
+    "contactButton": "Əlaqə Saxlayın",
+    "corporate": {
+      "title": "Korporativ Vebsayt",
+      "description": "Müasir, professional və responsive korporativ vebsaytlar. React və TypeScript ilə təhlükəsiz və miqyaslana bilən həllər."
+    },
+    "landing": {
+      "title": "Landing Page",
+      "description": "Yüksək konversiya fokuslu, sürətli yüklənən və SEO uyğun landing səhifələr. Framer Motion ilə təsirli animasiyalar."
+    },
+    "ecommerce": {
+      "title": "E-Ticarət Frontend",
+      "description": "İstifadəçi dostu e-ticarət interfeysi. Ödəniş inteqrasiyaları, məhsul kataloqları və səbət idarəetməsi."
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "description": "Məlumata əsaslanan qərar qəbul etməyinizi təmin edən interaktiv dashboard'lar. Qrafiklər, cədvəllər və real-time yeniləmələr."
+    },
+    "redesign": {
+      "title": "Vebsayt Yeniləmə",
+      "description": "Mövcud vebsaytınızı müasir texnologiyalarla yeniləyin. Performance optimallaşdırması və istifadəçi təcrübəsi təkmilləşdirmələri."
+    },
+    "responsive": {
+      "title": "Responsive Dizayn",
+      "description": "Mobil, planşet və desktop'da mükəmməl görünən responsive vebsaytlar. Mobile-first yanaşma."
+    },
+    "portfolio": {
+      "title": "Portfolio Vebsaytı",
+      "description": "Şəxsi portfolio və CV vebsaytları. Müasir dizayn, animasiyalar və SEO optimallaşdırması ilə fərqlənin."
+    },
+    "smallBusiness": {
+      "title": "Kiçik Müəssisə Saytı",
+      "description": "Yerli müəssisələr üçün əlverişli qiymətə effektiv vebsaytlar. Google My Business inteqrasiyası və yerli SEO."
+    },
+    "restaurant": {
+      "title": "Restaurant/Kafe Saytı",
+      "description": "Rəqəmsal menyu, rezervasiya sistemi və foto qalereyası ilə restaurant vebsaytları. QR kod menyu dəstəyi."
+    },
+    "personal": {
+      "title": "Şəxsi Vebsayt",
+      "description": "Blog, CV və ya şəxsi brend üçün xüsusi dizayn edilmiş vebsaytlar. Məzmun idarəetməsi və sosial media inteqrasiyası."
     }
   },
   "projects": {

@@ -13,6 +13,7 @@ const Hero = lazy(() => import('../components/Hero'));
 const About = lazy(() => import('../components/About'));
 const Experience = lazy(() => import('../components/Experience'));
 const Technologies = lazy(() => import('../components/Technologies'));
+const Services = lazy(() => import('../components/Services'));
 const Certificates = lazy(() => import('../components/Certificates'));
 const Projects = lazy(() => import('../components/Projects'));
 const Contact = lazy(() => import('../components/Contact'));
@@ -63,6 +64,10 @@ const Home: React.FC = () => {
         
         <Suspense fallback={<SkeletonLoader type="technologies" />}>
           <Technologies />
+        </Suspense>
+        
+        <Suspense fallback={<SkeletonLoader type="about" />}>
+          <Services />
         </Suspense>
         
         <Suspense fallback={<SkeletonLoader type="certificates" />}>

@@ -4,6 +4,7 @@
     "home": "Startseite",
     "about": "Über mich",
     "technologies": "Technologien",
+    "services": "Dienstleistungen",
     "projects": "Projekte",
     "contact": "Kontakt"
   },
@@ -132,6 +133,54 @@
       "hours": "Schulungsstunden",
       "projects": "Projekte",
       "experience": "Jahre Erfahrung"
+    }
+  },
+  "services": {
+    "title": "Meine Dienstleistungen",
+    "subtitle": "Kreative und benutzerfreundliche Weblösungen mit modernen Technologien",
+    "b2b": "Geschäftsdienstleistungen",
+    "b2c": "Persönliche Dienstleistungen",
+    "cta": "Möchten Sie mit mir an Ihrem Projekt arbeiten?",
+    "contactButton": "Kontakt aufnehmen",
+    "corporate": {
+      "title": "Unternehmenswebsite",
+      "description": "Moderne, professionelle und responsive Unternehmenswebsites. Sichere und skalierbare Lösungen mit React und TypeScript."
+    },
+    "landing": {
+      "title": "Landing Page",
+      "description": "Konversionsstarke Landing Pages, die schnell laden und SEO-freundlich sind. Beeindruckende Animationen mit Framer Motion."
+    },
+    "ecommerce": {
+      "title": "E-Commerce Frontend",
+      "description": "Benutzerfreundliche E-Commerce-Oberflächen. Zahlungsintegrationen, Produktkataloge und Warenkorbverwaltung."
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "description": "Interaktive Dashboards für datenbasierte Entscheidungen. Diagramme, Tabellen und Echtzeit-Updates."
+    },
+    "redesign": {
+      "title": "Website-Neugestaltung",
+      "description": "Erneuern Sie Ihre bestehende Website mit modernen Technologien. Performance-Optimierung und UX-Verbesserungen."
+    },
+    "responsive": {
+      "title": "Responsive Design",
+      "description": "Responsive Websites, die auf Mobilgeräten, Tablets und Desktops perfekt aussehen. Mobile-First-Ansatz."
+    },
+    "portfolio": {
+      "title": "Portfolio-Website",
+      "description": "Persönliche Portfolio- und CV-Websites. Heben Sie sich ab mit modernem Design, Animationen und SEO-Optimierung."
+    },
+    "smallBusiness": {
+      "title": "Website für kleine Unternehmen",
+      "description": "Erschwingliche, effektive Websites für lokale Unternehmen. Google My Business-Integration und lokales SEO."
+    },
+    "restaurant": {
+      "title": "Restaurant/Café-Website",
+      "description": "Restaurant-Websites mit digitaler Speisekarte, Reservierungssystem und Fotogalerie. QR-Code-Menü-Unterstützung."
+    },
+    "personal": {
+      "title": "Persönliche Website",
+      "description": "Maßgeschneiderte Websites für Blog, CV oder persönliche Marke. Content-Management und Social-Media-Integration."
     }
   },
   "projects": {
