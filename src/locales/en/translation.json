@@ -232,6 +232,18 @@
     "buyMeACoffee": "Buy Me a Coffee ☕"
   },
   "scrollToTop": "Scroll to top",
+  "cv": {
+    "professionalSummary": "Professional Summary",
+    "summaryText": "I develop creative and modern web projects as a Frontend Developer. I create user-friendly applications with React, TypeScript and TailwindCSS. I specialize in cross-platform mobile applications and responsive websites.",
+    "technicalSkills": "Technical Skills",
+    "workExperience": "Work Experience",
+    "education": "Education",
+    "certificates": "Certificates",
+    "languages": "Languages",
+    "generatePDF": "Generate PDF",
+    "turkcellDescription": "I support customers and solve problems at Turkcell Global Bilgi. I specialize in clear communication, problem solving and technical support.",
+    "upworkDescription": "I developed cross-platform mobile applications. I integrated RESTful APIs and Supabase. I designed dynamic UIs with Tailwind CSS, increasing user retention by 30%."
+  },
   "share": {
     "title": "Share",
     "shareOn": "Share on",

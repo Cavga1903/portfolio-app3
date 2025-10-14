@@ -232,6 +232,18 @@
     "buyMeACoffee": "Bana Bir Kahve Ismarla ☕"
   },
   "scrollToTop": "Yukarı çık",
+  "cv": {
+    "professionalSummary": "Profesyonel Özet",
+    "summaryText": "Frontend Developer olarak yaratıcı ve modern web projeleri geliştiriyorum. React, TypeScript ve TailwindCSS ile kullanıcı dostu uygulamalar oluşturuyorum. Cross-platform mobil uygulamalar ve responsive web siteleri konularında uzmanım.",
+    "technicalSkills": "Teknik Yetenekler",
+    "workExperience": "İş Deneyimi",
+    "education": "Eğitim",
+    "certificates": "Sertifikalar",
+    "languages": "Diller",
+    "generatePDF": "PDF Oluştur",
+    "turkcellDescription": "Turkcell Global Bilgi'de müşterileri destekliyor ve sorunları çözüyorum. Net iletişim, problem çözme ve teknik destek konularında uzmanlaşıyorum.",
+    "upworkDescription": "Cross-platform mobil uygulamalar geliştirdim. RESTful API'ler ve Supabase entegrasyonu yaptım. Tailwind CSS ile dinamik UI'lar tasarlayarak kullanıcı elde tutma oranını %30 artırdım."
+  },
   "share": {
     "title": "Paylaş",
     "shareOn": "Şurada paylaş:",
