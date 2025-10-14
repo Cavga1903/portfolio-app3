@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNpm } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss } from 'react-icons/si';
@@ -14,8 +13,6 @@ interface Technology {
 
 const Technologies: React.FC = () => {
   const { t } = useTranslation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
   
   const technologies: Technology[] = [
     {
@@ -75,55 +72,30 @@ const Technologies: React.FC = () => {
       icon: <FaNpm className="text-5xl" />
     },
   ];
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
   
   return (
-    <section ref={ref} id="technologies" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+    <section id="technologies" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      <motion.h2 
-        className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center inline-block group"
-        initial={{ opacity: 0, y: -30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
-        transition={{ duration: 0.6 }}
-      >
+      <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center fade-in-up inline-block group">
         {t('technologies.title')}
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-purple-400 group-hover:w-full transition-all duration-500"></span>
-      </motion.h2>
+      </h2>
 
-      <motion.p 
-        className="relative z-10 text-gray-400 text-center mb-12 max-w-2xl"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-      >
+      <p className="relative z-10 text-gray-400 text-center mb-12 max-w-2xl">
         {t('technologies.subtitle')}
-      </motion.p>
+      </p>
 
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6">
         {technologies.map((tech, index) => (
-          <motion.div 
+          <div 
             key={tech.iconKey}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={cardVariants}
-            transition={{
-              delay: index * 0.1,
-              duration: 0.5,
-            }}
-            className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-purple-500/20 transition-all duration-300 p-6 group"
-            whileHover={{ 
-              scale: 1.02,
-              boxShadow: "0 20px 60px rgba(168, 85, 247, 0.3)" 
-            }}
+            className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-purple-500/20 transition-all duration-300 p-6 group hover:scale-[1.02]"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center gap-6">
               {/* Icon */}
@@ -158,7 +130,7 @@ const Technologies: React.FC = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
