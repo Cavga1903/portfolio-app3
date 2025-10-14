@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaFacebook, FaWhatsapp, FaLink, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
 import Toast from './Toast';
 import { useToast } from '../hooks/useToast';
+import InstagramStoryTemplate from './InstagramStoryTemplate';
 
 interface ShareButtonsProps {
   url: string;
@@ -22,6 +23,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
 }) => {
   const { t } = useTranslation();
   const { isVisible, message, type, showToast, hideToast } = useToast();
+  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(url);
@@ -29,22 +31,8 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
   };
 
   const handleInstagramShare = () => {
-    // Mobil cihaz kontrolü
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-      // Mobil cihazlarda Instagram story kamerasını açmaya çalış
-      const storyUrl = 'instagram://story-camera';
-      window.location.href = storyUrl;
-      
-      // Instagram uygulaması yüklü değilse, fallback olarak profili aç
-      setTimeout(() => {
-        window.open('https://www.instagram.com/codewithcavga', '_blank');
-      }, 1500);
-    } else {
-      // Desktop'ta Instagram profilini aç
-      window.open('https://www.instagram.com/codewithcavga', '_blank');
-    }
+    // Story template modal'ını aç
+    setIsStoryModalOpen(true);
   };
 
   const shareLinks = {
@@ -94,6 +82,12 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
         onClose={hideToast}
         type={type}
         duration={3000}
+      />
+
+      {/* Instagram Story Template Modal */}
+      <InstagramStoryTemplate 
+        isOpen={isStoryModalOpen}
+        onClose={() => setIsStoryModalOpen(false)}
       />
 
       <div className="flex flex-col gap-3">
