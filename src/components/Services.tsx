@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { 
   FaLaptopCode, 
@@ -25,8 +24,6 @@ interface Service {
 
 const Services: React.FC = () => {
   const { t } = useTranslation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const services: Service[] = [
     // B2B Services
@@ -116,89 +113,44 @@ const Services: React.FC = () => {
   const b2bServices = services.filter(s => s.category === 'b2b');
   const b2cServices = services.filter(s => s.category === 'b2c');
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <section 
-      ref={ref}
       id="services" 
       className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white p-6 py-20 overflow-hidden"
     >
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute top-20 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-        <motion.div 
-          className="absolute bottom-20 left-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 4, repeat: Infinity, delay: 2 }}
-        />
+        <div className="absolute top-20 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       {/* Header */}
-      <motion.h2 
-        className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center inline-block group"
-        initial={{ opacity: 0, y: -30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
-        transition={{ duration: 0.6 }}
-      >
+      <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center fade-in-up inline-block group">
         {t('services.title')}
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full transition-all duration-500"></span>
-      </motion.h2>
+      </h2>
 
-      <motion.p 
-        className="relative z-10 text-gray-400 text-center mb-16 max-w-2xl"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-      >
+      <p className="relative z-10 text-gray-400 text-center mb-16 max-w-2xl">
         {t('services.subtitle')}
-      </motion.p>
+      </p>
 
       <div className="relative z-10 w-full max-w-7xl space-y-16">
         {/* B2B Services */}
         <div>
-          <motion.div
-            className="flex items-center gap-3 mb-8"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
+          <div className="flex items-center gap-3 mb-8 fade-in-up">
             <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full">
               <FaLaptopCode className="text-xl" />
               <h3 className="text-xl font-bold">{t('services.b2b')}</h3>
             </div>
             <div className="flex-1 h-px bg-gradient-to-r from-blue-500/50 to-transparent"></div>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {b2bServices.map((service, index) => (
-              <motion.div
+              <div
                 key={service.titleKey}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                variants={cardVariants}
-                transition={{
-                  delay: index * 0.1,
-                  duration: 0.5,
-                }}
-                className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 20px 60px rgba(59, 130, 246, 0.3)" 
-                }}
+                className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer hover:scale-[1.05]"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`inline-flex p-4 bg-gradient-to-br ${service.gradient} rounded-xl shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <div className="text-white">
@@ -213,42 +165,27 @@ const Services: React.FC = () => {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {t(service.descriptionKey)}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* B2C Services */}
         <div>
-          <motion.div
-            className="flex items-center gap-3 mb-8"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
+          <div className="flex items-center gap-3 mb-8 fade-in-up">
             <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
               <FaUser className="text-xl" />
               <h3 className="text-xl font-bold">{t('services.b2c')}</h3>
             </div>
             <div className="flex-1 h-px bg-gradient-to-r from-purple-500/50 to-transparent"></div>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {b2cServices.map((service, index) => (
-              <motion.div
+              <div
                 key={service.titleKey}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                variants={cardVariants}
-                transition={{
-                  delay: (index + b2bServices.length) * 0.1,
-                  duration: 0.5,
-                }}
-                className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 20px 60px rgba(168, 85, 247, 0.3)" 
-                }}
+                className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer hover:scale-[1.05]"
+                style={{ animationDelay: `${(index + b2bServices.length) * 100}ms` }}
               >
                 <div className={`inline-flex p-4 bg-gradient-to-br ${service.gradient} rounded-xl shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <div className="text-white">
@@ -263,31 +200,24 @@ const Services: React.FC = () => {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {t(service.descriptionKey)}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </div>
 
       {/* CTA */}
-      <motion.div
-        className="relative z-10 mt-16 text-center"
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ delay: 1, duration: 0.6 }}
-      >
+      <div className="relative z-10 mt-16 text-center fade-in-up">
         <p className="text-gray-300 mb-6 text-lg">
           {t('services.cta')}
         </p>
-        <motion.a
+        <a
           href="#contact"
-          className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
         >
           {t('services.contactButton')}
-        </motion.a>
-      </motion.div>
+        </a>
+      </div>
     </section>
   );
 };
