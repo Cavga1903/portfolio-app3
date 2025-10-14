@@ -33,6 +33,110 @@ const DynamicCV: React.FC = () => {
 
       console.log('Kütüphaneler yüklendi');
 
+      // Alternatif: Basit PDF oluşturma (OKLCH olmadan)
+      const generateSimplePDF = () => {
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        // Başlık
+        pdf.setFontSize(24);
+        pdf.setTextColor(37, 99, 235); // Blue
+        pdf.text('Tolga Çavga', 20, 30);
+        
+        pdf.setFontSize(16);
+        pdf.setTextColor(55, 65, 81); // Gray
+        pdf.text('Frontend Developer', 20, 40);
+        
+        // İletişim
+        pdf.setFontSize(10);
+        pdf.text('📧 cavgaa228@gmail.com', 20, 50);
+        pdf.text('🌐 www.tolgacavga.com', 20, 55);
+        pdf.text('📍 İzmir, Türkiye', 20, 60);
+        pdf.text('🔗 GitHub: github.com/Cavga1903', 20, 65);
+        pdf.text('💼 LinkedIn: linkedin.com/in/tolgaacavgaa', 20, 70);
+        
+        // Profesyonel Özet
+        pdf.setFontSize(14);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('Profesyonel Özet', 20, 85);
+        
+        pdf.setFontSize(10);
+        pdf.setTextColor(55, 65, 81);
+        const summary = t('cv.summaryText');
+        const splitSummary = pdf.splitTextToSize(summary, 170);
+        pdf.text(splitSummary, 20, 95);
+        
+        // Teknik Yetenekler
+        pdf.setFontSize(14);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('Teknik Yetenekler', 20, 120);
+        
+        pdf.setFontSize(10);
+        pdf.setTextColor(55, 65, 81);
+        pdf.text('Frontend: React, TypeScript, JavaScript, HTML5, CSS3, TailwindCSS', 20, 130);
+        pdf.text('Tools: Git, npm, Vite, Framer Motion, React Router', 20, 135);
+        
+        // İş Deneyimi
+        pdf.setFontSize(14);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('İş Deneyimi', 20, 150);
+        
+        pdf.setFontSize(10);
+        pdf.setTextColor(31, 41, 55);
+        pdf.text('Müşteri Hizmetleri Temsilcisi', 20, 160);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('Turkcell Global Bilgi', 20, 165);
+        pdf.setTextColor(107, 114, 128);
+        pdf.text('Ağustos 2025 - Devam Ediyor', 150, 165);
+        
+        pdf.setTextColor(55, 65, 81);
+        const turkcellDesc = t('cv.turkcellDescription');
+        const splitTurkcell = pdf.splitTextToSize(turkcellDesc, 170);
+        pdf.text(splitTurkcell, 20, 175);
+        
+        // Eğitim
+        pdf.setFontSize(14);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('Eğitim', 20, 200);
+        
+        pdf.setFontSize(10);
+        pdf.setTextColor(31, 41, 55);
+        pdf.text('Computer Science', 20, 210);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('University of the People', 20, 215);
+        pdf.setTextColor(107, 114, 128);
+        pdf.text('2022 - 2026', 150, 215);
+        
+        pdf.setTextColor(31, 41, 55);
+        pdf.text('Computer Programming', 20, 225);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('Anadolu Üniversitesi', 20, 230);
+        pdf.setTextColor(107, 114, 128);
+        pdf.text('2021 - 2023', 150, 230);
+        
+        // Sertifikalar
+        pdf.setFontSize(14);
+        pdf.setTextColor(37, 99, 235);
+        pdf.text('Sertifikalar', 20, 250);
+        
+        pdf.setFontSize(10);
+        pdf.setTextColor(55, 65, 81);
+        pdf.text('• React Native Bootcamp - Siliconmade Academy (2024)', 20, 260);
+        pdf.text('• Frontend Development Certificate - Online Platform', 20, 265);
+        pdf.text('• JavaScript Fundamentals - Codecademy', 20, 270);
+        
+        return pdf;
+      };
+
+      // Önce basit PDF'i dene
+      try {
+        const pdf = generateSimplePDF();
+        pdf.save(`Tolga_Cavga_CV_${i18n.language}.pdf`);
+        console.log('Basit PDF başarıyla oluşturuldu');
+        return;
+      } catch (simpleError) {
+        console.log('Basit PDF başarısız, html2canvas deneniyor...', simpleError);
+      }
+
       // HTML'i canvas'a çevir
       const canvas = await html2canvas(cvRef.current, {
         scale: 2, // Yüksek kalite için
@@ -41,25 +145,49 @@ const DynamicCV: React.FC = () => {
         backgroundColor: '#ffffff',
         width: 794, // A4 genişliği (pixel)
         height: 1123, // A4 yüksekliği (pixel)
-        ignoreElements: (element) => {
-          // OKLCH renklerini içeren elementleri atla
-          const style = window.getComputedStyle(element);
-          const color = style.color;
-          const backgroundColor = style.backgroundColor;
-          return color.includes('oklch') || backgroundColor.includes('oklch');
-        },
         onclone: (clonedDoc) => {
-          // OKLCH renklerini hex'e çevir
+          // Tüm OKLCH renklerini temizle
           const elements = clonedDoc.querySelectorAll('*');
           elements.forEach((element: any) => {
-            const style = element.style;
-            if (style.color && style.color.includes('oklch')) {
-              style.color = '#000000'; // Siyah yap
-            }
-            if (style.backgroundColor && style.backgroundColor.includes('oklch')) {
-              style.backgroundColor = '#ffffff'; // Beyaz yap
+            const computedStyle = window.getComputedStyle(element);
+            const elementStyle = element.style;
+            
+            // Tüm CSS özelliklerini kontrol et
+            const allProperties = [
+              'color', 'backgroundColor', 'borderColor', 'borderTopColor', 
+              'borderRightColor', 'borderBottomColor', 'borderLeftColor',
+              'outlineColor', 'textDecorationColor', 'textShadow',
+              'boxShadow', 'filter', 'backdropFilter'
+            ];
+            
+            allProperties.forEach(prop => {
+              const value = computedStyle.getPropertyValue(prop);
+              if (value && value.includes('oklch')) {
+                elementStyle.setProperty(prop, '');
+              }
+            });
+            
+            // Inline style'ları da kontrol et
+            if (elementStyle.cssText) {
+              elementStyle.cssText = elementStyle.cssText.replace(/oklch\([^)]+\)/g, '#000000');
             }
           });
+          
+          // CSS stillerini de temizle
+          const styleSheets = clonedDoc.styleSheets;
+          for (let i = 0; i < styleSheets.length; i++) {
+            try {
+              const rules = styleSheets[i].cssRules;
+              for (let j = 0; j < rules.length; j++) {
+                const rule = rules[j] as CSSStyleRule;
+                if (rule.style && rule.style.cssText) {
+                  rule.style.cssText = rule.style.cssText.replace(/oklch\([^)]+\)/g, '#000000');
+                }
+              }
+            } catch (e) {
+              // Cross-origin stylesheet hatası olabilir, devam et
+            }
+          }
         }
       });
 
