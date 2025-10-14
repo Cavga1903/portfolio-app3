@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaFacebook, FaWhatsapp, FaLink, FaInstagram } from 'react-icons/fa';
+import { FaLinkedin, FaFacebook, FaWhatsapp, FaLink } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
 import Toast from './Toast';
 import { useToast } from '../hooks/useToast';
-import InstagramStoryTemplate from './InstagramStoryTemplate';
 
 interface ShareButtonsProps {
   url: string;
@@ -23,16 +22,10 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
 }) => {
   const { t } = useTranslation();
   const { isVisible, message, type, showToast, hideToast } = useToast();
-  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(url);
     showToast(t('share.linkCopied'), 'success');
-  };
-
-  const handleInstagramShare = () => {
-    // Story template modal'ını aç
-    setIsStoryModalOpen(true);
   };
 
   const shareLinks = {
@@ -84,12 +77,6 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
         duration={3000}
       />
 
-      {/* Instagram Story Template Modal */}
-      <InstagramStoryTemplate 
-        isOpen={isStoryModalOpen}
-        onClose={() => setIsStoryModalOpen(false)}
-      />
-
       <div className="flex flex-col gap-3">
         {showLabel && (
           <p className="text-sm text-gray-400 font-medium">{t('share.title')}</p>
@@ -114,27 +101,13 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
           </motion.a>
         ))}
         
-        {/* Instagram Story Button */}
-        <motion.button
-          onClick={handleInstagramShare}
-          className="p-3 bg-gray-700/30 backdrop-blur-sm border border-gray-600/50 rounded-lg hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-500 hover:text-white hover:border-transparent transition-all duration-300 group cursor-pointer"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.3 }}
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          title="Instagram Story"
-        >
-          <FaInstagram className="text-xl text-gray-300 group-hover:text-white transition-colors" />
-        </motion.button>
-        
         {/* Copy Link Button */}
         <motion.button
           onClick={copyToClipboard}
           className="p-3 bg-gray-700/30 backdrop-blur-sm border border-gray-600/50 rounded-lg hover:bg-purple-500 hover:text-white hover:border-transparent transition-all duration-300 group cursor-pointer"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.3 }}
+          transition={{ delay: 0.4, duration: 0.3 }}
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
           title={t('share.copyLink')}
