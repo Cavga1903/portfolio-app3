@@ -1,16 +1,38 @@
 import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
+// Dynamic imports for better error handling
+const loadJsPDF = async () => {
+  const { default: jsPDF } = await import('jspdf');
+  return jsPDF;
+};
+
+const loadHtml2Canvas = async () => {
+  const { default: html2canvas } = await import('html2canvas');
+  return html2canvas;
+};
 
 const DynamicCV: React.FC = () => {
   const { t, i18n } = useTranslation();
   const cvRef = useRef<HTMLDivElement>(null);
 
   const generatePDF = async () => {
-    if (!cvRef.current) return;
+    if (!cvRef.current) {
+      console.error('CV ref bulunamadı');
+      return;
+    }
 
     try {
+      console.log('PDF oluşturma başlıyor...');
+      
+      // Dynamic imports
+      const [jsPDF, html2canvas] = await Promise.all([
+        loadJsPDF(),
+        loadHtml2Canvas()
+      ]);
+
+      console.log('Kütüphaneler yüklendi');
+
       // HTML'i canvas'a çevir
       const canvas = await html2canvas(cvRef.current, {
         scale: 2, // Yüksek kalite için
@@ -20,6 +42,8 @@ const DynamicCV: React.FC = () => {
         width: 794, // A4 genişliği (pixel)
         height: 1123, // A4 yüksekliği (pixel)
       });
+
+      console.log('Canvas oluşturuldu');
 
       // Canvas'ı PDF'e çevir
       const imgData = canvas.toDataURL('image/png');
@@ -47,8 +71,10 @@ const DynamicCV: React.FC = () => {
 
       // PDF'i indir
       pdf.save(`Tolga_Cavga_CV_${i18n.language}.pdf`);
+      console.log('PDF başarıyla oluşturuldu ve indirildi');
     } catch (error) {
       console.error('PDF oluşturma hatası:', error);
+      alert('PDF oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.');
     }
   };
 
@@ -191,12 +217,19 @@ const DynamicCV: React.FC = () => {
       </div>
 
       {/* Generate PDF Button */}
-      <div className="text-center mt-8">
+      <div className="text-center mt-8 space-y-4">
         <button
           onClick={generatePDF}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mr-4"
         >
           📄 {t('cv.generatePDF')}
+        </button>
+        
+        <button
+          onClick={() => window.print()}
+          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+        >
+          🖨️ {t('cv.printCV')}
         </button>
       </div>
     </div>

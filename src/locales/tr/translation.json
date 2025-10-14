@@ -241,6 +241,7 @@
     "certificates": "Sertifikalar",
     "languages": "Diller",
     "generatePDF": "PDF Oluştur",
+    "printCV": "Yazdır",
     "turkcellDescription": "Turkcell Global Bilgi'de müşterileri destekliyor ve sorunları çözüyorum. Net iletişim, problem çözme ve teknik destek konularında uzmanlaşıyorum.",
     "upworkDescription": "Cross-platform mobil uygulamalar geliştirdim. RESTful API'ler ve Supabase entegrasyonu yaptım. Tailwind CSS ile dinamik UI'lar tasarlayarak kullanıcı elde tutma oranını %30 artırdım."
   },

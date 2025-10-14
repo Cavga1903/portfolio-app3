@@ -241,6 +241,7 @@
     "certificates": "Certificates",
     "languages": "Languages",
     "generatePDF": "Generate PDF",
+    "printCV": "Print",
     "turkcellDescription": "I support customers and solve problems at Turkcell Global Bilgi. I specialize in clear communication, problem solving and technical support.",
     "upworkDescription": "I developed cross-platform mobile applications. I integrated RESTful APIs and Supabase. I designed dynamic UIs with Tailwind CSS, increasing user retention by 30%."
   },
