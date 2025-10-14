@@ -62,16 +62,16 @@ const Home: React.FC = () => {
           <Experience />
         </Suspense>
         
+        <Suspense fallback={<SkeletonLoader type="certificates" />}>
+          <Certificates />
+        </Suspense>
+        
         <Suspense fallback={<SkeletonLoader type="technologies" />}>
           <Technologies />
         </Suspense>
         
         <Suspense fallback={<SkeletonLoader type="about" />}>
           <Services />
-        </Suspense>
-        
-        <Suspense fallback={<SkeletonLoader type="certificates" />}>
-          <Certificates />
         </Suspense>
         
         <Suspense fallback={<SkeletonLoader type="projects" />}>
