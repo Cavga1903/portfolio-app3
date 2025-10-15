@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 type Project = {
@@ -14,6 +14,35 @@ type Project = {
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  
+  // Carousel logic
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
+  
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalPages);
+  };
+  
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalPages) % totalPages);
+  };
+  
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+  
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000); // 5 saniyede bir değişir
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, currentIndex]);
   
   const projects: Project[] = [
     {
@@ -108,82 +137,143 @@ const Projects: React.FC = () => {
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-indigo-400 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {projects.map((project, index) => (
-          <div key={index} className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2">
-            {/* Project Image/Preview */}
-            <div className="relative w-full h-40 overflow-hidden">
-              {project.image ? (
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              ) : (
-                // GitHub Preview benzeri placeholder
-                <div className={`w-full h-full bg-gradient-to-br ${project.imageGradient} flex items-center justify-center relative overflow-hidden`}>
-                  {/* Decorative elements */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-4 left-4 w-12 h-12 border-2 border-white rounded"></div>
-                    <div className="absolute top-8 right-8 w-16 h-16 border-2 border-white rounded-full"></div>
-                    <div className="absolute bottom-8 left-8 w-20 h-2 bg-white rounded"></div>
-                    <div className="absolute bottom-12 left-8 w-14 h-2 bg-white rounded"></div>
-                    <div className="absolute bottom-16 left-8 w-16 h-2 bg-white rounded"></div>
-                  </div>
-                  {/* Center icon */}
-                  <FaGithub className="text-white/20 text-6xl group-hover:scale-110 transition-transform duration-300" />
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
-                </div>
-              )}
-              {/* Badge overlay */}
-              <div className="absolute top-3 right-3 badge badge-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {t('projects.details')}
-              </div>
-            </div>
+      {/* Carousel Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          aria-label="Previous projects"
+        >
+          <FaChevronLeft className="text-xl" />
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          aria-label="Next projects"
+        >
+          <FaChevronRight className="text-xl" />
+        </button>
 
-            {/* Project Info */}
-            <div className="p-4 flex flex-col justify-between flex-grow">
-              <div>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
-                <p className="mb-4 text-gray-300">{project.description}</p>
-              </div>
-              <div>
-                <p className="font-semibold mb-2">{t('projects.tech')}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, idx) => (
-                    <span key={idx} className="badge badge-outline group-hover:badge-primary transition-all duration-300">{tech}</span>
+        {/* Carousel Content */}
+        <div className="overflow-hidden">
+          <div 
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {Array.from({ length: totalPages }, (_, pageIndex) => (
+              <div key={pageIndex} className="w-full flex-shrink-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-12">
+                  {projects
+                    .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
+                    .map((project, index) => (
+                    <div 
+                      key={pageIndex * itemsPerPage + index} 
+                      className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                      onMouseEnter={() => setIsAutoPlaying(false)}
+                      onMouseLeave={() => setIsAutoPlaying(true)}
+                    >
+                      {/* Project Image/Preview */}
+                      <div className="relative w-full h-48 overflow-hidden">
+                        {project.image ? (
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        ) : (
+                          // GitHub Preview benzeri placeholder
+                          <div className={`w-full h-full bg-gradient-to-br ${project.imageGradient} flex items-center justify-center relative overflow-hidden`}>
+                            {/* Decorative elements */}
+                            <div className="absolute inset-0 opacity-10">
+                              <div className="absolute top-4 left-4 w-12 h-12 border-2 border-white rounded"></div>
+                              <div className="absolute top-8 right-8 w-16 h-16 border-2 border-white rounded-full"></div>
+                              <div className="absolute bottom-8 left-8 w-20 h-2 bg-white rounded"></div>
+                              <div className="absolute bottom-12 left-8 w-14 h-2 bg-white rounded"></div>
+                              <div className="absolute bottom-16 left-8 w-16 h-2 bg-white rounded"></div>
+                            </div>
+                            {/* Center icon */}
+                            <FaGithub className="text-white/20 text-6xl group-hover:scale-110 transition-transform duration-300" />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+                          </div>
+                        )}
+                        {/* Badge overlay */}
+                        <div className="absolute top-3 right-3 badge badge-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          {t('projects.details')}
+                        </div>
+                      </div>
+
+                      {/* Project Info */}
+                      <div className="p-6 flex flex-col justify-between flex-grow">
+                        <div>
+                          <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
+                          <p className="mb-4 text-gray-300 text-sm leading-relaxed">{project.description}</p>
+                        </div>
+                        <div>
+                          <p className="font-semibold mb-2 text-sm">{t('projects.tech')}</p>
+                          <div className="flex flex-wrap gap-1 mb-4">
+                            {project.technologies.map((tech, idx) => (
+                              <span key={idx} className="badge badge-outline badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
+                            ))}
+                          </div>
+                          {/* CTA Buttons */}
+                          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            {project.github && (
+                              <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-primary btn-sm flex-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <FaGithub className="text-sm" /> {t('projects.github')}
+                              </a>
+                            )}
+                            {project.link && (
+                              <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-outline btn-sm flex-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <FaExternalLinkAlt className="text-sm" /> {t('projects.demo')}
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                {/* CTA Buttons */}
-                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary flex-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <FaGithub /> {t('projects.github')}
-                    </a>
-                  )}
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline flex-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <FaExternalLinkAlt /> {t('projects.demo')}
-                    </a>
-                  )}
-                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Pagination Dots */}
+        <div className="flex justify-center mt-8 space-x-2">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              onMouseEnter={() => setIsAutoPlaying(false)}
+              onMouseLeave={() => setIsAutoPlaying(true)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+                index === currentIndex
+                  ? 'bg-indigo-500 scale-125'
+                  : 'bg-gray-600 hover:bg-gray-500 hover:scale-110'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
