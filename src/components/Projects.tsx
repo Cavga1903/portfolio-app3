@@ -97,8 +97,27 @@ const Projects: React.FC = () => {
     },
   ];
   
-  // Carousel logic
-  const itemsPerPage = 3;
+  // Carousel logic - responsive items per page
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  
+  // Update items per page based on screen size
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerPage(1); // Mobile: 1 item
+      } else if (window.innerWidth < 1024) {
+        setItemsPerPage(2); // Tablet: 2 items
+      } else {
+        setItemsPerPage(3); // Desktop: 3 items
+      }
+    };
+    
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
+    
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, []);
+  
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   
   const nextSlide = () => {
@@ -144,20 +163,20 @@ const Projects: React.FC = () => {
           onClick={prevSlide}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-2 md:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           aria-label="Previous projects"
         >
-          <FaChevronLeft className="text-xl" />
+          <FaChevronLeft className="text-lg md:text-xl" />
         </button>
         
         <button
           onClick={nextSlide}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-2 md:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           aria-label="Next projects"
         >
-          <FaChevronRight className="text-xl" />
+          <FaChevronRight className="text-lg md:text-xl" />
         </button>
 
         {/* Carousel Content */}
@@ -168,7 +187,11 @@ const Projects: React.FC = () => {
           >
             {Array.from({ length: totalPages }, (_, pageIndex) => (
               <div key={pageIndex} className="w-full flex-shrink-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-12">
+                <div className={`grid gap-6 px-4 md:px-8 lg:px-12 ${
+                  itemsPerPage === 1 ? 'grid-cols-1' : 
+                  itemsPerPage === 2 ? 'grid-cols-1 md:grid-cols-2' : 
+                  'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                }`}>
                   {projects
                     .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
                     .map((project, index) => (
