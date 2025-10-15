@@ -17,33 +17,6 @@ const Projects: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   
-  // Carousel logic
-  const itemsPerPage = 3;
-  const totalPages = Math.ceil(projects.length / itemsPerPage);
-  
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalPages);
-  };
-  
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalPages) % totalPages);
-  };
-  
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-  
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000); // 5 saniyede bir değişir
-    
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, currentIndex]);
-  
   const projects: Project[] = [
     {
       title: t('projects.items.iot.title'),
@@ -123,6 +96,33 @@ const Projects: React.FC = () => {
       imageGradient: "from-lime-500 to-green-600",
     },
   ];
+  
+  // Carousel logic
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
+  
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalPages);
+  };
+  
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalPages) % totalPages);
+  };
+  
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+  
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000); // 5 saniyede bir değişir
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, currentIndex]);
   
   return (
     <section id="projects" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
