@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
@@ -7,6 +7,9 @@ import SkeletonLoader from '../components/SkeletonLoader';
 import SEOHead from '../components/SEOHead';
 import SocialProof from '../components/SocialProof';
 import PortfolioShareCTA from '../components/PortfolioShareCTA';
+import { useAnalytics } from '../hooks/useAnalytics';
+import { useScrollTracking } from '../hooks/useScrollTracking';
+import { useTimeTracking } from '../hooks/useTimeTracking';
 
 // Lazy load components
 const Hero = lazy(() => import('../components/Hero'));
@@ -20,6 +23,15 @@ const Contact = lazy(() => import('../components/Contact'));
 const Footer = lazy(() => import('../components/Footer'));
 
 const Home: React.FC = () => {
+  const { trackPageView } = useAnalytics();
+  useScrollTracking();
+  useTimeTracking('Home Page');
+
+  // Track page view on mount
+  useEffect(() => {
+    trackPageView('/', 'Tolga Çavga - Portfolio');
+  }, [trackPageView]);
+
   // Page transition animation
   const pageVariants = {
     initial: { opacity: 0, y: 20 },

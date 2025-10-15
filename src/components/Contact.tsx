@@ -1,9 +1,11 @@
 import React, { useState, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const { trackContactSubmission, trackFormInteraction } = useAnalytics();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +16,7 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
+    trackFormInteraction('contact_form', 'submit_start');
 
     try {
       // EmailJS ile e-posta gönder
@@ -47,6 +50,8 @@ const Contact: React.FC = () => {
       );
 
       setStatus('success');
+      trackContactSubmission(formData);
+      trackFormInteraction('contact_form', 'submit_success');
       setFormData({ name: '', email: '', message: '' });
       
       // 3 saniye sonra success mesajını kaldır
@@ -54,6 +59,7 @@ const Contact: React.FC = () => {
     } catch (error) {
       console.error('Email send error:', error);
       setStatus('error');
+      trackFormInteraction('contact_form', 'submit_error');
       
       // 3 saniye sonra error mesajını kaldır
       setTimeout(() => setStatus('idle'), 3000);
@@ -65,6 +71,7 @@ const Contact: React.FC = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    trackFormInteraction('contact_form', 'field_change', e.target.name);
   };
 
   return (

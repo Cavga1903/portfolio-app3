@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaCode, FaGlobe } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 type NavLink = {
   id: string;
@@ -21,13 +22,16 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
+  const { trackClick, trackLanguageChange } = useAnalytics();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleLangMenu = () => setIsLangMenuOpen((prev) => !prev);
 
   const changeLanguage = (lng: string) => {
+    const currentLang = i18n.language.split('-')[0];
     i18n.changeLanguage(lng);
     setIsLangMenuOpen(false);
+    trackLanguageChange(currentLang, lng);
   };
 
   const languages = [
@@ -61,6 +65,7 @@ const Navbar: React.FC = () => {
                 key={link.id}
                 href={`#${link.id}`}
                 className="text-lg text-gray-800 dark:text-white hover:text-blue-700 dark:hover:text-blue-400 cursor-pointer transition-all duration-300 relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
+                onClick={() => trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey))}
               >
                 {t(link.labelKey)}
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-700 dark:bg-blue-400 group-hover:w-full transition-all duration-300"></span>
@@ -139,7 +144,10 @@ const Navbar: React.FC = () => {
                 <a
                   href={`#${link.id}`}
                   className="block px-4 py-3 text-lg text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey));
+                  }}
                 >
                   {t(link.labelKey)}
                 </a>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaHeart, FaInstagram, FaCoffee, FaDownload } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
+  const { trackSocialClick, trackCVDownload, trackClick } = useAnalytics();
   
   return (
     <footer className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-8 flex flex-col items-center justify-center border-t border-gray-300 dark:border-gray-700">
@@ -16,6 +18,7 @@ const Footer: React.FC = () => {
           className="text-2xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-full group relative"
           aria-label="GitHub"
           title="GitHub - @Cavga1903"
+          onClick={() => trackSocialClick('github', 'profile_click')}
         >
           <FaGithub className="group-hover:rotate-12 transition-transform duration-300" />
         </a>
@@ -26,6 +29,7 @@ const Footer: React.FC = () => {
           className="text-2xl text-gray-700 dark:text-gray-300 hover:text-[#0A66C2] dark:hover:text-[#0A66C2] hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 rounded-full group"
           aria-label="LinkedIn"
           title="LinkedIn - @tolgaacavgaa"
+          onClick={() => trackSocialClick('linkedin', 'profile_click')}
         >
           <FaLinkedin className="group-hover:rotate-12 transition-transform duration-300" />
         </a>
@@ -36,6 +40,7 @@ const Footer: React.FC = () => {
           className="text-2xl hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 rounded-full group relative"
           aria-label="Instagram"
           title="Instagram - @codewithcavga"
+          onClick={() => trackSocialClick('instagram', 'profile_click')}
         >
           <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-white group-hover:text-pink-500" />
         </a>
@@ -48,6 +53,7 @@ const Footer: React.FC = () => {
           href="/Tolga_Cavga_CV.pdf"
           download="Tolga_Cavga_CV.pdf"
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
+          onClick={() => trackCVDownload('footer_static')}
         >
           <FaDownload className="text-xl group-hover:translate-y-1 transition-transform duration-300" />
           <span>{t('footer.downloadCV')}</span>
@@ -59,6 +65,7 @@ const Footer: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
+          onClick={() => trackClick('buy_me_coffee', 'external_link', 'https://buymeacoffee.com/cavga228')}
         >
           <FaCoffee className="text-xl group-hover:rotate-12 transition-transform duration-300" />
           <span>{t('footer.buyMeACoffee')}</span>

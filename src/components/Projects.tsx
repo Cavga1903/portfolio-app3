@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 type Project = {
   title: string;
@@ -14,6 +15,7 @@ type Project = {
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
+  const { trackProjectClick, trackCarouselInteraction, trackClick } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -129,15 +131,20 @@ const Projects: React.FC = () => {
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalPages);
+    const newIndex = (currentIndex + 1) % totalPages;
+    setCurrentIndex(newIndex);
+    trackCarouselInteraction('next', newIndex + 1, totalPages);
   };
   
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalPages) % totalPages);
+    const newIndex = (currentIndex - 1 + totalPages) % totalPages;
+    setCurrentIndex(newIndex);
+    trackCarouselInteraction('previous', newIndex + 1, totalPages);
   };
   
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+    trackCarouselInteraction('dot_click', index + 1, totalPages);
   };
   
   // Touch/Swipe functionality
@@ -159,8 +166,10 @@ const Projects: React.FC = () => {
     const isRightSwipe = distance < -50;
     
     if (isLeftSwipe) {
+      trackCarouselInteraction('swipe_left', currentIndex + 1, totalPages);
       nextSlide();
     } else if (isRightSwipe) {
+      trackCarouselInteraction('swipe_right', currentIndex + 1, totalPages);
       prevSlide();
     }
     
@@ -297,7 +306,10 @@ const Projects: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-primary btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                onClick={(e) => e.stopPropagation()}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  trackProjectClick(project.title, 'github', project.github);
+                                }}
                               >
                                 <FaGithub className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.github')}</span>
                               </a>
@@ -308,7 +320,10 @@ const Projects: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-outline btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                onClick={(e) => e.stopPropagation()}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  trackProjectClick(project.title, 'demo', project.link!);
+                                }}
                               >
                                 <FaExternalLinkAlt className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.demo')}</span>
                               </a>
