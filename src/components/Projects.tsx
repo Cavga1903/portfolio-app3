@@ -308,7 +308,9 @@ const Projects: React.FC = () => {
                                 className="btn btn-primary btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  trackProjectClick(project.title, 'github', project.github);
+                                  if (project.github) {
+                                    trackProjectClick(project.title, 'github', project.github);
+                                  }
                                 }}
                               >
                                 <FaGithub className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.github')}</span>
