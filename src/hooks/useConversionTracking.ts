@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useAnalytics } from './useAnalytics';
 
 export const useConversionTracking = () => {

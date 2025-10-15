@@ -51,10 +51,10 @@ export const usePerformanceTracking = () => {
         // First Input Delay (FID)
         const fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry) => {
+          entries.forEach((entry: any) => {
             trackEvent('core_web_vitals', {
               metric_name: 'FID',
-              metric_value: Math.round(entry.processingStart - entry.startTime),
+              metric_value: Math.round((entry.processingStart || 0) - entry.startTime),
               page_location: window.location.href,
             });
           });

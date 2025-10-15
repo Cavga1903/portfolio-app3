@@ -15,7 +15,7 @@ type Project = {
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
-  const { trackProjectClick, trackCarouselInteraction, trackClick } = useAnalytics();
+  const { trackProjectClick, trackCarouselInteraction } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -322,7 +322,9 @@ const Projects: React.FC = () => {
                                 className="btn btn-outline btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  trackProjectClick(project.title, 'demo', project.link!);
+                                  if (project.link) {
+                                    trackProjectClick(project.title, 'demo', project.link);
+                                  }
                                 }}
                               >
                                 <FaExternalLinkAlt className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.demo')}</span>
