@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { FaGithub, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 
@@ -130,22 +130,22 @@ const Projects: React.FC = () => {
   
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     const newIndex = (currentIndex + 1) % totalPages;
     setCurrentIndex(newIndex);
     trackCarouselInteraction('next', newIndex + 1, totalPages);
-  };
+  }, [currentIndex, totalPages, trackCarouselInteraction]);
   
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     const newIndex = (currentIndex - 1 + totalPages) % totalPages;
     setCurrentIndex(newIndex);
     trackCarouselInteraction('previous', newIndex + 1, totalPages);
-  };
+  }, [currentIndex, totalPages, trackCarouselInteraction]);
   
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index);
     trackCarouselInteraction('dot_click', index + 1, totalPages);
-  };
+  }, [totalPages, trackCarouselInteraction]);
   
   // Touch/Swipe functionality
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -188,7 +188,7 @@ const Projects: React.FC = () => {
     }, 5000); // 5 saniyede bir değişir
     
     return () => clearInterval(interval);
-  }, [isAutoPlaying, currentIndex]);
+  }, [isAutoPlaying, currentIndex, nextSlide]);
   
   return (
     <section id="projects" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
@@ -248,12 +248,20 @@ const Projects: React.FC = () => {
                   {projects
                     .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
                     .map((project, index) => (
-                    <div 
-                      key={pageIndex * itemsPerPage + index} 
-                      className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
-                      onMouseEnter={() => setIsAutoPlaying(false)}
-                      onMouseLeave={() => setIsAutoPlaying(true)}
-                    >
+                        <a
+                          key={pageIndex * itemsPerPage + index}
+                          href={project.github || '#'}
+                          target={project.github ? "_blank" : "_self"}
+                          rel={project.github ? "noopener noreferrer" : ""}
+                          className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                          onMouseEnter={() => setIsAutoPlaying(false)}
+                          onMouseLeave={() => setIsAutoPlaying(true)}
+                          onClick={() => {
+                            if (project.github) {
+                              trackProjectClick(project.title, 'github', project.github);
+                            }
+                          }}
+                        >
                       {/* Project Image/Preview */}
                       <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
                         {project.image ? (
@@ -298,48 +306,19 @@ const Projects: React.FC = () => {
                               <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
                             ))}
                           </div>
-                          {/* CTA Buttons */}
-                          <div className="flex gap-1 sm:gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            {project.github && (
-                              <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-primary btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  if (project.github) {
-                                    trackProjectClick(project.title, 'github', project.github);
-                                  }
-                                }}
-                              >
-                                <FaGithub className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.github')}</span>
-                              </a>
-                            )}
-                            {project.link && (
-                              <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-outline btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  if (project.link) {
-                                    trackProjectClick(project.title, 'demo', project.link);
-                                  }
-                                }}
-                              >
-                                <FaExternalLinkAlt className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.demo')}</span>
-                              </a>
-                            )}
+                          {/* GitHub Icon Overlay */}
+                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="bg-gray-800/90 backdrop-blur-sm rounded-full p-2">
+                              <FaGithub className="text-white text-lg" />
+                            </div>
                           </div>
                         </div>
                       </div>
+                        </a>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+                  </div>
+                ))}
           </div>
         </div>
 
