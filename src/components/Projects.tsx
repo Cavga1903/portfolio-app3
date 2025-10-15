@@ -17,25 +17,81 @@ const Projects: React.FC = () => {
   
   const projects: Project[] = [
     {
-      title: t('projects.items.todo.title'),
-      description: t('projects.items.todo.description'),
-      technologies: ["HTML", "CSS", "JavaScript", "React"],
-      github: "https://github.com/tolgacavgaa",
-      imageGradient: "from-blue-500 to-purple-600",
+      title: "IoT Device Simulator",
+      description: "Node.js, Express, Authentication, Statistics & Multi-language Support ile geliştirilmiş IoT cihaz simülatörü. Docker desteği ve QR kod oluşturma özellikleri.",
+      technologies: ["Node.js", "Express", "Docker", "Canvas", "QRCode"],
+      github: "https://github.com/Cavga1903/iot-simulator",
+      imageGradient: "from-blue-500 to-cyan-600",
     },
     {
-      title: t('projects.items.portfolio.title'),
-      description: t('projects.items.portfolio.description'),
-      technologies: ["React", "TypeScript", "TailwindCSS"],
-      github: "https://github.com/tolgacavgaa",
-      imageGradient: "from-indigo-500 to-pink-600",
+      title: "Todo App (Instagram Style)",
+      description: "Instagram benzeri arayüz ile geliştirilmiş modern todo uygulaması. React ve modern web teknolojileri kullanılarak oluşturuldu.",
+      technologies: ["React", "JavaScript", "CSS3", "HTML5"],
+      github: "https://github.com/Cavga1903/todo-app-ins",
+      imageGradient: "from-pink-500 to-purple-600",
     },
     {
-      title: t('projects.items.blog.title'),
-      description: t('projects.items.blog.description'),
-      technologies: ["React", "Node.js", "MongoDB"],
-      github: "https://github.com/tolgacavgaa",
-      imageGradient: "from-teal-500 to-emerald-600",
+      title: "Workshop Tracker",
+      description: "Workshop ve etkinlik takibi için geliştirilmiş web uygulaması. Katılımcı yönetimi ve etkinlik organizasyonu özellikleri.",
+      technologies: ["React", "TypeScript", "Node.js", "Database"],
+      github: "https://github.com/Cavga1903/workshop-tracker",
+      imageGradient: "from-green-500 to-teal-600",
+    },
+    {
+      title: "React Supabase Product Manager",
+      description: "Supabase backend ile geliştirilmiş ürün yönetim sistemi. CRUD operasyonları ve gerçek zamanlı veri senkronizasyonu.",
+      technologies: ["React", "Supabase", "TypeScript", "TailwindCSS"],
+      github: "https://github.com/Cavga1903/react-supabase-product-manager",
+      imageGradient: "from-orange-500 to-red-600",
+    },
+    {
+      title: "Online Grocery App",
+      description: "E-ticaret platformu olarak geliştirilmiş online market uygulaması. Sepet yönetimi ve ödeme entegrasyonu.",
+      technologies: ["React", "JavaScript", "E-commerce", "Payment"],
+      github: "https://github.com/Cavga1903/online-grocery-app",
+      imageGradient: "from-yellow-500 to-orange-600",
+    },
+    {
+      title: "Ürün Listesi (Geliştirilmiş)",
+      description: "Gelişmiş özelliklerle donatılmış ürün listesi uygulaması. Filtreleme, arama ve kategorilendirme özellikleri.",
+      technologies: ["React", "JavaScript", "LocalStorage", "Filtering"],
+      github: "https://github.com/Cavga1903/urun-listesi-gelistirilmis",
+      imageGradient: "from-indigo-500 to-blue-600",
+    },
+    {
+      title: "Ödeme Formu",
+      description: "Güvenli ödeme işlemleri için geliştirilmiş form uygulaması. Form validasyonu ve kullanıcı dostu arayüz.",
+      technologies: ["React", "Form Validation", "Payment", "UI/UX"],
+      github: "https://github.com/Cavga1903/odeme-formu",
+      imageGradient: "from-emerald-500 to-green-600",
+    },
+    {
+      title: "Global Identity",
+      description: "Küresel kimlik doğrulama sistemi. Çoklu platform desteği ve güvenli authentication özellikleri.",
+      technologies: ["React", "Authentication", "Security", "Multi-platform"],
+      github: "https://github.com/Cavga1903/global-identity-9",
+      imageGradient: "from-violet-500 to-purple-600",
+    },
+    {
+      title: "Basit Not Takip Sistemi",
+      description: "Kişisel not alma ve takip sistemi. Kullanıcı dostu arayüz ve verimli not yönetimi.",
+      technologies: ["React", "JavaScript", "Notes", "LocalStorage"],
+      github: "https://github.com/Cavga1903/basitNotTakipSistemi",
+      imageGradient: "from-rose-500 to-pink-600",
+    },
+    {
+      title: "Login UI (TypeScript)",
+      description: "TypeScript ile geliştirilmiş modern login arayüzü. Responsive tasarım ve form validasyonu.",
+      technologies: ["React", "TypeScript", "UI/UX", "Form Validation"],
+      github: "https://github.com/Cavga1903/login-ui-tsx-app",
+      imageGradient: "from-sky-500 to-blue-600",
+    },
+    {
+      title: "Node.js Notlar Uygulaması",
+      description: "Node.js backend ile geliştirilmiş not alma uygulaması. RESTful API ve veritabanı entegrasyonu.",
+      technologies: ["Node.js", "Express", "Database", "RESTful API"],
+      github: "https://github.com/Cavga1903/node.js-Notlar-uygulamas-",
+      imageGradient: "from-lime-500 to-green-600",
     },
   ];
   
@@ -52,11 +108,11 @@ const Projects: React.FC = () => {
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-indigo-400 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {projects.map((project, index) => (
           <div key={index} className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2">
             {/* Project Image/Preview */}
-            <div className="relative w-full h-48 overflow-hidden">
+            <div className="relative w-full h-40 overflow-hidden">
               {project.image ? (
                 <img 
                   src={project.image} 
@@ -87,9 +143,9 @@ const Projects: React.FC = () => {
             </div>
 
             {/* Project Info */}
-            <div className="p-6 flex flex-col justify-between flex-grow">
+            <div className="p-4 flex flex-col justify-between flex-grow">
               <div>
-                <h3 className="text-2xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
                 <p className="mb-4 text-gray-300">{project.description}</p>
               </div>
               <div>
