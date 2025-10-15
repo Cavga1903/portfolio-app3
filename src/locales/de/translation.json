@@ -190,17 +190,49 @@
     "github": "GitHub",
     "demo": "Demo",
     "items": {
+      "iot": {
+        "title": "IoT-Geräte-Simulator",
+        "description": "IoT-Geräte-Simulator entwickelt mit Node.js, Express, Authentifizierung, Statistiken & Mehrsprachigkeit. Mit Docker-Unterstützung und QR-Code-Generierung."
+      },
       "todo": {
-        "title": "Todo-Listen-App",
-        "description": "Eine einfache Aufgabenverwaltungsanwendung mit Hinzufügen-, Abschließen- und Löschen-Funktionen."
+        "title": "Todo-App (Instagram-Stil)",
+        "description": "Moderne Todo-Anwendung mit Instagram-ähnlicher Benutzeroberfläche entwickelt. Erstellt mit React und modernen Web-Technologien."
       },
-      "portfolio": {
-        "title": "Portfolio-Website",
-        "description": "Meine persönliche Portfolio-Website. Mit responsivem Design und moderner Benutzeroberfläche."
+      "workshop": {
+        "title": "Workshop-Tracker",
+        "description": "Webanwendung für Workshop- und Veranstaltungsverfolgung entwickelt. Mit Teilnehmerverwaltung und Veranstaltungsorganisation."
       },
-      "blog": {
-        "title": "Blog-Website",
-        "description": "Eine einfache Blog-Plattform mit Erstellen-, Bearbeiten- und Löschen-Funktionen für Beiträge."
+      "productManager": {
+        "title": "React Supabase Produktmanager",
+        "description": "Produktverwaltungssystem mit Supabase-Backend entwickelt. Mit CRUD-Operationen und Echtzeit-Datensynchronisation."
+      },
+      "grocery": {
+        "title": "Online-Lebensmittel-App",
+        "description": "Online-Marktplatz-Anwendung als E-Commerce-Plattform entwickelt. Mit Warenkorbverwaltung und Zahlungsintegration."
+      },
+      "productList": {
+        "title": "Produktliste (Erweitert)",
+        "description": "Produktlisten-Anwendung mit erweiterten Funktionen ausgestattet. Mit Filterung, Suche und Kategorisierung."
+      },
+      "paymentForm": {
+        "title": "Zahlungsformular",
+        "description": "Formularanwendung für sichere Zahlungstransaktionen entwickelt. Mit Formularvalidierung und benutzerfreundlicher Oberfläche."
+      },
+      "globalIdentity": {
+        "title": "Globale Identität",
+        "description": "Globales Identitätsverifikationssystem. Mit Multi-Plattform-Unterstützung und sicherer Authentifizierung."
+      },
+      "noteTracker": {
+        "title": "Einfaches Notizverfolgungssystem",
+        "description": "Persönliches Notiz- und Verfolgungssystem. Mit benutzerfreundlicher Oberfläche und effizienter Notizverwaltung."
+      },
+      "loginUI": {
+        "title": "Login-UI (TypeScript)",
+        "description": "Moderne Login-Benutzeroberfläche mit TypeScript entwickelt. Mit responsivem Design und Formularvalidierung."
+      },
+      "nodeNotes": {
+        "title": "Node.js Notizen-Anwendung",
+        "description": "Notizen-Anwendung mit Node.js-Backend entwickelt. Mit RESTful API und Datenbankintegration."
       }
     }
   },

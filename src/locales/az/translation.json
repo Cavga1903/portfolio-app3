@@ -190,17 +190,49 @@
     "github": "GitHub",
     "demo": "Demo",
     "items": {
+      "iot": {
+        "title": "IoT Cihaz Simulyatoru",
+        "description": "Node.js, Express, Authentication, Statistics & Multi-language Support ilə inkişaf etdirilmiş IoT cihaz simulyatoru. Docker dəstəyi və QR kod yaratma xüsusiyyətləri."
+      },
       "todo": {
-        "title": "Todo List Tətbiqi",
-        "description": "Tapşırıq əlavə etmə, tamamlama və silmə xüsusiyyətli sadə tapşırıq idarəetmə tətbiqi."
+        "title": "Todo App (Instagram Stili)",
+        "description": "Instagram bənzər interfeys ilə inkişaf etdirilmiş müasir todo tətbiqi. React və müasir veb texnologiyaları istifadə edilərək yaradılıb."
       },
-      "portfolio": {
-        "title": "Portfolio Veb Saytı",
-        "description": "Şəxsi portfolio saytım. Responsive dizayn və müasir UI ehtiva edir."
+      "workshop": {
+        "title": "Workshop Tracker",
+        "description": "Workshop və tədbir izləməsi üçün inkişaf etdirilmiş veb tətbiqi. İştirakçı idarəetməsi və tədbir təşkili xüsusiyyətləri."
       },
-      "blog": {
-        "title": "Bloq Saytı",
-        "description": "Sadə bloq platforması. Yazı əlavə etmə, redaktə etmə və silmə funksiyaları ilə."
+      "productManager": {
+        "title": "React Supabase Məhsul İdarəçisi",
+        "description": "Supabase backend ilə inkişaf etdirilmiş məhsul idarəetmə sistemi. CRUD əməliyyatları və real vaxt məlumat sinxronizasiyası."
+      },
+      "grocery": {
+        "title": "Online Grocery App",
+        "description": "E-ticarət platforması kimi inkişaf etdirilmiş online market tətbiqi. Səbət idarəetməsi və ödəniş inteqrasiyası."
+      },
+      "productList": {
+        "title": "Məhsul Siyahısı (Təkmilləşdirilmiş)",
+        "description": "Təkmilləşdirilmiş xüsusiyyətlərlə təchiz edilmiş məhsul siyahısı tətbiqi. Filtrləmə, axtarış və kateqoriyalama xüsusiyyətləri."
+      },
+      "paymentForm": {
+        "title": "Ödəniş Forması",
+        "description": "Təhlükəsiz ödəniş əməliyyatları üçün inkişaf etdirilmiş forma tətbiqi. Forma doğrulaması və istifadəçi dostu interfeys."
+      },
+      "globalIdentity": {
+        "title": "Qlobal Kimlik",
+        "description": "Qlobal kimlik doğrulama sistemi. Çox platforma dəstəyi və təhlükəsiz authentication xüsusiyyətləri."
+      },
+      "noteTracker": {
+        "title": "Sadə Qeyd İzləmə Sistemi",
+        "description": "Şəxsi qeyd alma və izləmə sistemi. İstifadəçi dostu interfeys və effektiv qeyd idarəetməsi."
+      },
+      "loginUI": {
+        "title": "Login UI (TypeScript)",
+        "description": "TypeScript ilə inkişaf etdirilmiş müasir login interfeysi. Responsive dizayn və forma doğrulaması."
+      },
+      "nodeNotes": {
+        "title": "Node.js Qeydlər Tətbiqi",
+        "description": "Node.js backend ilə inkişaf etdirilmiş qeyd alma tətbiqi. RESTful API və veritabanı inteqrasiyası."
       }
     }
   },

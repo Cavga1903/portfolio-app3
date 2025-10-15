@@ -190,17 +190,49 @@
     "github": "GitHub",
     "demo": "Demo",
     "items": {
+      "iot": {
+        "title": "IoT Cihaz Simülatörü",
+        "description": "Node.js, Express, Authentication, Statistics & Multi-language Support ile geliştirilmiş IoT cihaz simülatörü. Docker desteği ve QR kod oluşturma özellikleri."
+      },
       "todo": {
-        "title": "Todo List Uygulaması",
-        "description": "Görev ekleme, tamamlama ve silme özellikli basit bir görev yönetim uygulaması."
+        "title": "Todo App (Instagram Style)",
+        "description": "Instagram benzeri arayüz ile geliştirilmiş modern todo uygulaması. React ve modern web teknolojileri kullanılarak oluşturuldu."
       },
-      "portfolio": {
-        "title": "Portfolyo Websitesi",
-        "description": "Kişisel portfolyo sitem. Responsive tasarım ve modern UI içeriyor."
+      "workshop": {
+        "title": "Workshop Tracker",
+        "description": "Workshop ve etkinlik takibi için geliştirilmiş web uygulaması. Katılımcı yönetimi ve etkinlik organizasyonu özellikleri."
       },
-      "blog": {
-        "title": "Blog Sitesi",
-        "description": "Basit bir blog platformu. Yazı ekleme, düzenleme ve silme fonksiyonları ile."
+      "productManager": {
+        "title": "React Supabase Product Manager",
+        "description": "Supabase backend ile geliştirilmiş ürün yönetim sistemi. CRUD operasyonları ve gerçek zamanlı veri senkronizasyonu."
+      },
+      "grocery": {
+        "title": "Online Grocery App",
+        "description": "E-ticaret platformu olarak geliştirilmiş online market uygulaması. Sepet yönetimi ve ödeme entegrasyonu."
+      },
+      "productList": {
+        "title": "Ürün Listesi (Geliştirilmiş)",
+        "description": "Gelişmiş özelliklerle donatılmış ürün listesi uygulaması. Filtreleme, arama ve kategorilendirme özellikleri."
+      },
+      "paymentForm": {
+        "title": "Ödeme Formu",
+        "description": "Güvenli ödeme işlemleri için geliştirilmiş form uygulaması. Form validasyonu ve kullanıcı dostu arayüz."
+      },
+      "globalIdentity": {
+        "title": "Global Identity",
+        "description": "Küresel kimlik doğrulama sistemi. Çoklu platform desteği ve güvenli authentication özellikleri."
+      },
+      "noteTracker": {
+        "title": "Basit Not Takip Sistemi",
+        "description": "Kişisel not alma ve takip sistemi. Kullanıcı dostu arayüz ve verimli not yönetimi."
+      },
+      "loginUI": {
+        "title": "Login UI (TypeScript)",
+        "description": "TypeScript ile geliştirilmiş modern login arayüzü. Responsive tasarım ve form validasyonu."
+      },
+      "nodeNotes": {
+        "title": "Node.js Notlar Uygulaması",
+        "description": "Node.js backend ile geliştirilmiş not alma uygulaması. RESTful API ve veritabanı entegrasyonu."
       }
     }
   },

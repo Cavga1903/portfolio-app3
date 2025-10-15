@@ -190,17 +190,49 @@
     "github": "GitHub",
     "demo": "Demo",
     "items": {
+      "iot": {
+        "title": "IoT Device Simulator",
+        "description": "IoT device simulator developed with Node.js, Express, Authentication, Statistics & Multi-language Support. Features Docker support and QR code generation."
+      },
       "todo": {
-        "title": "Todo List Application",
-        "description": "A simple task management application with add, complete, and delete features."
+        "title": "Todo App (Instagram Style)",
+        "description": "Modern todo application developed with Instagram-like interface. Built using React and modern web technologies."
       },
-      "portfolio": {
-        "title": "Portfolio Website",
-        "description": "My personal portfolio site. Features responsive design and modern UI."
+      "workshop": {
+        "title": "Workshop Tracker",
+        "description": "Web application developed for workshop and event tracking. Features participant management and event organization capabilities."
       },
-      "blog": {
-        "title": "Blog Website",
-        "description": "A simple blog platform with create, edit, and delete post functionality."
+      "productManager": {
+        "title": "React Supabase Product Manager",
+        "description": "Product management system developed with Supabase backend. Features CRUD operations and real-time data synchronization."
+      },
+      "grocery": {
+        "title": "Online Grocery App",
+        "description": "Online marketplace application developed as an e-commerce platform. Features cart management and payment integration."
+      },
+      "productList": {
+        "title": "Product List (Enhanced)",
+        "description": "Product list application equipped with advanced features. Features filtering, search, and categorization capabilities."
+      },
+      "paymentForm": {
+        "title": "Payment Form",
+        "description": "Form application developed for secure payment transactions. Features form validation and user-friendly interface."
+      },
+      "globalIdentity": {
+        "title": "Global Identity",
+        "description": "Global identity verification system. Features multi-platform support and secure authentication capabilities."
+      },
+      "noteTracker": {
+        "title": "Simple Note Tracking System",
+        "description": "Personal note-taking and tracking system. Features user-friendly interface and efficient note management."
+      },
+      "loginUI": {
+        "title": "Login UI (TypeScript)",
+        "description": "Modern login interface developed with TypeScript. Features responsive design and form validation."
+      },
+      "nodeNotes": {
+        "title": "Node.js Notes Application",
+        "description": "Note-taking application developed with Node.js backend. Features RESTful API and database integration."
       }
     }
   },
