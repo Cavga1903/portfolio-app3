@@ -10,9 +10,9 @@ export interface GA4Event {
 
 // Custom hook for Google Analytics tracking
 export const useAnalytics = () => {
-  // Initialize GA4 via GTM
+  // Initialize GA4
   useEffect(() => {
-    // GTM already loaded in index.html, just initialize gtag
+    // GA4 already loaded in index.html, just initialize gtag if not already done
     if (typeof window !== 'undefined' && !window.gtag) {
       window.dataLayer = window.dataLayer || [];
       function gtag(...args: any[]) {
@@ -20,7 +20,7 @@ export const useAnalytics = () => {
       }
       window.gtag = gtag;
       gtag('js', new Date());
-      gtag('config', 'GTM-PCSFVTLP');
+      gtag('config', 'G-ZV4TQ7QMBM');
     }
   }, []);
 
