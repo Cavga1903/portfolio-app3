@@ -10,22 +10,17 @@ export interface GA4Event {
 
 // Custom hook for Google Analytics tracking
 export const useAnalytics = () => {
-  // Initialize GA4
+  // Initialize GA4 via GTM
   useEffect(() => {
-    // Load gtag script if not already loaded
+    // GTM already loaded in index.html, just initialize gtag
     if (typeof window !== 'undefined' && !window.gtag) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA4_MEASUREMENT_ID}`;
-      document.head.appendChild(script);
-
       window.dataLayer = window.dataLayer || [];
       function gtag(...args: any[]) {
         window.dataLayer.push(args);
       }
       window.gtag = gtag;
       gtag('js', new Date());
-      gtag('config', import.meta.env.VITE_GA4_MEASUREMENT_ID);
+      gtag('config', 'GTM-PCSFVTLP');
     }
   }, []);
 

@@ -10,6 +10,10 @@ import PortfolioShareCTA from '../components/PortfolioShareCTA';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { useScrollTracking } from '../hooks/useScrollTracking';
 import { useTimeTracking } from '../hooks/useTimeTracking';
+import { usePerformanceTracking } from '../hooks/usePerformanceTracking';
+import { useUserBehaviorTracking } from '../hooks/useUserBehaviorTracking';
+import { useAdvancedClickTracking } from '../hooks/useAdvancedClickTracking';
+import { useConversionTracking } from '../hooks/useConversionTracking';
 
 // Lazy load components
 const Hero = lazy(() => import('../components/Hero'));
@@ -24,8 +28,14 @@ const Footer = lazy(() => import('../components/Footer'));
 
 const Home: React.FC = () => {
   const { trackPageView } = useAnalytics();
+  
+  // Initialize all tracking hooks
   useScrollTracking();
   useTimeTracking('Home Page');
+  usePerformanceTracking();
+  useUserBehaviorTracking();
+  useAdvancedClickTracking();
+  useConversionTracking();
 
   // Track page view on mount
   useEffect(() => {
