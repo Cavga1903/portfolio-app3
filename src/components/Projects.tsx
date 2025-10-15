@@ -287,10 +287,12 @@ const Projects: React.FC = () => {
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
                           </div>
                         )}
-                        {/* Badge overlay */}
-                        <div className="absolute top-3 right-3 badge badge-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          {t('projects.details')}
-                        </div>
+                            {/* GitHub Icon Overlay - Top Right */}
+                            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <div className="bg-gray-800/90 backdrop-blur-sm rounded-full p-2">
+                                <FaGithub className="text-white text-lg" />
+                              </div>
+                            </div>
                       </div>
 
                       {/* Project Info */}
@@ -306,10 +308,10 @@ const Projects: React.FC = () => {
                               <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
                             ))}
                           </div>
-                          {/* GitHub Icon Overlay */}
-                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="bg-gray-800/90 backdrop-blur-sm rounded-full p-2">
-                              <FaGithub className="text-white text-lg" />
+                          {/* Details Badge - Bottom Right */}
+                          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="bg-indigo-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
+                              {t('projects.details')}
                             </div>
                           </div>
                         </div>
