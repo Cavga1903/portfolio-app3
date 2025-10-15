@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +16,9 @@ const Projects: React.FC = () => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   
   const projects: Project[] = [
     {
@@ -100,15 +103,20 @@ const Projects: React.FC = () => {
   // Carousel logic - responsive items per page
   const [itemsPerPage, setItemsPerPage] = useState(3);
   
-  // Update items per page based on screen size
+  // Update items per page based on screen size - more detailed breakpoints
   useEffect(() => {
     const updateItemsPerPage = () => {
-      if (window.innerWidth < 768) {
-        setItemsPerPage(1); // Mobile: 1 item
-      } else if (window.innerWidth < 1024) {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setItemsPerPage(1); // Mobile S: 1 item
+      } else if (width < 768) {
+        setItemsPerPage(1); // Mobile M: 1 item
+      } else if (width < 1024) {
         setItemsPerPage(2); // Tablet: 2 items
+      } else if (width < 1280) {
+        setItemsPerPage(3); // Desktop S: 3 items
       } else {
-        setItemsPerPage(3); // Desktop: 3 items
+        setItemsPerPage(3); // Desktop L: 3 items
       }
     };
     
@@ -130,6 +138,36 @@ const Projects: React.FC = () => {
   
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+  };
+  
+  // Touch/Swipe functionality
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsAutoPlaying(false);
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+    
+    // Restart auto-play after 3 seconds
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 3000);
   };
   
   // Auto-play functionality
@@ -180,17 +218,23 @@ const Projects: React.FC = () => {
         </button>
 
         {/* Carousel Content */}
-        <div className="overflow-hidden">
+        <div 
+          className="overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          ref={carouselRef}
+        >
           <div 
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {Array.from({ length: totalPages }, (_, pageIndex) => (
               <div key={pageIndex} className="w-full flex-shrink-0">
-                <div className={`grid gap-6 px-4 md:px-8 lg:px-12 ${
+                <div className={`grid gap-4 sm:gap-6 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 ${
                   itemsPerPage === 1 ? 'grid-cols-1' : 
-                  itemsPerPage === 2 ? 'grid-cols-1 md:grid-cols-2' : 
-                  'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                  itemsPerPage === 2 ? 'grid-cols-1 sm:grid-cols-2' : 
+                  'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
                 }`}>
                   {projects
                     .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
@@ -202,7 +246,7 @@ const Projects: React.FC = () => {
                       onMouseLeave={() => setIsAutoPlaying(true)}
                     >
                       {/* Project Image/Preview */}
-                      <div className="relative w-full h-48 overflow-hidden">
+                      <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
                         {project.image ? (
                           <img 
                             src={project.image} 
@@ -233,29 +277,29 @@ const Projects: React.FC = () => {
                       </div>
 
                       {/* Project Info */}
-                      <div className="p-6 flex flex-col justify-between flex-grow">
+                      <div className="p-3 sm:p-4 md:p-6 flex flex-col justify-between flex-grow">
                         <div>
-                          <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
-                          <p className="mb-4 text-gray-300 text-sm leading-relaxed">{project.description}</p>
+                          <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
+                          <p className="mb-3 sm:mb-4 text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3">{project.description}</p>
                         </div>
                         <div>
-                          <p className="font-semibold mb-2 text-sm">{t('projects.tech')}</p>
-                          <div className="flex flex-wrap gap-1 mb-4">
+                          <p className="font-semibold mb-2 text-xs sm:text-sm">{t('projects.tech')}</p>
+                          <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
                             {project.technologies.map((tech, idx) => (
-                              <span key={idx} className="badge badge-outline badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
+                              <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
                             ))}
                           </div>
                           {/* CTA Buttons */}
-                          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="flex gap-1 sm:gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             {project.github && (
                               <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-primary btn-sm flex-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                className="btn btn-primary btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                 onClick={(e) => e.stopPropagation()}
                               >
-                                <FaGithub className="text-sm" /> {t('projects.github')}
+                                <FaGithub className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.github')}</span>
                               </a>
                             )}
                             {project.link && (
@@ -263,10 +307,10 @@ const Projects: React.FC = () => {
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-outline btn-sm flex-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                className="btn btn-outline btn-xs sm:btn-sm flex-1 flex items-center justify-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                 onClick={(e) => e.stopPropagation()}
                               >
-                                <FaExternalLinkAlt className="text-sm" /> {t('projects.demo')}
+                                <FaExternalLinkAlt className="text-xs sm:text-sm" /> <span className="hidden sm:inline">{t('projects.demo')}</span>
                               </a>
                             )}
                           </div>
@@ -281,14 +325,14 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Pagination Dots */}
-        <div className="flex justify-center mt-8 space-x-2">
+        <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               onMouseEnter={() => setIsAutoPlaying(false)}
               onMouseLeave={() => setIsAutoPlaying(true)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
                 index === currentIndex
                   ? 'bg-indigo-500 scale-125'
                   : 'bg-gray-600 hover:bg-gray-500 hover:scale-110'
