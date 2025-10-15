@@ -62,16 +62,33 @@
 - ✅ Real-time form status feedback
 - ✅ Buy Me a Coffee integration (Footer)
 
+### 📊 **Analytics & Tracking**
+- ✅ Google Analytics 4 (GA4) integration
+- ✅ Google Tag Manager (GTM) setup
+- ✅ Comprehensive event tracking
+- ✅ User behavior analysis
+- ✅ Performance monitoring
+- ✅ Conversion tracking
+- ✅ Scroll depth tracking
+- ✅ Click pattern analysis
+- ✅ Form interaction tracking
+- ✅ Project engagement metrics
+- ✅ Real-time analytics dashboard
+
 ### 🎯 **Additional Features**
-- ✅ Experience Timeline
+- ✅ Experience Timeline with animated dots
 - ✅ Certificates & Achievements section
 - ✅ Tech Stack with progress bars
-- ✅ Project showcase with GitHub previews
+- ✅ Services section (B2B & B2C)
+- ✅ Project showcase with carousel (11 projects)
+- ✅ Touch/swipe navigation for mobile
 - ✅ 404 Not Found page (jokey & animated)
 - ✅ Progressive loading (Skeleton loaders)
 - ✅ Scroll progress indicator
 - ✅ Scroll to top button
 - ✅ Typing animation (Hero section)
+- ✅ Dynamic CV generation (PDF download)
+- ✅ Buy Me a Coffee integration
 
 ---
 
@@ -91,6 +108,8 @@
 - **React Type Animation 3.2.0** - Typing effects
 - **React Icons 5.4.0** - Icon library
 - **DaisyUI 4.12.23** - UI components
+- **jsPDF** - PDF generation
+- **html2canvas** - HTML to canvas conversion
 
 ### **Development Tools**
 - **ESLint** - Code linting
@@ -112,27 +131,33 @@ portfolio-app3-main/
 ├── src/
 │   ├── components/
 │   │   ├── About.tsx
-│   │   ├── AnimatedSection.tsx
 │   │   ├── Certificates.tsx
 │   │   ├── Contact.tsx
+│   │   ├── DynamicCV.tsx
 │   │   ├── Experience.tsx
 │   │   ├── Footer.tsx
 │   │   ├── Hero.tsx
 │   │   ├── Navbar.tsx
 │   │   ├── NotFound.tsx
-│   │   ├── ParallaxBackground.tsx
 │   │   ├── PortfolioShareCTA.tsx
 │   │   ├── Projects.tsx
 │   │   ├── ScrollProgress.tsx
 │   │   ├── ScrollToTop.tsx
 │   │   ├── SEOHead.tsx
-│   │   ├── ShareButtons.tsx
+│   │   ├── Services.tsx
 │   │   ├── SkeletonLoader.tsx
 │   │   ├── SocialProof.tsx
 │   │   ├── Technologies.tsx
 │   │   └── Toast.tsx
 │   ├── hooks/
-│   │   └── useToast.ts
+│   │   ├── useAdvancedClickTracking.ts
+│   │   ├── useAnalytics.ts
+│   │   ├── useConversionTracking.ts
+│   │   ├── usePerformanceTracking.ts
+│   │   ├── useScrollTracking.ts
+│   │   ├── useTimeTracking.ts
+│   │   ├── useToast.ts
+│   │   └── useUserBehaviorTracking.ts
 │   ├── locales/
 │   │   ├── tr/translation.json
 │   │   ├── en/translation.json
@@ -207,20 +232,83 @@ Custom notification system with Framer Motion animations and theme-matching desi
 ### **SocialProof.tsx**
 Showcase social media presence with animated cards (GitHub, LinkedIn, Instagram).
 
-### **ShareButtons.tsx**
-Social sharing functionality with modern toast notifications.
+### **PortfolioShareCTA.tsx**
+Social sharing functionality with modern toast notifications and copy link feature.
 
 ### **Experience.tsx**
-Vertical timeline for work experience and education with animated dots.
+Vertical timeline for work experience and education with animated dots and hover effects.
 
 ### **Certificates.tsx**
-Display achievements and certifications with stats cards.
+Display achievements and certifications with stats cards and animations.
+
+### **Services.tsx**
+B2B and B2C services showcase with animated cards and hover effects.
+
+### **Projects.tsx**
+Interactive project carousel with 11 projects, touch/swipe navigation, and clickable cards.
+
+### **Technologies.tsx**
+Tech stack display with progress bars and animated cards.
+
+### **DynamicCV.tsx**
+Dynamic CV generation with PDF download and print functionality.
 
 ### **Hero.tsx**
 Landing section with parallax background, multi-language typing animation (TR/EN/DE/AZ), and smooth scroll indicator.
 
 ### **Contact.tsx**
 Streamlined contact form with EmailJS integration. Direct email sending with multi-language support. Clean, focused UI without redundant social media links.
+
+### **Analytics Hooks**
+- **useAnalytics.ts** - Main analytics tracking
+- **useScrollTracking.ts** - Scroll depth and section tracking
+- **useTimeTracking.ts** - Page time tracking
+- **usePerformanceTracking.ts** - Performance metrics
+- **useUserBehaviorTracking.ts** - User behavior analysis
+- **useAdvancedClickTracking.ts** - Advanced click tracking
+- **useConversionTracking.ts** - Conversion tracking
+
+---
+
+## 📊 Analytics Features
+
+### **Event Tracking**
+- **Page Views** - Page visits and navigation
+- **Section Views** - Which sections users visit
+- **Scroll Depth** - 25%, 50%, 75%, 100% milestones
+- **Click Events** - All button and link clicks
+- **Form Interactions** - Field changes, submissions, errors
+- **Project Clicks** - GitHub and demo link clicks
+- **Language Changes** - Language switching tracking
+- **Carousel Interactions** - Navigation, swipe, dot clicks
+- **Social Media Clicks** - GitHub, LinkedIn, Instagram
+- **CV Downloads** - PDF download tracking
+- **Contact Form** - Form submissions and completions
+
+### **Performance Metrics**
+- **Core Web Vitals** - LCP, FID, CLS tracking
+- **Page Load Time** - Performance monitoring
+- **Memory Usage** - Browser memory tracking
+- **Network Info** - Connection speed and type
+- **Device Info** - Screen size, platform, language
+
+### **User Behavior Analysis**
+- **Mouse Movement** - Movement patterns and speed
+- **Click Patterns** - Click frequency and positions
+- **Keyboard Activity** - Keystroke tracking
+- **Scroll Behavior** - Scroll patterns and depth
+- **Engagement Score** - Calculated user engagement
+- **Session Duration** - Time spent on site
+- **Idle Time** - User inactivity tracking
+
+### **Conversion Tracking**
+- **CV Downloads** - Purchase events for CV downloads
+- **Contact Submissions** - Lead generation tracking
+- **Project Interactions** - Engagement value scoring
+- **Social Media Clicks** - Social engagement tracking
+- **Buy Me a Coffee** - Purchase intent tracking
+- **Section Engagement** - Time spent in sections
+- **Scroll Milestones** - Engagement progression
 
 ---
 
@@ -320,6 +408,25 @@ If you like this project, please consider:
 ---
 
 ## 📜 Changelog
+
+### v3.3.0 (2025-01-10)
+- 📊 **Comprehensive Analytics System** - Google Analytics 4 + GTM integration
+- 🎯 **Advanced Tracking** - 50+ event types, user behavior analysis
+- 🚀 **Performance Monitoring** - Core Web Vitals, memory usage, network info
+- 💰 **Conversion Tracking** - CV downloads, contact forms, project interactions
+- 🖱️ **Click Analytics** - Button, form, link, component click tracking
+- 📈 **Real-time Dashboard** - Live analytics data in Google Analytics
+- 🎨 **Project Carousel** - 11 projects with touch/swipe navigation
+- 🎯 **Clickable Project Cards** - Full card clickable, GitHub integration
+- 🛠️ **Services Section** - B2B & B2C services showcase
+- 📄 **Dynamic CV** - PDF generation with jsPDF + html2canvas
+- ☕ **Buy Me a Coffee** - Integration in footer
+- 🔧 **Performance Optimization** - useCallback hooks, memory cleanup
+
+### v3.2.0 (2025-01-10)
+- 🎨 **Project UI Improvements** - GitHub icon top-right, details bottom-right
+- 🎯 **Enhanced UX** - Better visual hierarchy, cleaner design
+- 🔧 **Code Optimization** - TypeScript fixes, performance improvements
 
 ### v3.1.0 (2025-01-10)
 - 🌍 **Azerbaijani language support** - Azərbaycan Türkcəsi added
