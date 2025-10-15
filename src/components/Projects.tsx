@@ -196,25 +196,25 @@ const Projects: React.FC = () => {
 
       {/* Carousel Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto">
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Hidden on mobile, visible on tablet+ */}
         <button
           onClick={prevSlide}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
-          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-2 md:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="hidden md:block absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           aria-label="Previous projects"
         >
-          <FaChevronLeft className="text-lg md:text-xl" />
+          <FaChevronLeft className="text-xl" />
         </button>
         
         <button
           onClick={nextSlide}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
-          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-2 md:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="hidden md:block absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           aria-label="Next projects"
         >
-          <FaChevronRight className="text-lg md:text-xl" />
+          <FaChevronRight className="text-xl" />
         </button>
 
         {/* Carousel Content */}
