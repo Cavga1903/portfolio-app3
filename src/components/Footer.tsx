@@ -37,12 +37,11 @@ const Footer: React.FC = () => {
           href="https://www.instagram.com/codewithcavga"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-2xl hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 rounded-full group relative"
-          aria-label="Instagram"
-          title="Instagram - @codewithcavga"
+          className="text-2xl text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-500 hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 rounded-full group relative"
+          aria-label="Instagram"  
           onClick={() => trackSocialClick('instagram', 'profile_click')}
         >
-          <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-gray-700 group-hover:text-pink-500" />
+          <FaInstagram className="group-hover:rotate-12 transition-transform duration-300" />
         </a>
       </div>
 
