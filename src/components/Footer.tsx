@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
           title="Instagram - @codewithcavga"
           onClick={() => trackSocialClick('instagram', 'profile_click')}
         >
-          <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-white group-hover:text-pink-500" />
+          <FaInstagram className="group-hover:rotate-12 transition-all duration-300 text-gray-700 group-hover:text-pink-500" />
         </a>
       </div>
 
