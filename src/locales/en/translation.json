@@ -30,6 +30,21 @@
         "label": "Love",
         "value": "Clean Code"
       }
+    },
+    "softSkills": {
+      "title": "Professional Competencies",
+      "corporate": {
+        "title": "Corporate Experience",
+        "description": "Experience working in large teams and managing complex projects"
+      },
+      "learning": {
+        "title": "Fast Learning",
+        "description": "Ability to quickly learn new technologies and apply them in projects"
+      },
+      "teamwork": {
+        "title": "Teamwork",
+        "description": "Experience working in different roles and team leadership"
+      }
     }
   },
   "experience": {

@@ -30,6 +30,21 @@
         "label": "Sevgi",
         "value": "Təmiz Kod"
       }
+    },
+    "softSkills": {
+      "title": "Peşəkar Bacarıqlarım",
+      "corporate": {
+        "title": "Korporativ Təcrübə",
+        "description": "Böyük komandalarda işləmə və mürəkkəb layihələri idarə etmə təcrübəsi"
+      },
+      "learning": {
+        "title": "Sürətli Öyrənmə",
+        "description": "Yeni texnologiyaları sürətlə öyrənmə və layihələrdə tətbiq etmə qabiliyyəti"
+      },
+      "teamwork": {
+        "title": "Komanda İşləməsi",
+        "description": "Müxtəlif rollarda işləmə və komanda rəhbərliyi təcrübəsi"
+      }
     }
   },
   "experience": {

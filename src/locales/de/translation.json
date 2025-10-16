@@ -30,6 +30,21 @@
         "label": "Liebe",
         "value": "Sauberer Code"
       }
+    },
+    "softSkills": {
+      "title": "Professionelle Kompetenzen",
+      "corporate": {
+        "title": "Unternehmenserfahrung",
+        "description": "Erfahrung in der Arbeit mit großen Teams und der Verwaltung komplexer Projekte"
+      },
+      "learning": {
+        "title": "Schnelles Lernen",
+        "description": "Fähigkeit, neue Technologien schnell zu erlernen und in Projekten anzuwenden"
+      },
+      "teamwork": {
+        "title": "Teamarbeit",
+        "description": "Erfahrung in verschiedenen Rollen und Teamführung"
+      }
     }
   },
   "experience": {
