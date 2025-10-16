@@ -53,7 +53,7 @@
     <!-- Facebook App ID (Placeholder - Replace with your actual Facebook App ID) -->
     <meta property="fb:app_id" content="YOUR_FACEBOOK_APP_ID" />
     
-    <!-- Schema.org JSON-LD for Person & Website -->
+    <!-- Schema.org JSON-LD for Person, Website & Professional Service -->
     <script type="application/ld+json">
     [
       {
@@ -98,21 +98,22 @@
           },
           "query-input": "required name=search_term_string"
         }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Tolga Çavga - Web Development Services",
+        "description": "Modern ve responsive web uygulamaları geliştiriyorum",
+        "url": "https://www.tolgacavga.com",
+        "serviceType": "Web Development",
+        "areaServed": "Worldwide",
+        "availableLanguage": ["Turkish", "English", "German", "Azerbaijani"],
+        "provider": {
+          "@type": "Person",
+          "name": "Tolga Çavga"
+        }
       }
     ]
-    </script>
-    
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Tolga Çavga - Web Development Services",
-      "description": "Modern ve responsive web uygulamaları geliştiriyorum",
-      "url": "https://www.tolgacavga.com",
-      "serviceType": "Web Development",
-      "areaServed": "Worldwide",
-      "availableLanguage": ["Turkish", "English", "German", "Azerbaijani"]
-    }
     </script>
     
     <title>Tolga Çavga | Frontend Developer - Portfolio</title>
