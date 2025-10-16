@@ -51,7 +51,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   const finalTitle = pageMeta.title || 'Tolga Çavga - Frontend Developer';
   const finalDescription = pageMeta.description || 'Frontend Developer & React.js Specialist';
   const finalTags = pageMeta.tags || ['Frontend Developer', 'React', 'JavaScript', 'TypeScript'];
-  const finalImage = image || `https://www.tolgacavga.com/og-images/og-image.svg`;
+  const finalImage = image || `https://www.tolgacavga.com/og-images/og_image.png`;
 
   useEffect(() => {
     // Update document title
