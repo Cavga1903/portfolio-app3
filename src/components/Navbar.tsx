@@ -46,8 +46,8 @@ const Navbar: React.FC = () => {
   const currentLanguage = languages.find(lang => lang.code === normalizedLang) || languages[1]; // Fallback: English
 
   return (
-    <nav className="bg-white dark:bg-gray-900 sticky top-0 z-50 shadow-md border-b border-gray-200 dark:border-gray-700">
-      <div className="max-w-screen-xl mx-auto px-4 py-3">
+    <nav className="bg-white dark:bg-gray-900 sticky top-0 z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full">
+      <div className="w-full px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
           </a>
 
           {/* Desktop Menu - Center */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <div className="hidden lg:flex lg:items-center lg:space-x-8">
             {navLinks.map((link) => (
               <a
                 key={link.id}
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } md:hidden mt-4 border-t border-gray-200 dark:border-gray-700 pt-4`}
+          } lg:hidden mt-4 border-t border-gray-200 dark:border-gray-700 pt-4`}
           id="mobile-menu"
         >
           <ul className="flex flex-col space-y-2">
@@ -158,7 +158,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Language Menu */}
         {isLangMenuOpen && (
-          <div className="absolute top-16 right-4 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 md:hidden">
+          <div className="absolute top-16 right-4 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 lg:hidden">
             {languages.map((lang) => (
               <button
                 key={lang.code}

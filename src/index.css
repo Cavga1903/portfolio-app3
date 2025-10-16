@@ -1,6 +1,8 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px; /* Navbar yüksekliği kadar offset */
+    /* scrollbar-gutter: stable; */ /* Opera'da çalışmıyor */
+    overflow-y: scroll; /* Her zaman scrollbar göster - kesin çözüm */
   }
 
 /* Smooth scroll için daha iyi performance */
@@ -194,6 +196,28 @@ html {
 .parallax-slow {
   will-change: transform;
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Layout Shift Prevention Utilities */
+.layout-stable {
+  /* Scrollbar için yer ayırma - modern tarayıcılar */
+  scrollbar-gutter: stable;
+}
+
+.layout-stable-fallback {
+  /* Eski tarayıcılar için fallback */
+  overflow-y: scroll;
+}
+
+/* Navbar Layout Shift Prevention */
+nav {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Fixed elements layout shift prevention */
+.fixed {
+  box-sizing: border-box !important;
 }
 
 /* Reduce motion for accessibility */
