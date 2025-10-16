@@ -78,16 +78,49 @@
     }
   },
   "technologies": {
-    "title": "Tech Stack",
-    "subtitle": "Technologies I work with and my proficiency levels",
-    "html": "HTML",
-    "css": "CSS",
+    "title": "My Skills",
+    "subtitle": "I have extensive experience in modern web development technologies. I constantly focus on learning and self-improvement.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "tools": "Tools",
+      "languages": "Languages"
+    },
+    "reactNative": "React Native",
+    "react": "React.js",
     "javascript": "JavaScript",
-    "react": "React",
-    "git": "Git",
     "typescript": "TypeScript",
+    "expo": "Expo",
     "tailwind": "Tailwind CSS",
-    "npm": "NPM"
+    "html": "HTML5",
+    "css": "CSS3",
+    "restful": "RESTful APIs",
+    "jwt": "JWT Authentication",
+    "nodejs": "Node.js",
+    "supabase": "Supabase",
+    "firebase": "Firebase",
+    "git": "Git & GitHub",
+    "salesforce": "Salesforce CRM",
+    "agile": "Agile",
+    "figma": "Figma",
+    "vercel": "Vercel",
+    "turkish": "Turkish",
+    "english": "English",
+    "german": "German",
+    "levels": {
+      "expert": "Expert",
+      "advanced": "Advanced",
+      "intermediate": "Intermediate",
+      "beginner": "Beginner"
+    },
+    "descriptions": {
+      "frontend": "User interface development and modern web technologies",
+      "backend": "Server-side development and API design",
+      "database": "Data management and database technologies",
+      "tools": "Development tools and project management",
+      "languages": "Language skills and communication"
+    }
   },
   "certificates": {
     "title": "Certificates & Achievements",

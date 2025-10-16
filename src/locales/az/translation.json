@@ -78,16 +78,49 @@
     }
   },
   "technologies": {
-    "title": "Texnologiya Yığını",
-    "subtitle": "İstifadə etdiyim texnologiyalar və bacarıq səviyyələrim",
-    "html": "HTML",
-    "css": "CSS",
+    "title": "Bacarıqlarım",
+    "subtitle": "Müasir veb inkişaf texnologiyaları sahəsində geniş təcrübəyə sahibəm. Davamlı öyrənməyə və özümü inkişaf etdirməyə fokuslanıram.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Verilənlər Bazası",
+      "tools": "Alətlər",
+      "languages": "Dillər"
+    },
+    "reactNative": "React Native",
+    "react": "React.js",
     "javascript": "JavaScript",
-    "react": "React",
-    "git": "Git",
     "typescript": "TypeScript",
+    "expo": "Expo",
     "tailwind": "Tailwind CSS",
-    "npm": "NPM"
+    "html": "HTML5",
+    "css": "CSS3",
+    "restful": "RESTful APIs",
+    "jwt": "JWT Authentication",
+    "nodejs": "Node.js",
+    "supabase": "Supabase",
+    "firebase": "Firebase",
+    "git": "Git & GitHub",
+    "salesforce": "Salesforce CRM",
+    "agile": "Agile",
+    "figma": "Figma",
+    "vercel": "Vercel",
+    "turkish": "Türk Dili",
+    "english": "İngilis Dili",
+    "german": "Alman Dili",
+    "levels": {
+      "expert": "Ekspert",
+      "advanced": "İleri",
+      "intermediate": "Orta",
+      "beginner": "Başlanğıc"
+    },
+    "descriptions": {
+      "frontend": "İstifadəçi interfeysi inkişafı və müasir veb texnologiyaları",
+      "backend": "Server tərəfi inkişaf və API dizaynı",
+      "database": "Məlumat idarəetməsi və verilənlər bazası texnologiyaları",
+      "tools": "İnkişaf alətləri və layihə idarəetməsi",
+      "languages": "Dil bacarıqları və ünsiyyət"
+    }
   },
   "certificates": {
     "title": "Sertifikatlar & Nailiyyətlər",

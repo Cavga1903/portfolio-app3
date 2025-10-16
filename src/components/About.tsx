@@ -2,9 +2,11 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
+  const { trackEvent, trackSectionView } = useAnalytics();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -12,6 +14,18 @@ const About: React.FC = () => {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+
+  // Track section view when component mounts
+  React.useEffect(() => {
+    if (isInView) {
+      trackSectionView('about', 0);
+      trackEvent('about_section_view', {
+        section_name: 'about',
+        has_soft_skills: true,
+        social_links_count: 3
+      });
+    }
+  }, [isInView, trackSectionView, trackEvent]);
   
   return (
     <section ref={ref} id="about" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
@@ -198,6 +212,13 @@ const About: React.FC = () => {
                 scale: 1.05, 
                 boxShadow: "0 20px 60px rgba(34, 197, 94, 0.3)" 
               }}
+              onMouseEnter={() => {
+                trackEvent('soft_skill_hover', {
+                  skill_name: 'corporate_experience',
+                  skill_type: 'soft_skill',
+                  skill_category: 'professional'
+                });
+              }}
             >
               <div className="text-center">
                 <div className="p-4 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
@@ -223,6 +244,13 @@ const About: React.FC = () => {
                 scale: 1.05, 
                 boxShadow: "0 20px 60px rgba(251, 191, 36, 0.3)" 
               }}
+              onMouseEnter={() => {
+                trackEvent('soft_skill_hover', {
+                  skill_name: 'fast_learning',
+                  skill_type: 'soft_skill',
+                  skill_category: 'learning'
+                });
+              }}
             >
               <div className="text-center">
                 <div className="p-4 bg-yellow-500/10 rounded-lg group-hover:bg-yellow-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
@@ -247,6 +275,13 @@ const About: React.FC = () => {
               whileHover={{ 
                 scale: 1.05, 
                 boxShadow: "0 20px 60px rgba(59, 130, 246, 0.3)" 
+              }}
+              onMouseEnter={() => {
+                trackEvent('soft_skill_hover', {
+                  skill_name: 'teamwork',
+                  skill_type: 'soft_skill',
+                  skill_category: 'collaboration'
+                });
               }}
             >
               <div className="text-center">

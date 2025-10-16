@@ -78,16 +78,49 @@
     }
   },
   "technologies": {
-    "title": "Tech Stack",
-    "subtitle": "Technologien, mit denen ich arbeite, und meine Kompetenzniveaus",
-    "html": "HTML",
-    "css": "CSS",
+    "title": "Meine Fähigkeiten",
+    "subtitle": "Ich habe umfangreiche Erfahrung in modernen Webentwicklungstechnologien. Ich konzentriere mich ständig auf Lernen und Selbstverbesserung.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Datenbank",
+      "tools": "Werkzeuge",
+      "languages": "Sprachen"
+    },
+    "reactNative": "React Native",
+    "react": "React.js",
     "javascript": "JavaScript",
-    "react": "React",
-    "git": "Git",
     "typescript": "TypeScript",
+    "expo": "Expo",
     "tailwind": "Tailwind CSS",
-    "npm": "NPM"
+    "html": "HTML5",
+    "css": "CSS3",
+    "restful": "RESTful APIs",
+    "jwt": "JWT Authentifizierung",
+    "nodejs": "Node.js",
+    "supabase": "Supabase",
+    "firebase": "Firebase",
+    "git": "Git & GitHub",
+    "salesforce": "Salesforce CRM",
+    "agile": "Agile",
+    "figma": "Figma",
+    "vercel": "Vercel",
+    "turkish": "Türkisch",
+    "english": "Englisch",
+    "german": "Deutsch",
+    "levels": {
+      "expert": "Experte",
+      "advanced": "Fortgeschritten",
+      "intermediate": "Mittelstufe",
+      "beginner": "Anfänger"
+    },
+    "descriptions": {
+      "frontend": "Benutzeroberflächenentwicklung und moderne Webtechnologien",
+      "backend": "Server-seitige Entwicklung und API-Design",
+      "database": "Datenverwaltung und Datenbanktechnologien",
+      "tools": "Entwicklungstools und Projektmanagement",
+      "languages": "Sprachkenntnisse und Kommunikation"
+    }
   },
   "certificates": {
     "title": "Zertifikate & Erfolge",

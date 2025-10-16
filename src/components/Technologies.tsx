@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel } from 'react-icons/si';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 interface Technology {
   iconKey: string;
@@ -15,6 +16,7 @@ interface Technology {
 
 const Technologies: React.FC = () => {
   const { t } = useTranslation();
+  const { trackEvent, trackSectionView } = useAnalytics();
   
   const technologies: Technology[] = [
     // Frontend
@@ -25,7 +27,7 @@ const Technologies: React.FC = () => {
       color: 'from-cyan-500 to-blue-500',
       icon: <SiReact className="text-5xl" />,
       category: 'frontend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'react',
@@ -34,7 +36,7 @@ const Technologies: React.FC = () => {
       color: 'from-cyan-500 to-blue-500',
       icon: <FaReact className="text-5xl" />,
       category: 'frontend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'javascript',
@@ -43,7 +45,7 @@ const Technologies: React.FC = () => {
       color: 'from-yellow-500 to-orange-500',
       icon: <FaJs className="text-5xl" />,
       category: 'frontend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'typescript',
@@ -52,7 +54,7 @@ const Technologies: React.FC = () => {
       color: 'from-blue-600 to-blue-400',
       icon: <SiTypescript className="text-5xl" />,
       category: 'frontend',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     {
       iconKey: 'expo',
@@ -61,7 +63,7 @@ const Technologies: React.FC = () => {
       color: 'from-gray-700 to-gray-900',
       icon: <SiExpo className="text-5xl" />,
       category: 'frontend',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     {
       iconKey: 'tailwind',
@@ -70,7 +72,7 @@ const Technologies: React.FC = () => {
       color: 'from-teal-500 to-cyan-500',
       icon: <SiTailwindcss className="text-5xl" />,
       category: 'frontend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'html',
@@ -79,7 +81,7 @@ const Technologies: React.FC = () => {
       color: 'from-orange-500 to-red-500',
       icon: <FaHtml5 className="text-5xl" />,
       category: 'frontend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'css',
@@ -88,7 +90,7 @@ const Technologies: React.FC = () => {
       color: 'from-blue-500 to-cyan-500',
       icon: <FaCss3Alt className="text-5xl" />,
       category: 'frontend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     // Backend
     {
@@ -98,7 +100,7 @@ const Technologies: React.FC = () => {
       color: 'from-green-500 to-emerald-500',
       icon: <FaCog className="text-5xl" />,
       category: 'backend',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'jwt',
@@ -107,7 +109,7 @@ const Technologies: React.FC = () => {
       color: 'from-yellow-500 to-orange-500',
       icon: <FaCog className="text-5xl" />,
       category: 'backend',
-      levelText: 'Orta'
+      levelText: 'intermediate'
     },
     {
       iconKey: 'nodejs',
@@ -116,7 +118,7 @@ const Technologies: React.FC = () => {
       color: 'from-green-600 to-green-400',
       icon: <SiNodedotjs className="text-5xl" />,
       category: 'backend',
-      levelText: 'Orta'
+      levelText: 'intermediate'
     },
     // Database
     {
@@ -126,7 +128,7 @@ const Technologies: React.FC = () => {
       color: 'from-green-500 to-emerald-500',
       icon: <SiSupabase className="text-5xl" />,
       category: 'database',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     {
       iconKey: 'firebase',
@@ -135,7 +137,7 @@ const Technologies: React.FC = () => {
       color: 'from-yellow-500 to-orange-500',
       icon: <SiFirebase className="text-5xl" />,
       category: 'database',
-      levelText: 'Orta'
+      levelText: 'intermediate'
     },
     // Tools
     {
@@ -145,7 +147,7 @@ const Technologies: React.FC = () => {
       color: 'from-orange-600 to-red-600',
       icon: <FaGitAlt className="text-5xl" />,
       category: 'tools',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     {
       iconKey: 'salesforce',
@@ -154,7 +156,7 @@ const Technologies: React.FC = () => {
       color: 'from-blue-500 to-cyan-500',
       icon: <SiSalesforce className="text-5xl" />,
       category: 'tools',
-      levelText: 'Orta'
+      levelText: 'intermediate'
     },
     {
       iconKey: 'agile',
@@ -163,7 +165,7 @@ const Technologies: React.FC = () => {
       color: 'from-purple-500 to-pink-500',
       icon: <FaWrench className="text-5xl" />,
       category: 'tools',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     {
       iconKey: 'figma',
@@ -172,7 +174,7 @@ const Technologies: React.FC = () => {
       color: 'from-pink-500 to-purple-500',
       icon: <SiFigma className="text-5xl" />,
       category: 'tools',
-      levelText: 'Orta'
+      levelText: 'intermediate'
     },
     {
       iconKey: 'vercel',
@@ -181,7 +183,7 @@ const Technologies: React.FC = () => {
       color: 'from-gray-700 to-gray-900',
       icon: <SiVercel className="text-5xl" />,
       category: 'tools',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     // Languages
     {
@@ -191,7 +193,7 @@ const Technologies: React.FC = () => {
       color: 'from-red-500 to-red-700',
       icon: <FaGlobe className="text-5xl" />,
       category: 'languages',
-      levelText: 'Uzman'
+      levelText: 'expert'
     },
     {
       iconKey: 'english',
@@ -200,7 +202,7 @@ const Technologies: React.FC = () => {
       color: 'from-blue-500 to-blue-700',
       icon: <FaGlobe className="text-5xl" />,
       category: 'languages',
-      levelText: 'İleri'
+      levelText: 'advanced'
     },
     {
       iconKey: 'german',
@@ -209,7 +211,7 @@ const Technologies: React.FC = () => {
       color: 'from-gray-400 to-gray-600',
       icon: <FaGlobe className="text-5xl" />,
       category: 'languages',
-      levelText: 'Başlangıç'
+      levelText: 'beginner'
     },
   ];
   
@@ -229,6 +231,16 @@ const Technologies: React.FC = () => {
     { key: 'tools', title: t('technologies.categories.tools'), icon: <FaWrench className="text-2xl" /> },
     { key: 'languages', title: t('technologies.categories.languages'), icon: <FaGlobe className="text-2xl" /> },
   ];
+
+  // Track section view when component mounts
+  React.useEffect(() => {
+    trackSectionView('technologies', 0);
+    trackEvent('technologies_section_view', {
+      section_name: 'technologies',
+      total_skills: technologies.length,
+      categories: categories.length
+    });
+  }, [trackSectionView, trackEvent, technologies.length, categories.length]);
 
   return (
     <section id="technologies" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
@@ -267,6 +279,14 @@ const Technologies: React.FC = () => {
                   key={tech.iconKey}
                   className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-purple-500/20 transition-all duration-300 p-4 group hover:scale-[1.02]"
                   style={{ animationDelay: `${(categoryIndex * 100) + (index * 50)}ms` }}
+                  onMouseEnter={() => {
+                    trackEvent('skill_hover', {
+                      skill_name: tech.nameKey,
+                      skill_category: tech.category,
+                      skill_level: tech.levelText,
+                      skill_percentage: tech.level
+                    });
+                  }}
                 >
                   <div className="flex items-center gap-4">
                     {/* Icon */}
@@ -283,12 +303,12 @@ const Technologies: React.FC = () => {
                           {t(tech.nameKey)}
                         </h4>
                         <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                          tech.levelText === 'Uzman' ? 'bg-green-500/20 text-green-400' :
-                          tech.levelText === 'İleri' ? 'bg-blue-500/20 text-blue-400' :
-                          tech.levelText === 'Orta' ? 'bg-yellow-500/20 text-yellow-400' :
+                          tech.levelText === 'expert' ? 'bg-green-500/20 text-green-400' :
+                          tech.levelText === 'advanced' ? 'bg-blue-500/20 text-blue-400' :
+                          tech.levelText === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
                           'bg-gray-500/20 text-gray-400'
                         }`}>
-                          {tech.levelText}
+                          {t(`technologies.levels.${tech.levelText}`)}
                         </span>
                       </div>
 

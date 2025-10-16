@@ -122,7 +122,20 @@
     "vercel": "Vercel",
     "turkish": "Türkçe",
     "english": "İngilizce",
-    "german": "Almanca"
+    "german": "Almanca",
+    "levels": {
+      "expert": "Uzman",
+      "advanced": "İleri",
+      "intermediate": "Orta",
+      "beginner": "Başlangıç"
+    },
+    "descriptions": {
+      "frontend": "Kullanıcı arayüzü geliştirme ve modern web teknolojileri",
+      "backend": "Sunucu tarafı geliştirme ve API tasarımı",
+      "database": "Veri yönetimi ve veritabanı teknolojileri",
+      "tools": "Geliştirme araçları ve proje yönetimi",
+      "languages": "Dil becerileri ve iletişim"
+    }
   },
   "certificates": {
     "title": "Sertifikalar & Başarılar",
