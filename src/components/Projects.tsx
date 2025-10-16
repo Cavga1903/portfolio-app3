@@ -28,6 +28,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.iot.description'),
       technologies: ["Node.js", "Express", "Docker", "Canvas", "QRCode"],
       github: "https://github.com/Cavga1903/iot-simulator",
+      link: "https://iot-simulator-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-blue-500 to-cyan-600",
     },
     {
@@ -35,6 +36,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.todo.description'),
       technologies: ["React", "JavaScript", "CSS3", "HTML5"],
       github: "https://github.com/Cavga1903/todo-app-ins",
+      link: "https://todo-app-ins-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-pink-500 to-purple-600",
     },
     {
@@ -42,6 +44,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.workshop.description'),
       technologies: ["React", "TypeScript", "Node.js", "Database"],
       github: "https://github.com/Cavga1903/workshop-tracker",
+      // Demo link yok - sadece GitHub
       imageGradient: "from-green-500 to-teal-600",
     },
     {
@@ -49,6 +52,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.productManager.description'),
       technologies: ["React", "Supabase", "TypeScript", "TailwindCSS"],
       github: "https://github.com/Cavga1903/react-supabase-product-manager",
+      link: "https://product-manager-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-orange-500 to-red-600",
     },
     {
@@ -56,6 +60,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.grocery.description'),
       technologies: ["React", "JavaScript", "E-commerce", "Payment"],
       github: "https://github.com/Cavga1903/online-grocery-app",
+      link: "https://grocery-app-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-yellow-500 to-orange-600",
     },
     {
@@ -63,6 +68,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.productList.description'),
       technologies: ["React", "JavaScript", "LocalStorage", "Filtering"],
       github: "https://github.com/Cavga1903/urun-listesi-gelistirilmis",
+      // Demo link yok - sadece GitHub
       imageGradient: "from-indigo-500 to-blue-600",
     },
     {
@@ -70,6 +76,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.paymentForm.description'),
       technologies: ["React", "Form Validation", "Payment", "UI/UX"],
       github: "https://github.com/Cavga1903/odeme-formu",
+      link: "https://payment-form-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-emerald-500 to-green-600",
     },
     {
@@ -77,6 +84,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.globalIdentity.description'),
       technologies: ["React", "Authentication", "Security", "Multi-platform"],
       github: "https://github.com/Cavga1903/global-identity-9",
+      // Demo link yok - sadece GitHub
       imageGradient: "from-violet-500 to-purple-600",
     },
     {
@@ -84,6 +92,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.noteTracker.description'),
       technologies: ["React", "JavaScript", "Notes", "LocalStorage"],
       github: "https://github.com/Cavga1903/basitNotTakipSistemi",
+      link: "https://note-tracker-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-rose-500 to-pink-600",
     },
     {
@@ -91,6 +100,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.loginUI.description'),
       technologies: ["React", "TypeScript", "UI/UX", "Form Validation"],
       github: "https://github.com/Cavga1903/login-ui-tsx-app",
+      link: "https://login-ui-demo.vercel.app", // Demo link eklendi
       imageGradient: "from-sky-500 to-blue-600",
     },
     {
@@ -98,6 +108,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.nodeNotes.description'),
       technologies: ["Node.js", "Express", "Database", "RESTful API"],
       github: "https://github.com/Cavga1903/node.js-Notlar-uygulamas-",
+      // Demo link yok - sadece GitHub
       imageGradient: "from-lime-500 to-green-600",
     },
   ];
@@ -248,19 +259,11 @@ const Projects: React.FC = () => {
                   {projects
                     .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
                     .map((project, index) => (
-                        <a
+                        <div
                           key={pageIndex * itemsPerPage + index}
-                          href={project.github || '#'}
-                          target={project.github ? "_blank" : "_self"}
-                          rel={project.github ? "noopener noreferrer" : ""}
-                          className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                          className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group"
                           onMouseEnter={() => setIsAutoPlaying(false)}
                           onMouseLeave={() => setIsAutoPlaying(true)}
-                          onClick={() => {
-                            if (project.github) {
-                              trackProjectClick(project.title, 'github', project.github);
-                            }
-                          }}
                         >
                       {/* Project Image/Preview */}
                       <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
@@ -303,20 +306,63 @@ const Projects: React.FC = () => {
                         </div>
                         <div>
                           <p className="font-semibold mb-2 text-xs sm:text-sm">{t('projects.tech')}</p>
-                          <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
+                          <div className="flex flex-wrap gap-1 mb-4">
                             {project.technologies.map((tech, idx) => (
                               <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
                             ))}
                           </div>
-                          {/* Details Badge - Bottom Right */}
-                          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="bg-indigo-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
-                              {t('projects.details')}
-                            </div>
+                          
+                          {/* Action Buttons */}
+                          <div className="flex gap-2 mt-auto">
+                            {project.link ? (
+                              <>
+                                {/* Canlı Demo Button */}
+                                <a
+                                  href={project.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                  onClick={() => {
+                                    trackProjectClick(project.title, 'demo', project.link!);
+                                  }}
+                                >
+                                  {t('projects.demo')}
+                                </a>
+                                {/* GitHub Button */}
+                                <a
+                                  href={project.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-blue-400 border border-blue-400 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                  onClick={() => {
+                                    if (project.github) {
+                                      trackProjectClick(project.title, 'github', project.github);
+                                    }
+                                  }}
+                                >
+                                  GitHub
+                                </a>
+                              </>
+                            ) : (
+                              /* Sadece GitHub Button */
+                              <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full bg-gray-700 hover:bg-gray-600 text-blue-400 border border-blue-400 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                onClick={() => {
+                                  if (project.github) {
+                                    trackProjectClick(project.title, 'github', project.github);
+                                  }
+                                }}
+                              >
+                                GitHub
+                              </a>
+                            )}
                           </div>
                         </div>
                       </div>
-                        </a>
+                        </div>
                       ))}
                     </div>
                   </div>

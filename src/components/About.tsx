@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
@@ -104,7 +104,7 @@ const About: React.FC = () => {
         </motion.div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Card 1 */}
           <motion.div 
             className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
@@ -174,6 +174,95 @@ const About: React.FC = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Soft Skills Section */}
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+        >
+          <h3 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+            {t('about.softSkills.title')}
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Kurumsal Deneyim */}
+            <motion.div 
+              className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={cardVariants}
+              transition={{ duration: 0.6, delay: 1.2 }}
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 20px 60px rgba(34, 197, 94, 0.3)" 
+              }}
+            >
+              <div className="text-center">
+                <div className="p-4 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
+                  <FaBuilding className="text-3xl text-green-400" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors duration-300">
+                  {t('about.softSkills.corporate.title')}
+                </h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {t('about.softSkills.corporate.description')}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Hızlı Öğrenme */}
+            <motion.div 
+              className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={cardVariants}
+              transition={{ duration: 0.6, delay: 1.4 }}
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 20px 60px rgba(251, 191, 36, 0.3)" 
+              }}
+            >
+              <div className="text-center">
+                <div className="p-4 bg-yellow-500/10 rounded-lg group-hover:bg-yellow-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
+                  <FaBolt className="text-3xl text-yellow-400" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300">
+                  {t('about.softSkills.learning.title')}
+                </h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {t('about.softSkills.learning.description')}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Takım Çalışması */}
+            <motion.div 
+              className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={cardVariants}
+              transition={{ duration: 0.6, delay: 1.6 }}
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 20px 60px rgba(59, 130, 246, 0.3)" 
+              }}
+            >
+              <div className="text-center">
+                <div className="p-4 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
+                  <FaUsers className="text-3xl text-blue-400" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                  {t('about.softSkills.teamwork.title')}
+                </h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {t('about.softSkills.teamwork.description')}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

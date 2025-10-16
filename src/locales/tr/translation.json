@@ -30,6 +30,21 @@
         "label": "Sevgi",
         "value": "Temiz Kod"
       }
+    },
+    "softSkills": {
+      "title": "Profesyonel Yetkinliklerim",
+      "corporate": {
+        "title": "Kurumsal Deneyim",
+        "description": "Büyük ekiplerde çalışma ve karmaşık projeleri yönetme deneyimi"
+      },
+      "learning": {
+        "title": "Hızlı Öğrenme",
+        "description": "Yeni teknolojileri hızla öğrenme ve projelerde uygulama yeteneği"
+      },
+      "teamwork": {
+        "title": "Takım Çalışması",
+        "description": "Farklı rollerde çalışma ve ekip liderliği deneyimi"
+      }
     }
   },
   "experience": {
@@ -78,16 +93,36 @@
     }
   },
   "technologies": {
-    "title": "Tech Stack",
-    "subtitle": "Kullandığım teknolojiler ve yeterlilik seviyelerim",
-    "html": "HTML",
-    "css": "CSS",
+    "title": "Yeteneklerim",
+    "subtitle": "Modern web geliştirme teknolojileri konusunda kapsamlı deneyime sahibim. Sürekli öğrenmeye ve kendimi geliştirmeye odaklanırım.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend", 
+      "database": "Veritabanı",
+      "tools": "Araçlar",
+      "languages": "Diller"
+    },
+    "reactNative": "React Native",
+    "react": "React.js",
     "javascript": "JavaScript",
-    "react": "React",
-    "git": "Git",
     "typescript": "TypeScript",
+    "expo": "Expo",
     "tailwind": "Tailwind CSS",
-    "npm": "NPM"
+    "html": "HTML5",
+    "css": "CSS3",
+    "restful": "RESTful APIs",
+    "jwt": "JWT Authentication",
+    "nodejs": "Node.js",
+    "supabase": "Supabase",
+    "firebase": "Firebase",
+    "git": "Git & GitHub",
+    "salesforce": "Salesforce CRM",
+    "agile": "Agile",
+    "figma": "Figma",
+    "vercel": "Vercel",
+    "turkish": "Türkçe",
+    "english": "İngilizce",
+    "german": "Almanca"
   },
   "certificates": {
     "title": "Sertifikalar & Başarılar",
@@ -188,7 +223,7 @@
     "details": "Detaylar",
     "tech": "Teknolojiler:",
     "github": "GitHub",
-    "demo": "Demo",
+    "demo": "Canlı Demo",
     "items": {
       "iot": {
         "title": "IoT Cihaz Simülatörü",
