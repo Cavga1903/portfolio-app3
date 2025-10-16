@@ -18,7 +18,7 @@
     
     <!-- Image information -->
     <image:image>
-      <image:loc>https://www.tolgacavga.com/og-images/og_image.png</image:loc>
+      <image:loc>https://www.tolgacavga.com/og-images/og-image.svg</image:loc>
       <image:title>Tolga Çavga - Frontend Developer Portfolio</image:title>
       <image:caption>Modern web projeleri ve teknolojiler</image:caption>
     </image:image>
