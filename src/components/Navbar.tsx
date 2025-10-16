@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <a
             href="#hero"
-            className="flex items-center text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group"
+            className="flex items-center text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group logo-text"
           >
             Tolga Çavga
             <FaCode className="text-3xl ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
           {/* Right Side - Desktop Language + Mobile Controls */}
           <div className="flex items-center gap-3">
             {/* Desktop Language Selector */}
-            <div className="hidden md:block relative">
+            <div className="hidden lg:block relative">
               <button
                 onClick={toggleLangMenu}
                 className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile - Language & Hamburger */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={toggleLangMenu}
                 className="px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
               <button
                 onClick={toggleMenu}
                 type="button"
-                className="p-2 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="p-2 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hamburger-button"
                 aria-controls="mobile-menu"
                 aria-expanded={isMenuOpen}
                 aria-label="Toggle menu"
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } lg:hidden mt-4 border-t border-gray-200 dark:border-gray-700 pt-4`}
+          } lg:hidden mt-4 border-t border-gray-200 dark:border-gray-700 pt-4 mobile-menu`}
           id="mobile-menu"
         >
           <ul className="flex flex-col space-y-2">

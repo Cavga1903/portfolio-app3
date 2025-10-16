@@ -118,6 +118,51 @@
     
     <title>Tolga Çavga | Frontend Developer - Portfolio</title>
     <link rel="stylesheet" href="src/index.css">
+    
+    <!-- Kayan Yazı Efekti -->
+    <script>
+      let originalTitle = "Tolga Çavga | Frontend Developer - Portfolio";
+      let isScrolling = false;
+
+      function scrollTitle() {
+        if (!isScrolling) return;
+        
+        // Eğer title değişmişse, orijinal title'ı geri yükle
+        if (document.title !== originalTitle && !document.title.includes("Tolga Çavga")) {
+          document.title = originalTitle + " ";
+          return;
+        }
+        
+        document.title = document.title.substring(1) + document.title.substring(0, 1);
+        setTimeout(scrollTitle, 300); // Yazının kayma hızı (milisaniye)
+      }
+
+      // Sayfa yüklendiğinde fonksiyonu başlat
+      window.addEventListener('load', function() {
+        // Orijinal title'ı ayarla ve boşluk ekle
+        document.title = originalTitle + " ";
+        isScrolling = true;
+        scrollTitle();
+      });
+
+      // Title değişikliklerini izle
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList' && mutation.target.nodeName === 'TITLE') {
+            // Title değiştiğinde orijinal title'ı geri yükle
+            if (isScrolling && !document.title.includes("Tolga Çavga")) {
+              document.title = originalTitle + " ";
+            }
+          }
+        });
+      });
+      
+      // Title elementini izle
+      const titleElement = document.querySelector('title');
+      if (titleElement) {
+        observer.observe(titleElement, { childList: true });
+      }
+    </script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

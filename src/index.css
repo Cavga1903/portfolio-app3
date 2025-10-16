@@ -220,6 +220,59 @@ nav {
   box-sizing: border-box !important;
 }
 
+/* Küçük ekranlar için güvenli alan */
+@media (max-width: 640px) {
+  /* Çok küçük ekranlarda padding azalt */
+  .container, .max-w-screen-xl {
+    padding-left: 0.75rem !important; /* px-3 */
+    padding-right: 0.75rem !important;
+  }
+  
+  /* Navbar için küçük ekran optimizasyonu */
+  nav {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  /* Text boyutlarını küçük ekranlarda optimize et */
+  .text-2xl {
+    font-size: 1.5rem !important; /* text-xl */
+  }
+  
+  .text-lg {
+    font-size: 1rem !important; /* text-base */
+  }
+  
+  /* Hamburger menü için daha fazla alan */
+  .mobile-menu {
+    padding: 1rem !important;
+  }
+}
+
+/* Çok küçük ekranlar için ek güvenlik */
+@media (max-width: 480px) {
+  /* Minimum genişlik garantisi */
+  body {
+    min-width: 320px !important;
+  }
+  
+  /* Navbar'ı daha kompakt yap */
+  nav {
+    padding-top: 0.5rem !important; /* py-2 */
+    padding-bottom: 0.5rem !important;
+  }
+  
+  /* Logo boyutunu küçült */
+  .logo-text {
+    font-size: 1.25rem !important; /* text-xl */
+  }
+  
+  /* Hamburger butonunu büyüt */
+  .hamburger-button {
+    padding: 0.75rem !important;
+  }
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,

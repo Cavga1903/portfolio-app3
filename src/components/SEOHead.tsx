@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SEOHeadProps {
@@ -50,7 +50,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   const pageMeta = getPageMeta();
   const finalTitle = pageMeta.title || 'Tolga Çavga - Frontend Developer';
   const finalDescription = pageMeta.description || 'Frontend Developer & React.js Specialist';
-  const finalTags = pageMeta.tags || ['Frontend Developer', 'React', 'JavaScript', 'TypeScript'];
+  const finalTags = useMemo(() => 
+    pageMeta.tags || ['Frontend Developer', 'React', 'JavaScript', 'TypeScript'], 
+    [pageMeta.tags]
+  );
   const finalImage = image || `https://www.tolgacavga.com/og-images/og_image.png`;
 
   useEffect(() => {
