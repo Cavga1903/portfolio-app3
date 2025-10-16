@@ -53,12 +53,12 @@ const Home: React.FC = () => {
     <>
       {/* SEO Meta Tags */}
       <SEOHead 
-        title="Tolga Çavga - Frontend Developer | React.js Specialist"
-        description="Frontend Developer & React.js Specialist. Modern, kullanıcı dostu web uygulamaları geliştiriyorum. HTML, CSS, JavaScript, React, TypeScript."
+        pageType="home"
         url="https://www.tolgacavga.com"
-        image="https://www.tolgacavga.com/og-image.jpg"
         type="website"
-        tags={['Frontend Developer', 'React', 'JavaScript', 'TypeScript', 'Web Development', 'UI/UX']}
+        imageWidth={1200}
+        imageHeight={630}
+        twitterCreator="@tolgacavga"
       />
 
       <motion.div 

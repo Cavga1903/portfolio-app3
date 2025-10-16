@@ -10,23 +10,52 @@ interface SEOHeadProps {
   publishedTime?: string;
   modifiedTime?: string;
   tags?: string[];
+  // Yeni props - sayfa tipine göre otomatik meta etiketleri
+  pageType?: 'home' | 'about' | 'projects' | 'technologies' | 'contact' | 'cv';
+  // OG görsel boyutları
+  imageWidth?: number;
+  imageHeight?: number;
+  // Twitter creator
+  twitterCreator?: string;
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = 'Tolga Çavga - Frontend Developer | React.js Specialist',
-  description = 'Frontend Developer & React.js Specialist. Modern, kullanıcı dostu web uygulamaları geliştiriyorum. HTML, CSS, JavaScript, React, TypeScript.',
-  image = 'https://www.tolgacavga.com/og-image.jpg',
+  title,
+  description,
+  image,
   url = 'https://www.tolgacavga.com',
   type = 'website',
   publishedTime,
   modifiedTime,
-  tags = ['Frontend Developer', 'React', 'JavaScript', 'TypeScript', 'Web Development']
+  tags,
+  pageType,
+  imageWidth = 1200,
+  imageHeight = 630,
+  twitterCreator = '@tolgacavga'
 }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Sayfa tipine göre otomatik meta etiketleri
+  const getPageMeta = () => {
+    if (!pageType) return { title, description, tags };
+    
+    const metaKey = `meta.${pageType}`;
+    return {
+      title: title || t(`${metaKey}.title`),
+      description: description || t(`${metaKey}.description`),
+      tags: tags || t(`${metaKey}.keywords`).split(', ')
+    };
+  };
+
+  const pageMeta = getPageMeta();
+  const finalTitle = pageMeta.title || 'Tolga Çavga - Frontend Developer';
+  const finalDescription = pageMeta.description || 'Frontend Developer & React.js Specialist';
+  const finalTags = pageMeta.tags || ['Frontend Developer', 'React', 'JavaScript', 'TypeScript'];
+  const finalImage = image || `https://www.tolgacavga.com/og-images/${pageType || 'home'}.jpg`;
 
   useEffect(() => {
     // Update document title
-    document.title = title;
+    document.title = finalTitle;
 
     // Update meta tags
     const updateMetaTag = (property: string, content: string, isName = false) => {
@@ -52,15 +81,18 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     };
 
     // Basic Meta Tags
-    updateMetaTag('description', description, true);
-    updateMetaTag('keywords', tags.join(', '), true);
+    updateMetaTag('description', finalDescription, true);
+    updateMetaTag('keywords', finalTags.join(', '), true);
     updateMetaTag('author', 'Tolga Çavga', true);
     updateMetaTag('robots', 'index, follow', true);
 
     // Open Graph Meta Tags
-    updateMetaTag('og:title', title);
-    updateMetaTag('og:description', description);
-    updateMetaTag('og:image', image);
+    updateMetaTag('og:title', finalTitle);
+    updateMetaTag('og:description', finalDescription);
+    updateMetaTag('og:image', finalImage);
+    updateMetaTag('og:image:width', imageWidth.toString());
+    updateMetaTag('og:image:height', imageHeight.toString());
+    updateMetaTag('og:image:alt', `${finalTitle} - Tolga Çavga Portfolio`);
     updateMetaTag('og:url', url);
     updateMetaTag('og:type', type);
     updateMetaTag('og:site_name', 'Tolga Çavga Portfolio');
@@ -73,11 +105,12 @@ const SEOHead: React.FC<SEOHeadProps> = ({
 
     // Twitter Card Meta Tags
     updateMetaTag('twitter:card', 'summary_large_image', true);
-    updateMetaTag('twitter:title', title, true);
-    updateMetaTag('twitter:description', description, true);
-    updateMetaTag('twitter:image', image, true);
-    updateMetaTag('twitter:creator', '@tolgacavga', true);
-    updateMetaTag('twitter:site', '@tolgacavga', true);
+    updateMetaTag('twitter:title', finalTitle, true);
+    updateMetaTag('twitter:description', finalDescription, true);
+    updateMetaTag('twitter:image', finalImage, true);
+    updateMetaTag('twitter:image:alt', `${finalTitle} - Tolga Çavga Portfolio`, true);
+    updateMetaTag('twitter:creator', twitterCreator, true);
+    updateMetaTag('twitter:site', twitterCreator, true);
     updateMetaTag('twitter:url', url, true);
 
     // Article Meta Tags (if type is article)
@@ -87,8 +120,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     if (type === 'article' && modifiedTime) {
       updateMetaTag('article:modified_time', modifiedTime);
     }
-    if (type === 'article') {
-      tags.forEach(tag => {
+    if (type === 'article' && finalTags) {
+      finalTags.forEach(tag => {
         const meta = document.createElement('meta');
         meta.setAttribute('property', 'article:tag');
         meta.setAttribute('content', tag);
@@ -113,7 +146,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     altLinkDe.href = `${url}?lang=de`;
     document.head.appendChild(altLinkDe);
 
-  }, [title, description, image, url, type, publishedTime, modifiedTime, tags, i18n.language]);
+  }, [finalTitle, finalDescription, finalImage, finalTags, url, type, publishedTime, modifiedTime, i18n.language, imageWidth, imageHeight, twitterCreator]);
 
   // JSON-LD Structured Data
   useEffect(() => {
@@ -152,7 +185,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       "@type": "WebSite",
       "name": "Tolga Çavga Portfolio",
       "url": "https://www.tolgacavga.com",
-      "description": description,
+      "description": finalDescription,
       "author": {
         "@type": "Person",
         "name": "Tolga Çavga"
@@ -172,7 +205,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       "name": "Tolga Çavga - Frontend Development Services",
       "url": "https://www.tolgacavga.com",
       "logo": "https://www.tolgacavga.com/logo.png",
-      "image": image,
+      "image": finalImage,
       "description": "Professional frontend development services specializing in React.js, TypeScript, and modern web applications.",
       "priceRange": "$$",
       "address": {
@@ -250,7 +283,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
     document.head.appendChild(breadcrumbScript);
 
-  }, [description, image]);
+  }, [finalDescription, finalImage]);
 
   return null; // This component doesn't render anything
 };

@@ -312,6 +312,38 @@
     "buyMeACoffee": "Kauf mir einen Kaffee ☕"
   },
   "scrollToTop": "Nach oben scrollen",
+  "meta": {
+    "home": {
+      "title": "Tolga Çavga | Frontend Entwickler - Moderne Webanwendungen",
+      "description": "Frontend-Entwickler, der moderne Webanwendungen mit React, TypeScript und TailwindCSS erstellt. Benutzerfreundliche Schnittstellen und leistungsorientierte Lösungen.",
+      "keywords": "Frontend Entwickler, React, TypeScript, JavaScript, Webentwicklung, UI/UX, Moderne Web"
+    },
+    "about": {
+      "title": "Über mich | Tolga Çavga - Frontend Entwickler",
+      "description": "Frontend-Entwickler, der mit großer Leidenschaft in die Welt der Softwareentwicklung eingetreten ist. Ich entwickle kreative und benutzerfreundliche Webanwendungen.",
+      "keywords": "Über mich, Frontend Entwickler, Softwareentwickler, Persönliche Informationen, Erfahrung"
+    },
+    "projects": {
+      "title": "Meine Projekte | Tolga Çavga - Portfolio",
+      "description": "Projekte, die ich mit React, Node.js und modernen Webtechnologien entwickelt habe. E-Commerce, IoT, Verwaltungspanels und mehr.",
+      "keywords": "Projekte, Portfolio, React Projekte, Webanwendungen, E-Commerce, IoT"
+    },
+    "technologies": {
+      "title": "Technologien | Tolga Çavga - Meine Fähigkeiten",
+      "description": "Expertise in 20+ Technologien in den Kategorien Frontend, Backend, Datenbank und Tools. React, TypeScript, Node.js und mehr.",
+      "keywords": "Technologien, Fähigkeiten, React, TypeScript, Node.js, Frontend, Backend"
+    },
+    "contact": {
+      "title": "Kontakt | Tolga Çavga - Frontend Entwickler",
+      "description": "Nehmen Sie Kontakt mit mir für Ihre Projekte auf. Ich spezialisiere mich auf die Entwicklung moderner Webanwendungen und benutzerfreundlicher Schnittstellen.",
+      "keywords": "Kontakt, Kontaktformular, Projektvorschlag, Webentwicklung, Frontend"
+    },
+    "cv": {
+      "title": "Lebenslauf herunterladen | Tolga Çavga - Frontend Entwickler",
+      "description": "Laden Sie Tolga Çavgas aktuellen Lebenslauf herunter. Experte für Frontend-Entwicklung in React, TypeScript und modernen Webtechnologien.",
+      "keywords": "Lebenslauf, Resume, Frontend Entwickler, React, TypeScript, Bewerbung"
+    }
+  },
   "share": {
     "title": "Teilen",
     "shareOn": "Teilen auf",

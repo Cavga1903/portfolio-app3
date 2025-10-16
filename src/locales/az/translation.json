@@ -312,6 +312,38 @@
     "buyMeACoffee": "Mənə Kofe Al ☕"
   },
   "scrollToTop": "Yuxarı qalx",
+  "meta": {
+    "home": {
+      "title": "Tolga Çavga | Frontend Developer - Müasir Veb Tətbiqləri",
+      "description": "React, TypeScript və TailwindCSS ilə müasir veb tətbiqləri yaradan Frontend Developer. İstifadəçi dostu interfeyslər və performans əsaslı həllər.",
+      "keywords": "Frontend Developer, React, TypeScript, JavaScript, Veb İnkişaf, UI/UX, Müasir Veb"
+    },
+    "about": {
+      "title": "Haqqımda | Tolga Çavga - Frontend Developer",
+      "description": "Proqram təminatı inkişafı dünyasına böyük ehtirasla qədəm qoyan Frontend Developer. Yaradıcı və istifadəçi dostu veb tətbiqlər hazırlayıram.",
+      "keywords": "Haqqımda, Frontend Developer, Proqram Təminatı İnkişafçısı, Şəxsi Məlumatlar, Təcrübə"
+    },
+    "projects": {
+      "title": "Layihələrim | Tolga Çavga - Portfolio",
+      "description": "React, Node.js və müasir veb texnologiyaları ilə hazırladığım layihələr. E-ticarət, IoT, idarəetmə panelləri və daha çoxu.",
+      "keywords": "Layihələr, Portfolio, React Layihələri, Veb Tətbiqləri, E-ticarət, IoT"
+    },
+    "technologies": {
+      "title": "Texnologiyalar | Tolga Çavga - Bacarıqlarım",
+      "description": "Frontend, Backend, Verilənlər Bazası və Alətlər kateqoriyalarında 20+ texnologiyada ekspertlik. React, TypeScript, Node.js və daha çoxu.",
+      "keywords": "Texnologiyalar, Bacarıqlar, React, TypeScript, Node.js, Frontend, Backend"
+    },
+    "contact": {
+      "title": "Əlaqə | Tolga Çavga - Frontend Developer",
+      "description": "Layihələriniz üçün mənimlə əlaqə saxlayın. Müasir veb tətbiqləri və istifadəçi dostu interfeyslər hazırlamaqda mütəxəssisəm.",
+      "keywords": "Əlaqə, Əlaqə Forması, Layihə Təklifi, Veb İnkişaf, Frontend"
+    },
+    "cv": {
+      "title": "CV Yüklə | Tolga Çavga - Frontend Developer",
+      "description": "Tolga Çavganın güncel CV-sini yükləyin. React, TypeScript və müasir veb texnologiyalarında ekspert Frontend Developer.",
+      "keywords": "CV, Resume, Frontend Developer, React, TypeScript, İş Müraciəti"
+    }
+  },
   "share": {
     "title": "Paylaş",
     "shareOn": "Burada paylaş:",

@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
 import { useAnalytics } from '../hooks/useAnalytics';
+import SEOHead from './SEOHead';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
@@ -28,7 +29,16 @@ const About: React.FC = () => {
   }, [isInView, trackSectionView, trackEvent]);
   
   return (
-    <section ref={ref} id="about" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+    <>
+      <SEOHead 
+        pageType="about"
+        url="https://www.tolgacavga.com#about"
+        type="profile"
+        imageWidth={1200}
+        imageHeight={630}
+        twitterCreator="@tolgacavga"
+      />
+      <section ref={ref} id="about" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -299,7 +309,8 @@ const About: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 

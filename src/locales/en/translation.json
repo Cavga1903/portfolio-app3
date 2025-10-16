@@ -325,6 +325,38 @@
     "turkcellDescription": "I support customers and solve problems at Turkcell Global Bilgi. I specialize in clear communication, problem solving and technical support.",
     "upworkDescription": "I developed cross-platform mobile applications. I integrated RESTful APIs and Supabase. I designed dynamic UIs with Tailwind CSS, increasing user retention by 30%."
   },
+  "meta": {
+    "home": {
+      "title": "Tolga Çavga | Frontend Developer - Modern Web Applications",
+      "description": "Frontend Developer creating modern web applications with React, TypeScript and TailwindCSS. User-friendly interfaces and performance-focused solutions.",
+      "keywords": "Frontend Developer, React, TypeScript, JavaScript, Web Development, UI/UX, Modern Web"
+    },
+    "about": {
+      "title": "About Me | Tolga Çavga - Frontend Developer",
+      "description": "Frontend Developer who stepped into the world of software development with great passion. I develop creative and user-friendly web applications.",
+      "keywords": "About Me, Frontend Developer, Software Developer, Personal Information, Experience"
+    },
+    "projects": {
+      "title": "My Projects | Tolga Çavga - Portfolio",
+      "description": "Projects I developed with React, Node.js and modern web technologies. E-commerce, IoT, management panels and more.",
+      "keywords": "Projects, Portfolio, React Projects, Web Applications, E-commerce, IoT"
+    },
+    "technologies": {
+      "title": "Technologies | Tolga Çavga - My Skills",
+      "description": "Expertise in 20+ technologies across Frontend, Backend, Database and Tools categories. React, TypeScript, Node.js and more.",
+      "keywords": "Technologies, Skills, React, TypeScript, Node.js, Frontend, Backend"
+    },
+    "contact": {
+      "title": "Contact | Tolga Çavga - Frontend Developer",
+      "description": "Get in touch with me for your projects. I specialize in developing modern web applications and user-friendly interfaces.",
+      "keywords": "Contact, Contact Form, Project Proposal, Web Development, Frontend"
+    },
+    "cv": {
+      "title": "Download CV | Tolga Çavga - Frontend Developer",
+      "description": "Download Tolga Çavga's current CV. Expert Frontend Developer in React, TypeScript and modern web technologies.",
+      "keywords": "CV, Resume, Frontend Developer, React, TypeScript, Job Application"
+    }
+  },
   "share": {
     "title": "Share",
     "shareOn": "Share on",
