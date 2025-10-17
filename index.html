@@ -18,13 +18,27 @@
     <!-- Critical CSS for above-the-fold content -->
     <style>
       /* Critical styles for initial render */
-      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+      * { box-sizing: border-box; }
+      body { 
+        margin: 0; 
+        font-family: system-ui, -apple-system, sans-serif; 
+        background: #0f1419;
+        color: white;
+        overflow-x: hidden;
+      }
       #root { min-height: 100vh; }
       .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
       @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
       }
+      /* Hero section critical styles */
+      .hero-gradient {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #000 100%);
+      }
+      /* Loading states */
+      .loading { opacity: 0.7; }
+      .loaded { opacity: 1; transition: opacity 0.3s ease; }
     </style>
     
     <meta name="description" content="Tolga Çavga - Frontend Developer. React, TypeScript, TailwindCSS ile modern web projeleri geliştiriyorum. İnteraktif ve responsive web uygulamaları tasarlıyorum." />

@@ -14,7 +14,7 @@ type Project = {
 };
 
 // Enhanced iframe component with better loading and placeholder
-const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; projectName: string }> = ({ src, title, isVisible, projectName }) => {
+const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; projectName: string }> = memo(({ src, title, isVisible, projectName }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -109,7 +109,7 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
       />
     </div>
   );
-};
+});
 
 const Projects: React.FC = memo(() => {
   const { t } = useTranslation();
