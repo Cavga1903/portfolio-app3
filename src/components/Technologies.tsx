@@ -432,7 +432,7 @@ const Technologies: React.FC = () => {
       </p>
 
       <div className="relative z-10 w-full max-w-6xl">
-        <div className="space-y-6 sm:space-y-8">
+        <div className="space-y-6 sm:space-y-8 pb-8 sm:pb-12 md:pb-16">
           {categories.map((category) => {
             const isOpen = openCategories.has(category.key);
             const isRotating = rotatingIcons.has(category.key);
@@ -478,7 +478,7 @@ const Technologies: React.FC = () => {
                 <div className={`overflow-hidden transition-all duration-300 ${
                   isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
                 }`}>
-                  <div className="px-6 pb-6 pt-4 sm:pt-6">
+                  <div className="px-6 pb-6 pt-4 sm:pt-6 mb-8 sm:mb-12 md:mb-16">
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
                       {categoryTechs.map((tech) => (
                         <div
