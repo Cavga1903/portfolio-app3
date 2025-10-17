@@ -8,6 +8,25 @@
     <link rel="apple-touch-icon" href="/favicon.svg" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+      /* Critical styles for initial render */
+      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+      #root { min-height: 100vh; }
+      .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+    
     <meta name="description" content="Tolga Çavga - Frontend Developer. React, TypeScript, TailwindCSS ile modern web projeleri geliştiriyorum. İnteraktif ve responsive web uygulamaları tasarlıyorum." />
     <meta name="keywords" content="Tolga Çavga, Frontend Developer, React, TypeScript, Web Developer, Portfolio, JavaScript, TailwindCSS, UI/UX" />
     <meta name="author" content="Tolga Çavga" />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { FaGithub, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
@@ -111,7 +111,7 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
   );
 };
 
-const Projects: React.FC = () => {
+const Projects: React.FC = memo(() => {
   const { t } = useTranslation();
   const { trackProjectClick, trackCarouselInteraction } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -575,6 +575,6 @@ const projects: Project[] = [
       </div>
     </section>
   );
-};
+});
 
 export default Projects;
