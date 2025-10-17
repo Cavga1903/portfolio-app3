@@ -66,7 +66,7 @@
     "siliconmade": {
       "title": "Mobile & Frontend Praktikant",
       "company": "Siliconmade Academy",
-      "location": "İzmir, Türkei",
+      "location": "Online",
       "period": "Februar 2025 - Juli 2025",
       "description": "Abgeschlossenes 6-monatiges / 184-stündiges Praktikum. Entwickelte reale Projekte. Praktische Erfahrung in React, React Native, REST API, Supabase, Tailwind CSS und Firebase gesammelt."
     },
@@ -88,8 +88,8 @@
       "title": "Associate Computerprogrammierung",
       "company": "Anadolu Üniversitesi",
       "location": "Eskişehir, Türkei",
-      "period": "Abgeschlossen",
-      "description": "Abgeschlossener Associate-Abschluss in Computerprogrammierung. Grundlagen der Programmierung und Softwareentwicklungsprozesse erlernt."
+      "period": "Läuft",
+      "description": "Derzeit Associate-Abschluss in Computerprogrammierung. Lerne Grundlagen der Programmierung und Softwareentwicklungsprozesse."
     }
   },
   "technologies": {
