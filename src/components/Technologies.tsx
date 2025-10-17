@@ -26,35 +26,35 @@ const Technologies: React.FC = () => {
   const categories = [
     {
       key: 'frontend',
-      icon: <FaReact className="text-xl" />,
+      icon: <FaReact className="text-lg" />,
       titleKey: 'technologies.categories.frontend',
       descriptionKey: 'technologies.descriptions.frontend',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       key: 'backend',
-      icon: <FaCog className="text-xl" />,
+      icon: <FaCog className="text-lg" />,
       titleKey: 'technologies.categories.backend',
       descriptionKey: 'technologies.descriptions.backend',
       color: 'from-green-500 to-emerald-500'
     },
     {
       key: 'database',
-      icon: <FaDatabase className="text-xl" />,
+      icon: <FaDatabase className="text-lg" />,
       titleKey: 'technologies.categories.database',
       descriptionKey: 'technologies.descriptions.database',
       color: 'from-purple-500 to-pink-500'
     },
     {
       key: 'tools',
-      icon: <FaWrench className="text-xl" />,
+      icon: <FaWrench className="text-lg" />,
       titleKey: 'technologies.categories.tools',
       descriptionKey: 'technologies.descriptions.tools',
       color: 'from-orange-500 to-red-500'
     },
     {
       key: 'languages',
-      icon: <FaGlobe className="text-xl" />,
+      icon: <FaGlobe className="text-lg" />,
       titleKey: 'technologies.categories.languages',
       descriptionKey: 'technologies.descriptions.languages',
       color: 'from-indigo-500 to-purple-500'
