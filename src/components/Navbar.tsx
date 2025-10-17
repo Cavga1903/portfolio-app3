@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
   const currentLanguage = languages.find(lang => lang.code === normalizedLang) || languages[1]; // Fallback: English
 
   return (
-    <nav className="bg-white dark:bg-gray-900 sticky top-0 z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full">
+    <nav className="bg-white dark:bg-gray-900 relative z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full">
       <div className="w-full px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
