@@ -13,57 +13,91 @@ type Project = {
   imageGradient?: string;
 };
 
-// Lazy iframe component to prevent scroll issues
+// Enhanced iframe component with better loading and placeholder
 const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; projectName: string }> = ({ src, title, isVisible, projectName }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { trackIframeInteraction } = useAnalytics();
 
   useEffect(() => {
     if (isVisible && !shouldLoad) {
-      // Delay loading to prevent scroll jump
-      const timer = setTimeout(() => {
-        setShouldLoad(true);
-      }, 100);
-      return () => clearTimeout(timer);
+      // Immediate loading for visible items
+      setShouldLoad(true);
     }
   }, [isVisible, shouldLoad]);
 
+  const handleLoad = () => {
+    setIsLoading(false);
+    setHasError(false);
+    // Prevent iframe from affecting page scroll
+    if (iframeRef.current) {
+      iframeRef.current.style.pointerEvents = 'none';
+    }
+    // Track iframe load
+    trackIframeInteraction(projectName, 'load');
+  };
+
+  const handleError = () => {
+    setIsLoading(false);
+    setHasError(true);
+    // Track iframe error
+    trackIframeInteraction(projectName, 'error');
+  };
+
   if (!shouldLoad) {
     return (
-      <div className="w-full h-full bg-gray-700/50 flex items-center justify-center">
-        <div className="text-white/50 text-sm">Loading...</div>
+      <div className="w-full h-full bg-gradient-to-br from-gray-700/50 to-gray-800/50 flex items-center justify-center relative overflow-hidden">
+        {/* Animated placeholder */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-pulse"></div>
+        <div className="relative z-10 text-center">
+          <div className="w-8 h-8 border-2 border-white/30 border-t-white/70 rounded-full animate-spin mx-auto mb-2"></div>
+          <div className="text-white/60 text-xs">Yükleniyor...</div>
+        </div>
       </div>
     );
   }
 
   return (
-    <iframe
-      ref={iframeRef}
-      src={src}
-      className="w-full h-full border-0"
-      title={title}
-      sandbox="allow-scripts allow-same-origin allow-forms"
-      loading="lazy"
-      style={{ 
-        transform: 'scale(0.25)',
-        transformOrigin: 'top left',
-        width: '400%',
-        height: '400%'
-      }}
-      onLoad={() => {
-        // Prevent iframe from affecting page scroll
-        if (iframeRef.current) {
-          iframeRef.current.style.pointerEvents = 'none';
-        }
-        // Track iframe load
-        trackIframeInteraction(projectName, 'load');
-      }}
-      onError={() => {
-        // Track iframe error
-        trackIframeInteraction(projectName, 'error');
-      }}
-    />
+    <div className="w-full h-full relative">
+      {/* Loading overlay */}
+      {isLoading && (
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-700/80 to-gray-800/80 flex items-center justify-center z-20">
+          <div className="text-center">
+            <div className="w-6 h-6 border-2 border-white/30 border-t-white/70 rounded-full animate-spin mx-auto mb-2"></div>
+            <div className="text-white/70 text-xs">Yükleniyor...</div>
+          </div>
+        </div>
+      )}
+      
+      {/* Error state */}
+      {hasError && (
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center z-20">
+          <div className="text-center">
+            <div className="text-red-400 text-2xl mb-2">⚠️</div>
+            <div className="text-white/70 text-xs">Demo yüklenemedi</div>
+          </div>
+        </div>
+      )}
+
+      <iframe
+        ref={iframeRef}
+        src={src}
+        className="w-full h-full border-0"
+        title={title}
+        sandbox="allow-scripts allow-same-origin allow-forms"
+        loading="eager"
+        style={{ 
+          transform: 'scale(0.25)',
+          transformOrigin: 'top left',
+          width: '400%',
+          height: '400%'
+        }}
+        onLoad={handleLoad}
+        onError={handleError}
+      />
+    </div>
   );
 };
 
@@ -266,7 +300,7 @@ const projects: Project[] = [
     }, 3000);
   };
   
-  // Intersection Observer for lazy loading iframes
+  // Enhanced Intersection Observer for faster loading
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -278,8 +312,8 @@ const projects: Project[] = [
         });
       },
       { 
-        rootMargin: '50px',
-        threshold: 0.1 
+        rootMargin: '200px', // Increased margin for earlier loading
+        threshold: 0.01 // Lower threshold for faster triggering
       }
     );
 
@@ -288,6 +322,16 @@ const projects: Project[] = [
     });
 
     return () => observer.disconnect();
+  }, [projects.length]);
+
+  // Preload all projects after component mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const allIndices = projects.map((_, index) => index);
+      setVisibleProjects(new Set(allIndices));
+    }, 1000); // Load all after 1 second
+
+    return () => clearTimeout(timer);
   }, [projects.length]);
 
   // Auto-play functionality
