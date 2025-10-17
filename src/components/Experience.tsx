@@ -25,7 +25,7 @@ const Experience: React.FC = () => {
       period: t('experience.turkcell.period'),
       description: t('experience.turkcell.description'),
       skills: ['Customer Service', 'Problem Solving', 'Communication'],
-      logo: '/logos/turkcell.png'
+      logo: '/logos/Turkcell_logo0.png'
     },
     {
       type: 'work',
@@ -45,7 +45,7 @@ const Experience: React.FC = () => {
       period: t('experience.siliconmade.period'),
       description: t('experience.siliconmade.description'),
       skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git'],
-      logo: '/logos/siliconmade.png'
+      logo: '/logos/siliconmade.jpeg'
     },
     {
       type: 'work',
@@ -65,7 +65,7 @@ const Experience: React.FC = () => {
       period: t('experience.uopeople.period'),
       description: t('experience.uopeople.description'),
       skills: ['Computer Science', 'Algorithms', 'Data Structures'],
-      logo: '/logos/uopeople.png'
+      logo: '/logos/uopeople_logo.png'
     },
     {
       type: 'education',
@@ -75,7 +75,7 @@ const Experience: React.FC = () => {
       period: t('experience.anadolu.period'),
       description: t('experience.anadolu.description'),
       skills: ['Computer Programming', 'Software Development'],
-      logo: '/logos/anadolu.png'
+      logo: '/logos/anadolu.svg'
     }
   ];
 
