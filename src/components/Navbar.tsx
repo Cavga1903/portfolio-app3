@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaCode, FaGlobe } from "react-icons/fa";
+import { FaGlobe } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "../hooks/useAnalytics";
 
@@ -71,7 +71,11 @@ const Navbar: React.FC = () => {
             }}
           >
             Tolga Çavga
-            <FaCode className="text-3xl ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
+            <img 
+              src="/titleLogo.svg" 
+              alt="Developer Logo" 
+              className="w-8 h-8 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300"
+            />
           </a>
 
           {/* Desktop Menu - Center */}
