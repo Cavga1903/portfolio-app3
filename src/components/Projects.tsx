@@ -13,6 +13,53 @@ type Project = {
   imageGradient?: string;
 };
 
+// Lazy iframe component to prevent scroll issues
+const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean }> = ({ src, title, isVisible }) => {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (isVisible && !shouldLoad) {
+      // Delay loading to prevent scroll jump
+      const timer = setTimeout(() => {
+        setShouldLoad(true);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, shouldLoad]);
+
+  if (!shouldLoad) {
+    return (
+      <div className="w-full h-full bg-gray-700/50 flex items-center justify-center">
+        <div className="text-white/50 text-sm">Loading...</div>
+      </div>
+    );
+  }
+
+  return (
+    <iframe
+      ref={iframeRef}
+      src={src}
+      className="w-full h-full border-0"
+      title={title}
+      sandbox="allow-scripts allow-same-origin allow-forms"
+      loading="lazy"
+      style={{ 
+        transform: 'scale(0.25)',
+        transformOrigin: 'top left',
+        width: '400%',
+        height: '400%'
+      }}
+      onLoad={() => {
+        // Prevent iframe from affecting page scroll
+        if (iframeRef.current) {
+          iframeRef.current.style.pointerEvents = 'none';
+        }
+      }}
+    />
+  );
+};
+
 const Projects: React.FC = () => {
   const { t } = useTranslation();
   const { trackProjectClick, trackCarouselInteraction } = useAnalytics();
@@ -20,7 +67,9 @@ const Projects: React.FC = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [visibleProjects, setVisibleProjects] = useState<Set<number>>(new Set());
   const carouselRef = useRef<HTMLDivElement>(null);
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
 const projects: Project[] = [
     // 1. Kişisel Portfolio
@@ -219,6 +268,30 @@ const projects: Project[] = [
     }, 3000);
   };
   
+  // Intersection Observer for lazy loading iframes
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-project-index') || '0');
+            setVisibleProjects(prev => new Set([...prev, index]));
+          }
+        });
+      },
+      { 
+        rootMargin: '50px',
+        threshold: 0.1 
+      }
+    );
+
+    projectRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [projects.length]);
+
   // Auto-play functionality
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -287,9 +360,13 @@ const projects: Project[] = [
                 }`}>
                   {projects
                     .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
-                    .map((project, index) => (
+                    .map((project, index) => {
+                      const globalIndex = pageIndex * itemsPerPage + index;
+                      return (
                         <div
-                          key={pageIndex * itemsPerPage + index}
+                          key={globalIndex}
+                          ref={(el) => { projectRefs.current[globalIndex] = el; }}
+                          data-project-index={globalIndex}
                           className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group"
                           onMouseEnter={() => setIsAutoPlaying(false)}
                           onMouseLeave={() => setIsAutoPlaying(true)}
@@ -297,20 +374,12 @@ const projects: Project[] = [
                       {/* Project Image/Preview */}
                       <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
                         {project.link ? (
-                          // Canlı demo preview - iframe ile küçük boyut
+                          // Canlı demo preview - LazyIframe ile optimize edilmiş
                           <div className="relative w-full h-full">
-                            <iframe
+                            <LazyIframe
                               src={project.link}
-                              className="w-full h-full border-0"
                               title={`${project.title} Preview`}
-                              sandbox="allow-scripts allow-same-origin allow-forms"
-                              loading="lazy"
-                              style={{ 
-                                transform: 'scale(0.25)',
-                                transformOrigin: 'top left',
-                                width: '400%',
-                                height: '400%'
-                              }}
+                              isVisible={visibleProjects.has(globalIndex)}
                             />
                             {/* Demo link indicator */}
                             <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
@@ -334,12 +403,12 @@ const projects: Project[] = [
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
                           </div>
                         )}
-                            {/* GitHub Icon Overlay - Top Right */}
-                            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                              <div className="bg-gray-800/90 backdrop-blur-sm rounded-full p-2">
-                                <FaGithub className="text-white text-lg" />
-                              </div>
-                            </div>
+                        {/* GitHub Icon Overlay - Top Right */}
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="bg-gray-800/90 backdrop-blur-sm rounded-full p-2">
+                            <FaGithub className="text-white text-lg" />
+                          </div>
+                        </div>
                       </div>
 
                       {/* Project Info */}
@@ -353,8 +422,8 @@ const projects: Project[] = [
                           <div className="flex flex-wrap gap-1 mb-4">
                 {project.technologies.map((tech, idx) => (
                               <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
-                            ))}
-                          </div>
+                ))}
+              </div>
                           
                           {/* Action Buttons */}
                           <div className="flex gap-2 mt-auto">
@@ -407,10 +476,11 @@ const projects: Project[] = [
                         </div>
                       </div>
                         </div>
-                ))}
-              </div>
+                      );
+                    })}
             </div>
-                ))}
+          </div>
+        ))}
           </div>
         </div>
 
