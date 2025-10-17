@@ -128,6 +128,10 @@ const Experience: React.FC = () => {
                         className={`w-full h-full object-contain p-2 backdrop-blur-sm border border-gray-600/50 ${
                           item.company.includes('İzmir') || item.company.includes('Izmir') 
                             ? 'bg-[#194265]' 
+                            : item.company.includes('Turkcell')
+                            ? 'bg-[#2855AC]'
+                            : item.company.includes('Concentrix')
+                            ? 'bg-[#003D5B]'
                             : 'bg-white'
                         }`}
                       />
