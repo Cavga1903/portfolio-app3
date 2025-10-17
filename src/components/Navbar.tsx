@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaGlobe } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
@@ -21,23 +21,11 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
   const { trackClick, trackLanguageChange } = useAnalytics();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleLangMenu = () => setIsLangMenuOpen((prev) => !prev);
-
-  // Scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Smooth scroll function
   const smoothScrollTo = (elementId: string) => {
@@ -70,14 +58,8 @@ const Navbar: React.FC = () => {
     languages.find((lang) => lang.code === normalizedLang) || languages[1]; // Fallback: English
 
   return (
-    <nav className={`bg-white dark:bg-gray-900 shadow-md border-b border-gray-200 dark:border-gray-700 w-full transition-all duration-300 ${
-      isScrolled 
-        ? 'fixed top-0 left-0 right-0 z-[9999] py-1' 
-        : 'relative z-50 py-3'
-    }`}>
-      <div className={`w-full px-4 transition-all duration-300 ${
-        isScrolled ? 'py-1' : 'py-3'
-      }`}>
+    <nav className="bg-white dark:bg-gray-900 relative z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full">
+      <div className="w-full px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
