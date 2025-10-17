@@ -49,6 +49,16 @@ const Experience: React.FC = () => {
     },
     {
       type: 'work',
+      title: t('experience.izmir.title'),
+      company: t('experience.izmir.company'),
+      location: t('experience.izmir.location'),
+      period: t('experience.izmir.period'),
+      description: t('experience.izmir.description'),
+      skills: ['Hardware & Software', 'System Administration', 'Technical Support', 'Teamwork'],
+      logo: '/logos/izmir.webp'
+    },
+    {
+      type: 'work',
       title: t('experience.concentrix.title'),
       company: t('experience.concentrix.company'),
       location: t('experience.concentrix.location'),

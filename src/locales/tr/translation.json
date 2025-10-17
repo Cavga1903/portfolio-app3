@@ -70,6 +70,13 @@
       "period": "Şubat 2025 - Temmuz 2025",
       "description": "6 aylık / 184 saatlik staj programını tamamladım. Gerçek dünya projeleri geliştirdim. React, React Native, REST API, Supabase, Tailwind CSS ve Firebase konularında pratik deneyim kazandım."
     },
+    "izmir": {
+      "title": "Bilgi İşlem Stajyeri",
+      "company": "İzmir Büyükşehir Belediyesi",
+      "location": "İzmir, Türkiye",
+      "period": "Eylül 2017 - Haziran 2018",
+      "description": "Sistem kurulumu ve donanım tanımlama konularında yardımcı oldum, operasyonel verimliliği artırdım. Kullanıcılara teknik destek sağladım, BT sorunlarını çözdüm ve kullanıcı memnuniyetini artırdım. Ekip üyeleriyle sorun giderme konularında işbirliği yaptım, işbirlikçi bir çalışma ortamı oluşturdum."
+    },
     "concentrix": {
       "title": "Müşteri Hizmetleri Temsilcisi - Bankacılık Sektörü",
       "company": "Concentrix",

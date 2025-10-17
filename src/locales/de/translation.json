@@ -70,6 +70,13 @@
       "period": "Februar 2025 - Juli 2025",
       "description": "Abgeschlossenes 6-monatiges / 184-stündiges Praktikum. Entwickelte reale Projekte. Praktische Erfahrung in React, React Native, REST API, Supabase, Tailwind CSS und Firebase gesammelt."
     },
+    "izmir": {
+      "title": "IT-Praktikant",
+      "company": "Metropolregion Izmir",
+      "location": "İzmir, Türkei",
+      "period": "September 2017 - Juni 2018",
+      "description": "Unterstützung bei Systemeinrichtung und Hardware-Identifikation, Verbesserung der operativen Effizienz. Technischer Support für Benutzer, Lösung von IT-Problemen und Verbesserung der Benutzerzufriedenheit. Zusammenarbeit mit Teammitgliedern bei der Fehlerbehebung, Förderung einer kooperativen Arbeitsumgebung."
+    },
     "concentrix": {
       "title": "Kundenbetreuer Banking",
       "company": "Concentrix",
