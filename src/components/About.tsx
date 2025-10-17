@@ -35,14 +35,14 @@ const About: React.FC = () => {
       image: 'https://avatars.githubusercontent.com/u/46963474?v=4',
       alt: 'GitHub Profile Photo',
       description: 'GitHub Profil Fotoğrafı',
-      fallback: '/IMG_4237.JPG'
+      fallback: '/profilePhoto.jpg'
     },
     {
-      id: 'backup',
+      id: 'profile',
       type: 'image',
-      image: '/IMG_4237.JPG',
-      alt: 'Backup Profile Photo',
-      description: 'Yedek Profil Fotoğrafı'
+      image: '/profilePhoto.jpg',
+      alt: 'Profile Photo',
+      description: 'Profil Fotoğrafı'
     }
   ];
 
