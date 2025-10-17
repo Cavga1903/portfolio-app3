@@ -63,18 +63,23 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <a
             href="#hero"
-            className="flex items-center text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group logo-text"
+            className="flex items-center text-sm font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group logo-text"
             onClick={(e) => {
               e.preventDefault();
               smoothScrollTo('hero');
               trackClick('nav_hero', 'navigation_link', 'Tolga Çavga');
             }}
           >
-            Tolga Çavga
+            {/* Tolga Çavga */}
             <img 
-              src="/titleLogo.svg" 
+              src="/darkThemeTitleLogo.svg" 
               alt="Developer Logo" 
-              className="w-8 h-8 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300"
+              className="w-50 h-50 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 dark:hidden"
+            />
+            <img 
+              src="/lighThemeTitleLogo.svg" 
+              alt="Developer Logo" 
+              className="w-50 h-50 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 hidden dark:block"
             />
           </a>
 
