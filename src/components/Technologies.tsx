@@ -441,7 +441,11 @@ const Technologies: React.FC = () => {
               >
                 {/* Accordion Header */}
                 <button
-                  onClick={() => toggleCategory(category.key)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleCategory(category.key);
+                  }}
                   className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between hover:bg-gray-700/30 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset"
                 >
                   <div className="flex items-center gap-4">
@@ -463,7 +467,7 @@ const Technologies: React.FC = () => {
                   </div>
                   
                   {/* Chevron Icon */}
-                  <div className={`text-gray-400 transition-transform duration-200 ease-in-out ${
+                  <div className={`text-gray-400 transition-transform duration-500 ease-in-out ${
                     isOpen ? 'rotate-180' : ''
                   }`}>
                     <FaChevronDown className="text-lg" />
@@ -471,7 +475,7 @@ const Technologies: React.FC = () => {
                 </button>
                 
                 {/* Accordion Content */}
-                <div className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
                   isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
                 }`}>
                   <div className={`px-6 pb-6 pt-4 sm:pt-6 ${
