@@ -39,7 +39,7 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
         if (iframeRef.current.contentWindow) {
           iframeRef.current.contentWindow.stop?.();
         }
-      } catch (e) {
+      } catch {
         // Cross-origin iframe, ignore error
       }
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaArrowDown } from 'react-icons/fa';
+import { FaArrowDown, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { TypeAnimation } from 'react-type-animation';
 
@@ -139,28 +139,40 @@ const Hero: React.FC = () => {
           {t('hero.description')}
         </motion.p>
         
-        {/* CTA Butonları */}
+        {/* CTA Butonları - Primary/Secondary Design */}
         <motion.div 
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
         >
+          {/* Primary Button - Hakkımda Daha Fazla */}
           <motion.a 
             href="#about" 
-            className="btn btn-primary text-white text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            whileHover={{ scale: 1.1, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.5)" }}
-            whileTap={{ scale: 0.95 }}
+            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg hover:shadow-xl border border-blue-500/50 hover:border-blue-400 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/30"
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 25px 50px rgba(59, 130, 246, 0.4)",
+              background: "linear-gradient(to right, #2563eb, #4f46e5)"
+            }}
+            whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
           >
-            {t('hero.ctaAbout')}
+            <span className="relative z-10">{t('hero.ctaAbout')}</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </motion.a>
+          
+          {/* Secondary Link - Projelerimi İncele */}
           <motion.a 
             href="#projects" 
-            className="btn btn-outline text-white border-white hover:bg-white hover:text-gray-900 text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
-            whileHover={{ scale: 1.1, boxShadow: "0 20px 40px rgba(255, 255, 255, 0.3)" }}
-            whileTap={{ scale: 0.95 }}
+            className="group inline-flex items-center gap-2 text-lg font-medium text-blue-400 hover:text-blue-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:ring-offset-2 rounded-lg px-2 py-1"
+            whileHover={{ 
+              scale: 1.05,
+              color: "#60a5fa"
+            }}
+            whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
           >
-            {t('hero.ctaProjects')}
+            <span>{t('hero.ctaProjects')}</span>
+            <FaChevronRight className="text-sm group-hover:translate-x-1 transition-transform duration-300" />
           </motion.a>
         </motion.div>
 
