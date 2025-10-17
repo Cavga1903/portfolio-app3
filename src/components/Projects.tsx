@@ -297,36 +297,24 @@ const projects: Project[] = [
                       {/* Project Image/Preview */}
                       <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
                         {project.link ? (
-                          // Canlı demo preview - screenshot benzeri
-                          <div className={`w-full h-full bg-gradient-to-br ${project.imageGradient} flex items-center justify-center relative overflow-hidden`}>
+                          // Canlı demo preview - iframe ile küçük boyut
+                          <div className="relative w-full h-full">
+                            <iframe
+                              src={project.link}
+                              className="w-full h-full border-0"
+                              title={`${project.title} Preview`}
+                              sandbox="allow-scripts allow-same-origin allow-forms"
+                              loading="lazy"
+                              style={{ 
+                                transform: 'scale(0.25)',
+                                transformOrigin: 'top left',
+                                width: '400%',
+                                height: '400%'
+                              }}
+                            />
                             {/* Demo link indicator */}
-                            <div className="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
-                              LIVE DEMO
-                            </div>
-                            
-                            {/* Decorative elements - daha fazla detay */}
-                            <div className="absolute inset-0 opacity-20">
-                              <div className="absolute top-4 left-4 w-12 h-12 border-2 border-white rounded"></div>
-                              <div className="absolute top-8 right-8 w-16 h-16 border-2 border-white rounded-full"></div>
-                              <div className="absolute bottom-8 left-8 w-20 h-2 bg-white rounded"></div>
-                              <div className="absolute bottom-12 left-8 w-14 h-2 bg-white rounded"></div>
-                              <div className="absolute bottom-16 left-8 w-16 h-2 bg-white rounded"></div>
-                              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white/30 rounded-lg"></div>
-                            </div>
-                            
-                            {/* Center content */}
-                            <div className="text-center text-white/80">
-                              <div className="text-4xl mb-2">🌐</div>
-                              <div className="text-sm font-semibold">Canlı Demo</div>
-                              <div className="text-xs opacity-70">Tıklayarak görüntüle</div>
-                            </div>
-                            
-                            {/* Overlay on hover */}
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
-                                <div className="text-2xl mb-2">👆</div>
-                                <div className="text-sm font-semibold">Demo'yu Aç</div>
-                              </div>
+                            <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
+                              LIVE
                             </div>
                           </div>
                         ) : (
