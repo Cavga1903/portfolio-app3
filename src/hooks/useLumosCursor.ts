@@ -16,16 +16,16 @@ export const useLumosCursor = () => {
     const handleMouseMove = (e: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.display = 'block';
-        cursorRef.current.style.left = `${e.clientX - 10}px`;
-        cursorRef.current.style.top = `${e.clientY - 10}px`;
+        cursorRef.current.style.left = `${e.clientX - 30}px`;
+        cursorRef.current.style.top = `${e.clientY - 30}px`;
       }
 
       // Create trail effect
       if (Math.random() > 0.7) { // 30% chance to create trail
         const trail = document.createElement('div');
         trail.className = 'lumos-trail';
-        trail.style.left = `${e.clientX - 3}px`;
-        trail.style.top = `${e.clientY - 3}px`;
+        trail.style.left = `${e.clientX - 6}px`;
+        trail.style.top = `${e.clientY - 6}px`;
         document.body.appendChild(trail);
         trailRefs.current.push(trail);
 
@@ -35,7 +35,7 @@ export const useLumosCursor = () => {
             trail.parentNode.removeChild(trail);
           }
           trailRefs.current = trailRefs.current.filter(t => t !== trail);
-        }, 500);
+        }, 800);
       }
     };
 

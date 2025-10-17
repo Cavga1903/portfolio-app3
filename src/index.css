@@ -298,18 +298,20 @@ nav {
 /* Harry Potter Lumos Cursor Effect */
 .lumos-cursor {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 0.1) 60%, transparent 100%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 70%, transparent 100%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: screen;
-  transition: transform 0.1s ease-out;
+  transition: transform 0.15s ease-out;
   box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 40px rgba(255, 255, 255, 0.4),
-    0 0 60px rgba(255, 255, 255, 0.2);
+    0 0 30px rgba(255, 255, 255, 0.8),
+    0 0 60px rgba(255, 255, 255, 0.6),
+    0 0 90px rgba(255, 255, 255, 0.4),
+    0 0 120px rgba(255, 255, 255, 0.2),
+    0 0 150px rgba(255, 255, 255, 0.1);
 }
 
 .lumos-cursor::before {
@@ -318,11 +320,14 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.9);
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.9),
+    0 0 25px rgba(255, 255, 255, 0.7),
+    0 0 35px rgba(255, 255, 255, 0.5);
 }
 
 .lumos-cursor::after {
@@ -331,24 +336,28 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 4px;
-  height: 4px;
+  width: 8px;
+  height: 8px;
   background: rgba(255, 255, 255, 1);
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 12px rgba(255, 255, 255, 0.8),
+    0 0 16px rgba(255, 255, 255, 0.6);
 }
 
 /* Lumos trail effect */
 .lumos-trail {
   position: fixed;
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 50%, transparent 80%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   mix-blend-mode: screen;
-  animation: lumosFade 0.5s ease-out forwards;
+  animation: lumosFade 0.8s ease-out forwards;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes lumosFade {
