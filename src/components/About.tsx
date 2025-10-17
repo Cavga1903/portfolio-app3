@@ -13,7 +13,6 @@ const About: React.FC = () => {
 
   // Instagram-style profile photo carousel state
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -23,22 +22,18 @@ const About: React.FC = () => {
   // Profile photos for Instagram-style carousel
   const profilePhotos = [
     {
+      id: 'emoji',
+      type: 'emoji',
+      emoji: '👨‍💻',
+      alt: 'Developer Emoji',
+      description: 'Developer Emoji'
+    },
+    {
       id: 'github',
+      type: 'image',
       image: 'https://avatars.githubusercontent.com/u/46963474?v=4',
       alt: 'GitHub Profile Photo',
       description: 'GitHub Profil Fotoğrafı'
-    },
-    {
-      id: 'professional',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-      alt: 'Professional Photo',
-      description: 'Profesyonel Fotoğraf'
-    },
-    {
-      id: 'casual',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-      alt: 'Casual Photo',
-      description: 'Günlük Fotoğraf'
     }
   ];
 
@@ -64,14 +59,12 @@ const About: React.FC = () => {
 
   // Auto-play functionality for photos
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
     const interval = setInterval(() => {
       nextPhoto();
-    }, 3000); // 3 saniyede bir değişir
+    }, 4000); // 4 saniyede bir değişir
     
     return () => clearInterval(interval);
-  }, [isAutoPlaying, currentPhotoIndex]);
+  }, [currentPhotoIndex]);
 
   // Track section view when component mounts
   React.useEffect(() => {
@@ -132,16 +125,24 @@ const About: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
               <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 shadow-xl cursor-pointer" onClick={nextPhoto}>
                 <AnimatePresence mode="wait">
-                  <motion.img
+                  <motion.div
                     key={currentPhotoIndex}
-                    src={profilePhotos[currentPhotoIndex].image}
-                    alt={profilePhotos[currentPhotoIndex].alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full flex items-center justify-center"
                     initial={{ rotateY: 90, opacity: 0 }}
                     animate={{ rotateY: 0, opacity: 1 }}
                     exit={{ rotateY: -90, opacity: 0 }}
                     transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
+                  >
+                    {profilePhotos[currentPhotoIndex].type === 'emoji' ? (
+                      <span className="text-6xl">{profilePhotos[currentPhotoIndex].emoji}</span>
+                    ) : (
+                      <img
+                        src={profilePhotos[currentPhotoIndex].image}
+                        alt={profilePhotos[currentPhotoIndex].alt}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </motion.div>
                 </AnimatePresence>
                 
                 {/* Navigation dots */}
@@ -161,24 +162,6 @@ const About: React.FC = () => {
                     />
                   ))}
                 </div>
-              </div>
-              
-              {/* Auto-play indicator */}
-              <div className="absolute -top-2 -right-2">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsAutoPlaying(!isAutoPlaying);
-                  }}
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-all duration-300 ${
-                    isAutoPlaying 
-                      ? 'bg-green-500 text-white' 
-                      : 'bg-gray-500 text-white hover:bg-gray-400'
-                  }`}
-                  title={isAutoPlaying ? 'Pause' : 'Play'}
-                >
-                  {isAutoPlaying ? '⏸️' : '▶️'}
-                </button>
               </div>
             </div>
 
