@@ -20,20 +20,29 @@ const About: React.FC = () => {
   };
 
   // Profile photos for Instagram-style carousel
-  const profilePhotos = [
-    {
-      id: 'emoji',
-      type: 'emoji',
-      emoji: '👨‍💻',
-      alt: 'Developer Emoji',
-      description: 'Developer Emoji'
-    },
+  const profilePhotos: Array<{
+    id: string;
+    type: 'emoji' | 'image';
+    emoji?: string;
+    image?: string;
+    alt: string;
+    description: string;
+    fallback?: string;
+  }> = [
     {
       id: 'github',
       type: 'image',
       image: 'https://avatars.githubusercontent.com/u/46963474?v=4',
       alt: 'GitHub Profile Photo',
-      description: 'GitHub Profil Fotoğrafı'
+      description: 'GitHub Profil Fotoğrafı',
+      fallback: '/IMG_4237.JPG'
+    },
+    {
+      id: 'backup',
+      type: 'image',
+      image: '/IMG_4237.JPG',
+      alt: 'Backup Profile Photo',
+      description: 'Yedek Profil Fotoğrafı'
     }
   ];
 
@@ -132,6 +141,12 @@ const About: React.FC = () => {
                         src={profilePhotos[currentPhotoIndex].image}
                         alt={profilePhotos[currentPhotoIndex].alt}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          if (profilePhotos[currentPhotoIndex].fallback && target.src !== profilePhotos[currentPhotoIndex].fallback) {
+                            target.src = profilePhotos[currentPhotoIndex].fallback!;
+                          }
+                        }}
                       />
                     )}
                   </motion.div>
