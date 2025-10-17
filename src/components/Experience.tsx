@@ -10,6 +10,7 @@ interface TimelineItem {
   period: string;
   description: string;
   skills?: string[];
+  logo?: string;
 }
 
 const Experience: React.FC = () => {
@@ -23,7 +24,8 @@ const Experience: React.FC = () => {
       location: t('experience.turkcell.location'),
       period: t('experience.turkcell.period'),
       description: t('experience.turkcell.description'),
-      skills: ['Customer Service', 'Problem Solving', 'Communication']
+      skills: ['Customer Service', 'Problem Solving', 'Communication'],
+      logo: '/logos/turkcell.png'
     },
     {
       type: 'work',
@@ -32,7 +34,8 @@ const Experience: React.FC = () => {
       location: t('experience.upwork.location'),
       period: t('experience.upwork.period'),
       description: t('experience.upwork.description'),
-      skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT']
+      skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT'],
+      logo: '/logos/upwork.png'
     },
     {
       type: 'education',
@@ -41,7 +44,8 @@ const Experience: React.FC = () => {
       location: t('experience.siliconmade.location'),
       period: t('experience.siliconmade.period'),
       description: t('experience.siliconmade.description'),
-      skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git']
+      skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git'],
+      logo: '/logos/siliconmade.png'
     },
     {
       type: 'work',
@@ -50,7 +54,8 @@ const Experience: React.FC = () => {
       location: t('experience.concentrix.location'),
       period: t('experience.concentrix.period'),
       description: t('experience.concentrix.description'),
-      skills: ['Salesforce CRM', 'Customer Satisfaction', 'Banking']
+      skills: ['Salesforce CRM', 'Customer Satisfaction', 'Banking'],
+      logo: '/logos/concentrix.png'
     },
     {
       type: 'education',
@@ -59,7 +64,8 @@ const Experience: React.FC = () => {
       location: t('experience.uopeople.location'),
       period: t('experience.uopeople.period'),
       description: t('experience.uopeople.description'),
-      skills: ['Computer Science', 'Algorithms', 'Data Structures']
+      skills: ['Computer Science', 'Algorithms', 'Data Structures'],
+      logo: '/logos/uopeople.png'
     },
     {
       type: 'education',
@@ -68,7 +74,8 @@ const Experience: React.FC = () => {
       location: t('experience.anadolu.location'),
       period: t('experience.anadolu.period'),
       description: t('experience.anadolu.description'),
-      skills: ['Computer Programming', 'Software Development']
+      skills: ['Computer Programming', 'Software Development'],
+      logo: '/logos/anadolu.png'
     }
   ];
 
@@ -99,13 +106,26 @@ const Experience: React.FC = () => {
 
               {/* Content card */}
               <div className={`card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-6 hover:scale-[1.02] ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'} relative`}>
-                {/* Icon */}
+                {/* Company Logo & Info */}
                 <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? 'flex-row' : 'md:flex-row-reverse'}`}>
-                  <div className={`p-4 bg-gradient-to-br ${item.type === 'work' ? 'from-emerald-500 to-teal-500' : 'from-blue-500 to-cyan-500'} rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    {item.type === 'work' ? (
-                      <FaBriefcase className="text-3xl text-white" />
+                  {/* Company Logo or Icon */}
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {item.logo ? (
+                      // Company Logo
+                      <img 
+                        src={item.logo} 
+                        alt={`${item.company} logo`}
+                        className="w-full h-full object-contain p-2 bg-white/10 backdrop-blur-sm border border-gray-600/50"
+                      />
                     ) : (
-                      <FaGraduationCap className="text-3xl text-white" />
+                      // Fallback Icon
+                      <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${item.type === 'work' ? 'from-emerald-500 to-teal-500' : 'from-blue-500 to-cyan-500'}`}>
+                        {item.type === 'work' ? (
+                          <FaBriefcase className="text-2xl text-white" />
+                        ) : (
+                          <FaGraduationCap className="text-2xl text-white" />
+                        )}
+                      </div>
                     )}
                   </div>
 
