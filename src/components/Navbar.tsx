@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
             <img 
               src="/titleLogo.svg" 
               alt="Developer Logo" 
-              className="w-8 h-8 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300"
+              className="w-6 h-6 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300"
             />
           </a>
 
