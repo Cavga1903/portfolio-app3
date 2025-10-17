@@ -93,20 +93,11 @@ const Technologies: React.FC = () => {
   const technologies: Technology[] = [
     // Frontend
     {
-      iconKey: 'react-native',
-      nameKey: 'technologies.reactNative',
-      level: 90,
-      color: 'from-cyan-500 to-blue-500',
-      icon: <SiReact className="text-5xl" />,
-      category: 'frontend',
-      levelText: 'expert'
-    },
-    {
       iconKey: 'react',
       nameKey: 'technologies.react',
       level: 90,
       color: 'from-cyan-500 to-blue-500',
-      icon: <FaReact className="text-5xl" />,
+      icon: <SiReact className="text-5xl" />,
       category: 'frontend',
       levelText: 'expert'
     },
