@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench } from 'react-icons/fa';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench, FaChevronDown } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
 
@@ -17,6 +17,78 @@ interface Technology {
 const Technologies: React.FC = () => {
   const { t } = useTranslation();
   const { trackEvent, trackSectionView } = useAnalytics();
+  
+  // Accordion state
+  const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(['frontend'])); // Frontend açık başlasın
+  const [rotatingIcons, setRotatingIcons] = useState<Set<string>>(new Set());
+  
+  // Kategori bilgileri
+  const categories = [
+    {
+      key: 'frontend',
+      icon: <FaReact className="text-2xl" />,
+      titleKey: 'technologies.categories.frontend',
+      descriptionKey: 'technologies.descriptions.frontend',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      key: 'backend',
+      icon: <FaCog className="text-2xl" />,
+      titleKey: 'technologies.categories.backend',
+      descriptionKey: 'technologies.descriptions.backend',
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      key: 'database',
+      icon: <FaDatabase className="text-2xl" />,
+      titleKey: 'technologies.categories.database',
+      descriptionKey: 'technologies.descriptions.database',
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      key: 'tools',
+      icon: <FaWrench className="text-2xl" />,
+      titleKey: 'technologies.categories.tools',
+      descriptionKey: 'technologies.descriptions.tools',
+      color: 'from-orange-500 to-red-500'
+    },
+    {
+      key: 'languages',
+      icon: <FaGlobe className="text-2xl" />,
+      titleKey: 'technologies.categories.languages',
+      descriptionKey: 'technologies.descriptions.languages',
+      color: 'from-indigo-500 to-purple-500'
+    }
+  ];
+  
+  // Accordion toggle function
+  const toggleCategory = (categoryKey: string) => {
+    setOpenCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryKey)) {
+        newSet.delete(categoryKey);
+      } else {
+        newSet.add(categoryKey);
+      }
+      return newSet;
+    });
+    
+    // Icon rotation animation
+    setRotatingIcons(prev => new Set([...prev, categoryKey]));
+    setTimeout(() => {
+      setRotatingIcons(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(categoryKey);
+        return newSet;
+      });
+    }, 300);
+    
+    // Analytics tracking
+    trackEvent('accordion_toggle', {
+      category: categoryKey,
+      action: openCategories.has(categoryKey) ? 'close' : 'open'
+    });
+  };
   
   const technologies: Technology[] = [
     // Frontend
@@ -287,16 +359,8 @@ const Technologies: React.FC = () => {
     return acc;
   }, {} as Record<string, Technology[]>);
 
-  const categories = [
-    { key: 'frontend', title: t('technologies.categories.frontend'), icon: <FaCog className="text-2xl" /> },
-    { key: 'backend', title: t('technologies.categories.backend'), icon: <FaCog className="text-2xl" /> },
-    { key: 'database', title: t('technologies.categories.database'), icon: <FaDatabase className="text-2xl" /> },
-    { key: 'tools', title: t('technologies.categories.tools'), icon: <FaWrench className="text-2xl" /> },
-    { key: 'languages', title: t('technologies.categories.languages'), icon: <FaGlobe className="text-2xl" /> },
-  ];
-
   // Track section view when component mounts
-  React.useEffect(() => {
+  useEffect(() => {
     trackSectionView('technologies', 0);
     trackEvent('technologies_section_view', {
       section_name: 'technologies',
@@ -313,87 +377,114 @@ const Technologies: React.FC = () => {
         <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center fade-in-up inline-block group">
+      <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center fade-in-up inline-block group mt-8 sm:mt-12 md:mt-16 lg:mt-20">
         {t('technologies.title')}
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-purple-400 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
-      <p className="relative z-10 text-gray-400 text-center mb-12 max-w-2xl">
+      <p className="relative z-10 text-gray-400 text-center mb-12 sm:mb-16 md:mb-20 max-w-2xl">
         {t('technologies.subtitle')}
       </p>
 
-      <div className="relative z-10 w-full max-w-7xl">
-        {categories.map((category, categoryIndex) => (
-          <div key={category.key} className="mb-12">
-            {/* Category Header */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl">
-                {category.icon}
-              </div>
-              <h3 className="text-2xl font-bold text-white">
-                {category.title}
-              </h3>
-            </div>
-
-            {/* Skills Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {groupedTechs[category.key]?.map((tech, index) => (
-                <div 
-                  key={tech.iconKey}
-                  className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-purple-500/20 transition-all duration-300 p-4 group hover:scale-[1.02]"
-                  style={{ animationDelay: `${(categoryIndex * 100) + (index * 50)}ms` }}
-                  onMouseEnter={() => {
-                    trackEvent('skill_hover', {
-                      skill_name: tech.nameKey,
-                      skill_category: tech.category,
-                      skill_level: tech.levelText,
-                      skill_percentage: tech.level
-                    });
-                  }}
+      <div className="relative z-10 w-full max-w-6xl">
+        <div className="space-y-6 sm:space-y-8">
+          {categories.map((category) => {
+            const isOpen = openCategories.has(category.key);
+            const isRotating = rotatingIcons.has(category.key);
+            const categoryTechs = groupedTechs[category.key] || [];
+            
+            return (
+              <div
+                key={category.key}
+                className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-gray-600/50"
+              >
+                {/* Accordion Header */}
+                <button
+                  onClick={() => toggleCategory(category.key)}
+                  className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between hover:bg-gray-700/30 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset"
                 >
                   <div className="flex items-center gap-4">
-                    {/* Icon */}
-                    <div className={`p-3 bg-gradient-to-br ${tech.color} rounded-lg shadow-lg group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
-                      <div className="text-white">
-                        {tech.icon}
-                      </div>
+                    {/* Category Icon with Rotation */}
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-white transition-transform duration-300 ${
+                      isRotating ? 'rotate-180' : ''
+                    }`}>
+                      {category.icon}
                     </div>
-
-                    {/* Info */}
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="text-lg font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
-                          {t(tech.nameKey)}
-                        </h4>
-                        <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                          tech.levelText === 'expert' ? 'bg-green-500/20 text-green-400' :
-                          tech.levelText === 'advanced' ? 'bg-blue-500/20 text-blue-400' :
-                          tech.levelText === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
-                          'bg-gray-500/20 text-gray-400'
-                        }`}>
-                          {t(`technologies.levels.${tech.levelText}`)}
-                        </span>
-                      </div>
-
-                      {/* Progress Bar */}
-                      <div className="relative w-full h-2 bg-gray-700/50 rounded-full overflow-hidden">
-                        <div 
-                          className={`absolute top-0 left-0 h-full bg-gradient-to-r ${tech.color} rounded-full transition-all duration-1000 ease-out`}
-                          style={{ 
-                            width: `${tech.level}%`,
-                            animation: 'progressAnimation 1.5s ease-out'
+                    
+                    <div>
+                      <h3 className="text-xl font-bold text-white">
+                        {t(category.titleKey)}
+                      </h3>
+                      <p className="text-sm text-gray-400">
+                        {t(category.descriptionKey)}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Chevron Icon */}
+                  <div className={`text-gray-400 transition-transform duration-300 ${
+                    isOpen ? 'rotate-180' : ''
+                  }`}>
+                    <FaChevronDown className="text-lg" />
+                  </div>
+                </button>
+                
+                {/* Accordion Content */}
+                <div className={`overflow-hidden transition-all duration-300 ${
+                  isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className="px-6 pb-6 pt-4 sm:pt-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                      {categoryTechs.map((tech) => (
+                        <div
+                          key={tech.iconKey}
+                          className="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-3 sm:p-4 hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                          onMouseEnter={() => {
+                            trackEvent('skill_hover', {
+                              skill_name: tech.iconKey,
+                              skill_category: tech.category,
+                              skill_level: tech.levelText
+                            });
+                          }}
+                          onClick={() => {
+                            trackEvent('skill_click', {
+                              skill_name: tech.iconKey,
+                              skill_category: tech.category,
+                              skill_level: tech.levelText
+                            });
                           }}
                         >
-                          <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                          {/* Skill Icon */}
+                          <div className={`w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-to-br ${tech.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
+                            {tech.icon}
+                          </div>
+                          
+                          {/* Skill Name */}
+                          <h4 className="text-sm font-semibold text-center mb-2 group-hover:text-purple-400 transition-colors duration-300">
+                            {t(tech.nameKey)}
+                          </h4>
+                          
+                          {/* Skill Level */}
+                          <div className="text-xs text-gray-400 text-center mb-2">
+                            {t(`technologies.levels.${tech.levelText}`)}
+                          </div>
+                          
+                          {/* Progress Bar */}
+                          <div className="w-full bg-gray-700 rounded-full h-1.5">
+                            <div
+                              className={`h-1.5 rounded-full bg-gradient-to-r ${tech.color} transition-all duration-1000 ease-out`}
+                              style={{ width: `${tech.level}%` }}
+                            ></div>
+                          </div>
                         </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
