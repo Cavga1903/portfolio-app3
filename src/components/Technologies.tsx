@@ -446,7 +446,7 @@ const Technologies: React.FC = () => {
                 >
                   <div className="flex items-center gap-4">
                     {/* Category Icon with Rotation */}
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-white transition-transform duration-300 ${
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white transition-transform duration-300 ${
                       isRotating ? 'rotate-180' : ''
                     }`}>
                       {category.icon}
