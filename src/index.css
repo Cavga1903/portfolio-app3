@@ -49,6 +49,12 @@ html {
 
 @import "tailwindcss";
 
+/* Font Display Optimization */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+}
+
 /* Gradient Animation for Hero Title */
 @keyframes gradient {
   0% {

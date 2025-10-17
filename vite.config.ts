@@ -9,5 +9,16 @@ export default defineConfig({
   optimizeDeps: {
     include: ['flowbite'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          animations: ['framer-motion']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  }
 })
   
