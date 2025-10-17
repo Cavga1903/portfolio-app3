@@ -45,7 +45,7 @@ const Experience: React.FC = () => {
       period: t('experience.siliconmade.period'),
       description: t('experience.siliconmade.description'),
       skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git'],
-      logo: '/logos/siliconmade.jpeg'
+      logo: '/logos/siliconmade.svg'
     },
     {
       type: 'work',

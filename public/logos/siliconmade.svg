@@ -1,0 +1,13 @@
+<svg width="120" height="60" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect width="120" height="60" rx="8" ry="8" fill="#1e3a8a"/>
+  
+  <!-- SILICONMADE text -->
+  <text x="60" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">SILICONMADE</text>
+  
+  <!-- ACADEMY text with red wave -->
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">ACADEMY</text>
+  
+  <!-- Red wave line under ACADEMY -->
+  <path d="M 25 50 Q 35 48 45 50 Q 55 52 60 50 Q 65 48 75 50 Q 85 52 95 50" stroke="#ef4444" stroke-width="2" fill="none"/>
+</svg>
