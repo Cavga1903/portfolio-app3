@@ -26,35 +26,35 @@ const Technologies: React.FC = () => {
   const categories = [
     {
       key: 'frontend',
-      icon: <FaReact className="text-2xl" />,
+      icon: <FaReact className="text-xl" />,
       titleKey: 'technologies.categories.frontend',
       descriptionKey: 'technologies.descriptions.frontend',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       key: 'backend',
-      icon: <FaCog className="text-2xl" />,
+      icon: <FaCog className="text-xl" />,
       titleKey: 'technologies.categories.backend',
       descriptionKey: 'technologies.descriptions.backend',
       color: 'from-green-500 to-emerald-500'
     },
     {
       key: 'database',
-      icon: <FaDatabase className="text-2xl" />,
+      icon: <FaDatabase className="text-xl" />,
       titleKey: 'technologies.categories.database',
       descriptionKey: 'technologies.descriptions.database',
       color: 'from-purple-500 to-pink-500'
     },
     {
       key: 'tools',
-      icon: <FaWrench className="text-2xl" />,
+      icon: <FaWrench className="text-xl" />,
       titleKey: 'technologies.categories.tools',
       descriptionKey: 'technologies.descriptions.tools',
       color: 'from-orange-500 to-red-500'
     },
     {
       key: 'languages',
-      icon: <FaGlobe className="text-2xl" />,
+      icon: <FaGlobe className="text-xl" />,
       titleKey: 'technologies.categories.languages',
       descriptionKey: 'technologies.descriptions.languages',
       color: 'from-indigo-500 to-purple-500'
@@ -446,7 +446,7 @@ const Technologies: React.FC = () => {
                 >
                   <div className="flex items-center gap-4">
                     {/* Category Icon with Rotation */}
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white transition-transform duration-300 ${
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white transition-transform duration-300 shadow-lg ${
                       isRotating ? 'rotate-180' : ''
                     }`}>
                       {category.icon}
