@@ -23,15 +23,8 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
 
   useEffect(() => {
     if (isVisible && !shouldLoad) {
-      // Conservative loading strategy for iframes
-      const isMobile = window.innerWidth < 768;
-      const delay = isMobile ? 2000 : 1000; // Longer delays to prevent issues
-      
-      const timer = setTimeout(() => {
-        setShouldLoad(true);
-      }, delay);
-      
-      return () => clearTimeout(timer);
+      // Immediate loading for better user experience
+      setShouldLoad(true);
     }
   }, [isVisible, shouldLoad]);
 
@@ -41,9 +34,14 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
     // Completely disable iframe interactions
     if (iframeRef.current) {
       iframeRef.current.style.pointerEvents = 'none';
-      // Disable all iframe functionality
-      iframeRef.current.contentWindow?.stop?.();
-      iframeRef.current.contentDocument?.execCommand?.('stop');
+      // Only disable if same origin (avoid cross-origin errors)
+      try {
+        if (iframeRef.current.contentWindow) {
+          iframeRef.current.contentWindow.stop?.();
+        }
+      } catch (e) {
+        // Cross-origin iframe, ignore error
+      }
     }
     // Track iframe load
     trackIframeInteraction(projectName, 'load');
@@ -56,18 +54,18 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
     trackIframeInteraction(projectName, 'error');
   };
 
-  if (!shouldLoad) {
-    return (
-      <div className="w-full h-full bg-gradient-to-br from-gray-700/50 to-gray-800/50 flex items-center justify-center relative overflow-hidden">
-        {/* Animated placeholder */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-pulse"></div>
-        <div className="relative z-10 text-center">
-          <div className="w-8 h-8 border-2 border-white/30 border-t-white/70 rounded-full animate-spin mx-auto mb-2"></div>
-          <div className="text-white/60 text-xs">Yükleniyor...</div>
-        </div>
-      </div>
-    );
-  }
+      if (!shouldLoad) {
+        return (
+          <div className="w-full h-full bg-gradient-to-br from-gray-700/50 to-gray-800/50 flex items-center justify-center relative overflow-hidden">
+            {/* Animated placeholder */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-pulse"></div>
+            <div className="relative z-10 text-center">
+              <div className="w-6 h-6 border-2 border-white/30 border-t-white/70 rounded-full animate-spin mx-auto mb-2"></div>
+              <div className="text-white/60 text-xs">Preview yükleniyor...</div>
+            </div>
+          </div>
+        );
+      }
 
   return (
     <div className="w-full h-full relative">
@@ -96,7 +94,7 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
         src={src}
         className="w-full h-full border-0 pointer-events-none"
         title={title}
-        sandbox=""
+        sandbox="allow-same-origin allow-scripts"
         loading="lazy"
         style={{ 
           transform: 'scale(0.25)',
@@ -338,23 +336,19 @@ const projects: Project[] = [
     return () => observer.disconnect();
   }, [projects.length]);
 
-  // Preload projects based on device type
+  // Conservative iframe loading strategy
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     
     if (isMobile) {
-      // Mobile: Only load visible projects + next 2 projects
+      // Mobile: Only load current project to prevent issues
+      setVisibleProjects(new Set([currentIndex]));
+    } else {
+      // Desktop: Load current + next 2 projects only
       const visibleIndices = [currentIndex];
       if (currentIndex + 1 < projects.length) visibleIndices.push(currentIndex + 1);
       if (currentIndex + 2 < projects.length) visibleIndices.push(currentIndex + 2);
       setVisibleProjects(new Set(visibleIndices));
-    } else {
-      // Desktop: Load all projects after 1 second
-      const timer = setTimeout(() => {
-        const allIndices = projects.map((_, index) => index);
-        setVisibleProjects(new Set(allIndices));
-      }, 1000);
-      return () => clearTimeout(timer);
     }
   }, [projects.length, currentIndex]);
 

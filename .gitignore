@@ -27,3 +27,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Dynamic CV component (not needed)
+src/components/DynamicCV.tsx
