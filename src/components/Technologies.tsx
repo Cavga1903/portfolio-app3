@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
 
 interface Technology {
@@ -129,6 +129,15 @@ const Technologies: React.FC = () => {
       category: 'backend',
       levelText: 'intermediate'
     },
+    {
+      iconKey: 'express',
+      nameKey: 'technologies.express',
+      level: 75,
+      color: 'from-gray-600 to-gray-800',
+      icon: <SiExpress className="text-5xl" />,
+      category: 'backend',
+      levelText: 'intermediate'
+    },
     // Database
     {
       iconKey: 'supabase',
@@ -247,7 +256,7 @@ const Technologies: React.FC = () => {
       color: 'from-red-500 to-red-700',
       icon: <FaGlobe className="text-5xl" />,
       category: 'languages',
-      levelText: 'expert'
+      levelText: 'native'
     },
     {
       iconKey: 'english',

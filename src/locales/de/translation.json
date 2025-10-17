@@ -130,10 +130,11 @@
     "english": "Englisch",
     "german": "Deutsch",
     "levels": {
-      "expert": "Experte",
-      "advanced": "Fortgeschritten",
-      "intermediate": "Mittelstufe",
-      "beginner": "Anfänger"
+    "expert": "Experte",
+    "advanced": "Fortgeschritten",
+    "intermediate": "Mittelstufe",
+    "beginner": "Anfänger",
+    "native": "Muttersprache"
     },
     "descriptions": {
       "frontend": "Benutzeroberflächenentwicklung und moderne Webtechnologien",

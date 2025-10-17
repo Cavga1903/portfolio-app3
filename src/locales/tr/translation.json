@@ -114,6 +114,7 @@
     "restful": "RESTful APIs",
     "jwt": "JWT Authentication",
     "nodejs": "Node.js",
+    "express": "Express.js",
     "supabase": "Supabase",
     "firebase": "Firebase",
     "git": "Git & GitHub",
@@ -130,10 +131,11 @@
     "english": "İngilizce",
     "german": "Almanca",
     "levels": {
-      "expert": "Uzman",
-      "advanced": "İleri",
-      "intermediate": "Orta",
-      "beginner": "Başlangıç"
+    "expert": "Uzman",
+    "advanced": "İleri",
+    "intermediate": "Orta",
+    "beginner": "Başlangıç",
+    "native": "Anadil"
     },
     "descriptions": {
       "frontend": "Kullanıcı arayüzü geliştirme ve modern web teknolojileri",

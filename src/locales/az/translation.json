@@ -130,10 +130,11 @@
     "english": "İngilis Dili",
     "german": "Alman Dili",
     "levels": {
-      "expert": "Ekspert",
-      "advanced": "İleri",
-      "intermediate": "Orta",
-      "beginner": "Başlanğıc"
+    "expert": "Ekspert",
+    "advanced": "İleri",
+    "intermediate": "Orta",
+    "beginner": "Başlanğıc",
+    "native": "Ana dil"
     },
     "descriptions": {
       "frontend": "İstifadəçi interfeysi inkişafı və müasir veb texnologiyaları",

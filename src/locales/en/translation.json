@@ -114,6 +114,7 @@
     "restful": "RESTful APIs",
     "jwt": "JWT Authentication",
     "nodejs": "Node.js",
+    "express": "Express.js",
     "supabase": "Supabase",
     "firebase": "Firebase",
     "git": "Git & GitHub",
@@ -130,10 +131,11 @@
     "english": "English",
     "german": "German",
     "levels": {
-      "expert": "Expert",
-      "advanced": "Advanced",
-      "intermediate": "Intermediate",
-      "beginner": "Beginner"
+    "expert": "Expert",
+    "advanced": "Advanced",
+    "intermediate": "Intermediate",
+    "beginner": "Beginner",
+    "native": "Native"
     },
     "descriptions": {
       "frontend": "User interface development and modern web technologies",
