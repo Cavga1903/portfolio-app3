@@ -281,6 +281,18 @@
       "nodeNotes": {
         "title": "Node.js Notes Application",
         "description": "Note-taking application developed with Node.js backend. Features RESTful API and database integration."
+      },
+      "portfolio": {
+        "title": "Personal Portfolio",
+        "description": "Personal portfolio website developed with modern React and TypeScript. Features responsive design and multi-language support."
+      },
+      "ecommerce": {
+        "title": "E-commerce Website",
+        "description": "Full-featured e-commerce platform developed with React. Includes cart management, product catalog, and payment system."
+      },
+      "cvPreparation": {
+        "title": "CV Preparation App",
+        "description": "Web application for dynamic CV creation and PDF download. Features user-friendly interface and template system."
       }
     }
   },

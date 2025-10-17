@@ -28,7 +28,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.iot.description'),
       technologies: ["Node.js", "Express", "Docker", "Canvas", "QRCode"],
       github: "https://github.com/Cavga1903/iot-simulator",
-      link: "https://iot-simulator-demo.vercel.app", // Demo link eklendi
+      link: "https://iot-simulator-kqi7.onrender.com", // Güncellenmiş demo link
       imageGradient: "from-blue-500 to-cyan-600",
     },
     {
@@ -36,7 +36,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.todo.description'),
       technologies: ["React", "JavaScript", "CSS3", "HTML5"],
       github: "https://github.com/Cavga1903/todo-app-ins",
-      link: "https://todo-app-ins-demo.vercel.app", // Demo link eklendi
+      link: "https://cavga1903.github.io/todo-app-ins/", // Güncellenmiş demo link
       imageGradient: "from-pink-500 to-purple-600",
     },
     {
@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.workshop.description'),
       technologies: ["React", "TypeScript", "Node.js", "Database"],
       github: "https://github.com/Cavga1903/workshop-tracker",
-      // Demo link yok - sadece GitHub
+      link: "https://workshop-tracker-d0ispp24b-tolgas-projects-145e9a37.vercel.app/login", // Güncellenmiş demo link
       imageGradient: "from-green-500 to-teal-600",
     },
     {
@@ -52,7 +52,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.productManager.description'),
       technologies: ["React", "Supabase", "TypeScript", "TailwindCSS"],
       github: "https://github.com/Cavga1903/react-supabase-product-manager",
-      link: "https://product-manager-demo.vercel.app", // Demo link eklendi
+      link: "https://react-supabase-product-manager.vercel.app/login", // Güncellenmiş demo link
       imageGradient: "from-orange-500 to-red-600",
     },
     {
@@ -60,7 +60,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.grocery.description'),
       technologies: ["React", "JavaScript", "E-commerce", "Payment"],
       github: "https://github.com/Cavga1903/online-grocery-app",
-      link: "https://grocery-app-demo.vercel.app", // Demo link eklendi
+      link: "https://cavga1903.github.io/online-grocery-app/", // Güncellenmiş demo link
       imageGradient: "from-yellow-500 to-orange-600",
     },
     {
@@ -76,7 +76,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.paymentForm.description'),
       technologies: ["React", "Form Validation", "Payment", "UI/UX"],
       github: "https://github.com/Cavga1903/odeme-formu",
-      link: "https://payment-form-demo.vercel.app", // Demo link eklendi
+      link: "https://cavga1903.github.io/odeme-formu/", // Güncellenmiş demo link
       imageGradient: "from-emerald-500 to-green-600",
     },
     {
@@ -84,7 +84,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.globalIdentity.description'),
       technologies: ["React", "Authentication", "Security", "Multi-platform"],
       github: "https://github.com/Cavga1903/global-identity-9",
-      // Demo link yok - sadece GitHub
+      link: "https://cavga1903.github.io/global-identity-9/", // Güncellenmiş demo link
       imageGradient: "from-violet-500 to-purple-600",
     },
     {
@@ -110,6 +110,30 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/node.js-Notlar-uygulamas-",
       // Demo link yok - sadece GitHub
       imageGradient: "from-lime-500 to-green-600",
+    },
+    {
+      title: t('projects.items.portfolio.title'),
+      description: t('projects.items.portfolio.description'),
+      technologies: ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
+      github: "https://github.com/Cavga1903/portfolio-app3",
+      link: "https://www.tolgacavga.com", // Yeni portfolyo projesi
+      imageGradient: "from-purple-500 to-indigo-600",
+    },
+    {
+      title: t('projects.items.ecommerce.title'),
+      description: t('projects.items.ecommerce.description'),
+      technologies: ["React", "JavaScript", "E-commerce", "Shopping Cart"],
+      github: "https://github.com/Cavga1903/eCommerce-WebsiteOdev4",
+      link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/", // Yeni e-commerce projesi
+      imageGradient: "from-red-500 to-pink-600",
+    },
+    {
+      title: t('projects.items.cvPreparation.title'),
+      description: t('projects.items.cvPreparation.description'),
+      technologies: ["React", "JavaScript", "CV Builder", "PDF Generation"],
+      github: "https://github.com/Cavga1903/cvPreparationApp",
+      link: "https://cavga1903.github.io/cvPreparationApp/", // Yeni CV preparation projesi
+      imageGradient: "from-teal-500 to-cyan-600",
     },
   ];
   

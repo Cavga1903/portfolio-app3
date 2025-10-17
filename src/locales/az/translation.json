@@ -281,6 +281,18 @@
       "nodeNotes": {
         "title": "Node.js Qeydlər Tətbiqi",
         "description": "Node.js backend ilə inkişaf etdirilmiş qeyd alma tətbiqi. RESTful API və veritabanı inteqrasiyası."
+      },
+      "portfolio": {
+        "title": "Şəxsi Portfolio",
+        "description": "Müasir React və TypeScript ilə inkişaf etdirilmiş şəxsi portfolio veb saytı. Responsive dizayn və çoxdilli dəstək."
+      },
+      "ecommerce": {
+        "title": "E-ticarət Veb Saytı",
+        "description": "React ilə inkişaf etdirilmiş tam funksiyalı e-ticarət platforması. Səbət idarəetməsi, məhsul kataloqu və ödəniş sistemi."
+      },
+      "cvPreparation": {
+        "title": "CV Hazırlama Tətbiqi",
+        "description": "Dinamik CV yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi."
       }
     }
   },

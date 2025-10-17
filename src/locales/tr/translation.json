@@ -281,6 +281,18 @@
       "nodeNotes": {
         "title": "Node.js Notlar Uygulaması",
         "description": "Node.js backend ile geliştirilmiş not alma uygulaması. RESTful API ve veritabanı entegrasyonu."
+      },
+      "portfolio": {
+        "title": "Kişisel Portfolyo",
+        "description": "Modern React ve TypeScript ile geliştirilmiş kişisel portfolyo web sitesi. Responsive tasarım ve çok dilli destek."
+      },
+      "ecommerce": {
+        "title": "E-ticaret Web Sitesi",
+        "description": "React ile geliştirilmiş tam özellikli e-ticaret platformu. Sepet yönetimi, ürün kataloğu ve ödeme sistemi."
+      },
+      "cvPreparation": {
+        "title": "CV Hazırlama Uygulaması",
+        "description": "Dinamik CV oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi."
       }
     }
   },
