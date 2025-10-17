@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.workshop.description'),
       technologies: ["React", "TypeScript", "Node.js", "Database"],
       github: "https://github.com/Cavga1903/workshop-tracker",
-      link: "https://workshop-tracker-d0ispp24b-tolgas-projects-145e9a37.vercel.app/login", // Güncellenmiş demo link
+      link: "https://workshop-tracker-taupe.vercel.app", // Doğru demo link
       imageGradient: "from-green-500 to-teal-600",
     },
     {
