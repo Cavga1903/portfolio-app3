@@ -23,7 +23,16 @@ const Projects: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
 const projects: Project[] = [
-    // 1. Workshop Tracker
+    // 1. Kişisel Portfolio
+    {
+      title: t('projects.items.portfolio.title'),
+      description: t('projects.items.portfolio.description'),
+      technologies: ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
+      github: "https://github.com/Cavga1903/portfolio-app3",
+      link: "https://www.tolgacavga.com",
+      imageGradient: "from-purple-500 to-indigo-600",
+    },
+    // 2. Workshop Tracker
     {
       title: t('projects.items.workshop.title'),
       description: t('projects.items.workshop.description'),
@@ -32,7 +41,7 @@ const projects: Project[] = [
       link: "https://workshop-tracker-taupe.vercel.app",
       imageGradient: "from-green-500 to-teal-600",
     },
-    // 2. IoT Cihaz Simülatörü
+    // 3. IoT Cihaz Simülatörü
     {
       title: t('projects.items.iot.title'),
       description: t('projects.items.iot.description'),
@@ -41,7 +50,7 @@ const projects: Project[] = [
       link: "https://iot-simulator-kqi7.onrender.com",
       imageGradient: "from-blue-500 to-cyan-600",
     },
-    // 3. Furniro E-commerce
+    // 4. Furniro E-commerce
     {
       title: t('projects.items.furniro.title'),
       description: t('projects.items.furniro.description'),
@@ -50,7 +59,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/",
       imageGradient: "from-red-500 to-pink-600",
     },
-    // 4. CV Hazırlama
+    // 5. CV Hazırlama
     {
       title: t('projects.items.cvPreparation.title'),
       description: t('projects.items.cvPreparation.description'),
@@ -59,7 +68,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/cvPreparationApp/",
       imageGradient: "from-teal-500 to-cyan-600",
     },
-    // 5. Online Grocery
+    // 6. Online Grocery
     {
       title: t('projects.items.grocery.title'),
       description: t('projects.items.grocery.description'),
@@ -68,7 +77,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/online-grocery-app/",
       imageGradient: "from-yellow-500 to-orange-600",
     },
-    // 6. Todo App
+    // 7. Todo App
     {
       title: t('projects.items.todo.title'),
       description: t('projects.items.todo.description'),
@@ -77,7 +86,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/todo-app-ins/",
       imageGradient: "from-pink-500 to-purple-600",
     },
-    // 7. React Supabase Product Manager
+    // 8. React Supabase Product Manager
     {
       title: t('projects.items.productManager.title'),
       description: t('projects.items.productManager.description'),
@@ -86,7 +95,7 @@ const projects: Project[] = [
       link: "https://react-supabase-product-manager.vercel.app/login",
       imageGradient: "from-orange-500 to-red-600",
     },
-    // 8. Ödeme Formu
+    // 9. Ödeme Formu
     {
       title: t('projects.items.paymentForm.title'),
       description: t('projects.items.paymentForm.description'),
@@ -95,7 +104,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/odeme-formu/",
       imageGradient: "from-emerald-500 to-green-600",
     },
-    // 9. Global Identity
+    // 10. Global Identity
     {
       title: t('projects.items.globalIdentity.title'),
       description: t('projects.items.globalIdentity.description'),
@@ -104,7 +113,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/global-identity-9/",
       imageGradient: "from-violet-500 to-purple-600",
     },
-    // 10. Exchange Screen
+    // 11. Exchange Screen
     {
       title: t('projects.items.exchangeScreen.title'),
       description: t('projects.items.exchangeScreen.description'),
@@ -113,7 +122,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/exchangeScreenOdev3/",
       imageGradient: "from-indigo-500 to-blue-600",
     },
-    // 11. Dashboard
+    // 12. Dashboard
     {
       title: t('projects.items.dashboard.title'),
       description: t('projects.items.dashboard.description'),
@@ -122,7 +131,7 @@ const projects: Project[] = [
       link: "https://cavga1903.github.io/dashboardOdev2/",
       imageGradient: "from-slate-500 to-gray-600",
     },
-    // 12. Odev (Social Media Dashboard)
+    // 13. Odev (Social Media Dashboard)
     {
       title: t('projects.items.odev.title'),
       description: t('projects.items.odev.description'),
@@ -130,15 +139,6 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/odev",
       link: "https://cavga1903.github.io/odev/",
       imageGradient: "from-rose-500 to-pink-600",
-    },
-    // 13. Kişisel Portfolio
-    {
-      title: t('projects.items.portfolio.title'),
-      description: t('projects.items.portfolio.description'),
-      technologies: ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
-      github: "https://github.com/Cavga1903/portfolio-app3",
-      link: "https://www.tolgacavga.com",
-      imageGradient: "from-purple-500 to-indigo-600",
     },
   ];
   
