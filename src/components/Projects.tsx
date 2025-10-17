@@ -23,9 +23,9 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
 
   useEffect(() => {
     if (isVisible && !shouldLoad) {
-      // Mobile: Add delay to prevent memory issues
+      // Conservative loading strategy for iframes
       const isMobile = window.innerWidth < 768;
-      const delay = isMobile ? 500 : 100;
+      const delay = isMobile ? 2000 : 1000; // Longer delays to prevent issues
       
       const timer = setTimeout(() => {
         setShouldLoad(true);
@@ -38,9 +38,12 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
   const handleLoad = () => {
     setIsLoading(false);
     setHasError(false);
-    // Prevent iframe from affecting page scroll
+    // Completely disable iframe interactions
     if (iframeRef.current) {
       iframeRef.current.style.pointerEvents = 'none';
+      // Disable all iframe functionality
+      iframeRef.current.contentWindow?.stop?.();
+      iframeRef.current.contentDocument?.execCommand?.('stop');
     }
     // Track iframe load
     trackIframeInteraction(projectName, 'load');
@@ -91,15 +94,17 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
       <iframe
         ref={iframeRef}
         src={src}
-        className="w-full h-full border-0"
+        className="w-full h-full border-0 pointer-events-none"
         title={title}
-        sandbox="allow-scripts allow-forms"
-        loading="eager"
+        sandbox=""
+        loading="lazy"
         style={{ 
           transform: 'scale(0.25)',
           transformOrigin: 'top left',
           width: '400%',
-          height: '400%'
+          height: '400%',
+          filter: 'blur(0.5px)',
+          opacity: 0.9
         }}
         onLoad={handleLoad}
         onError={handleError}
@@ -374,7 +379,7 @@ const projects: Project[] = [
 
       <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-10 text-center fade-in-up inline-block group">
         {t('projects.title')}
-        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-indigo-400 group-hover:w-full transition-all duration-500"></span>
+        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-indigo-500 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
       {/* Carousel Container */}
@@ -432,23 +437,33 @@ const projects: Project[] = [
                           onMouseEnter={() => setIsAutoPlaying(false)}
                           onMouseLeave={() => setIsAutoPlaying(true)}
                         >
-                      {/* Project Image/Preview */}
-                      <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
-                        {project.link ? (
-                          // Canlı demo preview - LazyIframe ile optimize edilmiş
-                          <div className="relative w-full h-full">
-                            <LazyIframe
-                              src={project.link}
-                              title={`${project.title} Preview`}
-                              isVisible={visibleProjects.has(globalIndex)}
-                              projectName={project.title}
-                            />
-                            {/* Demo link indicator */}
-                            <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
-                              LIVE
-                            </div>
-                          </div>
-                        ) : (
+                  {/* Project Image/Preview */}
+                  <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
+                    {project.link ? ( // Safe iframe preview - read-only mode
+                      // Canlı demo preview - LazyIframe ile optimize edilmiş
+                      <div className="relative w-full h-full">
+                        <LazyIframe
+                          src={project.link || ''}
+                          title={`${project.title} Preview`}
+                          isVisible={visibleProjects.has(globalIndex)}
+                          projectName={project.title}
+                        />
+                        {/* Demo link indicator */}
+                        <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
+                          LIVE
+                        </div>
+                        {/* Click blocker overlay - prevents iframe interaction */}
+                        <div className="absolute inset-0 z-20 cursor-pointer" 
+                             onClick={() => {
+                               if (project.link) {
+                                 window.open(project.link, '_blank');
+                                 trackProjectClick(project.title, 'demo', project.link);
+                               }
+                             }}
+                             title="Click to open live demo">
+                        </div>
+                      </div>
+                    ) : (
                           // GitHub Preview benzeri placeholder
                           <div className={`w-full h-full bg-gradient-to-br ${project.imageGradient} flex items-center justify-center relative overflow-hidden`}>
                             {/* Decorative elements */}
@@ -476,7 +491,7 @@ const projects: Project[] = [
                       {/* Project Info */}
                       <div className="p-3 sm:p-4 md:p-6 flex flex-col justify-between flex-grow">
             <div>
-                          <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
+                          <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-indigo-500 transition-colors duration-300">{project.title}</h3>
                           <p className="mb-3 sm:mb-4 text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3">{project.description}</p>
             </div>
             <div>
@@ -508,7 +523,7 @@ const projects: Project[] = [
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-blue-400 border border-blue-400 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-blue-500 border border-blue-500 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                   onClick={() => {
                                     if (project.github) {
                                       trackProjectClick(project.title, 'github', project.github);
@@ -524,7 +539,7 @@ const projects: Project[] = [
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-full bg-gray-700 hover:bg-gray-600 text-blue-400 border border-blue-400 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                className="w-full bg-gray-700 hover:bg-gray-600 text-blue-500 border border-blue-500 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                 onClick={() => {
                                   if (project.github) {
                                     trackProjectClick(project.title, 'github', project.github);

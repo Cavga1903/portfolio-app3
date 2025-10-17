@@ -420,7 +420,7 @@ const Technologies: React.FC = () => {
 
       <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-4 text-center fade-in-up inline-block group mt-8 sm:mt-12 md:mt-16 lg:mt-20">
         {t('technologies.title')}
-        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-purple-400 group-hover:w-full transition-all duration-500"></span>
+        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-purple-500 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
       <p className="relative z-10 text-gray-400 text-center mb-12 sm:mb-16 md:mb-20 max-w-2xl">
@@ -501,7 +501,7 @@ const Technologies: React.FC = () => {
                           </div>
                           
                           {/* Skill Name */}
-                          <h4 className="text-sm font-semibold text-center mb-2 group-hover:text-purple-400 transition-colors duration-300">
+                          <h4 className="text-sm font-semibold text-center mb-2 group-hover:text-purple-500 transition-colors duration-300">
                             {t(tech.nameKey)}
                           </h4>
                           

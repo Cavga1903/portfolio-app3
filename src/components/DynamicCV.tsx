@@ -169,7 +169,7 @@ const DynamicCV: React.FC = () => {
             
             // Inline style'ları da kontrol et
             if (elementStyle.cssText) {
-              elementStyle.cssText = elementStyle.cssText.replace(/oklch\([^)]+\)/g, '#000000');
+              elementStyle.cssText = elementStyle.cssText.replace(/oklch\([^)]+\)/g, '#000000').replace(/#0000/g, '#000000');
             }
           });
           
@@ -181,7 +181,7 @@ const DynamicCV: React.FC = () => {
               for (let j = 0; j < rules.length; j++) {
                 const rule = rules[j] as CSSStyleRule;
                 if (rule.style && rule.style.cssText) {
-                  rule.style.cssText = rule.style.cssText.replace(/oklch\([^)]+\)/g, '#000000');
+                  rule.style.cssText = rule.style.cssText.replace(/oklch\([^)]+\)/g, '#000000').replace(/#0000/g, '#000000');
                 }
               }
             } catch (e) {
