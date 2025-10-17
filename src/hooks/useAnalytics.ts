@@ -59,7 +59,7 @@ export const useAnalytics = () => {
     trackEvent('click', {
       element_name: elementName,
       element_type: elementType,
-      element_value: elementValue,
+      element_value: elementValue || '',
       page_location: window.location.href,
     });
   };
@@ -69,7 +69,7 @@ export const useAnalytics = () => {
     trackEvent('form_interaction', {
       form_name: formName,
       form_action: action,
-      field_name: fieldName,
+      field_name: fieldName || '',
       page_location: window.location.href,
     });
   };
@@ -150,6 +150,55 @@ export const useAnalytics = () => {
     });
   };
 
+  // Track accordion interactions
+  const trackAccordionToggle = (category: string, action: 'open' | 'close') => {
+    trackEvent('accordion_toggle', {
+      accordion_category: category,
+      accordion_action: action,
+      page_location: window.location.href,
+    });
+  };
+
+  // Track skill interactions
+  const trackSkillInteraction = (skillName: string, skillCategory: string, interactionType: 'hover' | 'click', skillLevel: string) => {
+    trackEvent('skill_interaction', {
+      skill_name: skillName,
+      skill_category: skillCategory,
+      interaction_type: interactionType,
+      skill_level: skillLevel,
+      page_location: window.location.href,
+    });
+  };
+
+  // Track soft skill interactions
+  const trackSoftSkillInteraction = (skillName: string, interactionType: 'hover' | 'click') => {
+    trackEvent('soft_skill_interaction', {
+      soft_skill_name: skillName,
+      interaction_type: interactionType,
+      page_location: window.location.href,
+    });
+  };
+
+  // Track iframe interactions
+  const trackIframeInteraction = (projectName: string, action: 'load' | 'error' | 'click') => {
+    trackEvent('iframe_interaction', {
+      project_name: projectName,
+      iframe_action: action,
+      page_location: window.location.href,
+    });
+  };
+
+  // Track accordion content visibility
+  const trackAccordionContentVisibility = (category: string, visibleSkills: number, totalSkills: number) => {
+    trackEvent('accordion_content_visibility', {
+      accordion_category: category,
+      visible_skills: visibleSkills,
+      total_skills: totalSkills,
+      visibility_percentage: Math.round((visibleSkills / totalSkills) * 100),
+      page_location: window.location.href,
+    });
+  };
+
   return {
     trackEvent,
     trackPageView,
@@ -164,6 +213,11 @@ export const useAnalytics = () => {
     trackTimeOnPage,
     trackSocialClick,
     trackContactSubmission,
+    trackAccordionToggle,
+    trackSkillInteraction,
+    trackSoftSkillInteraction,
+    trackIframeInteraction,
+    trackAccordionContentVisibility,
   };
 };
 

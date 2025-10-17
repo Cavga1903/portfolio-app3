@@ -16,7 +16,7 @@ interface Technology {
 
 const Technologies: React.FC = () => {
   const { t } = useTranslation();
-  const { trackEvent, trackSectionView } = useAnalytics();
+  const { trackEvent, trackSectionView, trackAccordionToggle, trackSkillInteraction, trackAccordionContentVisibility } = useAnalytics();
   
   // Accordion state
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(['frontend'])); // Frontend açık başlasın
@@ -63,6 +63,8 @@ const Technologies: React.FC = () => {
   
   // Accordion toggle function
   const toggleCategory = (categoryKey: string) => {
+    const isCurrentlyOpen = openCategories.has(categoryKey);
+    
     setOpenCategories(prev => {
       const newSet = new Set(prev);
       if (newSet.has(categoryKey)) {
@@ -83,11 +85,14 @@ const Technologies: React.FC = () => {
       });
     }, 300);
     
-    // Analytics tracking
-    trackEvent('accordion_toggle', {
-      category: categoryKey,
-      action: openCategories.has(categoryKey) ? 'close' : 'open'
-    });
+    // Enhanced analytics tracking
+    trackAccordionToggle(categoryKey, isCurrentlyOpen ? 'close' : 'open');
+    
+    // Track content visibility when opening
+    if (!isCurrentlyOpen) {
+      const categoryTechs = groupedTechs[categoryKey] || [];
+      trackAccordionContentVisibility(categoryKey, categoryTechs.length, categoryTechs.length);
+    }
   };
   
   const technologies: Technology[] = [
@@ -480,18 +485,10 @@ const Technologies: React.FC = () => {
                           key={tech.iconKey}
                           className="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-3 sm:p-4 hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                           onMouseEnter={() => {
-                            trackEvent('skill_hover', {
-                              skill_name: tech.iconKey,
-                              skill_category: tech.category,
-                              skill_level: tech.levelText
-                            });
+                            trackSkillInteraction(tech.iconKey, tech.category, 'hover', tech.levelText);
                           }}
                           onClick={() => {
-                            trackEvent('skill_click', {
-                              skill_name: tech.iconKey,
-                              skill_category: tech.category,
-                              skill_level: tech.levelText
-                            });
+                            trackSkillInteraction(tech.iconKey, tech.category, 'click', tech.levelText);
                           }}
                         >
                           {/* Skill Icon */}

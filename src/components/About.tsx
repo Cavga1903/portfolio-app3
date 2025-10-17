@@ -7,7 +7,7 @@ import SEOHead from './SEOHead';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
-  const { trackEvent, trackSectionView } = useAnalytics();
+  const { trackEvent, trackSectionView, trackSoftSkillInteraction } = useAnalytics();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -223,11 +223,10 @@ const About: React.FC = () => {
                 boxShadow: "0 20px 60px rgba(34, 197, 94, 0.3)" 
               }}
               onMouseEnter={() => {
-                trackEvent('soft_skill_hover', {
-                  skill_name: 'corporate_experience',
-                  skill_type: 'soft_skill',
-                  skill_category: 'professional'
-                });
+                trackSoftSkillInteraction('corporate_experience', 'hover');
+              }}
+              onClick={() => {
+                trackSoftSkillInteraction('corporate_experience', 'click');
               }}
             >
               <div className="text-center">
@@ -255,11 +254,10 @@ const About: React.FC = () => {
                 boxShadow: "0 20px 60px rgba(251, 191, 36, 0.3)" 
               }}
               onMouseEnter={() => {
-                trackEvent('soft_skill_hover', {
-                  skill_name: 'fast_learning',
-                  skill_type: 'soft_skill',
-                  skill_category: 'learning'
-                });
+                trackSoftSkillInteraction('fast_learning', 'hover');
+              }}
+              onClick={() => {
+                trackSoftSkillInteraction('fast_learning', 'click');
               }}
             >
               <div className="text-center">
@@ -287,11 +285,10 @@ const About: React.FC = () => {
                 boxShadow: "0 20px 60px rgba(59, 130, 246, 0.3)" 
               }}
               onMouseEnter={() => {
-                trackEvent('soft_skill_hover', {
-                  skill_name: 'teamwork',
-                  skill_type: 'soft_skill',
-                  skill_category: 'collaboration'
-                });
+                trackSoftSkillInteraction('teamwork', 'hover');
+              }}
+              onClick={() => {
+                trackSoftSkillInteraction('teamwork', 'click');
               }}
             >
               <div className="text-center">
@@ -309,7 +306,7 @@ const About: React.FC = () => {
           </div>
         </motion.div>
       </div>
-      </section>
+    </section>
     </>
   );
 };

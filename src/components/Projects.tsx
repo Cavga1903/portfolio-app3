@@ -14,9 +14,10 @@ type Project = {
 };
 
 // Lazy iframe component to prevent scroll issues
-const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean }> = ({ src, title, isVisible }) => {
+const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; projectName: string }> = ({ src, title, isVisible, projectName }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { trackIframeInteraction } = useAnalytics();
 
   useEffect(() => {
     if (isVisible && !shouldLoad) {
@@ -55,6 +56,12 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean }> =
         if (iframeRef.current) {
           iframeRef.current.style.pointerEvents = 'none';
         }
+        // Track iframe load
+        trackIframeInteraction(projectName, 'load');
+      }}
+      onError={() => {
+        // Track iframe error
+        trackIframeInteraction(projectName, 'error');
       }}
     />
   );
@@ -371,6 +378,7 @@ const projects: Project[] = [
                               src={project.link}
                               title={`${project.title} Preview`}
                               isVisible={visibleProjects.has(globalIndex)}
+                              projectName={project.title}
                             />
                             {/* Demo link indicator */}
                             <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
