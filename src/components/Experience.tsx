@@ -19,16 +19,6 @@ const Experience: React.FC = () => {
   const experiences: TimelineItem[] = [
     {
       type: 'work',
-      title: t('experience.izmir.title'),
-      company: t('experience.izmir.company'),
-      location: t('experience.izmir.location'),
-      period: t('experience.izmir.period'),
-      description: t('experience.izmir.description'),
-      skills: ['Hardware & Software', 'System Administration', 'Technical Support', 'Teamwork'],
-      logo: '/logos/izmir.webp'
-    },
-    {
-      type: 'work',
       title: t('experience.turkcell.title'),
       company: t('experience.turkcell.company'),
       location: t('experience.turkcell.location'),
@@ -66,6 +56,16 @@ const Experience: React.FC = () => {
       description: t('experience.concentrix.description'),
       skills: ['Salesforce CRM', 'Customer Satisfaction', 'Banking'],
       logo: '/logos/concentrix.webp'
+    },
+    {
+      type: 'work',
+      title: t('experience.izmir.title'),
+      company: t('experience.izmir.company'),
+      location: t('experience.izmir.location'),
+      period: t('experience.izmir.period'),
+      description: t('experience.izmir.description'),
+      skills: ['Hardware & Software', 'System Administration', 'Technical Support', 'Teamwork'],
+      logo: '/logos/izmir.webp'
     },
     {
       type: 'education',
