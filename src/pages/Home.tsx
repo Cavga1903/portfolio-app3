@@ -62,7 +62,7 @@ const Home: React.FC = () => {
       />
 
       <motion.div 
-        className="relative"
+        className="relative safe-area-container"
         variants={pageVariants}
         initial="initial"
         animate="animate"

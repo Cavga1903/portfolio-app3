@@ -3,7 +3,23 @@ html {
     scroll-padding-top: 80px; /* Navbar yüksekliği kadar offset */
     /* scrollbar-gutter: stable; */ /* Opera'da çalışmıyor */
     overflow-y: scroll; /* Her zaman scrollbar göster - kesin çözüm */
+    /* iPhone Safe Area Support */
+    background-color: #0F172A; /* Sitenin koyu arkaplan rengi */
   }
+
+/* iPhone Safe Area Support */
+body {
+  background-color: #0F172A; /* Sitenin koyu arkaplan rengi */
+}
+
+/* Safe Area Container - Ana kapsayıcı için */
+.safe-area-container {
+  /* Safe area insets for iPhone - sadece gerekli yerlerde */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 /* Smooth scroll için daha iyi performance */
 * {
