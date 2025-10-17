@@ -293,6 +293,22 @@
       "cvPreparation": {
         "title": "CV Hazırlama Tətbiqi",
         "description": "Dinamik CV yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi."
+      },
+      "furniro": {
+        "title": "Furniro E-ticarət",
+        "description": "Mebel və ev dekorasiyasına yönəlmiş e-ticarət platforması. Müasir dizayn və istifadəçi dostu interfeys."
+      },
+      "exchangeScreen": {
+        "title": "Valyuta Kursu Ekranı",
+        "description": "Gerçək zamanlı valyuta kurslarını göstərən interaktiv veb tətbiqi. USD, EUR, BTC, ETH dəstəyi."
+      },
+      "dashboard": {
+        "title": "Maliyyə Dashboard",
+        "description": "Səhm və kripto valyuta izləməsi üçün inkişaf etdirilmiş dashboard tətbiqi. NVIDIA, Tesla kimi şirkətlərin məlumatlarını göstərir."
+      },
+      "odev": {
+        "title": "Sosial Media Dashboard",
+        "description": "Çoxlu sosial media platformalarını tək ekranda izləyən dashboard tətbiqi. Müasir və responsive dizayn."
       }
     }
   },

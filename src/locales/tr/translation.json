@@ -293,6 +293,22 @@
       "cvPreparation": {
         "title": "CV Hazırlama Uygulaması",
         "description": "Dinamik CV oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi."
+      },
+      "furniro": {
+        "title": "Furniro E-ticaret",
+        "description": "Mobilya ve ev dekorasyonu odaklı e-ticaret platformu. Modern tasarım ve kullanıcı dostu arayüz."
+      },
+      "exchangeScreen": {
+        "title": "Döviz Kuru Ekranı",
+        "description": "Gerçek zamanlı döviz kurlarını gösteren interaktif web uygulaması. USD, EUR, BTC, ETH destekli."
+      },
+      "dashboard": {
+        "title": "Finansal Dashboard",
+        "description": "Hisse senedi ve kripto para takibi için geliştirilmiş dashboard uygulaması. NVIDIA, Tesla gibi şirketlerin verilerini gösterir."
+      },
+      "odev": {
+        "title": "Sosyal Medya Dashboard",
+        "description": "Çoklu sosyal medya platformlarını tek ekranda takip eden dashboard uygulaması. Modern ve responsive tasarım."
       }
     }
   },

@@ -293,6 +293,22 @@
       "cvPreparation": {
         "title": "CV-Vorbereitungs-App",
         "description": "Webanwendung für dynamische CV-Erstellung und PDF-Download. Mit benutzerfreundlicher Oberfläche und Vorlagensystem."
+      },
+      "furniro": {
+        "title": "Furniro E-Commerce",
+        "description": "E-Commerce-Plattform mit Fokus auf Möbel und Wohnaccessoires. Modernes Design und benutzerfreundliche Oberfläche."
+      },
+      "exchangeScreen": {
+        "title": "Wechselkurs-Anzeige",
+        "description": "Interaktive Webanwendung zur Anzeige von Echtzeit-Wechselkursen. Unterstützt USD, EUR, BTC, ETH."
+      },
+      "dashboard": {
+        "title": "Finanz-Dashboard",
+        "description": "Dashboard-Anwendung für Aktien- und Krypto-Tracking. Zeigt Daten von Unternehmen wie NVIDIA, Tesla."
+      },
+      "odev": {
+        "title": "Social Media Dashboard",
+        "description": "Dashboard-Anwendung, die mehrere Social Media-Plattformen auf einem Bildschirm verfolgt. Modernes und responsives Design."
       }
     }
   },

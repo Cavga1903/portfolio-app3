@@ -23,117 +23,122 @@ const Projects: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   
   const projects: Project[] = [
-    {
-      title: t('projects.items.iot.title'),
-      description: t('projects.items.iot.description'),
-      technologies: ["Node.js", "Express", "Docker", "Canvas", "QRCode"],
-      github: "https://github.com/Cavga1903/iot-simulator",
-      link: "https://iot-simulator-kqi7.onrender.com", // Güncellenmiş demo link
-      imageGradient: "from-blue-500 to-cyan-600",
-    },
-    {
-      title: t('projects.items.todo.title'),
-      description: t('projects.items.todo.description'),
-      technologies: ["React", "JavaScript", "CSS3", "HTML5"],
-      github: "https://github.com/Cavga1903/todo-app-ins",
-      link: "https://cavga1903.github.io/todo-app-ins/", // Güncellenmiş demo link
-      imageGradient: "from-pink-500 to-purple-600",
-    },
+    // 1. Workshop Tracker
     {
       title: t('projects.items.workshop.title'),
       description: t('projects.items.workshop.description'),
       technologies: ["React", "TypeScript", "Node.js", "Database"],
       github: "https://github.com/Cavga1903/workshop-tracker",
-      link: "https://workshop-tracker-taupe.vercel.app", // Doğru demo link
+      link: "https://workshop-tracker-taupe.vercel.app",
       imageGradient: "from-green-500 to-teal-600",
     },
+    // 2. IoT Cihaz Simülatörü
     {
-      title: t('projects.items.productManager.title'),
-      description: t('projects.items.productManager.description'),
-      technologies: ["React", "Supabase", "TypeScript", "TailwindCSS"],
-      github: "https://github.com/Cavga1903/react-supabase-product-manager",
-      link: "https://react-supabase-product-manager.vercel.app/login", // Güncellenmiş demo link
-      imageGradient: "from-orange-500 to-red-600",
+      title: t('projects.items.iot.title'),
+      description: t('projects.items.iot.description'),
+      technologies: ["Node.js", "Express", "Docker", "Canvas", "QRCode"],
+      github: "https://github.com/Cavga1903/iot-simulator",
+      link: "https://iot-simulator-kqi7.onrender.com",
+      imageGradient: "from-blue-500 to-cyan-600",
     },
+    // 3. Furniro E-commerce
     {
-      title: t('projects.items.grocery.title'),
-      description: t('projects.items.grocery.description'),
-      technologies: ["React", "JavaScript", "E-commerce", "Payment"],
-      github: "https://github.com/Cavga1903/online-grocery-app",
-      link: "https://cavga1903.github.io/online-grocery-app/", // Güncellenmiş demo link
-      imageGradient: "from-yellow-500 to-orange-600",
-    },
-    {
-      title: t('projects.items.productList.title'),
-      description: t('projects.items.productList.description'),
-      technologies: ["React", "JavaScript", "LocalStorage", "Filtering"],
-      github: "https://github.com/Cavga1903/urun-listesi-gelistirilmis",
-      // Demo link yok - sadece GitHub
-      imageGradient: "from-indigo-500 to-blue-600",
-    },
-    {
-      title: t('projects.items.paymentForm.title'),
-      description: t('projects.items.paymentForm.description'),
-      technologies: ["React", "Form Validation", "Payment", "UI/UX"],
-      github: "https://github.com/Cavga1903/odeme-formu",
-      link: "https://cavga1903.github.io/odeme-formu/", // Güncellenmiş demo link
-      imageGradient: "from-emerald-500 to-green-600",
-    },
-    {
-      title: t('projects.items.globalIdentity.title'),
-      description: t('projects.items.globalIdentity.description'),
-      technologies: ["React", "Authentication", "Security", "Multi-platform"],
-      github: "https://github.com/Cavga1903/global-identity-9",
-      link: "https://cavga1903.github.io/global-identity-9/", // Güncellenmiş demo link
-      imageGradient: "from-violet-500 to-purple-600",
-    },
-    {
-      title: t('projects.items.noteTracker.title'),
-      description: t('projects.items.noteTracker.description'),
-      technologies: ["React", "JavaScript", "Notes", "LocalStorage"],
-      github: "https://github.com/Cavga1903/basitNotTakipSistemi",
-      link: "https://note-tracker-demo.vercel.app", // Demo link eklendi
-      imageGradient: "from-rose-500 to-pink-600",
-    },
-    {
-      title: t('projects.items.loginUI.title'),
-      description: t('projects.items.loginUI.description'),
-      technologies: ["React", "TypeScript", "UI/UX", "Form Validation"],
-      github: "https://github.com/Cavga1903/login-ui-tsx-app",
-      link: "https://cavga1903.github.io/login-ui-tsx-app/", // Güncellenmiş demo link
-      imageGradient: "from-sky-500 to-blue-600",
-    },
-    {
-      title: t('projects.items.nodeNotes.title'),
-      description: t('projects.items.nodeNotes.description'),
-      technologies: ["Node.js", "Express", "Database", "RESTful API"],
-      github: "https://github.com/Cavga1903/node.js-Notlar-uygulamas-",
-      // Demo link yok - sadece GitHub
-      imageGradient: "from-lime-500 to-green-600",
-    },
-    {
-      title: t('projects.items.portfolio.title'),
-      description: t('projects.items.portfolio.description'),
-      technologies: ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
-      github: "https://github.com/Cavga1903/portfolio-app3",
-      link: "https://www.tolgacavga.com", // Yeni portfolyo projesi
-      imageGradient: "from-purple-500 to-indigo-600",
-    },
-    {
-      title: t('projects.items.ecommerce.title'),
-      description: t('projects.items.ecommerce.description'),
-      technologies: ["React", "JavaScript", "E-commerce", "Shopping Cart"],
+      title: t('projects.items.furniro.title'),
+      description: t('projects.items.furniro.description'),
+      technologies: ["React", "JavaScript", "E-commerce", "Furniture"],
       github: "https://github.com/Cavga1903/eCommerce-WebsiteOdev4",
-      link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/", // Yeni e-commerce projesi
+      link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/",
       imageGradient: "from-red-500 to-pink-600",
     },
+    // 4. CV Hazırlama
     {
       title: t('projects.items.cvPreparation.title'),
       description: t('projects.items.cvPreparation.description'),
       technologies: ["React", "JavaScript", "CV Builder", "PDF Generation"],
       github: "https://github.com/Cavga1903/cvPreparationApp",
-      link: "https://cavga1903.github.io/cvPreparationApp/", // Yeni CV preparation projesi
+      link: "https://cavga1903.github.io/cvPreparationApp/",
       imageGradient: "from-teal-500 to-cyan-600",
+    },
+    // 5. Online Grocery
+    {
+      title: t('projects.items.grocery.title'),
+      description: t('projects.items.grocery.description'),
+      technologies: ["React", "JavaScript", "E-commerce", "Payment"],
+      github: "https://github.com/Cavga1903/online-grocery-app",
+      link: "https://cavga1903.github.io/online-grocery-app/",
+      imageGradient: "from-yellow-500 to-orange-600",
+    },
+    // 6. Todo App
+    {
+      title: t('projects.items.todo.title'),
+      description: t('projects.items.todo.description'),
+      technologies: ["React", "JavaScript", "CSS3", "HTML5"],
+      github: "https://github.com/Cavga1903/todo-app-ins",
+      link: "https://cavga1903.github.io/todo-app-ins/",
+      imageGradient: "from-pink-500 to-purple-600",
+    },
+    // 7. React Supabase Product Manager
+    {
+      title: t('projects.items.productManager.title'),
+      description: t('projects.items.productManager.description'),
+      technologies: ["React", "Supabase", "TypeScript", "TailwindCSS"],
+      github: "https://github.com/Cavga1903/react-supabase-product-manager",
+      link: "https://react-supabase-product-manager.vercel.app/login",
+      imageGradient: "from-orange-500 to-red-600",
+    },
+    // 8. Ödeme Formu
+    {
+      title: t('projects.items.paymentForm.title'),
+      description: t('projects.items.paymentForm.description'),
+      technologies: ["React", "Form Validation", "Payment", "UI/UX"],
+      github: "https://github.com/Cavga1903/odeme-formu",
+      link: "https://cavga1903.github.io/odeme-formu/",
+      imageGradient: "from-emerald-500 to-green-600",
+    },
+    // 9. Global Identity
+    {
+      title: t('projects.items.globalIdentity.title'),
+      description: t('projects.items.globalIdentity.description'),
+      technologies: ["React", "Authentication", "Security", "Multi-platform"],
+      github: "https://github.com/Cavga1903/global-identity-9",
+      link: "https://cavga1903.github.io/global-identity-9/",
+      imageGradient: "from-violet-500 to-purple-600",
+    },
+    // 10. Exchange Screen
+    {
+      title: t('projects.items.exchangeScreen.title'),
+      description: t('projects.items.exchangeScreen.description'),
+      technologies: ["JavaScript", "HTML5", "CSS3", "Currency API"],
+      github: "https://github.com/Cavga1903/exchangeScreenOdev3",
+      link: "https://cavga1903.github.io/exchangeScreenOdev3/",
+      imageGradient: "from-indigo-500 to-blue-600",
+    },
+    // 11. Dashboard
+    {
+      title: t('projects.items.dashboard.title'),
+      description: t('projects.items.dashboard.description'),
+      technologies: ["HTML5", "CSS3", "JavaScript", "Dashboard UI"],
+      github: "https://github.com/Cavga1903/dashboardOdev2",
+      link: "https://cavga1903.github.io/dashboardOdev2/",
+      imageGradient: "from-slate-500 to-gray-600",
+    },
+    // 12. Odev (Social Media Dashboard)
+    {
+      title: t('projects.items.odev.title'),
+      description: t('projects.items.odev.description'),
+      technologies: ["HTML5", "CSS3", "JavaScript", "Social Media"],
+      github: "https://github.com/Cavga1903/odev",
+      link: "https://cavga1903.github.io/odev/",
+      imageGradient: "from-rose-500 to-pink-600",
+    },
+    // 13. Kişisel Portfolio
+    {
+      title: t('projects.items.portfolio.title'),
+      description: t('projects.items.portfolio.description'),
+      technologies: ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
+      github: "https://github.com/Cavga1903/portfolio-app3",
+      link: "https://www.tolgacavga.com",
+      imageGradient: "from-purple-500 to-indigo-600",
     },
   ];
   
