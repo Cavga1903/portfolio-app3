@@ -32,29 +32,30 @@ const Navbar: React.FC = () => {
     const element = document.getElementById(elementId);
     if (element) {
       element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
 
   const changeLanguage = (lng: string) => {
-    const currentLang = i18n.language.split('-')[0];
+    const currentLang = i18n.language.split("-")[0];
     i18n.changeLanguage(lng);
     setIsLangMenuOpen(false);
     trackLanguageChange(currentLang, lng);
   };
 
   const languages = [
-    { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-    { code: 'az', name: 'Azərbaycan Türkcəsi', flag: '🇦🇿' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: "tr", name: "Türkçe", flag: "🇹🇷" },
+    { code: "az", name: "Azərbaycan Türkcəsi", flag: "🇦🇿" },
+    { code: "en", name: "English", flag: "🇬🇧" },
+    { code: "de", name: "Deutsch", flag: "🇩🇪" },
   ];
 
   // i18n.language'i normalize et (en-US -> en)
-  const normalizedLang = i18n.language.split('-')[0].toLowerCase();
-  const currentLanguage = languages.find(lang => lang.code === normalizedLang) || languages[1]; // Fallback: English
+  const normalizedLang = i18n.language.split("-")[0].toLowerCase();
+  const currentLanguage =
+    languages.find((lang) => lang.code === normalizedLang) || languages[1]; // Fallback: English
 
   return (
     <nav className="bg-white dark:bg-gray-900 relative z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full">
@@ -66,16 +67,19 @@ const Navbar: React.FC = () => {
             className="flex items-center text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group logo-text"
             onClick={(e) => {
               e.preventDefault();
-              smoothScrollTo('hero');
-              trackClick('nav_hero', 'navigation_link', 'Tolga Çavga');
+              smoothScrollTo("hero");
+              trackClick("nav_hero", "navigation_link", "Tolga Çavga");
             }}
           >
-            <img 
-              src="/tabLogo.svg" 
-              alt="Developer Logo" 
+            <img
+              src="/tabLogo.svg"
+              alt="Developer Logo"
               className="w-20 h-20 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 hidden dark:block"
             />
             Tolga Çavga
+            {/* <span className="text-blue-600 dark:text-white font-bold hover:text-blue-600 dark:hover:text-blue-400">
+              Çavga
+            </span> */}
           </a>
 
           {/* Desktop Menu - Center */}
@@ -88,7 +92,11 @@ const Navbar: React.FC = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   smoothScrollTo(link.id);
-                  trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey));
+                  trackClick(
+                    `nav_${link.id}`,
+                    "navigation_link",
+                    t(link.labelKey)
+                  );
                 }}
               >
                 {t(link.labelKey)}
@@ -106,9 +114,11 @@ const Navbar: React.FC = () => {
                 className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 <FaGlobe className="text-lg" />
-                <span className="text-sm font-medium">{currentLanguage.code.toUpperCase()}</span>
+                <span className="text-sm font-medium">
+                  {currentLanguage.code.toUpperCase()}
+                </span>
               </button>
-              
+
               {isLangMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
                   {languages.map((lang) => (
@@ -116,10 +126,14 @@ const Navbar: React.FC = () => {
                       key={lang.code}
                       onClick={() => changeLanguage(lang.code)}
                       className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                        i18n.language === lang.code ? 'bg-blue-50 dark:bg-gray-700' : ''
+                        i18n.language === lang.code
+                          ? "bg-blue-50 dark:bg-gray-700"
+                          : ""
                       } first:rounded-t-lg last:rounded-b-lg`}
                     >
-                      <span className="font-medium text-gray-800 dark:text-white">{lang.name}</span>
+                      <span className="font-medium text-gray-800 dark:text-white">
+                        {lang.name}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -136,7 +150,7 @@ const Navbar: React.FC = () => {
                 <FaGlobe className="inline mr-1" />
                 {currentLanguage.code.toUpperCase()}
               </button>
-              
+
               <button
                 onClick={toggleMenu}
                 type="button"
@@ -172,7 +186,11 @@ const Navbar: React.FC = () => {
                     e.preventDefault();
                     setIsMenuOpen(false);
                     smoothScrollTo(link.id);
-                    trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey));
+                    trackClick(
+                      `nav_${link.id}`,
+                      "navigation_link",
+                      t(link.labelKey)
+                    );
                   }}
                 >
                   {t(link.labelKey)}
@@ -190,10 +208,14 @@ const Navbar: React.FC = () => {
                 key={lang.code}
                 onClick={() => changeLanguage(lang.code)}
                 className={`w-full flex items-center justify-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                  i18n.language === lang.code ? 'bg-blue-50 dark:bg-gray-700' : ''
+                  i18n.language === lang.code
+                    ? "bg-blue-50 dark:bg-gray-700"
+                    : ""
                 } first:rounded-t-lg last:rounded-b-lg`}
               >
-                <span className="font-medium text-gray-800 dark:text-white">{lang.name}</span>
+                <span className="font-medium text-gray-800 dark:text-white">
+                  {lang.name}
+                </span>
               </button>
             ))}
           </div>

@@ -463,7 +463,7 @@ const Technologies: React.FC = () => {
                   </div>
                   
                   {/* Chevron Icon */}
-                  <div className={`text-gray-400 transition-transform duration-300 ${
+                  <div className={`text-gray-400 transition-transform duration-200 ease-in-out ${
                     isOpen ? 'rotate-180' : ''
                   }`}>
                     <FaChevronDown className="text-lg" />
@@ -471,7 +471,7 @@ const Technologies: React.FC = () => {
                 </button>
                 
                 {/* Accordion Content */}
-                <div className={`overflow-hidden transition-all duration-300 ${
+                <div className={`overflow-hidden transition-all duration-200 ease-in-out ${
                   isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
                 }`}>
                   <div className={`px-6 pb-6 pt-4 sm:pt-6 ${
