@@ -478,7 +478,11 @@ const Technologies: React.FC = () => {
                 <div className={`overflow-hidden transition-all duration-300 ${
                   isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
                 }`}>
-                  <div className="px-6 pb-6 pt-4 sm:pt-6 mb-8 sm:mb-12 md:mb-16">
+                  <div className={`px-6 pb-6 pt-4 sm:pt-6 ${
+                    category.key === 'frontend' || category.key === 'tools' 
+                      ? 'mb-16 sm:mb-20 md:mb-24' 
+                      : 'mb-8 sm:mb-12 md:mb-16'
+                  }`}>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
                       {categoryTechs.map((tech) => (
                         <div
