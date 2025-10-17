@@ -35,7 +35,7 @@ const Experience: React.FC = () => {
       period: t('experience.upwork.period'),
       description: t('experience.upwork.description'),
       skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT'],
-      logo: '/logos/upwork.png'
+      logo: '/logos/upwork.svg'
     },
     {
       type: 'education',
