@@ -179,16 +179,7 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/dashboardOdev2",
       link: "https://cavga1903.github.io/dashboardOdev2/",
       imageGradient: "from-slate-500 to-gray-600",
-    },
-    // 13. Odev (Social Media Dashboard)
-    {
-      title: t('projects.items.odev.title'),
-      description: t('projects.items.odev.description'),
-      technologies: ["HTML5", "CSS3", "JavaScript", "Social Media"],
-      github: "https://github.com/Cavga1903/odev",
-      link: "https://cavga1903.github.io/odev/",
-      imageGradient: "from-rose-500 to-pink-600",
-    },
+    }
   ];
   
   // Carousel logic - responsive items per page

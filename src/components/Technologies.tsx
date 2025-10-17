@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench, FaChevronDown } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress, SiRender, SiGoogleanalytics, SiMongodb, SiPostgresql, SiMysql, SiRedis } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
 
 interface Technology {
@@ -229,6 +229,42 @@ const Technologies: React.FC = () => {
       category: 'database',
       levelText: 'intermediate'
     },
+    {
+      iconKey: 'mongodb',
+      nameKey: 'technologies.mongodb',
+      level: 75,
+      color: 'from-green-600 to-green-400',
+      icon: <SiMongodb className="text-5xl" />,
+      category: 'database',
+      levelText: 'intermediate'
+    },
+    {
+      iconKey: 'postgresql',
+      nameKey: 'technologies.postgresql',
+      level: 70,
+      color: 'from-blue-600 to-blue-400',
+      icon: <SiPostgresql className="text-5xl" />,
+      category: 'database',
+      levelText: 'intermediate'
+    },
+    {
+      iconKey: 'mysql',
+      nameKey: 'technologies.mysql',
+      level: 65,
+      color: 'from-orange-500 to-orange-700',
+      icon: <SiMysql className="text-5xl" />,
+      category: 'database',
+      levelText: 'intermediate'
+    },
+    {
+      iconKey: 'redis',
+      nameKey: 'technologies.redis',
+      level: 60,
+      color: 'from-red-500 to-red-700',
+      icon: <SiRedis className="text-5xl" />,
+      category: 'database',
+      levelText: 'intermediate'
+    },
     // Tools
     {
       iconKey: 'git',
@@ -289,7 +325,7 @@ const Technologies: React.FC = () => {
       nameKey: 'technologies.render',
       level: 80,
       color: 'from-green-500 to-emerald-500',
-      icon: <FaGlobe className="text-5xl" />,
+      icon: <SiRender className="text-5xl" />,
       category: 'tools',
       levelText: 'advanced'
     },
@@ -316,7 +352,7 @@ const Technologies: React.FC = () => {
       nameKey: 'technologies.googleAnalytics',
       level: 85,
       color: 'from-orange-500 to-red-500',
-      icon: <FaCog className="text-5xl" />,
+      icon: <SiGoogleanalytics className="text-5xl" />,
       category: 'tools',
       levelText: 'advanced'
     },
@@ -326,7 +362,7 @@ const Technologies: React.FC = () => {
       nameKey: 'technologies.turkish',
       level: 100,
       color: 'from-red-500 to-red-700',
-      icon: <FaGlobe className="text-5xl" />,
+      icon: <span className="text-5xl">🇹🇷</span>,
       category: 'languages',
       levelText: 'native'
     },
@@ -335,7 +371,7 @@ const Technologies: React.FC = () => {
       nameKey: 'technologies.english',
       level: 80,
       color: 'from-blue-500 to-blue-700',
-      icon: <FaGlobe className="text-5xl" />,
+      icon: <span className="text-5xl">🇺🇸</span>,
       category: 'languages',
       levelText: 'advanced'
     },
@@ -344,7 +380,7 @@ const Technologies: React.FC = () => {
       nameKey: 'technologies.german',
       level: 30,
       color: 'from-gray-400 to-gray-600',
-      icon: <FaGlobe className="text-5xl" />,
+      icon: <span className="text-5xl">🇩🇪</span>,
       category: 'languages',
       levelText: 'beginner'
     },
