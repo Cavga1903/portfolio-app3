@@ -48,14 +48,6 @@ const About: React.FC = () => {
   };
 
 
-  const goToPhoto = (index: number) => {
-    setCurrentPhotoIndex(index);
-    trackEvent('about_photo_navigation', {
-      action: 'direct',
-      photo_index: index,
-      total_photos: profilePhotos.length
-    });
-  };
 
   // Auto-play functionality for photos
   useEffect(() => {
@@ -145,23 +137,6 @@ const About: React.FC = () => {
                   </motion.div>
                 </AnimatePresence>
                 
-                {/* Navigation dots */}
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
-                  {profilePhotos.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        goToPhoto(index);
-                      }}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === currentPhotoIndex 
-                          ? 'bg-white scale-125' 
-                          : 'bg-white/50 hover:bg-white/75'
-                      }`}
-                    />
-                  ))}
-                </div>
               </div>
             </div>
 
