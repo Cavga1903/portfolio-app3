@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
+      setIsScrolled(scrollTop > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -70,10 +70,10 @@ const Navbar: React.FC = () => {
     languages.find((lang) => lang.code === normalizedLang) || languages[1]; // Fallback: English
 
   return (
-    <nav className={`bg-white dark:bg-gray-900 relative z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full transition-all duration-300 ${
+    <nav className={`bg-white dark:bg-gray-900 shadow-md border-b border-gray-200 dark:border-gray-700 w-full transition-all duration-300 ${
       isScrolled 
-        ? 'fixed top-0 left-0 right-0 py-2' 
-        : 'py-3'
+        ? 'fixed top-0 left-0 right-0 z-[9999] py-2' 
+        : 'relative z-50 py-3'
     }`}>
       <div className={`w-full px-4 transition-all duration-300 ${
         isScrolled ? 'py-2' : 'py-3'
