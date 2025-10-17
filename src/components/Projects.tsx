@@ -352,15 +352,11 @@ const projects: Project[] = [
     }
   }, [projects.length, currentIndex]);
 
-  // Auto-play functionality
+  // Auto-play functionality - Disabled to prevent unwanted scrolling
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000); // 5 saniyede bir değişir
-    
-    return () => clearInterval(interval);
+    // Auto-play is disabled to prevent page jumping
+    // Users can manually navigate using arrows or dots
+    return;
   }, [isAutoPlaying, currentIndex, nextSlide]);
   
   return (

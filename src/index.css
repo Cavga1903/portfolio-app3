@@ -1,5 +1,5 @@
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Disabled smooth scroll to prevent auto-jumping */
     scroll-padding-top: 80px; /* Navbar yüksekliği kadar offset */
     /* scrollbar-gutter: stable; */ /* Opera'da çalışmıyor */
     overflow-y: scroll; /* Her zaman scrollbar göster - kesin çözüm */
