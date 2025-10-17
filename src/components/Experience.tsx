@@ -125,7 +125,11 @@ const Experience: React.FC = () => {
                       <img 
                         src={item.logo} 
                         alt={`${item.company} logo`}
-                        className="w-full h-full object-contain p-2 bg-white/10 backdrop-blur-sm border border-gray-600/50"
+                        className={`w-full h-full object-contain p-2 backdrop-blur-sm border border-gray-600/50 ${
+                          item.company.includes('İzmir') || item.company.includes('Izmir') 
+                            ? 'bg-[#194265]' 
+                            : 'bg-white'
+                        }`}
                       />
                     ) : (
                       // Fallback Icon
