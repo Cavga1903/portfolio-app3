@@ -12,6 +12,17 @@ const Hero: React.FC = () => {
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  // Smooth scroll function
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
   
   // Typing animation sequences based on language
   const getTypingSequence = () => {
@@ -155,6 +166,10 @@ const Hero: React.FC = () => {
             }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo('about');
+            }}
           >
             <span className="relative z-10">{t('hero.ctaAbout')}</span>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -170,6 +185,10 @@ const Hero: React.FC = () => {
             }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo('projects');
+            }}
           >
             <span>{t('hero.ctaProjects')}</span>
             <FaChevronRight className="text-sm group-hover:translate-x-1 transition-transform duration-300" />

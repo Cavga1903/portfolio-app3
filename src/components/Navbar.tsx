@@ -27,6 +27,17 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleLangMenu = () => setIsLangMenuOpen((prev) => !prev);
 
+  // Smooth scroll function
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   const changeLanguage = (lng: string) => {
     const currentLang = i18n.language.split('-')[0];
     i18n.changeLanguage(lng);
@@ -53,6 +64,11 @@ const Navbar: React.FC = () => {
           <a
             href="#hero"
             className="flex items-center text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group logo-text"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo('hero');
+              trackClick('nav_hero', 'navigation_link', 'Tolga Çavga');
+            }}
           >
             Tolga Çavga
             <FaCode className="text-3xl ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
@@ -65,7 +81,11 @@ const Navbar: React.FC = () => {
                 key={link.id}
                 href={`#${link.id}`}
                 className="text-lg text-gray-800 dark:text-white hover:text-blue-700 dark:hover:text-blue-400 cursor-pointer transition-all duration-300 relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
-                onClick={() => trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey))}
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollTo(link.id);
+                  trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey));
+                }}
               >
                 {t(link.labelKey)}
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-700 dark:bg-blue-400 group-hover:w-full transition-all duration-300"></span>
@@ -144,8 +164,10 @@ const Navbar: React.FC = () => {
                 <a
                   href={`#${link.id}`}
                   className="block px-4 py-3 text-lg text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     setIsMenuOpen(false);
+                    smoothScrollTo(link.id);
                     trackClick(`nav_${link.id}`, 'navigation_link', t(link.labelKey));
                   }}
                 >
