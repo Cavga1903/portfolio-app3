@@ -21,8 +21,8 @@ const Projects: React.FC = () => {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
-  
-  const projects: Project[] = [
+
+const projects: Project[] = [
     // 1. Workshop Tracker
     {
       title: t('projects.items.workshop.title'),
@@ -296,11 +296,20 @@ const Projects: React.FC = () => {
                         >
                       {/* Project Image/Preview */}
                       <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
-                        {project.image ? (
-                          <img 
-                            src={project.image} 
-                            alt={project.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        {project.link ? (
+                          // Canlı demo preview - iframe ile
+                          <iframe
+                            src={project.link}
+                            className="w-full h-full border-0 scale-50 origin-top-left"
+                            style={{ 
+                              width: '200%', 
+                              height: '200%',
+                              transform: 'scale(0.5)',
+                              transformOrigin: 'top left'
+                            }}
+                            title={`${project.title} Preview`}
+                            sandbox="allow-scripts allow-same-origin allow-forms"
+                            loading="lazy"
                           />
                         ) : (
                           // GitHub Preview benzeri placeholder
@@ -329,14 +338,14 @@ const Projects: React.FC = () => {
 
                       {/* Project Info */}
                       <div className="p-3 sm:p-4 md:p-6 flex flex-col justify-between flex-grow">
-                        <div>
+            <div>
                           <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
                           <p className="mb-3 sm:mb-4 text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3">{project.description}</p>
-                        </div>
-                        <div>
+            </div>
+            <div>
                           <p className="font-semibold mb-2 text-xs sm:text-sm">{t('projects.tech')}</p>
                           <div className="flex flex-wrap gap-1 mb-4">
-                            {project.technologies.map((tech, idx) => (
+                {project.technologies.map((tech, idx) => (
                               <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
                             ))}
                           </div>
@@ -392,9 +401,9 @@ const Projects: React.FC = () => {
                         </div>
                       </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                ))}
+              </div>
+            </div>
                 ))}
           </div>
         </div>
