@@ -111,6 +111,7 @@
     "html": "HTML5",
     "css": "CSS3",
     "bootstrap": "Bootstrap",
+    "redux": "Redux",
     "restful": "RESTful APIs",
     "jwt": "JWT Authentifizierung",
     "nodejs": "Node.js",

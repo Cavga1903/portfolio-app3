@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench, FaChevronDown } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress, SiRender, SiGoogleanalytics, SiMongodb, SiPostgresql, SiMysql, SiRedis } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress, SiRender, SiGoogleanalytics, SiMongodb, SiPostgresql, SiMysql, SiRedis, SiRedux } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
 
 interface Technology {
@@ -136,6 +136,15 @@ const Technologies: React.FC = () => {
       icon: <SiExpo className="text-5xl" />,
       category: 'frontend',
       levelText: 'advanced'
+    },
+    {
+      iconKey: 'redux',
+      nameKey: 'technologies.redux',
+      level: 75,
+      color: 'from-purple-500 to-pink-500',
+      icon: <SiRedux className="text-5xl" />,
+      category: 'frontend',
+      levelText: 'intermediate'
     },
     {
       iconKey: 'tailwind',
@@ -361,7 +370,7 @@ const Technologies: React.FC = () => {
       iconKey: 'turkish',
       nameKey: 'technologies.turkish',
       level: 100,
-      color: 'from-red-500 to-red-700',
+      color: 'transparent',
       icon: <span className="text-5xl">🇹🇷</span>,
       category: 'languages',
       levelText: 'native'
@@ -370,7 +379,7 @@ const Technologies: React.FC = () => {
       iconKey: 'english',
       nameKey: 'technologies.english',
       level: 80,
-      color: 'from-blue-500 to-blue-700',
+      color: 'transparent',
       icon: <span className="text-5xl">🇺🇸</span>,
       category: 'languages',
       levelText: 'advanced'
@@ -379,7 +388,7 @@ const Technologies: React.FC = () => {
       iconKey: 'german',
       nameKey: 'technologies.german',
       level: 30,
-      color: 'from-gray-400 to-gray-600',
+      color: 'transparent',
       icon: <span className="text-5xl">🇩🇪</span>,
       category: 'languages',
       levelText: 'beginner'
@@ -491,7 +500,11 @@ const Technologies: React.FC = () => {
                           }}
                         >
                           {/* Skill Icon */}
-                          <div className={`w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-to-br ${tech.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
+                          <div className={`w-10 h-10 mx-auto mb-3 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 ${
+                            tech.category === 'languages' 
+                              ? 'bg-transparent' 
+                              : `bg-gradient-to-br ${tech.color}`
+                          }`}>
                             {tech.icon}
                           </div>
                           
@@ -508,7 +521,11 @@ const Technologies: React.FC = () => {
                           {/* Progress Bar */}
                           <div className="w-full bg-gray-700 rounded-full h-1.5">
                             <div
-                              className={`h-1.5 rounded-full bg-gradient-to-r ${tech.color} transition-all duration-1000 ease-out`}
+                              className={`h-1.5 rounded-full transition-all duration-1000 ease-out ${
+                                tech.category === 'languages' 
+                                  ? 'bg-gradient-to-r from-gray-400 to-gray-600' 
+                                  : `bg-gradient-to-r ${tech.color}`
+                              }`}
                               style={{ width: `${tech.level}%` }}
                             ></div>
                           </div>
