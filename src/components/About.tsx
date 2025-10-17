@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
 import { useAnalytics } from '../hooks/useAnalytics';
@@ -11,10 +11,67 @@ const About: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
+  // Instagram-style profile photo carousel state
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+
+  // Profile photos for Instagram-style carousel
+  const profilePhotos = [
+    {
+      id: 'github',
+      image: 'https://avatars.githubusercontent.com/u/46963474?v=4',
+      alt: 'GitHub Profile Photo',
+      description: 'GitHub Profil Fotoğrafı'
+    },
+    {
+      id: 'professional',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+      alt: 'Professional Photo',
+      description: 'Profesyonel Fotoğraf'
+    },
+    {
+      id: 'casual',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+      alt: 'Casual Photo',
+      description: 'Günlük Fotoğraf'
+    }
+  ];
+
+  // Photo carousel functions
+  const nextPhoto = () => {
+    setCurrentPhotoIndex((prev) => (prev + 1) % profilePhotos.length);
+    trackEvent('about_photo_navigation', {
+      action: 'next',
+      photo_index: (currentPhotoIndex + 1) % profilePhotos.length,
+      total_photos: profilePhotos.length
+    });
+  };
+
+
+  const goToPhoto = (index: number) => {
+    setCurrentPhotoIndex(index);
+    trackEvent('about_photo_navigation', {
+      action: 'direct',
+      photo_index: index,
+      total_photos: profilePhotos.length
+    });
+  };
+
+  // Auto-play functionality for photos
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      nextPhoto();
+    }, 3000); // 3 saniyede bir değişir
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, currentPhotoIndex]);
 
   // Track section view when component mounts
   React.useEffect(() => {
@@ -23,7 +80,8 @@ const About: React.FC = () => {
       trackEvent('about_section_view', {
         section_name: 'about',
         has_soft_skills: true,
-        social_links_count: 3
+        social_links_count: 3,
+        photo_carousel: true
       });
     }
   }, [isInView, trackSectionView, trackEvent]);
@@ -69,11 +127,58 @@ const About: React.FC = () => {
         >
           {/* Profile Section */}
           <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
-            {/* Avatar */}
+            {/* Instagram-style Photo Carousel */}
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-              <div className="relative w-32 h-32 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-xl">
-                <span className="text-6xl">👨‍💻</span>
+              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 shadow-xl cursor-pointer" onClick={nextPhoto}>
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentPhotoIndex}
+                    src={profilePhotos[currentPhotoIndex].image}
+                    alt={profilePhotos[currentPhotoIndex].alt}
+                    className="w-full h-full object-cover"
+                    initial={{ rotateY: 90, opacity: 0 }}
+                    animate={{ rotateY: 0, opacity: 1 }}
+                    exit={{ rotateY: -90, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                  />
+                </AnimatePresence>
+                
+                {/* Navigation dots */}
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+                  {profilePhotos.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToPhoto(index);
+                      }}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentPhotoIndex 
+                          ? 'bg-white scale-125' 
+                          : 'bg-white/50 hover:bg-white/75'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              {/* Auto-play indicator */}
+              <div className="absolute -top-2 -right-2">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsAutoPlaying(!isAutoPlaying);
+                  }}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-all duration-300 ${
+                    isAutoPlaying 
+                      ? 'bg-green-500 text-white' 
+                      : 'bg-gray-500 text-white hover:bg-gray-400'
+                  }`}
+                  title={isAutoPlaying ? 'Pause' : 'Play'}
+                >
+                  {isAutoPlaying ? '⏸️' : '▶️'}
+                </button>
               </div>
             </div>
 
