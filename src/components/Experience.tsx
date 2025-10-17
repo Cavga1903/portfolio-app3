@@ -25,7 +25,7 @@ const Experience: React.FC = () => {
       period: t('experience.turkcell.period'),
       description: t('experience.turkcell.description'),
       skills: ['Customer Service', 'Problem Solving', 'Communication'],
-      logo: '/logos/Turkcell_logo0.png'
+      logo: '/logos/turkcell.png'
     },
     {
       type: 'work',
