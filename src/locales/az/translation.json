@@ -354,7 +354,7 @@
     "rights": "Bütün Hüquqlar Qorunur.",
     "madeWith": "Hazırlanıb",
     "by": "Tolqa tərəfindən | Frontend Developer",
-    "downloadCV": "CV Yüklə",
+    "downloadCV": "Tərcümeyi-hal Yüklə",
     "buyMeACoffee": "Mənə Kofe Al ☕"
   },
   "scrollToTop": "Yuxarı qalx",
@@ -385,9 +385,9 @@
       "keywords": "Əlaqə, Əlaqə Forması, Layihə Təklifi, Veb İnkişaf, Frontend"
     },
     "cv": {
-      "title": "CV Yüklə | Tolga Çavga - Frontend Developer",
-      "description": "Tolga Çavganın güncel CV-sini yükləyin. React, TypeScript və müasir veb texnologiyalarında ekspert Frontend Developer.",
-      "keywords": "CV, Resume, Frontend Developer, React, TypeScript, İş Müraciəti"
+      "title": "Tərcümeyi-hal Yüklə | Tolga Çavga - Frontend Developer",
+      "description": "Tolga Çavganın güncel tərcümeyi-halını yükləyin. React, TypeScript və müasir veb texnologiyalarında ekspert Frontend Developer.",
+      "keywords": "Tərcümeyi-hal, Resume, Frontend Developer, React, TypeScript, İş Müraciəti"
     }
   },
   "share": {
