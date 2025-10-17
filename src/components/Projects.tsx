@@ -100,7 +100,7 @@ const Projects: React.FC = () => {
       description: t('projects.items.loginUI.description'),
       technologies: ["React", "TypeScript", "UI/UX", "Form Validation"],
       github: "https://github.com/Cavga1903/login-ui-tsx-app",
-      link: "https://login-ui-demo.vercel.app", // Demo link eklendi
+      link: "https://cavga1903.github.io/login-ui-tsx-app/", // Güncellenmiş demo link
       imageGradient: "from-sky-500 to-blue-600",
     },
     {
