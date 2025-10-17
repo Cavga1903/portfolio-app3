@@ -23,8 +23,15 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
 
   useEffect(() => {
     if (isVisible && !shouldLoad) {
-      // Immediate loading for visible items
-      setShouldLoad(true);
+      // Mobile: Add delay to prevent memory issues
+      const isMobile = window.innerWidth < 768;
+      const delay = isMobile ? 500 : 100;
+      
+      const timer = setTimeout(() => {
+        setShouldLoad(true);
+      }, delay);
+      
+      return () => clearTimeout(timer);
     }
   }, [isVisible, shouldLoad]);
 
@@ -86,7 +93,7 @@ const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; pro
         src={src}
         className="w-full h-full border-0"
         title={title}
-        sandbox="allow-scripts allow-same-origin allow-forms"
+        sandbox="allow-scripts allow-forms"
         loading="eager"
         style={{ 
           transform: 'scale(0.25)',
@@ -300,8 +307,10 @@ const projects: Project[] = [
     }, 3000);
   };
   
-  // Enhanced Intersection Observer for faster loading
+  // Enhanced Intersection Observer with mobile optimization
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -312,8 +321,8 @@ const projects: Project[] = [
         });
       },
       { 
-        rootMargin: '200px', // Increased margin for earlier loading
-        threshold: 0.01 // Lower threshold for faster triggering
+        rootMargin: isMobile ? '50px' : '200px', // Smaller margin on mobile
+        threshold: isMobile ? 0.1 : 0.01 // Higher threshold on mobile for better performance
       }
     );
 
@@ -324,15 +333,25 @@ const projects: Project[] = [
     return () => observer.disconnect();
   }, [projects.length]);
 
-  // Preload all projects after component mount
+  // Preload projects based on device type
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const allIndices = projects.map((_, index) => index);
-      setVisibleProjects(new Set(allIndices));
-    }, 1000); // Load all after 1 second
-
-    return () => clearTimeout(timer);
-  }, [projects.length]);
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // Mobile: Only load visible projects + next 2 projects
+      const visibleIndices = [currentIndex];
+      if (currentIndex + 1 < projects.length) visibleIndices.push(currentIndex + 1);
+      if (currentIndex + 2 < projects.length) visibleIndices.push(currentIndex + 2);
+      setVisibleProjects(new Set(visibleIndices));
+    } else {
+      // Desktop: Load all projects after 1 second
+      const timer = setTimeout(() => {
+        const allIndices = projects.map((_, index) => index);
+        setVisibleProjects(new Set(allIndices));
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [projects.length, currentIndex]);
 
   // Auto-play functionality
   useEffect(() => {
