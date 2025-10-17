@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
 
 interface Technology {
@@ -91,6 +91,15 @@ const Technologies: React.FC = () => {
       icon: <FaCss3Alt className="text-5xl" />,
       category: 'frontend',
       levelText: 'expert'
+    },
+    {
+      iconKey: 'bootstrap',
+      nameKey: 'technologies.bootstrap',
+      level: 85,
+      color: 'from-purple-500 to-pink-500',
+      icon: <SiBootstrap className="text-5xl" />,
+      category: 'frontend',
+      levelText: 'advanced'
     },
     // Backend
     {

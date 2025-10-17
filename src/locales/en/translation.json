@@ -110,6 +110,7 @@
     "tailwind": "Tailwind CSS",
     "html": "HTML5",
     "css": "CSS3",
+    "bootstrap": "Bootstrap",
     "restful": "RESTful APIs",
     "jwt": "JWT Authentication",
     "nodejs": "Node.js",
