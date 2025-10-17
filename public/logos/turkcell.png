@@ -1,1 +1,365 @@
-data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwQzVGMCIvPgo8dGV4dCB4PSIzMiIgeT0iMzgiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UQzwvdGV4dD4KPC9zdmc+
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="google-site-verification" content="ZswVZjjZoxZ-JxSbzqc_ebPxylFpWPED0QqF6rtsXd8">
+	<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.turkcell.com.tr/anasayfa">
+	<link rel="stylesheet" type="text/css" media="all" href="https://s.turkcell.com.tr/static_lib/assetsv2/common/styles/vendors.css">
+	<link rel="stylesheet" type="text/css" media="all" href="https://s.turkcell.com.tr/static_lib/assetsv2/desktop/styles/app.desktop.min.css">
+	<link rel="stylesheet" type="text/css" href="https://s.turkcell.com.tr/static_lib/assets/styles/global/trk.rd.desktop.min.css">
+    <link rel="shortcut icon" href="https://s.turkcell.com.tr/static_lib/assetsv2/common/images/favicon.ico" type="image/vnd.microsoft.icon">
+	<!-- Used by Google Tag Manager and should be imported to here--> 
+	<script> 
+		var dataLayer = []; 
+	</script> 
+	<!-- Google Tag Manager --> 
+	<script type="text/javascript">
+	setTimeout(function () {
+		try {
+			(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+				var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-SVLC');
+			}
+			catch (e) {
+				console.log(e)
+			}
+	}, 2000);
+	</script> 
+	<!-- End Google Tag Manager -->
+	<link rel = "manifest" href = "/insider/manifest.json">
+</head>
+
+<body>
+    <div class="header-bandaid"></div>
+    <header class="o-header" data-component="Header">
+        <div class="m-header-topnav">
+            <div class="container">
+                <ul>
+                    <li class="active"><a href="https://www.turkcell.com.tr" title="Bireysel">Bireysel</a></li>
+                    <li><a href="https://www.turkcell.com.tr/kurumsal" title="Kurumsal">Kurumsal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="o-header__bar">
+                <div class="o-header__logo">
+                	<a class="m-logo" href="https://www.turkcell.com.tr"><img src="https://s.turkcell.com.tr/static_lib/assetsv2/common/images/content/turkcell-logo.png" alt="Turkcell"/></a>
+                </div>
+                <nav class="m-header-nav">
+					<a class="" href="https://www.turkcell.com.tr/pasaj?place=menu" data-index="0" title="Cihazlar">Cihazlar</a>
+					<a class="" href="https://www.turkcell.com.tr/paket-ve-tarifeler?place=menu" data-index="1" title="Paketler">Paketler</a>
+					<a class="" href="https://www.turkcell.com.tr/servisler?place=menu" data-index="2" title="Dijital Servisler">Dijital Servisler</a>
+					<a class="" href="https://www.turkcell.com.tr/tr/ev-cozumleri?place=menu" data-index="3" title="Ev Çözümleri">Ev Çözümleri</a>
+					<a class="" href="https://www.turkcell.com.tr/kampanyalar?place=menu" data-index="4" title="Kampanyalar">Kampanyalar</a>
+				</nav>
+                <div class="o-header__right">
+                    <div class="m-dropdown js-quick-nav" data-component="Dropdown" role="navigation"><input type="checkbox" id="s0-0-0-15-9-dropdown"><label aria-haspopup="true" title="Hızlı İşlemler" for="s0-0-0-15-9-dropdown">Hızlı İşlemler</label>
+                        <ul aria-hidden="true" aria-labelledby="s0-0-0-15-9-dropdown">
+							<li>
+								<a href="https://www.turkcell.com.tr/yardim/yardim-araclari/fatura-borc-sorgulama-ve-odeme?place=qa" title="Fatura Sorgula / Öde">Fatura Sorgula / Öde</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/yukle/tl-yukle?place=qa" title="TL Yükle">TL Yükle</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/servisler/turkcell-tl-transfer?s=1&place=qa" title="TL Transfer">TL Transfer</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/yukle/hazir-kart-paket-yukle?place=qa" title="Hazır Kart Paket Yükle ">Hazır Kart Paket Yükle </a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/yukle/turkcell-rahat-ek-paket-al?place=qa" title="Turkcell Rahat Ek Paket Al">Turkcell Rahat Ek Paket Al</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/yukle/cepten-internet-paketi-yukle?place=qa" title="Cepten İnternet Paketi Yükle">Cepten İnternet Paketi Yükle</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/yukle/bilgisayardan-internet-paketi-yukle?place=qa" title="Bilgisayardan İnternet Yükle">Bilgisayardan İnternet Yükle</a>
+							</li>
+						</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="o-404" class="p-t-60 o-warning p-b-80">
+            <div class="container">
+            	<img src="https://s.turkcell.com.tr/static_lib/assetsv2/common/images/content/404.png">
+                <h2 class="text-center">Aradığınız Sayfa Bulunamadı</h2>
+                <div class="m-btn-group m-t-30"><a class="a-btn" href="https://www.turkcell.com.tr">Ana Sayfaya Dön</a></div>
+            </div>
+        </section>
+    </main>
+	<footer class="o-footer">
+		<div class="o-footer-top">
+			<div class="container">
+				<nav class="o-footer-nav">
+					<div class="m-grid">
+						<div class="m-grid-col">
+							<h3>
+								<a href="https://www.turkcell.com.tr/tr/hakkimizda?place=footer" title="Hakkımızda">Hakkımızda</a>
+							</h3>
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/5g?place=footer" title="Turkcell 5G">Turkcell 5G</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/haberler-sosyal-aglar?place=footer&place=footer" title="Haberler ve Sosyal Ağlar">Haberler ve Sosyal Ağlar</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis?place=footer&place=footer" title="Turkcell'e Genel Bakış ">Turkcell'e Genel Bakış </a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/sosyal-sorumluluk?place=footer&place=footer" title="Sosyal Sorumluluk, Sponsorluk ve STK İlişkileri">Sosyal Sorumluluk, Sponsorluk ve STK İlişkileri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/yatirimci-iliskileri?place=footer&place=footer" title="Yatırımcı İlişkileri">Yatırımcı İlişkileri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/insan-kaynaklari?place=footer&place=footer" title="İnsan Kaynakları">İnsan Kaynakları</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/video-galeri?place=footer&place=footer" title="Video Galeri">Video Galeri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/turkcell-logo?place=footer&place=footer" title="Logolarımız">Logolarımız</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz?place=footer" title="İştiraklerimiz">İştiraklerimiz</a>
+								</li>
+								<li>
+									<a href="https://e-sirket.mkk.com.tr/esir/Dashboard.jsp#/sirketbilgileri/12505?place=footer" title="Bilgi Toplumu Hizmetleri">Bilgi Toplumu Hizmetleri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/iletisim?place=footer" title="İletişim">İletişim</a>
+								</li>
+							</ul>
+						</div>
+						<div class="m-grid-col">
+							<h3>
+								<a href="https://www.turkcell.com.tr/urunler-ve-hizmetler?place=menu&place=footer" title="Ürün ve Hizmetler">Ürün ve Hizmetler</a>
+							</h3>
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/pasaj?place=footer&place=footer" title="Cihazlar">Cihazlar</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/paket-ve-tarifeler?place=footer&place=footer" title="Paketler">Paketler</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/servisler?place=footer&place=footer" title="Dijital Servisler">Dijital Servisler</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/ev-cozumleri?place=footer" title="Ev Çözümleri">Ev Çözümleri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/kampanyalar?place=footer" title="Kampanyalar">Kampanyalar</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/kulup-ve-programlar/sosyal-destek?place=footer&place=footer" title="Sosyal Destek">Sosyal Destek</a>
+								</li>
+							</ul>
+						</div>
+						<div class="m-grid-col">
+							<h3>
+								<a href="https://www.turkcell.com.tr/#?place=footer" title="Özel Sayfalar">Özel Sayfalar</a>
+							</h3>
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/pasaj/cep-telefonu-apple?place=footer" title="Apple Ürünleri">Apple Ürünleri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/pasaj/cep-telefonu-samsung?place=footer" title="Samsung Ürünleri">Samsung Ürünleri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/pasaj/cep-telefonu-huawei?place=footer" title="Huawei Ürünleri">Huawei Ürünleri</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/kampanyalar/pasaj/cihazlar/firsat-garaji?place=footer" title="Fırsat Garajı">Fırsat Garajı</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/pasaj/cep-telefonu?place=footer" title="Akıllı Telefon">Akıllı Telefon</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/paket-ve-tarifeler?place=footer" title="Faturalı Paketler">Faturalı Paketler</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/paket-ve-tarifeler/hazir-kart?place=footer" title="Hazır Kart Paketler">Hazır Kart Paketler</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/kampanyalar/ev-interneti?place=footer" title="Ev İnterneti">Ev İnterneti</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/turkcellli-olmak/numara-tasima?place=footer" title="Numara Taşıma">Numara Taşıma</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/pasaj/cihazlar/aksesuarlar/giyilebilir_teknoloji/akilli-saatler?place=footer" title="Akıllı Saat">Akıllı Saat</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/servisler/arikovani?place=footer" title="Arıkovanı Ürünleri">Arıkovanı Ürünleri</a>
+								</li>
+							</ul>
+						</div>
+						<div class="m-grid-col">
+							<h3>
+								<a href="https://www.turkcell.com.tr/hesabim?place=footer" title="İşlem Merkezi">İşlem Merkezi</a>
+							</h3>
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/faturalar?place=footer" title="Faturalarım">Faturalarım</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/tl-islemleri?place=footer" title="TL İşlemlerim">TL İşlemlerim</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/paket-ve-tarifelerim?place=footer" title="Paket ve Tarifelerim">Paket ve Tarifelerim</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/servislerim?place=footer" title="Servislerim">Servislerim</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/kampanyalarim?place=footer" title="Kampanyalarım">Kampanyalarım</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/siparislerim?place=footer" title="Sipariş Takibi">Sipariş Takibi</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/ayarlarim?place=footer" title="Hesap Ayarlarım">Hesap Ayarlarım</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/duyurular/guvenli-internet-hizmeti?place=footer" title="Güvenli İnternet">Güvenli İnternet</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/randevularim?place=footer" title="Randevularım">Randevularım</a>
+								</li>
+							</ul>
+						</div>
+						<div class="m-grid-col">
+							<h3>
+								<a href="https://www.turkcell.com.tr/kurumsal/yardim?place=footer" title="Yardım">Yardım</a>
+							</h3>
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/iletisim/turkcell-iletisim-merkezleri?place=footer" title="En Yakın Mağaza">En Yakın Mağaza</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/yardim/yurtdisi?place=footer" title="Yurt Dışı">Yurt Dışı</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/yardim/yardim-araclari/puk-sorgulama?place=footer" title="Puk Sorgulama">Puk Sorgulama</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/video-galeri/yardim-videolari?place=footer&place=footer" title="Yardım Videoları">Yardım Videoları</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/yardim/hattiniz/faturali/fatura-tutarimi-nasil-ogrenebilirim?place=footer" title="Sıkça Sorulan Sorular - Faturalı Hat ">Sıkça Sorulan Sorular - Faturalı Hat </a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/yardim/hattiniz/hazirkart/nasil-tl-yukleyebilirim?place=footer" title="Sıkça Sorulan Sorular - Hazır Kart">Sıkça Sorulan Sorular - Hazır Kart</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/yardim/yardim-araclari/alacak-sorgulama?place=footer" title="Alacak Sorgulama / TL İade Talep​">Alacak Sorgulama / TL İade Talep​</a>
+								</li>
+							</ul>
+						</div>
+						<div class="m-grid-col">
+							<h3>
+								<a href="https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/turkcell-musteri-memnuniyeti-politikasi/sikayet-talebi?place=footer" title="Tüketici Şikayetleri">Tüketici Şikayetleri</a>
+							</h3>
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/turkcell-musteri-memnuniyeti-politikasi/sikayet-talebi?place=footer" title="Şikayet Talebi Oluşturma">Şikayet Talebi Oluşturma</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/hesabim/tuketici-sikayetleri?place=footer" title="Şikayet Takibi">Şikayet Takibi</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<hr class="o-footer__line" />
+			</div>
+		</div>
+		<div class="o-footer-middle">
+			<div class="container">
+				<div class="m-grid">
+					<div class="m-grid-col">
+						<ul class="o-footer__language">
+							<li class="o-footer-language__active">
+								<a href="javascript:;" title="Türkçe">Türkçe</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/english-support" class="uxr-en-flag">
+									<span>English</span>
+								</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/arabic-support" class="uxr-ar-flag">
+									<span>العربية</span>
+								</a>
+							</li>
+							<li>
+								<a href="https://www.turkcell.com.tr/russian-support" class="uxr-ru-flag">
+									<span>русский</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="m-grid-col m-grid-offset-5">
+						<div class="o-footer__social">
+							<strong>Bizi Takip Edin</strong>
+							<div class="m-btn-group m-btn-group--align-right">
+								<a class="a-btn-icon" href="https://www.twitter.com/Turkcell" title="Twitter" target="blank">
+									<i class="icon-twitter"></i>
+								</a>
+								<a class="a-btn-icon" href="https://www.facebook.com/Turkcell" title="Facebook" target="blank">
+									<i class="icon-facebook"></i>
+								</a>
+								<a class="a-btn-icon" href="https://www.instagram.com/turkcell/" title="Instagram" target="blank">
+									<i class="icon-instagram"></i>
+								</a>
+								<a class="a-btn-icon" href="https://www.youtube.com/Turkcell" title="Youtube" target="blank">
+									<i class="icon-youtube"></i>
+								</a>
+								<a class="a-btn-icon" href="https://www.linkedin.com/company/turkcell/?originalSubdomain=tr" title="Linkedin" target="blank">
+									<i class="icon-linkedin"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="o-footer-bottom">
+			<div class="container">
+				<div class="o-footer__copy">
+					<div class="m-grid">
+						<div class="m-grid-col">
+							<ul>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/gizlilik-ve-guvenlik" title="Gizlilik ve Güvenlik">Gizlilik ve Güvenlik</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tr/hakkimizda/site-haritasi" title="Site Haritası">Site Haritası</a>
+								</li>
+								<li>
+									<a href="https://www.turkcell.com.tr/tarifekarsilastirmasitesi" title="Tarife karşılaştırma">Tarife Karşılaştırma</a>
+								</li>
+							</ul>
+						</div>
+						<div class="m-grid-col-2">
+							<span class="o-footer__copyright">© 2019 Turkcell</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
