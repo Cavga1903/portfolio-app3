@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
 
 interface Technology {
@@ -182,6 +182,51 @@ const Technologies: React.FC = () => {
       level: 80,
       color: 'from-gray-700 to-gray-900',
       icon: <SiVercel className="text-5xl" />,
+      category: 'tools',
+      levelText: 'advanced'
+    },
+    {
+      iconKey: 'docker',
+      nameKey: 'technologies.docker',
+      level: 70,
+      color: 'from-blue-500 to-cyan-500',
+      icon: <SiDocker className="text-5xl" />,
+      category: 'tools',
+      levelText: 'intermediate'
+    },
+    {
+      iconKey: 'render',
+      nameKey: 'technologies.render',
+      level: 80,
+      color: 'from-green-500 to-emerald-500',
+      icon: <FaGlobe className="text-5xl" />,
+      category: 'tools',
+      levelText: 'advanced'
+    },
+    {
+      iconKey: 'railway',
+      nameKey: 'technologies.railway',
+      level: 70,
+      color: 'from-gray-600 to-gray-800',
+      icon: <SiRailway className="text-5xl" />,
+      category: 'tools',
+      levelText: 'intermediate'
+    },
+    {
+      iconKey: 'opengraph',
+      nameKey: 'technologies.opengraph',
+      level: 80,
+      color: 'from-purple-500 to-pink-500',
+      icon: <FaGlobe className="text-5xl" />,
+      category: 'tools',
+      levelText: 'advanced'
+    },
+    {
+      iconKey: 'googleAnalytics',
+      nameKey: 'technologies.googleAnalytics',
+      level: 85,
+      color: 'from-orange-500 to-red-500',
+      icon: <FaCog className="text-5xl" />,
       category: 'tools',
       levelText: 'advanced'
     },
