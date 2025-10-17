@@ -38,11 +38,11 @@ const About: React.FC = () => {
       fallback: '/profilePhoto.jpg'
     },
     {
-      id: 'profile',
-      type: 'image',
-      image: '/profilePhoto.jpg',
-      alt: 'Profile Photo',
-      description: 'Profil Fotoğrafı'
+      id: 'emoji',
+      type: 'emoji',
+      emoji: '👨‍💻',
+      alt: 'Developer Emoji',
+      description: 'Developer Emoji'
     }
   ];
 
@@ -55,8 +55,6 @@ const About: React.FC = () => {
       total_photos: profilePhotos.length
     });
   };
-
-
 
   // Auto-play functionality for photos
   useEffect(() => {
@@ -151,7 +149,6 @@ const About: React.FC = () => {
                     )}
                   </motion.div>
                 </AnimatePresence>
-                
               </div>
             </div>
 
