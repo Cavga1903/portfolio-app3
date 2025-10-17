@@ -65,7 +65,7 @@ const Experience: React.FC = () => {
       period: t('experience.izmir.period'),
       description: t('experience.izmir.description'),
       skills: ['Hardware & Software', 'System Administration', 'Technical Support', 'Teamwork'],
-      logo: '/logos/izbel-navbar-logo.svg'
+      logo: '/logos/izmir.svg'
     },
     {
       type: 'education',
