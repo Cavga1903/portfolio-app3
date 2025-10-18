@@ -118,7 +118,7 @@ const Hero: React.FC = () => {
       >
         <motion.h1 
           variants={itemVariants}
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-300% hero-title"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-300%"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
@@ -128,7 +128,7 @@ const Hero: React.FC = () => {
         {/* Typing Animation */}
         <motion.div 
           variants={itemVariants}
-          className="text-2xl md:text-4xl font-semibold mb-8 text-cyan-400 h-16 flex items-center justify-center hero-subtitle"
+          className="text-2xl md:text-4xl font-semibold mb-8 text-cyan-400 h-16 flex items-center justify-center"
         >
           <TypeAnimation
             key={i18n.language} // Re-render when language changes
@@ -143,7 +143,7 @@ const Hero: React.FC = () => {
         
         <motion.p 
           variants={itemVariants}
-          className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto hero-description"
+          className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto"
           whileHover={{ color: '#ffffff' }}
           transition={{ duration: 0.3 }}
         >

@@ -69,50 +69,6 @@ body {
 @font-face {
   font-family: 'Inter';
   font-display: swap;
-  font-weight: 400 900;
-  font-style: normal;
-}
-
-/* Hero section font optimization */
-#hero {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-#hero h1, #hero .text-4xl, #hero .text-6xl, #hero .text-7xl {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 800;
-  font-display: swap;
-}
-
-#hero p, #hero .text-lg, #hero .text-xl {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 400;
-  font-display: swap;
-}
-
-#hero .text-2xl, #hero .text-4xl {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 600;
-  font-display: swap;
-}
-
-/* Hero specific font classes */
-.hero-title {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 800 !important;
-  font-display: swap;
-}
-
-.hero-subtitle {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 600 !important;
-  font-display: swap;
-}
-
-.hero-description {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 400 !important;
-  font-display: swap;
 }
 
 /* Gradient Animation for Hero Title */
