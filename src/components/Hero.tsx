@@ -141,14 +141,14 @@ const Hero: React.FC = () => {
           />
         </motion.div>
         
-        <motion.p 
+        {/* <motion.p 
           variants={itemVariants}
           className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto"
           whileHover={{ color: '#ffffff' }}
           transition={{ duration: 0.3 }}
         >
-          {/* {t('hero.description')} */}
-        </motion.p>
+          {t('hero.description')}
+        </motion.p> */}
         
         {/* CTA Butonları - Primary/Secondary Design */}
         <motion.div 
