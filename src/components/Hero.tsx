@@ -147,7 +147,7 @@ const Hero: React.FC = () => {
           whileHover={{ color: '#ffffff' }}
           transition={{ duration: 0.3 }}
         >
-          {t('hero.description')}
+          {/* {t('hero.description')} */}
         </motion.p>
         
         {/* CTA Butonları - Primary/Secondary Design */}
