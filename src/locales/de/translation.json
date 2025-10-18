@@ -234,7 +234,7 @@
     },
     "portfolio": {
       "title": "Portfolio-Website",
-      "description": "Persönliche Portfolio- und CV-Websites. Heben Sie sich ab mit modernem Design, Animationen und SEO-Optimierung."
+      "description": "Persönliche Portfolio- und Lebenslauf-Websites. Heben Sie sich ab mit modernem Design, Animationen und SEO-Optimierung."
     },
     "smallBusiness": {
       "title": "Website für kleine Unternehmen",
@@ -246,7 +246,7 @@
     },
     "personal": {
       "title": "Persönliche Website",
-      "description": "Maßgeschneiderte Websites für Blog, CV oder persönliche Marke. Content-Management und Social-Media-Integration."
+      "description": "Maßgeschneiderte Websites für Blog, Lebenslauf oder persönliche Marke. Content-Management und Social-Media-Integration."
     }
   },
   "projects": {
@@ -309,8 +309,8 @@
         "description": "Vollständige E-Commerce-Plattform mit React entwickelt. Mit Warenkorb-Management, Produktkatalog und Zahlungssystem."
       },
       "cvPreparation": {
-        "title": "CV-Vorbereitungs-App",
-        "description": "Webanwendung für dynamische CV-Erstellung und PDF-Download. Mit benutzerfreundlicher Oberfläche und Vorlagensystem."
+        "title": "Lebenslauf-Vorbereitungs-App",
+        "description": "Webanwendung für dynamische Lebenslauf-Erstellung und PDF-Download. Mit benutzerfreundlicher Oberfläche und Vorlagensystem."
       },
       "furniro": {
         "title": "Furniro E-Commerce",

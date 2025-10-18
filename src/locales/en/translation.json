@@ -235,7 +235,7 @@
     },
     "portfolio": {
       "title": "Portfolio Website",
-      "description": "Personal portfolio and CV websites. Stand out with modern design, animations and SEO optimization."
+      "description": "Personal portfolio and resume websites. Stand out with modern design, animations and SEO optimization."
     },
     "smallBusiness": {
       "title": "Small Business Website",
@@ -247,7 +247,7 @@
     },
     "personal": {
       "title": "Personal Website",
-      "description": "Custom designed websites for blog, CV or personal brand. Content management and social media integration."
+      "description": "Custom designed websites for blog, resume or personal brand. Content management and social media integration."
     }
   },
   "projects": {
@@ -310,8 +310,8 @@
         "description": "Full-featured e-commerce platform developed with React. Includes cart management, product catalog, and payment system."
       },
       "cvPreparation": {
-        "title": "CV Preparation App",
-        "description": "Web application for dynamic CV creation and PDF download. Features user-friendly interface and template system."
+        "title": "Resume Preparation App",
+        "description": "Web application for dynamic resume creation and PDF download. Features user-friendly interface and template system."
       },
       "furniro": {
         "title": "Furniro E-commerce",
@@ -355,7 +355,7 @@
     "rights": "All Rights Reserved.",
     "madeWith": "Made with",
     "by": "by Tolga | Frontend Developer",
-    "downloadCV": "Download CV",
+    "downloadCV": "Download Resume",
     "buyMeACoffee": "Buy Me a Coffee ☕"
   },
   "scrollToTop": "Scroll to top",
@@ -399,9 +399,9 @@
       "keywords": "Contact, Contact Form, Project Proposal, Web Development, Frontend"
     },
     "cv": {
-      "title": "Download CV | Tolga Çavga - Frontend Developer",
-      "description": "Download Tolga Çavga's current CV. Expert Frontend Developer in React, TypeScript and modern web technologies.",
-      "keywords": "CV, Resume, Frontend Developer, React, TypeScript, Job Application"
+      "title": "Download Resume | Tolga Çavga - Frontend Developer",
+      "description": "Download Tolga Çavga's current resume. Expert Frontend Developer in React, TypeScript and modern web technologies.",
+      "keywords": "Resume, CV, Frontend Developer, React, TypeScript, Job Application"
     }
   },
   "share": {

@@ -234,7 +234,7 @@
     },
     "portfolio": {
       "title": "Portfolio Vebsaytı",
-      "description": "Şəxsi portfolio və CV vebsaytları. Müasir dizayn, animasiyalar və SEO optimallaşdırması ilə fərqlənin."
+      "description": "Şəxsi portfolio və tərcümeyi-hal vebsaytları. Müasir dizayn, animasiyalar və SEO optimallaşdırması ilə fərqlənin."
     },
     "smallBusiness": {
       "title": "Kiçik Müəssisə Saytı",
@@ -246,7 +246,7 @@
     },
     "personal": {
       "title": "Şəxsi Vebsayt",
-      "description": "Blog, CV və ya şəxsi brend üçün xüsusi dizayn edilmiş vebsaytlar. Məzmun idarəetməsi və sosial media inteqrasiyası."
+      "description": "Blog, tərcümeyi-hal və ya şəxsi brend üçün xüsusi dizayn edilmiş vebsaytlar. Məzmun idarəetməsi və sosial media inteqrasiyası."
     }
   },
   "projects": {
@@ -309,8 +309,8 @@
         "description": "React ilə inkişaf etdirilmiş tam funksiyalı e-ticarət platforması. Səbət idarəetməsi, məhsul kataloqu və ödəniş sistemi."
       },
       "cvPreparation": {
-        "title": "CV Hazırlama Tətbiqi",
-        "description": "Dinamik CV yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi."
+        "title": "Tərcümeyi-hal Hazırlama Tətbiqi",
+        "description": "Dinamik tərcümeyi-hal yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi."
       },
       "furniro": {
         "title": "Furniro E-ticarət",
@@ -354,7 +354,7 @@
     "rights": "Bütün Hüquqlar Qorunur.",
     "madeWith": "Hazırlanıb",
     "by": "Tolqa tərəfindən | Frontend Developer",
-    "downloadCV": "CV Yüklə",
+    "downloadCV": "Tərcümeyi-hal Yüklə",
     "buyMeACoffee": "Mənə Kofe Al ☕"
   },
   "scrollToTop": "Yuxarı qalx",
@@ -385,9 +385,9 @@
       "keywords": "Əlaqə, Əlaqə Forması, Layihə Təklifi, Veb İnkişaf, Frontend"
     },
     "cv": {
-      "title": "CV Yüklə | Tolga Çavga - Frontend Developer",
-      "description": "Tolga Çavganın güncel CV-sini yükləyin. React, TypeScript və müasir veb texnologiyalarında ekspert Frontend Developer.",
-      "keywords": "CV, Resume, Frontend Developer, React, TypeScript, İş Müraciəti"
+      "title": "Tərcümeyi-hal Yüklə | Tolga Çavga - Frontend Developer",
+      "description": "Tolga Çavganın güncel tərcümeyi-halını yükləyin. React, TypeScript və müasir veb texnologiyalarında ekspert Frontend Developer.",
+      "keywords": "Tərcümeyi-hal, Resume, Frontend Developer, React, TypeScript, İş Müraciəti"
     }
   },
   "share": {

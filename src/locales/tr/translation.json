@@ -235,7 +235,7 @@
     },
     "portfolio": {
       "title": "Portfolyo Web Sitesi",
-      "description": "Kişisel portfolyo ve CV web siteleri. Modern tasarım, animasyonlar ve SEO optimizasyonu ile öne çıkın."
+      "description": "Kişisel portfolyo ve özgeçmiş web siteleri. Modern tasarım, animasyonlar ve SEO optimizasyonu ile öne çıkın."
     },
     "smallBusiness": {
       "title": "Küçük İşletme Sitesi",
@@ -247,7 +247,7 @@
     },
     "personal": {
       "title": "Kişisel Web Sitesi",
-      "description": "Blog, CV veya kişisel marka için özel tasarlanmış web siteleri. İçerik yönetimi ve sosyal medya entegrasyonu."
+      "description": "Blog, özgeçmiş veya kişisel marka için özel tasarlanmış web siteleri. İçerik yönetimi ve sosyal medya entegrasyonu."
     }
   },
   "projects": {
@@ -310,8 +310,8 @@
         "description": "React ile geliştirilmiş tam özellikli e-ticaret platformu. Sepet yönetimi, ürün kataloğu ve ödeme sistemi."
       },
       "cvPreparation": {
-        "title": "CV Hazırlama Uygulaması",
-        "description": "Dinamik CV oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi."
+        "title": "Özgeçmiş Hazırlama Uygulaması",
+        "description": "Dinamik özgeçmiş oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi."
       },
       "furniro": {
         "title": "Furniro E-ticaret",
@@ -355,7 +355,7 @@
     "rights": "Tüm Hakları Saklıdır.",
     "madeWith": "Made with",
     "by": "by Tolga | Frontend Developer",
-    "downloadCV": "CV İndir",
+    "downloadCV": "Özgeçmiş İndir",
     "buyMeACoffee": "Bana Bir Kahve Ismarla ☕"
   },
   "scrollToTop": "Yukarı çık",
@@ -399,9 +399,9 @@
       "keywords": "İletişim, İletişim Formu, Proje Teklifi, Web Geliştirme, Frontend"
     },
     "cv": {
-      "title": "CV İndir | Tolga Çavga - Frontend Developer",
-      "description": "Tolga Çavga'nın güncel CV'sini indirin. React, TypeScript ve modern web teknolojileri konusunda uzman Frontend Developer.",
-      "keywords": "CV, Resume, Frontend Developer, React, TypeScript, İş Başvurusu"
+      "title": "Özgeçmiş İndir | Tolga Çavga - Frontend Developer",
+      "description": "Tolga Çavga'nın güncel özgeçmişini indirin. React, TypeScript ve modern web teknolojileri konusunda uzman Frontend Developer.",
+      "keywords": "Özgeçmiş, Resume, Frontend Developer, React, TypeScript, İş Başvurusu"
     }
   },
   "share": {
