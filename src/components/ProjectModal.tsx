@@ -37,18 +37,36 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-30 backdrop-blur-sm"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%)'
+          }}
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl max-h-[90vh] bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden border border-white/30"
+            initial={{ scale: 0.8, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0, y: 20 }}
+            transition={{ 
+              type: "spring", 
+              damping: 20, 
+              stiffness: 200,
+              mass: 0.8
+            }}
+            className="relative w-full max-w-4xl max-h-[90vh] bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/30"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className={`relative p-8 bg-gradient-to-r ${project.imageGradient || 'from-blue-500 to-purple-600'} text-white`}>
+            <div 
+              className={`relative p-8 bg-gradient-to-r ${project.imageGradient || 'from-blue-500 to-purple-600'} text-white`}
+              style={{
+                background: `linear-gradient(135deg, ${project.imageGradient ? project.imageGradient.split(' ')[0].replace('from-', '') : 'blue-500'}, ${project.imageGradient ? project.imageGradient.split(' ')[2].replace('to-', '') : 'purple-600'})`,
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.1)'
+              }}
+            >
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-200"
