@@ -451,21 +451,21 @@ const Projects: React.FC = () => {
 
         {/* Carousel Container */}
         <div className="relative">
-          {/* Navigation Arrows - Hidden on mobile */}
+          {/* Navigation Arrows - Liquid style, outside container */}
           <button
             onClick={prevSlide}
-            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg items-center justify-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200"
+            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-20 w-16 h-16 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 group"
             aria-label="Previous projects"
           >
-            <FaChevronLeft className="w-5 h-5" />
+            <FaChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg items-center justify-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200"
+            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-20 w-16 h-16 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 group"
             aria-label="Next projects"
           >
-            <FaChevronRight className="w-5 h-5" />
+            <FaChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
           </button>
 
           {/* Projects Grid */}
@@ -574,6 +574,25 @@ const Projects: React.FC = () => {
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
+          </div>
+
+          {/* Mobile Navigation Arrows */}
+          <div className="flex lg:hidden justify-center mt-6 space-x-4">
+            <button
+              onClick={prevSlide}
+              className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
+              aria-label="Previous projects"
+            >
+              <FaChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
+              aria-label="Next projects"
+            >
+              <FaChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+            </button>
           </div>
         </div>
 
