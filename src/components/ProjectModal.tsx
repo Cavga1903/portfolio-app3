@@ -95,32 +95,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                     )}
                   </div>
                 </div>
-                
-                {/* Action Buttons */}
-                <div className="flex gap-3 ml-6">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-800 hover:bg-white hover:scale-105 rounded-lg transition-all duration-200 shadow-lg"
-                    >
-                      <FaGithub className="w-4 h-4" />
-                      <span>GitHub</span>
-                    </a>
-                  )}
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-800 hover:bg-white hover:scale-105 rounded-lg transition-all duration-200 shadow-lg"
-                    >
-                      <FaExternalLinkAlt className="w-4 h-4" />
-                      <span>Live Demo</span>
-                    </a>
-                  )}
-                </div>
               </div>
             </div>
 
@@ -221,7 +195,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       className="flex items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200"
                     >
                       <FaGithub className="w-4 h-4" />
-                      <span>View Code</span>
+                      <span>GitHub</span>
                     </a>
                   )}
                   {project.link && (
@@ -232,7 +206,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200"
                     >
                       <FaExternalLinkAlt className="w-4 h-4" />
-                      <span>Visit Site</span>
+                      <span>Live Demo</span>
                     </a>
                   )}
                 </div>
