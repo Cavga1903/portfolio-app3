@@ -63,7 +63,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             <div 
               className={`relative p-8 bg-gradient-to-r ${project.imageGradient || 'from-blue-500 to-purple-600'} text-white`}
               style={{
-                background: `linear-gradient(135deg, ${project.imageGradient ? project.imageGradient.split(' ')[0].replace('from-', '') : 'blue-500'}, ${project.imageGradient ? project.imageGradient.split(' ')[2].replace('to-', '') : 'purple-600'})`,
                 boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.1)'
               }}
             >
