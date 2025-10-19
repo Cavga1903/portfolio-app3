@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
-import { FaGithub, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
+import ProjectModal from './ProjectModal';
 
 type Project = {
   title: string;
@@ -11,118 +13,41 @@ type Project = {
   github?: string;
   image?: string;
   imageGradient?: string;
+  longDescription?: string;
+  features?: string[];
+  challenges?: string[];
+  solutions?: string[];
+  duration?: string;
+  role?: string;
 };
 
-// Enhanced iframe component with better loading and placeholder
-const LazyIframe: React.FC<{ src: string; title: string; isVisible: boolean; projectName: string }> = memo(({ src, title, isVisible, projectName }) => {
-  const [shouldLoad, setShouldLoad] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const { trackIframeInteraction } = useAnalytics();
-
-  useEffect(() => {
-    if (isVisible && !shouldLoad) {
-      // Immediate loading for better user experience
-      setShouldLoad(true);
-    }
-  }, [isVisible, shouldLoad]);
-
-  const handleLoad = () => {
-    setIsLoading(false);
-    setHasError(false);
-    // Completely disable iframe interactions
-    if (iframeRef.current) {
-      iframeRef.current.style.pointerEvents = 'none';
-      // Only disable if same origin (avoid cross-origin errors)
-      try {
-        if (iframeRef.current.contentWindow) {
-          iframeRef.current.contentWindow.stop?.();
-        }
-      } catch {
-        // Cross-origin iframe, ignore error
-      }
-    }
-    // Track iframe load
-    trackIframeInteraction(projectName, 'load');
-  };
-
-  const handleError = () => {
-    setIsLoading(false);
-    setHasError(true);
-    // Track iframe error
-    trackIframeInteraction(projectName, 'error');
-  };
-
-      if (!shouldLoad) {
-        return (
-          <div className="w-full h-full bg-gradient-to-br from-gray-700/50 to-gray-800/50 flex items-center justify-center relative overflow-hidden">
-            {/* Animated placeholder */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-pulse"></div>
-            <div className="relative z-10 text-center">
-              <div className="w-6 h-6 border-2 border-white/30 border-t-white/70 rounded-full animate-spin mx-auto mb-2"></div>
-              <div className="text-white/60 text-xs">Preview yükleniyor...</div>
-            </div>
-          </div>
-        );
-      }
-
+// Project placeholder component
+const ProjectPlaceholder: React.FC<{ project: Project }> = memo(({ project }) => {
   return (
-    <div className="w-full h-full relative">
-      {/* Loading overlay */}
-      {isLoading && (
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-700/80 to-gray-800/80 flex items-center justify-center z-20">
-          <div className="text-center">
-            <div className="w-6 h-6 border-2 border-white/30 border-t-white/70 rounded-full animate-spin mx-auto mb-2"></div>
-            <div className="text-white/70 text-xs">Yükleniyor...</div>
-          </div>
-        </div>
-      )}
-      
-      {/* Error state */}
-      {hasError && (
-        <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center z-20">
-          <div className="text-center">
-            <div className="text-red-400 text-2xl mb-2">⚠️</div>
-            <div className="text-white/70 text-xs">Demo yüklenemedi</div>
-          </div>
-        </div>
-      )}
-
-      <iframe
-        ref={iframeRef}
-        src={src}
-        className="w-full h-full border-0 pointer-events-none"
-        title={title}
-        sandbox="allow-same-origin allow-scripts"
-        loading="lazy"
-        style={{ 
-          transform: 'scale(0.25)',
-          transformOrigin: 'top left',
-          width: '400%',
-          height: '400%',
-          filter: 'blur(0.5px)',
-          opacity: 0.9
-        }}
-        onLoad={handleLoad}
-        onError={handleError}
-      />
+    <div className={`w-full h-48 bg-gradient-to-br ${project.imageGradient || 'from-blue-500 to-purple-600'} rounded-lg flex items-center justify-center relative overflow-hidden`}>
+      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+      <div className="relative z-10 text-center text-white">
+        <div className="text-4xl mb-2">🚀</div>
+        <div className="text-lg font-semibold mb-1">{project.title}</div>
+        <div className="text-sm opacity-90">Click to view details</div>
+      </div>
     </div>
   );
 });
 
-const Projects: React.FC = memo(() => {
+const Projects: React.FC = () => {
   const { t } = useTranslation();
-  const { trackProjectClick, trackCarouselInteraction } = useAnalytics();
+  const { trackClick } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [visibleProjects, setVisibleProjects] = useState<Set<number>>(new Set());
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-const projects: Project[] = [
+  const projects: Project[] = [
     // 1. Kişisel Portfolio
     {
       title: t('projects.items.portfolio.title'),
@@ -131,6 +56,26 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/portfolio-app3",
       link: "https://www.tolgacavga.com",
       imageGradient: "from-purple-500 to-indigo-600",
+      longDescription: "Modern ve responsive bir portfolyo web sitesi. React, TypeScript ve TailwindCSS kullanılarak geliştirildi. Framer Motion ile smooth animasyonlar ve çoklu dil desteği.",
+      features: [
+        "Responsive tasarım",
+        "Çoklu dil desteği (TR, EN, DE, AZ)",
+        "Smooth animasyonlar",
+        "SEO optimizasyonu",
+        "Dark/Light tema"
+      ],
+      challenges: [
+        "Performans optimizasyonu",
+        "Çoklu dil yönetimi",
+        "Responsive tasarım"
+      ],
+      solutions: [
+        "Lazy loading ve code splitting",
+        "i18next kütüphanesi",
+        "Mobile-first yaklaşım"
+      ],
+      duration: "2 ay",
+      role: "Full Stack Developer"
     },
     // 2. Workshop Tracker
     {
@@ -140,6 +85,15 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/workshop-tracker",
       link: "https://workshop-tracker-taupe.vercel.app",
       imageGradient: "from-green-500 to-teal-600",
+      longDescription: "Workshop ve etkinlik takip sistemi. Katılımcıların kayıt olabileceği, etkinlik detaylarını görüntüleyebileceği modern bir platform.",
+      features: [
+        "Kullanıcı kayıt sistemi",
+        "Etkinlik yönetimi",
+        "Real-time güncellemeler",
+        "Admin paneli"
+      ],
+      duration: "1.5 ay",
+      role: "Full Stack Developer"
     },
     // 3. IoT Cihaz Simülatörü
     {
@@ -149,6 +103,15 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/iot-simulator",
       link: "https://iot-simulator-kqi7.onrender.com",
       imageGradient: "from-blue-500 to-cyan-600",
+      longDescription: "IoT cihazlarını simüle eden web uygulaması. Gerçek zamanlı veri görselleştirme ve QR kod entegrasyonu.",
+      features: [
+        "Real-time data visualization",
+        "QR kod entegrasyonu",
+        "Docker containerization",
+        "WebSocket bağlantısı"
+      ],
+      duration: "1 ay",
+      role: "Backend Developer"
     },
     // 4. Furniro E-commerce
     {
@@ -158,6 +121,15 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/eCommerce-WebsiteOdev4",
       link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/",
       imageGradient: "from-red-500 to-pink-600",
+      longDescription: "Mobilya e-ticaret sitesi. Modern tasarım ve kullanıcı dostu arayüz ile mobilya ürünlerinin satışı.",
+      features: [
+        "Ürün kataloğu",
+        "Sepet yönetimi",
+        "Ödeme sistemi",
+        "Responsive tasarım"
+      ],
+      duration: "3 hafta",
+      role: "Frontend Developer"
     },
     // 5. CV Hazırlama
     {
@@ -167,410 +139,390 @@ const projects: Project[] = [
       github: "https://github.com/Cavga1903/cvPreparationApp",
       link: "https://cavga1903.github.io/cvPreparationApp/",
       imageGradient: "from-teal-500 to-cyan-600",
+      longDescription: "Dinamik CV oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi.",
+      features: [
+        "Dinamik CV oluşturma",
+        "PDF export",
+        "Şablon sistemi",
+        "Real-time preview"
+      ],
+      duration: "2 hafta",
+      role: "Frontend Developer"
     },
     // 6. Online Grocery
     {
       title: t('projects.items.grocery.title'),
       description: t('projects.items.grocery.description'),
-      technologies: ["React", "JavaScript", "E-commerce", "Payment"],
+      technologies: ["React", "JavaScript", "E-commerce", "Grocery"],
       github: "https://github.com/Cavga1903/online-grocery-app",
       link: "https://cavga1903.github.io/online-grocery-app/",
-      imageGradient: "from-yellow-500 to-orange-600",
+      imageGradient: "from-orange-500 to-yellow-600",
+      longDescription: "Online market uygulaması. Gıda ürünlerinin satışı ve teslimat takibi.",
+      features: [
+        "Ürün kategorileri",
+        "Arama ve filtreleme",
+        "Teslimat takibi",
+        "Kullanıcı hesapları"
+      ],
+      duration: "2.5 hafta",
+      role: "Full Stack Developer"
     },
     // 7. Todo App
     {
       title: t('projects.items.todo.title'),
       description: t('projects.items.todo.description'),
-      technologies: ["React", "JavaScript", "CSS3", "HTML5"],
+      technologies: ["React", "JavaScript", "Local Storage", "CRUD"],
       github: "https://github.com/Cavga1903/todo-app-ins",
       link: "https://cavga1903.github.io/todo-app-ins/",
-      imageGradient: "from-pink-500 to-purple-600",
+      imageGradient: "from-indigo-500 to-purple-600",
+      longDescription: "Görev yönetim uygulaması. CRUD operasyonları ve local storage entegrasyonu.",
+      features: [
+        "Görev ekleme/silme",
+        "Durum güncelleme",
+        "Local storage",
+        "Responsive tasarım"
+      ],
+      duration: "1 hafta",
+      role: "Frontend Developer"
     },
-    // 8. React Supabase Product Manager
+    // 8. Product Manager
     {
       title: t('projects.items.productManager.title'),
       description: t('projects.items.productManager.description'),
-      technologies: ["React", "Supabase", "TypeScript", "TailwindCSS"],
+      technologies: ["React", "Supabase", "Database", "CRUD"],
       github: "https://github.com/Cavga1903/react-supabase-product-manager",
       link: "https://react-supabase-product-manager.vercel.app/login",
-      imageGradient: "from-orange-500 to-red-600",
+      imageGradient: "from-emerald-500 to-green-600",
+      longDescription: "Ürün yönetim sistemi. Supabase backend ile CRUD operasyonları ve kullanıcı kimlik doğrulama.",
+      features: [
+        "Ürün CRUD operasyonları",
+        "Kullanıcı kimlik doğrulama",
+        "Supabase entegrasyonu",
+        "Real-time güncellemeler"
+      ],
+      duration: "3 hafta",
+      role: "Full Stack Developer"
     },
-    // 9. Ödeme Formu
+    // 9. Payment Form
     {
-      title: t('projects.items.paymentForm.title'),
-      description: t('projects.items.paymentForm.description'),
-      technologies: ["React", "Form Validation", "Payment", "UI/UX"],
+      title: t('projects.items.payment.title'),
+      description: t('projects.items.payment.description'),
+      technologies: ["React", "JavaScript", "Payment", "Form Validation"],
       github: "https://github.com/Cavga1903/odeme-formu",
       link: "https://cavga1903.github.io/odeme-formu/",
-      imageGradient: "from-emerald-500 to-green-600",
+      imageGradient: "from-rose-500 to-pink-600",
+      longDescription: "Ödeme formu uygulaması. Form validasyonu ve güvenli ödeme işlemleri.",
+      features: [
+        "Form validasyonu",
+        "Güvenli ödeme",
+        "Responsive tasarım",
+        "Error handling"
+      ],
+      duration: "1 hafta",
+      role: "Frontend Developer"
     },
     // 10. Global Identity
     {
       title: t('projects.items.globalIdentity.title'),
       description: t('projects.items.globalIdentity.description'),
-      technologies: ["React", "Authentication", "Security", "Multi-platform"],
+      technologies: ["React", "JavaScript", "Identity", "Management"],
       github: "https://github.com/Cavga1903/global-identity-9",
       link: "https://cavga1903.github.io/global-identity-9/",
       imageGradient: "from-violet-500 to-purple-600",
+      longDescription: "Küresel kimlik yönetim sistemi. Kullanıcı profilleri ve kimlik doğrulama.",
+      features: [
+        "Kullanıcı profilleri",
+        "Kimlik doğrulama",
+        "Güvenlik önlemleri",
+        "Multi-language support"
+      ],
+      duration: "2 hafta",
+      role: "Full Stack Developer"
     },
     // 11. Exchange Screen
     {
-      title: t('projects.items.exchangeScreen.title'),
-      description: t('projects.items.exchangeScreen.description'),
-      technologies: ["JavaScript", "HTML5", "CSS3", "Currency API"],
+      title: t('projects.items.exchange.title'),
+      description: t('projects.items.exchange.description'),
+      technologies: ["React", "JavaScript", "Exchange", "Trading"],
       github: "https://github.com/Cavga1903/exchangeScreenOdev3",
       link: "https://cavga1903.github.io/exchangeScreenOdev3/",
-      imageGradient: "from-indigo-500 to-blue-600",
+      imageGradient: "from-amber-500 to-orange-600",
+      longDescription: "Döviz kuru takip ve alım-satım ekranı. Real-time veri ve grafik görselleştirme.",
+      features: [
+        "Real-time döviz kurları",
+        "Grafik görselleştirme",
+        "Alım-satım simülasyonu",
+        "Responsive tasarım"
+      ],
+      duration: "1.5 hafta",
+      role: "Frontend Developer"
     },
     // 12. Dashboard
     {
       title: t('projects.items.dashboard.title'),
       description: t('projects.items.dashboard.description'),
-      technologies: ["HTML5", "CSS3", "JavaScript", "Dashboard UI"],
+      technologies: ["React", "JavaScript", "Dashboard", "Analytics"],
       github: "https://github.com/Cavga1903/dashboardOdev2",
       link: "https://cavga1903.github.io/dashboardOdev2/",
       imageGradient: "from-slate-500 to-gray-600",
+      longDescription: "Analitik dashboard uygulaması. Veri görselleştirme ve raporlama sistemi.",
+      features: [
+        "Veri görselleştirme",
+        "Analitik raporlar",
+        "Interactive charts",
+        "Export functionality"
+      ],
+      duration: "2 hafta",
+      role: "Frontend Developer"
     }
   ];
-  
-  // Carousel logic - responsive items per page
-  const [itemsPerPage, setItemsPerPage] = useState(3);
-  
-  // Update items per page based on screen size - more detailed breakpoints
+
+  // Responsive project count
+  const getProjectCount = () => {
+    if (window.innerWidth < 640) return 1; // Mobile
+    if (window.innerWidth < 1024) return 2; // Tablet
+    return 3; // Desktop
+  };
+
+  const [projectCount, setProjectCount] = useState(getProjectCount());
+
   useEffect(() => {
-    const updateItemsPerPage = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setItemsPerPage(1); // Mobile S: 1 item
-      } else if (width < 768) {
-        setItemsPerPage(1); // Mobile M: 1 item
-      } else if (width < 1024) {
-        setItemsPerPage(2); // Tablet: 2 items
-      } else if (width < 1280) {
-        setItemsPerPage(3); // Desktop S: 3 items
-      } else {
-        setItemsPerPage(3); // Desktop L: 3 items
-      }
+    const handleResize = () => {
+      setProjectCount(getProjectCount());
     };
-    
-    updateItemsPerPage();
-    window.addEventListener('resize', updateItemsPerPage);
-    
-    return () => window.removeEventListener('resize', updateItemsPerPage);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
-  const totalPages = Math.ceil(projects.length / itemsPerPage);
-  
-  const nextSlide = useCallback(() => {
-    const newIndex = (currentIndex + 1) % totalPages;
-    setCurrentIndex(newIndex);
-    trackCarouselInteraction('next', newIndex + 1, totalPages);
-  }, [currentIndex, totalPages, trackCarouselInteraction]);
-  
-  const prevSlide = useCallback(() => {
-    const newIndex = (currentIndex - 1 + totalPages) % totalPages;
-    setCurrentIndex(newIndex);
-    trackCarouselInteraction('previous', newIndex + 1, totalPages);
-  }, [currentIndex, totalPages, trackCarouselInteraction]);
-  
-  const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index);
-    trackCarouselInteraction('dot_click', index + 1, totalPages);
-  }, [totalPages, trackCarouselInteraction]);
-  
-  // Touch/Swipe functionality
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % projects.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoPlaying, projects.length]);
+
+  // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
-    setIsAutoPlaying(false);
   };
-  
+
   const handleTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
-  
+
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
-    
+
     if (isLeftSwipe) {
-      trackCarouselInteraction('swipe_left', currentIndex + 1, totalPages);
       nextSlide();
     } else if (isRightSwipe) {
-      trackCarouselInteraction('swipe_right', currentIndex + 1, totalPages);
       prevSlide();
     }
-    
-    // Restart auto-play after 3 seconds
-    setTimeout(() => {
-      setIsAutoPlaying(true);
-    }, 3000);
   };
-  
-  // Enhanced Intersection Observer with mobile optimization
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-project-index') || '0');
-            setVisibleProjects(prev => new Set([...prev, index]));
-          }
-        });
-      },
-      { 
-        rootMargin: isMobile ? '50px' : '200px', // Smaller margin on mobile
-        threshold: isMobile ? 0.1 : 0.01 // Higher threshold on mobile for better performance
-      }
-    );
 
-    projectRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % projects.length);
+    trackClick('projects_next', 'carousel_navigation', 'Next slide');
+  }, [projects.length, trackClick]);
 
-    return () => observer.disconnect();
-  }, [projects.length]);
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    trackClick('projects_prev', 'carousel_navigation', 'Previous slide');
+  }, [projects.length, trackClick]);
 
-  // Conservative iframe loading strategy
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    
-    if (isMobile) {
-      // Mobile: Only load current project to prevent issues
-      setVisibleProjects(new Set([currentIndex]));
-    } else {
-      // Desktop: Load current + next 2 projects only
-      const visibleIndices = [currentIndex];
-      if (currentIndex + 1 < projects.length) visibleIndices.push(currentIndex + 1);
-      if (currentIndex + 2 < projects.length) visibleIndices.push(currentIndex + 2);
-      setVisibleProjects(new Set(visibleIndices));
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+    trackClick('project_modal_open', 'project_interaction', project.title);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
+  // Get visible projects
+  const getVisibleProjects = () => {
+    const visible = [];
+    for (let i = 0; i < projectCount; i++) {
+      const index = (currentIndex + i) % projects.length;
+      visible.push({ ...projects[index], index });
     }
-  }, [projects.length, currentIndex]);
+    return visible;
+  };
 
-  // Auto-play functionality - Disabled to prevent unwanted scrolling
-  useEffect(() => {
-    // Auto-play is disabled to prevent page jumping
-    // Users can manually navigate using arrows or dots
-    return;
-  }, [isAutoPlaying, currentIndex, nextSlide]);
-  
   return (
-    <section id="projects" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
-      {/* Animated Background Circles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 left-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
+    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            {t('projects.title')}
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Modern web teknolojileri kullanarak geliştirdiğim projeler
+          </p>
+        </div>
 
-      <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-10 text-center fade-in-up inline-block group">
-        {t('projects.title')}
-        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-indigo-500 group-hover:w-full transition-all duration-500"></span>
-      </h2>
-
-      {/* Carousel Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
-        {/* Navigation Arrows - Hidden on mobile, visible on tablet+ */}
-        <button
-          onClick={prevSlide}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-          className="hidden md:block absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          aria-label="Previous projects"
-        >
-          <FaChevronLeft className="text-xl" />
-        </button>
-        
-        <button
-          onClick={nextSlide}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-          className="hidden md:block absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700/90 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          aria-label="Next projects"
-        >
-          <FaChevronRight className="text-xl" />
-        </button>
-
-        {/* Carousel Content */}
-        <div 
-          className="overflow-hidden"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          ref={carouselRef}
-        >
-          <div 
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Arrows - Hidden on mobile */}
+          <button
+            onClick={prevSlide}
+            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg items-center justify-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200"
+            aria-label="Previous projects"
           >
-            {Array.from({ length: totalPages }, (_, pageIndex) => (
-              <div key={pageIndex} className="w-full flex-shrink-0">
-                <div className={`grid gap-4 sm:gap-6 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 ${
-                  itemsPerPage === 1 ? 'grid-cols-1' : 
-                  itemsPerPage === 2 ? 'grid-cols-1 sm:grid-cols-2' : 
-                  'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-                }`}>
-                  {projects
-                    .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
-                    .map((project, index) => {
-                      const globalIndex = pageIndex * itemsPerPage + index;
-                      return (
-                        <div
-                          key={globalIndex}
-                          ref={(el) => { projectRefs.current[globalIndex] = el; }}
-                          data-project-index={globalIndex}
-                          className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-indigo-500/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group"
-                          onMouseEnter={() => setIsAutoPlaying(false)}
-                          onMouseLeave={() => setIsAutoPlaying(true)}
-                        >
-                  {/* Project Image/Preview */}
-                  <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
-                    {project.link ? ( // Safe iframe preview - read-only mode
-                      // Canlı demo preview - LazyIframe ile optimize edilmiş
-                      <div className="relative w-full h-full">
-                        <LazyIframe
-                          src={project.link || ''}
-                          title={`${project.title} Preview`}
-                          isVisible={visibleProjects.has(globalIndex)}
-                          projectName={project.title}
-                        />
-                        {/* Demo link indicator */}
-                        <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
-                          LIVE
-                        </div>
-                        {/* Click blocker overlay - prevents iframe interaction */}
-                        <div className="absolute inset-0 z-20 cursor-pointer" 
-                             onClick={() => {
-                               if (project.link) {
-                                 window.open(project.link, '_blank');
-                                 trackProjectClick(project.title, 'demo', project.link);
-                               }
-                             }}
-                             title="Click to open live demo">
-                        </div>
-                      </div>
-                    ) : (
-                          // GitHub Preview benzeri placeholder
-                          <div className={`w-full h-full bg-gradient-to-br ${project.imageGradient} flex items-center justify-center relative overflow-hidden`}>
-                            {/* Decorative elements */}
-                            <div className="absolute inset-0 opacity-10">
-                              <div className="absolute top-4 left-4 w-12 h-12 border-2 border-white rounded"></div>
-                              <div className="absolute top-8 right-8 w-16 h-16 border-2 border-white rounded-full"></div>
-                              <div className="absolute bottom-8 left-8 w-20 h-2 bg-white rounded"></div>
-                              <div className="absolute bottom-12 left-8 w-14 h-2 bg-white rounded"></div>
-                              <div className="absolute bottom-16 left-8 w-16 h-2 bg-white rounded"></div>
-                            </div>
-                            {/* Center icon */}
-                            <FaGithub className="text-white/20 text-6xl group-hover:scale-110 transition-transform duration-300" />
-                            {/* Overlay on hover */}
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
-                          </div>
-                        )}
-                        {/* GitHub Icon Overlay - Top Right */}
-                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <div className="bg-gray-800/90 backdrop-blur-sm rounded-full p-2">
-                            <FaGithub className="text-white text-lg" />
-                          </div>
-                        </div>
-                      </div>
+            <FaChevronLeft className="w-5 h-5" />
+          </button>
 
-                      {/* Project Info */}
-                      <div className="p-3 sm:p-4 md:p-6 flex flex-col justify-between flex-grow">
-            <div>
-                          <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-indigo-500 transition-colors duration-300">{project.title}</h3>
-                          <p className="mb-3 sm:mb-4 text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3">{project.description}</p>
-            </div>
-            <div>
-                          <p className="font-semibold mb-2 text-xs sm:text-sm">{t('projects.tech')}</p>
-                          <div className="flex flex-wrap gap-1 mb-4">
-                {project.technologies.map((tech, idx) => (
-                              <span key={idx} className="badge badge-outline badge-xs sm:badge-sm group-hover:badge-primary transition-all duration-300">{tech}</span>
-                ))}
-              </div>
-                          
-                          {/* Action Buttons */}
-                          <div className="flex gap-2 mt-auto">
-                            {project.link ? (
-                              <>
-                                {/* Canlı Demo Button */}
-                                <a
-                                  href={project.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                  onClick={() => {
-                                    trackProjectClick(project.title, 'demo', project.link!);
-                                  }}
-                                >
-                                  {t('projects.demo')}
-                                </a>
-                                {/* GitHub Button */}
-                                <a
-                                  href={project.github}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-blue-500 border border-blue-500 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                  onClick={() => {
-                                    if (project.github) {
-                                      trackProjectClick(project.title, 'github', project.github);
-                                    }
-                                  }}
-                                >
-                                  GitHub
-                                </a>
-                              </>
-                            ) : (
-                              /* Sadece GitHub Button */
-                              <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-full bg-gray-700 hover:bg-gray-600 text-blue-500 border border-blue-500 text-xs sm:text-sm font-medium py-2 px-3 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                onClick={() => {
-                                  if (project.github) {
-                                    trackProjectClick(project.title, 'github', project.github);
-                                  }
-                                }}
-                              >
-                                GitHub
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                        </div>
-                      );
-                    })}
-            </div>
+          <button
+            onClick={nextSlide}
+            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg items-center justify-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200"
+            aria-label="Next projects"
+          >
+            <FaChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Projects Grid */}
+          <div
+            ref={carouselRef}
+            className="grid gap-8 transition-all duration-500 ease-in-out"
+            style={{
+              gridTemplateColumns: `repeat(${projectCount}, 1fr)`
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {getVisibleProjects().map((project, index) => (
+              <motion.div
+                key={`${project.title}-${project.index}`}
+                ref={(el) => {
+                  if (el) projectRefs.current[project.index] = el;
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group cursor-pointer"
+                onClick={() => handleProjectClick(project)}
+              >
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105">
+                  {/* Project Preview */}
+                  <ProjectPlaceholder project={project} />
+                  
+                  {/* Project Info */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                      {project.description}
+                    </p>
+                    
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full">
+                          +{project.technologies.length - 3}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            trackClick('project_github', 'external_link', project.title);
+                          }}
+                          className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm"
+                        >
+                          <FaGithub className="w-4 h-4" />
+                          <span>GitHub</span>
+                        </a>
+                      )}
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            trackClick('project_demo', 'external_link', project.title);
+                          }}
+                          className="flex items-center gap-2 px-3 py-2 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors text-sm"
+                        >
+                          <FaExternalLinkAlt className="w-4 h-4" />
+                          <span>Demo</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        ))}
+
+          {/* Pagination Dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: Math.ceil(projects.length / projectCount) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index * projectCount)}
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  Math.floor(currentIndex / projectCount) === index
+                    ? 'bg-blue-600 scale-125'
+                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Pagination Dots */}
-        <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              onMouseEnter={() => setIsAutoPlaying(false)}
-              onMouseLeave={() => setIsAutoPlaying(true)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                index === currentIndex
-                  ? 'bg-indigo-500 scale-125'
-                  : 'bg-gray-600 hover:bg-gray-500 hover:scale-110'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+        {/* Auto-play Toggle */}
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              isAutoPlaying
+                ? 'bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800'
+                : 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800'
+            }`}
+          >
+            {isAutoPlaying ? '⏸️ Pause' : '▶️ Auto-play'}
+          </button>
         </div>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </section>
   );
-});
+};
 
 export default Projects;
