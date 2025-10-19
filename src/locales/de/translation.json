@@ -288,6 +288,44 @@
         "title": "Zahlungsformular",
         "description": "Formularanwendung für sichere Zahlungstransaktionen entwickelt. Mit Formularvalidierung und benutzerfreundlicher Oberfläche."
       },
+      "payment": {
+        "title": "Zahlungsformular-Anwendung",
+        "description": "Zahlungsformular-Anwendung. Formularvalidierung und sichere Zahlungstransaktionen.",
+        "longDescription": "Sichere Zahlungsformular-Anwendung, die mit modernen Web-Technologien entwickelt wurde. Bietet sichere Zahlungstransaktionen mit benutzerfreundlicher Oberfläche und umfassender Formularvalidierung.",
+        "features": [
+          "Formularvalidierung",
+          "Sichere Zahlung",
+          "Responsive Design",
+          "Fehlerbehandlung"
+        ],
+        "challenges": [
+          "Sichere Datenverarbeitung",
+          "Benutzererfahrungsoptimierung"
+        ],
+        "solutions": [
+          "Moderne Validierungsbibliotheken",
+          "Responsive Design-Prinzipien"
+        ]
+      },
+      "exchange": {
+        "title": "Währungsumtausch-Tracking-App",
+        "description": "Währungsumtausch-Kursverfolgung und Handelsoberfläche. Echtzeitdaten und Diagrammvisualisierung.",
+        "longDescription": "Moderne Webanwendung, die Echtzeit-Wechselkurse verfolgt und Handelssimulation bietet. Bietet benutzerfreundliche Erfahrung mit Diagrammvisualisierung und responsivem Design.",
+        "features": [
+          "Echtzeit-Wechselkurse",
+          "Diagrammvisualisierung",
+          "Handelssimulation",
+          "Responsive Design"
+        ],
+        "challenges": [
+          "Echtzeitdatenintegration",
+          "Leistungsoptimierung"
+        ],
+        "solutions": [
+          "WebSocket-Verbindungen",
+          "Effizientes Daten-Caching"
+        ]
+      },
       "globalIdentity": {
         "title": "Globale Identität",
         "description": "Globales Identitätsverifikationssystem. Mit Multi-Plattform-Unterstützung und sicherer Authentifizierung."

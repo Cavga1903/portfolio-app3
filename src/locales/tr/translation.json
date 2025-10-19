@@ -289,6 +289,44 @@
         "title": "Ödeme Formu",
         "description": "Güvenli ödeme işlemleri için geliştirilmiş form uygulaması. Form validasyonu ve kullanıcı dostu arayüz."
       },
+      "payment": {
+        "title": "Ödeme Formu Uygulaması",
+        "description": "Ödeme formu uygulaması. Form validasyonu ve güvenli ödeme işlemleri.",
+        "longDescription": "Modern web teknolojileri kullanılarak geliştirilmiş güvenli ödeme formu uygulaması. Kullanıcı dostu arayüz ve kapsamlı form validasyonu ile güvenli ödeme işlemleri sağlar.",
+        "features": [
+          "Form validasyonu",
+          "Güvenli ödeme",
+          "Responsive tasarım",
+          "Error handling"
+        ],
+        "challenges": [
+          "Güvenli veri işleme",
+          "Kullanıcı deneyimi optimizasyonu"
+        ],
+        "solutions": [
+          "Modern validasyon kütüphaneleri",
+          "Responsive tasarım prensipleri"
+        ]
+      },
+      "exchange": {
+        "title": "Döviz Kuru Takip Uygulaması",
+        "description": "Döviz kuru takip ve alım-satım ekranı. Real-time veri ve grafik görselleştirme.",
+        "longDescription": "Gerçek zamanlı döviz kurlarını takip eden ve alım-satım simülasyonu yapabilen modern web uygulaması. Grafik görselleştirme ve responsive tasarım ile kullanıcı dostu deneyim sunar.",
+        "features": [
+          "Real-time döviz kurları",
+          "Grafik görselleştirme",
+          "Alım-satım simülasyonu",
+          "Responsive tasarım"
+        ],
+        "challenges": [
+          "Real-time veri entegrasyonu",
+          "Performans optimizasyonu"
+        ],
+        "solutions": [
+          "WebSocket bağlantıları",
+          "Efficient data caching"
+        ]
+      },
       "globalIdentity": {
         "title": "Global Identity",
         "description": "Küresel kimlik doğrulama sistemi. Çoklu platform desteği ve güvenli authentication özellikleri."

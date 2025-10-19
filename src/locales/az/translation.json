@@ -288,6 +288,44 @@
         "title": "Ödəniş Forması",
         "description": "Təhlükəsiz ödəniş əməliyyatları üçün inkişaf etdirilmiş forma tətbiqi. Forma doğrulaması və istifadəçi dostu interfeys."
       },
+      "payment": {
+        "title": "Ödəniş Formu Tətbiqi",
+        "description": "Ödəniş formu tətbiqi. Form validasiyası və təhlükəsiz ödəniş əməliyyatları.",
+        "longDescription": "Müasir veb texnologiyaları istifadə edərək inkişaf etdirilmiş təhlükəsiz ödəniş formu tətbiqi. İstifadəçi dostu interfeys və hərtərəfli form validasiyası ilə təhlükəsiz ödəniş əməliyyatları təmin edir.",
+        "features": [
+          "Form validasiyası",
+          "Təhlükəsiz ödəniş",
+          "Responsive dizayn",
+          "Xəta idarəetməsi"
+        ],
+        "challenges": [
+          "Təhlükəsiz məlumat emalı",
+          "İstifadəçi təcrübəsi optimallaşdırması"
+        ],
+        "solutions": [
+          "Müasir validasiya kitabxanaları",
+          "Responsive dizayn prinsipləri"
+        ]
+      },
+      "exchange": {
+        "title": "Valyuta Mübadiləsi İzləmə Tətbiqi",
+        "description": "Valyuta mübadiləsi məzənnəsi izləmə və alış-satış ekranı. Real vaxt məlumatları və qrafik vizualizasiya.",
+        "longDescription": "Real vaxt valyuta məzənnələrini izləyən və alış-satış simulyasiyası təklif edən müasir veb tətbiqi. Qrafik vizualizasiya və responsive dizayn ilə istifadəçi dostu təcrübə təklif edir.",
+        "features": [
+          "Real vaxt valyuta məzənnələri",
+          "Qrafik vizualizasiya",
+          "Alış-satış simulyasiyası",
+          "Responsive dizayn"
+        ],
+        "challenges": [
+          "Real vaxt məlumat inteqrasiyası",
+          "Performans optimallaşdırması"
+        ],
+        "solutions": [
+          "WebSocket bağlantıları",
+          "Effektiv məlumat keşləmə"
+        ]
+      },
       "globalIdentity": {
         "title": "Qlobal Kimlik",
         "description": "Qlobal kimlik doğrulama sistemi. Çox platforma dəstəyi və təhlükəsiz authentication xüsusiyyətləri."

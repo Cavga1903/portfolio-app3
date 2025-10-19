@@ -289,6 +289,44 @@
         "title": "Payment Form",
         "description": "Form application developed for secure payment transactions. Features form validation and user-friendly interface."
       },
+      "payment": {
+        "title": "Payment Form Application",
+        "description": "Payment form application. Form validation and secure payment transactions.",
+        "longDescription": "Secure payment form application developed using modern web technologies. Provides secure payment transactions with user-friendly interface and comprehensive form validation.",
+        "features": [
+          "Form validation",
+          "Secure payment",
+          "Responsive design",
+          "Error handling"
+        ],
+        "challenges": [
+          "Secure data processing",
+          "User experience optimization"
+        ],
+        "solutions": [
+          "Modern validation libraries",
+          "Responsive design principles"
+        ]
+      },
+      "exchange": {
+        "title": "Currency Exchange Tracking App",
+        "description": "Currency exchange rate tracking and trading screen. Real-time data and chart visualization.",
+        "longDescription": "Modern web application that tracks real-time exchange rates and provides trading simulation. Offers user-friendly experience with chart visualization and responsive design.",
+        "features": [
+          "Real-time exchange rates",
+          "Chart visualization",
+          "Trading simulation",
+          "Responsive design"
+        ],
+        "challenges": [
+          "Real-time data integration",
+          "Performance optimization"
+        ],
+        "solutions": [
+          "WebSocket connections",
+          "Efficient data caching"
+        ]
+      },
       "globalIdentity": {
         "title": "Global Identity",
         "description": "Global identity verification system. Features multi-platform support and secure authentication capabilities."
