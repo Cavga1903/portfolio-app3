@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaRocket, FaCalendar, FaTag } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface Project {
   title: string;
@@ -24,6 +25,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+  const { t } = useTranslation();
 
   if (!project) return null;
 
@@ -34,7 +36,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
@@ -42,7 +44,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-4xl max-h-[90vh] bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden border border-white/30"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -83,7 +85,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg transition-all duration-200"
+                      className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-800 hover:bg-white hover:scale-105 rounded-lg transition-all duration-200 shadow-lg"
                     >
                       <FaGithub className="w-4 h-4" />
                       <span>GitHub</span>
@@ -94,7 +96,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg transition-all duration-200"
+                      className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-800 hover:bg-white hover:scale-105 rounded-lg transition-all duration-200 shadow-lg"
                     >
                       <FaExternalLinkAlt className="w-4 h-4" />
                       <span>Live Demo</span>
@@ -105,7 +107,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             </div>
 
             {/* Content */}
-            <div className="p-8 overflow-y-auto max-h-[60vh]">
+            <div className="p-8 overflow-y-auto max-h-[60vh] bg-white/80 dark:bg-gray-800/80">
               {/* Technologies */}
               <div className="mb-8">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -187,10 +189,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             </div>
 
             {/* Footer */}
-            <div className="px-8 py-4 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-8 py-4 bg-gray-50/80 dark:bg-gray-800/80 border-t border-gray-200 dark:border-gray-700">
               <div className="flex justify-between items-center">
                 <div className="text-sm text-gray-500 dark:text-gray-400">
-                  Click outside to close
+                  {t('modal.clickOutsideToClose')}
                 </div>
                 <div className="flex gap-3">
                   {project.github && (

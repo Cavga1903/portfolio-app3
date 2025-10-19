@@ -14,6 +14,9 @@
     "ctaAbout": "Learn More About Me",
     "ctaProjects": "View My Projects"
   },
+  "modal": {
+    "clickOutsideToClose": "Click outside to close"
+  },
   "about": {
     "title": "About Me",
     "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports.",
