@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 import ProjectModal from './ProjectModal';
@@ -24,12 +24,11 @@ type Project = {
 // Project placeholder component
 const ProjectPlaceholder: React.FC<{ project: Project }> = memo(({ project }) => {
   return (
-    <div className={`w-full h-48 bg-gradient-to-br ${project.imageGradient || 'from-blue-500 to-purple-600'} rounded-lg flex items-center justify-center relative overflow-hidden`}>
-      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-      <div className="relative z-10 text-center text-white">
-        <div className="text-4xl mb-2">🚀</div>
+    <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center relative overflow-hidden">
+      <div className="text-center text-gray-500 dark:text-gray-400">
+        <FaGithub className="text-6xl mb-3 mx-auto" />
         <div className="text-lg font-semibold mb-1">{project.title}</div>
-        <div className="text-sm opacity-90">Click to view details</div>
+        <div className="text-sm opacity-75">Click to view details</div>
       </div>
     </div>
   );
@@ -504,13 +503,14 @@ const Projects: React.FC = () => {
         <div className="flex justify-center mt-8">
           <button
             onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
               isAutoPlaying
                 ? 'bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800'
                 : 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800'
             }`}
+            aria-label={isAutoPlaying ? 'Pause carousel' : 'Play carousel'}
           >
-            {isAutoPlaying ? '⏸️ Pause' : '▶️ Auto-play'}
+            {isAutoPlaying ? <FaPause className="text-lg" /> : <FaPlay className="text-lg" />}
           </button>
         </div>
       </div>
