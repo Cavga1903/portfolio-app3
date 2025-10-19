@@ -52,7 +52,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
               stiffness: 200,
               mass: 0.8
             }}
-            className="relative w-full max-w-4xl max-h-[90vh] bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/30"
+            className="relative w-full max-w-2xl max-h-[85vh] bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden border border-white/30"
             style={{
               background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
@@ -61,7 +61,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
           >
             {/* Header */}
             <div 
-              className={`relative p-8 bg-gradient-to-r ${project.imageGradient || 'from-blue-500 to-purple-600'} text-white`}
+              className={`relative p-6 bg-gradient-to-r ${project.imageGradient || 'from-blue-500 to-purple-600'} text-white`}
               style={{
                 boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.1)'
               }}
@@ -75,42 +75,42 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
               </button>
               
               <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <h2 className="text-3xl font-bold mb-2">{project.title}</h2>
-                  <p className="text-lg opacity-90 mb-4">{project.description}</p>
-                  
-                  {/* Project Meta */}
-                  <div className="flex flex-wrap gap-4 text-sm">
-                    {project.duration && (
-                      <div className="flex items-center gap-2">
-                        <FaCalendar className="w-4 h-4" />
-                        <span>{project.duration}</span>
-                      </div>
-                    )}
-                    {project.role && (
-                      <div className="flex items-center gap-2">
-                        <FaCode className="w-4 h-4" />
-                        <span>{project.role}</span>
-                      </div>
-                    )}
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold mb-1">{project.title}</h2>
+                    <p className="text-base opacity-90 mb-3">{project.description}</p>
+                    
+                    {/* Project Meta */}
+                    <div className="flex flex-wrap gap-3 text-sm">
+                      {project.duration && (
+                        <div className="flex items-center gap-1.5">
+                          <FaCalendar className="w-3 h-3" />
+                          <span>{project.duration}</span>
+                        </div>
+                      )}
+                      {project.role && (
+                        <div className="flex items-center gap-1.5">
+                          <FaCode className="w-3 h-3" />
+                          <span>{project.role}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
               </div>
             </div>
 
             {/* Content */}
-            <div className="p-8 overflow-y-auto max-h-[60vh] bg-white/80 dark:bg-gray-800/80">
+            <div className="p-6 overflow-y-auto max-h-[55vh] bg-white/80 dark:bg-gray-800/80">
               {/* Technologies */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <FaTag className="w-5 h-5 text-blue-500" />
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                  <FaTag className="w-4 h-4 text-blue-500" />
                   Technologies Used
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium"
+                      className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs font-medium"
                     >
                       {tech}
                     </span>
@@ -120,9 +120,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 
               {/* Long Description */}
               {project.longDescription && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold mb-4">Project Overview</h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold mb-3">Project Overview</h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
                     {project.longDescription}
                   </p>
                 </div>
@@ -130,16 +130,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 
               {/* Features */}
               {project.features && project.features.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <FaRocket className="w-5 h-5 text-green-500" />
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                    <FaRocket className="w-4 h-4 text-green-500" />
                     Key Features
                   </h3>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1.5">
                     {project.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-gray-700 dark:text-gray-300 text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -148,15 +148,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 
               {/* Challenges & Solutions */}
               {(project.challenges || project.solutions) && (
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-6">
                   {project.challenges && project.challenges.length > 0 && (
                     <div>
-                      <h3 className="text-xl font-semibold mb-4 text-orange-600">Challenges</h3>
-                      <ul className="space-y-2">
+                      <h3 className="text-lg font-semibold mb-3 text-orange-600">Challenges</h3>
+                      <ul className="space-y-1.5">
                         {project.challenges.map((challenge, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-700 dark:text-gray-300">{challenge}</span>
+                          <li key={index} className="flex items-start gap-2">
+                            <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
                           </li>
                         ))}
                       </ul>
@@ -165,12 +165,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 
                   {project.solutions && project.solutions.length > 0 && (
                     <div>
-                      <h3 className="text-xl font-semibold mb-4 text-green-600">Solutions</h3>
-                      <ul className="space-y-2">
+                      <h3 className="text-lg font-semibold mb-3 text-green-600">Solutions</h3>
+                      <ul className="space-y-1.5">
                         {project.solutions.map((solution, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-700 dark:text-gray-300">{solution}</span>
+                          <li key={index} className="flex items-start gap-2">
+                            <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <span className="text-gray-700 dark:text-gray-300 text-sm">{solution}</span>
                           </li>
                         ))}
                       </ul>
@@ -181,20 +181,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             </div>
 
             {/* Footer */}
-            <div className="px-8 py-4 bg-gray-50/80 dark:bg-gray-800/80 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-6 py-3 bg-gray-50/80 dark:bg-gray-800/80 border-t border-gray-200 dark:border-gray-700">
               <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-xs text-gray-500 dark:text-gray-400">
                   {t('modal.clickOutsideToClose')}
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 text-sm"
                     >
-                      <FaGithub className="w-4 h-4" />
+                      <FaGithub className="w-3 h-3" />
                       <span>GitHub</span>
                     </a>
                   )}
@@ -203,9 +203,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 text-sm"
                     >
-                      <FaExternalLinkAlt className="w-4 h-4" />
+                      <FaExternalLinkAlt className="w-3 h-3" />
                       <span>Live Demo</span>
                     </a>
                   )}
