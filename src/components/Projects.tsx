@@ -506,7 +506,7 @@ const Projects: React.FC = () => {
           {/* Projects Grid */}
           <div
             ref={carouselRef}
-            className={`grid gap-8 transition-all duration-500 ease-in-out ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} select-none`}
+            className={`grid gap-8 items-stretch transition-all duration-500 ease-in-out ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} select-none`}
             style={{
               gridTemplateColumns: `repeat(${projectCount}, 1fr)`,
               transform: isDragging ? `translateX(${dragOffset}px)` : undefined
@@ -535,12 +535,12 @@ const Projects: React.FC = () => {
                   }
                 }}
               >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105 h-full flex flex-col">
                   {/* Project Preview */}
                   <ProjectPlaceholder project={project} t={t} />
                   
                   {/* Project Info */}
-                  <div className="p-4">
+                  <div className="p-4 flex-1 flex flex-col">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {project.title}
                     </h3>
@@ -566,7 +566,7 @@ const Projects: React.FC = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-1.5">
+                    <div className="flex gap-1.5 mt-auto">
                       {project.github && (
                         <a
                           href={project.github}
