@@ -23,12 +23,26 @@ type Project = {
 
 // Project placeholder component
 const ProjectPlaceholder: React.FC<{ project: Project }> = memo(({ project }) => {
+  // Check if project has a screenshot
+  const screenshotPath = `/project-screenshots/${project.title.toLowerCase().replace(/\s+/g, '-')}.webp`;
+  
   return (
-    <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center relative overflow-hidden">
-      <div className="text-center text-gray-500 dark:text-gray-400">
-        <FaGithub className="text-6xl mb-3 mx-auto" />
+    <div className={`w-full h-48 bg-gradient-to-br ${project.imageGradient || 'from-blue-500 to-purple-600'} rounded-lg flex items-center justify-center relative overflow-hidden`}>
+      {/* Try to load screenshot, fallback to gradient */}
+      <img
+        src={screenshotPath}
+        alt={project.title}
+        className="absolute inset-0 w-full h-full object-cover opacity-80"
+        onError={(e) => {
+          // Hide image on error, show gradient background
+          e.currentTarget.style.display = 'none';
+        }}
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="relative z-10 text-center text-white">
+        <div className="text-4xl mb-2">🚀</div>
         <div className="text-lg font-semibold mb-1">{project.title}</div>
-        <div className="text-sm opacity-75">Click to view details</div>
+        <div className="text-sm opacity-90">Click to view details</div>
       </div>
     </div>
   );
@@ -505,8 +519,8 @@ const Projects: React.FC = () => {
             onClick={() => setIsAutoPlaying(!isAutoPlaying)}
             className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
               isAutoPlaying
-                ? 'bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800'
-                : 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800'
+                ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
             }`}
             aria-label={isAutoPlaying ? 'Pause carousel' : 'Play carousel'}
           >
