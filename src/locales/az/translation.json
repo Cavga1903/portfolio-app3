@@ -258,6 +258,7 @@
     "tech": "Texnologiyalar:",
     "github": "GitHub",
     "demo": "Canlı Demo",
+    "clickToViewDetails": "Təfərrüatları görmək üçün klikləyin",
     "items": {
       "iot": {
         "title": "IoT Cihaz Simulyatoru",

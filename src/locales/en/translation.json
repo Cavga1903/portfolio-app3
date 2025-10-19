@@ -259,6 +259,7 @@
     "tech": "Technologies:",
     "github": "GitHub",
     "demo": "Live Demo",
+    "clickToViewDetails": "Click to view details",
     "items": {
       "iot": {
         "title": "IoT Device Simulator",

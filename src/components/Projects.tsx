@@ -22,7 +22,7 @@ type Project = {
 };
 
 // Project placeholder component
-const ProjectPlaceholder: React.FC<{ project: Project }> = memo(({ project }) => {
+const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => string }> = memo(({ project, t }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   
@@ -63,10 +63,10 @@ const ProjectPlaceholder: React.FC<{ project: Project }> = memo(({ project }) =>
       {/* GitHub-style footer - more compact */}
       <div className="px-3 py-1.5 bg-gray-800 border-t border-gray-700 text-xs text-gray-400">
         <div className="flex items-center justify-between">
-          <span>Click to view details</span>
+          <span>{t('projects.clickToViewDetails')}</span>
           <div className="flex items-center space-x-3">
-            <span>⭐ {Math.floor(Math.random() * 100) + 10}</span>
-            <span>🍴 {Math.floor(Math.random() * 50) + 5}</span>
+            <span title="GitHub Stars - Projenin beğenilme sayısı">⭐ {Math.floor(Math.random() * 100) + 10}</span>
+            <span title="GitHub Forks - Projenin çatallanma sayısı">🍴 {Math.floor(Math.random() * 50) + 5}</span>
           </div>
         </div>
       </div>
@@ -485,22 +485,22 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative">
-          {/* Navigation Arrows - Liquid style, outside container */}
+        <div className="relative px-16">
+          {/* Navigation Arrows - Inside container for better visibility */}
           <button
             onClick={prevSlide}
-            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-20 w-16 h-16 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 group"
+            className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
             aria-label="Previous projects"
           >
-            <FaChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+            <FaChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-20 w-16 h-16 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 group"
+            className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
             aria-label="Next projects"
           >
-            <FaChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+            <FaChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
           </button>
 
           {/* Projects Grid */}
@@ -537,7 +537,7 @@ const Projects: React.FC = () => {
               >
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105">
                   {/* Project Preview */}
-                  <ProjectPlaceholder project={project} />
+                  <ProjectPlaceholder project={project} t={t} />
                   
                   {/* Project Info */}
                   <div className="p-4">
