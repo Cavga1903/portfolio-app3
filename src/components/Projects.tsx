@@ -23,27 +23,91 @@ type Project = {
 
 // Project placeholder component
 const ProjectPlaceholder: React.FC<{ project: Project }> = memo(({ project }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  
   // Check if project has a screenshot
   const screenshotPath = `/project-screenshots/${project.title.toLowerCase().replace(/\s+/g, '-')}.webp`;
   
-  return (
-    <div className={`w-full h-48 bg-gradient-to-br ${project.imageGradient || 'from-blue-500 to-purple-600'} rounded-lg flex items-center justify-center relative overflow-hidden`}>
-      {/* Try to load screenshot, fallback to gradient */}
-      <img
-        src={screenshotPath}
-        alt={project.title}
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-        onError={(e) => {
-          // Hide image on error, show gradient background
-          e.currentTarget.style.display = 'none';
-        }}
-      />
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-      <div className="relative z-10 text-center text-white">
-        <div className="text-4xl mb-2">🚀</div>
-        <div className="text-lg font-semibold mb-1">{project.title}</div>
-        <div className="text-sm opacity-90">Click to view details</div>
+  // GitHub-style placeholder with code-like appearance
+  const renderGitHubPlaceholder = () => (
+    <div className="w-full h-full bg-gray-900 flex flex-col">
+      {/* GitHub-style header */}
+      <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+        <div className="flex items-center space-x-2">
+          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+        <div className="text-xs text-gray-400 font-mono">index.js</div>
       </div>
+      
+      {/* Code-like content */}
+      <div className="flex-1 p-4 font-mono text-sm">
+        <div className="space-y-2">
+          <div className="text-blue-400">
+            <span className="text-gray-500">1</span> <span className="text-purple-400">const</span> <span className="text-yellow-300">{project.title.replace(/\s+/g, '')}</span> <span className="text-gray-300">= () =&gt;</span> <span className="text-gray-300">{'{'}</span>
+          </div>
+          <div className="text-green-400 ml-4">
+            <span className="text-gray-500">2</span> <span className="text-gray-300">return</span> <span className="text-blue-300">(</span>
+          </div>
+          <div className="text-gray-300 ml-8">
+            <span className="text-gray-500">3</span> <span className="text-yellow-300">&lt;div&gt;</span>
+          </div>
+          <div className="text-gray-300 ml-12">
+            <span className="text-gray-500">4</span> <span className="text-green-300">// {project.title}</span>
+          </div>
+          <div className="text-gray-300 ml-8">
+            <span className="text-gray-500">5</span> <span className="text-yellow-300">&lt;/div&gt;</span>
+          </div>
+          <div className="text-gray-300 ml-4">
+            <span className="text-gray-500">6</span> <span className="text-blue-300">)</span>
+          </div>
+          <div className="text-blue-400">
+            <span className="text-gray-500">7</span> <span className="text-gray-300">{'}'}</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* GitHub-style footer */}
+      <div className="px-4 py-2 bg-gray-800 border-t border-gray-700 text-xs text-gray-400">
+        <div className="flex items-center justify-between">
+          <span>Click to view details</span>
+          <div className="flex items-center space-x-4">
+            <span>⭐ {Math.floor(Math.random() * 100) + 10}</span>
+            <span>🍴 {Math.floor(Math.random() * 50) + 5}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  
+  return (
+    <div className="w-full h-48 rounded-lg overflow-hidden relative">
+      {/* Try to load screenshot first */}
+      {!imageError && (
+        <img
+          src={screenshotPath}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover"
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageError(true)}
+          style={{ display: imageLoaded ? 'block' : 'none' }}
+        />
+      )}
+      
+      {/* Show GitHub-style placeholder if no screenshot or error */}
+      {(!imageLoaded || imageError) && renderGitHubPlaceholder()}
+      
+      {/* Overlay for screenshot */}
+      {imageLoaded && !imageError && (
+        <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+          <div className="text-center text-white">
+            <div className="text-2xl mb-2">👁️</div>
+            <div className="text-sm font-semibold">Live Preview</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 });
