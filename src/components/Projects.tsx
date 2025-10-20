@@ -112,9 +112,6 @@ const Projects: React.FC = () => {
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState<number | null>(null);
-  const [dragOffset, setDragOffset] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -401,45 +398,7 @@ const Projects: React.FC = () => {
   };
 
   // Mouse drag handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.button !== 0) return; // Only left mouse button
-    setIsDragging(true);
-    setDragStart(e.clientX);
-    setDragOffset(0);
-    e.preventDefault();
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || dragStart === null) return;
-    
-    const currentX = e.clientX;
-    const diff = currentX - dragStart;
-    setDragOffset(diff);
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging || dragStart === null) return;
-    
-    const threshold = 100;
-    
-    if (dragOffset > threshold) {
-      prevSlide();
-    } else if (dragOffset < -threshold) {
-      nextSlide();
-    }
-    
-    setIsDragging(false);
-    setDragStart(null);
-    setDragOffset(0);
-  };
-
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      setIsDragging(false);
-      setDragStart(null);
-      setDragOffset(0);
-    }
-  };
+  // Removed: Desktop mouse drag disabled per request
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -506,18 +465,13 @@ const Projects: React.FC = () => {
           {/* Projects Grid */}
           <div
             ref={carouselRef}
-            className={`grid gap-8 items-stretch transition-all duration-500 ease-in-out ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} select-none`}
+            className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
             style={{
-              gridTemplateColumns: `repeat(${projectCount}, 1fr)`,
-              transform: isDragging ? `translateX(${dragOffset}px)` : undefined
+              gridTemplateColumns: `repeat(${projectCount}, 1fr)`
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
           >
             {getVisibleProjects().map((project, index) => (
               <motion.div
@@ -528,11 +482,9 @@ const Projects: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group ${isDragging ? 'cursor-grabbing' : 'cursor-pointer'}`}
+                className={"group cursor-pointer"}
                 onClick={() => {
-                  if (!isDragging && Math.abs(dragOffset) < 10) {
-                    handleProjectClick(project);
-                  }
+                  handleProjectClick(project);
                 }}
               >
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105 h-full flex flex-col">
