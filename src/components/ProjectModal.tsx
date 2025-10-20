@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaRocket, FaCalendar, FaTag } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +28,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
   const { t } = useTranslation();
 
   if (!project) return null;
+
+  // Prevent background page scroll while modal is open; restore on close
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -96,7 +106,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             </div>
 
             {/* Content */}
-            <div className="p-6 overflow-y-auto max-h-[55vh] bg-white/80 dark:bg-gray-800/80">
+            <div className="p-6 overflow-y-auto max-h-[55vh] bg-white/80 dark:bg-gray-800/80 overscroll-contain">
               {/* Technologies */}
               <div className="mb-6">
                 <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
