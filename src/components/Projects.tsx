@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
@@ -390,8 +390,10 @@ const Projects: React.FC = () => {
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe) {
+      setSlideDirection(1);
       nextSlide();
     } else if (isRightSwipe) {
+      setSlideDirection(-1);
       prevSlide();
     }
   };
@@ -476,104 +478,107 @@ const Projects: React.FC = () => {
           </button>
 
           {/* Projects Grid */}
-          <motion.div
-            ref={carouselRef}
-            className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
-            style={{
-              gridTemplateColumns: `repeat(${projectCount}, 1fr)`
-            }}
-            custom={slideDirection}
-            variants={gridVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: 'tween', ease: 'easeOut', duration: 0.35 }}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={() => { setSlideDirection(1); handleTouchEnd(); }}
-          >
-            {getVisibleProjects().map((project, index) => (
-              <motion.div
-                key={`${project.title}-${project.index}`}
-                ref={(el) => {
-                  if (el) projectRefs.current[project.index] = el;
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={"group cursor-pointer"}
-                onClick={() => {
-                  handleProjectClick(project);
-                }}
-              >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105 h-full flex flex-col">
-                  {/* Project Preview */}
-                  <ProjectPlaceholder project={project} t={t} />
-                  
-                  {/* Project Info */}
-                  <div className="p-4 flex-1 flex flex-col">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-3 line-clamp-2 text-sm">
-                      {project.description}
-                    </p>
+          <AnimatePresence initial={false} custom={slideDirection} mode="wait">
+            <motion.div
+              key={currentIndex}
+              ref={carouselRef}
+              className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
+              style={{
+                gridTemplateColumns: `repeat(${projectCount}, 1fr)`
+              }}
+              custom={slideDirection}
+              variants={gridVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ type: 'tween', ease: 'easeOut', duration: 0.35 }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {getVisibleProjects().map((project, index) => (
+                <motion.div
+                  key={`${project.title}-${project.index}`}
+                  ref={(el) => {
+                    if (el) projectRefs.current[project.index] = el;
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={"group cursor-pointer"}
+                  onClick={() => {
+                    handleProjectClick(project);
+                  }}
+                >
+                  <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105 h-full flex flex-col">
+                    {/* Project Preview */}
+                    <ProjectPlaceholder project={project} t={t} />
                     
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.technologies.slice(0, 2).map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 2 && (
-                        <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full">
-                          +{project.technologies.length - 2}
-                        </span>
-                      )}
-                    </div>
+                    {/* Project Info */}
+                    <div className="p-4 flex-1 flex flex-col">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-3 line-clamp-2 text-sm">
+                        {project.description}
+                      </p>
+                      
+                      {/* Technologies */}
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {project.technologies.slice(0, 2).map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.technologies.length > 2 && (
+                          <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full">
+                            +{project.technologies.length - 2}
+                          </span>
+                        )}
+                      </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex gap-1.5 mt-auto">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            trackClick('project_github', 'external_link', project.title);
-                          }}
-                          className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-xs"
-                        >
-                          <FaGithub className="w-3 h-3" />
-                          <span>GitHub</span>
-                        </a>
-                      )}
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            trackClick('project_demo', 'external_link', project.title);
-                          }}
-                          className="flex items-center gap-1.5 px-2.5 py-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors text-xs"
-                        >
-                          <FaExternalLinkAlt className="w-3 h-3" />
-                          <span>Demo</span>
-                        </a>
-                      )}
+                      {/* Action Buttons */}
+                      <div className="flex gap-1.5 mt-auto">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              trackClick('project_github', 'external_link', project.title);
+                            }}
+                            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-xs"
+                          >
+                            <FaGithub className="w-3 h-3" />
+                            <span>GitHub</span>
+                          </a>
+                        )}
+                        {project.link && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              trackClick('project_demo', 'external_link', project.title);
+                            }}
+                            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors text-xs"
+                          >
+                            <FaExternalLinkAlt className="w-3 h-3" />
+                            <span>Demo</span>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Pagination Dots */}
           <div className="flex justify-center mt-8 space-x-2">
