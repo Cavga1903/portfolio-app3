@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa';
+import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 import ProjectModal from './ProjectModal';
@@ -107,7 +107,7 @@ const Projects: React.FC = () => {
   const { t } = useTranslation();
   const { trackClick } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  // Autoplay is always enabled
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -363,15 +363,14 @@ const Projects: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Auto-play functionality
+  // Auto-play functionality (always on)
   useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % projects.length);
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [isAutoPlaying, projects.length]);
+    const interval = setInterval(() => {
+      setSlideDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % projects.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [projects.length]);
 
   // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -612,20 +611,7 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Auto-play Toggle */}
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
-              isAutoPlaying
-                ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-            }`}
-            aria-label={isAutoPlaying ? 'Pause carousel' : 'Play carousel'}
-          >
-            {isAutoPlaying ? <FaPause className="text-lg" /> : <FaPlay className="text-lg" />}
-          </button>
-        </div>
+        {/* Auto-play Toggle removed - autoplay is always enabled */}
       </div>
 
       {/* Project Modal */}
