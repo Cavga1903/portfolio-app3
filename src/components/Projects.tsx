@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
@@ -390,10 +390,8 @@ const Projects: React.FC = () => {
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe) {
-      setSlideDirection(1);
       nextSlide();
     } else if (isRightSwipe) {
-      setSlideDirection(-1);
       prevSlide();
     }
   };
@@ -478,24 +476,22 @@ const Projects: React.FC = () => {
           </button>
 
           {/* Projects Grid */}
-          <AnimatePresence initial={false} custom={slideDirection} mode="wait">
-            <motion.div
-              key={currentIndex}
-              ref={carouselRef}
-              className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
-              style={{
-                gridTemplateColumns: `repeat(${projectCount}, 1fr)`
-              }}
-              custom={slideDirection}
-              variants={gridVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ type: 'tween', ease: 'easeOut', duration: 0.35 }}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
+          <motion.div
+            ref={carouselRef}
+            className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
+            style={{
+              gridTemplateColumns: `repeat(${projectCount}, 1fr)`
+            }}
+            custom={slideDirection}
+            variants={gridVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: 'tween', ease: 'easeOut', duration: 0.35 }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={() => { setSlideDirection(1); handleTouchEnd(); }}
+          >
               {getVisibleProjects().map((project, index) => (
                 <motion.div
                   key={`${project.title}-${project.index}`}
@@ -577,8 +573,7 @@ const Projects: React.FC = () => {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
-          </AnimatePresence>
+          </motion.div>
 
           {/* Pagination Dots */}
           <div className="flex justify-center mt-8 space-x-2">
