@@ -27,8 +27,6 @@ interface ProjectModalProps {
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   const { t } = useTranslation();
 
-  if (!project) return null;
-
   // Prevent background page scroll while modal is open; restore on close
   useEffect(() => {
     if (!isOpen) return;
@@ -38,6 +36,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
+
+  if (!project) return null;
 
   return (
     <AnimatePresence>
