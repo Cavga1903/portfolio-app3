@@ -410,6 +410,20 @@ const Projects: React.FC = () => {
     trackClick('projects_prev', 'carousel_navigation', 'Previous slide');
   }, [projects.length, trackClick]);
 
+  const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
+
+  const gridVariants = {
+    enter: (direction: 1 | -1) => ({
+      x: direction === 1 ? 24 : -24,
+      opacity: 0.95
+    }),
+    center: { x: 0, opacity: 1 },
+    exit: (direction: 1 | -1) => ({
+      x: direction === 1 ? -12 : 12,
+      opacity: 0.98
+    })
+  };
+
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
@@ -447,7 +461,7 @@ const Projects: React.FC = () => {
         <div className="relative px-16">
           {/* Navigation Arrows - Inside container for better visibility */}
           <button
-            onClick={prevSlide}
+            onClick={() => { setSlideDirection(-1); prevSlide(); }}
             className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
             aria-label="Previous projects"
           >
@@ -455,7 +469,7 @@ const Projects: React.FC = () => {
           </button>
 
           <button
-            onClick={nextSlide}
+            onClick={() => { setSlideDirection(1); nextSlide(); }}
             className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
             aria-label="Next projects"
           >
@@ -463,15 +477,21 @@ const Projects: React.FC = () => {
           </button>
 
           {/* Projects Grid */}
-          <div
+          <motion.div
             ref={carouselRef}
             className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
             style={{
               gridTemplateColumns: `repeat(${projectCount}, 1fr)`
             }}
+            custom={slideDirection}
+            variants={gridVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: 'tween', ease: 'easeOut', duration: 0.35 }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            onTouchEnd={() => { setSlideDirection(1); handleTouchEnd(); }}
           >
             {getVisibleProjects().map((project, index) => (
               <motion.div
@@ -554,7 +574,7 @@ const Projects: React.FC = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Pagination Dots */}
           <div className="flex justify-center mt-8 space-x-2">
@@ -575,7 +595,7 @@ const Projects: React.FC = () => {
           {/* Mobile Navigation Arrows */}
           <div className="flex lg:hidden justify-center mt-6 space-x-4">
             <button
-              onClick={prevSlide}
+              onClick={() => { setSlideDirection(-1); prevSlide(); }}
               className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
               aria-label="Previous projects"
             >
@@ -583,7 +603,7 @@ const Projects: React.FC = () => {
             </button>
 
             <button
-              onClick={nextSlide}
+              onClick={() => { setSlideDirection(1); nextSlide(); }}
               className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
               aria-label="Next projects"
             >
