@@ -152,37 +152,36 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
   }
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex flex-col items-center gap-1 ${className}`}>
       <button
         onClick={handleLike}
         disabled={isLoading}
-        className={`p-3 rounded-full transition-all duration-200 shadow-lg z-10 ${
+        className={`p-2 rounded-full transition-all duration-200 shadow-lg z-10 ${
           isLiked 
             ? 'bg-blue-500 text-white hover:bg-blue-600' 
             : 'bg-white/90 text-gray-800 hover:bg-white'
         } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'}`}
         aria-label={isLiked ? "Unlike project" : "Like project"}
       >
-        <FaThumbsUp className={`w-5 h-5 ${isLiked ? 'text-white' : 'text-gray-800'}`} />
+        <FaThumbsUp className={`w-4 h-4 ${isLiked ? 'text-white' : 'text-gray-800'}`} />
       </button>
       
       <button
         onClick={handleDislike}
         disabled={isLoading}
-        className={`p-3 rounded-full transition-all duration-200 shadow-lg z-10 ${
+        className={`p-2 rounded-full transition-all duration-200 shadow-lg z-10 ${
           isDisliked 
             ? 'bg-red-500 text-white hover:bg-red-600' 
             : 'bg-white/90 text-gray-800 hover:bg-white'
         } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'}`}
         aria-label={isDisliked ? "Remove dislike" : "Dislike project"}
       >
-        <FaThumbsDown className={`w-5 h-5 ${isDisliked ? 'text-white' : 'text-gray-800'}`} />
+        <FaThumbsDown className={`w-4 h-4 ${isDisliked ? 'text-white' : 'text-gray-800'}`} />
       </button>
       
       {stats && (
-        <div className="text-sm text-white/80">
+        <div className="text-xs text-white/80 text-center">
           <span className="font-semibold">{stats.totalLikes}</span>
-          <span className="ml-1">beğeni</span>
         </div>
       )}
     </div>
