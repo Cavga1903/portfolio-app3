@@ -74,8 +74,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                 boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.1)'
               }}
             >
-              {/* Close Button - Top Right */}
-              <div className="absolute top-4 right-4">
+              {/* Close Button and Like/Unlike Buttons - Top Right */}
+              <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
                 <button
                   onClick={onClose}
                   className="p-3 rounded-full bg-white/90 text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg z-10"
@@ -83,15 +83,24 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                 >
                   <FaTimes className="w-5 h-5" />
                 </button>
+                
+                {/* Like/Unlike Buttons - Below Close Button */}
+                <div className="flex flex-col gap-1">
+                  <ProjectLikeButton 
+                    projectId={project.title.toLowerCase().replace(/\s+/g, '-')}
+                    projectTitle={project.title}
+                    className="scale-75"
+                  />
+                </div>
               </div>
               
               <div className="flex items-start justify-between">
-                <div className="flex-1 pr-20">
+                <div className="flex-1 pr-24">
                   <h2 className="text-2xl font-bold mb-1">{project.title}</h2>
                   <p className="text-base opacity-90 mb-3">{project.description}</p>
                   
                   {/* Project Meta */}
-                  <div className="flex flex-wrap gap-3 text-sm mb-4">
+                  <div className="flex flex-wrap gap-3 text-sm">
                     {project.duration && (
                       <div className="flex items-center gap-1.5">
                         <FaCalendar className="w-3 h-3" />
@@ -104,15 +113,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                         <span>{project.role}</span>
                       </div>
                     )}
-                  </div>
-
-                  {/* Like/Unlike Buttons - Below Project Meta */}
-                  <div className="flex items-center gap-2">
-                    <ProjectLikeButton 
-                      projectId={project.title.toLowerCase().replace(/\s+/g, '-')}
-                      projectTitle={project.title}
-                      className="scale-90"
-                    />
                   </div>
                 </div>
               </div>
