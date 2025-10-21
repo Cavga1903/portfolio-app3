@@ -48,6 +48,13 @@
 - ✅ Multi-language hreflang tags
 - ✅ Dynamic meta tag updates
 
+### ❤️ **Social Features**
+- ✅ **Real-time project likes** with Supabase
+- ✅ **Social interaction** tracking
+- ✅ **Detailed analytics** for engagement
+- ✅ **Toast notifications** for user feedback
+- ✅ **Persistent like states** across sessions
+
 ### 🌐 **Social Features**
 - ✅ Dedicated Social Proof section (GitHub, LinkedIn, Instagram stats & links)
 - ✅ Portfolio share buttons (LinkedIn, X/Twitter, Facebook, WhatsApp)
@@ -458,6 +465,57 @@ If you like this project, please consider:
 
 ### v1.0.0
 - 🎉 Initial release
+
+---
+
+## 🚀 Kurulum
+
+### Gereksinimler
+- Node.js (v18+)
+- npm veya yarn
+- Supabase hesabı (social features için)
+
+### Adımlar
+1. **Repository'yi klonlayın:**
+   ```bash
+   git clone https://github.com/Cavga1903/portfolio-app3.git
+   cd portfolio-app3
+   ```
+
+2. **Dependencies'leri yükleyin:**
+   ```bash
+   npm install
+   ```
+
+3. **Supabase Kurulumu (Opsiyonel - Social Features için):**
+   ```bash
+   # Supabase projesi oluşturun: https://supabase.com
+   # supabase-setup.sql dosyasını Supabase SQL Editor'da çalıştırın
+   # .env dosyası oluşturun:
+   cp env.example .env
+   # .env dosyasını düzenleyin ve Supabase bilgilerinizi ekleyin
+   ```
+
+4. **Development server'ı başlatın:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Build için:**
+   ```bash
+   npm run build
+   ```
+
+### Supabase Kurulum Detayları
+1. [Supabase](https://supabase.com) hesabı oluşturun
+2. Yeni proje oluşturun
+3. `supabase-setup.sql` dosyasını SQL Editor'da çalıştırın
+4. Project Settings > API'den URL ve anon key'i alın
+5. `.env` dosyasına ekleyin:
+   ```
+   REACT_APP_SUPABASE_URL=https://your-project.supabase.co
+   REACT_APP_SUPABASE_ANON_KEY=your_anon_key
+   ```
 
 ---
 
