@@ -27,24 +27,24 @@ body {
 }
 
 /* Mobile Menu Animations */
-@keyframes slideInFromRight {
+@keyframes slideInFromTop {
   from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    transform: translateY(30px);
+    transform: translateY(-100%);
     opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
     opacity: 1;
   }
 }
@@ -54,7 +54,7 @@ body {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
   }
 }
 
@@ -67,12 +67,23 @@ body {
   }
 }
 
-.mobile-menu .fixed.top-0.right-0 {
-  animation: slideInFromRight 0.5s ease-out;
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.mobile-menu .space-y-3 > div {
-  animation: fadeInUp 0.6s ease-out both;
+.mobile-menu .fixed.top-0.left-0.right-0 {
+  animation: slideInFromTop 0.5s ease-out;
+}
+
+.mobile-menu .flex.gap-2 > div {
+  animation: fadeInLeft 0.6s ease-out both;
 }
 
 .mobile-menu .group:hover {
@@ -81,6 +92,16 @@ body {
 
 .mobile-menu .group:hover .rounded-2xl {
   animation: glow 1s ease-in-out infinite;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Custom Scrollbar - Website Teması */

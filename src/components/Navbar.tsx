@@ -169,68 +169,64 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - Modern Glassmorphism Design */}
+        {/* Mobile Menu - Compact Horizontal Design */}
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } lg:hidden fixed inset-0 z-50 mobile-menu`}
+          } fixed inset-0 z-50 mobile-menu`}
           id="mobile-menu"
         >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-gradient-to-br from-black/60 via-purple-900/40 to-blue-900/60 backdrop-blur-md"
+            className="fixed inset-0 bg-gradient-to-b from-black/80 via-purple-900/60 to-transparent backdrop-blur-md"
             onClick={() => setIsMenuOpen(false)}
           />
           
-          {/* Menu Panel - Slide from right */}
-          <div className="fixed top-0 right-0 h-full w-96 max-w-[90vw] bg-white/10 backdrop-blur-xl border-l border-white/20 shadow-2xl transform transition-all duration-500 ease-out">
-            {/* Header with gradient */}
-            <div className="relative p-8 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 border-b border-white/10">
+          {/* Menu Panel - Compact Horizontal */}
+          <div className="fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-2xl transform transition-all duration-500 ease-out">
+            {/* Header - Compact */}
+            <div className="px-4 py-3 border-b border-white/10">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div className="relative">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
                       <img
                         src="/tabLogo.svg"
                         alt="Developer Logo"
-                        className="w-10 h-10 filter brightness-0 invert"
+                        className="w-6 h-6 filter brightness-0 invert"
                       />
                     </div>
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-white">Tolga Çavga</h2>
-                    <p className="text-blue-200 text-sm">Frontend Developer</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-xs text-green-300">Available for work</span>
-                    </div>
+                    <h2 className="text-lg font-bold text-white">Tolga Çavga</h2>
+                    <p className="text-blue-200 text-xs">Frontend Developer</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-3 text-white/70 hover:text-white hover:bg-white/10 rounded-2xl transition-all duration-300 hover:rotate-90"
+                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 hover:rotate-90"
                   aria-label="Close menu"
                 >
-                  <HiX className="w-6 h-6" />
+                  <HiX className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
-            {/* Navigation Links with modern cards */}
-            <nav className="flex-1 px-6 py-8 overflow-y-auto">
-              <div className="space-y-3">
+            {/* Navigation Links - Compact Horizontal */}
+            <div className="px-4 py-3">
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide">
                 {navLinks.map((link, index) => (
                   <div
                     key={link.id}
-                    className="group relative"
+                    className="group relative flex-shrink-0"
                     style={{
-                      animationDelay: `${index * 100}ms`
+                      animationDelay: `${index * 80}ms`
                     }}
                   >
                     <a
                       href={`#${link.id}`}
-                      className="block relative p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
+                      className="block relative p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm min-w-[120px]"
                       onClick={(e) => {
                         e.preventDefault();
                         setIsMenuOpen(false);
@@ -242,55 +238,37 @@ const Navbar: React.FC = () => {
                         );
                       }}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/30 to-purple-500/30 group-hover:from-blue-500/50 group-hover:to-purple-500/50 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                          <span className="text-xl font-bold text-white group-hover:text-blue-100">
+                      <div className="flex flex-col items-center text-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/30 to-purple-500/30 group-hover:from-blue-500/50 group-hover:to-purple-500/50 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                          <span className="text-sm font-bold text-white group-hover:text-blue-100">
                             {link.id.charAt(0).toUpperCase()}
                           </span>
                         </div>
-                        <div className="flex-1">
-                          <div className="text-lg font-semibold text-white group-hover:text-blue-100 transition-colors">
+                        <div>
+                          <div className="text-xs font-semibold text-white group-hover:text-blue-100 transition-colors">
                             {t(link.labelKey)}
                           </div>
-                          <div className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
-                            {link.id === 'hero' && 'Ana sayfa ve tanıtım'}
-                            {link.id === 'about' && 'Kişisel bilgilerim ve deneyim'}
-                            {link.id === 'technologies' && 'Kullandığım teknolojiler'}
-                            {link.id === 'services' && 'Sunduğum hizmetler'}
-                            {link.id === 'projects' && 'Geliştirdiğim projeler'}
-                            {link.id === 'contact' && 'İletişim ve sosyal medya'}
-                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-white/30 group-hover:bg-blue-400 transition-all duration-300 group-hover:scale-150"></div>
-                          <div className="text-white/40 group-hover:text-white/60 transition-colors">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </div>
-                        </div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-blue-400 transition-all duration-300 group-hover:scale-150"></div>
                       </div>
                       
                       {/* Hover effect overlay */}
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
                     </a>
                   </div>
                 ))}
               </div>
-            </nav>
+            </div>
 
-            {/* Footer with language selector and social links */}
-            <div className="p-6 border-t border-white/10 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10">
-              <div className="space-y-6">
-                {/* Language Selector */}
-                <div>
-                  <p className="text-white/70 text-sm font-medium mb-3 flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                    </svg>
-                    Dil Seçimi
-                  </p>
-                  <div className="grid grid-cols-2 gap-2">
+            {/* Footer - Compact Language and Actions */}
+            <div className="px-4 py-2 border-t border-white/10 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10">
+              <div className="flex items-center justify-between gap-3">
+                {/* Language Selector - Compact */}
+                <div className="flex items-center gap-2">
+                  <svg className="w-3 h-3 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                  </svg>
+                  <div className="flex gap-1">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
@@ -298,25 +276,24 @@ const Navbar: React.FC = () => {
                           changeLanguage(lang.code);
                           setIsMenuOpen(false);
                         }}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                        className={`px-2 py-1 rounded-md text-xs font-medium transition-all duration-200 ${
                           i18n.language === lang.code
-                            ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-105"
-                            : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white hover:scale-105"
+                            ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                            : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
                         }`}
                       >
-                        <span className="text-lg">{lang.flag}</span>
-                        <span>{lang.code.toUpperCase()}</span>
+                        {lang.flag} {lang.code.toUpperCase()}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                {/* Quick Actions */}
-                <div className="flex gap-2">
-                  <button className="flex-1 py-3 px-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-xl border border-white/20 hover:border-white/30 transition-all duration-300 text-sm font-medium">
-                    CV İndir
+                {/* Quick Actions - Compact */}
+                <div className="flex gap-1">
+                  <button className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium">
+                    CV
                   </button>
-                  <button className="flex-1 py-3 px-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 text-white rounded-xl border border-white/20 hover:border-white/30 transition-all duration-300 text-sm font-medium">
+                  <button className="px-3 py-1.5 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium">
                     İletişim
                   </button>
                 </div>
