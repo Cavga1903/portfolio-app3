@@ -14,9 +14,14 @@
     "ctaAbout": "Haqqımda Ətraflı",
     "ctaProjects": "Layihələrimə Bax"
   },
-  "modal": {
-    "clickOutsideToClose": "Bağlamaq üçün kənara klikləyin"
-  },
+    "modal": {
+      "clickOutsideToClose": "Bağlamaq üçün kənara klikləyin",
+      "technologiesUsed": "İstifadə edilən Texnologiyalar",
+      "projectOverview": "Layihə Ümumi Baxış",
+      "keyFeatures": "Əsas Xüsusiyyətlər",
+      "challenges": "Çətinliklər",
+      "solutions": "Həllər"
+    },
   "about": {
     "title": "Haqqımda",
     "description": "Salam! Mən Tolqa. Proqram təminatı inkişafı dünyasına böyük bir ehtiras ilə addım atdım. Frontend Developer olaraq yaradıcı və istifadəçi dostu veb tətbiqləri hazırlamaqdan böyük həzz alıram. Boş vaxtlarımda yeni texnologiyalar öyrənmək, kitab oxumaq və idmanla məşğul olmaqla maraqlanıram.",

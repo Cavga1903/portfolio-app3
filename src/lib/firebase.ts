@@ -3,12 +3,12 @@ import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, query, where,
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "your-api-key",
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "your-project.firebaseapp.com",
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || "your-project-id",
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || "your-project.appspot.com",
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || "123456789",
-  appId: process.env.REACT_APP_FIREBASE_APP_ID || "your-app-id"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyBcoAieQ_rOryEo424wWd8cqh6tLWVY544",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "myportfolio-586ac.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "myportfolio-586ac",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "myportfolio-586ac.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "583297253491",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:583297253491:web:aa2d9aedb3922b4799aa06"
 }
 
 // Initialize Firebase

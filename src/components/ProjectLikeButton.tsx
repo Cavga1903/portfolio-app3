@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FaThumbsUp } from 'react-icons/fa'
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa'
 import { 
   toggleProjectLike, 
   getProjectStats, 
@@ -20,6 +20,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
   className = '' 
 }) => {
   const [isLiked, setIsLiked] = useState(false)
+  const [isDisliked, setIsDisliked] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [stats, setStats] = useState<ProjectStats | null>(null)
   const [userId] = useState(() => generateUserId())
@@ -36,7 +37,9 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         const userLikeQuery = query(likesRef, where('projectId', '==', projectId), where('userId', '==', userId))
         const querySnapshot = await getDocs(userLikeQuery)
         
-        setIsLiked(!querySnapshot.empty && querySnapshot.docs[0].data().liked)
+        const userLike = !querySnapshot.empty ? querySnapshot.docs[0].data() : null
+        setIsLiked(userLike?.liked === true)
+        setIsDisliked(userLike?.liked === false)
 
         // Load project stats
         const projectStats = await getProjectStats(projectId)
@@ -59,6 +62,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
       
       if (result) {
         setIsLiked(result.liked)
+        setIsDisliked(false) // Reset dislike when liking
         
         // Update stats after like/unlike
         await updateProjectStats(projectId)
@@ -82,6 +86,51 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
       }
     } catch (error) {
       console.error('Error toggling like:', error)
+      showToast('Bir hata oluştu, lütfen tekrar deneyin')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDislike = async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
+    
+    try {
+      // If already disliked, remove the dislike
+      if (isDisliked) {
+        const result = await toggleProjectLike(projectId, userId)
+        if (result) {
+          setIsDisliked(false)
+          setIsLiked(false)
+          showToast('Beğenmeme kaldırıldı')
+        }
+      } else {
+        // Create dislike (set liked to false)
+        const result = await toggleProjectLike(projectId, userId)
+        if (result) {
+          setIsDisliked(true)
+          setIsLiked(false)
+          showToast('Proje beğenilmedi 👎')
+        }
+      }
+      
+      // Update stats
+      await updateProjectStats(projectId)
+      const updatedStats = await getProjectStats(projectId)
+      setStats(updatedStats)
+
+      // Analytics tracking
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'project_dislike', {
+          project_title: projectTitle,
+          project_id: projectId,
+          dislike_status: isDisliked ? 'removed' : 'disliked'
+        })
+      }
+    } catch (error) {
+      console.error('Error toggling dislike:', error)
       showToast('Bir hata oluştu, lütfen tekrar deneyin')
     } finally {
       setIsLoading(false)
@@ -115,6 +164,19 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         aria-label={isLiked ? "Unlike project" : "Like project"}
       >
         <FaThumbsUp className={`w-5 h-5 ${isLiked ? 'text-white' : 'text-gray-800'}`} />
+      </button>
+      
+      <button
+        onClick={handleDislike}
+        disabled={isLoading}
+        className={`p-3 rounded-full transition-all duration-200 shadow-lg z-10 ${
+          isDisliked 
+            ? 'bg-red-500 text-white hover:bg-red-600' 
+            : 'bg-white/90 text-gray-800 hover:bg-white'
+        } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'}`}
+        aria-label={isDisliked ? "Remove dislike" : "Dislike project"}
+      >
+        <FaThumbsDown className={`w-5 h-5 ${isDisliked ? 'text-white' : 'text-gray-800'}`} />
       </button>
       
       {stats && (

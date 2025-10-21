@@ -114,12 +114,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 
             {/* Content */}
             <div className="p-6 overflow-y-auto max-h-[55vh] bg-white/80 dark:bg-gray-800/80 overscroll-contain">
-              {/* Technologies */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                  <FaTag className="w-4 h-4 text-blue-500" />
-                  Technologies Used
-                </h3>
+                  {/* Technologies */}
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                      <FaTag className="w-4 h-4 text-blue-500" />
+                      {t('modal.technologiesUsed')}
+                    </h3>
                 <div className="flex flex-wrap gap-1.5">
                   {project.technologies.map((tech, index) => (
                     <span
@@ -132,23 +132,23 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                 </div>
               </div>
 
-              {/* Long Description */}
-              {project.longDescription && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-3">Project Overview</h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-                    {project.longDescription}
-                  </p>
-                </div>
-              )}
+                  {/* Long Description */}
+                  {project.longDescription && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold mb-3">{t('modal.projectOverview')}</h3>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                        {project.longDescription}
+                      </p>
+                    </div>
+                  )}
 
-              {/* Features */}
-              {project.features && project.features.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                    <FaRocket className="w-4 h-4 text-green-500" />
-                    Key Features
-                  </h3>
+                  {/* Features */}
+                  {project.features && project.features.length > 0 && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                        <FaRocket className="w-4 h-4 text-green-500" />
+                        {t('modal.keyFeatures')}
+                      </h3>
                   <ul className="space-y-1.5">
                     {project.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -163,9 +163,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
               {/* Challenges & Solutions */}
               {(project.challenges || project.solutions) && (
                 <div className="grid md:grid-cols-2 gap-6">
-                  {project.challenges && project.challenges.length > 0 && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-3 text-orange-600">Challenges</h3>
+                      {project.challenges && project.challenges.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3 text-orange-600">{t('modal.challenges')}</h3>
                       <ul className="space-y-1.5">
                         {project.challenges.map((challenge, index) => (
                           <li key={index} className="flex items-start gap-2">
@@ -177,9 +177,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                     </div>
                   )}
 
-                  {project.solutions && project.solutions.length > 0 && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-3 text-green-600">Solutions</h3>
+                      {project.solutions && project.solutions.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3 text-green-600">{t('modal.solutions')}</h3>
                       <ul className="space-y-1.5">
                         {project.solutions.map((solution, index) => (
                           <li key={index} className="flex items-start gap-2">

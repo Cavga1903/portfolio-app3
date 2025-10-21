@@ -14,9 +14,14 @@
     "ctaAbout": "Hakkımda Daha Fazla",
     "ctaProjects": "Projelerimi İncele"
   },
-  "modal": {
-    "clickOutsideToClose": "Dışarı tıklayarak kapat"
-  },
+    "modal": {
+      "clickOutsideToClose": "Dışarı tıklayarak kapat",
+      "technologiesUsed": "Kullanılan Teknolojiler",
+      "projectOverview": "Proje Genel Bakış",
+      "keyFeatures": "Temel Özellikler",
+      "challenges": "Zorluklar",
+      "solutions": "Çözümler"
+    },
   "about": {
     "title": "Hakkımda",
     "description": "Merhaba! Ben Tolga. Yazılım geliştirme dünyasına büyük bir tutku ile adım attım. Frontend Developer olarak yaratıcı ve kullanıcı dostu web uygulamaları geliştirmekten büyük keyif alıyorum. Boş zamanlarımda yeni teknolojiler öğrenmek, kitap okumak ve spor yapmakla ilgileniyorum.",
