@@ -27,9 +27,9 @@ body {
 }
 
 /* Mobile Menu Animations */
-@keyframes slideInFromLeft {
+@keyframes slideInFromRight {
   from {
-    transform: translateX(-100%);
+    transform: translateX(100%);
     opacity: 0;
   }
   to {
@@ -40,7 +40,7 @@ body {
 
 @keyframes fadeInUp {
   from {
-    transform: translateY(20px);
+    transform: translateY(30px);
     opacity: 0;
   }
   to {
@@ -49,25 +49,38 @@ body {
   }
 }
 
-@keyframes pulse {
+@keyframes float {
   0%, 100% {
-    transform: scale(1);
+    transform: translateY(0px);
   }
   50% {
-    transform: scale(1.05);
+    transform: translateY(-5px);
   }
 }
 
-.mobile-menu .fixed.top-0.left-0 {
-  animation: slideInFromLeft 0.3s ease-out;
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(147, 51, 234, 0.6);
+  }
 }
 
-.mobile-menu ul li {
-  animation: fadeInUp 0.4s ease-out both;
+.mobile-menu .fixed.top-0.right-0 {
+  animation: slideInFromRight 0.5s ease-out;
 }
 
-.mobile-menu .group:hover .w-10.h-10 {
-  animation: pulse 0.6s ease-in-out;
+.mobile-menu .space-y-3 > div {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.mobile-menu .group:hover {
+  animation: float 0.6s ease-in-out;
+}
+
+.mobile-menu .group:hover .rounded-2xl {
+  animation: glow 1s ease-in-out infinite;
 }
 
 /* Custom Scrollbar - Website Teması */

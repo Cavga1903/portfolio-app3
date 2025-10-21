@@ -169,7 +169,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - Modern Design */}
+        {/* Mobile Menu - Modern Glassmorphism Design */}
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
@@ -178,42 +178,59 @@ const Navbar: React.FC = () => {
         >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-gradient-to-br from-black/60 via-purple-900/40 to-blue-900/60 backdrop-blur-md"
             onClick={() => setIsMenuOpen(false)}
           />
           
-          {/* Menu Panel */}
-          <div className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 shadow-2xl transform transition-transform duration-300 ease-in-out">
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/tabLogo.svg"
-                  alt="Developer Logo"
-                  className="w-12 h-12 rounded-lg shadow-lg"
-                />
-                <div>
-                  <h2 className="text-xl font-bold text-white">Tolga Çavga</h2>
-                  <p className="text-sm text-blue-200">Frontend Developer</p>
+          {/* Menu Panel - Slide from right */}
+          <div className="fixed top-0 right-0 h-full w-96 max-w-[90vw] bg-white/10 backdrop-blur-xl border-l border-white/20 shadow-2xl transform transition-all duration-500 ease-out">
+            {/* Header with gradient */}
+            <div className="relative p-8 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 border-b border-white/10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+                      <img
+                        src="/tabLogo.svg"
+                        alt="Developer Logo"
+                        className="w-10 h-10 filter brightness-0 invert"
+                      />
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white">Tolga Çavga</h2>
+                    <p className="text-blue-200 text-sm">Frontend Developer</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-green-300">Available for work</span>
+                    </div>
+                  </div>
                 </div>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-3 text-white/70 hover:text-white hover:bg-white/10 rounded-2xl transition-all duration-300 hover:rotate-90"
+                  aria-label="Close menu"
+                >
+                  <HiX className="w-6 h-6" />
+                </button>
               </div>
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
-                aria-label="Close menu"
-              >
-                <HiX className="w-6 h-6" />
-              </button>
             </div>
 
-            {/* Navigation Links */}
-            <nav className="flex-1 px-6 py-8">
-              <ul className="space-y-2">
+            {/* Navigation Links with modern cards */}
+            <nav className="flex-1 px-6 py-8 overflow-y-auto">
+              <div className="space-y-3">
                 {navLinks.map((link, index) => (
-                  <li key={link.id}>
+                  <div
+                    key={link.id}
+                    className="group relative"
+                    style={{
+                      animationDelay: `${index * 100}ms`
+                    }}
+                  >
                     <a
                       href={`#${link.id}`}
-                      className="group flex items-center gap-4 px-4 py-4 text-white/90 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                      className="block relative p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
                       onClick={(e) => {
                         e.preventDefault();
                         setIsMenuOpen(false);
@@ -224,54 +241,84 @@ const Navbar: React.FC = () => {
                           t(link.labelKey)
                         );
                       }}
-                      style={{
-                        animationDelay: `${index * 100}ms`
-                      }}
                     >
-                      <div className="w-10 h-10 rounded-lg bg-white/10 group-hover:bg-blue-500/30 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                        <span className="text-lg font-bold text-blue-300 group-hover:text-white">
-                          {link.id.charAt(0).toUpperCase()}
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-lg font-medium">{t(link.labelKey)}</div>
-                        <div className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
-                          {link.id === 'hero' && 'Ana sayfa'}
-                          {link.id === 'about' && 'Hakkımda bilgileri'}
-                          {link.id === 'technologies' && 'Teknoloji yığınım'}
-                          {link.id === 'services' && 'Hizmetlerim'}
-                          {link.id === 'projects' && 'Projelerim'}
-                          {link.id === 'contact' && 'İletişim bilgileri'}
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/30 to-purple-500/30 group-hover:from-blue-500/50 group-hover:to-purple-500/50 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                          <span className="text-xl font-bold text-white group-hover:text-blue-100">
+                            {link.id.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-lg font-semibold text-white group-hover:text-blue-100 transition-colors">
+                            {t(link.labelKey)}
+                          </div>
+                          <div className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
+                            {link.id === 'hero' && 'Ana sayfa ve tanıtım'}
+                            {link.id === 'about' && 'Kişisel bilgilerim ve deneyim'}
+                            {link.id === 'technologies' && 'Kullandığım teknolojiler'}
+                            {link.id === 'services' && 'Sunduğum hizmetler'}
+                            {link.id === 'projects' && 'Geliştirdiğim projeler'}
+                            {link.id === 'contact' && 'İletişim ve sosyal medya'}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-white/30 group-hover:bg-blue-400 transition-all duration-300 group-hover:scale-150"></div>
+                          <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
                         </div>
                       </div>
-                      <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-blue-400 transition-all duration-300 group-hover:scale-150"></div>
+                      
+                      {/* Hover effect overlay */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
                     </a>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </nav>
 
-            {/* Footer */}
-            <div className="p-6 border-t border-white/10">
-              <div className="text-center">
-                <p className="text-white/70 text-sm mb-4">Dil Seçimi</p>
-                <div className="flex justify-center gap-2">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        changeLanguage(lang.code);
-                        setIsMenuOpen(false);
-                      }}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                        i18n.language === lang.code
-                          ? "bg-blue-500 text-white shadow-lg"
-                          : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
-                      }`}
-                    >
-                      {lang.flag} {lang.code.toUpperCase()}
-                    </button>
-                  ))}
+            {/* Footer with language selector and social links */}
+            <div className="p-6 border-t border-white/10 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10">
+              <div className="space-y-6">
+                {/* Language Selector */}
+                <div>
+                  <p className="text-white/70 text-sm font-medium mb-3 flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                    Dil Seçimi
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          changeLanguage(lang.code);
+                          setIsMenuOpen(false);
+                        }}
+                        className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                          i18n.language === lang.code
+                            ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-105"
+                            : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white hover:scale-105"
+                        }`}
+                      >
+                        <span className="text-lg">{lang.flag}</span>
+                        <span>{lang.code.toUpperCase()}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="flex gap-2">
+                  <button className="flex-1 py-3 px-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-xl border border-white/20 hover:border-white/30 transition-all duration-300 text-sm font-medium">
+                    CV İndir
+                  </button>
+                  <button className="flex-1 py-3 px-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 text-white rounded-xl border border-white/20 hover:border-white/30 transition-all duration-300 text-sm font-medium">
+                    İletişim
+                  </button>
                 </div>
               </div>
             </div>
