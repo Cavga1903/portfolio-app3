@@ -82,7 +82,7 @@ body {
   animation: slideInFromTop 0.5s ease-out;
 }
 
-.mobile-menu .flex.gap-2 > div {
+.mobile-menu .grid.gap-2 > div {
   animation: fadeInLeft 0.6s ease-out both;
 }
 

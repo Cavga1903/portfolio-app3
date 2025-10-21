@@ -213,20 +213,20 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Navigation Links - Compact Horizontal */}
+            {/* Navigation Links - Compact Vertical */}
             <div className="px-4 py-3">
-              <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+              <div className="grid grid-cols-2 gap-2">
                 {navLinks.map((link, index) => (
                   <div
                     key={link.id}
-                    className="group relative flex-shrink-0"
+                    className="group relative"
                     style={{
                       animationDelay: `${index * 80}ms`
                     }}
                   >
                     <a
                       href={`#${link.id}`}
-                      className="block relative p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm min-w-[120px]"
+                      className="block relative p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
                       onClick={(e) => {
                         e.preventDefault();
                         setIsMenuOpen(false);
@@ -238,13 +238,13 @@ const Navbar: React.FC = () => {
                         );
                       }}
                     >
-                      <div className="flex flex-col items-center text-center gap-2">
+                      <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/30 to-purple-500/30 group-hover:from-blue-500/50 group-hover:to-purple-500/50 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                           <span className="text-sm font-bold text-white group-hover:text-blue-100">
                             {link.id.charAt(0).toUpperCase()}
                           </span>
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <div className="text-xs font-semibold text-white group-hover:text-blue-100 transition-colors">
                             {t(link.labelKey)}
                           </div>
