@@ -290,11 +290,18 @@ const Navbar: React.FC = () => {
 
                 {/* Quick Actions - Compact */}
                 <div className="flex gap-1">
-                  <button className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium">
-                    CV
-                  </button>
-                  <button className="px-3 py-1.5 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium">
-                    İletişim
+                  <button 
+                    onClick={() => {
+                      // CV indirme fonksiyonu
+                      const link = document.createElement('a');
+                      link.href = '/Tolga_Cavga_CV.pdf';
+                      link.download = 'Tolga_Cavga_Resume.pdf';
+                      link.click();
+                      trackClick('resume_download', 'file_download', 'Resume Download');
+                    }}
+                    className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium hover:scale-105"
+                  >
+                    Resume
                   </button>
                 </div>
               </div>
