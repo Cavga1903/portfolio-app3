@@ -5,9 +5,8 @@ import {
   getProjectStats, 
   generateUserId,
   updateProjectStats,
-  ProjectStats,
-  supabase
-} from '../lib/supabase'
+  ProjectStats
+} from '../lib/firebase'
 
 interface ProjectLikeButtonProps {
   projectId: string
@@ -30,14 +29,14 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
     const loadLikeStatus = async () => {
       try {
         // Check if user liked this project
-        const { data: userLike } = await supabase
-          .from('project_likes')
-          .select('liked')
-          .eq('project_id', projectId)
-          .eq('user_id', userId)
-          .single()
-
-        setIsLiked(userLike?.liked || false)
+        const { db } = await import('../lib/firebase')
+        const { collection, query, where, getDocs } = await import('firebase/firestore')
+        
+        const likesRef = collection(db, 'projectLikes')
+        const userLikeQuery = query(likesRef, where('projectId', '==', projectId), where('userId', '==', userId))
+        const querySnapshot = await getDocs(userLikeQuery)
+        
+        setIsLiked(!querySnapshot.empty && querySnapshot.docs[0].data().liked)
 
         // Load project stats
         const projectStats = await getProjectStats(projectId)
@@ -74,7 +73,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
             project_title: projectTitle,
             project_id: projectId,
             like_status: result.liked ? 'liked' : 'unliked',
-            total_likes: updatedStats?.total_likes || 0
+            total_likes: updatedStats?.totalLikes || 0
           })
         }
 
@@ -120,7 +119,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
       
       {stats && (
         <div className="text-sm text-white/80">
-          <span className="font-semibold">{stats.total_likes}</span>
+          <span className="font-semibold">{stats.totalLikes}</span>
           <span className="ml-1">beğeni</span>
         </div>
       )}

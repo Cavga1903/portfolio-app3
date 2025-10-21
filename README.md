@@ -49,7 +49,7 @@
 - ✅ Dynamic meta tag updates
 
 ### ❤️ **Social Features**
-- ✅ **Real-time project likes** with Supabase
+- ✅ **Real-time project likes** with Firebase Firestore
 - ✅ **Social interaction** tracking
 - ✅ **Detailed analytics** for engagement
 - ✅ **Toast notifications** for user feedback
@@ -473,7 +473,7 @@ If you like this project, please consider:
 ### Gereksinimler
 - Node.js (v18+)
 - npm veya yarn
-- Supabase hesabı (social features için)
+- Firebase hesabı (social features için)
 
 ### Adımlar
 1. **Repository'yi klonlayın:**
@@ -487,13 +487,14 @@ If you like this project, please consider:
    npm install
    ```
 
-3. **Supabase Kurulumu (Opsiyonel - Social Features için):**
+3. **Firebase Kurulumu (Opsiyonel - Social Features için):**
    ```bash
-   # Supabase projesi oluşturun: https://supabase.com
-   # supabase-setup.sql dosyasını Supabase SQL Editor'da çalıştırın
+   # Firebase projesi oluşturun: https://console.firebase.google.com
+   # Firestore Database'i etkinleştirin
+   # firebase-setup.md dosyasındaki talimatları takip edin
    # .env dosyası oluşturun:
    cp env.example .env
-   # .env dosyasını düzenleyin ve Supabase bilgilerinizi ekleyin
+   # .env dosyasını düzenleyin ve Firebase bilgilerinizi ekleyin
    ```
 
 4. **Development server'ı başlatın:**
@@ -506,15 +507,20 @@ If you like this project, please consider:
    npm run build
    ```
 
-### Supabase Kurulum Detayları
-1. [Supabase](https://supabase.com) hesabı oluşturun
+### Firebase Kurulum Detayları
+1. [Firebase Console](https://console.firebase.google.com) hesabı oluşturun
 2. Yeni proje oluşturun
-3. `supabase-setup.sql` dosyasını SQL Editor'da çalıştırın
-4. Project Settings > API'den URL ve anon key'i alın
-5. `.env` dosyasına ekleyin:
+3. Firestore Database'i etkinleştirin (test mode)
+4. `firebase-setup.md` dosyasındaki talimatları takip edin
+5. Project Settings > General > Your apps > Web app'i ekleyin
+6. `.env` dosyasına Firebase config bilgilerini ekleyin:
    ```
-   REACT_APP_SUPABASE_URL=https://your-project.supabase.co
-   REACT_APP_SUPABASE_ANON_KEY=your_anon_key
+   REACT_APP_FIREBASE_API_KEY=your_api_key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+   REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=123456789
+   REACT_APP_FIREBASE_APP_ID=your-app-id
    ```
 
 ---
