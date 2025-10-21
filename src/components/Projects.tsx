@@ -62,12 +62,8 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
       
       {/* GitHub-style footer - more compact */}
       <div className="px-3 py-1.5 bg-gray-800 border-t border-gray-700 text-xs text-gray-400">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center">
           <span>{t('projects.clickToViewDetails')}</span>
-          <div className="flex items-center space-x-3">
-            <span title="GitHub Stars - Projenin beğenilme sayısı">⭐ {Math.floor(Math.random() * 100) + 10}</span>
-            <span title="GitHub Forks - Projenin çatallanma sayısı">🍴 {Math.floor(Math.random() * 50) + 5}</span>
-          </div>
         </div>
       </div>
     </div>

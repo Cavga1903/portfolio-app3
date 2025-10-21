@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaRocket, FaCalendar, FaTag } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaRocket, FaCalendar, FaTag, FaThumbsUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 interface Project {
@@ -26,6 +26,7 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   const { t } = useTranslation();
+  const [isLiked, setIsLiked] = useState(false);
 
   // Prevent background page scroll while modal is open; restore on close
   useEffect(() => {
@@ -36,6 +37,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+  };
 
   if (!project) return null;
 
@@ -73,13 +78,26 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                 boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.1)'
               }}
             >
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 p-3 rounded-full bg-white/90 text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg z-10"
-                aria-label="Close modal"
-              >
-                <FaTimes className="w-5 h-5" />
-              </button>
+                  <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <button
+                      onClick={handleLike}
+                      className={`p-3 rounded-full transition-all duration-200 shadow-lg z-10 ${
+                        isLiked 
+                          ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                          : 'bg-white/90 text-gray-800 hover:bg-white'
+                      }`}
+                      aria-label={isLiked ? "Unlike project" : "Like project"}
+                    >
+                      <FaThumbsUp className={`w-5 h-5 ${isLiked ? 'text-white' : 'text-gray-800'}`} />
+                    </button>
+                    <button
+                      onClick={onClose}
+                      className="p-3 rounded-full bg-white/90 text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg z-10"
+                      aria-label="Close modal"
+                    >
+                      <FaTimes className="w-5 h-5" />
+                    </button>
+                  </div>
               
               <div className="flex items-start justify-between">
                   <div className="flex-1">
