@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-2">SEO Destekli Ücretsiz Teklif</h3>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-2">Ücretsiz Teklif</h3>
               <p className="text-gray-300 text-sm">Web sitenizi analiz edip, SEO performansınızı artıracak öneriler sunuyorum</p>
             </div>
 
