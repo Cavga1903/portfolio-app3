@@ -91,10 +91,93 @@ const Contact: React.FC = () => {
         {t('contact.description')}
       </p>
 
-      <div className="relative z-10 w-full max-w-2xl">
-        {/* Contact Form */}
-        <div className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 p-8">
-          <h3 className="text-2xl font-bold mb-6 text-teal-400 text-center">{t('contact.form.title')}</h3>
+      <div className="relative z-10 w-full max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* SEO Destekli Ücretsiz Teklif Bölümü */}
+          <div className="card bg-gradient-to-br from-emerald-500/10 to-teal-500/10 backdrop-blur-sm border border-emerald-500/30 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-8">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full mb-4">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-2">SEO Destekli Ücretsiz Teklif</h3>
+              <p className="text-gray-300 text-sm">Web sitenizi analiz edip, SEO performansınızı artıracak öneriler sunuyorum</p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-6 h-6 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-sm">Site Analizi</h4>
+                  <p className="text-gray-400 text-xs">Web sitenizin mevcut SEO durumunu detaylı analiz ederim</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-6 h-6 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-sm">Performans Raporu</h4>
+                  <p className="text-gray-400 text-xs">Google PageSpeed, Core Web Vitals ve teknik SEO analizi</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-6 h-6 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-sm">Optimizasyon Önerileri</h4>
+                  <p className="text-gray-400 text-xs">Arama motorlarında üst sıralara çıkmanız için somut öneriler</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-6 h-6 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-sm">Rekabet Analizi</h4>
+                  <p className="text-gray-400 text-xs">Rakiplerinizi analiz edip stratejik avantajlar öneririm</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-emerald-400 font-semibold text-sm">Tamamen Ücretsiz</span>
+              </div>
+              <p className="text-gray-300 text-xs">Bu analiz ve öneriler tamamen ücretsizdir. Hiçbir yükümlülük altına girmezsiniz.</p>
+            </div>
+
+            <div className="mt-4 text-center">
+              <button 
+                onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300"
+              >
+                Ücretsiz Teklif Al
+              </button>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div id="contact-form" className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 p-8">
+            <h3 className="text-2xl font-bold mb-6 text-teal-400 text-center">{t('contact.form.title')}</h3>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Input */}
@@ -169,6 +252,7 @@ const Contact: React.FC = () => {
               </div>
             )}
           </form>
+          </div>
         </div>
       </div>
     </section>
