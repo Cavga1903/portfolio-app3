@@ -101,8 +101,8 @@ const Contact: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-2">Ücretsiz Teklif</h3>
-              <p className="text-gray-300 text-sm">Web sitenizi analiz edip, SEO performansınızı artıracak öneriler sunuyorum</p>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-2">Ücretsiz Destek Teklif Al</h3>
+              <p className="text-gray-300 text-sm">Web sitenizi analiz edip, performansınızı artıracak öneriler sunuyorum</p>
             </div>
 
             <div className="space-y-4">
@@ -170,7 +170,7 @@ const Contact: React.FC = () => {
                 onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                 className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300"
               >
-                Ücretsiz Teklif Al
+                Ücretsiz Destek Al
               </button>
             </div>
           </div>
