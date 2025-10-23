@@ -9,14 +9,22 @@ import {
   ProjectStats
 } from '../lib/firebase'
 
-const FirebaseDebug: React.FC = () => {
+interface FirebaseDebugProps {
+  isVisible?: boolean;
+  onClose?: () => void;
+}
+
+const FirebaseDebug: React.FC<FirebaseDebugProps> = ({ isVisible: externalVisible, onClose }) => {
   const [allLikes, setAllLikes] = useState<ProjectLike[]>([])
   const [projectStats, setProjectStats] = useState<ProjectStats[]>([])
   const [currentUserId] = useState(() => generateUserId())
   const [userLikes, setUserLikes] = useState<ProjectLike[]>([])
   const [selectedProjectId, setSelectedProjectId] = useState<string>('')
   const [projectLikes, setProjectLikes] = useState<ProjectLike[]>([])
-  const [isVisible, setIsVisible] = useState(true)
+  const [internalVisible, setInternalVisible] = useState(true)
+  
+  // External visibility kontrolü
+  const isVisible = externalVisible !== undefined ? externalVisible : internalVisible
 
   useEffect(() => {
     loadAllData()
@@ -73,7 +81,13 @@ const FirebaseDebug: React.FC = () => {
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-bold text-green-400">🔥 Firebase Debug Panel</h3>
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={() => {
+            if (onClose) {
+              onClose();
+            } else {
+              setInternalVisible(false);
+            }
+          }}
           className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
           title="Kapat"
         >

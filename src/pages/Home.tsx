@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
@@ -29,6 +29,7 @@ const Footer = lazy(() => import('../components/Footer'));
 
 const Home: React.FC = () => {
   const { trackPageView } = useAnalytics();
+  const [showDebugPanel, setShowDebugPanel] = useState(false);
   
   // Initialize all tracking hooks
   useScrollTracking();
@@ -115,12 +116,18 @@ const Home: React.FC = () => {
           <Footer />
         </Suspense>
         
-        <ScrollToTop />
+        <ScrollToTop 
+          onToggleDebugPanel={() => setShowDebugPanel(!showDebugPanel)}
+          showDebugPanel={showDebugPanel}
+        />
         
         {/* Firebase Debug Panel - Only in development */}
-        {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === 'development' && showDebugPanel && (
           <Suspense fallback={null}>
-            <FirebaseDebug />
+            <FirebaseDebug 
+              isVisible={showDebugPanel} 
+              onClose={() => setShowDebugPanel(false)} 
+            />
           </Suspense>
         )}
       </motion.div>
