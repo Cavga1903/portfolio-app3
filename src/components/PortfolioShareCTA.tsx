@@ -32,7 +32,7 @@ const PortfolioShareCTA: React.FC = () => {
       </div>
 
       <motion.div 
-        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        className="relative z-0 max-w-4xl mx-auto px-6 text-center"
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6 }}

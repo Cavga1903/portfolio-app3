@@ -63,22 +63,22 @@ const Toast: React.FC<ToastProps> = ({
             damping: 30,
             duration: 0.3 
           }}
-          className="fixed top-20 left-1/2 transform -translate-x-1/2 z-[9999] max-w-md w-full px-4"
+          className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[99999] max-w-sm sm:max-w-md w-full px-4 sm:top-20"
         >
           <div className={`relative bg-gray-900/95 backdrop-blur-xl border ${colorScheme.border} rounded-xl shadow-2xl overflow-hidden`}>
             {/* Gradient Border Top */}
             <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colorScheme.gradient}`} />
             
             {/* Content */}
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4">
               {/* Icon */}
               <div className={`flex-shrink-0 p-2 ${colorScheme.bg} rounded-full`}>
-                <FaCheckCircle className={`text-2xl ${colorScheme.icon}`} />
+                <FaCheckCircle className={`text-xl sm:text-2xl ${colorScheme.icon}`} />
               </div>
 
               {/* Message */}
               <div className="flex-1">
-                <p className="text-white font-medium text-lg">
+                <p className="text-white font-medium text-base sm:text-lg">
                   {message}
                 </p>
               </div>
@@ -90,7 +90,7 @@ const Toast: React.FC<ToastProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <FaTimes className="text-gray-400 group-hover:text-white transition-colors" />
+                <FaTimes className="text-gray-400 group-hover:text-white transition-colors text-sm sm:text-base" />
               </motion.button>
             </div>
 
