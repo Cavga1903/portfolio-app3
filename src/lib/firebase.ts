@@ -32,11 +32,41 @@ export interface ProjectStats {
   lastUpdated: Date
 }
 
-// Generate unique user ID (IP + User Agent hash)
+// Generate unique user ID (persistent per browser)
 export const generateUserId = (): string => {
-  const userAgent = navigator.userAgent
-  const timestamp = Date.now().toString()
-  return btoa(userAgent + timestamp).slice(0, 16)
+  const STORAGE_KEY = 'portfolio_user_id'
+  
+  // Check if user ID already exists in localStorage
+  let userId = localStorage.getItem(STORAGE_KEY)
+  
+  if (!userId) {
+    // Generate new unique ID based on browser fingerprint
+    const userAgent = navigator.userAgent
+    const language = navigator.language
+    const platform = navigator.platform
+    const screenResolution = `${screen.width}x${screen.height}`
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    
+    // Create a more stable fingerprint
+    const fingerprint = `${userAgent}-${language}-${platform}-${screenResolution}-${timezone}`
+    
+    // Generate hash from fingerprint
+    let hash = 0
+    for (let i = 0; i < fingerprint.length; i++) {
+      const char = fingerprint.charCodeAt(i)
+      hash = ((hash << 5) - hash) + char
+      hash = hash & hash // Convert to 32-bit integer
+    }
+    
+    // Add random component for uniqueness
+    const randomComponent = Math.random().toString(36).substring(2, 8)
+    userId = `user_${Math.abs(hash).toString(36)}_${randomComponent}`
+    
+    // Store in localStorage for persistence
+    localStorage.setItem(STORAGE_KEY, userId)
+  }
+  
+  return userId
 }
 
 // Get project likes
@@ -181,5 +211,55 @@ export const initializeProjectStats = async (projectIds: string[]): Promise<void
     }
   } catch (error) {
     console.error('Error initializing project stats:', error)
+  }
+}
+
+// Get all project likes for admin view
+export const getAllProjectLikes = async (): Promise<ProjectLike[]> => {
+  try {
+    const likesRef = collection(db, 'projectLikes')
+    const querySnapshot = await getDocs(likesRef)
+    
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as ProjectLike))
+  } catch (error) {
+    console.error('Error fetching all project likes:', error)
+    return []
+  }
+}
+
+// Get likes by project ID for admin view
+export const getProjectLikesByProjectId = async (projectId: string): Promise<ProjectLike[]> => {
+  try {
+    const likesRef = collection(db, 'projectLikes')
+    const q = query(likesRef, where('projectId', '==', projectId))
+    const querySnapshot = await getDocs(q)
+    
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as ProjectLike))
+  } catch (error) {
+    console.error('Error fetching project likes by project ID:', error)
+    return []
+  }
+}
+
+// Get user's like history
+export const getUserLikeHistory = async (userId: string): Promise<ProjectLike[]> => {
+  try {
+    const likesRef = collection(db, 'projectLikes')
+    const q = query(likesRef, where('userId', '==', userId))
+    const querySnapshot = await getDocs(q)
+    
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as ProjectLike))
+  } catch (error) {
+    console.error('Error fetching user like history:', error)
+    return []
   }
 }

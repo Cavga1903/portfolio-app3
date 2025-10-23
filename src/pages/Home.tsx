@@ -16,6 +16,7 @@ import { useAdvancedClickTracking } from '../hooks/useAdvancedClickTracking';
 import { useConversionTracking } from '../hooks/useConversionTracking';
 
 // Lazy load components
+const FirebaseDebug = lazy(() => import('../components/FirebaseDebug'));
 const Hero = lazy(() => import('../components/Hero'));
 const About = lazy(() => import('../components/About'));
 const Experience = lazy(() => import('../components/Experience'));
@@ -115,6 +116,13 @@ const Home: React.FC = () => {
         </Suspense>
         
         <ScrollToTop />
+        
+        {/* Firebase Debug Panel - Only in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <Suspense fallback={null}>
+            <FirebaseDebug />
+          </Suspense>
+        )}
       </motion.div>
     </>
   );

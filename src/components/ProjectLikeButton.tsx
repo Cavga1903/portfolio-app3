@@ -23,7 +23,10 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
   const [isDisliked, setIsDisliked] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [stats, setStats] = useState<ProjectStats | null>(null)
-  const [userId] = useState(() => generateUserId())
+  const [userId] = useState(() => {
+    // Generate user ID once and store it
+    return generateUserId()
+  })
 
   // Load initial like status and stats
   useEffect(() => {
