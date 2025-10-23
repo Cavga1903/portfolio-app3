@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-2">Ücretsiz Destek Teklif Al</h3>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-2">Ücretsiz Teklif Al</h3>
               <p className="text-gray-300 text-sm">Web sitenizi analiz edip, performansınızı artıracak öneriler sunuyorum</p>
             </div>
 
@@ -187,8 +187,8 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div id="contact-form" className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 p-8">
-            <h3 className="text-2xl font-bold mb-6 text-teal-400 text-center">{t('contact.form.title')}</h3>
+          <div id="contact-form" className="card bg-gradient-to-br from-emerald-500/5 to-teal-500/5 backdrop-blur-sm border border-emerald-500/20 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-8">
+            <h3 className="text-2xl font-bold mb-6 text-emerald-400 text-center">{t('contact.form.title')}</h3>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Input */}
@@ -204,7 +204,7 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 required
                 placeholder={t('contact.form.namePlaceholder')}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
+                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
               />
             </div>
 
@@ -221,7 +221,7 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 required
                 placeholder={t('contact.form.emailPlaceholder')}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
+                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
               />
             </div>
 
@@ -238,7 +238,7 @@ const Contact: React.FC = () => {
                 required
                 rows={5}
                 placeholder={t('contact.form.messagePlaceholder')}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white placeholder-gray-400 resize-none transition-all duration-300"
+                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 resize-none transition-all duration-300"
               />
             </div>
 
@@ -246,7 +246,7 @@ const Contact: React.FC = () => {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="w-full btn btn-primary bg-teal-500 hover:bg-teal-600 border-none text-white font-semibold py-3 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+              className="w-full btn btn-primary bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
             >
               {status === 'sending' ? t('contact.form.sending') : t('contact.form.send')}
             </button>
