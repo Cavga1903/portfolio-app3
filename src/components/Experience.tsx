@@ -11,6 +11,7 @@ interface TimelineItem {
   description: string;
   skills?: string[];
   logo?: string;
+  website?: string;
 }
 
 const Experience: React.FC = () => {
@@ -25,7 +26,8 @@ const Experience: React.FC = () => {
       period: t('experience.turkcell.period'),
       description: t('experience.turkcell.description'),
       skills: ['Customer Service', 'Problem Solving', 'Communication'],
-      logo: '/logos/turkcell.webp'
+      logo: '/logos/turkcell.webp',
+      website: 'https://globalbilgi.com.tr'
     },
     {
       type: 'work',
@@ -35,7 +37,8 @@ const Experience: React.FC = () => {
       period: t('experience.upwork.period'),
       description: t('experience.upwork.description'),
       skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT'],
-      logo: '/logos/upwork.svg'
+      logo: '/logos/upwork.svg',
+      website: 'https://www.upwork.com'
     },
     {
       type: 'education',
@@ -45,7 +48,8 @@ const Experience: React.FC = () => {
       period: t('experience.siliconmade.period'),
       description: t('experience.siliconmade.description'),
       skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git'],
-      logo: '/logos/siliconmade.webp'
+      logo: '/logos/siliconmade.webp',
+      website: 'https://www.siliconmadeacademy.com'
     },
     {
       type: 'work',
@@ -55,7 +59,8 @@ const Experience: React.FC = () => {
       period: t('experience.concentrix.period'),
       description: t('experience.concentrix.description'),
       skills: ['Salesforce CRM', 'Customer Satisfaction', 'Banking'],
-      logo: '/logos/concentrix.webp'
+      logo: '/logos/concentrix.webp',
+      website: 'https://www.concentrix.com'
     },
     {
       type: 'work',
@@ -65,7 +70,8 @@ const Experience: React.FC = () => {
       period: t('experience.izmir.period'),
       description: t('experience.izmir.description'),
       skills: ['Hardware & Software', 'System Administration', 'Technical Support', 'Teamwork'],
-      logo: '/logos/izmir.svg'
+      logo: '/logos/izmir.svg',
+      website: 'https://www.izmir.bel.tr/tr/Anasayfa'
     },
     {
       type: 'education',
@@ -75,7 +81,8 @@ const Experience: React.FC = () => {
       period: t('experience.uopeople.period'),
       description: t('experience.uopeople.description'),
       skills: ['Computer Science', 'Algorithms', 'Data Structures'],
-      logo: '/logos/uopeople_logo.webp'
+      logo: '/logos/uopeople_logo.webp',
+      website: 'https://www.uopeople.edu'
     },
     {
       type: 'education',
@@ -85,7 +92,8 @@ const Experience: React.FC = () => {
       period: t('experience.anadolu.period'),
       description: t('experience.anadolu.description'),
       skills: ['Computer Programming', 'Software Development'],
-      logo: '/logos/anadolu.svg'
+      logo: '/logos/anadolu.svg',
+      website: 'https://www.anadolu.edu.tr'
     }
   ];
 
@@ -151,7 +159,18 @@ const Experience: React.FC = () => {
                     <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300 break-words">
                       {item.title}
                     </h3>
-                    <p className="text-base md:text-lg text-emerald-400 font-semibold">{item.company}</p>
+                    {item.website ? (
+                      <a 
+                        href={item.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-base md:text-lg text-emerald-400/80 font-semibold hover:text-emerald-300 hover:underline transition-all duration-300 inline-block"
+                      >
+                        {item.company}
+                      </a>
+                    ) : (
+                      <p className="text-base md:text-lg text-emerald-400/80 font-semibold">{item.company}</p>
+                    )}
                   </div>
                 </div>
 

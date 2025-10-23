@@ -116,6 +116,13 @@ const Home: React.FC = () => {
         </Suspense>
         
         <ScrollToTop />
+        
+        {/* Firebase Debug Panel - Only in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <Suspense fallback={null}>
+            <FirebaseDebug />
+          </Suspense>
+        )}
       </motion.div>
     </>
   );
