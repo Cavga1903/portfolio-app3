@@ -16,6 +16,7 @@ const FirebaseDebug: React.FC = () => {
   const [userLikes, setUserLikes] = useState<ProjectLike[]>([])
   const [selectedProjectId, setSelectedProjectId] = useState<string>('')
   const [projectLikes, setProjectLikes] = useState<ProjectLike[]>([])
+  const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
     loadAllData()
@@ -62,9 +63,25 @@ const FirebaseDebug: React.FC = () => {
     return null
   }
 
+  // Don't render if not visible
+  if (!isVisible) {
+    return null
+  }
+
   return (
     <div className="fixed bottom-4 right-4 bg-black/90 text-white p-4 rounded-lg max-w-md max-h-96 overflow-y-auto text-xs z-50">
-      <h3 className="font-bold mb-2 text-green-400">🔥 Firebase Debug Panel</h3>
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="font-bold text-green-400">🔥 Firebase Debug Panel</h3>
+        <button
+          onClick={() => setIsVisible(false)}
+          className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+          title="Kapat"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
       
       <div className="mb-3">
         <p className="text-yellow-400">Current User ID:</p>
