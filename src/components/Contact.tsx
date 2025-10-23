@@ -181,7 +181,7 @@ const Contact: React.FC = () => {
                 }}
                 className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300"
               >
-                Destek almak için mesaj gönderin
+                Teklif almak için mesaj gönderin
               </button>
             </div>
           </div>
