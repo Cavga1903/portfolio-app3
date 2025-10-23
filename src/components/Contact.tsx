@@ -167,10 +167,21 @@ const Contact: React.FC = () => {
 
             <div className="mt-4 text-center">
               <button 
-                onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  // Mesaj kutusuna odaklan
+                  const messageTextarea = document.getElementById('message') as HTMLTextAreaElement;
+                  if (messageTextarea) {
+                    messageTextarea.focus();
+                    messageTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Mesaj kutusuna örnek metin ekle
+                    messageTextarea.value = 'Merhaba! Web sitem için ücretsiz destek almak istiyorum. Lütfen detaylı analiz yapabilir misiniz?';
+                    // Form state'ini güncelle
+                    setFormData(prev => ({ ...prev, message: messageTextarea.value }));
+                  }
+                }}
                 className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300"
               >
-                Ücretsiz Destek Al
+                Destek almak için mesaj gönderin
               </button>
             </div>
           </div>
