@@ -103,7 +103,6 @@ const Projects: React.FC = () => {
   const { t } = useTranslation();
   const { trackClick } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
-  // Autoplay is always enabled
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -295,14 +294,7 @@ const Projects: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Auto-play functionality (always on)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSlideDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % projects.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [projects.length]);
+  // Auto-play functionality disabled - users can manually navigate
 
   // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -543,7 +535,7 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Auto-play Toggle removed - autoplay is always enabled */}
+        {/* Auto-play disabled - users can manually navigate */}
       </div>
 
       {/* Project Modal */}
