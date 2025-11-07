@@ -20,17 +20,6 @@ const Experience: React.FC = () => {
   const experiences: TimelineItem[] = [
     {
       type: 'work',
-      title: t('experience.turkcell.title'),
-      company: t('experience.turkcell.company'),
-      location: t('experience.turkcell.location'),
-      period: t('experience.turkcell.period'),
-      description: t('experience.turkcell.description'),
-      skills: ['Customer Service', 'Problem Solving', 'Communication'],
-      logo: '/logos/turkcell.webp',
-      website: 'https://globalbilgi.com.tr'
-    },
-    {
-      type: 'work',
       title: t('experience.upwork.title'),
       company: t('experience.upwork.company'),
       location: t('experience.upwork.location'),
@@ -39,6 +28,17 @@ const Experience: React.FC = () => {
       skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT'],
       logo: '/logos/upwork.svg',
       website: 'https://www.upwork.com'
+    },
+    {
+      type: 'work',
+      title: t('experience.turkcell.title'),
+      company: t('experience.turkcell.company'),
+      location: t('experience.turkcell.location'),
+      period: t('experience.turkcell.period'),
+      description: t('experience.turkcell.description'),
+      skills: ['Customer Service', 'Problem Solving', 'Communication'],
+      logo: '/logos/turkcell.webp',
+      website: 'https://globalbilgi.com.tr'
     },
     {
       type: 'education',
