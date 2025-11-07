@@ -12,7 +12,13 @@
     "greeting": "Hallo, ich bin Tolga! 👋",
     "description": "Als Frontend-Entwickler erstelle ich kreative und moderne Webprojekte.",
     "ctaAbout": "Mehr über mich erfahren",
-    "ctaProjects": "Meine Projekte ansehen"
+    "ctaProjects": "Meine Projekte ansehen",
+    "typing": {
+      "frontendDeveloper": "Frontend-Entwickler",
+      "reactSpecialist": "React-Spezialist",
+      "uiuxEnthusiast": "UI/UX-Enthusiast",
+      "creativeCoder": "Kreativer Programmierer"
+    }
   },
     "modal": {
       "clickOutsideToClose": "Außerhalb klicken zum Schließen",
@@ -24,6 +30,10 @@
     },
   "about": {
     "title": "Über mich",
+    "name": "Tolga Çavga",
+    "role": "Frontend-Entwickler",
+    "githubPhotoAlt": "GitHub Profilfoto",
+    "developerEmojiAlt": "Developer Emoji",
     "description": "Hallo! Ich bin Tolga. Ich bin mit großer Leidenschaft in die Welt der Softwareentwicklung eingetreten. Als Frontend-Entwickler genieße ich es, kreative und benutzerfreundliche Webanwendungen zu erstellen. In meiner Freizeit interessiere ich mich für das Lernen neuer Technologien, das Lesen von Büchern und Sport.",
     "stats": {
       "focus": {
@@ -57,6 +67,15 @@
   },
   "experience": {
     "title": "Erfahrung & Bildung",
+    "skills": {
+      "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
+      "turkcell": ["Kundenservice", "Problemlösung", "Kommunikation"],
+      "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
+      "concentrix": ["Salesforce CRM", "Kundenzufriedenheit", "Bankwesen"],
+      "izmir": ["Hardware & Software", "Systemverwaltung", "Technischer Support", "Teamarbeit"],
+      "uopeople": ["Informatik", "Algorithmen", "Datenstrukturen"],
+      "anadolu": ["Computerprogrammierung", "Softwareentwicklung"]
+    },
     "turkcell": {
       "title": "Kundenbetreuer",
       "company": "Turkcell Global Bilgi",
@@ -166,6 +185,14 @@
   "certificates": {
     "title": "Zertifikate & Erfolge",
     "subtitle": "Zertifizierungen und Erfolge auf meiner Lernreise",
+    "skills": {
+      "siliconmade": ["React", "React Native", "Mobile Development"],
+      "frontend": ["HTML", "CSS", "JavaScript"],
+      "react": ["React", "Components", "Hooks"],
+      "responsive": ["Responsive Design", "Mobile First", "CSS Grid"],
+      "javascript": ["JavaScript", "ES6+", "Async/Await"],
+      "git": ["Git", "GitHub", "Version Control"]
+    },
     "siliconmade": {
       "title": "Mobil- & Frontend-Entwicklungszertifikat",
       "issuer": "Siliconmade Academy",
@@ -259,31 +286,65 @@
   },
   "projects": {
     "title": "Meine Projekte",
+    "subtitle": "Projekte, die ich mit modernen Webtechnologien entwickelt habe",
     "details": "Details",
     "tech": "Technologien:",
     "github": "GitHub",
-    "demo": "Live Demo",
+    "demo": "Demo",
+    "liveDemo": "Live Demo",
+    "livePreview": "Live-Vorschau",
     "clickToViewDetails": "Klicken Sie, um Details anzuzeigen",
+    "roles": {
+      "fullStack": "Full Stack Entwickler",
+      "frontend": "Frontend-Entwickler",
+      "backend": "Backend-Entwickler"
+    },
+    "durations": {
+      "week": "{{count}} Woche",
+      "weeks": "{{count}} Wochen",
+      "month": "{{count}} Monat",
+      "months": "{{count}} Monate"
+    },
     "items": {
       "iot": {
         "title": "IoT-Geräte-Simulator",
-        "description": "IoT-Geräte-Simulator entwickelt mit Node.js, Express, Authentifizierung, Statistiken & Mehrsprachigkeit. Mit Docker-Unterstützung und QR-Code-Generierung."
+        "description": "IoT-Geräte-Simulator entwickelt mit Node.js, Express, Authentifizierung, Statistiken & Mehrsprachigkeit. Mit Docker-Unterstützung und QR-Code-Generierung.",
+        "longDescription": "Webanwendung, die IoT-Geräte simuliert. Echtzeit-Datenvisualisierung und QR-Code-Integration.",
+        "features": ["Echtzeit-Datenvisualisierung", "QR-Code-Integration", "Docker-Containerisierung", "WebSocket-Verbindung"],
+        "duration": "1 Monat",
+        "role": "Backend-Entwickler"
       },
       "todo": {
         "title": "Todo-App (Instagram-Stil)",
-        "description": "Moderne Todo-Anwendung mit Instagram-ähnlicher Benutzeroberfläche entwickelt. Erstellt mit React und modernen Web-Technologien."
+        "description": "Moderne Todo-Anwendung mit Instagram-ähnlicher Benutzeroberfläche entwickelt. Erstellt mit React und modernen Web-Technologien.",
+        "longDescription": "Aufgabenverwaltungsanwendung. CRUD-Operationen und Local Storage-Integration.",
+        "features": ["Aufgaben hinzufügen/löschen", "Status-Updates", "Local Storage", "Responsive Design"],
+        "duration": "1 Woche",
+        "role": "Frontend-Entwickler"
       },
       "workshop": {
         "title": "Workshop-Tracker",
-        "description": "Webanwendung für Workshop- und Veranstaltungsverfolgung entwickelt. Mit Teilnehmerverwaltung und Veranstaltungsorganisation."
+        "description": "Webanwendung für Workshop- und Veranstaltungsverfolgung entwickelt. Mit Teilnehmerverwaltung und Veranstaltungsorganisation.",
+        "longDescription": "Workshop- und Veranstaltungsverfolgungssystem. Moderne Plattform, auf der Teilnehmer sich registrieren und Veranstaltungsdetails anzeigen können.",
+        "features": ["Benutzerregistrierungssystem", "Veranstaltungsverwaltung", "Echtzeit-Updates", "Admin-Panel"],
+        "duration": "1,5 Monate",
+        "role": "Full Stack Entwickler"
       },
       "productManager": {
         "title": "React Supabase Produktmanager",
-        "description": "Produktverwaltungssystem mit Supabase-Backend entwickelt. Mit CRUD-Operationen und Echtzeit-Datensynchronisation."
+        "description": "Produktverwaltungssystem mit Supabase-Backend entwickelt. Mit CRUD-Operationen und Echtzeit-Datensynchronisation.",
+        "longDescription": "Produktverwaltungssystem. CRUD-Operationen und Benutzerauthentifizierung mit Supabase-Backend.",
+        "features": ["Produkt-CRUD-Operationen", "Benutzerauthentifizierung", "Supabase-Integration", "Echtzeit-Updates"],
+        "duration": "3 Wochen",
+        "role": "Full Stack Entwickler"
       },
       "grocery": {
         "title": "Online-Lebensmittel-App",
-        "description": "Online-Marktplatz-Anwendung als E-Commerce-Plattform entwickelt. Mit Warenkorbverwaltung und Zahlungsintegration."
+        "description": "Online-Marktplatz-Anwendung als E-Commerce-Plattform entwickelt. Mit Warenkorbverwaltung und Zahlungsintegration.",
+        "longDescription": "Online-Marktplatz-Anwendung. Verkauf von Lebensmitteln und Lieferverfolgung.",
+        "features": ["Produktkategorien", "Suche und Filterung", "Lieferverfolgung", "Benutzerkonten"],
+        "duration": "2,5 Wochen",
+        "role": "Full Stack Entwickler"
       },
       "productList": {
         "title": "Produktliste (Erweitert)",
@@ -315,25 +376,20 @@
       "exchange": {
         "title": "Währungsumtausch-Tracking-App",
         "description": "Währungsumtausch-Kursverfolgung und Handelsoberfläche. Echtzeitdaten und Diagrammvisualisierung.",
-        "longDescription": "Moderne Webanwendung, die Echtzeit-Wechselkurse verfolgt und Handelssimulation bietet. Bietet benutzerfreundliche Erfahrung mit Diagrammvisualisierung und responsivem Design.",
-        "features": [
-          "Echtzeit-Wechselkurse",
-          "Diagrammvisualisierung",
-          "Handelssimulation",
-          "Responsive Design"
-        ],
-        "challenges": [
-          "Echtzeitdatenintegration",
-          "Leistungsoptimierung"
-        ],
-        "solutions": [
-          "WebSocket-Verbindungen",
-          "Effizientes Daten-Caching"
-        ]
+        "longDescription": "Währungsumtausch-Kursverfolgung und Handelsoberfläche. Echtzeitdaten und Diagrammvisualisierung.",
+        "features": ["Echtzeit-Wechselkurse", "Diagrammvisualisierung", "Handelssimulation", "Responsive Design"],
+        "challenges": ["Echtzeitdatenintegration", "Leistungsoptimierung"],
+        "solutions": ["WebSocket-Verbindungen", "Effizientes Daten-Caching"],
+        "duration": "1,5 Wochen",
+        "role": "Frontend-Entwickler"
       },
       "globalIdentity": {
         "title": "Globale Identität",
-        "description": "Globales Identitätsverifikationssystem. Mit Multi-Plattform-Unterstützung und sicherer Authentifizierung."
+        "description": "Globales Identitätsverifikationssystem. Mit Multi-Plattform-Unterstützung und sicherer Authentifizierung.",
+        "longDescription": "Globales Identitätsverwaltungssystem. Benutzerprofile und Authentifizierung.",
+        "features": ["Benutzerprofile", "Authentifizierung", "Sicherheitsmaßnahmen", "Mehrsprachige Unterstützung"],
+        "duration": "2 Wochen",
+        "role": "Full Stack Entwickler"
       },
       "noteTracker": {
         "title": "Einfaches Notizverfolgungssystem",
@@ -349,7 +405,13 @@
       },
       "portfolio": {
         "title": "Persönliches Portfolio",
-        "description": "Persönliche Portfolio-Website mit modernem React und TypeScript entwickelt. Mit responsivem Design und mehrsprachiger Unterstützung."
+        "description": "Persönliche Portfolio-Website mit modernem React und TypeScript entwickelt. Mit responsivem Design und mehrsprachiger Unterstützung.",
+        "longDescription": "Moderne und responsive Portfolio-Website. Entwickelt mit React, TypeScript und TailwindCSS. Sanfte Animationen mit Framer Motion und mehrsprachige Unterstützung.",
+        "features": ["Responsive Design", "Mehrsprachige Unterstützung (TR, EN, DE, AZ)", "Sanfte Animationen", "SEO-Optimierung", "Dark/Light-Theme"],
+        "challenges": ["Leistungsoptimierung", "Mehrsprachige Verwaltung", "Responsive Design"],
+        "solutions": ["Lazy Loading und Code Splitting", "i18next-Bibliothek", "Mobile-First-Ansatz"],
+        "duration": "2 Monate",
+        "role": "Full Stack Entwickler"
       },
       "ecommerce": {
         "title": "E-Commerce Website",
@@ -357,11 +419,19 @@
       },
       "cvPreparation": {
         "title": "Lebenslauf-Vorbereitungs-App",
-        "description": "Webanwendung für dynamische Lebenslauf-Erstellung und PDF-Download. Mit benutzerfreundlicher Oberfläche und Vorlagensystem."
+        "description": "Webanwendung für dynamische Lebenslauf-Erstellung und PDF-Download. Mit benutzerfreundlicher Oberfläche und Vorlagensystem.",
+        "longDescription": "Webanwendung mit dynamischer CV-Erstellung und PDF-Download-Funktionen. Benutzerfreundliche Oberfläche und Vorlagensystem.",
+        "features": ["Dynamische CV-Erstellung", "PDF-Export", "Vorlagensystem", "Echtzeit-Vorschau"],
+        "duration": "2 Wochen",
+        "role": "Frontend-Entwickler"
       },
       "furniro": {
         "title": "Furniro E-Commerce",
-        "description": "E-Commerce-Plattform mit Fokus auf Möbel und Wohnaccessoires. Modernes Design und benutzerfreundliche Oberfläche."
+        "description": "E-Commerce-Plattform mit Fokus auf Möbel und Wohnaccessoires. Modernes Design und benutzerfreundliche Oberfläche.",
+        "longDescription": "Möbel-E-Commerce-Website. Verkauf von Möbelprodukten mit modernem Design und benutzerfreundlicher Oberfläche.",
+        "features": ["Produktkatalog", "Warenkorbverwaltung", "Zahlungssystem", "Responsive Design"],
+        "duration": "3 Wochen",
+        "role": "Frontend-Entwickler"
       },
       "exchangeScreen": {
         "title": "Wechselkurs-Anzeige",
@@ -369,7 +439,11 @@
       },
       "dashboard": {
         "title": "Finanz-Dashboard",
-        "description": "Dashboard-Anwendung für Aktien- und Krypto-Tracking. Zeigt Daten von Unternehmen wie NVIDIA, Tesla."
+        "description": "Dashboard-Anwendung für Aktien- und Krypto-Tracking. Zeigt Daten von Unternehmen wie NVIDIA, Tesla.",
+        "longDescription": "Analytische Dashboard-Anwendung. Datenvisualisierung und Berichtssystem.",
+        "features": ["Datenvisualisierung", "Analytische Berichte", "Interaktive Diagramme", "Export-Funktionalität"],
+        "duration": "2 Wochen",
+        "role": "Frontend-Entwickler"
       },
       "odev": {
         "title": "Social Media Dashboard",
@@ -380,6 +454,30 @@
   "contact": {
     "title": "Kontakt",
     "description": "Nehmen Sie Kontakt mit mir auf! Füllen Sie das untenstehende Formular aus, um mir direkt eine E-Mail zu senden.",
+    "freeQuote": {
+      "title": "Kostenloses Angebot erhalten",
+      "description": "Ich analysiere Ihre Website und gebe Empfehlungen zur Verbesserung Ihrer Leistung",
+      "siteAnalysis": {
+        "title": "Website-Analyse",
+        "description": "Ich analysiere den aktuellen SEO-Status Ihrer Website im Detail"
+      },
+      "performanceReport": {
+        "title": "Leistungsbericht",
+        "description": "Google PageSpeed, Core Web Vitals und technische SEO-Analyse"
+      },
+      "optimizationSuggestions": {
+        "title": "Optimierungsvorschläge",
+        "description": "Konkrete Empfehlungen für höhere Rankings in Suchmaschinen"
+      },
+      "competitorAnalysis": {
+        "title": "Wettbewerbsanalyse",
+        "description": "Ich analysiere Ihre Konkurrenten und schlage strategische Vorteile vor"
+      },
+      "completelyFree": "Völlig kostenlos",
+      "completelyFreeDescription": "Diese Analyse und Empfehlungen sind völlig kostenlos. Sie gehen keine Verpflichtung ein.",
+      "sendMessageForQuote": "Senden Sie eine Nachricht, um ein Angebot zu erhalten",
+      "exampleMessage": "Hallo! Ich möchte kostenlose Unterstützung für meine Website erhalten. Können Sie bitte eine detaillierte Analyse durchführen?"
+    },
     "form": {
       "title": "Nachricht senden",
       "name": "Ihr Name",
@@ -476,6 +574,30 @@
     "goHome": "Zur Startseite",
     "goBack": "Zurück",
     "tip": "Versuche den Konami-Code, vielleicht passiert etwas..."
+  },
+  "common": {
+    "name": "Tolga Çavga",
+    "role": "Frontend-Entwickler",
+    "resume": "Lebenslauf",
+    "developerLogo": "Developer Logo",
+    "closeMenu": "Menü schließen",
+    "languages": {
+      "turkish": "Türkisch",
+      "azerbaijani": "Aserbaidschanisch-Türkisch",
+      "english": "Englisch",
+      "german": "Deutsch"
+    }
+  },
+  "projectLike": {
+    "like": "Projekt mögen",
+    "unlike": "Projekt nicht mehr mögen",
+    "dislike": "Projekt nicht mögen",
+    "removeDislike": "Nicht mögen entfernen",
+    "liked": "Projekt gemocht! ❤️",
+    "unliked": "Gefällt mir entfernt",
+    "disliked": "Projekt nicht gemocht 👎",
+    "dislikeRemoved": "Nicht mögen entfernt",
+    "error": "Ein Fehler ist aufgetreten, bitte versuchen Sie es erneut"
   }
 }
 

@@ -89,10 +89,10 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
       {/* Overlay for screenshot */}
       {imageLoaded && !imageError && (
         <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-          <div className="text-center text-white">
-            <div className="text-2xl mb-2">👁️</div>
-            <div className="text-sm font-semibold">Live Preview</div>
-          </div>
+            <div className="text-center text-white">
+              <div className="text-2xl mb-2">👁️</div>
+              <div className="text-sm font-semibold">{t('projects.livePreview')}</div>
+            </div>
         </div>
       )}
     </div>
@@ -120,26 +120,12 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/portfolio-app3",
       link: "https://www.tolgacavga.com",
       imageGradient: "from-purple-500 to-indigo-600",
-      longDescription: "Modern ve responsive bir portfolyo web sitesi. React, TypeScript ve TailwindCSS kullanılarak geliştirildi. Framer Motion ile smooth animasyonlar ve çoklu dil desteği.",
-      features: [
-        "Responsive tasarım",
-        "Çoklu dil desteği (TR, EN, DE, AZ)",
-        "Smooth animasyonlar",
-        "SEO optimizasyonu",
-        "Dark/Light tema"
-      ],
-      challenges: [
-        "Performans optimizasyonu",
-        "Çoklu dil yönetimi",
-        "Responsive tasarım"
-      ],
-      solutions: [
-        "Lazy loading ve code splitting",
-        "i18next kütüphanesi",
-        "Mobile-first yaklaşım"
-      ],
-      duration: "2 ay",
-      role: "Full Stack Developer"
+      longDescription: t('projects.items.portfolio.longDescription'),
+      features: t('projects.items.portfolio.features', { returnObjects: true }) as string[],
+      challenges: t('projects.items.portfolio.challenges', { returnObjects: true }) as string[],
+      solutions: t('projects.items.portfolio.solutions', { returnObjects: true }) as string[],
+      duration: t('projects.items.portfolio.duration'),
+      role: t('projects.items.portfolio.role')
     },
     // 2. Workshop Tracker
     {
@@ -149,15 +135,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/workshop-tracker",
       link: "https://workshop-tracker-taupe.vercel.app",
       imageGradient: "from-green-500 to-teal-600",
-      longDescription: "Workshop ve etkinlik takip sistemi. Katılımcıların kayıt olabileceği, etkinlik detaylarını görüntüleyebileceği modern bir platform.",
-      features: [
-        "Kullanıcı kayıt sistemi",
-        "Etkinlik yönetimi",
-        "Real-time güncellemeler",
-        "Admin paneli"
-      ],
-      duration: "1.5 ay",
-      role: "Full Stack Developer"
+      longDescription: t('projects.items.workshop.longDescription'),
+      features: t('projects.items.workshop.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.workshop.duration'),
+      role: t('projects.items.workshop.role')
     },
     // 3. IoT Cihaz Simülatörü
     {
@@ -167,15 +148,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/iot-simulator",
       link: "https://iot-simulator-kqi7.onrender.com",
       imageGradient: "from-blue-500 to-cyan-600",
-      longDescription: "IoT cihazlarını simüle eden web uygulaması. Gerçek zamanlı veri görselleştirme ve QR kod entegrasyonu.",
-      features: [
-        "Real-time data visualization",
-        "QR kod entegrasyonu",
-        "Docker containerization",
-        "WebSocket bağlantısı"
-      ],
-      duration: "1 ay",
-      role: "Backend Developer"
+      longDescription: t('projects.items.iot.longDescription'),
+      features: t('projects.items.iot.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.iot.duration'),
+      role: t('projects.items.iot.role')
     },
     // 4. Furniro E-commerce
     {
@@ -185,15 +161,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/eCommerce-WebsiteOdev4",
       link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/",
       imageGradient: "from-red-500 to-pink-600",
-      longDescription: "Mobilya e-ticaret sitesi. Modern tasarım ve kullanıcı dostu arayüz ile mobilya ürünlerinin satışı.",
-      features: [
-        "Ürün kataloğu",
-        "Sepet yönetimi",
-        "Ödeme sistemi",
-        "Responsive tasarım"
-      ],
-      duration: "3 hafta",
-      role: "Frontend Developer"
+      longDescription: t('projects.items.furniro.longDescription'),
+      features: t('projects.items.furniro.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.furniro.duration'),
+      role: t('projects.items.furniro.role')
     },
     // 5. CV Hazırlama
     {
@@ -203,15 +174,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/cvPreparationApp",
       link: "https://cavga1903.github.io/cvPreparationApp/",
       imageGradient: "from-teal-500 to-cyan-600",
-      longDescription: "Dinamik CV oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi.",
-      features: [
-        "Dinamik CV oluşturma",
-        "PDF export",
-        "Şablon sistemi",
-        "Real-time preview"
-      ],
-      duration: "2 hafta",
-      role: "Frontend Developer"
+      longDescription: t('projects.items.cvPreparation.longDescription'),
+      features: t('projects.items.cvPreparation.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.cvPreparation.duration'),
+      role: t('projects.items.cvPreparation.role')
     },
     // 6. Online Grocery
     {
@@ -221,15 +187,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/online-grocery-app",
       link: "https://cavga1903.github.io/online-grocery-app/",
       imageGradient: "from-orange-500 to-yellow-600",
-      longDescription: "Online market uygulaması. Gıda ürünlerinin satışı ve teslimat takibi.",
-      features: [
-        "Ürün kategorileri",
-        "Arama ve filtreleme",
-        "Teslimat takibi",
-        "Kullanıcı hesapları"
-      ],
-      duration: "2.5 hafta",
-      role: "Full Stack Developer"
+      longDescription: t('projects.items.grocery.longDescription'),
+      features: t('projects.items.grocery.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.grocery.duration'),
+      role: t('projects.items.grocery.role')
     },
     // 7. Todo App
     {
@@ -239,15 +200,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/todo-app-ins",
       link: "https://cavga1903.github.io/todo-app-ins/",
       imageGradient: "from-indigo-500 to-purple-600",
-      longDescription: "Görev yönetim uygulaması. CRUD operasyonları ve local storage entegrasyonu.",
-      features: [
-        "Görev ekleme/silme",
-        "Durum güncelleme",
-        "Local storage",
-        "Responsive tasarım"
-      ],
-      duration: "1 hafta",
-      role: "Frontend Developer"
+      longDescription: t('projects.items.todo.longDescription'),
+      features: t('projects.items.todo.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.todo.duration'),
+      role: t('projects.items.todo.role')
     },
     // 8. Product Manager
     {
@@ -257,15 +213,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/react-supabase-product-manager",
       link: "https://react-supabase-product-manager.vercel.app/login",
       imageGradient: "from-emerald-500 to-green-600",
-      longDescription: "Ürün yönetim sistemi. Supabase backend ile CRUD operasyonları ve kullanıcı kimlik doğrulama.",
-      features: [
-        "Ürün CRUD operasyonları",
-        "Kullanıcı kimlik doğrulama",
-        "Supabase entegrasyonu",
-        "Real-time güncellemeler"
-      ],
-      duration: "3 hafta",
-      role: "Full Stack Developer"
+      longDescription: t('projects.items.productManager.longDescription'),
+      features: t('projects.items.productManager.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.productManager.duration'),
+      role: t('projects.items.productManager.role')
     },
     // 9. Payment Form
     {
@@ -293,15 +244,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/global-identity-9",
       link: "https://cavga1903.github.io/global-identity-9/",
       imageGradient: "from-violet-500 to-purple-600",
-      longDescription: "Küresel kimlik yönetim sistemi. Kullanıcı profilleri ve kimlik doğrulama.",
-      features: [
-        "Kullanıcı profilleri",
-        "Kimlik doğrulama",
-        "Güvenlik önlemleri",
-        "Multi-language support"
-      ],
-      duration: "2 hafta",
-      role: "Full Stack Developer"
+      longDescription: t('projects.items.globalIdentity.longDescription'),
+      features: t('projects.items.globalIdentity.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.globalIdentity.duration'),
+      role: t('projects.items.globalIdentity.role')
     },
     // 11. Exchange Screen
     {
@@ -311,15 +257,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/exchangeScreenOdev3",
       link: "https://cavga1903.github.io/exchangeScreenOdev3/",
       imageGradient: "from-amber-500 to-orange-600",
-      longDescription: "Döviz kuru takip ve alım-satım ekranı. Real-time veri ve grafik görselleştirme.",
-      features: [
-        "Real-time döviz kurları",
-        "Grafik görselleştirme",
-        "Alım-satım simülasyonu",
-        "Responsive tasarım"
-      ],
-      duration: "1.5 hafta",
-      role: "Frontend Developer"
+      longDescription: t('projects.items.exchange.longDescription'),
+      features: t('projects.items.exchange.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.exchange.duration'),
+      role: t('projects.items.exchange.role')
     },
     // 12. Dashboard
     {
@@ -329,15 +270,10 @@ const Projects: React.FC = () => {
       github: "https://github.com/Cavga1903/dashboardOdev2",
       link: "https://cavga1903.github.io/dashboardOdev2/",
       imageGradient: "from-slate-500 to-gray-600",
-      longDescription: "Analitik dashboard uygulaması. Veri görselleştirme ve raporlama sistemi.",
-      features: [
-        "Veri görselleştirme",
-        "Analitik raporlar",
-        "Interactive charts",
-        "Export functionality"
-      ],
-      duration: "2 hafta",
-      role: "Frontend Developer"
+      longDescription: t('projects.items.dashboard.longDescription'),
+      features: t('projects.items.dashboard.features', { returnObjects: true }) as string[],
+      duration: t('projects.items.dashboard.duration'),
+      role: t('projects.items.dashboard.role')
     }
   ];
 
@@ -448,7 +384,7 @@ const Projects: React.FC = () => {
             {t('projects.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Modern web teknolojileri kullanarak geliştirdiğim projeler
+            {t('projects.subtitle')}
           </p>
         </div>
 
@@ -546,7 +482,7 @@ const Projects: React.FC = () => {
                             className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-xs"
                           >
                             <FaGithub className="w-3 h-3" />
-                            <span>GitHub</span>
+                            <span>{t('projects.github')}</span>
                           </a>
                         )}
                         {project.link && (
@@ -561,7 +497,7 @@ const Projects: React.FC = () => {
                             className="flex items-center gap-1.5 px-2.5 py-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors text-xs"
                           >
                             <FaExternalLinkAlt className="w-3 h-3" />
-                            <span>Demo</span>
+                            <span>{t('projects.demo')}</span>
                           </a>
                         )}
                       </div>

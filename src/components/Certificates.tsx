@@ -23,7 +23,7 @@ const Certificates: React.FC = () => {
       dateKey: 'certificates.siliconmade.date',
       descriptionKey: 'certificates.siliconmade.description',
       color: 'from-yellow-500 to-orange-500',
-      skills: ['React', 'React Native', 'Mobile Development']
+      skills: t('certificates.skills.siliconmade', { returnObjects: true }) as string[]
     },
     {
       icon: <FaCertificate className="text-4xl" />,
@@ -32,7 +32,7 @@ const Certificates: React.FC = () => {
       dateKey: 'certificates.frontend.date',
       descriptionKey: 'certificates.frontend.description',
       color: 'from-blue-500 to-cyan-500',
-      skills: ['HTML', 'CSS', 'JavaScript']
+      skills: t('certificates.skills.frontend', { returnObjects: true }) as string[]
     },
     {
       icon: <FaAward className="text-4xl" />,
@@ -41,7 +41,7 @@ const Certificates: React.FC = () => {
       dateKey: 'certificates.react.date',
       descriptionKey: 'certificates.react.description',
       color: 'from-cyan-500 to-blue-500',
-      skills: ['React', 'Components', 'Hooks']
+      skills: t('certificates.skills.react', { returnObjects: true }) as string[]
     },
     {
       icon: <FaMedal className="text-4xl" />,
@@ -50,7 +50,7 @@ const Certificates: React.FC = () => {
       dateKey: 'certificates.responsive.date',
       descriptionKey: 'certificates.responsive.description',
       color: 'from-green-500 to-emerald-500',
-      skills: ['Responsive Design', 'Mobile First', 'CSS Grid']
+      skills: t('certificates.skills.responsive', { returnObjects: true }) as string[]
     },
     {
       icon: <FaStar className="text-4xl" />,
@@ -59,7 +59,7 @@ const Certificates: React.FC = () => {
       dateKey: 'certificates.javascript.date',
       descriptionKey: 'certificates.javascript.description',
       color: 'from-yellow-500 to-amber-500',
-      skills: ['JavaScript', 'ES6+', 'Async/Await']
+      skills: t('certificates.skills.javascript', { returnObjects: true }) as string[]
     },
     {
       icon: <FaCheckCircle className="text-4xl" />,
@@ -68,7 +68,7 @@ const Certificates: React.FC = () => {
       dateKey: 'certificates.git.date',
       descriptionKey: 'certificates.git.description',
       color: 'from-orange-500 to-red-500',
-      skills: ['Git', 'GitHub', 'Version Control']
+      skills: t('certificates.skills.git', { returnObjects: true }) as string[]
     }
   ];
 

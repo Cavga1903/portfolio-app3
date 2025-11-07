@@ -12,7 +12,13 @@
     "greeting": "Salam, mən Tolqa! 👋",
     "description": "Frontend Developer olaraq yaradıcı və müasir veb layihələri hazırlayıram.",
     "ctaAbout": "Haqqımda Ətraflı",
-    "ctaProjects": "Layihələrimə Bax"
+    "ctaProjects": "Layihələrimə Bax",
+    "typing": {
+      "frontendDeveloper": "Frontend Developer",
+      "reactSpecialist": "React Mütəxəssisi",
+      "uiuxEnthusiast": "UI/UX Həvəskarı",
+      "creativeCoder": "Yaradıcı Proqramçı"
+    }
   },
     "modal": {
       "clickOutsideToClose": "Bağlamaq üçün kənara klikləyin",
@@ -24,6 +30,10 @@
     },
   "about": {
     "title": "Haqqımda",
+    "name": "Tolqa Çavqa",
+    "role": "Frontend Developer",
+    "githubPhotoAlt": "GitHub Profil Fotoğrafı",
+    "developerEmojiAlt": "Developer Emoji",
     "description": "Salam! Mən Tolqa. Proqram təminatı inkişafı dünyasına böyük bir ehtiras ilə addım atdım. Frontend Developer olaraq yaradıcı və istifadəçi dostu veb tətbiqləri hazırlamaqdan böyük həzz alıram. Boş vaxtlarımda yeni texnologiyalar öyrənmək, kitab oxumaq və idmanla məşğul olmaqla maraqlanıram.",
     "stats": {
       "focus": {
@@ -57,6 +67,15 @@
   },
   "experience": {
     "title": "Təcrübə & Təhsil",
+    "skills": {
+      "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
+      "turkcell": ["Müştəri Xidmətləri", "Problem Həlli", "Ünsiyyət"],
+      "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
+      "concentrix": ["Salesforce CRM", "Müştəri Məmnuniyyəti", "Bankçılıq"],
+      "izmir": ["Avadanlıq & Proqram Təminatı", "Sistem İdarəetməsi", "Texniki Dəstək", "Komanda İşləməsi"],
+      "uopeople": ["Kompüter Elmləri", "Alqoritmlər", "Məlumat Strukturları"],
+      "anadolu": ["Kompüter Proqramlaşdırması", "Proqram Təminatı İnkişafı"]
+    },
     "turkcell": {
       "title": "Müştəri Xidmətləri Nümayəndəsi",
       "company": "Turkcell Global Bilgi",
@@ -166,6 +185,14 @@
   "certificates": {
     "title": "Sertifikatlar & Nailiyyətlər",
     "subtitle": "Təhsil səyahətimdə qazandığım sertifikatlar və nailiyyətlər",
+    "skills": {
+      "siliconmade": ["React", "React Native", "Mobile Development"],
+      "frontend": ["HTML", "CSS", "JavaScript"],
+      "react": ["React", "Components", "Hooks"],
+      "responsive": ["Responsive Design", "Mobile First", "CSS Grid"],
+      "javascript": ["JavaScript", "ES6+", "Async/Await"],
+      "git": ["Git", "GitHub", "Version Control"]
+    },
     "siliconmade": {
       "title": "Mobil & Frontend İnkişaf Sertifikatı",
       "issuer": "Siliconmade Academy",
@@ -259,31 +286,65 @@
   },
   "projects": {
     "title": "Layihələrim",
+    "subtitle": "Müasir veb texnologiyaları istifadə edərək hazırladığım layihələr",
     "details": "Təfərrüatlar",
     "tech": "Texnologiyalar:",
     "github": "GitHub",
-    "demo": "Canlı Demo",
+    "demo": "Demo",
+    "liveDemo": "Canlı Demo",
+    "livePreview": "Canlı Önizləmə",
     "clickToViewDetails": "Təfərrüatları görmək üçün klikləyin",
+    "roles": {
+      "fullStack": "Full Stack Developer",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer"
+    },
+    "durations": {
+      "week": "{{count}} həftə",
+      "weeks": "{{count}} həftə",
+      "month": "{{count}} ay",
+      "months": "{{count}} ay"
+    },
     "items": {
       "iot": {
         "title": "IoT Cihaz Simulyatoru",
-        "description": "Node.js, Express, Authentication, Statistics & Multi-language Support ilə inkişaf etdirilmiş IoT cihaz simulyatoru. Docker dəstəyi və QR kod yaratma xüsusiyyətləri."
+        "description": "Node.js, Express, Authentication, Statistics & Multi-language Support ilə inkişaf etdirilmiş IoT cihaz simulyatoru. Docker dəstəyi və QR kod yaratma xüsusiyyətləri.",
+        "longDescription": "IoT cihazlarını simulyasiya edən veb tətbiqi. Real vaxt məlumat görüntüləmə və QR kod inteqrasiyası.",
+        "features": ["Real-time data visualization", "QR kod inteqrasiyası", "Docker containerization", "WebSocket bağlantısı"],
+        "duration": "1 ay",
+        "role": "Backend Developer"
       },
       "todo": {
         "title": "Todo App (Instagram Stili)",
-        "description": "Instagram bənzər interfeys ilə inkişaf etdirilmiş müasir todo tətbiqi. React və müasir veb texnologiyaları istifadə edilərək yaradılıb."
+        "description": "Instagram bənzər interfeys ilə inkişaf etdirilmiş müasir todo tətbiqi. React və müasir veb texnologiyaları istifadə edilərək yaradılıb.",
+        "longDescription": "Tapşırıq idarəetmə tətbiqi. CRUD əməliyyatları və local storage inteqrasiyası.",
+        "features": ["Tapşırıq əlavə etmə/silmə", "Status yeniləmə", "Local storage", "Responsive dizayn"],
+        "duration": "1 həftə",
+        "role": "Frontend Developer"
       },
       "workshop": {
         "title": "Workshop Tracker",
-        "description": "Workshop və tədbir izləməsi üçün inkişaf etdirilmiş veb tətbiqi. İştirakçı idarəetməsi və tədbir təşkili xüsusiyyətləri."
+        "description": "Workshop və tədbir izləməsi üçün inkişaf etdirilmiş veb tətbiqi. İştirakçı idarəetməsi və tədbir təşkili xüsusiyyətləri.",
+        "longDescription": "Workshop və tədbir izləmə sistemi. İştirakçıların qeydiyyatdan keçə biləcəyi, tədbir detallarını görüntüləyə biləcəyi müasir platforma.",
+        "features": ["İstifadəçi qeydiyyat sistemi", "Tədbir idarəetməsi", "Real-time yeniləmələr", "Admin paneli"],
+        "duration": "1.5 ay",
+        "role": "Full Stack Developer"
       },
       "productManager": {
         "title": "React Supabase Məhsul İdarəçisi",
-        "description": "Supabase backend ilə inkişaf etdirilmiş məhsul idarəetmə sistemi. CRUD əməliyyatları və real vaxt məlumat sinxronizasiyası."
+        "description": "Supabase backend ilə inkişaf etdirilmiş məhsul idarəetmə sistemi. CRUD əməliyyatları və real vaxt məlumat sinxronizasiyası.",
+        "longDescription": "Məhsul idarəetmə sistemi. Supabase backend ilə CRUD əməliyyatları və istifadəçi kimlik doğrulama.",
+        "features": ["Məhsul CRUD əməliyyatları", "İstifadəçi kimlik doğrulama", "Supabase inteqrasiyası", "Real-time yeniləmələr"],
+        "duration": "3 həftə",
+        "role": "Full Stack Developer"
       },
       "grocery": {
         "title": "Online Grocery App",
-        "description": "E-ticarət platforması kimi inkişaf etdirilmiş online market tətbiqi. Səbət idarəetməsi və ödəniş inteqrasiyası."
+        "description": "E-ticarət platforması kimi inkişaf etdirilmiş online market tətbiqi. Səbət idarəetməsi və ödəniş inteqrasiyası.",
+        "longDescription": "Online market tətbiqi. Qida məhsullarının satışı və çatdırılma izləməsi.",
+        "features": ["Məhsul kateqoriyaları", "Axtarış və filtrləmə", "Çatdırılma izləməsi", "İstifadəçi hesabları"],
+        "duration": "2.5 həftə",
+        "role": "Full Stack Developer"
       },
       "productList": {
         "title": "Məhsul Siyahısı (Təkmilləşdirilmiş)",
@@ -315,25 +376,20 @@
       "exchange": {
         "title": "Valyuta Mübadiləsi İzləmə Tətbiqi",
         "description": "Valyuta mübadiləsi məzənnəsi izləmə və alış-satış ekranı. Real vaxt məlumatları və qrafik vizualizasiya.",
-        "longDescription": "Real vaxt valyuta məzənnələrini izləyən və alış-satış simulyasiyası təklif edən müasir veb tətbiqi. Qrafik vizualizasiya və responsive dizayn ilə istifadəçi dostu təcrübə təklif edir.",
-        "features": [
-          "Real vaxt valyuta məzənnələri",
-          "Qrafik vizualizasiya",
-          "Alış-satış simulyasiyası",
-          "Responsive dizayn"
-        ],
-        "challenges": [
-          "Real vaxt məlumat inteqrasiyası",
-          "Performans optimallaşdırması"
-        ],
-        "solutions": [
-          "WebSocket bağlantıları",
-          "Effektiv məlumat keşləmə"
-        ]
+        "longDescription": "Valyuta məzənnəsi izləmə və alış-satış ekranı. Real vaxt məlumat və qrafik vizualizasiya.",
+        "features": ["Real vaxt valyuta məzənnələri", "Qrafik vizualizasiya", "Alış-satış simulyasiyası", "Responsive dizayn"],
+        "challenges": ["Real vaxt məlumat inteqrasiyası", "Performans optimallaşdırması"],
+        "solutions": ["WebSocket bağlantıları", "Effektiv məlumat keşləmə"],
+        "duration": "1.5 həftə",
+        "role": "Frontend Developer"
       },
       "globalIdentity": {
         "title": "Qlobal Kimlik",
-        "description": "Qlobal kimlik doğrulama sistemi. Çox platforma dəstəyi və təhlükəsiz authentication xüsusiyyətləri."
+        "description": "Qlobal kimlik doğrulama sistemi. Çox platforma dəstəyi və təhlükəsiz authentication xüsusiyyətləri.",
+        "longDescription": "Qlobal kimlik idarəetmə sistemi. İstifadəçi profilləri və kimlik doğrulama.",
+        "features": ["İstifadəçi profilləri", "Kimlik doğrulama", "Təhlükəsizlik tədbirləri", "Multi-language support"],
+        "duration": "2 həftə",
+        "role": "Full Stack Developer"
       },
       "noteTracker": {
         "title": "Sadə Qeyd İzləmə Sistemi",
@@ -349,7 +405,13 @@
       },
       "portfolio": {
         "title": "Şəxsi Portfolio",
-        "description": "Müasir React və TypeScript ilə inkişaf etdirilmiş şəxsi portfolio veb saytı. Responsive dizayn və çoxdilli dəstək."
+        "description": "Müasir React və TypeScript ilə inkişaf etdirilmiş şəxsi portfolio veb saytı. Responsive dizayn və çoxdilli dəstək.",
+        "longDescription": "Müasir və responsive portfolio veb saytı. React, TypeScript və TailwindCSS istifadə edilərək hazırlanıb. Framer Motion ilə smooth animasiyalar və çoxdilli dəstək.",
+        "features": ["Responsive dizayn", "Çoxdilli dəstək (TR, EN, DE, AZ)", "Smooth animasiyalar", "SEO optimallaşdırması", "Dark/Light tema"],
+        "challenges": ["Performans optimallaşdırması", "Çoxdilli idarəetmə", "Responsive dizayn"],
+        "solutions": ["Lazy loading və code splitting", "i18next kitabxanası", "Mobile-first yanaşma"],
+        "duration": "2 ay",
+        "role": "Full Stack Developer"
       },
       "ecommerce": {
         "title": "E-ticarət Veb Saytı",
@@ -357,11 +419,19 @@
       },
       "cvPreparation": {
         "title": "Tərcümeyi-hal Hazırlama Tətbiqi",
-        "description": "Dinamik tərcümeyi-hal yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi."
+        "description": "Dinamik tərcümeyi-hal yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi.",
+        "longDescription": "Dinamik CV yaratma və PDF yükləmə xüsusiyyətli veb tətbiqi. İstifadəçi dostu interfeys və şablon sistemi.",
+        "features": ["Dinamik CV yaratma", "PDF export", "Şablon sistemi", "Real-time preview"],
+        "duration": "2 həftə",
+        "role": "Frontend Developer"
       },
       "furniro": {
         "title": "Furniro E-ticarət",
-        "description": "Mebel və ev dekorasiyasına yönəlmiş e-ticarət platforması. Müasir dizayn və istifadəçi dostu interfeys."
+        "description": "Mebel və ev dekorasiyasına yönəlmiş e-ticarət platforması. Müasir dizayn və istifadəçi dostu interfeys.",
+        "longDescription": "Mebel e-ticarət saytı. Müasir dizayn və istifadəçi dostu interfeys ilə mebel məhsullarının satışı.",
+        "features": ["Məhsul kataloqu", "Səbət idarəetməsi", "Ödəniş sistemi", "Responsive dizayn"],
+        "duration": "3 həftə",
+        "role": "Frontend Developer"
       },
       "exchangeScreen": {
         "title": "Valyuta Kursu Ekranı",
@@ -369,7 +439,11 @@
       },
       "dashboard": {
         "title": "Maliyyə Dashboard",
-        "description": "Səhm və kripto valyuta izləməsi üçün inkişaf etdirilmiş dashboard tətbiqi. NVIDIA, Tesla kimi şirkətlərin məlumatlarını göstərir."
+        "description": "Səhm və kripto valyuta izləməsi üçün inkişaf etdirilmiş dashboard tətbiqi. NVIDIA, Tesla kimi şirkətlərin məlumatlarını göstərir.",
+        "longDescription": "Analitik dashboard tətbiqi. Məlumat görüntüləmə və hesabat sistemi.",
+        "features": ["Məlumat görüntüləmə", "Analitik hesabatlar", "Interactive charts", "Export functionality"],
+        "duration": "2 həftə",
+        "role": "Frontend Developer"
       },
       "odev": {
         "title": "Sosial Media Dashboard",
@@ -380,6 +454,30 @@
   "contact": {
     "title": "Əlaqə",
     "description": "Mənimlə əlaqə saxlayın! Aşağıdakı formanı dolduraraq birbaşa e-poçt göndərə bilərsiniz.",
+    "freeQuote": {
+      "title": "Pulsuz Təklif Al",
+      "description": "Veb saytınızı təhlil edib, performansınızı artıracaq tövsiyələr təqdim edirəm",
+      "siteAnalysis": {
+        "title": "Sayt Təhlili",
+        "description": "Veb saytınızın mövcud SEO vəziyyətini ətraflı təhlil edirəm"
+      },
+      "performanceReport": {
+        "title": "Performans Hesabatı",
+        "description": "Google PageSpeed, Core Web Vitals və texniki SEO təhlili"
+      },
+      "optimizationSuggestions": {
+        "title": "Optimallaşdırma Tövsiyələri",
+        "description": "Axtarış motorlarında yuxarı sıralara çıxmağınız üçün konkret tövsiyələr"
+      },
+      "competitorAnalysis": {
+        "title": "Rəqabət Təhlili",
+        "description": "Rəqiblərinizi təhlil edib strateji üstünlüklər təklif edirəm"
+      },
+      "completelyFree": "Tamamilə Pulsuz",
+      "completelyFreeDescription": "Bu təhlil və tövsiyələr tamamilə pulsuzdur. Heç bir öhdəlik altına girmirsiniz.",
+      "sendMessageForQuote": "Təklif almaq üçün mesaj göndərin",
+      "exampleMessage": "Salam! Veb saytım üçün pulsuz dəstək almaq istəyirəm. Zəhmət olmasa ətraflı təhlil edə bilərsinizmi?"
+    },
     "form": {
       "title": "Mesaj Göndərin",
       "name": "Adınız",
@@ -476,6 +574,30 @@
     "goHome": "Ana Səhifəyə Qayıt",
     "goBack": "Geri Qayıt",
     "tip": "Konami kodunu sına bəlkə nəsə olar..."
+  },
+  "common": {
+    "name": "Tolqa Çavqa",
+    "role": "Frontend Developer",
+    "resume": "Tərcümeyi-hal",
+    "developerLogo": "Developer Logo",
+    "closeMenu": "Menüni Bağla",
+    "languages": {
+      "turkish": "Türk Dili",
+      "azerbaijani": "Azərbaycan Türkcəsi",
+      "english": "İngilis Dili",
+      "german": "Alman Dili"
+    }
+  },
+  "projectLike": {
+    "like": "Layihəni bəyən",
+    "unlike": "Bəyəni kaldır",
+    "dislike": "Layihəni bəyənmə",
+    "removeDislike": "Bəyənməməni kaldır",
+    "liked": "Layihə bəyənildi! ❤️",
+    "unliked": "Bəyəni kaldırıldı",
+    "disliked": "Layihə bəyənilmədi 👎",
+    "dislikeRemoved": "Bəyənməmə kaldırıldı",
+    "error": "Xəta baş verdi, zəhmət olmasa yenidən cəhd edin"
   }
 }
 

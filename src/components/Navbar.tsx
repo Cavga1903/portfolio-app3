@@ -73,10 +73,10 @@ const Navbar: React.FC = () => {
           >
             <img
               src="/tabLogo.svg"
-              alt="Developer Logo"
+              alt={t('common.developerLogo')}
               className="w-20 h-20 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 hidden dark:block"
             />
-            Tolga Çavga
+            {t('common.name')}
             {/* <span className="text-blue-600 dark:text-white font-bold hover:text-blue-600 dark:hover:text-blue-400">
               Çavga
             </span> */}
@@ -192,21 +192,21 @@ const Navbar: React.FC = () => {
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
                       <img
                         src="/tabLogo.svg"
-                        alt="Developer Logo"
+                        alt={t('common.developerLogo')}
                         className="w-6 h-6 filter brightness-0 invert"
                       />
                     </div>
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-white">Tolga Çavga</h2>
-                    <p className="text-blue-200 text-xs">Frontend Developer</p>
+                    <h2 className="text-lg font-bold text-white">{t('common.name')}</h2>
+                    <p className="text-blue-200 text-xs">{t('common.role')}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 hover:rotate-90"
-                  aria-label="Close menu"
+                  aria-label={t('common.closeMenu')}
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -301,7 +301,7 @@ const Navbar: React.FC = () => {
                     }}
                     className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium hover:scale-105"
                   >
-                    Resume
+                    {t('common.resume')}
                   </button>
                 </div>
               </div>

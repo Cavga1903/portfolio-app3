@@ -25,7 +25,7 @@ const Experience: React.FC = () => {
       location: t('experience.upwork.location'),
       period: t('experience.upwork.period'),
       description: t('experience.upwork.description'),
-      skills: ['React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Firebase', 'JWT'],
+      skills: t('experience.skills.upwork', { returnObjects: true }) as string[],
       logo: '/logos/upwork.svg',
       website: 'https://www.upwork.com'
     },
@@ -36,7 +36,7 @@ const Experience: React.FC = () => {
       location: t('experience.turkcell.location'),
       period: t('experience.turkcell.period'),
       description: t('experience.turkcell.description'),
-      skills: ['Customer Service', 'Problem Solving', 'Communication'],
+      skills: t('experience.skills.turkcell', { returnObjects: true }) as string[],
       logo: '/logos/turkcell.webp',
       website: 'https://globalbilgi.com.tr'
     },
@@ -47,7 +47,7 @@ const Experience: React.FC = () => {
       location: t('experience.siliconmade.location'),
       period: t('experience.siliconmade.period'),
       description: t('experience.siliconmade.description'),
-      skills: ['React', 'React Native', 'REST API', 'Supabase', 'Tailwind CSS', 'Git'],
+      skills: t('experience.skills.siliconmade', { returnObjects: true }) as string[],
       logo: '/logos/siliconmade.webp',
       website: 'https://www.siliconmadeacademy.com'
     },
@@ -58,7 +58,7 @@ const Experience: React.FC = () => {
       location: t('experience.concentrix.location'),
       period: t('experience.concentrix.period'),
       description: t('experience.concentrix.description'),
-      skills: ['Salesforce CRM', 'Customer Satisfaction', 'Banking'],
+      skills: t('experience.skills.concentrix', { returnObjects: true }) as string[],
       logo: '/logos/concentrix.webp',
       website: 'https://www.concentrix.com'
     },
@@ -69,7 +69,7 @@ const Experience: React.FC = () => {
       location: t('experience.izmir.location'),
       period: t('experience.izmir.period'),
       description: t('experience.izmir.description'),
-      skills: ['Hardware & Software', 'System Administration', 'Technical Support', 'Teamwork'],
+      skills: t('experience.skills.izmir', { returnObjects: true }) as string[],
       logo: '/logos/izmir.svg',
       website: 'https://www.izmir.bel.tr/tr/Anasayfa'
     },
@@ -80,7 +80,7 @@ const Experience: React.FC = () => {
       location: t('experience.uopeople.location'),
       period: t('experience.uopeople.period'),
       description: t('experience.uopeople.description'),
-      skills: ['Computer Science', 'Algorithms', 'Data Structures'],
+      skills: t('experience.skills.uopeople', { returnObjects: true }) as string[],
       logo: '/logos/uopeople_logo.webp',
       website: 'https://www.uopeople.edu'
     },
@@ -91,7 +91,7 @@ const Experience: React.FC = () => {
       location: t('experience.anadolu.location'),
       period: t('experience.anadolu.period'),
       description: t('experience.anadolu.description'),
-      skills: ['Computer Programming', 'Software Development'],
+      skills: t('experience.skills.anadolu', { returnObjects: true }) as string[],
       logo: '/logos/anadolu.svg',
       website: 'https://www.anadolu.edu.tr'
     }

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGlobe, FaCog, FaDatabase, FaWrench, FaChevronDown } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss, SiReact, SiExpo, SiNodedotjs, SiSupabase, SiFirebase, SiSalesforce, SiFigma, SiVercel, SiDocker, SiRailway, SiBootstrap, SiExpress, SiRender, SiGoogleanalytics, SiMongodb, SiPostgresql, SiMysql, SiRedis, SiRedux } from 'react-icons/si';
 import { useAnalytics } from '../hooks/useAnalytics';
@@ -21,12 +22,13 @@ const Technologies: React.FC = () => {
   // Accordion state
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(['frontend'])); // Frontend açık başlasın
   const [rotatingIcons, setRotatingIcons] = useState<Set<string>>(new Set());
+  const accordionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   
   // Kategori bilgileri
   const categories = [
     {
       key: 'frontend',
-      icon: <FaReact className="text-xs" />,
+      icon: <FaReact className="text-base" />,
       titleKey: 'technologies.categories.frontend',
       descriptionKey: 'technologies.descriptions.frontend',
       color: 'from-blue-500 to-cyan-500'
@@ -61,7 +63,7 @@ const Technologies: React.FC = () => {
     }
   ];
   
-  // Accordion toggle function
+  // Accordion toggle function with smooth scroll
   const toggleCategory = (categoryKey: string) => {
     const isCurrentlyOpen = openCategories.has(categoryKey);
     
@@ -71,6 +73,16 @@ const Technologies: React.FC = () => {
         newSet.delete(categoryKey);
       } else {
         newSet.add(categoryKey);
+        // Smooth scroll to opened accordion after a short delay
+        setTimeout(() => {
+          const accordionElement = accordionRefs.current[categoryKey];
+          if (accordionElement) {
+            accordionElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }, 100);
       }
       return newSet;
     });
@@ -92,6 +104,14 @@ const Technologies: React.FC = () => {
     if (!isCurrentlyOpen) {
       const categoryTechs = groupedTechs[categoryKey] || [];
       trackAccordionContentVisibility(categoryKey, categoryTechs.length, categoryTechs.length);
+    }
+  };
+
+  // Keyboard navigation handler
+  const handleKeyDown = (e: React.KeyboardEvent, categoryKey: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleCategory(categoryKey);
     }
   };
   
@@ -391,14 +411,16 @@ const Technologies: React.FC = () => {
     },
   ];
   
-  // Group technologies by category
-  const groupedTechs = technologies.reduce((acc, tech) => {
-    if (!acc[tech.category]) {
-      acc[tech.category] = [];
-    }
-    acc[tech.category].push(tech);
-    return acc;
-  }, {} as Record<string, Technology[]>);
+  // Group technologies by category (memoized for performance)
+  const groupedTechs = useMemo(() => {
+    return technologies.reduce((acc, tech) => {
+      if (!acc[tech.category]) {
+        acc[tech.category] = [];
+      }
+      acc[tech.category].push(tech);
+      return acc;
+    }, {} as Record<string, Technology[]>);
+  }, [technologies]);
 
   // Track section view when component mounts
   useEffect(() => {
@@ -429,32 +451,55 @@ const Technologies: React.FC = () => {
 
       <div className="relative z-10 w-full max-w-6xl">
         <div className="space-y-6 sm:space-y-8 pb-8 sm:pb-12 md:pb-16">
-          {categories.map((category) => {
+          {categories.map((category, categoryIndex) => {
             const isOpen = openCategories.has(category.key);
             const isRotating = rotatingIcons.has(category.key);
             const categoryTechs = groupedTechs[category.key] || [];
             
             return (
-              <div
+              <motion.div
                 key={category.key}
-                className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-gray-600/50"
+                ref={(el) => {
+                  accordionRefs.current[category.key] = el;
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.4, 
+                  delay: categoryIndex * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94] // Custom easing for smoothness
+                }}
+                className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-gray-600/50 hover:shadow-lg hover:shadow-purple-500/10"
               >
                 {/* Accordion Header */}
-                <button
+                <motion.button
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     toggleCategory(category.key);
                   }}
-                  className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between hover:bg-gray-700/30 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset"
+                  onKeyDown={(e) => handleKeyDown(e, category.key)}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between hover:bg-gray-700/30 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset focus:ring-offset-2 focus:ring-offset-gray-900"
+                  aria-expanded={isOpen}
+                  aria-controls={`accordion-content-${category.key}`}
                 >
                   <div className="flex items-center gap-4">
                     {/* Category Icon with Rotation */}
-                    <div className={`w-12 h-12 p-1 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white transition-transform duration-300 shadow-lg ${
-                      isRotating ? 'rotate-180' : ''
-                    }`}>
+                    <motion.div 
+                      className={`w-12 h-12 p-1 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white shadow-lg`}
+                      animate={{ 
+                        rotate: isRotating ? 180 : 0,
+                        scale: isOpen ? 1.05 : 1
+                      }}
+                      transition={{ 
+                        duration: 0.3,
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }}
+                    >
                       {category.icon}
-                    </div>
+                    </motion.div>
                     
                     <div>
                       <h3 className="text-xl font-bold text-white">
@@ -467,70 +512,136 @@ const Technologies: React.FC = () => {
                   </div>
                   
                   {/* Chevron Icon */}
-                  <div className={`text-gray-400 transition-transform duration-500 ease-in-out ${
-                    isOpen ? 'rotate-180' : ''
-                  }`}>
+                  <motion.div 
+                    className="text-gray-400"
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ 
+                      duration: 0.4,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                  >
                     <FaChevronDown className="text-lg" />
-                  </div>
-                </button>
+                  </motion.div>
+                </motion.button>
                 
-                {/* Accordion Content */}
-                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-                }`}>
-                  <div className={`px-6 pb-6 pt-4 sm:pt-6 ${
-                    category.key === 'frontend' || category.key === 'tools' 
-                      ? 'mb-16 sm:mb-20 md:mb-24' 
-                      : 'mb-8 sm:mb-12 md:mb-16'
-                  }`}>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-                      {categoryTechs.map((tech) => (
-                        <div
-                          key={tech.iconKey}
-                          className="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-3 sm:p-4 hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                          onMouseEnter={() => {
-                            trackSkillInteraction(tech.iconKey, tech.category, 'hover', tech.levelText);
-                          }}
-                          onClick={() => {
-                            trackSkillInteraction(tech.iconKey, tech.category, 'click', tech.levelText);
-                          }}
+                {/* Accordion Content with AnimatePresence */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`accordion-content-${category.key}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: 'auto', 
+                        opacity: 1,
+                        transition: {
+                          height: {
+                            duration: 0.5,
+                            ease: [0.25, 0.46, 0.45, 0.94]
+                          },
+                          opacity: {
+                            duration: 0.3,
+                            delay: 0.1
+                          }
+                        }
+                      }}
+                      exit={{ 
+                        height: 0, 
+                        opacity: 0,
+                        transition: {
+                          height: {
+                            duration: 0.4,
+                            ease: [0.25, 0.46, 0.45, 0.94]
+                          },
+                          opacity: {
+                            duration: 0.2
+                          }
+                        }
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <div className={`px-6 pb-6 pt-4 sm:pt-6 ${
+                        category.key === 'frontend' || category.key === 'tools' 
+                          ? 'mb-16 sm:mb-20 md:mb-24' 
+                          : 'mb-8 sm:mb-12 md:mb-16'
+                      }`}>
+                        <motion.div 
+                          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.3, delay: 0.2 }}
                         >
-                          {/* Skill Icon */}
-                          <div className={`w-10 h-10 mx-auto mb-3 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 ${
-                            tech.category === 'languages' 
-                              ? 'bg-transparent' 
-                              : `bg-gradient-to-br ${tech.color}`
-                          }`}>
-                            {tech.icon}
-                          </div>
-                          
-                          {/* Skill Name */}
-                          <h4 className="text-sm font-semibold text-center mb-2 group-hover:text-purple-500 transition-colors duration-300">
-                            {t(tech.nameKey)}
-                          </h4>
-                          
-                          {/* Skill Level */}
-                          <div className="text-xs text-gray-400 text-center mb-2">
-                            {t(`technologies.levels.${tech.levelText}`)}
-                          </div>
-                          
-                          {/* Progress Bar */}
-                          <div className="w-full bg-gray-700 rounded-full h-1.5">
-                            <div
-                              className={`h-1.5 rounded-full transition-all duration-1000 ease-out ${
-                                tech.category === 'languages' 
-                                  ? 'bg-gradient-to-r from-gray-400 to-gray-600' 
-                                  : `bg-gradient-to-r ${tech.color}`
-                              }`}
-                              style={{ width: `${tech.level}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                          {categoryTechs.map((tech, techIndex) => (
+                            <motion.div
+                              key={tech.iconKey}
+                              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                              animate={{ opacity: 1, scale: 1, y: 0 }}
+                              transition={{
+                                duration: 0.3,
+                                delay: 0.2 + (techIndex * 0.03),
+                                ease: [0.25, 0.46, 0.45, 0.94]
+                              }}
+                              whileHover={{ 
+                                scale: 1.05, 
+                                y: -4,
+                                transition: { duration: 0.2 }
+                              }}
+                              whileTap={{ scale: 0.95 }}
+                              className="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-3 sm:p-4 hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                              onMouseEnter={() => {
+                                trackSkillInteraction(tech.iconKey, tech.category, 'hover', tech.levelText);
+                              }}
+                              onClick={() => {
+                                trackSkillInteraction(tech.iconKey, tech.category, 'click', tech.levelText);
+                              }}
+                            >
+                              {/* Skill Icon */}
+                              <motion.div 
+                                className={`w-10 h-10 mx-auto mb-3 rounded-lg flex items-center justify-center text-white ${
+                                  tech.category === 'languages' 
+                                    ? 'bg-transparent' 
+                                    : `bg-gradient-to-br ${tech.color}`
+                                }`}
+                                whileHover={{ scale: 1.15, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                {tech.icon}
+                              </motion.div>
+                              
+                              {/* Skill Name */}
+                              <h4 className="text-sm font-semibold text-center mb-2 group-hover:text-purple-500 transition-colors duration-300">
+                                {t(tech.nameKey)}
+                              </h4>
+                              
+                              {/* Skill Level */}
+                              <div className="text-xs text-gray-400 text-center mb-2">
+                                {t(`technologies.levels.${tech.levelText}`)}
+                              </div>
+                              
+                              {/* Progress Bar */}
+                              <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                                <motion.div
+                                  className={`h-1.5 rounded-full ${
+                                    tech.category === 'languages' 
+                                      ? 'bg-gradient-to-r from-gray-400 to-gray-600' 
+                                      : `bg-gradient-to-r ${tech.color}`
+                                  }`}
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${tech.level}%` }}
+                                  transition={{ 
+                                    duration: 1,
+                                    delay: 0.3 + (techIndex * 0.03),
+                                    ease: [0.25, 0.46, 0.45, 0.94]
+                                  }}
+                                />
+                              </div>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>

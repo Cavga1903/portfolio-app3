@@ -12,7 +12,13 @@
     "greeting": "Merhaba, ben Tolga! 👋",
     "description": "Frontend Developer olarak yaratıcı ve modern web projeleri geliştiriyorum.",
     "ctaAbout": "Hakkımda Daha Fazla",
-    "ctaProjects": "Projelerimi İncele"
+    "ctaProjects": "Projelerimi İncele",
+    "typing": {
+      "frontendDeveloper": "Frontend Developer",
+      "reactSpecialist": "React Uzmanı",
+      "uiuxEnthusiast": "UI/UX Meraklısı",
+      "creativeCoder": "Yaratıcı Kodlayıcı"
+    }
   },
     "modal": {
       "clickOutsideToClose": "Dışarı tıklayarak kapat",
@@ -24,6 +30,10 @@
     },
   "about": {
     "title": "Hakkımda",
+    "name": "Tolga Çavga",
+    "role": "Frontend Developer",
+    "githubPhotoAlt": "GitHub Profil Fotoğrafı",
+    "developerEmojiAlt": "Developer Emoji",
     "description": "Merhaba! Ben Tolga. Yazılım geliştirme dünyasına büyük bir tutku ile adım attım. Frontend Developer olarak yaratıcı ve kullanıcı dostu web uygulamaları geliştirmekten büyük keyif alıyorum. Boş zamanlarımda yeni teknolojiler öğrenmek, kitap okumak ve spor yapmakla ilgileniyorum.",
     "stats": {
       "focus": {
@@ -57,6 +67,15 @@
   },
   "experience": {
     "title": "Deneyim & Eğitim",
+    "skills": {
+      "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
+      "turkcell": ["Müşteri Hizmetleri", "Problem Çözme", "İletişim"],
+      "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
+      "concentrix": ["Salesforce CRM", "Müşteri Memnuniyeti", "Bankacılık"],
+      "izmir": ["Donanım & Yazılım", "Sistem Yönetimi", "Teknik Destek", "Takım Çalışması"],
+      "uopeople": ["Bilgisayar Bilimi", "Algoritmalar", "Veri Yapıları"],
+      "anadolu": ["Bilgisayar Programlama", "Yazılım Geliştirme"]
+    },
     "turkcell": {
       "title": "Müşteri Hizmetleri Temsilcisi",
       "company": "Turkcell Global Bilgi",
@@ -167,6 +186,14 @@
   "certificates": {
     "title": "Sertifikalar & Başarılar",
     "subtitle": "Eğitim yolculuğumda kazandığım sertifikalar ve başarılar",
+    "skills": {
+      "siliconmade": ["React", "React Native", "Mobile Development"],
+      "frontend": ["HTML", "CSS", "JavaScript"],
+      "react": ["React", "Components", "Hooks"],
+      "responsive": ["Responsive Design", "Mobile First", "CSS Grid"],
+      "javascript": ["JavaScript", "ES6+", "Async/Await"],
+      "git": ["Git", "GitHub", "Version Control"]
+    },
     "siliconmade": {
       "title": "Mobil & Frontend Geliştirme Sertifikası",
       "issuer": "Siliconmade Academy",
@@ -260,31 +287,65 @@
   },
   "projects": {
     "title": "Projelerim",
+    "subtitle": "Modern web teknolojileri kullanarak geliştirdiğim projeler",
     "details": "Detaylar",
     "tech": "Teknolojiler:",
     "github": "GitHub",
-    "demo": "Canlı Demo",
+    "demo": "Demo",
+    "liveDemo": "Canlı Demo",
+    "livePreview": "Canlı Önizleme",
     "clickToViewDetails": "Detayları görüntülemek için tıklayın",
+    "roles": {
+      "fullStack": "Full Stack Developer",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer"
+    },
+    "durations": {
+      "week": "{{count}} hafta",
+      "weeks": "{{count}} hafta",
+      "month": "{{count}} ay",
+      "months": "{{count}} ay"
+    },
     "items": {
       "iot": {
         "title": "IoT Cihaz Simülatörü",
-        "description": "Node.js, Express, Authentication, Statistics & Multi-language Support ile geliştirilmiş IoT cihaz simülatörü. Docker desteği ve QR kod oluşturma özellikleri."
+        "description": "Node.js, Express, Authentication, Statistics & Multi-language Support ile geliştirilmiş IoT cihaz simülatörü. Docker desteği ve QR kod oluşturma özellikleri.",
+        "longDescription": "IoT cihazlarını simüle eden web uygulaması. Gerçek zamanlı veri görselleştirme ve QR kod entegrasyonu.",
+        "features": ["Real-time data visualization", "QR kod entegrasyonu", "Docker containerization", "WebSocket bağlantısı"],
+        "duration": "1 ay",
+        "role": "Backend Developer"
       },
       "todo": {
         "title": "Todo App (Instagram Style)",
-        "description": "Instagram benzeri arayüz ile geliştirilmiş modern todo uygulaması. React ve modern web teknolojileri kullanılarak oluşturuldu."
+        "description": "Instagram benzeri arayüz ile geliştirilmiş modern todo uygulaması. React ve modern web teknolojileri kullanılarak oluşturuldu.",
+        "longDescription": "Görev yönetim uygulaması. CRUD operasyonları ve local storage entegrasyonu.",
+        "features": ["Görev ekleme/silme", "Durum güncelleme", "Local storage", "Responsive tasarım"],
+        "duration": "1 hafta",
+        "role": "Frontend Developer"
       },
       "workshop": {
         "title": "Workshop Tracker",
-        "description": "Workshop ve etkinlik takibi için geliştirilmiş web uygulaması. Katılımcı yönetimi ve etkinlik organizasyonu özellikleri."
+        "description": "Workshop ve etkinlik takibi için geliştirilmiş web uygulaması. Katılımcı yönetimi ve etkinlik organizasyonu özellikleri.",
+        "longDescription": "Workshop ve etkinlik takip sistemi. Katılımcıların kayıt olabileceği, etkinlik detaylarını görüntüleyebileceği modern bir platform.",
+        "features": ["Kullanıcı kayıt sistemi", "Etkinlik yönetimi", "Real-time güncellemeler", "Admin paneli"],
+        "duration": "1.5 ay",
+        "role": "Full Stack Developer"
       },
       "productManager": {
         "title": "React Supabase Product Manager",
-        "description": "Supabase backend ile geliştirilmiş ürün yönetim sistemi. CRUD operasyonları ve gerçek zamanlı veri senkronizasyonu."
+        "description": "Supabase backend ile geliştirilmiş ürün yönetim sistemi. CRUD operasyonları ve gerçek zamanlı veri senkronizasyonu.",
+        "longDescription": "Ürün yönetim sistemi. Supabase backend ile CRUD operasyonları ve kullanıcı kimlik doğrulama.",
+        "features": ["Ürün CRUD operasyonları", "Kullanıcı kimlik doğrulama", "Supabase entegrasyonu", "Real-time güncellemeler"],
+        "duration": "3 hafta",
+        "role": "Full Stack Developer"
       },
       "grocery": {
         "title": "Online Grocery App",
-        "description": "E-ticaret platformu olarak geliştirilmiş online market uygulaması. Sepet yönetimi ve ödeme entegrasyonu."
+        "description": "E-ticaret platformu olarak geliştirilmiş online market uygulaması. Sepet yönetimi ve ödeme entegrasyonu.",
+        "longDescription": "Online market uygulaması. Gıda ürünlerinin satışı ve teslimat takibi.",
+        "features": ["Ürün kategorileri", "Arama ve filtreleme", "Teslimat takibi", "Kullanıcı hesapları"],
+        "duration": "2.5 hafta",
+        "role": "Full Stack Developer"
       },
       "productList": {
         "title": "Ürün Listesi (Geliştirilmiş)",
@@ -313,28 +374,13 @@
           "Responsive tasarım prensipleri"
         ]
       },
-      "exchange": {
-        "title": "Döviz Kuru Takip Uygulaması",
-        "description": "Döviz kuru takip ve alım-satım ekranı. Real-time veri ve grafik görselleştirme.",
-        "longDescription": "Gerçek zamanlı döviz kurlarını takip eden ve alım-satım simülasyonu yapabilen modern web uygulaması. Grafik görselleştirme ve responsive tasarım ile kullanıcı dostu deneyim sunar.",
-        "features": [
-          "Real-time döviz kurları",
-          "Grafik görselleştirme",
-          "Alım-satım simülasyonu",
-          "Responsive tasarım"
-        ],
-        "challenges": [
-          "Real-time veri entegrasyonu",
-          "Performans optimizasyonu"
-        ],
-        "solutions": [
-          "WebSocket bağlantıları",
-          "Efficient data caching"
-        ]
-      },
       "globalIdentity": {
         "title": "Global Identity",
-        "description": "Küresel kimlik doğrulama sistemi. Çoklu platform desteği ve güvenli authentication özellikleri."
+        "description": "Küresel kimlik doğrulama sistemi. Çoklu platform desteği ve güvenli authentication özellikleri.",
+        "longDescription": "Küresel kimlik yönetim sistemi. Kullanıcı profilleri ve kimlik doğrulama.",
+        "features": ["Kullanıcı profilleri", "Kimlik doğrulama", "Güvenlik önlemleri", "Multi-language support"],
+        "duration": "2 hafta",
+        "role": "Full Stack Developer"
       },
       "noteTracker": {
         "title": "Basit Not Takip Sistemi",
@@ -350,7 +396,13 @@
       },
       "portfolio": {
         "title": "Kişisel Portfolyo",
-        "description": "Modern React ve TypeScript ile geliştirilmiş kişisel portfolyo web sitesi. Responsive tasarım ve çok dilli destek."
+        "description": "Modern React ve TypeScript ile geliştirilmiş kişisel portfolyo web sitesi. Responsive tasarım ve çok dilli destek.",
+        "longDescription": "Modern ve responsive bir portfolyo web sitesi. React, TypeScript ve TailwindCSS kullanılarak geliştirildi. Framer Motion ile smooth animasyonlar ve çoklu dil desteği.",
+        "features": ["Responsive tasarım", "Çoklu dil desteği (TR, EN, DE, AZ)", "Smooth animasyonlar", "SEO optimizasyonu", "Dark/Light tema"],
+        "challenges": ["Performans optimizasyonu", "Çoklu dil yönetimi", "Responsive tasarım"],
+        "solutions": ["Lazy loading ve code splitting", "i18next kütüphanesi", "Mobile-first yaklaşım"],
+        "duration": "2 ay",
+        "role": "Full Stack Developer"
       },
       "ecommerce": {
         "title": "E-ticaret Web Sitesi",
@@ -358,11 +410,29 @@
       },
       "cvPreparation": {
         "title": "Özgeçmiş Hazırlama Uygulaması",
-        "description": "Dinamik özgeçmiş oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi."
+        "description": "Dinamik özgeçmiş oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi.",
+        "longDescription": "Dinamik CV oluşturma ve PDF indirme özellikli web uygulaması. Kullanıcı dostu arayüz ve şablon sistemi.",
+        "features": ["Dinamik CV oluşturma", "PDF export", "Şablon sistemi", "Real-time preview"],
+        "duration": "2 hafta",
+        "role": "Frontend Developer"
       },
       "furniro": {
         "title": "Furniro E-ticaret",
-        "description": "Mobilya ve ev dekorasyonu odaklı e-ticaret platformu. Modern tasarım ve kullanıcı dostu arayüz."
+        "description": "Mobilya ve ev dekorasyonu odaklı e-ticaret platformu. Modern tasarım ve kullanıcı dostu arayüz.",
+        "longDescription": "Mobilya e-ticaret sitesi. Modern tasarım ve kullanıcı dostu arayüz ile mobilya ürünlerinin satışı.",
+        "features": ["Ürün kataloğu", "Sepet yönetimi", "Ödeme sistemi", "Responsive tasarım"],
+        "duration": "3 hafta",
+        "role": "Frontend Developer"
+      },
+      "exchange": {
+        "title": "Döviz Kuru Takip Uygulaması",
+        "description": "Döviz kuru takip ve alım-satım ekranı. Real-time veri ve grafik görselleştirme.",
+        "longDescription": "Döviz kuru takip ve alım-satım ekranı. Real-time veri ve grafik görselleştirme.",
+        "features": ["Real-time döviz kurları", "Grafik görselleştirme", "Alım-satım simülasyonu", "Responsive tasarım"],
+        "challenges": ["Real-time veri entegrasyonu", "Performans optimizasyonu"],
+        "solutions": ["WebSocket bağlantıları", "Efficient data caching"],
+        "duration": "1.5 hafta",
+        "role": "Frontend Developer"
       },
       "exchangeScreen": {
         "title": "Döviz Kuru Ekranı",
@@ -370,7 +440,11 @@
       },
       "dashboard": {
         "title": "Finansal Dashboard",
-        "description": "Hisse senedi ve kripto para takibi için geliştirilmiş dashboard uygulaması. NVIDIA, Tesla gibi şirketlerin verilerini gösterir."
+        "description": "Hisse senedi ve kripto para takibi için geliştirilmiş dashboard uygulaması. NVIDIA, Tesla gibi şirketlerin verilerini gösterir.",
+        "longDescription": "Analitik dashboard uygulaması. Veri görselleştirme ve raporlama sistemi.",
+        "features": ["Veri görselleştirme", "Analitik raporlar", "Interactive charts", "Export functionality"],
+        "duration": "2 hafta",
+        "role": "Frontend Developer"
       },
       "odev": {
         "title": "Sosyal Medya Dashboard",
@@ -381,6 +455,30 @@
   "contact": {
     "title": "İletişim",
     "description": "Benimle iletişime geçin! Aşağıdaki formu doldurarak doğrudan e-posta gönderebilirsiniz.",
+    "freeQuote": {
+      "title": "Ücretsiz Teklif Al",
+      "description": "Web sitenizi analiz edip, performansınızı artıracak öneriler sunuyorum",
+      "siteAnalysis": {
+        "title": "Site Analizi",
+        "description": "Web sitenizin mevcut SEO durumunu detaylı analiz ederim"
+      },
+      "performanceReport": {
+        "title": "Performans Raporu",
+        "description": "Google PageSpeed, Core Web Vitals ve teknik SEO analizi"
+      },
+      "optimizationSuggestions": {
+        "title": "Optimizasyon Önerileri",
+        "description": "Arama motorlarında üst sıralara çıkmanız için somut öneriler"
+      },
+      "competitorAnalysis": {
+        "title": "Rekabet Analizi",
+        "description": "Rakiplerinizi analiz edip stratejik avantajlar öneririm"
+      },
+      "completelyFree": "Tamamen Ücretsiz",
+      "completelyFreeDescription": "Bu analiz ve öneriler tamamen ücretsizdir. Hiçbir yükümlülük altına girmezsiniz.",
+      "sendMessageForQuote": "Teklif almak için mesaj gönderin",
+      "exampleMessage": "Merhaba! Web sitem için ücretsiz destek almak istiyorum. Lütfen detaylı analiz yapabilir misiniz?"
+    },
     "form": {
       "title": "Mesaj Gönderin",
       "name": "Adınız",
@@ -490,6 +588,30 @@
     "goHome": "Ana Sayfaya Dön",
     "goBack": "Geri Dön",
     "tip": "Konami kodunu dene belki bir şeyler olur..."
+  },
+  "common": {
+    "name": "Tolga Çavga",
+    "role": "Frontend Developer",
+    "resume": "Özgeçmiş",
+    "developerLogo": "Developer Logo",
+    "closeMenu": "Menüyü Kapat",
+    "languages": {
+      "turkish": "Türkçe",
+      "azerbaijani": "Azərbaycan Türkcəsi",
+      "english": "English",
+      "german": "Deutsch"
+    }
+  },
+  "projectLike": {
+    "like": "Projeyi beğen",
+    "unlike": "Beğeniyi kaldır",
+    "dislike": "Projeyi beğenme",
+    "removeDislike": "Beğenmemeyi kaldır",
+    "liked": "Proje beğenildi! ❤️",
+    "unliked": "Beğeni kaldırıldı",
+    "disliked": "Proje beğenilmedi 👎",
+    "dislikeRemoved": "Beğenmeme kaldırıldı",
+    "error": "Bir hata oluştu, lütfen tekrar deneyin"
   }
 }
 

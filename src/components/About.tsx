@@ -33,7 +33,7 @@ const About: React.FC = () => {
       id: 'github',
       type: 'image',
       image: 'https://avatars.githubusercontent.com/u/46963474?v=4',
-      alt: 'GitHub Profile Photo',
+      alt: t('about.githubPhotoAlt'),
       description: 'GitHub Profil Fotoğrafı',
       fallback: '/profilePhoto.jpg'
     },
@@ -41,8 +41,8 @@ const About: React.FC = () => {
       id: 'emoji',
       type: 'emoji',
       emoji: '👨‍💻',
-      alt: 'Developer Emoji',
-      description: 'Developer Emoji'
+      alt: t('about.developerEmojiAlt'),
+      description: t('about.developerEmojiAlt')
     }
   ];
 
@@ -155,9 +155,9 @@ const About: React.FC = () => {
             {/* Info */}
             <div className="flex-1 text-center md:text-left">
               <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Tolga Çavga
+                {t('about.name')}
               </h3>
-              <p className="text-cyan-400 text-lg mb-4">Frontend Developer</p>
+              <p className="text-cyan-400 text-lg mb-4">{t('about.role')}</p>
               <p className="text-lg leading-relaxed text-gray-200">
                 {t('about.description')}
               </p>

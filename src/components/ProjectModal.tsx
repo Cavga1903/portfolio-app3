@@ -215,7 +215,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 text-sm"
                     >
                       <FaGithub className="w-3 h-3" />
-                      <span>GitHub</span>
+                      <span>{t('projects.github')}</span>
                     </a>
                   )}
                   {project.link && (
@@ -226,7 +226,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                       className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 text-sm"
                     >
                       <FaExternalLinkAlt className="w-3 h-3" />
-                      <span>Live Demo</span>
+                      <span>{t('projects.liveDemo')}</span>
                     </a>
                   )}
                 </div>

@@ -12,7 +12,13 @@
     "greeting": "Hello, I'm Tolga! 👋",
     "description": "As a Frontend Developer, I build creative and modern web projects.",
     "ctaAbout": "Learn More About Me",
-    "ctaProjects": "View My Projects"
+    "ctaProjects": "View My Projects",
+    "typing": {
+      "frontendDeveloper": "Frontend Developer",
+      "reactSpecialist": "React Specialist",
+      "uiuxEnthusiast": "UI/UX Enthusiast",
+      "creativeCoder": "Creative Coder"
+    }
   },
     "modal": {
       "clickOutsideToClose": "Click outside to close",
@@ -24,6 +30,10 @@
     },
   "about": {
     "title": "About Me",
+    "name": "Tolga Çavga",
+    "role": "Frontend Developer",
+    "githubPhotoAlt": "GitHub Profile Photo",
+    "developerEmojiAlt": "Developer Emoji",
     "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports.",
     "stats": {
       "focus": {
@@ -57,6 +67,15 @@
   },
   "experience": {
     "title": "Experience & Education",
+    "skills": {
+      "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
+      "turkcell": ["Customer Service", "Problem Solving", "Communication"],
+      "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
+      "concentrix": ["Salesforce CRM", "Customer Satisfaction", "Banking"],
+      "izmir": ["Hardware & Software", "System Administration", "Technical Support", "Teamwork"],
+      "uopeople": ["Computer Science", "Algorithms", "Data Structures"],
+      "anadolu": ["Computer Programming", "Software Development"]
+    },
     "turkcell": {
       "title": "Customer Service Representative",
       "company": "Turkcell Global Bilgi",
@@ -167,6 +186,14 @@
   "certificates": {
     "title": "Certificates & Achievements",
     "subtitle": "Certifications and achievements earned during my learning journey",
+    "skills": {
+      "siliconmade": ["React", "React Native", "Mobile Development"],
+      "frontend": ["HTML", "CSS", "JavaScript"],
+      "react": ["React", "Components", "Hooks"],
+      "responsive": ["Responsive Design", "Mobile First", "CSS Grid"],
+      "javascript": ["JavaScript", "ES6+", "Async/Await"],
+      "git": ["Git", "GitHub", "Version Control"]
+    },
     "siliconmade": {
       "title": "Mobile & Frontend Development Certificate",
       "issuer": "Siliconmade Academy",
@@ -260,31 +287,65 @@
   },
   "projects": {
     "title": "My Projects",
+    "subtitle": "Projects I developed using modern web technologies",
     "details": "Details",
     "tech": "Technologies:",
     "github": "GitHub",
-    "demo": "Live Demo",
+    "demo": "Demo",
+    "liveDemo": "Live Demo",
+    "livePreview": "Live Preview",
     "clickToViewDetails": "Click to view details",
+    "roles": {
+      "fullStack": "Full Stack Developer",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer"
+    },
+    "durations": {
+      "week": "{{count}} week",
+      "weeks": "{{count}} weeks",
+      "month": "{{count}} month",
+      "months": "{{count}} months"
+    },
     "items": {
       "iot": {
         "title": "IoT Device Simulator",
-        "description": "IoT device simulator developed with Node.js, Express, Authentication, Statistics & Multi-language Support. Features Docker support and QR code generation."
+        "description": "IoT device simulator developed with Node.js, Express, Authentication, Statistics & Multi-language Support. Features Docker support and QR code generation.",
+        "longDescription": "Web application that simulates IoT devices. Real-time data visualization and QR code integration.",
+        "features": ["Real-time data visualization", "QR code integration", "Docker containerization", "WebSocket connection"],
+        "duration": "1 month",
+        "role": "Backend Developer"
       },
       "todo": {
         "title": "Todo App (Instagram Style)",
-        "description": "Modern todo application developed with Instagram-like interface. Built using React and modern web technologies."
+        "description": "Modern todo application developed with Instagram-like interface. Built using React and modern web technologies.",
+        "longDescription": "Task management application. CRUD operations and local storage integration.",
+        "features": ["Add/delete tasks", "Status updates", "Local storage", "Responsive design"],
+        "duration": "1 week",
+        "role": "Frontend Developer"
       },
       "workshop": {
         "title": "Workshop Tracker",
-        "description": "Web application developed for workshop and event tracking. Features participant management and event organization capabilities."
+        "description": "Web application developed for workshop and event tracking. Features participant management and event organization capabilities.",
+        "longDescription": "Workshop and event tracking system. Modern platform where participants can register and view event details.",
+        "features": ["User registration system", "Event management", "Real-time updates", "Admin panel"],
+        "duration": "1.5 months",
+        "role": "Full Stack Developer"
       },
       "productManager": {
         "title": "React Supabase Product Manager",
-        "description": "Product management system developed with Supabase backend. Features CRUD operations and real-time data synchronization."
+        "description": "Product management system developed with Supabase backend. Features CRUD operations and real-time data synchronization.",
+        "longDescription": "Product management system. CRUD operations and user authentication with Supabase backend.",
+        "features": ["Product CRUD operations", "User authentication", "Supabase integration", "Real-time updates"],
+        "duration": "3 weeks",
+        "role": "Full Stack Developer"
       },
       "grocery": {
         "title": "Online Grocery App",
-        "description": "Online marketplace application developed as an e-commerce platform. Features cart management and payment integration."
+        "description": "Online marketplace application developed as an e-commerce platform. Features cart management and payment integration.",
+        "longDescription": "Online marketplace application. Sales of food products and delivery tracking.",
+        "features": ["Product categories", "Search and filtering", "Delivery tracking", "User accounts"],
+        "duration": "2.5 weeks",
+        "role": "Full Stack Developer"
       },
       "productList": {
         "title": "Product List (Enhanced)",
@@ -316,25 +377,20 @@
       "exchange": {
         "title": "Currency Exchange Tracking App",
         "description": "Currency exchange rate tracking and trading screen. Real-time data and chart visualization.",
-        "longDescription": "Modern web application that tracks real-time exchange rates and provides trading simulation. Offers user-friendly experience with chart visualization and responsive design.",
-        "features": [
-          "Real-time exchange rates",
-          "Chart visualization",
-          "Trading simulation",
-          "Responsive design"
-        ],
-        "challenges": [
-          "Real-time data integration",
-          "Performance optimization"
-        ],
-        "solutions": [
-          "WebSocket connections",
-          "Efficient data caching"
-        ]
+        "longDescription": "Currency exchange rate tracking and trading screen. Real-time data and chart visualization.",
+        "features": ["Real-time exchange rates", "Chart visualization", "Trading simulation", "Responsive design"],
+        "challenges": ["Real-time data integration", "Performance optimization"],
+        "solutions": ["WebSocket connections", "Efficient data caching"],
+        "duration": "1.5 weeks",
+        "role": "Frontend Developer"
       },
       "globalIdentity": {
         "title": "Global Identity",
-        "description": "Global identity verification system. Features multi-platform support and secure authentication capabilities."
+        "description": "Global identity verification system. Features multi-platform support and secure authentication capabilities.",
+        "longDescription": "Global identity management system. User profiles and authentication.",
+        "features": ["User profiles", "Authentication", "Security measures", "Multi-language support"],
+        "duration": "2 weeks",
+        "role": "Full Stack Developer"
       },
       "noteTracker": {
         "title": "Simple Note Tracking System",
@@ -350,7 +406,13 @@
       },
       "portfolio": {
         "title": "Personal Portfolio",
-        "description": "Personal portfolio website developed with modern React and TypeScript. Features responsive design and multi-language support."
+        "description": "Personal portfolio website developed with modern React and TypeScript. Features responsive design and multi-language support.",
+        "longDescription": "Modern and responsive portfolio website. Developed with React, TypeScript and TailwindCSS. Smooth animations with Framer Motion and multi-language support.",
+        "features": ["Responsive design", "Multi-language support (TR, EN, DE, AZ)", "Smooth animations", "SEO optimization", "Dark/Light theme"],
+        "challenges": ["Performance optimization", "Multi-language management", "Responsive design"],
+        "solutions": ["Lazy loading and code splitting", "i18next library", "Mobile-first approach"],
+        "duration": "2 months",
+        "role": "Full Stack Developer"
       },
       "ecommerce": {
         "title": "E-commerce Website",
@@ -358,11 +420,19 @@
       },
       "cvPreparation": {
         "title": "Resume Preparation App",
-        "description": "Web application for dynamic resume creation and PDF download. Features user-friendly interface and template system."
+        "description": "Web application for dynamic resume creation and PDF download. Features user-friendly interface and template system.",
+        "longDescription": "Web application with dynamic CV creation and PDF download features. User-friendly interface and template system.",
+        "features": ["Dynamic CV creation", "PDF export", "Template system", "Real-time preview"],
+        "duration": "2 weeks",
+        "role": "Frontend Developer"
       },
       "furniro": {
         "title": "Furniro E-commerce",
-        "description": "Furniture and home decoration focused e-commerce platform. Modern design and user-friendly interface."
+        "description": "Furniture and home decoration focused e-commerce platform. Modern design and user-friendly interface.",
+        "longDescription": "Furniture e-commerce site. Sales of furniture products with modern design and user-friendly interface.",
+        "features": ["Product catalog", "Cart management", "Payment system", "Responsive design"],
+        "duration": "3 weeks",
+        "role": "Frontend Developer"
       },
       "exchangeScreen": {
         "title": "Exchange Rate Screen",
@@ -370,7 +440,11 @@
       },
       "dashboard": {
         "title": "Financial Dashboard",
-        "description": "Dashboard application developed for stock and crypto tracking. Shows data from companies like NVIDIA, Tesla."
+        "description": "Dashboard application developed for stock and crypto tracking. Shows data from companies like NVIDIA, Tesla.",
+        "longDescription": "Analytics dashboard application. Data visualization and reporting system.",
+        "features": ["Data visualization", "Analytics reports", "Interactive charts", "Export functionality"],
+        "duration": "2 weeks",
+        "role": "Frontend Developer"
       },
       "odev": {
         "title": "Social Media Dashboard",
@@ -381,6 +455,30 @@
   "contact": {
     "title": "Contact",
     "description": "Get in touch with me! Fill out the form below to send me a direct email.",
+    "freeQuote": {
+      "title": "Get Free Quote",
+      "description": "I analyze your website and provide recommendations to improve your performance",
+      "siteAnalysis": {
+        "title": "Site Analysis",
+        "description": "I analyze your website's current SEO status in detail"
+      },
+      "performanceReport": {
+        "title": "Performance Report",
+        "description": "Google PageSpeed, Core Web Vitals and technical SEO analysis"
+      },
+      "optimizationSuggestions": {
+        "title": "Optimization Suggestions",
+        "description": "Concrete recommendations to rank higher in search engines"
+      },
+      "competitorAnalysis": {
+        "title": "Competitor Analysis",
+        "description": "I analyze your competitors and suggest strategic advantages"
+      },
+      "completelyFree": "Completely Free",
+      "completelyFreeDescription": "This analysis and recommendations are completely free. You are under no obligation.",
+      "sendMessageForQuote": "Send a message to get a quote",
+      "exampleMessage": "Hello! I would like to get free support for my website. Can you please do a detailed analysis?"
+    },
     "form": {
       "title": "Send a Message",
       "name": "Your Name",
@@ -490,6 +588,30 @@
     "goHome": "Go Home",
     "goBack": "Go Back",
     "tip": "Try the Konami code, something might happen..."
+  },
+  "common": {
+    "name": "Tolga Çavga",
+    "role": "Frontend Developer",
+    "resume": "Resume",
+    "developerLogo": "Developer Logo",
+    "closeMenu": "Close Menu",
+    "languages": {
+      "turkish": "Turkish",
+      "azerbaijani": "Azerbaijani Turkish",
+      "english": "English",
+      "german": "German"
+    }
+  },
+  "projectLike": {
+    "like": "Like project",
+    "unlike": "Unlike project",
+    "dislike": "Dislike project",
+    "removeDislike": "Remove dislike",
+    "liked": "Project liked! ❤️",
+    "unliked": "Like removed",
+    "disliked": "Project disliked 👎",
+    "dislikeRemoved": "Dislike removed",
+    "error": "An error occurred, please try again"
   }
 }
 

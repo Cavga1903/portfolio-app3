@@ -101,8 +101,8 @@ const Contact: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-2">Ücretsiz Teklif Al</h3>
-              <p className="text-gray-300 text-sm">Web sitenizi analiz edip, performansınızı artıracak öneriler sunuyorum</p>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-2">{t('contact.freeQuote.title')}</h3>
+              <p className="text-gray-300 text-sm">{t('contact.freeQuote.description')}</p>
             </div>
 
             <div className="space-y-4">
@@ -113,8 +113,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">Site Analizi</h4>
-                  <p className="text-gray-400 text-xs">Web sitenizin mevcut SEO durumunu detaylı analiz ederim</p>
+                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.siteAnalysis.title')}</h4>
+                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.siteAnalysis.description')}</p>
                 </div>
               </div>
 
@@ -125,8 +125,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">Performans Raporu</h4>
-                  <p className="text-gray-400 text-xs">Google PageSpeed, Core Web Vitals ve teknik SEO analizi</p>
+                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.performanceReport.title')}</h4>
+                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.performanceReport.description')}</p>
                 </div>
               </div>
 
@@ -137,8 +137,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">Optimizasyon Önerileri</h4>
-                  <p className="text-gray-400 text-xs">Arama motorlarında üst sıralara çıkmanız için somut öneriler</p>
+                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.optimizationSuggestions.title')}</h4>
+                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.optimizationSuggestions.description')}</p>
                 </div>
               </div>
 
@@ -149,8 +149,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">Rekabet Analizi</h4>
-                  <p className="text-gray-400 text-xs">Rakiplerinizi analiz edip stratejik avantajlar öneririm</p>
+                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.competitorAnalysis.title')}</h4>
+                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.competitorAnalysis.description')}</p>
                 </div>
               </div>
             </div>
@@ -160,9 +160,9 @@ const Contact: React.FC = () => {
                 <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                <span className="text-emerald-400 font-semibold text-sm">Tamamen Ücretsiz</span>
+                <span className="text-emerald-400 font-semibold text-sm">{t('contact.freeQuote.completelyFree')}</span>
               </div>
-              <p className="text-gray-300 text-xs">Bu analiz ve öneriler tamamen ücretsizdir. Hiçbir yükümlülük altına girmezsiniz.</p>
+              <p className="text-gray-300 text-xs">{t('contact.freeQuote.completelyFreeDescription')}</p>
             </div>
 
             <div className="mt-4 text-center">
@@ -174,14 +174,14 @@ const Contact: React.FC = () => {
                     messageTextarea.focus();
                     messageTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     // Mesaj kutusuna örnek metin ekle
-                    messageTextarea.value = 'Merhaba! Web sitem için ücretsiz destek almak istiyorum. Lütfen detaylı analiz yapabilir misiniz?';
+                    messageTextarea.value = t('contact.freeQuote.exampleMessage');
                     // Form state'ini güncelle
                     setFormData(prev => ({ ...prev, message: messageTextarea.value }));
                   }
                 }}
                 className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300"
               >
-                Teklif almak için mesaj gönderin
+                {t('contact.freeQuote.sendMessageForQuote')}
               </button>
             </div>
           </div>

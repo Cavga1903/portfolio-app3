@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCheckCircle, FaTimes } from 'react-icons/fa';
 
@@ -50,7 +51,8 @@ const Toast: React.FC<ToastProps> = ({
 
   const colorScheme = colors[type];
 
-  return (
+  // Portal ile body'ye render et - her zaman en üstte görünsün
+  const toastContent = (
     <AnimatePresence>
       {isVisible && (
         <motion.div
@@ -63,7 +65,8 @@ const Toast: React.FC<ToastProps> = ({
             damping: 30,
             duration: 0.3 
           }}
-          className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[99999] max-w-sm sm:max-w-md w-full px-4 sm:top-20"
+          className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[999999] max-w-sm sm:max-w-md w-full px-4 sm:top-20 pointer-events-auto"
+          style={{ isolation: 'isolate' }}
         >
           <div className={`relative bg-gray-900/95 backdrop-blur-xl border ${colorScheme.border} rounded-xl shadow-2xl overflow-hidden`}>
             {/* Gradient Border Top */}
@@ -106,6 +109,13 @@ const Toast: React.FC<ToastProps> = ({
       )}
     </AnimatePresence>
   );
+
+  // Portal ile body'ye render et
+  if (typeof window !== 'undefined') {
+    return createPortal(toastContent, document.body);
+  }
+
+  return null;
 };
 
 export default Toast;

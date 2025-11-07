@@ -26,55 +26,16 @@ const Hero: React.FC = () => {
   
   // Typing animation sequences based on language
   const getTypingSequence = () => {
-    const lang = i18n.language.split('-')[0].toLowerCase(); // Normalize language code
-    
-    if (lang === 'en') {
-      return [
-        'Frontend Developer',
-        2000,
-        'React Specialist',
-        2000,
-        'UI/UX Enthusiast',
-        2000,
-        'Creative Coder',
-        2000,
-      ];
-    } else if (lang === 'de') {
-      return [
-        'Frontend-Entwickler',
-        2000,
-        'React-Spezialist',
-        2000,
-        'UI/UX-Enthusiast',
-        2000,
-        'Kreativer Programmierer',
-        2000,
-      ];
-    } else if (lang === 'az') {
-      // Azerbaijani
-      return [
-        'Frontend Developer',
-        2000,
-        'React Mütəxəssisi',
-        2000,
-        'UI/UX Həvəskarı',
-        2000,
-        'Yaradıcı Proqramçı',
-        2000,
-      ];
-    } else {
-      // Turkish (default)
-      return [
-        'Frontend Developer',
-        2000,
-        'React Uzmanı',
-        2000,
-        'UI/UX Meraklısı',
-        2000,
-        'Yaratıcı Kodlayıcı',
-        2000,
-      ];
-    }
+    return [
+      t('hero.typing.frontendDeveloper'),
+      2000,
+      t('hero.typing.reactSpecialist'),
+      2000,
+      t('hero.typing.uiuxEnthusiast'),
+      2000,
+      t('hero.typing.creativeCoder'),
+      2000,
+    ];
   };
   
   // Stagger animation for child elements

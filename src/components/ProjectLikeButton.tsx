@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import { 
   toggleProjectLike, 
   getProjectStats, 
@@ -14,11 +15,23 @@ interface ProjectLikeButtonProps {
   className?: string
 }
 
+// Google Analytics gtag type definition
+type GtagFunction = (
+  command: string,
+  targetId: string,
+  config?: Record<string, string | number>
+) => void
+
+interface WindowWithGtag {
+  gtag?: GtagFunction
+}
+
 const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({ 
   projectId, 
   projectTitle, 
   className = '' 
 }) => {
+  const { t } = useTranslation()
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -75,21 +88,24 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         setStats(updatedStats)
 
         // Analytics tracking
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'project_like', {
-            project_title: projectTitle,
-            project_id: projectId,
-            like_status: result.liked ? 'liked' : 'unliked',
-            total_likes: updatedStats?.totalLikes || 0
-          })
+        if (typeof window !== 'undefined') {
+          const windowWithGtag = window as unknown as WindowWithGtag
+          if (windowWithGtag.gtag) {
+            windowWithGtag.gtag('event', 'project_like', {
+              project_title: projectTitle,
+              project_id: projectId,
+              like_status: result.liked ? 'liked' : 'unliked',
+              total_likes: updatedStats?.totalLikes || 0
+            })
+          }
         }
 
         // Show toast notification
-        showToast(result.liked ? 'Proje beğenildi! ❤️' : 'Beğeni kaldırıldı')
+        showToast(result.liked ? t('projectLike.liked') : t('projectLike.unliked'))
       }
     } catch (error) {
       console.error('Error toggling like:', error)
-      showToast('Bir hata oluştu, lütfen tekrar deneyin')
+      showToast(t('projectLike.error'))
     } finally {
       setIsLoading(false)
     }
@@ -107,7 +123,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         if (result) {
           setIsDisliked(false)
           setIsLiked(false)
-          showToast('Beğenmeme kaldırıldı')
+          showToast(t('projectLike.dislikeRemoved'))
         }
       } else {
         // Create dislike (set liked to false)
@@ -115,7 +131,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         if (result) {
           setIsDisliked(true)
           setIsLiked(false)
-          showToast('Proje beğenilmedi 👎')
+          showToast(t('projectLike.disliked'))
         }
       }
       
@@ -125,16 +141,19 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
       setStats(updatedStats)
 
       // Analytics tracking
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'project_dislike', {
-          project_title: projectTitle,
-          project_id: projectId,
-          dislike_status: isDisliked ? 'removed' : 'disliked'
-        })
+      if (typeof window !== 'undefined') {
+        const windowWithGtag = window as unknown as WindowWithGtag
+        if (windowWithGtag.gtag) {
+          windowWithGtag.gtag('event', 'project_dislike', {
+            project_title: projectTitle,
+            project_id: projectId,
+            dislike_status: isDisliked ? 'removed' : 'disliked'
+          })
+        }
       }
     } catch (error) {
       console.error('Error toggling dislike:', error)
-      showToast('Bir hata oluştu, lütfen tekrar deneyin')
+      showToast(t('projectLike.error'))
     } finally {
       setIsLoading(false)
     }
@@ -164,7 +183,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
             ? 'bg-blue-500 text-white hover:bg-blue-600' 
             : 'bg-white/90 text-gray-800 hover:bg-white'
         } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'}`}
-        aria-label={isLiked ? "Unlike project" : "Like project"}
+        aria-label={isLiked ? t('projectLike.unlike') : t('projectLike.like')}
       >
         <FaThumbsUp className={`w-4 h-4 ${isLiked ? 'text-white' : 'text-gray-800'}`} />
       </button>
@@ -177,7 +196,7 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
             ? 'bg-red-500 text-white hover:bg-red-600' 
             : 'bg-white/90 text-gray-800 hover:bg-white'
         } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'}`}
-        aria-label={isDisliked ? "Remove dislike" : "Dislike project"}
+        aria-label={isDisliked ? t('projectLike.removeDislike') : t('projectLike.dislike')}
       >
         <FaThumbsDown className={`w-4 h-4 ${isDisliked ? 'text-white' : 'text-gray-800'}`} />
       </button>
