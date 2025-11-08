@@ -9,7 +9,9 @@ const App: React.FC = () => {
 
   // Dil değiştiğinde sayfa başlığını güncelle
   useEffect(() => {
-    document.title = t('pageTitle');
+    if (typeof document !== 'undefined') {
+      document.title = t('pageTitle');
+    }
   }, [i18n.language, t]);
 
       return (

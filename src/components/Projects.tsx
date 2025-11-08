@@ -278,14 +278,22 @@ const Projects: React.FC = () => {
 
   // Responsive project count
   const getProjectCount = () => {
+    if (typeof window === 'undefined') return 3; // SSR fallback
     if (window.innerWidth < 640) return 1; // Mobile
     if (window.innerWidth < 1024) return 2; // Tablet
     return 3; // Desktop
   };
 
-  const [projectCount, setProjectCount] = useState(getProjectCount());
+  const [projectCount, setProjectCount] = useState(() => {
+    // Safari uyumluluğu için client-side'da hesapla
+    if (typeof window === 'undefined') return 3;
+    return getProjectCount();
+  });
 
   useEffect(() => {
+    // Safari uyumluluğu için window kontrolü
+    if (typeof window === 'undefined') return;
+    
     const handleResize = () => {
       setProjectCount(getProjectCount());
     };

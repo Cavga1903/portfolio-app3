@@ -28,24 +28,47 @@ const languageDetector = new LanguageDetector();
 languageDetector.addDetector({
   name: 'customDetector',
   lookup() {
+    // Safari uyumluluğu için kontrol
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return 'en'; // SSR fallback
+    }
+
     // localStorage'dan kontrol et
-    const storedLang = localStorage.getItem('i18nextLng');
-    if (storedLang && ['tr', 'en', 'de', 'az'].includes(storedLang)) {
-      return storedLang;
+    try {
+      const storedLang = localStorage.getItem('i18nextLng');
+      if (storedLang && ['tr', 'en', 'de', 'az'].includes(storedLang)) {
+        return storedLang;
+      }
+    } catch (e) {
+      // localStorage erişim hatası (Safari private mode gibi)
+      console.warn('localStorage access failed:', e);
     }
 
     // Tarayıcı dilini al
-    const browserLang = navigator.language || (navigator as any).userLanguage;
-    const langCode = browserLang.toLowerCase().split('-')[0]; // 'en-US' -> 'en'
+    if (typeof navigator !== 'undefined' && navigator.language) {
+      const browserLang = navigator.language || (navigator as any).userLanguage;
+      const langCode = browserLang.toLowerCase().split('-')[0]; // 'en-US' -> 'en'
+      
+      // Türkçe ise tr, Almanca ise de, Azərbaycanca ise az, diğerleri en
+      if (langCode === 'tr') return 'tr';
+      if (langCode === 'de') return 'de';
+      if (langCode === 'az') return 'az';
+    }
     
-    // Türkçe ise tr, Almanca ise de, Azərbaycanca ise az, diğerleri en
-    if (langCode === 'tr') return 'tr';
-    if (langCode === 'de') return 'de';
-    if (langCode === 'az') return 'az';
     return 'en'; // Fallback: Diğer tüm diller İngilizce
   },
   cacheUserLanguage(lng: string) {
-    localStorage.setItem('i18nextLng', lng);
+    // Safari uyumluluğu için kontrol
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return;
+    }
+    
+    try {
+      localStorage.setItem('i18nextLng', lng);
+    } catch (e) {
+      // localStorage erişim hatası (Safari private mode gibi)
+      console.warn('localStorage setItem failed:', e);
+    }
   }
 });
 
