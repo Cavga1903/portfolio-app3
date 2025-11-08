@@ -36,16 +36,30 @@ export interface ProjectStats {
 export const generateUserId = (): string => {
   const STORAGE_KEY = 'portfolio_user_id'
   
+  // Safari uyumluluğu için localStorage kontrolü
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    // SSR veya localStorage yoksa geçici ID oluştur
+    const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    return `temp_user_${randomId}`
+  }
+  
   // Check if user ID already exists in localStorage
-  let userId = localStorage.getItem(STORAGE_KEY)
+  let userId: string | null = null
+  
+  try {
+    userId = localStorage.getItem(STORAGE_KEY)
+  } catch (e) {
+    // localStorage erişim hatası (Safari private mode, ITP gibi)
+    console.warn('localStorage getItem failed, using session-based ID:', e)
+  }
   
   if (!userId) {
     // Generate new unique ID based on browser fingerprint
-    const userAgent = navigator.userAgent
-    const language = navigator.language
-    const platform = navigator.platform
-    const screenResolution = `${screen.width}x${screen.height}`
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : 'unknown'
+    const language = typeof navigator !== 'undefined' ? navigator.language : 'en'
+    const platform = typeof navigator !== 'undefined' ? navigator.platform : 'unknown'
+    const screenResolution = typeof screen !== 'undefined' ? `${screen.width}x${screen.height}` : '0x0'
+    const timezone = typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'UTC'
     
     // Create a more stable fingerprint
     const fingerprint = `${userAgent}-${language}-${platform}-${screenResolution}-${timezone}`
@@ -62,8 +76,13 @@ export const generateUserId = (): string => {
     const randomComponent = Math.random().toString(36).substring(2, 8)
     userId = `user_${Math.abs(hash).toString(36)}_${randomComponent}`
     
-    // Store in localStorage for persistence
-    localStorage.setItem(STORAGE_KEY, userId)
+    // Store in localStorage for persistence (Safari uyumluluğu için try-catch)
+    try {
+      localStorage.setItem(STORAGE_KEY, userId)
+    } catch (e) {
+      // localStorage erişim hatası - session-based ID kullanılacak
+      console.warn('localStorage setItem failed, ID will not persist:', e)
+    }
   }
   
   return userId
