@@ -1,11 +1,14 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
   "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/octet-stream"
+        }
+      ]
+    },
     {
       "source": "/assets/(.*\\.css)",
       "headers": [
@@ -59,6 +62,38 @@
           "value": "image/svg+xml; charset=utf-8"
         }
       ]
+    },
+    {
+      "source": "/(.*\\.woff2)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "font/woff2"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.woff)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "font/woff"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*\\.(js|css|json|svg|woff|woff2|png|jpg|jpeg|gif|webp|ico|pdf))",
+      "destination": "/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
