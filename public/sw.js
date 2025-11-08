@@ -1,5 +1,5 @@
 // Service Worker for Portfolio App
-const CACHE_NAME = 'portfolio-v1';
+const CACHE_NAME = 'portfolio-v2';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
@@ -24,6 +24,19 @@ self.addEventListener('install', (event) => {
 
 // Fetch event
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+  
+  // Favicon ve icon dosyalarını cache'leme - her zaman network'ten al
+  if (url.pathname.includes('tabLogo') || url.pathname.includes('favicon') || url.pathname.includes('icon')) {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        // Network hatası durumunda fallback
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then((response) => {

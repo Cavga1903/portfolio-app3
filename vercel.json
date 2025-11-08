@@ -1,14 +1,7 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/octet-stream"
-        }
-      ]
-    },
     {
       "source": "/assets/(.*\\.css)",
       "headers": [
@@ -64,6 +57,19 @@
       ]
     },
     {
+      "source": "/tabLogo.svg",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/svg+xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/(.*\\.woff2)",
       "headers": [
         {
@@ -83,14 +89,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/(.*\\.(js|css|json|svg|woff|woff2|png|jpg|jpeg|gif|webp|ico|pdf))",
-      "destination": "/$1"
-    },
-    {
-      "source": "/assets/(.*)",
-      "destination": "/assets/$1"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
