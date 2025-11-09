@@ -489,7 +489,23 @@
       "send": "Göndər",
       "sending": "Göndərilir...",
       "success": "✅ Mesajınız uğurla göndərildi!",
-      "error": "❌ Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin."
+      "error": "❌ Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.",
+      "errors": {
+        "nameRequired": "Ad sahəsi məcburidir",
+        "nameMinLength": "Ad ən azı 2 simvol olmalıdır",
+        "emailRequired": "E-poçt sahəsi məcburidir",
+        "emailInvalid": "Zəhmət olmasa düzgün e-poçt ünvanı daxil edin",
+        "messageRequired": "Mesaj sahəsi məcburidir",
+        "messageMinLength": "Mesaj ən azı 10 simvol olmalıdır",
+        "messageMaxLength": "Mesaj maksimum 1000 simvol ola bilər",
+        "captchaRequired": "Təhlükəsizlik sualına cavab verməlisiniz",
+        "captchaInvalid": "Təhlükəsizlik sualının cavabı yanlışdır. Zəhmət olmasa yenidən cəhd edin."
+      },
+      "captcha": {
+        "label": "Təhlükəsizlik Yoxlaması",
+        "placeholder": "Nəticəni daxil edin",
+        "refresh": "Yenilə"
+      }
     },
     "or": "və ya",
     "email": "E-poçt Göndər",

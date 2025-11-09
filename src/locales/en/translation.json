@@ -490,7 +490,23 @@
       "send": "Send",
       "sending": "Sending...",
       "success": "✅ Your message was sent successfully!",
-      "error": "❌ An error occurred. Please try again."
+      "error": "❌ An error occurred. Please try again.",
+      "errors": {
+        "nameRequired": "Name field is required",
+        "nameMinLength": "Name must be at least 2 characters",
+        "emailRequired": "Email field is required",
+        "emailInvalid": "Please enter a valid email address",
+        "messageRequired": "Message field is required",
+        "messageMinLength": "Message must be at least 10 characters",
+        "messageMaxLength": "Message cannot exceed 1000 characters",
+        "captchaRequired": "You must answer the security question",
+        "captchaInvalid": "Security question answer is incorrect. Please try again."
+      },
+      "captcha": {
+        "label": "Security Verification",
+        "placeholder": "Enter the result",
+        "refresh": "Refresh"
+      }
     },
     "or": "or",
     "email": "Send Email",

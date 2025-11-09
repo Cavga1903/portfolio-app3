@@ -1,7 +1,17 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import { useAnalytics } from '../hooks/useAnalytics';
+import { VALIDATION, TIMING, EMAILJS_FALLBACK } from '../utils/constants';
+import { getValidationError, validateCaptcha } from '../utils/validation';
+import { generateCaptcha, type CaptchaChallenge } from '../utils/captcha';
+
+interface FormErrors {
+  name: string;
+  email: string;
+  message: string;
+  captcha: string;
+}
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -10,19 +20,89 @@ const Contact: React.FC = () => {
     name: '',
     email: '',
     message: '',
+    captchaAnswer: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errors, setErrors] = useState<FormErrors>({
+    name: '',
+    email: '',
+    message: '',
+    captcha: '',
+  });
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [captcha, setCaptcha] = useState<CaptchaChallenge | null>(null);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Generate CAPTCHA on component mount
+  useEffect(() => {
+    setCaptcha(generateCaptcha());
+  }, []);
+
+  // Validate form fields
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {
+      name: '',
+      email: '',
+      message: '',
+      captcha: '',
+    };
+    let isValid = true;
+
+    // Validate name
+    const nameError = getValidationError('name', formData.name);
+    if (nameError) {
+      newErrors.name = t(nameError);
+      isValid = false;
+    }
+
+    // Validate email
+    const emailError = getValidationError('email', formData.email);
+    if (emailError) {
+      newErrors.email = t(emailError);
+      isValid = false;
+    }
+
+    // Validate message
+    const messageError = getValidationError('message', formData.message);
+    if (messageError) {
+      newErrors.message = t(messageError);
+      isValid = false;
+    }
+
+    // Validate CAPTCHA
+    if (!formData.captchaAnswer.trim()) {
+      newErrors.captcha = t('contact.form.errors.captchaRequired');
+      isValid = false;
+    } else if (!captcha || !validateCaptcha(Number(formData.captchaAnswer), captcha.answer)) {
+      newErrors.captcha = t('contact.form.errors.captchaInvalid');
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Clear previous errors
+    setErrors({ name: '', email: '', message: '', captcha: '' });
+    setErrorMessage('');
+
+    // Validate form
+    if (!validateForm()) {
+      trackFormInteraction('contact_form', 'validation_error');
+      return;
+    }
+
     setStatus('sending');
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
       // EmailJS ile e-posta gönder
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bc4c1qr';
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ow0vkmg';
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'EaLO_KojjN4ucFgXf';
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || EMAILJS_FALLBACK.SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || EMAILJS_FALLBACK.TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || EMAILJS_FALLBACK.PUBLIC_KEY;
 
       // Dil bilgisini al
       const languageNames: { [key: string]: string } = {
@@ -37,9 +117,9 @@ const Contact: React.FC = () => {
         serviceId,
         templateId,
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
+          from_name: formData.name.trim(),
+          from_email: formData.email.trim(),
+          message: formData.message.trim(),
           language: currentLanguage,
           time: new Date().toLocaleString('tr-TR', { 
             dateStyle: 'full', 
@@ -52,26 +132,96 @@ const Contact: React.FC = () => {
       setStatus('success');
       trackContactSubmission(formData);
       trackFormInteraction('contact_form', 'submit_success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', captchaAnswer: '' });
+      setErrors({ name: '', email: '', message: '', captcha: '' });
+      // Generate new CAPTCHA after successful submission
+      setCaptcha(generateCaptcha());
       
-      // 3 saniye sonra success mesajını kaldır
-      setTimeout(() => setStatus('idle'), 3000);
-    } catch (error) {
+      // Success mesajını kaldır
+      setTimeout(() => setStatus('idle'), TIMING.SUCCESS_MESSAGE_DURATION);
+    } catch (error: unknown) {
       console.error('Email send error:', error);
       setStatus('error');
+      
+      // More detailed error handling
+      if (error && typeof error === 'object') {
+        if ('text' in error && typeof error.text === 'string') {
+          setErrorMessage(error.text);
+        } else if ('message' in error && typeof error.message === 'string') {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage(t('contact.form.error'));
+        }
+      } else {
+        setErrorMessage(t('contact.form.error'));
+      }
+      
       trackFormInteraction('contact_form', 'submit_error');
       
-      // 3 saniye sonra error mesajını kaldır
-      setTimeout(() => setStatus('idle'), 3000);
+      // Error mesajını kaldır
+      setTimeout(() => {
+        setStatus('idle');
+        setErrorMessage('');
+      }, TIMING.ERROR_MESSAGE_DURATION);
     }
   };
 
+  // Debounced analytics tracking cleanup
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [fieldName]: fieldValue,
     });
-    trackFormInteraction('contact_form', 'field_change', e.target.name);
+
+    // Clear error for this field when user starts typing
+    if (errors[fieldName as keyof FormErrors]) {
+      setErrors({
+        ...errors,
+        [fieldName]: '',
+      });
+    }
+
+    // Debounced analytics tracking (only track after delay of inactivity)
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    debounceTimerRef.current = setTimeout(() => {
+      trackFormInteraction('contact_form', 'field_change', fieldName);
+    }, TIMING.ANALYTICS_DEBOUNCE_DELAY);
+  };
+
+  // Real-time validation on blur
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
+    const newErrors = { ...errors };
+
+    // Use utility function for validation
+    if (fieldName === 'name' || fieldName === 'email' || fieldName === 'message') {
+      const errorKey = getValidationError(fieldName, fieldValue);
+      newErrors[fieldName] = errorKey ? t(errorKey) : '';
+    }
+
+    setErrors(newErrors);
+  };
+
+  // Refresh CAPTCHA
+  const handleRefreshCaptcha = () => {
+    setCaptcha(generateCaptcha());
+    setFormData(prev => ({ ...prev, captchaAnswer: '' }));
+    setErrors(prev => ({ ...prev, captcha: '' }));
   };
 
   return (
@@ -166,7 +316,8 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="mt-4 text-center">
-              <button 
+              <button
+                type="button"
                 onClick={() => {
                   // Mesaj kutusuna odaklan
                   const messageTextarea = document.getElementById('message') as HTMLTextAreaElement;
@@ -174,12 +325,15 @@ const Contact: React.FC = () => {
                     messageTextarea.focus();
                     messageTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     // Mesaj kutusuna örnek metin ekle
-                    messageTextarea.value = t('contact.freeQuote.exampleMessage');
-                    // Form state'ini güncelle
-                    setFormData(prev => ({ ...prev, message: messageTextarea.value }));
+                    const exampleMessage = t('contact.freeQuote.exampleMessage');
+                    messageTextarea.value = exampleMessage;
+                    // Form state'ini güncelle ve validation'ı temizle
+                    setFormData(prev => ({ ...prev, message: exampleMessage }));
+                    setErrors(prev => ({ ...prev, message: '' }));
                   }
                 }}
-                className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300"
+                aria-label={t('contact.freeQuote.sendMessageForQuote')}
+                className="btn bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 px-6 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               >
                 {t('contact.freeQuote.sendMessageForQuote')}
               </button>
@@ -195,6 +349,7 @@ const Contact: React.FC = () => {
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-200">
                 {t('contact.form.name')}
+                <span className="text-red-400 ml-1" aria-label="required">*</span>
               </label>
               <input
                 type="text"
@@ -202,16 +357,28 @@ const Contact: React.FC = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
+                aria-required="true"
+                aria-invalid={errors.name ? 'true' : 'false'}
+                aria-describedby={errors.name ? 'name-error' : undefined}
                 placeholder={t('contact.form.namePlaceholder')}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
+                className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300 ${
+                  errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                }`}
               />
+              {errors.name && (
+                <p id="name-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {errors.name}
+                </p>
+              )}
             </div>
 
             {/* Email Input */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-200">
                 {t('contact.form.email')}
+                <span className="text-red-400 ml-1" aria-label="required">*</span>
               </label>
               <input
                 type="email"
@@ -219,47 +386,153 @@ const Contact: React.FC = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
+                aria-required="true"
+                aria-invalid={errors.email ? 'true' : 'false'}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 placeholder={t('contact.form.emailPlaceholder')}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
+                className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300 ${
+                  errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                }`}
               />
+              {errors.email && (
+                <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {errors.email}
+                </p>
+              )}
             </div>
 
             {/* Message Textarea */}
             <div>
               <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-200">
                 {t('contact.form.message')}
+                <span className="text-red-400 ml-1" aria-label="required">*</span>
+                <span className="text-gray-400 text-xs font-normal ml-2">
+                  ({formData.message.length}/{VALIDATION.MAX_MESSAGE_LENGTH})
+                </span>
               </label>
               <textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
                 rows={5}
+                maxLength={VALIDATION.MAX_MESSAGE_LENGTH}
+                aria-required="true"
+                aria-invalid={errors.message ? 'true' : 'false'}
+                aria-describedby={errors.message ? 'message-error' : undefined}
                 placeholder={t('contact.form.messagePlaceholder')}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 resize-none transition-all duration-300"
+                className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 resize-none transition-all duration-300 ${
+                  errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                }`}
               />
+              {errors.message && (
+                <p id="message-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {errors.message}
+                </p>
+              )}
             </div>
+
+            {/* CAPTCHA */}
+            {captcha && (
+              <div>
+                <label htmlFor="captcha" className="block text-sm font-medium mb-2 text-gray-200">
+                  {t('contact.form.captcha.label')}
+                  <span className="text-red-400 ml-1" aria-label="required">*</span>
+                </label>
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 flex items-center gap-2">
+                    <span className="text-lg font-bold text-emerald-400 bg-gray-900/50 px-4 py-3 rounded-lg border border-gray-700">
+                      {captcha.question} = ?
+                    </span>
+                    <input
+                      type="number"
+                      id="captcha"
+                      name="captchaAnswer"
+                      value={formData.captchaAnswer}
+                      onChange={handleChange}
+                      required
+                      aria-required="true"
+                      aria-invalid={errors.captcha ? 'true' : 'false'}
+                      aria-describedby={errors.captcha ? 'captcha-error' : undefined}
+                      placeholder={t('contact.form.captcha.placeholder')}
+                      className={`flex-1 px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300 ${
+                        errors.captcha ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                      }`}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleRefreshCaptcha}
+                    aria-label={t('contact.form.captcha.refresh')}
+                    className="px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-gray-300 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </button>
+                </div>
+                {errors.captcha && (
+                  <p id="captcha-error" className="mt-1 text-sm text-red-400" role="alert">
+                    {errors.captcha}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Submit Button */}
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="w-full btn btn-primary bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              aria-label={status === 'sending' ? t('contact.form.sending') : t('contact.form.send')}
+              className="w-full btn btn-primary bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 border-none text-white font-semibold py-3 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 flex items-center justify-center gap-2"
             >
+              {status === 'sending' && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              )}
               {status === 'sending' ? t('contact.form.sending') : t('contact.form.send')}
             </button>
 
             {/* Status Messages */}
             {status === 'success' && (
-              <div className="p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-center animate-pulse">
+              <div
+                className="p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-center animate-pulse"
+                role="alert"
+                aria-live="polite"
+              >
                 {t('contact.form.success')}
               </div>
             )}
             {status === 'error' && (
-              <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-center animate-pulse">
-                {t('contact.form.error')}
+              <div
+                className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-center animate-pulse"
+                role="alert"
+                aria-live="assertive"
+              >
+                {errorMessage || t('contact.form.error')}
               </div>
             )}
           </form>

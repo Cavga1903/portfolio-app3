@@ -489,7 +489,23 @@
       "send": "Senden",
       "sending": "Wird gesendet...",
       "success": "✅ Ihre Nachricht wurde erfolgreich gesendet!",
-      "error": "❌ Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+      "error": "❌ Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "errors": {
+        "nameRequired": "Das Namensfeld ist erforderlich",
+        "nameMinLength": "Der Name muss mindestens 2 Zeichen lang sein",
+        "emailRequired": "Das E-Mail-Feld ist erforderlich",
+        "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "messageRequired": "Das Nachrichtenfeld ist erforderlich",
+        "messageMinLength": "Die Nachricht muss mindestens 10 Zeichen lang sein",
+        "messageMaxLength": "Die Nachricht darf maximal 1000 Zeichen lang sein",
+        "captchaRequired": "Sie müssen die Sicherheitsfrage beantworten",
+        "captchaInvalid": "Die Antwort auf die Sicherheitsfrage ist falsch. Bitte versuchen Sie es erneut."
+      },
+      "captcha": {
+        "label": "Sicherheitsüberprüfung",
+        "placeholder": "Geben Sie das Ergebnis ein",
+        "refresh": "Aktualisieren"
+      }
     },
     "or": "oder",
     "email": "E-Mail senden",

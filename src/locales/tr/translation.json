@@ -490,7 +490,23 @@
       "send": "Gönder",
       "sending": "Gönderiliyor...",
       "success": "✅ Mesajınız başarıyla gönderildi!",
-      "error": "❌ Bir hata oluştu. Lütfen tekrar deneyin."
+      "error": "❌ Bir hata oluştu. Lütfen tekrar deneyin.",
+      "errors": {
+        "nameRequired": "Ad alanı zorunludur",
+        "nameMinLength": "Ad en az 2 karakter olmalıdır",
+        "emailRequired": "E-posta alanı zorunludur",
+        "emailInvalid": "Geçerli bir e-posta adresi giriniz",
+        "messageRequired": "Mesaj alanı zorunludur",
+        "messageMinLength": "Mesaj en az 10 karakter olmalıdır",
+        "messageMaxLength": "Mesaj en fazla 1000 karakter olabilir",
+        "captchaRequired": "Güvenlik sorusunu cevaplamalısınız",
+        "captchaInvalid": "Güvenlik sorusu yanlış. Lütfen tekrar deneyin."
+      },
+      "captcha": {
+        "label": "Güvenlik Doğrulaması",
+        "placeholder": "Sonucu giriniz",
+        "refresh": "Yenile"
+      }
     },
     "or": "veya",
     "email": "E-posta Gönder",
