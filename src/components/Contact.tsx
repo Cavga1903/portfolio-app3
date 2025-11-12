@@ -2,14 +2,24 @@ import React, { useState, FormEvent, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { VALIDATION, TIMING } from '../utils/constants';
-import { getValidationError, validateCaptcha } from '../utils/validation';
-import { generateCaptcha, type CaptchaChallenge } from '../utils/captcha';
+import { getValidationError } from '../utils/validation';
 
 interface FormErrors {
   name: string;
   email: string;
   message: string;
-  captcha: string;
+  recaptcha: string;
+}
+
+// Google reCAPTCHA window interface
+interface WindowWithRecaptcha extends Window {
+  grecaptcha?: {
+    ready: (callback: () => void) => void;
+    execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    render: (element: HTMLElement, options: { sitekey: string; callback?: (token: string) => void; 'expired-callback'?: () => void; 'error-callback'?: () => void }) => number;
+    reset: (widgetId?: number) => void;
+    getResponse: (widgetId?: number) => string;
+  };
 }
 
 const Contact: React.FC = () => {
@@ -19,23 +29,55 @@ const Contact: React.FC = () => {
     name: '',
     email: '',
     message: '',
-    captchaAnswer: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<FormErrors>({
     name: '',
     email: '',
     message: '',
-    captcha: '',
+    recaptcha: '',
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [captcha, setCaptcha] = useState<CaptchaChallenge | null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string>('');
+  const [recaptchaWidgetId, setRecaptchaWidgetId] = useState<number | null>(null);
+  const recaptchaRef = useRef<HTMLDivElement>(null);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Generate CAPTCHA on component mount
+  const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
+
+  // Initialize reCAPTCHA
   useEffect(() => {
-    setCaptcha(generateCaptcha());
-  }, []);
+    if (!RECAPTCHA_SITE_KEY) {
+      console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
+      return;
+    }
+
+    const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
+    
+    if (windowWithRecaptcha.grecaptcha && recaptchaRef.current) {
+      const grecaptcha = windowWithRecaptcha.grecaptcha;
+      grecaptcha.ready(() => {
+        if (recaptchaRef.current && grecaptcha) {
+          const widgetId = grecaptcha.render(recaptchaRef.current, {
+            sitekey: RECAPTCHA_SITE_KEY,
+            callback: (token: string) => {
+              setRecaptchaToken(token);
+              setErrors(prev => ({ ...prev, recaptcha: '' }));
+            },
+            'expired-callback': () => {
+              setRecaptchaToken('');
+              setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaExpired') }));
+            },
+            'error-callback': () => {
+              setRecaptchaToken('');
+              setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaError') }));
+            },
+          });
+          setRecaptchaWidgetId(widgetId);
+        }
+      });
+    }
+  }, [RECAPTCHA_SITE_KEY, t]);
 
   // Validate form fields
   const validateForm = (): boolean => {
@@ -43,7 +85,7 @@ const Contact: React.FC = () => {
       name: '',
       email: '',
       message: '',
-      captcha: '',
+      recaptcha: '',
     };
     let isValid = true;
 
@@ -68,12 +110,9 @@ const Contact: React.FC = () => {
       isValid = false;
     }
 
-    // Validate CAPTCHA
-    if (!formData.captchaAnswer.trim()) {
-      newErrors.captcha = t('contact.form.errors.captchaRequired');
-      isValid = false;
-    } else if (!captcha || !validateCaptcha(Number(formData.captchaAnswer), captcha.answer)) {
-      newErrors.captcha = t('contact.form.errors.captchaInvalid');
+    // Validate reCAPTCHA
+    if (!recaptchaToken) {
+      newErrors.recaptcha = t('contact.form.errors.recaptchaRequired');
       isValid = false;
     }
 
@@ -85,7 +124,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     
     // Clear previous errors
-    setErrors({ name: '', email: '', message: '', captcha: '' });
+    setErrors({ name: '', email: '', message: '', recaptcha: '' });
     setErrorMessage('');
 
     // Validate form
@@ -121,8 +160,7 @@ const Contact: React.FC = () => {
           email: formData.email.trim(),
           message: formData.message.trim(),
           language: currentLanguage,
-          captchaAnswer: formData.captchaAnswer,
-          captchaQuestion: captcha?.question,
+          recaptchaToken: recaptchaToken,
         }),
       });
 
@@ -135,10 +173,15 @@ const Contact: React.FC = () => {
       setStatus('success');
       trackContactSubmission(formData);
       trackFormInteraction('contact_form', 'submit_success');
-      setFormData({ name: '', email: '', message: '', captchaAnswer: '' });
-      setErrors({ name: '', email: '', message: '', captcha: '' });
-      // Generate new CAPTCHA after successful submission
-      setCaptcha(generateCaptcha());
+      setFormData({ name: '', email: '', message: '' });
+      setErrors({ name: '', email: '', message: '', recaptcha: '' });
+      setRecaptchaToken('');
+      
+      // Reset reCAPTCHA
+      const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
+      if (windowWithRecaptcha.grecaptcha && recaptchaWidgetId !== null) {
+        windowWithRecaptcha.grecaptcha.reset(recaptchaWidgetId);
+      }
       
       // Success mesajını kaldır
       setTimeout(() => setStatus('idle'), TIMING.SUCCESS_MESSAGE_DURATION);
@@ -214,12 +257,6 @@ const Contact: React.FC = () => {
     setErrors(newErrors);
   };
 
-  // Refresh CAPTCHA
-  const handleRefreshCaptcha = () => {
-    setCaptcha(generateCaptcha());
-    setFormData(prev => ({ ...prev, captchaAnswer: '' }));
-    setErrors(prev => ({ ...prev, captcha: '' }));
-  };
 
   return (
     <section id="contact" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
@@ -433,48 +470,22 @@ const Contact: React.FC = () => {
               )}
             </div>
 
-            {/* CAPTCHA */}
-            {captcha && (
+            {/* Google reCAPTCHA */}
+            {RECAPTCHA_SITE_KEY && (
               <div>
-                <label htmlFor="captcha" className="block text-sm font-medium mb-2 text-gray-200">
-                  {t('contact.form.captcha.label')}
+                <label className="block text-sm font-medium mb-2 text-gray-200">
+                  {t('contact.form.recaptcha.label')}
                   <span className="text-red-400 ml-1" aria-label="required">*</span>
                 </label>
-                <div className="flex items-center gap-3">
-                  <div className="flex-1 flex items-center gap-2">
-                    <span className="text-lg font-bold text-emerald-400 bg-gray-900/50 px-4 py-3 rounded-lg border border-gray-700">
-                      {captcha.question} = ?
-                    </span>
-                    <input
-                      type="number"
-                      id="captcha"
-                      name="captchaAnswer"
-                      value={formData.captchaAnswer}
-                      onChange={handleChange}
-                      required
-                      aria-required="true"
-                      aria-invalid={errors.captcha ? 'true' : 'false'}
-                      aria-describedby={errors.captcha ? 'captcha-error' : undefined}
-                      placeholder={t('contact.form.captcha.placeholder')}
-                      className={`flex-1 px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300 ${
-                        errors.captcha ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
-                      }`}
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleRefreshCaptcha}
-                    aria-label={t('contact.form.captcha.refresh')}
-                    className="px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-gray-300 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  </button>
-                </div>
-                {errors.captcha && (
-                  <p id="captcha-error" className="mt-1 text-sm text-red-400" role="alert">
-                    {errors.captcha}
+                <div ref={recaptchaRef} className="flex justify-center"></div>
+                {errors.recaptcha && (
+                  <p id="recaptcha-error" className="mt-2 text-sm text-red-400" role="alert">
+                    {errors.recaptcha}
+                  </p>
+                )}
+                {!RECAPTCHA_SITE_KEY && (
+                  <p className="mt-2 text-sm text-yellow-400">
+                    {t('contact.form.recaptcha.notConfigured')}
                   </p>
                 )}
               </div>

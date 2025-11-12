@@ -16,20 +16,9 @@ interface ProjectLikeButtonProps {
   className?: string
 }
 
-// Google Analytics gtag type definition
-type GtagFunction = (
-  command: string,
-  targetId: string,
-  config?: Record<string, string | number>
-) => void
-
-interface WindowWithGtag {
-  gtag?: GtagFunction
-}
-
 const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({ 
   projectId, 
-  projectTitle, 
+  projectTitle: _projectTitle, 
   className = '' 
 }) => {
   const { t } = useTranslation()

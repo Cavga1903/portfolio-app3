@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaGlobe, FaGithub, FaUser, FaMoon, FaSun } from "react-icons/fa";
+import { FaGithub, FaUser, FaMoon, FaSun } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "../hooks/useAnalytics";
 
@@ -18,13 +18,11 @@ const navLinks: NavLink[] = [
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { t, i18n } = useTranslation();
-  const { trackClick, trackLanguageChange } = useAnalytics();
+  const { t } = useTranslation();
+  const { trackClick } = useAnalytics();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const toggleLangMenu = () => setIsLangMenuOpen((prev) => !prev);
 
   // Dark mode toggle
   const toggleDarkMode = () => {
@@ -64,35 +62,6 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const changeLanguage = (lng: string) => {
-    const currentLang = i18n.language.split("-")[0];
-    i18n.changeLanguage(lng);
-    setIsLangMenuOpen(false);
-    trackLanguageChange(currentLang, lng);
-  };
-
-  const languages = [
-    { code: "tr", name: "Türkçe", flag: "🇹🇷" },
-    { code: "az", name: "Azərbaycan Türkcəsi", flag: "🇦🇿" },
-    { code: "en", name: "English", flag: "🇬🇧" },
-    { code: "de", name: "Deutsch", flag: "🇩🇪" },
-  ];
-
-  // i18n.language'i normalize et (en-US -> en)
-  const normalizedLang = i18n.language.split("-")[0].toLowerCase();
-  const currentLanguage =
-    languages.find((lang) => lang.code === normalizedLang) || languages[1]; // Fallback: English
-
-  // Get language flag emoji
-  const getLanguageFlag = (code: string) => {
-    const flags: { [key: string]: string } = {
-      'en': '🇺🇸',
-      'tr': '🇹🇷',
-      'de': '🇩🇪',
-      'az': '🇦🇿'
-    };
-    return flags[code] || '🌐';
-  };
 
   return (
     <nav className="bg-gray-800/90 backdrop-blur-sm relative z-50 border-b border-gray-700/50 w-full">
@@ -124,35 +93,6 @@ const Navbar: React.FC = () => {
                 <FaSun className="w-5 h-5" />
               ) : (
                 <FaMoon className="w-5 h-5" />
-              )}
-            </button>
-
-            {/* Language Selector */}
-            <button
-              onClick={toggleLangMenu}
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
-              aria-label="Change language"
-            >
-              <span className="text-lg">{getLanguageFlag(currentLanguage.code)}</span>
-              {isLangMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-50">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => changeLanguage(lang.code)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors ${
-                        i18n.language === lang.code
-                          ? "bg-gray-700"
-                          : ""
-                      } first:rounded-t-lg last:rounded-b-lg`}
-                    >
-                      <span className="text-lg">{getLanguageFlag(lang.code)}</span>
-                      <span className="text-sm font-medium text-gray-300">
-                        {lang.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
               )}
             </button>
 
@@ -210,35 +150,6 @@ const Navbar: React.FC = () => {
                 <FaSun className="w-5 h-5" />
               ) : (
                 <FaMoon className="w-5 h-5" />
-              )}
-            </button>
-
-            {/* Language Selector - Mobile */}
-            <button
-              onClick={toggleLangMenu}
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
-              aria-label="Change language"
-            >
-              <span className="text-lg">{getLanguageFlag(currentLanguage.code)}</span>
-              {isLangMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-50">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => changeLanguage(lang.code)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors ${
-                        i18n.language === lang.code
-                          ? "bg-gray-700"
-                          : ""
-                      } first:rounded-t-lg last:rounded-b-lg`}
-                    >
-                      <span className="text-lg">{getLanguageFlag(lang.code)}</span>
-                      <span className="text-sm font-medium text-gray-300">
-                        {lang.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
               )}
             </button>
 
@@ -351,75 +262,28 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Footer - Compact Language and Actions */}
+            {/* Footer - Compact Actions */}
             <div className="px-4 py-2 border-t border-white/10 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10">
-              <div className="flex items-center justify-between gap-3">
-                {/* Language Selector - Compact */}
-                <div className="flex items-center gap-2">
-                  <svg className="w-3 h-3 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                  </svg>
-                  <div className="flex gap-1">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          changeLanguage(lang.code);
-                          setIsMenuOpen(false);
-                        }}
-                        className={`px-2 py-1 rounded-md text-xs font-medium transition-all duration-200 ${
-                          i18n.language === lang.code
-                            ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
-                            : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
-                        }`}
-                      >
-                        {lang.flag} {lang.code.toUpperCase()}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
+              <div className="flex items-center justify-center gap-3">
                 {/* Quick Actions - Compact */}
-                <div className="flex gap-1">
-                  <button 
-                    onClick={() => {
-                      // CV indirme fonksiyonu
-                      const link = document.createElement('a');
-                      link.href = '/Tolga_Cavga_CV.pdf';
-                      link.download = 'Tolga_Cavga_Resume.pdf';
-                      link.click();
-                      trackClick('resume_download', 'file_download', 'Resume Download');
-                    }}
-                    className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium hover:scale-105"
-                  >
-                    {t('common.resume')}
-                  </button>
-                </div>
+                <button 
+                  onClick={() => {
+                    // CV indirme fonksiyonu
+                    const link = document.createElement('a');
+                    link.href = '/Tolga_Cavga_CV.pdf';
+                    link.download = 'Tolga_Cavga_Resume.pdf';
+                    link.click();
+                    trackClick('resume_download', 'file_download', 'Resume Download');
+                  }}
+                  className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium hover:scale-105"
+                >
+                  {t('common.resume')}
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Mobile Language Menu */}
-        {isLangMenuOpen && (
-          <div className="absolute top-16 right-4 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 lg:hidden">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => changeLanguage(lang.code)}
-                className={`w-full flex items-center justify-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                  i18n.language === lang.code
-                    ? "bg-blue-50 dark:bg-gray-700"
-                    : ""
-                } first:rounded-t-lg last:rounded-b-lg`}
-              >
-                <span className="font-medium text-gray-800 dark:text-white">
-                  {lang.name}
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </nav>
   );

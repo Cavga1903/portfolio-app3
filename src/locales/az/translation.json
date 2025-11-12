@@ -497,8 +497,13 @@
         "messageRequired": "Mesaj sahəsi məcburidir",
         "messageMinLength": "Mesaj ən azı 10 simvol olmalıdır",
         "messageMaxLength": "Mesaj maksimum 1000 simvol ola bilər",
-        "captchaRequired": "Təhlükəsizlik sualına cavab verməlisiniz",
-        "captchaInvalid": "Təhlükəsizlik sualının cavabı yanlışdır. Zəhmət olmasa yenidən cəhd edin."
+        "recaptchaRequired": "Zəhmət olmasa reCAPTCHA yoxlamasını tamamlayın",
+        "recaptchaExpired": "reCAPTCHA yoxlamasının müddəti bitib. Zəhmət olmasa yenidən cəhd edin.",
+        "recaptchaError": "reCAPTCHA yoxlaması uğursuz oldu. Zəhmət olmasa yenidən cəhd edin."
+      },
+      "recaptcha": {
+        "label": "Təhlükəsizlik Yoxlaması",
+        "notConfigured": "reCAPTCHA konfiqurasiya edilməyib. Zəhmət olmasa administratorla əlaqə saxlayın."
       },
       "captcha": {
         "label": "Təhlükəsizlik Yoxlaması",

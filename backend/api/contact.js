@@ -56,7 +56,7 @@ const createTransporter = () => {
 // Contact form endpoint
 app.post('/api/contact', limiter, async (req, res) => {
   try {
-    const { name, email, message, language, captchaAnswer, captchaQuestion } = req.body;
+    const { name, email, message, language, recaptchaToken } = req.body;
 
     // Validation
     if (!name || !email || !message) {
@@ -93,17 +93,50 @@ app.post('/api/contact', limiter, async (req, res) => {
       });
     }
 
-    // CAPTCHA validation (optional - basit matematik CAPTCHA)
-    if (captchaAnswer && captchaQuestion) {
-      // captchaQuestion format: "What is 5 + 3?"
-      const match = captchaQuestion.match(/(\d+)\s*\+\s*(\d+)/);
-      if (match) {
-        const correctAnswer = parseInt(match[1]) + parseInt(match[2]);
-        if (parseInt(captchaAnswer) !== correctAnswer) {
+    // Google reCAPTCHA validation
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+
+    if (!recaptchaSecretKey) {
+      console.warn('RECAPTCHA_SECRET_KEY not set. Skipping reCAPTCHA verification.');
+    } else {
+      if (!recaptchaToken) {
+        return res.status(400).json({ 
+          error: 'reCAPTCHA verification is required.' 
+        });
+      }
+
+      // Verify reCAPTCHA token with Google
+      try {
+        const recaptchaVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
+        const verifyResponse = await fetch(recaptchaVerifyUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `secret=${recaptchaSecretKey}&response=${recaptchaToken}`,
+        });
+
+        const verifyData = await verifyResponse.json();
+
+        if (!verifyData.success) {
+          console.error('reCAPTCHA verification failed:', verifyData['error-codes']);
           return res.status(400).json({ 
-            error: 'CAPTCHA verification failed.' 
+            error: 'reCAPTCHA verification failed. Please try again.' 
           });
         }
+
+        // Optional: Check score for reCAPTCHA v3 (if using v3)
+        // For v2, success is enough
+        if (verifyData.score !== undefined && verifyData.score < 0.5) {
+          return res.status(400).json({ 
+            error: 'reCAPTCHA verification failed. Please try again.' 
+          });
+        }
+      } catch (recaptchaError) {
+        console.error('Error verifying reCAPTCHA:', recaptchaError);
+        return res.status(500).json({ 
+          error: 'Failed to verify reCAPTCHA. Please try again later.' 
+        });
       }
     }
 

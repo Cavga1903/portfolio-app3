@@ -497,8 +497,13 @@
         "messageRequired": "Message field is required",
         "messageMinLength": "Message must be at least 10 characters",
         "messageMaxLength": "Message cannot exceed 1000 characters",
-        "captchaRequired": "You must answer the security question",
-        "captchaInvalid": "Security question answer is incorrect. Please try again."
+        "recaptchaRequired": "Please complete the reCAPTCHA verification",
+        "recaptchaExpired": "reCAPTCHA verification expired. Please try again.",
+        "recaptchaError": "reCAPTCHA verification failed. Please try again."
+      },
+      "recaptcha": {
+        "label": "Security Verification",
+        "notConfigured": "reCAPTCHA is not configured. Please contact the administrator."
       },
       "captcha": {
         "label": "Security Verification",

@@ -497,8 +497,13 @@
         "messageRequired": "Das Nachrichtenfeld ist erforderlich",
         "messageMinLength": "Die Nachricht muss mindestens 10 Zeichen lang sein",
         "messageMaxLength": "Die Nachricht darf maximal 1000 Zeichen lang sein",
-        "captchaRequired": "Sie müssen die Sicherheitsfrage beantworten",
-        "captchaInvalid": "Die Antwort auf die Sicherheitsfrage ist falsch. Bitte versuchen Sie es erneut."
+        "recaptchaRequired": "Bitte vervollständigen Sie die reCAPTCHA-Überprüfung",
+        "recaptchaExpired": "Die reCAPTCHA-Überprüfung ist abgelaufen. Bitte versuchen Sie es erneut.",
+        "recaptchaError": "Die reCAPTCHA-Überprüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut."
+      },
+      "recaptcha": {
+        "label": "Sicherheitsüberprüfung",
+        "notConfigured": "reCAPTCHA ist nicht konfiguriert. Bitte kontaktieren Sie den Administrator."
       },
       "captcha": {
         "label": "Sicherheitsüberprüfung",

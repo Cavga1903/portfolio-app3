@@ -497,8 +497,13 @@
         "messageRequired": "Mesaj alanı zorunludur",
         "messageMinLength": "Mesaj en az 10 karakter olmalıdır",
         "messageMaxLength": "Mesaj en fazla 1000 karakter olabilir",
-        "captchaRequired": "Güvenlik sorusunu cevaplamalısınız",
-        "captchaInvalid": "Güvenlik sorusu yanlış. Lütfen tekrar deneyin."
+        "recaptchaRequired": "Lütfen güvenlik doğrulamasını tamamlayın",
+        "recaptchaExpired": "Güvenlik doğrulaması süresi doldu. Lütfen tekrar deneyin.",
+        "recaptchaError": "Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin."
+      },
+      "recaptcha": {
+        "label": "Güvenlik Doğrulaması",
+        "notConfigured": "reCAPTCHA yapılandırılmamış. Lütfen yönetici ile iletişime geçin."
       },
       "captcha": {
         "label": "Güvenlik Doğrulaması",
