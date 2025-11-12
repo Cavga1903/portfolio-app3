@@ -18,13 +18,6 @@ export const TIMING = {
   ANALYTICS_DEBOUNCE_DELAY: 1000,
 } as const;
 
-// EmailJS fallback values (should be overridden by environment variables)
-export const EMAILJS_FALLBACK = {
-  SERVICE_ID: 'service_bc4c1qr',
-  TEMPLATE_ID: 'template_ow0vkmg',
-  PUBLIC_KEY: 'EaLO_KojjN4ucFgXf',
-} as const;
-
 // CAPTCHA constants
 export const CAPTCHA = {
   MIN_NUMBER: 1,

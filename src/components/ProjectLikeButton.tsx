@@ -6,8 +6,9 @@ import {
   getProjectStats, 
   generateUserId,
   updateProjectStats,
+  getProjectLikes,
   ProjectStats
-} from '../lib/firebase'
+} from '../lib/localStorage'
 
 interface ProjectLikeButtonProps {
   projectId: string
@@ -46,14 +47,9 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
     const loadLikeStatus = async () => {
       try {
         // Check if user liked this project
-        const { db } = await import('../lib/firebase')
-        const { collection, query, where, getDocs } = await import('firebase/firestore')
+        const userLikes = await getProjectLikes(projectId)
+        const userLike = userLikes.find(like => like.userId === userId)
         
-        const likesRef = collection(db, 'projectLikes')
-        const userLikeQuery = query(likesRef, where('projectId', '==', projectId), where('userId', '==', userId))
-        const querySnapshot = await getDocs(userLikeQuery)
-        
-        const userLike = !querySnapshot.empty ? querySnapshot.docs[0].data() : null
         setIsLiked(userLike?.liked === true)
         setIsDisliked(userLike?.liked === false)
 
@@ -87,18 +83,18 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         const updatedStats = await getProjectStats(projectId)
         setStats(updatedStats)
 
-        // Analytics tracking
-        if (typeof window !== 'undefined') {
-          const windowWithGtag = window as unknown as WindowWithGtag
-          if (windowWithGtag.gtag) {
-            windowWithGtag.gtag('event', 'project_like', {
-              project_title: projectTitle,
-              project_id: projectId,
-              like_status: result.liked ? 'liked' : 'unliked',
-              total_likes: updatedStats?.totalLikes || 0
-            })
-          }
-        }
+        // Analytics tracking (optional - can be removed)
+        // if (typeof window !== 'undefined') {
+        //   const windowWithGtag = window as unknown as WindowWithGtag
+        //   if (windowWithGtag.gtag) {
+        //     windowWithGtag.gtag('event', 'project_like', {
+        //       project_title: projectTitle,
+        //       project_id: projectId,
+        //       like_status: result.liked ? 'liked' : 'unliked',
+        //       total_likes: updatedStats?.totalLikes || 0
+        //     })
+        //   }
+        // }
 
         // Show toast notification
         showToast(result.liked ? t('projectLike.liked') : t('projectLike.unliked'))
@@ -140,17 +136,17 @@ const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
       const updatedStats = await getProjectStats(projectId)
       setStats(updatedStats)
 
-      // Analytics tracking
-      if (typeof window !== 'undefined') {
-        const windowWithGtag = window as unknown as WindowWithGtag
-        if (windowWithGtag.gtag) {
-          windowWithGtag.gtag('event', 'project_dislike', {
-            project_title: projectTitle,
-            project_id: projectId,
-            dislike_status: isDisliked ? 'removed' : 'disliked'
-          })
-        }
-      }
+      // Analytics tracking (optional - can be removed)
+      // if (typeof window !== 'undefined') {
+      //   const windowWithGtag = window as unknown as WindowWithGtag
+      //   if (windowWithGtag.gtag) {
+      //     windowWithGtag.gtag('event', 'project_dislike', {
+      //       project_title: projectTitle,
+      //       project_id: projectId,
+      //       dislike_status: isDisliked ? 'removed' : 'disliked'
+      //     })
+      //   }
+      // }
     } catch (error) {
       console.error('Error toggling dislike:', error)
       showToast(t('projectLike.error'))

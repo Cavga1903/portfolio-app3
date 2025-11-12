@@ -47,7 +47,7 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ onToggleDebugPanel, showDebug
     <>
       {isVisible && (
         <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-3">
-          {/* Firebase Debug Panel Butonu - Sadece development modunda */}
+          {/* LocalStorage Debug Panel Butonu - Sadece development modunda */}
           {process.env.NODE_ENV === 'development' && (
             <button
               onClick={toggleDebugPanel}
@@ -56,8 +56,8 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ onToggleDebugPanel, showDebug
                   ? 'bg-green-600 hover:bg-green-700 focus:ring-green-500' 
                   : 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500'
               }`}
-              aria-label="Firebase Debug Panel"
-              title="Firebase Debug Panel"
+              aria-label="LocalStorage Debug Panel"
+              title="LocalStorage Debug Panel"
             >
               <FaBug className="text-xl group-hover:animate-pulse" />
             </button>

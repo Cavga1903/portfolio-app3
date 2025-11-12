@@ -121,7 +121,7 @@ const Home: React.FC = () => {
           showDebugPanel={showDebugPanel}
         />
         
-        {/* Firebase Debug Panel - Only in development */}
+        {/* LocalStorage Debug Panel - Only in development */}
         {process.env.NODE_ENV === 'development' && showDebugPanel && (
           <Suspense fallback={null}>
             <FirebaseDebug 

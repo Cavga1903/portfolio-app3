@@ -1,8 +1,7 @@
 import React, { useState, FormEvent, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import emailjs from '@emailjs/browser';
 import { useAnalytics } from '../hooks/useAnalytics';
-import { VALIDATION, TIMING, EMAILJS_FALLBACK } from '../utils/constants';
+import { VALIDATION, TIMING } from '../utils/constants';
 import { getValidationError, validateCaptcha } from '../utils/validation';
 import { generateCaptcha, type CaptchaChallenge } from '../utils/captcha';
 
@@ -99,11 +98,6 @@ const Contact: React.FC = () => {
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
-      // EmailJS ile e-posta gönder
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || EMAILJS_FALLBACK.SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || EMAILJS_FALLBACK.TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || EMAILJS_FALLBACK.PUBLIC_KEY;
-
       // Dil bilgisini al
       const languageNames: { [key: string]: string } = {
         'tr': 'Türkçe 🇹🇷',
@@ -112,22 +106,31 @@ const Contact: React.FC = () => {
         'az': 'Azərbaycan Türkcəsi 🇦🇿'
       };
       const currentLanguage = languageNames[i18n.language.split('-')[0]] || i18n.language;
-
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: formData.name.trim(),
-          from_email: formData.email.trim(),
+      
+      // Backend API endpoint
+      const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'http://localhost:3001/api/contact';
+      
+      // Backend API'ye istek gönder
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
           message: formData.message.trim(),
           language: currentLanguage,
-          time: new Date().toLocaleString('tr-TR', { 
-            dateStyle: 'full', 
-            timeStyle: 'short' 
-          }),
-        },
-        publicKey
-      );
+          captchaAnswer: formData.captchaAnswer,
+          captchaQuestion: captcha?.question,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send email');
+      }
 
       setStatus('success');
       trackContactSubmission(formData);
@@ -140,18 +143,12 @@ const Contact: React.FC = () => {
       // Success mesajını kaldır
       setTimeout(() => setStatus('idle'), TIMING.SUCCESS_MESSAGE_DURATION);
     } catch (error: unknown) {
-      console.error('Email send error:', error);
+      console.error('Error sending email:', error);
       setStatus('error');
       
       // More detailed error handling
-      if (error && typeof error === 'object') {
-        if ('text' in error && typeof error.text === 'string') {
-          setErrorMessage(error.text);
-        } else if ('message' in error && typeof error.message === 'string') {
-          setErrorMessage(error.message);
-        } else {
-          setErrorMessage(t('contact.form.error'));
-        }
+      if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string') {
+        setErrorMessage(error.message);
       } else {
         setErrorMessage(t('contact.form.error'));
       }

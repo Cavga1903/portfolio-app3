@@ -7,7 +7,7 @@ import {
   generateUserId,
   ProjectLike,
   ProjectStats
-} from '../lib/firebase'
+} from '../lib/localStorage'
 
 interface FirebaseDebugProps {
   isVisible?: boolean;
@@ -40,8 +40,8 @@ const FirebaseDebug: React.FC<FirebaseDebugProps> = ({ isVisible: externalVisibl
       const userLikesData = await getUserLikeHistory(currentUserId)
       setUserLikes(userLikesData)
 
-      // Load project stats for all projects
-      const projectIds = ['portfolio', 'workshop', 'iot-simulator', 'ecommerce', 'weather', 'todo', 'blog', 'chat', 'crypto', 'social', 'fitness']
+      // Load project stats for all projects (only active projects)
+      const projectIds = ['kişisel-portfolio', 'workshop-tracker']
       const statsPromises = projectIds.map(id => getProjectStats(id))
       const stats = await Promise.all(statsPromises)
       setProjectStats(stats.filter(Boolean) as ProjectStats[])
@@ -61,9 +61,14 @@ const FirebaseDebug: React.FC<FirebaseDebugProps> = ({ isVisible: externalVisibl
     }
   }
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: string | Date | undefined) => {
     if (!date) return 'N/A'
-    return new Date(date.seconds ? date.seconds * 1000 : date).toLocaleString()
+    try {
+      const dateObj = typeof date === 'string' ? new Date(date) : date
+      return dateObj.toLocaleString()
+    } catch (e) {
+      return 'N/A'
+    }
   }
 
   // Only show in development
@@ -79,7 +84,7 @@ const FirebaseDebug: React.FC<FirebaseDebugProps> = ({ isVisible: externalVisibl
   return (
     <div className="fixed bottom-4 right-4 bg-black/90 text-white p-4 rounded-lg max-w-md max-h-96 overflow-y-auto text-xs z-50">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="font-bold text-green-400">🔥 Firebase Debug Panel</h3>
+        <h3 className="font-bold text-green-400">💾 LocalStorage Debug Panel</h3>
         <button
           onClick={() => {
             if (onClose) {
@@ -140,17 +145,8 @@ const FirebaseDebug: React.FC<FirebaseDebugProps> = ({ isVisible: externalVisibl
           className="w-full bg-gray-800 text-white p-1 rounded text-xs mb-2"
         >
           <option value="">Select Project</option>
-          <option value="portfolio">Portfolio</option>
-          <option value="workshop">Workshop Tracker</option>
-          <option value="iot-simulator">IoT Simulator</option>
-          <option value="ecommerce">E-commerce</option>
-          <option value="weather">Weather App</option>
-          <option value="todo">Todo App</option>
-          <option value="blog">Blog Platform</option>
-          <option value="chat">Chat App</option>
-          <option value="crypto">Crypto Tracker</option>
-          <option value="social">Social Media</option>
-          <option value="fitness">Fitness App</option>
+          <option value="kişisel-portfolio">Kişisel Portfolio</option>
+          <option value="workshop-tracker">Workshop Tracker</option>
         </select>
         
         {projectLikes.length > 0 && (

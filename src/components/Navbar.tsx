@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaGlobe } from "react-icons/fa";
+import { FaGlobe, FaGithub, FaUser, FaMoon, FaSun } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "../hooks/useAnalytics";
 
@@ -11,21 +11,47 @@ type NavLink = {
 
 const navLinks: NavLink[] = [
   { id: "hero", labelKey: "nav.home" },
-  { id: "about", labelKey: "nav.about" },
-  { id: "technologies", labelKey: "nav.technologies" },
-  { id: "services", labelKey: "nav.services" },
   { id: "projects", labelKey: "nav.projects" },
   { id: "contact", labelKey: "nav.contact" },
+  { id: "blog", labelKey: "nav.blog" },
 ];
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const { t, i18n } = useTranslation();
   const { trackClick, trackLanguageChange } = useAnalytics();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleLangMenu = () => setIsLangMenuOpen((prev) => !prev);
+
+  // Dark mode toggle
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    if (newMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
+  // Check initial theme
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    
+    setIsDarkMode(shouldBeDark);
+    if (shouldBeDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   // Smooth scroll function
   const smoothScrollTo = (elementId: string) => {
@@ -57,38 +83,85 @@ const Navbar: React.FC = () => {
   const currentLanguage =
     languages.find((lang) => lang.code === normalizedLang) || languages[1]; // Fallback: English
 
+  // Get language flag emoji
+  const getLanguageFlag = (code: string) => {
+    const flags: { [key: string]: string } = {
+      'en': '🇺🇸',
+      'tr': '🇹🇷',
+      'de': '🇩🇪',
+      'az': '🇦🇿'
+    };
+    return flags[code] || '🌐';
+  };
+
   return (
-    <nav className="bg-white dark:bg-gray-900 relative z-50 shadow-md border-b border-gray-200 dark:border-gray-700 w-full">
-      <div className="w-full px-4 py-3">
+    <nav className="bg-gray-800/90 backdrop-blur-sm relative z-50 border-b border-gray-700/50 w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Left Side */}
           <a
             href="#hero"
-            className="flex items-center text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group logo-text"
+            className="flex items-center gap-2 text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 group"
             onClick={(e) => {
               e.preventDefault();
               smoothScrollTo("hero");
               trackClick("nav_hero", "navigation_link", "Tolga Çavga");
             }}
           >
-            <img
-              src="/tabLogo.svg"
-              alt={t('common.developerLogo')}
-              className="w-20 h-20 ml-2 align-middle group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 hidden dark:block"
-            />
-            {t('common.name')}
-            {/* <span className="text-blue-600 dark:text-white font-bold hover:text-blue-600 dark:hover:text-blue-400">
-              Çavga
-            </span> */}
+            <span className="text-xl font-mono">{"</>"}</span>
+            <span className="text-lg font-medium">cavga.dev</span>
           </a>
 
-          {/* Desktop Menu - Center */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-8">
+          {/* Desktop Menu - Right Side */}
+          <div className="hidden lg:flex lg:items-center lg:gap-4">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? (
+                <FaSun className="w-5 h-5" />
+              ) : (
+                <FaMoon className="w-5 h-5" />
+              )}
+            </button>
+
+            {/* Language Selector */}
+            <button
+              onClick={toggleLangMenu}
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
+              aria-label="Change language"
+            >
+              <span className="text-lg">{getLanguageFlag(currentLanguage.code)}</span>
+              {isLangMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-50">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => changeLanguage(lang.code)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors ${
+                        i18n.language === lang.code
+                          ? "bg-gray-700"
+                          : ""
+                      } first:rounded-t-lg last:rounded-b-lg`}
+                    >
+                      <span className="text-lg">{getLanguageFlag(lang.code)}</span>
+                      <span className="text-sm font-medium text-gray-300">
+                        {lang.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </button>
+
+            {/* Navigation Links */}
             {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className="text-lg text-gray-800 dark:text-white hover:text-blue-700 dark:hover:text-blue-400 cursor-pointer transition-all duration-300 relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
+                className="text-sm text-gray-300 hover:text-white cursor-pointer transition-all duration-300 relative group px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
                 onClick={(e) => {
                   e.preventDefault();
                   smoothScrollTo(link.id);
@@ -100,72 +173,90 @@ const Navbar: React.FC = () => {
                 }}
               >
                 {t(link.labelKey)}
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-700 dark:bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
+
+            {/* GitHub Icon */}
+            <a
+              href="https://github.com/Cavga1903"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="GitHub"
+              onClick={() => trackClick('github', 'social_link', 'GitHub')}
+            >
+              <FaGithub className="w-5 h-5" />
+            </a>
+
+            {/* Profile Icon */}
+            <button
+              className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Profile"
+            >
+              <FaUser className="w-4 h-4 text-white" />
+            </button>
           </div>
 
-          {/* Right Side - Desktop Language + Mobile Controls */}
-          <div className="flex items-center gap-3">
-            {/* Desktop Language Selector */}
-            <div className="hidden lg:block relative">
-              <button
-                onClick={toggleLangMenu}
-                className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                <FaGlobe className="text-lg" />
-                <span className="text-sm font-medium">
-                  {currentLanguage.code.toUpperCase()}
-                </span>
-              </button>
+          {/* Mobile Controls */}
+          <div className="flex items-center gap-2 lg:hidden">
+            {/* Dark Mode Toggle - Mobile */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? (
+                <FaSun className="w-5 h-5" />
+              ) : (
+                <FaMoon className="w-5 h-5" />
+              )}
+            </button>
 
+            {/* Language Selector - Mobile */}
+            <button
+              onClick={toggleLangMenu}
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
+              aria-label="Change language"
+            >
+              <span className="text-lg">{getLanguageFlag(currentLanguage.code)}</span>
               {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
+                <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-50">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => changeLanguage(lang.code)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors ${
                         i18n.language === lang.code
-                          ? "bg-blue-50 dark:bg-gray-700"
+                          ? "bg-gray-700"
                           : ""
                       } first:rounded-t-lg last:rounded-b-lg`}
                     >
-                      <span className="font-medium text-gray-800 dark:text-white">
+                      <span className="text-lg">{getLanguageFlag(lang.code)}</span>
+                      <span className="text-sm font-medium text-gray-300">
                         {lang.name}
                       </span>
                     </button>
                   ))}
                 </div>
               )}
-            </div>
+            </button>
 
-            {/* Mobile - Language & Hamburger */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <button
-                onClick={toggleLangMenu}
-                className="px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                aria-label="Change language"
-              >
-                <FaGlobe className="inline mr-1" />
-                {currentLanguage.code.toUpperCase()}
-              </button>
-
-              <button
-                onClick={toggleMenu}
-                type="button"
-                className="p-2 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hamburger-button"
-                aria-controls="mobile-menu"
-                aria-expanded={isMenuOpen}
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? (
-                  <HiX className="w-6 h-6" />
-                ) : (
-                  <HiMenu className="w-6 h-6" />
-                )}
-              </button>
-            </div>
+            {/* Hamburger Menu - Mobile */}
+            <button
+              onClick={toggleMenu}
+              type="button"
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-controls="mobile-menu"
+              aria-expanded={isMenuOpen}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <HiX className="w-6 h-6" />
+              ) : (
+                <HiMenu className="w-6 h-6" />
+              )}
+            </button>
           </div>
         </div>
 

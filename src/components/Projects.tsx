@@ -138,141 +138,6 @@ const Projects: React.FC = () => {
       features: t('projects.items.workshop.features', { returnObjects: true }) as string[],
       duration: t('projects.items.workshop.duration'),
       role: t('projects.items.workshop.role')
-    },
-    // 3. IoT Cihaz Simülatörü
-    {
-      title: t('projects.items.iot.title'),
-      description: t('projects.items.iot.description'),
-      technologies: ["Node.js", "Express", "Docker", "Canvas", "QRCode"],
-      github: "https://github.com/Cavga1903/iot-simulator",
-      link: "https://iot-simulator-kqi7.onrender.com",
-      imageGradient: "from-blue-500 to-cyan-600",
-      longDescription: t('projects.items.iot.longDescription'),
-      features: t('projects.items.iot.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.iot.duration'),
-      role: t('projects.items.iot.role')
-    },
-    // 4. Furniro E-commerce
-    {
-      title: t('projects.items.furniro.title'),
-      description: t('projects.items.furniro.description'),
-      technologies: ["React", "JavaScript", "E-commerce", "Furniture"],
-      github: "https://github.com/Cavga1903/eCommerce-WebsiteOdev4",
-      link: "https://cavga1903.github.io/eCommerce-WebsiteOdev4/",
-      imageGradient: "from-red-500 to-pink-600",
-      longDescription: t('projects.items.furniro.longDescription'),
-      features: t('projects.items.furniro.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.furniro.duration'),
-      role: t('projects.items.furniro.role')
-    },
-    // 5. CV Hazırlama
-    {
-      title: t('projects.items.cvPreparation.title'),
-      description: t('projects.items.cvPreparation.description'),
-      technologies: ["React", "JavaScript", "CV Builder", "PDF Generation"],
-      github: "https://github.com/Cavga1903/cvPreparationApp",
-      link: "https://cavga1903.github.io/cvPreparationApp/",
-      imageGradient: "from-teal-500 to-cyan-600",
-      longDescription: t('projects.items.cvPreparation.longDescription'),
-      features: t('projects.items.cvPreparation.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.cvPreparation.duration'),
-      role: t('projects.items.cvPreparation.role')
-    },
-    // 6. Online Grocery
-    {
-      title: t('projects.items.grocery.title'),
-      description: t('projects.items.grocery.description'),
-      technologies: ["React", "JavaScript", "E-commerce", "Grocery"],
-      github: "https://github.com/Cavga1903/online-grocery-app",
-      link: "https://cavga1903.github.io/online-grocery-app/",
-      imageGradient: "from-orange-500 to-yellow-600",
-      longDescription: t('projects.items.grocery.longDescription'),
-      features: t('projects.items.grocery.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.grocery.duration'),
-      role: t('projects.items.grocery.role')
-    },
-    // 7. Todo App
-    {
-      title: t('projects.items.todo.title'),
-      description: t('projects.items.todo.description'),
-      technologies: ["React", "JavaScript", "Local Storage", "CRUD"],
-      github: "https://github.com/Cavga1903/todo-app-ins",
-      link: "https://cavga1903.github.io/todo-app-ins/",
-      imageGradient: "from-indigo-500 to-purple-600",
-      longDescription: t('projects.items.todo.longDescription'),
-      features: t('projects.items.todo.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.todo.duration'),
-      role: t('projects.items.todo.role')
-    },
-    // 8. Product Manager
-    {
-      title: t('projects.items.productManager.title'),
-      description: t('projects.items.productManager.description'),
-      technologies: ["React", "Supabase", "Database", "CRUD"],
-      github: "https://github.com/Cavga1903/react-supabase-product-manager",
-      link: "https://react-supabase-product-manager.vercel.app/login",
-      imageGradient: "from-emerald-500 to-green-600",
-      longDescription: t('projects.items.productManager.longDescription'),
-      features: t('projects.items.productManager.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.productManager.duration'),
-      role: t('projects.items.productManager.role')
-    },
-    // 9. Payment Form
-    {
-      title: t('projects.items.payment.title'),
-      description: t('projects.items.payment.description'),
-      technologies: ["React", "JavaScript", "Payment", "Form Validation"],
-      github: "https://github.com/Cavga1903/odeme-formu",
-      link: "https://cavga1903.github.io/odeme-formu/",
-      imageGradient: "from-rose-500 to-pink-600",
-      longDescription: "Ödeme formu uygulaması. Form validasyonu ve güvenli ödeme işlemleri.",
-      features: [
-        "Form validasyonu",
-        "Güvenli ödeme",
-        "Responsive tasarım",
-        "Error handling"
-      ],
-      duration: "1 hafta",
-      role: "Frontend Developer"
-    },
-    // 10. Global Identity
-    {
-      title: t('projects.items.globalIdentity.title'),
-      description: t('projects.items.globalIdentity.description'),
-      technologies: ["React", "JavaScript", "Identity", "Management"],
-      github: "https://github.com/Cavga1903/global-identity-9",
-      link: "https://cavga1903.github.io/global-identity-9/",
-      imageGradient: "from-violet-500 to-purple-600",
-      longDescription: t('projects.items.globalIdentity.longDescription'),
-      features: t('projects.items.globalIdentity.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.globalIdentity.duration'),
-      role: t('projects.items.globalIdentity.role')
-    },
-    // 11. Exchange Screen
-    {
-      title: t('projects.items.exchange.title'),
-      description: t('projects.items.exchange.description'),
-      technologies: ["React", "JavaScript", "Exchange", "Trading"],
-      github: "https://github.com/Cavga1903/exchangeScreenOdev3",
-      link: "https://cavga1903.github.io/exchangeScreenOdev3/",
-      imageGradient: "from-amber-500 to-orange-600",
-      longDescription: t('projects.items.exchange.longDescription'),
-      features: t('projects.items.exchange.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.exchange.duration'),
-      role: t('projects.items.exchange.role')
-    },
-    // 12. Dashboard
-    {
-      title: t('projects.items.dashboard.title'),
-      description: t('projects.items.dashboard.description'),
-      technologies: ["React", "JavaScript", "Dashboard", "Analytics"],
-      github: "https://github.com/Cavga1903/dashboardOdev2",
-      link: "https://cavga1903.github.io/dashboardOdev2/",
-      imageGradient: "from-slate-500 to-gray-600",
-      longDescription: t('projects.items.dashboard.longDescription'),
-      features: t('projects.items.dashboard.features', { returnObjects: true }) as string[],
-      duration: t('projects.items.dashboard.duration'),
-      role: t('projects.items.dashboard.role')
     }
   ];
 
@@ -369,9 +234,12 @@ const Projects: React.FC = () => {
   // Get visible projects
   const getVisibleProjects = () => {
     const visible = [];
-    for (let i = 0; i < projectCount; i++) {
-      const index = (currentIndex + i) % projects.length;
-      visible.push({ ...projects[index], index });
+    const maxVisible = Math.min(projectCount, projects.length);
+    for (let i = 0; i < maxVisible; i++) {
+      const index = currentIndex + i;
+      if (index < projects.length) {
+        visible.push({ ...projects[index], index });
+      }
     }
     return visible;
   };
@@ -391,28 +259,32 @@ const Projects: React.FC = () => {
         {/* Carousel Container */}
         <div className="relative px-16">
           {/* Navigation Arrows - Inside container for better visibility */}
-          <button
-            onClick={() => { setSlideDirection(-1); prevSlide(); }}
-            className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
-            aria-label="Previous projects"
-          >
-            <FaChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-          </button>
+          {projects.length > projectCount && (
+            <>
+              <button
+                onClick={() => { setSlideDirection(-1); prevSlide(); }}
+                className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
+                aria-label="Previous projects"
+              >
+                <FaChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+              </button>
 
-          <button
-            onClick={() => { setSlideDirection(1); nextSlide(); }}
-            className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
-            aria-label="Next projects"
-          >
-            <FaChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-          </button>
+              <button
+                onClick={() => { setSlideDirection(1); nextSlide(); }}
+                className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-2xl items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/50 hover:to-purple-500/50 transition-all duration-300 group"
+                aria-label="Next projects"
+              >
+                <FaChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+              </button>
+            </>
+          )}
 
           {/* Projects Grid */}
           <motion.div
             ref={carouselRef}
             className={"grid gap-8 items-stretch transition-all duration-500 ease-in-out select-none"}
             style={{
-              gridTemplateColumns: `repeat(${projectCount}, 1fr)`
+              gridTemplateColumns: `repeat(${Math.min(projectCount, projects.length)}, 1fr)`
             }}
             custom={slideDirection}
             variants={gridVariants}
@@ -524,23 +396,25 @@ const Projects: React.FC = () => {
           </div>
 
           {/* Mobile Navigation Arrows */}
-          <div className="flex lg:hidden justify-center mt-6 space-x-4">
-            <button
-              onClick={() => { setSlideDirection(-1); prevSlide(); }}
-              className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
-              aria-label="Previous projects"
-            >
-              <FaChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-            </button>
+          {projects.length > projectCount && (
+            <div className="flex lg:hidden justify-center mt-6 space-x-4">
+              <button
+                onClick={() => { setSlideDirection(-1); prevSlide(); }}
+                className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
+                aria-label="Previous projects"
+              >
+                <FaChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+              </button>
 
-            <button
-              onClick={() => { setSlideDirection(1); nextSlide(); }}
-              className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
-              aria-label="Next projects"
-            >
-              <FaChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-            </button>
-          </div>
+              <button
+                onClick={() => { setSlideDirection(1); nextSlide(); }}
+                className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-white/30 rounded-full shadow-lg items-center justify-center text-white hover:text-blue-300 hover:scale-110 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300 group flex"
+                aria-label="Next projects"
+              >
+                <FaChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Auto-play disabled - users can manually navigate */}
