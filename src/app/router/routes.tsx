@@ -34,7 +34,7 @@ export const routes = [
   {
     path: '/admin',
     element: (
-      <PrivateRoute requiredRole="admin">
+      <PrivateRoute>
         <AdminBlogManagement />
       </PrivateRoute>
     ),
@@ -52,7 +52,7 @@ export const routes = [
   {
     path: '/admin/blog',
     element: (
-      <PrivateRoute requiredRole="admin">
+      <PrivateRoute>
         <AdminBlogManagement />
       </PrivateRoute>
     ),

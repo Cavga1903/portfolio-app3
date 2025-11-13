@@ -473,39 +473,37 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                         <span>{t('nav.blog') || 'Blog'}</span>
                       </a>
                       
+                      <div className="px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-t border-gray-200 dark:border-gray-700 mt-1 pt-2">
+                        {t('nav.admin') || 'Admin'}
+                      </div>
                       {user?.role === 'admin' && (
-                        <>
-                          <div className="px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-t border-gray-200 dark:border-gray-700 mt-1 pt-2">
-                            {t('nav.admin') || 'Admin'}
-                          </div>
-                          <a
-                            href="/admin/dashboard"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsProfileDropdownOpen(false);
-                              navigate('/admin/dashboard');
-                              trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
-                            }}
-                            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
-                          >
-                            <FaChartLine className="w-4 h-4" />
-                            <span>{t('nav.dashboard') || 'Dashboard'}</span>
-                          </a>
-                          <a
-                            href="/admin"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsProfileDropdownOpen(false);
-                              navigate('/admin');
-                              trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
-                            }}
-                            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
-                          >
-                            <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.blogManagement') || 'Blog Management'}</span>
-                          </a>
-                        </>
+                        <a
+                          href="/admin/dashboard"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setIsProfileDropdownOpen(false);
+                            navigate('/admin/dashboard');
+                            trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
+                          }}
+                          className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                        >
+                          <FaChartLine className="w-4 h-4" />
+                          <span>{t('nav.dashboard') || 'Dashboard'}</span>
+                        </a>
                       )}
+                      <a
+                        href="/admin"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setIsProfileDropdownOpen(false);
+                          navigate('/admin');
+                          trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
+                        }}
+                        className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                      >
+                        <FaBlog className="w-4 h-4" />
+                        <span>{t('nav.blogManagement') || 'Blog Management'}</span>
+                      </a>
                     </div>
                     
                     {/* Logout */}
