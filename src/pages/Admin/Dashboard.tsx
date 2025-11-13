@@ -10,7 +10,6 @@ import {
   FaPlus
 } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../lib/firebase/config';
 import Navbar from '../../components/Navbar';
