@@ -20,10 +20,6 @@ export const SUPPORTED_LANGUAGES = [
   { code: 'no', name: 'Norwegian' },
 ];
 
-interface TranslationResult {
-  translatedText: string;
-}
-
 /**
  * Translate text using Google Translate API (free tier via RapidAPI or direct)
  * Note: For production, you should use a backend API to hide your API key

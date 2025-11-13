@@ -11,16 +11,16 @@ interface RelatedPostsProps {
 }
 
 const RelatedPosts: React.FC<RelatedPostsProps> = ({ currentSlug }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const { data: posts } = useQuery<BlogPost[]>({
-    queryKey: ['blogPosts'],
-    queryFn: blogService.getPosts,
+    queryKey: ['blogPosts', 'related', i18n.language],
+    queryFn: () => blogService.getPosts(i18n.language),
   });
 
   const relatedPosts = posts
-    ?.filter((post) => post.slug !== currentSlug)
+    ?.filter((post: BlogPost) => post.slug !== currentSlug)
     .slice(0, 3) || [];
 
   if (relatedPosts.length === 0) {
@@ -33,7 +33,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ currentSlug }) => {
         {t('blog.relatedPosts') || 'Related Posts'}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {relatedPosts.map((post, index) => (
+        {relatedPosts.map((post: BlogPost, index: number) => (
           <motion.article
             key={post.id}
             initial={{ opacity: 0, y: 20 }}
