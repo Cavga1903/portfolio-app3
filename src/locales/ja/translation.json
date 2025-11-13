@@ -497,13 +497,13 @@
         "messageRequired": "Message field is required",
         "messageMinLength": "Message must be at least 10 characters",
         "messageMaxLength": "Message cannot exceed 1000 characters",
-        "recaptchaRequired": "Please complete the reCAPTCHA verification",
-        "recaptchaExpired": "reCAPTCHA verification expired. Please try again.",
-        "recaptchaError": "reCAPTCHA verification failed. Please try again."
+        "recaptchaRequired": "reCAPTCHAの確認を完了してください",
+        "recaptchaExpired": "reCAPTCHAの確認が期限切れです。もう一度お試しください。",
+        "recaptchaError": "reCAPTCHAの確認に失敗しました。もう一度お試しください。"
       },
       "recaptcha": {
-        "label": "Security Verification",
-        "notConfigured": "reCAPTCHA is not configured. Please contact the administrator."
+        "label": "セキュリティ確認",
+        "notConfigured": "reCAPTCHAが設定されていません。管理者にお問い合わせください。"
       },
       "captcha": {
         "label": "Security Verification",

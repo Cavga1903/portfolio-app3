@@ -497,13 +497,13 @@
         "messageRequired": "Message field is required",
         "messageMinLength": "Message must be at least 10 characters",
         "messageMaxLength": "Message cannot exceed 1000 characters",
-        "recaptchaRequired": "Please complete the reCAPTCHA verification",
-        "recaptchaExpired": "reCAPTCHA verification expired. Please try again.",
-        "recaptchaError": "reCAPTCHA verification failed. Please try again."
+        "recaptchaRequired": "Vennligst fullfør reCAPTCHA-verifiseringen",
+        "recaptchaExpired": "reCAPTCHA-verifiseringen har utløpt. Vennligst prøv igjen.",
+        "recaptchaError": "reCAPTCHA-verifiseringen mislyktes. Vennligst prøv igjen."
       },
       "recaptcha": {
-        "label": "Security Verification",
-        "notConfigured": "reCAPTCHA is not configured. Please contact the administrator."
+        "label": "Sikkerhetsverifisering",
+        "notConfigured": "reCAPTCHA er ikke konfigurert. Vennligst kontakt administratoren."
       },
       "captcha": {
         "label": "Security Verification",

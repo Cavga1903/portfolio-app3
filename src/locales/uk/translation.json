@@ -497,13 +497,13 @@
         "messageRequired": "Message field is required",
         "messageMinLength": "Message must be at least 10 characters",
         "messageMaxLength": "Message cannot exceed 1000 characters",
-        "recaptchaRequired": "Please complete the reCAPTCHA verification",
-        "recaptchaExpired": "reCAPTCHA verification expired. Please try again.",
-        "recaptchaError": "reCAPTCHA verification failed. Please try again."
+        "recaptchaRequired": "Будь ласка, завершіть перевірку reCAPTCHA",
+        "recaptchaExpired": "Перевірка reCAPTCHA закінчилася. Будь ласка, спробуйте ще раз.",
+        "recaptchaError": "Перевірка reCAPTCHA не вдалася. Будь ласка, спробуйте ще раз."
       },
       "recaptcha": {
-        "label": "Security Verification",
-        "notConfigured": "reCAPTCHA is not configured. Please contact the administrator."
+        "label": "Перевірка Безпеки",
+        "notConfigured": "reCAPTCHA не налаштовано. Будь ласка, зв'яжіться з адміністратором."
       },
       "captcha": {
         "label": "Security Verification",

@@ -497,13 +497,13 @@
         "messageRequired": "Message field is required",
         "messageMinLength": "Message must be at least 10 characters",
         "messageMaxLength": "Message cannot exceed 1000 characters",
-        "recaptchaRequired": "Please complete the reCAPTCHA verification",
-        "recaptchaExpired": "reCAPTCHA verification expired. Please try again.",
-        "recaptchaError": "reCAPTCHA verification failed. Please try again."
+        "recaptchaRequired": "Si prega di completare la verifica reCAPTCHA",
+        "recaptchaExpired": "La verifica reCAPTCHA è scaduta. Si prega di riprovare.",
+        "recaptchaError": "La verifica reCAPTCHA è fallita. Si prega di riprovare."
       },
       "recaptcha": {
-        "label": "Security Verification",
-        "notConfigured": "reCAPTCHA is not configured. Please contact the administrator."
+        "label": "Verifica di Sicurezza",
+        "notConfigured": "reCAPTCHA non è configurato. Si prega di contattare l'amministratore."
       },
       "captcha": {
         "label": "Security Verification",

@@ -497,13 +497,13 @@
         "messageRequired": "Message field is required",
         "messageMinLength": "Message must be at least 10 characters",
         "messageMaxLength": "Message cannot exceed 1000 characters",
-        "recaptchaRequired": "Please complete the reCAPTCHA verification",
-        "recaptchaExpired": "reCAPTCHA verification expired. Please try again.",
-        "recaptchaError": "reCAPTCHA verification failed. Please try again."
+        "recaptchaRequired": "Παρακαλώ ολοκληρώστε την επαλήθευση reCAPTCHA",
+        "recaptchaExpired": "Η επαλήθευση reCAPTCHA έληξε. Παρακαλώ δοκιμάστε ξανά.",
+        "recaptchaError": "Η επαλήθευση reCAPTCHA απέτυχε. Παρακαλώ δοκιμάστε ξανά."
       },
       "recaptcha": {
-        "label": "Security Verification",
-        "notConfigured": "reCAPTCHA is not configured. Please contact the administrator."
+        "label": "Επαλήθευση Ασφαλείας",
+        "notConfigured": "Το reCAPTCHA δεν έχει ρυθμιστεί. Παρακαλώ επικοινωνήστε με τον διαχειριστή."
       },
       "captcha": {
         "label": "Security Verification",
