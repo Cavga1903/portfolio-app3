@@ -74,6 +74,7 @@ const navLinks: NavLink[] = [
 
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState("hero");
   const { t, i18n } = useTranslation();
@@ -401,15 +402,18 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
             {/* Profile Icon / User Menu */}
             {isAuthenticated ? (
-              <div className="relative group">
+              <div className="relative profile-dropdown-container">
                 <button
+                  onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
                   className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
                   aria-label="Profile"
                 >
                   <FaUser className="w-4 h-4 text-white" />
                 </button>
                 {/* Dropdown Menu */}
-                <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className={`absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-200 z-50 ${
+                  isProfileDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                }`}>
                   <div className="p-2">
                     {/* User Info */}
                     <div className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
@@ -423,8 +427,16 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                         href="/"
                         onClick={(e) => {
                           e.preventDefault();
-                          navigate('/');
-                          setIsMenuOpen(false);
+                          setIsProfileDropdownOpen(false);
+                          if (location.pathname !== '/') {
+                            navigate('/');
+                          } else {
+                            // Scroll to hero section if already on home page
+                            const heroElement = document.getElementById('hero');
+                            if (heroElement) {
+                              heroElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                          }
                           trackClick('nav_home_profile', 'navigation_link', 'Home');
                         }}
                         className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
@@ -437,8 +449,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                         href="/blog"
                         onClick={(e) => {
                           e.preventDefault();
+                          setIsProfileDropdownOpen(false);
                           navigate('/blog');
-                          setIsMenuOpen(false);
                           trackClick('nav_blog_profile', 'navigation_link', 'Blog');
                         }}
                         className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
@@ -451,8 +463,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                         href="/admin"
                         onClick={(e) => {
                           e.preventDefault();
+                          setIsProfileDropdownOpen(false);
                           navigate('/admin');
-                          setIsMenuOpen(false);
                           trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
                         }}
                         className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
@@ -465,9 +477,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                     {/* Logout */}
                     <div className="pt-1 border-t border-gray-200 dark:border-gray-700 mt-1">
                       <button
-                        onClick={() => {
-                          logout();
-                          setIsMenuOpen(false);
+                        onClick={async () => {
+                          setIsProfileDropdownOpen(false);
+                          await logout();
                           navigate('/');
                           trackClick('nav_logout', 'action', 'Logout');
                         }}
