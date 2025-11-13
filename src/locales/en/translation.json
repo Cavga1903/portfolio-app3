@@ -653,7 +653,13 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
-      "welcome": "Welcome back"
+      "welcome": "Welcome back",
+      "recentPosts": "Recent Blog Posts",
+      "viewAll": "View All",
+      "published": "Published",
+      "draft": "Draft",
+      "noPosts": "No blog posts yet",
+      "createFirst": "Create Your First Post"
     },
     "stats": {
       "totalUsers": "Total Users",

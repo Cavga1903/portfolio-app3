@@ -697,7 +697,13 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
-      "welcome": "Hoş geldiniz"
+      "welcome": "Hoş geldiniz",
+      "recentPosts": "Son Blog Postları",
+      "viewAll": "Tümünü Gör",
+      "published": "Yayınlandı",
+      "draft": "Taslak",
+      "noPosts": "Henüz blog post yok",
+      "createFirst": "İlk Postunuzu Oluşturun"
     },
     "stats": {
       "totalUsers": "Toplam Kullanıcı",
