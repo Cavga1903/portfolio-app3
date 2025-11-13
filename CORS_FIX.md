@@ -16,9 +16,16 @@ access control check: Redirect is not allowed for a preflight request.
 
 ## ✅ Çözüm
 
+### 1. Backend CORS Ayarları
 Backend'de CORS ayarları güncellendi:
 - Hem `www.cavga.dev` hem `cavga.dev` için izin veriliyor
 - Development'ta tüm origin'lere izin veriliyor
+
+### 2. Frontend API Endpoint
+Frontend'de API endpoint'i `www` olmadan oluşturuluyor:
+- `www.cavga.dev` → `https://cavga.dev/api/contact`
+- `cavga.dev` → `https://cavga.dev/api/contact`
+- Bu sayede redirect sorunu önleniyor
 
 ## 🔧 Vercel Environment Variables
 
