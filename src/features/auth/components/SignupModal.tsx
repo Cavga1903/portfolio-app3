@@ -113,14 +113,9 @@ export const SignupModal: React.FC<SignupModalProps> = ({
     try {
       await signup(formData.email, formData.password, formData.name);
       onClose();
-      // Redirect based on user role - wait a bit for state to update
+      // Redirect to dashboard after signup
       setTimeout(() => {
-        const currentUser = useAuthStore.getState().user;
-        if (currentUser?.role === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/blog');
-        }
+        navigate('/admin');
       }, 100);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t('auth.signupError') || 'Signup failed';
@@ -361,14 +356,9 @@ export const SignupModal: React.FC<SignupModalProps> = ({
                         try {
                           await loginWithGoogle();
                           onClose();
-                          // Redirect based on user role - wait a bit for state to update
+                          // Redirect to dashboard after signup
                           setTimeout(() => {
-                            const currentUser = useAuthStore.getState().user;
-                            if (currentUser?.role === 'admin') {
-                              navigate('/admin');
-                            } else {
-                              navigate('/blog');
-                            }
+                            navigate('/admin');
                           }, 100);
                         } catch (error) {
                           const errorMessage = error instanceof Error ? error.message : t('auth.googleSignupError') || 'Google sign up failed';

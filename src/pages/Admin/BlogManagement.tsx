@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaPlus, FaSearch } from 'react-icons/fa';
+import Navbar from '../../components/Navbar';
+import { LoginModal, SignupModal } from '../../features/auth';
 
 // Blog management components
 const BlogListAdmin = React.lazy(() => import('../../features/admin/components/BlogManagement/BlogListAdmin'));
@@ -12,6 +14,8 @@ const AdminBlogManagement: React.FC = () => {
   const [showEditor, setShowEditor] = useState(false);
   const [editingPost, setEditingPost] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   const handleCreate = () => {
     setEditingPost(null);
@@ -30,6 +34,7 @@ const AdminBlogManagement: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Navbar onLoginClick={() => setShowLoginModal(true)} />
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -92,6 +97,24 @@ const AdminBlogManagement: React.FC = () => {
           </React.Suspense>
         )}
       </main>
+
+      {/* Auth Modals */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToSignup={() => {
+          setShowLoginModal(false);
+          setShowSignupModal(true);
+        }}
+      />
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={() => setShowSignupModal(false)}
+        onSwitchToLogin={() => {
+          setShowSignupModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </div>
   );
 };

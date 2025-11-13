@@ -244,36 +244,46 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
     handleLinkClick(elementId);
   };
 
-  // Detect active section on scroll
+  // Set active link based on current route
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navLinks.map(link => ({
-        id: link.id,
-        element: document.getElementById(link.id),
-      }));
+    // If on blog page, set blog as active
+    if (location.pathname === '/blog' || location.pathname.startsWith('/blog/')) {
+      setActiveLink('blog');
+      updateUnderline('blog');
+      return;
+    }
+    
+    // If on home page, detect active section on scroll
+    if (location.pathname === '/') {
+      const handleScroll = () => {
+        const sections = navLinks.map(link => ({
+          id: link.id,
+          element: document.getElementById(link.id),
+        }));
 
-      const scrollPosition = window.scrollY + 100; // Offset for navbar height
+        const scrollPosition = window.scrollY + 100; // Offset for navbar height
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section.element) {
-          const { offsetTop, offsetHeight } = section.element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            if (activeLink !== section.id) {
-              setActiveLink(section.id);
-              updateUnderline(section.id);
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = sections[i];
+          if (section.element) {
+            const { offsetTop, offsetHeight } = section.element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              if (activeLink !== section.id) {
+                setActiveLink(section.id);
+                updateUnderline(section.id);
+              }
+              break;
             }
-            break;
           }
         }
-      }
-    };
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+      window.addEventListener("scroll", handleScroll);
+      handleScroll(); // Initial check
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeLink, updateUnderline]);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [activeLink, updateUnderline, location.pathname]);
 
   // Update underline when active link changes
   useEffect(() => {

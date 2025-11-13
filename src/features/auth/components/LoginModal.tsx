@@ -103,14 +103,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     try {
       await login(email, password);
       onClose();
-      // Redirect based on user role - wait a bit for state to update
+      // Redirect to dashboard after login
       setTimeout(() => {
-        const currentUser = useAuthStore.getState().user;
-        if (currentUser?.role === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/blog');
-        }
+        navigate('/admin');
       }, 100);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t('auth.loginError') || 'Login failed';
@@ -287,14 +282,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                         try {
                           await loginWithGoogle();
                           onClose();
-                          // Redirect based on user role - wait a bit for state to update
+                          // Redirect to dashboard after login
                           setTimeout(() => {
-                            const currentUser = useAuthStore.getState().user;
-                            if (currentUser?.role === 'admin') {
-                              navigate('/admin');
-                            } else {
-                              navigate('/blog');
-                            }
+                            navigate('/admin');
                           }, 100);
                         } catch (error) {
                           const errorMessage = error instanceof Error ? error.message : t('auth.googleLoginError') || 'Google sign in failed';

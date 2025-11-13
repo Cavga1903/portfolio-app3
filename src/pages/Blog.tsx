@@ -1,7 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaSearch } from 'react-icons/fa';
+import Navbar from '../components/Navbar';
+import { LoginModal, SignupModal } from '../features/auth';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 // Lazy load blog components
@@ -10,11 +12,14 @@ const BlogFilters = React.lazy(() => import('../features/blog/components/BlogFil
 
 const Blog: React.FC = () => {
   const { t } = useTranslation();
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+      <Navbar onLoginClick={() => setShowLoginModal(true)} />
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
         {/* Background */}
@@ -83,6 +88,24 @@ const Blog: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Auth Modals */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToSignup={() => {
+          setShowLoginModal(false);
+          setShowSignupModal(true);
+        }}
+      />
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={() => setShowSignupModal(false)}
+        onSwitchToLogin={() => {
+          setShowSignupModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </div>
   );
 };

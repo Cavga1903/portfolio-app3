@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -7,6 +7,8 @@ import {
   FaChartLine, 
   FaEye
 } from 'react-icons/fa';
+import Navbar from '../../components/Navbar';
+import { LoginModal, SignupModal } from '../../features/auth';
 import { useAuthStore } from '../../app/store/authStore';
 
 // Dashboard components
@@ -17,6 +19,8 @@ const RecentActivity = React.lazy(() => import('../../features/admin/components/
 const AdminDashboard: React.FC = () => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   const stats = [
     {
@@ -55,6 +59,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Navbar onLoginClick={() => setShowLoginModal(true)} />
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 py-4">
