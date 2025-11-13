@@ -140,15 +140,19 @@ const Navbar: React.FC = () => {
     }
   };
 
-  // Check initial theme
+  // Check initial theme - Default to dark theme
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    // Default to dark theme if no saved theme
+    const shouldBeDark = savedTheme === 'light' ? false : true;
     
     setIsDarkMode(shouldBeDark);
     if (shouldBeDark) {
       document.documentElement.classList.add('dark');
+      // Save dark theme as default if not already saved
+      if (!savedTheme) {
+        localStorage.setItem('theme', 'dark');
+      }
     } else {
       document.documentElement.classList.remove('dark');
     }
