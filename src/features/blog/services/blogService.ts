@@ -84,6 +84,48 @@ export const blogService = {
     }
   },
 
+  // Get all posts including drafts (for admin panel)
+  getAllPosts: async (currentLanguage?: string): Promise<BlogPost[]> => {
+    try {
+      const postsRef = collection(db, 'blogPosts');
+      // Try to order by updatedAt first
+      try {
+        const q = query(
+          postsRef,
+          orderBy('updatedAt', 'desc')
+        );
+        const querySnapshot = await getDocs(q);
+        const posts: BlogPost[] = [];
+        
+        querySnapshot.forEach((docSnapshot) => {
+          posts.push(docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage));
+        });
+        
+        return posts;
+      } catch (orderError) {
+        // If orderBy fails (index doesn't exist), get all and sort manually
+        const querySnapshot = await getDocs(postsRef);
+        const posts: BlogPost[] = [];
+        
+        querySnapshot.forEach((docSnapshot) => {
+          posts.push(docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage));
+        });
+        
+        // Sort manually by updatedAt or publishedAt
+        posts.sort((a, b) => {
+          const dateA = new Date(b.updatedAt || b.publishedAt || 0).getTime();
+          const dateB = new Date(a.updatedAt || a.publishedAt || 0).getTime();
+          return dateA - dateB;
+        });
+        
+        return posts;
+      }
+    } catch (error) {
+      console.error('Error fetching all blog posts:', error);
+      throw error;
+    }
+  },
+
   getPost: async (slug: string, currentLanguage?: string): Promise<BlogPost> => {
     try {
       const postsRef = collection(db, 'blogPosts');

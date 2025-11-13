@@ -30,9 +30,10 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
   const [isSelectionMode, setIsSelectionMode] = useState(false);
 
   const { data: posts, isLoading } = useQuery<BlogPost[]>({
-    queryKey: ['blogPosts', searchQuery],
+    queryKey: ['blogPosts', 'admin', searchQuery],
     queryFn: async () => {
-      const allPosts = await blogService.getPosts();
+      // Admin panelinde tüm postları getir (published + draft)
+      const allPosts = await blogService.getAllPosts();
       if (!searchQuery) return allPosts;
       return allPosts.filter(
         (post) =>
@@ -51,13 +52,23 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
 
   const togglePublishMutation = useMutation({
     mutationFn: async ({ id, isPublished }: { id: string; isPublished: boolean }) => {
-      return blogService.updatePost(id, { 
+      const updateData: Partial<BlogPost> = {
         isPublished: !isPublished,
-        ...(isPublished ? {} : { publishedAt: new Date().toISOString() })
-      });
+      };
+      
+      // If publishing, set publishedAt date
+      if (isPublished === false) {
+        updateData.publishedAt = new Date().toISOString();
+      }
+      // If unpublishing, keep publishedAt but mark as draft
+      // (We don't delete publishedAt to keep history)
+      
+      return blogService.updatePost(id, updateData);
     },
     onSuccess: () => {
+      // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
     },
   });
 
@@ -66,7 +77,9 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
       return blogService.updatePost(id, { isBookmarked: !isBookmarked });
     },
     onSuccess: () => {
+      // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
     },
   });
 
@@ -75,7 +88,9 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
       return blogService.updatePost(id, { isFavorited: !isFavorited });
     },
     onSuccess: () => {
+      // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
     },
   });
 
@@ -84,7 +99,9 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
       return blogService.updatePost(id, { isArchived: !isArchived });
     },
     onSuccess: () => {
+      // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
     },
   });
 
