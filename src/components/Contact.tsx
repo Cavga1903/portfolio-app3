@@ -11,11 +11,15 @@ interface FormErrors {
   recaptcha: string;
 }
 
-// Google reCAPTCHA v3 window interface
+// Google reCAPTCHA Enterprise window interface
 interface WindowWithRecaptcha extends Window {
   grecaptcha?: {
-    ready: (callback: () => void) => void;
-    execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    enterprise?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+    ready?: (callback: () => void) => void;
+    execute?: (siteKey: string, options: { action: string }) => Promise<string>;
   };
 }
 
@@ -39,21 +43,22 @@ const Contact: React.FC = () => {
 
   const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
-  // Load reCAPTCHA v3 script dynamically
+  // Load reCAPTCHA Enterprise script dynamically
   useEffect(() => {
     if (!RECAPTCHA_SITE_KEY) {
       console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
       return;
     }
 
-    // Check if script is already loaded
-    if (document.querySelector(`script[src*="recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}"]`)) {
+    // Check if script is already loaded (Enterprise or regular)
+    if (document.querySelector(`script[src*="recaptcha/enterprise.js?render=${RECAPTCHA_SITE_KEY}"]`) ||
+        document.querySelector(`script[src*="recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}"]`)) {
       return;
     }
 
-    // Load reCAPTCHA v3 script
+    // Load reCAPTCHA Enterprise script
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.src = `https://www.google.com/recaptcha/enterprise.js?render=${RECAPTCHA_SITE_KEY}`;
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
@@ -123,24 +128,43 @@ const Contact: React.FC = () => {
           await new Promise(resolve => setTimeout(resolve, 1000));
         }
 
-        if (windowWithRecaptcha.grecaptcha) {
+        // Try Enterprise first, fallback to regular
+        const grecaptcha = windowWithRecaptcha.grecaptcha;
+        const enterprise = grecaptcha?.enterprise;
+        const isEnterprise = !!enterprise;
+        
+        if (grecaptcha && (enterprise || grecaptcha.execute)) {
           try {
             // Use ready() to ensure reCAPTCHA is fully loaded
             await new Promise<void>((resolve, reject) => {
-              windowWithRecaptcha.grecaptcha!.ready(() => {
+              const readyFn = isEnterprise 
+                ? enterprise!.ready.bind(enterprise)
+                : grecaptcha.ready!.bind(grecaptcha);
+              
+              readyFn(() => {
                 resolve();
               });
               // Timeout after 5 seconds
               setTimeout(() => {
-                if (!windowWithRecaptcha.grecaptcha) {
+                if (!grecaptcha) {
                   reject(new Error('reCAPTCHA failed to load'));
                 }
               }, 5000);
             });
 
-            recaptchaToken = await windowWithRecaptcha.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
-              action: 'contact_form_submit'
-            });
+            // Use Enterprise API if available, otherwise regular API
+            if (isEnterprise && enterprise.execute) {
+              recaptchaToken = await enterprise.execute(RECAPTCHA_SITE_KEY, {
+                action: 'contact_form_submit'
+              });
+            } else if (grecaptcha.execute) {
+              recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, {
+                action: 'contact_form_submit'
+              });
+            } else {
+              throw new Error('reCAPTCHA execute method not available');
+            }
+            
             console.log('✅ reCAPTCHA token alındı:', recaptchaToken.substring(0, 20) + '...');
           } catch (recaptchaError) {
             console.error('reCAPTCHA error:', recaptchaError);

@@ -26,9 +26,36 @@ const ContactEmail = require('./templates/ContactEmail');
 const app = express();
 
 // Middleware
+// CORS configuration - hem www hem www olmayan domain'leri destekle
+const allowedOrigins = process.env.ALLOWED_ORIGIN 
+  ? process.env.ALLOWED_ORIGIN.split(',').map(origin => origin.trim())
+  : ['https://www.cavga.dev', 'https://cavga.dev', 'http://localhost:5173', 'http://localhost:3000'];
+
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGIN || '*', // Production'da spesifik domain kullanın
-  credentials: true
+  origin: function (origin, callback) {
+    // Origin yoksa (mobile app, Postman, vb.) izin ver
+    if (!origin) return callback(null, true);
+    
+    // ALLOWED_ORIGIN='*' ise tüm origin'lere izin ver
+    if (process.env.ALLOWED_ORIGIN === '*') {
+      return callback(null, true);
+    }
+    
+    // Allowed origins listesinde var mı kontrol et
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      // Development'ta tüm origin'lere izin ver
+      if (process.env.NODE_ENV !== 'production') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 
@@ -69,15 +96,6 @@ const createTransporter = () => {
 app.post('/api/contact', limiter, async (req, res) => {
   try {
     const { name, email, message, language, recaptchaToken } = req.body;
-    
-    // Debug: Log received data (without sensitive info)
-    console.log('Contact form submission:', {
-      name: name ? 'provided' : 'missing',
-      email: email ? 'provided' : 'missing',
-      message: message ? `length: ${message.length}` : 'missing',
-      language: language || 'not provided',
-      recaptchaToken: recaptchaToken ? `provided (${recaptchaToken.substring(0, 20)}...)` : 'missing'
-    });
     
     // Debug: Log received data (without sensitive info)
     console.log('Contact form submission:', {
