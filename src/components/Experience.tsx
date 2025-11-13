@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaBriefcase, FaGraduationCap, FaMapMarkerAlt, FaCalendarAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 
 interface TimelineItem {
   type: 'work' | 'education';
@@ -17,7 +17,16 @@ interface TimelineItem {
 
 const Experience: React.FC = () => {
   const { t } = useTranslation();
-  const [showAll, setShowAll] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  // Scroll animasyonu - Hero'daki gibi ama ters (scroll yapıldıkça görünür)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [50, 0, 0, -50]);
 
   const experiences: TimelineItem[] = [
     {
@@ -99,99 +108,51 @@ const Experience: React.FC = () => {
     }
   ];
 
-  // İlk deneyim tam görünsün, "Daha Fazla Göster"e basmadan ikincisi görünmesin
-  const visibleExperiences = showAll ? experiences : experiences.slice(0, 1);
-  const hasMore = experiences.length > 1;
 
   return (
-    <section id="experience" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
+    <section 
+      ref={sectionRef}
+      id="experience" 
+      className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden"
+    >
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/3 right-20 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-12 text-center fade-in-up inline-block group">
-        {t('experience.title')}
-        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-emerald-400 group-hover:w-full transition-all duration-500"></span>
-      </h2>
+      <motion.div
+        style={{ opacity, y }}
+        className="relative z-10 w-full max-w-4xl"
+      >
+        <h2 className="relative z-10 text-3xl md:text-4xl font-bold mb-12 text-center fade-in-up inline-block group">
+          {t('experience.title')}
+          <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-emerald-400 group-hover:w-full transition-all duration-500"></span>
+        </h2>
 
-      <div className="relative z-10 w-full max-w-4xl">
         {/* Timeline */}
-        <motion.div 
-          className="relative"
-          layout
-          transition={{ 
-            type: "spring",
-            stiffness: 100,
-            damping: 20,
-            mass: 0.5
-          }}
-        >
+        <div className="relative">
           {/* Center line */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 via-teal-500 to-cyan-500 opacity-30 z-10"></div>
 
           {/* Timeline items */}
-          <AnimatePresence mode="popLayout" initial={false}>
-            {visibleExperiences.map((item, index) => {
-              // İlk deneyim (index 0) her zaman görünür, animasyon yok
-              // Yeni eklenen deneyimler (index > 0) aşağıdan kayarak gelir
-              const isNewItem = index > 0;
-              
-              return (
+          {experiences.map((item, index) => {
+            return (
               <motion.div
                 key={`${item.company}-${item.period}`}
-                layout
-                initial={isNewItem ? { 
+                initial={{ 
                   opacity: 0, 
-                  y: 100, 
-                  scale: 0.9,
-                  filter: "blur(4px)"
-                } : false}
-                animate={{ 
+                  y: 50
+                }}
+                whileInView={{ 
                   opacity: 1, 
-                  y: 0, 
-                  scale: 1,
-                  filter: "blur(0px)"
+                  y: 0
                 }}
-                exit={{ 
-                  opacity: 0, 
-                  y: -100, 
-                  scale: 0.9,
-                  filter: "blur(4px)"
-                }}
+                viewport={{ once: true, margin: "-100px" }}
                 transition={{
-                  layout: { 
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20,
-                    mass: 0.5
-                  },
-                  opacity: { 
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                    mass: 0.8,
-                    delay: isNewItem ? (index - 1) * 0.1 : 0
-                  },
-                  y: { 
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                    mass: 0.8,
-                    delay: isNewItem ? (index - 1) * 0.1 : 0
-                  },
-                  scale: { 
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                    mass: 0.8,
-                    delay: isNewItem ? (index - 1) * 0.1 : 0
-                  },
-                  filter: { 
-                    duration: 0.3,
-                    delay: isNewItem ? (index - 1) * 0.1 : 0
-                  }
+                  duration: 0.6,
+                  delay: index * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94]
                 }}
                 className={`relative mb-12 ${index % 2 === 0 ? 'md:pr-1/2' : 'md:pl-1/2 md:text-right'} group`}
               >
@@ -278,29 +239,11 @@ const Experience: React.FC = () => {
                   </div>
                 )}
               </div>
-            </motion.div>
+              </motion.div>
             );
           })}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Show More / Show Less Button */}
-        {hasMore && (
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
-            >
-              <span>{showAll ? t('experience.showLess') : t('experience.showMore')}</span>
-              {showAll ? (
-                <FaChevronUp className="w-4 h-4 group-hover:translate-y-[-2px] transition-transform duration-300" />
-              ) : (
-                <FaChevronDown className="w-4 h-4 group-hover:translate-y-[2px] transition-transform duration-300" />
-              )}
-            </button>
-          </div>
-        )}
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
