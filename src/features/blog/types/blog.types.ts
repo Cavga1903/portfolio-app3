@@ -25,6 +25,10 @@ export interface BlogPost {
   views?: number;
   likes?: number;
   isPublished: boolean;
+  // SEO fields
+  metaDescription?: string;
+  seoTitle?: string;
+  seoKeywords?: string[];
 }
 
 export interface BlogCategory {

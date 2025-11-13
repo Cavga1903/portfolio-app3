@@ -2,9 +2,12 @@ import React, { Suspense, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
 import { FaArrowLeft } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import { LoginModal, SignupModal } from '../features/auth';
+import { SEOHead } from '../components/SEOHead';
+import { blogService } from '../features/blog/services/blogService';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 // Lazy load blog components
@@ -14,12 +17,20 @@ const RelatedPosts = React.lazy(() => import('../features/blog/components/Relate
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
 
+  // Fetch blog post for SEO
+  const { data: post } = useQuery({
+    queryKey: ['blogPost', slug],
+    queryFn: () => blogService.getPost(slug!, i18n.language),
+    enabled: !!slug,
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+      <SEOHead post={post} />
       <Navbar onLoginClick={() => setShowLoginModal(true)} />
       
       {/* Header */}

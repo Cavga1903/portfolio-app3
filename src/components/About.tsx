@@ -3,7 +3,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
 import { useAnalytics } from '../hooks/useAnalytics';
-import SEOHead from './SEOHead';
+import { SEOHead } from './SEOHead';
 
 const About: React.FC = () => {
   const { t } = useTranslation();

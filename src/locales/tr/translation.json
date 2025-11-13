@@ -727,6 +727,12 @@
       "translating": "Çevriliyor...",
       "translateSuccess": "Çeviriler başarıyla tamamlandı!",
       "translateError": "Çeviri başarısız. Lütfen API anahtarınızı kontrol edin.",
+      "slugTaken": "Bu slug zaten kullanılıyor",
+      "checkingSlug": "Kontrol ediliyor...",
+      "minWords": "Min 50 kelime",
+      "upload": "Yükle",
+      "uploading": "Yükleniyor...",
+      "saveFirst": "Önce kaydedin",
       "form": {
         "title": "Başlık",
         "slug": "Slug",

@@ -5,6 +5,7 @@ import { PrivateRoute } from './PrivateRoute';
 const Home = lazy(() => import('../../pages/Home'));
 const Blog = lazy(() => import('../../pages/Blog'));
 const BlogPost = lazy(() => import('../../pages/BlogPost'));
+const Sitemap = lazy(() => import('../../pages/Sitemap'));
 const AdminBlogManagement = lazy(() => import('../../pages/Admin/BlogManagement'));
 const NotFound = lazy(() => import('../../components/NotFound'));
 
@@ -22,6 +23,11 @@ export const routes = [
   {
     path: '/blog/:slug',
     element: <BlogPost />,
+    public: true,
+  },
+  {
+    path: '/sitemap.xml',
+    element: <Sitemap />,
     public: true,
   },
   {

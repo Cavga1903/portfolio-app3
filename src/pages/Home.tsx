@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
 import ScrollProgress from '../components/ScrollProgress';
 import SkeletonLoader from '../components/SkeletonLoader';
-import SEOHead from '../components/SEOHead';
+import { SEOHead } from '../components/SEOHead';
 import SocialProof from '../components/SocialProof';
 import PortfolioShareCTA from '../components/PortfolioShareCTA';
 import { LoginModal, SignupModal } from '../features/auth';

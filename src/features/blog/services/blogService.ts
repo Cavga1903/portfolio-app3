@@ -16,6 +16,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../lib/firebase/config';
 import { BlogPost } from '../types/blog.types';
+import { generateMetaDescription } from './seoService';
 
 // Helper function to convert Firestore document to BlogPost
 const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: string, currentLanguage?: string): BlogPost => {
@@ -116,8 +117,14 @@ export const blogService = {
   createPost: async (post: Partial<BlogPost>): Promise<BlogPost> => {
     try {
       const postsRef = collection(db, 'blogPosts');
+      
+      // Generate meta description if not provided
+      const metaDescription = post.metaDescription || 
+        (post.content ? generateMetaDescription(post.content) : undefined);
+      
       const postData = {
         ...post,
+        metaDescription,
         publishedAt: post.publishedAt ? Timestamp.fromDate(new Date(post.publishedAt)) : Timestamp.now(),
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),

@@ -1,311 +1,145 @@
-import React, { useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+/**
+ * SEO Head Component
+ * Manages meta tags, Open Graph, and structured data for SEO
+ */
+
+import React, { useEffect } from 'react';
+import { generateSEOTags, generateStructuredData } from '../features/blog/services/seoService';
+import { BlogPost } from '../features/blog/types/blog.types';
 
 interface SEOHeadProps {
+  post?: BlogPost;
   title?: string;
   description?: string;
   image?: string;
+  baseUrl?: string;
+  // Legacy props for backward compatibility
+  pageType?: string;
   url?: string;
-  type?: 'website' | 'article' | 'profile';
-  publishedTime?: string;
-  modifiedTime?: string;
-  tags?: string[];
-  // Yeni props - sayfa tipine göre otomatik meta etiketleri
-  pageType?: 'home' | 'about' | 'projects' | 'technologies' | 'contact' | 'cv';
-  // OG görsel boyutları
+  type?: string;
   imageWidth?: number;
   imageHeight?: number;
-  // Twitter creator
   twitterCreator?: string;
 }
 
-const SEOHead: React.FC<SEOHeadProps> = ({
-  title,
-  description,
-  image,
-  url = 'https://www.tolgacavga.com',
-  type = 'website',
-  publishedTime,
-  modifiedTime,
-  tags,
+export const SEOHead: React.FC<SEOHeadProps> = ({
+  post,
+  title: propTitle,
+  description: propDescription,
+  image: propImage,
+  baseUrl = 'https://www.cavga.dev',
+  // Legacy props
   pageType,
-  imageWidth = 1200,
-  imageHeight = 630,
-  twitterCreator = '@tolgacavga'
+  url,
+  type,
+  imageWidth,
+  imageHeight,
+  twitterCreator,
 }) => {
-  const { t, i18n } = useTranslation();
-
-  // Sayfa tipine göre otomatik meta etiketleri
-  const getPageMeta = () => {
-    if (!pageType) return { title, description, tags };
-    
-    const metaKey = `meta.${pageType}`;
-    return {
-      title: title || t(`${metaKey}.title`),
-      description: description || t(`${metaKey}.description`),
-      tags: tags || t(`${metaKey}.keywords`).split(', ')
-    };
-  };
-
-  const pageMeta = getPageMeta();
-  const finalTitle = pageMeta.title || 'Tolga Çavga - Frontend Developer';
-  const finalDescription = pageMeta.description || 'Frontend Developer & React.js Specialist';
-  const finalTags = useMemo(() => 
-    pageMeta.tags || ['Frontend Developer', 'React', 'JavaScript', 'TypeScript'], 
-    [pageMeta.tags]
-  );
-  const finalImage = image || `https://www.tolgacavga.com/og-images/og_image.png`;
-
   useEffect(() => {
+    // Use legacy props if provided, otherwise use new props
+    const title = propTitle || (pageType ? `${pageType} - Cavga.dev` : undefined);
+    const description = propDescription;
+    const image = propImage;
+
+    if (!post && !title) return;
+
+    let seoData;
+    if (post) {
+      seoData = generateSEOTags(post, baseUrl);
+    } else {
+      seoData = {
+        title: title || 'Cavga.dev - Portfolio & Blog',
+        description: description || 'Modern web development portfolio and blog',
+        keywords: [],
+        ogImage: image,
+        ogType: type || 'website',
+        canonicalUrl: url || baseUrl,
+      };
+    }
+
     // Update document title
-    document.title = finalTitle;
+    document.title = seoData.title;
 
-    // Update meta tags
-    const updateMetaTag = (property: string, content: string, isName = false) => {
-      const attribute = isName ? 'name' : 'property';
-      let meta = document.querySelector(`meta[${attribute}="${property}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attribute, property);
-        document.head.appendChild(meta);
+    // Update or create meta tags
+    const updateMetaTag = (name: string, content: string, attribute: string = 'name') => {
+      let element = document.querySelector(`meta[${attribute}="${name}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, name);
+        document.head.appendChild(element);
       }
-      meta.setAttribute('content', content);
+      element.setAttribute('content', content);
     };
 
-    // Update link tags
-    const updateLinkTag = (rel: string, href: string) => {
-      let link = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement;
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = rel;
-        document.head.appendChild(link);
+    // Basic meta tags
+    updateMetaTag('description', seoData.description);
+    if (seoData.keywords && seoData.keywords.length > 0) {
+      updateMetaTag('keywords', seoData.keywords.join(', '));
+    }
+
+    // Open Graph tags
+    updateMetaTag('og:title', seoData.title, 'property');
+    updateMetaTag('og:description', seoData.description, 'property');
+    updateMetaTag('og:type', seoData.ogType, 'property');
+    if (seoData.ogImage) {
+      updateMetaTag('og:image', seoData.ogImage, 'property');
+    }
+    if (seoData.canonicalUrl) {
+      updateMetaTag('og:url', seoData.canonicalUrl, 'property');
+    }
+
+    // Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:title', seoData.title);
+    updateMetaTag('twitter:description', seoData.description);
+    if (seoData.ogImage) {
+      updateMetaTag('twitter:image', seoData.ogImage);
+    }
+    if (twitterCreator) {
+      updateMetaTag('twitter:creator', twitterCreator);
+    }
+    if (imageWidth) {
+      updateMetaTag('og:image:width', imageWidth.toString(), 'property');
+    }
+    if (imageHeight) {
+      updateMetaTag('og:image:height', imageHeight.toString(), 'property');
+    }
+
+    // Article-specific tags
+    if (seoData.ogType === 'article' && post) {
+      if (seoData.articleAuthor) {
+        updateMetaTag('article:author', seoData.articleAuthor, 'property');
       }
-      link.href = href;
-    };
-
-    // Basic Meta Tags
-    updateMetaTag('description', finalDescription, true);
-    updateMetaTag('keywords', finalTags.join(', '), true);
-    updateMetaTag('author', 'Tolga Çavga', true);
-    updateMetaTag('robots', 'index, follow', true);
-
-    // Open Graph Meta Tags
-    updateMetaTag('og:title', finalTitle);
-    updateMetaTag('og:description', finalDescription);
-    updateMetaTag('og:image', finalImage);
-    updateMetaTag('og:image:width', imageWidth.toString());
-    updateMetaTag('og:image:height', imageHeight.toString());
-    updateMetaTag('og:image:alt', `${finalTitle} - Tolga Çavga Portfolio`);
-    updateMetaTag('og:url', url);
-    updateMetaTag('og:type', type);
-    updateMetaTag('og:site_name', 'Tolga Çavga Portfolio');
-    updateMetaTag('og:locale', 
-      i18n.language === 'tr' ? 'tr_TR' : 
-      i18n.language === 'de' ? 'de_DE' : 
-      i18n.language === 'az' ? 'az_AZ' : 
-      'en_US'
-    );
-
-    // Twitter Card Meta Tags
-    updateMetaTag('twitter:card', 'summary_large_image', true);
-    updateMetaTag('twitter:title', finalTitle, true);
-    updateMetaTag('twitter:description', finalDescription, true);
-    updateMetaTag('twitter:image', finalImage, true);
-    updateMetaTag('twitter:image:alt', `${finalTitle} - Tolga Çavga Portfolio`, true);
-    updateMetaTag('twitter:creator', twitterCreator, true);
-    updateMetaTag('twitter:site', twitterCreator, true);
-    updateMetaTag('twitter:url', url, true);
-
-    // Article Meta Tags (if type is article)
-    if (type === 'article' && publishedTime) {
-      updateMetaTag('article:published_time', publishedTime);
-    }
-    if (type === 'article' && modifiedTime) {
-      updateMetaTag('article:modified_time', modifiedTime);
-    }
-    if (type === 'article' && finalTags) {
-      finalTags.forEach(tag => {
-        const meta = document.createElement('meta');
-        meta.setAttribute('property', 'article:tag');
-        meta.setAttribute('content', tag);
-        document.head.appendChild(meta);
-      });
+      if (seoData.articlePublishedTime) {
+        updateMetaTag('article:published_time', seoData.articlePublishedTime, 'property');
+      }
+      if (seoData.articleModifiedTime) {
+        updateMetaTag('article:modified_time', seoData.articleModifiedTime, 'property');
+      }
     }
 
     // Canonical URL
-    updateLinkTag('canonical', url);
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', seoData.canonicalUrl || baseUrl);
 
-    // Alternate Language Links
-    updateLinkTag('alternate', `${url}?lang=tr`);
-    const altLinkEn = document.createElement('link');
-    altLinkEn.rel = 'alternate';
-    altLinkEn.hreflang = 'en';
-    altLinkEn.href = `${url}?lang=en`;
-    document.head.appendChild(altLinkEn);
-
-    const altLinkDe = document.createElement('link');
-    altLinkDe.rel = 'alternate';
-    altLinkDe.hreflang = 'de';
-    altLinkDe.href = `${url}?lang=de`;
-    document.head.appendChild(altLinkDe);
-
-  }, [finalTitle, finalDescription, finalImage, finalTags, url, type, publishedTime, modifiedTime, i18n.language, imageWidth, imageHeight, twitterCreator]);
-
-  // JSON-LD Structured Data
-  useEffect(() => {
-    const removeExistingScript = (id: string) => {
-      const existing = document.getElementById(id);
-      if (existing) existing.remove();
-    };
-
-    // Person Schema
-    const personSchema = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Tolga Çavga",
-      "url": "https://www.tolgacavga.com",
-      "image": "https://www.tolgacavga.com/profile.jpg",
-      "jobTitle": "Frontend Developer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance"
-      },
-      "sameAs": [
-        "https://github.com/Cavga1903",
-        "https://www.linkedin.com/in/tolgaacavgaa",
-        "https://www.instagram.com/codewithcavga"
-      ],
-      "knowsAbout": ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind CSS", "Frontend Development"],
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Berufskolleg Volksgartenstraße"
+    // Structured data (JSON-LD)
+    if (post) {
+      const structuredData = generateStructuredData(post, baseUrl);
+      let scriptTag = document.querySelector('script[type="application/ld+json"]');
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.setAttribute('type', 'application/ld+json');
+        document.head.appendChild(scriptTag);
       }
-    };
-
-    // Website Schema
-    const websiteSchema = {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Tolga Çavga Portfolio",
-      "url": "https://www.tolgacavga.com",
-      "description": finalDescription,
-      "author": {
-        "@type": "Person",
-        "name": "Tolga Çavga"
-      },
-      "inLanguage": ["tr", "en", "de"],
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.tolgacavga.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    };
-
-    // Professional Service Schema
-    const professionalServiceSchema = {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Tolga Çavga - Frontend Development Services",
-      "url": "https://www.tolgacavga.com",
-      "logo": "https://www.tolgacavga.com/logo.png",
-      "image": finalImage,
-      "description": "Professional frontend development services specializing in React.js, TypeScript, and modern web applications.",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "DE"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "addressCountry": "DE"
-      },
-      "sameAs": [
-        "https://github.com/Cavga1903",
-        "https://www.linkedin.com/in/tolgaacavgaa"
-      ]
-    };
-
-    // Breadcrumb Schema
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.tolgacavga.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Portfolio",
-          "item": "https://www.tolgacavga.com#projects"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "About",
-          "item": "https://www.tolgacavga.com#about"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Contact",
-          "item": "https://www.tolgacavga.com#contact"
-        }
-      ]
-    };
-
-    // Insert schemas with error handling
-    try {
-      removeExistingScript('person-schema');
-      const personScript = document.createElement('script');
-      personScript.id = 'person-schema';
-      personScript.type = 'application/ld+json';
-      personScript.textContent = JSON.stringify(personSchema);
-      document.head.appendChild(personScript);
-    } catch (error) {
-      console.warn('Failed to add person schema:', error);
+      scriptTag.textContent = JSON.stringify(structuredData);
     }
-
-    try {
-      removeExistingScript('website-schema');
-      const websiteScript = document.createElement('script');
-      websiteScript.id = 'website-schema';
-      websiteScript.type = 'application/ld+json';
-      websiteScript.textContent = JSON.stringify(websiteSchema);
-      document.head.appendChild(websiteScript);
-    } catch (error) {
-      console.warn('Failed to add website schema:', error);
-    }
-
-    try {
-      removeExistingScript('professional-schema');
-      const professionalScript = document.createElement('script');
-      professionalScript.id = 'professional-schema';
-      professionalScript.type = 'application/ld+json';
-      professionalScript.textContent = JSON.stringify(professionalServiceSchema);
-      document.head.appendChild(professionalScript);
-    } catch (error) {
-      console.warn('Failed to add professional schema:', error);
-    }
-
-    try {
-      removeExistingScript('breadcrumb-schema');
-      const breadcrumbScript = document.createElement('script');
-      breadcrumbScript.id = 'breadcrumb-schema';
-      breadcrumbScript.type = 'application/ld+json';
-      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
-      document.head.appendChild(breadcrumbScript);
-    } catch (error) {
-      console.warn('Failed to add breadcrumb schema:', error);
-    }
-
-  }, [finalDescription, finalImage]);
+  }, [post, propTitle, propDescription, propImage, baseUrl, pageType, url, type, imageWidth, imageHeight, twitterCreator]);
 
   return null; // This component doesn't render anything
 };
-
-export default SEOHead;
-
