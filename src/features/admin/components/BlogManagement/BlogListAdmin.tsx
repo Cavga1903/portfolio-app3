@@ -294,20 +294,16 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
               <td className="px-6 py-4 whitespace-nowrap">
                 {(() => {
                   // Determine status based on post properties
-                  let status: 'archived' | 'published' | 'draft' = 'draft';
                   let statusText = '';
                   let statusClass = '';
 
                   if (post.isArchived) {
-                    status = 'archived';
                     statusText = t('admin.blog.archived') || 'Archived';
                     statusClass = 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400';
                   } else if (post.isPublished) {
-                    status = 'published';
                     statusText = t('admin.blog.published') || 'Published';
                     statusClass = 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
                   } else {
-                    status = 'draft';
                     statusText = t('admin.blog.draft') || 'Draft';
                     statusClass = 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
                   }
