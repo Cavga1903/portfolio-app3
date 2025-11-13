@@ -1,8 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaArrowLeft } from 'react-icons/fa';
+import Navbar from '../components/Navbar';
+import { LoginModal, SignupModal } from '../features/auth';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 // Lazy load blog components
@@ -13,9 +15,13 @@ const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+      <Navbar onLoginClick={() => setShowLoginModal(true)} />
+      
       {/* Header */}
       <section className="relative py-12 md:py-16 px-6 md:px-8 lg:px-12">
         <div className="max-w-4xl mx-auto">
@@ -48,6 +54,24 @@ const BlogPost: React.FC = () => {
           </Suspense>
         </div>
       </section>
+
+      {/* Auth Modals */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToSignup={() => {
+          setShowLoginModal(false);
+          setShowSignupModal(true);
+        }}
+      />
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={() => setShowSignupModal(false)}
+        onSwitchToLogin={() => {
+          setShowSignupModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </div>
   );
 };

@@ -5,7 +5,6 @@ import { PrivateRoute } from './PrivateRoute';
 const Home = lazy(() => import('../../pages/Home'));
 const Blog = lazy(() => import('../../pages/Blog'));
 const BlogPost = lazy(() => import('../../pages/BlogPost'));
-const AdminDashboard = lazy(() => import('../../pages/Admin/Dashboard'));
 const AdminBlogManagement = lazy(() => import('../../pages/Admin/BlogManagement'));
 const NotFound = lazy(() => import('../../components/NotFound'));
 
