@@ -298,6 +298,20 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
     updateUnderline(activeLink);
   }, [activeLink, updateUnderline]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isProfileDropdownOpen && !target.closest('.profile-dropdown-container')) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    if (isProfileDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isProfileDropdownOpen]);
 
   return (
     <nav className="bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm fixed z-50 border-b border-gray-200/80 dark:border-gray-700/50 w-full top-0 left-0 right-0">
