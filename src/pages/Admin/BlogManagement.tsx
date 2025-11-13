@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { FaPlus, FaSearch } from 'react-icons/fa';
 import Navbar from '../../components/Navbar';
 import { LoginModal, SignupModal } from '../../features/auth';
@@ -11,11 +12,23 @@ const BlogEditorAdmin = React.lazy(() => import('../../features/admin/components
 
 const AdminBlogManagement: React.FC = () => {
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [showEditor, setShowEditor] = useState(false);
   const [editingPost, setEditingPost] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+
+  // Check if edit parameter is in URL
+  useEffect(() => {
+    const editId = searchParams.get('edit');
+    if (editId) {
+      setEditingPost(editId);
+      setShowEditor(true);
+      // Remove edit parameter from URL
+      setSearchParams({}, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const handleCreate = () => {
     setEditingPost(null);
