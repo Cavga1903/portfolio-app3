@@ -442,12 +442,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                           e.preventDefault();
                           navigate('/admin');
                           setIsMenuOpen(false);
-                          trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
+                          trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
                         }}
                         className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
                       >
-                        <FaChartLine className="w-4 h-4" />
-                        <span>{t('nav.dashboard') || 'Dashboard'}</span>
+                        <FaBlog className="w-4 h-4" />
+                        <span>{t('nav.blogManagement') || 'Blog Management'}</span>
                       </a>
                     </div>
                     

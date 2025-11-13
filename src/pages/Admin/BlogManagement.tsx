@@ -56,10 +56,10 @@ const AdminBlogManagement: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {t('admin.dashboard.title') || 'Dashboard'}
+                {t('admin.blog.title') || 'Blog Management'}
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                {t('admin.dashboard.welcome') || 'Welcome back'}, {user?.name || 'Admin'}
+                {t('admin.blog.subtitle') || 'Manage your blog posts'}
               </p>
             </div>
             <button
