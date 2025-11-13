@@ -10,7 +10,7 @@ const PortfolioShareCTA: React.FC = () => {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="relative py-16 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 overflow-hidden">
+    <section ref={ref} className="relative py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 bg-gradient-to-br from-gray-800 via-gray-900 to-black overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 

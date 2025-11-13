@@ -91,7 +91,7 @@ const About: React.FC = () => {
         imageHeight={630}
         twitterCreator="@tolgacavga"
       />
-      <section ref={ref} id="about" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+      <section ref={ref} id="about" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -111,7 +111,7 @@ const About: React.FC = () => {
       <div className="relative z-10 w-full max-w-5xl">
         {/* Main Content Card */}
         <motion.div 
-          className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl p-8 mb-8 group"
+          className="card bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-2xl p-8 mb-8 group"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -161,46 +161,46 @@ const About: React.FC = () => {
                 {t('about.name')}
               </h3>
               <p className="text-cyan-400 text-lg mb-4">{t('about.role')}</p>
-              <p className="text-lg leading-relaxed text-gray-200">
+              <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-200">
                 {t('about.description')}
               </p>
             </div>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center gap-4 pt-6 border-t border-gray-700/50">
+          <div className="flex justify-center gap-4 pt-6 border-t border-gray-200/50 dark:border-gray-700/50">
             <motion.a
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-700/50 rounded-lg group cursor-pointer"
+              className="p-3 bg-gray-100/70 dark:bg-gray-700/50 rounded-lg group cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600/50"
               title="GitHub - @Cavga1903"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(17, 24, 39, 0.5)" }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaGithub className="text-2xl text-gray-300 group-hover:text-white transition-colors group-hover:rotate-12" />
+              <FaGithub className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors group-hover:rotate-12" />
             </motion.a>
             <motion.a
               href="https://www.linkedin.com/in/tolgaacavgaa"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-700/50 rounded-lg group cursor-pointer"
+              className="p-3 bg-gray-100/70 dark:bg-gray-700/50 rounded-lg group cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600/50"
               title="LinkedIn - @tolgaacavgaa"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(10, 102, 194, 0.2)" }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaLinkedin className="text-2xl text-gray-300 group-hover:text-[#0A66C2] transition-colors group-hover:rotate-12" />
+              <FaLinkedin className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-[#0A66C2] transition-colors group-hover:rotate-12" />
             </motion.a>
             <motion.a
               href="https://www.instagram.com/codewithcavga"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-700/50 rounded-lg group relative overflow-hidden cursor-pointer"
+              className="p-3 bg-gray-100/50 dark:bg-gray-700/50 rounded-lg group relative overflow-hidden cursor-pointer"
               title="Instagram - @codewithcavga"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaInstagram className="text-2xl text-gray-300 group-hover:text-pink-500 transition-colors group-hover:rotate-12 relative z-10" />
+              <FaInstagram className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-pink-500 transition-colors group-hover:rotate-12 relative z-10" />
             </motion.a>
           </div>
         </motion.div>
@@ -209,7 +209,7 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Card 1 */}
           <motion.div 
-            className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+            className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl p-6 group hover:bg-gray-50 dark:hover:bg-gray-700/50"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={cardVariants}
@@ -224,15 +224,15 @@ const About: React.FC = () => {
                 <FaCode className="text-3xl text-blue-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-sm">{t('about.stats.focus.label')}</p>
-                <p className="text-xl font-bold text-white">{t('about.stats.focus.value')}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{t('about.stats.focus.label')}</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-white">{t('about.stats.focus.value')}</p>
               </div>
             </div>
           </motion.div>
 
           {/* Card 2 */}
           <motion.div 
-            className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+            className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl p-6 group hover:bg-gray-50 dark:hover:bg-gray-700/50"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={cardVariants}
@@ -247,15 +247,15 @@ const About: React.FC = () => {
                 <FaRocket className="text-3xl text-cyan-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-sm">{t('about.stats.passion.label')}</p>
-                <p className="text-xl font-bold text-white">{t('about.stats.passion.value')}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{t('about.stats.passion.label')}</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-white">{t('about.stats.passion.value')}</p>
               </div>
             </div>
           </motion.div>
 
           {/* Card 3 */}
           <motion.div 
-            className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+            className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl p-6 group hover:bg-gray-50 dark:hover:bg-gray-700/50"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={cardVariants}
@@ -270,8 +270,8 @@ const About: React.FC = () => {
                 <FaHeart className="text-3xl text-purple-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-sm">{t('about.stats.love.label')}</p>
-                <p className="text-xl font-bold text-white">{t('about.stats.love.value')}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{t('about.stats.love.label')}</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-white">{t('about.stats.love.value')}</p>
               </div>
             </div>
           </motion.div>
@@ -291,7 +291,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Kurumsal Deneyim */}
             <motion.div 
-              className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+              className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl p-6 group hover:bg-gray-50 dark:hover:bg-gray-700/50"
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={cardVariants}
@@ -311,10 +311,10 @@ const About: React.FC = () => {
                 <div className="p-4 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
                   <FaBuilding className="text-3xl text-green-400" />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors duration-300">
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
                   {t('about.softSkills.corporate.title')}
                 </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   {t('about.softSkills.corporate.description')}
                 </p>
               </div>
@@ -322,7 +322,7 @@ const About: React.FC = () => {
 
             {/* Hızlı Öğrenme */}
             <motion.div 
-              className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+              className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl p-6 group hover:bg-gray-50 dark:hover:bg-gray-700/50"
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={cardVariants}
@@ -342,10 +342,10 @@ const About: React.FC = () => {
                 <div className="p-4 bg-yellow-500/10 rounded-lg group-hover:bg-yellow-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
                   <FaBolt className="text-3xl text-yellow-400" />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300">
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors duration-300">
                   {t('about.softSkills.learning.title')}
                 </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   {t('about.softSkills.learning.description')}
                 </p>
               </div>
@@ -353,7 +353,7 @@ const About: React.FC = () => {
 
             {/* Takım Çalışması */}
             <motion.div 
-              className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl p-6 group"
+              className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl p-6 group hover:bg-gray-50 dark:hover:bg-gray-700/50"
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={cardVariants}
@@ -373,10 +373,10 @@ const About: React.FC = () => {
                 <div className="p-4 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors duration-300 mx-auto w-fit mb-4">
                   <FaUsers className="text-3xl text-blue-400" />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                   {t('about.softSkills.teamwork.title')}
                 </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   {t('about.softSkills.teamwork.description')}
                 </p>
               </div>

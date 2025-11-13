@@ -68,6 +68,8 @@
   },
   "experience": {
     "title": "Erfaring og utdanning",
+    "showMore": "Vis mer",
+    "showLess": "Vis mindre",
     "skills": {
       "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
       "turkcell": ["Kundeservice", "Problemløsing", "Kommunikasjon"],

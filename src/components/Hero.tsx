@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative flex flex-col items-center justify-center text-center min-h-screen bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+    <section id="hero" className="relative flex flex-col items-center justify-center text-center min-h-screen bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
       {/* Animated Background Circles with Parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -104,7 +104,7 @@ const Hero: React.FC = () => {
         
         <motion.p 
           variants={itemVariants}
-          className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto"
+          className="text-lg md:text-xl mb-8 text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
           whileHover={{ color: '#ffffff' }}
           transition={{ duration: 0.3 }}
         >
@@ -139,7 +139,7 @@ const Hero: React.FC = () => {
           {/* Secondary Link - Projelerimi İncele */}
           <motion.a 
             href="#projects" 
-            className="group inline-flex items-center gap-2 text-lg font-medium text-blue-400 hover:text-blue-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:ring-offset-2 rounded-lg px-2 py-1"
+            className="group inline-flex items-center gap-2 text-lg font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:ring-offset-2 rounded-lg px-2 py-1"
             whileHover={{ 
               scale: 1.05,
               color: "#60a5fa"
@@ -163,7 +163,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ opacity: 1 }}
         >
-          <FaArrowDown className="text-2xl text-blue-400 opacity-70 transition-opacity duration-300" />
+          <FaArrowDown className="text-2xl text-blue-600 dark:text-blue-400 opacity-70 transition-opacity duration-300" />
         </motion.div>
       </motion.div>
     </section>

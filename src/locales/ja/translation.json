@@ -1,141 +1,143 @@
 {
   "pageTitle": "Tolga Çavga | Frontend Developer - Portfolio",
   "nav": {
-    "home": "Home",
-    "about": "About",
-    "technologies": "Technologies",
-    "services": "Services",
-    "projects": "Portfolio",
-    "contact": "Contact",
-    "blog": "Blog"
+    "home": "ホーム",
+    "about": "私について",
+    "technologies": "技術",
+    "services": "サービス",
+    "projects": "ポートフォリオ",
+    "contact": "お問い合わせ",
+    "blog": "ブログ"
   },
   "hero": {
-    "greeting": "Hello, I'm Tolga! 👋",
-    "description": "As a Frontend Developer, I build creative and modern web projects.",
-    "ctaAbout": "Learn More About Me",
-    "ctaProjects": "View My Projects",
+    "greeting": "こんにちは、Tolgaです！ 👋",
+    "description": "Frontend Developerとして、創造的でモダンなWebプロジェクトを構築しています。",
+    "ctaAbout": "もっと詳しく",
+    "ctaProjects": "プロジェクトを見る",
     "typing": {
       "frontendDeveloper": "Frontend Developer",
-      "reactSpecialist": "React Specialist",
-      "uiuxEnthusiast": "UI/UX Enthusiast",
-      "creativeCoder": "Creative Coder"
+      "reactSpecialist": "Reactスペシャリスト",
+      "uiuxEnthusiast": "UI/UX愛好家",
+      "creativeCoder": "クリエイティブコーダー"
     }
   },
     "modal": {
-      "clickOutsideToClose": "Click outside to close",
-      "technologiesUsed": "Technologies Used",
-      "projectOverview": "Project Overview",
-      "keyFeatures": "Key Features",
-      "challenges": "Challenges",
-      "solutions": "Solutions"
+      "clickOutsideToClose": "外側をクリックして閉じる",
+      "technologiesUsed": "使用技術",
+      "projectOverview": "プロジェクト概要",
+      "keyFeatures": "主な機能",
+      "challenges": "課題",
+      "solutions": "解決策"
     },
   "about": {
-    "title": "About Me",
+    "title": "私について",
     "name": "Tolga Çavga",
     "role": "Frontend Developer",
-    "githubPhotoAlt": "GitHub Profile Photo",
+    "githubPhotoAlt": "GitHubプロフィール写真",
     "developerEmojiAlt": "Developer Emoji",
-    "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports.",
+    "description": "こんにちは！Tolgaです。大きな情熱を持ってソフトウェア開発の世界に入りました。Frontend Developerとして、創造的でユーザーフレンドリーなWebアプリケーションを作成することを楽しんでいます。余暇には、新しい技術を学ぶこと、読書、スポーツに興味があります。",
     "stats": {
       "focus": {
-        "label": "Focus",
+        "label": "焦点",
         "value": "Frontend Dev"
       },
       "passion": {
-        "label": "Passion",
-        "value": "Innovation"
+        "label": "情熱",
+        "value": "革新"
       },
       "love": {
-        "label": "Love",
-        "value": "Clean Code"
+        "label": "愛",
+        "value": "クリーンコード"
       }
     },
     "softSkills": {
-      "title": "Professional Competencies",
+      "title": "専門能力",
       "corporate": {
-        "title": "Corporate Experience",
-        "description": "Experience working in large teams and managing complex projects"
+        "title": "企業経験",
+        "description": "大規模なチームでの作業経験と複雑なプロジェクトの管理"
       },
       "learning": {
-        "title": "Fast Learning",
-        "description": "Ability to quickly learn new technologies and apply them in projects"
+        "title": "高速学習",
+        "description": "新しい技術を素早く学び、プロジェクトに適用する能力"
       },
       "teamwork": {
-        "title": "Teamwork",
-        "description": "Experience working in different roles and team leadership"
+        "title": "チームワーク",
+        "description": "異なる役割での作業経験とチームリーダーシップ"
       }
     }
   },
   "experience": {
-    "title": "Experience & Education",
+    "title": "経験 & 教育",
+    "showMore": "もっと見る",
+    "showLess": "折りたたむ",
     "skills": {
       "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
-      "turkcell": ["Customer Service", "Problem Solving", "Communication"],
+      "turkcell": ["カスタマーサービス", "問題解決", "コミュニケーション"],
       "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
-      "concentrix": ["Salesforce CRM", "Customer Satisfaction", "Banking"],
-      "izmir": ["Hardware & Software", "System Administration", "Technical Support", "Teamwork"],
-      "uopeople": ["Computer Science", "Algorithms", "Data Structures"],
-      "anadolu": ["Computer Programming", "Software Development"]
+      "concentrix": ["Salesforce CRM", "顧客満足度", "銀行業務"],
+      "izmir": ["ハードウェア & ソフトウェア", "システム管理", "技術サポート", "チームワーク"],
+      "uopeople": ["コンピュータサイエンス", "アルゴリズム", "データ構造"],
+      "anadolu": ["コンピュータプログラミング", "ソフトウェア開発"]
     },
     "turkcell": {
-      "title": "Customer Service Representative",
+      "title": "カスタマーサービス担当者",
       "company": "Turkcell Global Bilgi",
-      "location": "Bornova, Izmir, Türkiye",
-      "period": "August 2025 - November 2025",
-      "description": "Supporting customers and resolving issues at Turkcell Global Bilgi, with a focus on clear communication, problem-solving, and technical support."
+      "location": "Bornova, İzmir, トルコ",
+      "period": "2025年8月 - 2025年11月",
+      "description": "Turkcell Global Bilgiで顧客をサポートし、問題を解決。明確なコミュニケーション、問題解決、技術サポートに焦点を当てています。"
     },
     "upwork": {
-      "title": "React Native Developer | Freelance Frontend Developer",
+      "title": "React Native Developer | フリーランス Frontend Developer",
       "company": "Upwork",
-      "location": "İzmir, Türkiye",
-      "period": "July 2025 - Present",
-      "description": "Built cross-platform mobile apps with React Native. Integrated RESTful APIs & Supabase. Designed dynamic UIs with Tailwind CSS, improving user retention by 30%."
+      "location": "İzmir, トルコ",
+      "period": "2025年7月 - 進行中",
+      "description": "React Nativeでクロスプラットフォームモバイルアプリを構築。RESTful APIs & Supabaseを統合。Tailwind CSSで動的UIを設計し、ユーザー維持率を30%向上させました。"
     },
     "siliconmade": {
-      "title": "Mobile and Frontend Development Trainee",
+      "title": "Mobile & Frontend Development 研修生",
       "company": "Siliconmade Academy",
-      "location": "Online",
-      "period": "February 2025 - July 2025",
-      "description": "Completed 6-month / 184-hour traineeship. Developed real-world projects. Gained hands-on expertise in React, React Native, REST API, Supabase, Tailwind CSS, and Firebase."
+      "location": "オンライン",
+      "period": "2025年2月 - 2025年7月",
+      "description": "6ヶ月 / 184時間の研修を完了。実世界のプロジェクトを開発。React、React Native、REST API、Supabase、Tailwind CSS、Firebaseの実践的な専門知識を獲得。"
     },
     "izmir": {
-      "title": "Information Technology Intern",
-      "company": "Izmir Metropolitan Municipality",
-      "location": "İzmir, Türkiye",
-      "period": "September 2017 - June 2018",
-      "description": "Assisted in system setup and hardware identification, enhancing operational efficiency. Provided technical support to users, resolving IT issues and improving user satisfaction. Collaborated with team members on troubleshooting, fostering a cooperative work environment."
+      "title": "情報技術インターン",
+      "company": "İzmir大都市圏",
+      "location": "İzmir, トルコ",
+      "period": "2017年9月 - 2018年6月",
+      "description": "システムセットアップとハードウェア識別を支援し、運用効率を向上。ユーザーに技術サポートを提供し、IT問題を解決し、ユーザー満足度を向上。チームメンバーとトラブルシューティングで協力し、協力的な作業環境を育成。"
     },
     "concentrix": {
-      "title": "Customer Service Representative – Banking Sector",
+      "title": "カスタマーサービス担当者 – 銀行セクター",
       "company": "Concentrix",
-      "location": "İzmir, Türkiye",
-      "period": "December 2022 - October 2024",
-      "description": "Provided front-line banking support. Maintained 95% customer satisfaction. Managed service tickets with Salesforce CRM."
+      "location": "İzmir, トルコ",
+      "period": "2022年12月 - 2024年10月",
+      "description": "第一線の銀行サポートを提供。95%の顧客満足度を維持。Salesforce CRMでサービスチケットを管理。"
     },
     "uopeople": {
-      "title": "Bachelor of Science, Computer Science",
+      "title": "コンピュータサイエンス学士",
       "company": "University of the People",
-      "location": "Online",
-      "period": "June 2025 - In Progress",
-      "description": "Currently pursuing a Bachelor of Science in Computer Science. Studying algorithms, data structures, and software engineering principles."
+      "location": "オンライン",
+      "period": "2025年6月 - 進行中",
+      "description": "現在、コンピュータサイエンスの学士号を取得中。アルゴリズム、データ構造、ソフトウェア工学の原則を学習中。"
     },
     "anadolu": {
-      "title": "Associate's Degree, Computer Programming",
-      "company": "Anadolu University",
-      "location": "Eskişehir, Türkiye",
-      "period": "In Progress",
-      "description": "Currently pursuing Associate's Degree in Computer Programming. Learning programming fundamentals and software development processes."
+      "title": "準学士、コンピュータプログラミング",
+      "company": "アナドル大学",
+      "location": "Eskişehir, トルコ",
+      "period": "進行中",
+      "description": "現在、コンピュータプログラミングの準学士号を取得中。プログラミングの基礎とソフトウェア開発プロセスを学習中。"
     }
   },
   "technologies": {
-    "title": "Creativity needs a lot of tools",
-    "subtitle": "Have a lot of tools in my toolbox, and i'm always learning new ones.",
+    "title": "創造性には多くのツールが必要です",
+    "subtitle": "ツールボックスに多くのツールがあり、常に新しいものを学んでいます。",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
-      "database": "Database",
-      "tools": "Tools",
-      "languages": "Languages"
+      "database": "データベース",
+      "tools": "ツール",
+      "languages": "言語"
     },
     "react": "React.js",
     "javascript": "JavaScript",
@@ -156,9 +158,9 @@
     "docker": "Docker",
     "opengraph": "OpenGraph",
     "googleAnalytics": "Google Analytics",
-    "turkish": "Turkish",
-    "english": "English",
-    "german": "German",
+    "turkish": "トルコ語",
+    "english": "英語",
+    "german": "ドイツ語",
     "descriptions": {
       "react": "react & native & next",
       "typescript": "type-safe & modern",
@@ -176,14 +178,14 @@
       "vercel": "deployment & hosting",
       "docker": "containers & CI/CD",
       "googleAnalytics": "tracking & insights",
-      "turkish": "native speaker",
-      "english": "professional",
-      "german": "beginner"
+      "turkish": "ネイティブスピーカー",
+      "english": "プロフェッショナル",
+      "german": "初心者"
     }
   },
   "certificates": {
-    "title": "Certificates & Achievements",
-    "subtitle": "Certifications and achievements earned during my learning journey",
+    "title": "証明書 & 実績",
+    "subtitle": "学習の旅で獲得した認定と実績",
     "skills": {
       "siliconmade": ["React", "React Native", "Mobile Development"],
       "frontend": ["HTML", "CSS", "JavaScript"],
@@ -193,116 +195,116 @@
       "git": ["Git", "GitHub", "Version Control"]
     },
     "siliconmade": {
-      "title": "Mobile & Frontend Development Certificate",
+      "title": "Mobile & Frontend Development 証明書",
       "issuer": "Siliconmade Academy",
-      "date": "July 2025",
-      "description": "184-hour intensive training program. Mobile app development with React and React Native."
+      "date": "2025年7月",
+      "description": "184時間の集中研修プログラム。ReactとReact Nativeを使用したモバイルアプリ開発。"
     },
     "frontend": {
-      "title": "Frontend Development Fundamentals",
-      "issuer": "Online Learning Platform",
+      "title": "Frontend Development 基礎",
+      "issuer": "オンライン学習プラットフォーム",
       "date": "2024",
-      "description": "Comprehensive training covering HTML, CSS, and JavaScript fundamentals."
+      "description": "HTML、CSS、JavaScriptの基礎をカバーする包括的な研修。"
     },
     "react": {
       "title": "React.js Mastery",
-      "issuer": "Online Learning Platform",
+      "issuer": "オンライン学習プラットフォーム",
       "date": "2024",
-      "description": "Advanced training in React components, hooks, and state management."
+      "description": "Reactコンポーネント、フック、状態管理の高度な研修。"
     },
     "responsive": {
       "title": "Responsive Web Design",
-      "issuer": "Online Learning Platform",
+      "issuer": "オンライン学習プラットフォーム",
       "date": "2024",
-      "description": "Mobile-first approach and responsive design principles."
+      "description": "モバイルファーストアプローチとレスポンシブデザインの原則。"
     },
     "javascript": {
       "title": "Modern JavaScript (ES6+)",
-      "issuer": "Online Learning Platform",
+      "issuer": "オンライン学習プラットフォーム",
       "date": "2024",
-      "description": "ES6+ features, async/await, and modern JavaScript techniques."
+      "description": "ES6+機能、async/await、モダンなJavaScript技術。"
     },
     "git": {
       "title": "Git & GitHub Mastery",
-      "issuer": "Online Learning Platform",
+      "issuer": "オンライン学習プラットフォーム",
       "date": "2024",
-      "description": "Version control, branching strategies, and collaborative development."
+      "description": "バージョン管理、ブランチング戦略、協調開発。"
     },
     "stats": {
-      "certificates": "Certificates",
-      "hours": "Training Hours",
-      "projects": "Projects",
-      "experience": "Years Experience"
+      "certificates": "証明書",
+      "hours": "研修時間",
+      "projects": "プロジェクト",
+      "experience": "年の経験"
     }
   },
   "services": {
-    "title": "My Services",
-    "subtitle": "Creative and user-friendly web solutions with modern technologies",
-    "b2b": "Business Services",
-    "b2c": "Personal Services",
-    "cta": "Want to work with me on your project?",
-    "contactButton": "Get In Touch",
+    "title": "私のサービス",
+    "subtitle": "モダンな技術を使った創造的でユーザーフレンドリーなWebソリューション",
+    "b2b": "ビジネスサービス",
+    "b2c": "個人サービス",
+    "cta": "プロジェクトで一緒に働きませんか？",
+    "contactButton": "お問い合わせ",
     "corporate": {
-      "title": "Corporate Website",
-      "description": "Modern, professional and responsive corporate websites. Secure and scalable solutions with React and TypeScript."
+      "title": "企業ウェブサイト",
+      "description": "モダンでプロフェッショナルなレスポンシブ企業ウェブサイト。ReactとTypeScriptを使用した安全でスケーラブルなソリューション。"
     },
     "landing": {
-      "title": "Landing Page",
-      "description": "High-conversion landing pages that load fast and are SEO-friendly. Impressive animations with Framer Motion."
+      "title": "ランディングページ",
+      "description": "高速読み込みでSEOに優れた高コンバージョンランディングページ。Framer Motionによる印象的なアニメーション。"
     },
     "ecommerce": {
       "title": "E-Commerce Frontend",
-      "description": "User-friendly e-commerce interfaces. Payment integrations, product catalogs and cart management."
+      "description": "ユーザーフレンドリーなEコマースインターフェース。決済統合、製品カタログ、カート管理。"
     },
     "dashboard": {
       "title": "Admin Dashboard",
-      "description": "Interactive dashboards for data-driven decision making. Charts, tables and real-time updates."
+      "description": "データ駆動型意思決定のためのインタラクティブダッシュボード。グラフ、テーブル、リアルタイム更新。"
     },
     "redesign": {
-      "title": "Website Redesign",
-      "description": "Renew your existing website with modern technologies. Performance optimization and UX improvements."
+      "title": "ウェブサイトリデザイン",
+      "description": "モダンな技術で既存のウェブサイトを刷新。パフォーマンス最適化とUX改善。"
     },
     "responsive": {
-      "title": "Responsive Design",
-      "description": "Responsive websites that look perfect on mobile, tablet and desktop. Mobile-first approach."
+      "title": "レスポンシブデザイン",
+      "description": "モバイル、タブレット、デスクトップで完璧に見えるレスポンシブウェブサイト。モバイルファーストアプローチ。"
     },
     "portfolio": {
-      "title": "Portfolio Website",
-      "description": "Personal portfolio and resume websites. Stand out with modern design, animations and SEO optimization."
+      "title": "ポートフォリオウェブサイト",
+      "description": "個人ポートフォリオと履歴書ウェブサイト。モダンなデザイン、アニメーション、SEO最適化で際立つ。"
     },
     "smallBusiness": {
-      "title": "Small Business Website",
-      "description": "Affordable, effective websites for local businesses. Google My Business integration and local SEO."
+      "title": "小規模ビジネスウェブサイト",
+      "description": "地元企業向けの手頃で効果的なウェブサイト。Google My Business統合とローカルSEO。"
     },
     "restaurant": {
-      "title": "Restaurant/Cafe Website",
-      "description": "Restaurant websites with digital menu, reservation system and photo gallery. QR code menu support."
+      "title": "レストラン/カフェウェブサイト",
+      "description": "デジタルメニュー、予約システム、写真ギャラリー付きレストランウェブサイト。QRコードメニューサポート。"
     },
     "personal": {
-      "title": "Personal Website",
-      "description": "Custom designed websites for blog, resume or personal brand. Content management and social media integration."
+      "title": "個人ウェブサイト",
+      "description": "ブログ、履歴書、または個人ブランド用のカスタムデザインウェブサイト。コンテンツ管理とソーシャルメディア統合。"
     }
   },
   "projects": {
-    "title": "My Projects",
-    "subtitle": "Projects I developed using modern web technologies",
-    "details": "Details",
-    "tech": "Technologies:",
+    "title": "私のプロジェクト",
+    "subtitle": "モダンなWeb技術を使って開発したプロジェクト",
+    "details": "詳細",
+    "tech": "技術:",
     "github": "GitHub",
-    "demo": "Demo",
-    "liveDemo": "Live Demo",
-    "livePreview": "Live Preview",
-    "clickToViewDetails": "Click to view details",
+    "demo": "デモ",
+    "liveDemo": "ライブデモ",
+    "livePreview": "ライブプレビュー",
+    "clickToViewDetails": "クリックして詳細を見る",
     "roles": {
       "fullStack": "Full Stack Developer",
       "frontend": "Frontend Developer",
       "backend": "Backend Developer"
     },
     "durations": {
-      "week": "{{count}} week",
-      "weeks": "{{count}} weeks",
-      "month": "{{count}} month",
-      "months": "{{count}} months"
+      "week": "{{count}}週間",
+      "weeks": "{{count}}週間",
+      "month": "{{count}}ヶ月",
+      "months": "{{count}}ヶ月"
     },
     "items": {
       "iot": {
@@ -451,52 +453,52 @@
     }
   },
   "contact": {
-    "title": "Contact",
-    "description": "Get in touch with me! Fill out the form below to send me a direct email.",
+    "title": "お問い合わせ",
+    "description": "お気軽にお問い合わせください！以下のフォームに記入して、直接メールを送信してください。",
     "freeQuote": {
-      "title": "Get Free Quote",
-      "description": "I analyze your website and provide recommendations to improve your performance",
+      "title": "無料見積もりを取得",
+      "description": "ウェブサイトを分析し、パフォーマンス向上のための推奨事項を提供します",
       "siteAnalysis": {
-        "title": "Site Analysis",
-        "description": "I analyze your website's current SEO status in detail"
+        "title": "サイト分析",
+        "description": "ウェブサイトの現在のSEO状況を詳細に分析します"
       },
       "performanceReport": {
-        "title": "Performance Report",
-        "description": "Google PageSpeed, Core Web Vitals and technical SEO analysis"
+        "title": "パフォーマンスレポート",
+        "description": "Google PageSpeed、Core Web Vitals、技術的SEO分析"
       },
       "optimizationSuggestions": {
-        "title": "Optimization Suggestions",
-        "description": "Concrete recommendations to rank higher in search engines"
+        "title": "最適化提案",
+        "description": "検索エンジンでより高いランキングを得るための具体的な推奨事項"
       },
       "competitorAnalysis": {
-        "title": "Competitor Analysis",
-        "description": "I analyze your competitors and suggest strategic advantages"
+        "title": "競合分析",
+        "description": "競合他社を分析し、戦略的優位性を提案します"
       },
-      "completelyFree": "Completely Free",
-      "completelyFreeDescription": "This analysis and recommendations are completely free. You are under no obligation.",
-      "sendMessageForQuote": "Send a message to get a quote",
-      "exampleMessage": "Hello! I would like to get free support for my website. Can you please do a detailed analysis?"
+      "completelyFree": "完全無料",
+      "completelyFreeDescription": "この分析と推奨事項は完全に無料です。義務はありません。",
+      "sendMessageForQuote": "見積もりを取得するためにメッセージを送信",
+      "exampleMessage": "こんにちは！ウェブサイトの無料サポートを受けたいです。詳細な分析をしていただけますか？"
     },
     "form": {
-      "title": "Send a Message",
-      "name": "Your Name",
-      "namePlaceholder": "Enter your name",
-      "email": "Your Email",
+      "title": "メッセージを送信",
+      "name": "お名前",
+      "namePlaceholder": "お名前を入力してください",
+      "email": "メールアドレス",
       "emailPlaceholder": "example@email.com",
-      "message": "Your Message",
-      "messagePlaceholder": "Write your message here...",
-      "send": "Send",
-      "sending": "Sending...",
-      "success": "✅ Your message was sent successfully!",
-      "error": "❌ An error occurred. Please try again.",
+      "message": "メッセージ",
+      "messagePlaceholder": "メッセージをここに書いてください...",
+      "send": "送信",
+      "sending": "送信中...",
+      "success": "✅ メッセージが正常に送信されました！",
+      "error": "❌ エラーが発生しました。もう一度お試しください。",
       "errors": {
-        "nameRequired": "Name field is required",
-        "nameMinLength": "Name must be at least 2 characters",
-        "emailRequired": "Email field is required",
-        "emailInvalid": "Please enter a valid email address",
-        "messageRequired": "Message field is required",
-        "messageMinLength": "Message must be at least 10 characters",
-        "messageMaxLength": "Message cannot exceed 1000 characters",
+        "nameRequired": "名前フィールドは必須です",
+        "nameMinLength": "名前は少なくとも2文字である必要があります",
+        "emailRequired": "メールフィールドは必須です",
+        "emailInvalid": "有効なメールアドレスを入力してください",
+        "messageRequired": "メッセージフィールドは必須です",
+        "messageMinLength": "メッセージは少なくとも10文字である必要があります",
+        "messageMaxLength": "メッセージは1000文字を超えることはできません",
         "recaptchaRequired": "reCAPTCHAの確認を完了してください",
         "recaptchaExpired": "reCAPTCHAの確認が期限切れです。もう一度お試しください。",
         "recaptchaError": "reCAPTCHAの確認に失敗しました。もう一度お試しください。"
@@ -506,35 +508,35 @@
         "notConfigured": "reCAPTCHAが設定されていません。管理者にお問い合わせください。"
       },
       "captcha": {
-        "label": "Security Verification",
-        "placeholder": "Enter the result",
-        "refresh": "Refresh"
+        "label": "セキュリティ確認",
+        "placeholder": "結果を入力",
+        "refresh": "更新"
       }
     },
-    "or": "or",
-    "email": "Send Email",
+    "or": "または",
+    "email": "メールを送信",
     "linkedin": "LinkedIn"
   },
   "footer": {
-    "rights": "All Rights Reserved.",
+    "rights": "全著作権所有。",
     "madeWith": "Made with",
     "by": "by Tolga | Frontend Developer",
-    "downloadCV": "Download Resume",
-    "buyMeACoffee": "Buy Me a Coffee ☕"
+    "downloadCV": "履歴書をダウンロード",
+    "buyMeACoffee": "コーヒーをおごってください ☕"
   },
-  "scrollToTop": "Scroll to top",
+  "scrollToTop": "トップにスクロール",
   "cv": {
-    "professionalSummary": "Professional Summary",
-    "summaryText": "I develop creative and modern web projects as a Frontend Developer. I create user-friendly applications with React, TypeScript and TailwindCSS. I specialize in cross-platform mobile applications and responsive websites.",
-    "technicalSkills": "Technical Skills",
-    "workExperience": "Work Experience",
-    "education": "Education",
-    "certificates": "Certificates",
-    "languages": "Languages",
-    "generatePDF": "Generate PDF",
-    "printCV": "Print",
-    "turkcellDescription": "I support customers and solve problems at Turkcell Global Bilgi. I specialize in clear communication, problem solving and technical support.",
-    "upworkDescription": "I developed cross-platform mobile applications. I integrated RESTful APIs and Supabase. I designed dynamic UIs with Tailwind CSS, increasing user retention by 30%."
+    "professionalSummary": "プロフェッショナルサマリー",
+    "summaryText": "Frontend Developerとして、創造的でモダンなWebプロジェクトを開発しています。React、TypeScript、TailwindCSSを使用してユーザーフレンドリーなアプリケーションを作成しています。クロスプラットフォームモバイルアプリケーションとレスポンシブWebサイトを専門としています。",
+    "technicalSkills": "技術スキル",
+    "workExperience": "職務経験",
+    "education": "教育",
+    "certificates": "証明書",
+    "languages": "言語",
+    "generatePDF": "PDFを生成",
+    "printCV": "印刷",
+    "turkcellDescription": "Turkcell Global Bilgiで顧客をサポートし、問題を解決しています。明確なコミュニケーション、問題解決、技術サポートを専門としています。",
+    "upworkDescription": "クロスプラットフォームモバイルアプリケーションを開発しました。RESTful APIsとSupabaseを統合しました。Tailwind CSSで動的UIを設計し、ユーザー維持率を30%向上させました。"
   },
   "meta": {
     "home": {
@@ -569,68 +571,68 @@
     }
   },
   "share": {
-    "title": "Share",
-    "shareOn": "Share on",
-    "copyLink": "Copy Link",
-    "linkCopied": "Link copied! ✅"
+    "title": "共有",
+    "shareOn": "で共有",
+    "copyLink": "リンクをコピー",
+    "linkCopied": "リンクがコピーされました！ ✅"
   },
   "socialProof": {
-    "title": "Follow Me on Social Media",
-    "subtitle": "Follow my projects, stay updated, and connect with me!",
-    "followMe": "Follow",
-    "cta": "Want to stay updated with new projects and content?",
-    "followGitHub": "Follow on GitHub",
-    "connectLinkedIn": "Connect on LinkedIn",
+    "title": "ソーシャルメディアでフォロー",
+    "subtitle": "プロジェクトをフォローし、最新情報を入手し、つながりましょう！",
+    "followMe": "フォロー",
+    "cta": "新しいプロジェクトやコンテンツの最新情報を入手したいですか？",
+    "followGitHub": "GitHubでフォロー",
+    "connectLinkedIn": "LinkedInでつながる",
     "github": {
-      "stats": "20+ Repos",
-      "description": "Open source projects and code examples"
+      "stats": "20+ リポジトリ",
+      "description": "オープンソースプロジェクトとコード例"
     },
     "linkedin": {
-      "stats": "500+ Connections",
-      "description": "Professional network and career development"
+      "stats": "500+ 接続",
+      "description": "プロフェッショナルネットワークとキャリア開発"
     },
     "instagram": {
-      "description": "Coding tips and daily development content"
+      "description": "コーディングのヒントと日常の開発コンテンツ"
     }
   },
   "portfolioShare": {
-    "title": "Like My Portfolio?",
-    "description": "If you enjoyed this portfolio and want to share it with your friends, feel free to use the buttons below. Every share motivates me! 🚀",
-    "shareTitle": "Check out Tolga Çavga's amazing portfolio!",
-    "shareDescription": "Modern and creative frontend developer portfolio - React, TypeScript and more!",
-    "thankYou": "Thank you for your support!"
+    "title": "私のポートフォリオを気に入りましたか？",
+    "description": "このポートフォリオを気に入って、友達と共有したい場合は、下のボタンをお気軽にご利用ください。すべての共有が私のモチベーションになります！ 🚀",
+    "shareTitle": "Tolga Çavgaの素晴らしいポートフォリオをチェックしてください！",
+    "shareDescription": "モダンで創造的なフロントエンド開発者のポートフォリオ - React、TypeScriptなど！",
+    "thankYou": "ご支援ありがとうございます！"
   },
   "notFound": {
-    "title": "Oops! You Seem Lost! 🗺️",
-    "message": "The page you're looking for might be in a parallel universe... Or it never existed. Who knows? 🤷‍♂️",
-    "funFact": "💡 Fun Fact: You unlocked a secret achievement by finding this 404 page!",
-    "goHome": "Go Home",
-    "goBack": "Go Back",
-    "tip": "Try the Konami code, something might happen..."
+    "title": "おっと！迷子になったようですね！ 🗺️",
+    "message": "探しているページは並行宇宙にあるかもしれません...または存在しなかったかもしれません。誰が知っているでしょう？ 🤷‍♂️",
+    "funFact": "💡 楽しい事実：この404ページを見つけることで秘密の実績を解除しました！",
+    "goHome": "ホームに戻る",
+    "goBack": "戻る",
+    "tip": "コナミコードを試してみてください、何かが起こるかもしれません..."
   },
   "common": {
     "name": "Tolga Çavga",
     "role": "Frontend Developer",
-    "resume": "Resume",
+    "resume": "履歴書",
     "developerLogo": "Developer Logo",
-    "closeMenu": "Close Menu",
+    "closeMenu": "メニューを閉じる",
     "languages": {
-      "turkish": "Turkish",
-      "azerbaijani": "Azerbaijani Turkish",
-      "english": "English",
-      "german": "German"
+      "turkish": "トルコ語",
+      "azerbaijani": "アゼルバイジャン語トルコ語",
+      "english": "英語",
+      "german": "ドイツ語"
     }
   },
   "projectLike": {
-    "like": "Like project",
-    "unlike": "Unlike project",
-    "dislike": "Dislike project",
-    "removeDislike": "Remove dislike",
-    "liked": "Project liked! ❤️",
-    "unliked": "Like removed",
-    "disliked": "Project disliked 👎",
-    "dislikeRemoved": "Dislike removed",
-    "error": "An error occurred, please try again"
+    "like": "プロジェクトを気に入る",
+    "unlike": "プロジェクトの気に入りを解除",
+    "dislike": "プロジェクトを気に入らない",
+    "removeDislike": "気に入らないを解除",
+    "liked": "プロジェクトを気に入りました！ ❤️",
+    "unliked": "気に入りを解除しました",
+    "disliked": "プロジェクトを気に入りませんでした 👎",
+    "dislikeRemoved": "気に入らないを解除しました",
+    "error": "エラーが発生しました。もう一度お試しください"
   }
 }
 

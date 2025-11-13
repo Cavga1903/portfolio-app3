@@ -294,7 +294,7 @@ const Contact: React.FC = () => {
 
 
   return (
-    <section id="contact" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+    <section id="contact" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tl from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-1/4 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -316,12 +316,12 @@ const Contact: React.FC = () => {
           <div className="card bg-gradient-to-br from-emerald-500/10 to-teal-500/10 backdrop-blur-sm border border-emerald-500/30 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-8">
             <div className="text-center mb-6">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full mb-4">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-emerald-400 mb-2">{t('contact.freeQuote.title')}</h3>
-              <p className="text-gray-300 text-sm">{t('contact.freeQuote.description')}</p>
+              <p className="text-gray-700 dark:text-gray-300 text-sm">{t('contact.freeQuote.description')}</p>
             </div>
 
             <div className="space-y-4">
@@ -332,8 +332,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.siteAnalysis.title')}</h4>
-                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.siteAnalysis.description')}</p>
+                  <h4 className="text-gray-900 dark:text-white font-semibold text-sm">{t('contact.freeQuote.siteAnalysis.title')}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">{t('contact.freeQuote.siteAnalysis.description')}</p>
                 </div>
               </div>
 
@@ -344,8 +344,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.performanceReport.title')}</h4>
-                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.performanceReport.description')}</p>
+                  <h4 className="text-gray-900 dark:text-white font-semibold text-sm">{t('contact.freeQuote.performanceReport.title')}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">{t('contact.freeQuote.performanceReport.description')}</p>
                 </div>
               </div>
 
@@ -356,8 +356,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.optimizationSuggestions.title')}</h4>
-                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.optimizationSuggestions.description')}</p>
+                  <h4 className="text-gray-900 dark:text-white font-semibold text-sm">{t('contact.freeQuote.optimizationSuggestions.title')}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">{t('contact.freeQuote.optimizationSuggestions.description')}</p>
                 </div>
               </div>
 
@@ -368,8 +368,8 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">{t('contact.freeQuote.competitorAnalysis.title')}</h4>
-                  <p className="text-gray-400 text-xs">{t('contact.freeQuote.competitorAnalysis.description')}</p>
+                  <h4 className="text-gray-900 dark:text-white font-semibold text-sm">{t('contact.freeQuote.competitorAnalysis.title')}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">{t('contact.freeQuote.competitorAnalysis.description')}</p>
                 </div>
               </div>
             </div>
@@ -381,7 +381,7 @@ const Contact: React.FC = () => {
                 </svg>
                 <span className="text-emerald-400 font-semibold text-sm">{t('contact.freeQuote.completelyFree')}</span>
               </div>
-              <p className="text-gray-300 text-xs">{t('contact.freeQuote.completelyFreeDescription')}</p>
+              <p className="text-gray-700 dark:text-gray-300 text-xs">{t('contact.freeQuote.completelyFreeDescription')}</p>
             </div>
 
             <div className="mt-4 text-center">
@@ -416,7 +416,7 @@ const Contact: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Input */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-200">
+              <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-800 dark:text-gray-200">
                 {t('contact.form.name')}
                 <span className="text-red-400 ml-1" aria-label="required">*</span>
               </label>
@@ -432,8 +432,8 @@ const Contact: React.FC = () => {
                 aria-invalid={errors.name ? 'true' : 'false'}
                 aria-describedby={errors.name ? 'name-error' : undefined}
                 placeholder={t('contact.form.namePlaceholder')}
-                className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300 ${
-                  errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                className={`w-full px-4 py-3 bg-white dark:bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 transition-all duration-300 ${
+                  errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700'
                 }`}
               />
               {errors.name && (
@@ -445,7 +445,7 @@ const Contact: React.FC = () => {
 
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-200">
+              <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-800 dark:text-gray-200">
                 {t('contact.form.email')}
                 <span className="text-red-400 ml-1" aria-label="required">*</span>
               </label>
@@ -461,8 +461,8 @@ const Contact: React.FC = () => {
                 aria-invalid={errors.email ? 'true' : 'false'}
                 aria-describedby={errors.email ? 'email-error' : undefined}
                 placeholder={t('contact.form.emailPlaceholder')}
-                className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300 ${
-                  errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                className={`w-full px-4 py-3 bg-white dark:bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 transition-all duration-300 ${
+                  errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700'
                 }`}
               />
               {errors.email && (
@@ -474,10 +474,10 @@ const Contact: React.FC = () => {
 
             {/* Message Textarea */}
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-200">
+              <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-800 dark:text-gray-200">
                 {t('contact.form.message')}
                 <span className="text-red-400 ml-1" aria-label="required">*</span>
-                <span className="text-gray-400 text-xs font-normal ml-2">
+                <span className="text-gray-600 dark:text-gray-400 text-xs font-normal ml-2">
                   ({formData.message.length}/{VALIDATION.MAX_MESSAGE_LENGTH})
                 </span>
               </label>
@@ -494,8 +494,8 @@ const Contact: React.FC = () => {
                 aria-invalid={errors.message ? 'true' : 'false'}
                 aria-describedby={errors.message ? 'message-error' : undefined}
                 placeholder={t('contact.form.messagePlaceholder')}
-                className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-400 resize-none transition-all duration-300 ${
-                  errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-700'
+                className={`w-full px-4 py-3 bg-white dark:bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 resize-none transition-all duration-300 ${
+                  errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700'
                 }`}
               />
               {errors.message && (

@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaGithub, FaUser } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useAnalytics } from "../hooks/useAnalytics";
 
 // Dil listesi - component dışında tanımlı (public/png klasöründeki bayraklara göre)
@@ -65,8 +66,19 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeLink, setActiveLink] = useState("hero");
   const { t, i18n } = useTranslation();
   const { trackClick, trackLanguageChange } = useAnalytics();
+  
+  // Refs for link positions
+  const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
+  const underlineX = useMotionValue(0);
+  const underlineWidth = useMotionValue(0);
+  
+  // Smooth spring animations for underline
+  const springConfig = { damping: 25, stiffness: 300 };
+  const underlineXSpring = useSpring(underlineX, springConfig);
+  const underlineWidthSpring = useSpring(underlineWidth, springConfig);
 
   const normalizedLang = i18n.language.split("-")[0].toLowerCase();
   const currentLanguageIndex = useMemo(() => {
@@ -172,6 +184,22 @@ const Navbar: React.FC = () => {
     }
   }, []);
 
+  // Update underline position based on active link
+  const updateUnderline = React.useCallback((linkId: string) => {
+    const linkElement = linkRefs.current[linkId];
+    if (linkElement) {
+      const { offsetLeft, offsetWidth } = linkElement;
+      underlineX.set(offsetLeft);
+      underlineWidth.set(offsetWidth);
+    }
+  }, [underlineX, underlineWidth]);
+
+  // Set active link and update underline
+  const handleLinkClick = (linkId: string) => {
+    setActiveLink(linkId);
+    updateUnderline(linkId);
+  };
+
   // Smooth scroll function
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -181,33 +209,69 @@ const Navbar: React.FC = () => {
         block: "start",
       });
     }
+    handleLinkClick(elementId);
   };
+
+  // Detect active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => ({
+        id: link.id,
+        element: document.getElementById(link.id),
+      }));
+
+      const scrollPosition = window.scrollY + 100; // Offset for navbar height
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section.element) {
+          const { offsetTop, offsetHeight } = section.element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            if (activeLink !== section.id) {
+              setActiveLink(section.id);
+              updateUnderline(section.id);
+            }
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeLink, updateUnderline]);
+
+  // Update underline when active link changes
+  useEffect(() => {
+    updateUnderline(activeLink);
+  }, [activeLink, updateUnderline]);
 
 
   return (
-    <nav className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm fixed z-50 border-b border-gray-200/50 dark:border-gray-700/50 w-full top-0 left-0 right-0">
+    <nav className="bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm fixed z-50 border-b border-gray-200/80 dark:border-gray-700/50 w-full top-0 left-0 right-0">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo - Left Side */}
-          <a
-            href="#hero"
-            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-colors duration-300 group"
-            onClick={(e) => {
-              e.preventDefault();
-              smoothScrollTo("hero");
-              trackClick("nav_hero", "navigation_link", "Tolga Çavga");
-            }}
-          >
-            <span className="text-xl font-mono">{"</>"}</span>
-            <span className="text-lg font-medium">cavga.dev</span>
-          </a>
+          {/* Logo and Toggles - Left Side */}
+          <div className="flex items-center gap-3">
+            <a
+              href="#hero"
+              className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white cursor-pointer transition-colors duration-300 group"
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("hero");
+                trackClick("nav_hero", "navigation_link", "Tolga Çavga");
+              }}
+            >
+              <span className="text-xl font-mono">{"</>"}</span>
+              <span className="text-lg font-medium">cavga.dev</span>
+            </a>
 
-          {/* Desktop Menu - Right Side */}
-          <div className="hidden lg:flex lg:items-center lg:gap-4">
-            {/* Dark Mode Toggle */}
+            {/* Dark Mode Toggle - Desktop */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="hidden lg:flex p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -217,43 +281,65 @@ const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* Language Selector */}
+            {/* Language Selector - Desktop */}
             <button
               onClick={cycleToNextLanguage}
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+              className="hidden lg:flex p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
               aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
               title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
             >
               <FlagIcon code={currentLanguage.code} className="w-6 h-6" />
             </button>
+          </div>
+
+          {/* Desktop Menu - Right Side */}
+          <div className="hidden lg:flex lg:items-center lg:gap-4 relative">
 
             {/* Navigation Links */}
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-all duration-300 relative group px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo(link.id);
-                  trackClick(
-                    `nav_${link.id}`,
-                    "navigation_link",
-                    t(link.labelKey)
-                  );
+            <div className="relative flex items-center gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  ref={(el) => {
+                    linkRefs.current[link.id] = el;
+                  }}
+                  href={`#${link.id}`}
+                  className={`text-sm cursor-pointer transition-all duration-300 relative px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded ${
+                    activeLink === link.id
+                      ? "text-blue-600 dark:text-blue-400 font-medium"
+                      : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    smoothScrollTo(link.id);
+                    trackClick(
+                      `nav_${link.id}`,
+                      "navigation_link",
+                      t(link.labelKey)
+                    );
+                  }}
+                >
+                  {t(link.labelKey)}
+                </a>
+              ))}
+              
+              {/* Animated Underline */}
+              <motion.div
+                className="absolute bottom-0 h-0.5 bg-blue-500 dark:bg-blue-400 rounded-full"
+                style={{
+                  x: underlineXSpring,
+                  width: underlineWidthSpring,
                 }}
-              >
-                {t(link.labelKey)}
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
-              </a>
-            ))}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              />
+            </div>
 
             {/* GitHub Icon */}
             <a
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="GitHub"
               onClick={() => trackClick('github', 'social_link', 'GitHub')}
             >
@@ -274,7 +360,7 @@ const Navbar: React.FC = () => {
             {/* Dark Mode Toggle - Mobile */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -287,7 +373,7 @@ const Navbar: React.FC = () => {
             {/* Language Selector - Mobile */}
             <button
               onClick={cycleToNextLanguage}
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
               aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
               title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
             >
@@ -298,7 +384,7 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-controls="mobile-menu"
               aria-expanded={isMenuOpen}
               aria-label="Toggle menu"
@@ -326,29 +412,54 @@ const Navbar: React.FC = () => {
           />
           
           {/* Menu Panel */}
-          <div className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-xl">
+          <div className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-700/50 shadow-xl">
             {/* Header */}
               <div className="px-4 py-3 border-b border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-between">
-                {/* Logo */}
-                <a
-                  href="#hero"
-                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsMenuOpen(false);
-                    smoothScrollTo("hero");
-                    trackClick("nav_hero", "navigation_link", "Tolga Çavga");
-                  }}
-                >
-                  <span className="text-xl font-mono">{"</>"}</span>
-                  <span className="text-lg font-medium">cavga.dev</span>
-                </a>
+                {/* Logo and Toggles */}
+                <div className="flex items-center gap-3">
+                  <a
+                    href="#hero"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      smoothScrollTo("hero");
+                      trackClick("nav_hero", "navigation_link", "Tolga Çavga");
+                    }}
+                  >
+                    <span className="text-xl font-mono">{"</>"}</span>
+                    <span className="text-lg font-medium">cavga.dev</span>
+                  </a>
+
+                  {/* Dark Mode Toggle - Mobile Menu */}
+                  <button
+                    onClick={toggleDarkMode}
+                    className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    aria-label="Toggle dark mode"
+                  >
+                    {isDarkMode ? (
+                      <SunIcon className="w-5 h-5" />
+                    ) : (
+                      <MoonIcon className="w-5 h-5" />
+                    )}
+                  </button>
+
+                  {/* Language Selector - Mobile Menu */}
+                  <button
+                    onClick={cycleToNextLanguage}
+                    className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+                    aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
+                    title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
+                  >
+                    <FlagIcon code={currentLanguage.code} className="w-5 h-5" />
+                  </button>
+                </div>
                 
                 {/* Close Button */}
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200"
+                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200"
                   aria-label="Close menu"
                 >
                   <HiX className="w-6 h-6" />
@@ -362,7 +473,7 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.id}
                   href={`#${link.id}`}
-                  className="block px-3 py-2.5 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 relative group"
+                  className="block px-3 py-2.5 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 relative group"
                   onClick={(e) => {
                     e.preventDefault();
                     setIsMenuOpen(false);
@@ -388,7 +499,7 @@ const Navbar: React.FC = () => {
                   href="https://github.com/Cavga1903"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200"
+                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200"
                   aria-label="GitHub"
                   onClick={() => {
                     setIsMenuOpen(false);

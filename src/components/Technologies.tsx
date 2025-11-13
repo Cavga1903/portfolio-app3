@@ -37,6 +37,18 @@ const Technologies: React.FC = () => {
   const { t } = useTranslation();
   const { trackEvent, trackSectionView, trackSkillInteraction } = useAnalytics();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredCategory, setHoveredCategory] = useState<'frontend' | 'backend' | 'tools' | null>(null);
+  
+  // Generate random order for each category on mount
+  const [categoryOrders, setCategoryOrders] = useState<{
+    frontend: string[];
+    backend: string[];
+    tools: string[];
+  }>({
+    frontend: [],
+    backend: [],
+    tools: []
+  });
   
   const technologies: Technology[] = [
     // Frontend
@@ -195,6 +207,33 @@ const Technologies: React.FC = () => {
     tools: technologies.filter(tech => tech.category === 'tools')
   };
 
+  // Initialize random order for each category
+  useEffect(() => {
+    const shuffleArray = <T,>(array: T[]): T[] => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+    
+    setCategoryOrders({
+      frontend: shuffleArray(technologiesByCategory.frontend.map(tech => tech.iconKey)),
+      backend: shuffleArray(technologiesByCategory.backend.map(tech => tech.iconKey)),
+      tools: shuffleArray(technologiesByCategory.tools.map(tech => tech.iconKey))
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Get delay for a card based on its position in the random order
+  const getCardDelay = (iconKey: string, category: 'frontend' | 'backend' | 'tools'): number => {
+    if (hoveredCategory !== category) return 0;
+    const order = categoryOrders[category];
+    const index = order.indexOf(iconKey);
+    return index >= 0 ? index * 0.1 : 0;
+  };
+
   // Track section view when component mounts
   useEffect(() => {
     trackSectionView('technologies', 0);
@@ -205,7 +244,7 @@ const Technologies: React.FC = () => {
   }, [trackSectionView, trackEvent, technologies.length]);
 
   return (
-    <section id="technologies" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+    <section id="technologies" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-bl from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -217,7 +256,7 @@ const Technologies: React.FC = () => {
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-purple-500 group-hover:w-full transition-all duration-500"></span>
       </h2>
 
-      <p className="relative z-10 text-gray-400 text-center mb-12 sm:mb-16 md:mb-20 max-w-2xl">
+      <p className="relative z-10 text-gray-600 dark:text-gray-400 text-center mb-12 sm:mb-16 md:mb-20 max-w-2xl">
         {t('technologies.subtitle')}
       </p>
 
@@ -227,6 +266,11 @@ const Technologies: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          onMouseEnter={() => setHoveredCategory('frontend')}
+          onMouseLeave={() => {
+            setHoveredCategory(null);
+            setHoveredCard(null);
+          }}
         >
           <div className="flex items-center gap-3 mb-6">
             <span className="text-lg sm:text-xl font-semibold text-purple-400 bg-purple-500/10 px-4 py-2 rounded-lg border border-purple-500/30">
@@ -240,7 +284,9 @@ const Technologies: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {technologiesByCategory.frontend.map((tech, index) => (
+            {technologiesByCategory.frontend.map((tech, index) => {
+              const cardDelay = getCardDelay(tech.iconKey, 'frontend');
+              return (
               <motion.div
                 key={tech.iconKey}
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -267,10 +313,11 @@ const Technologies: React.FC = () => {
                   <motion.div
                     className="relative w-full h-full"
                     animate={{
-                      rotateY: hoveredCard === tech.iconKey ? 180 : 0
+                      rotateY: hoveredCategory === 'frontend' ? 180 : 0
                     }}
                     transition={{
                       duration: 0.6,
+                      delay: cardDelay,
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
                     style={{
@@ -279,7 +326,7 @@ const Technologies: React.FC = () => {
                   >
                     {/* Front of Card - Icon */}
                     <div 
-                      className="absolute inset-0 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 sm:p-5 hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-lg transition-all duration-300 cursor-pointer flex items-center justify-center"
+                      className="absolute inset-0 bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-lg p-4 sm:p-5 hover:border-purple-500/50 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:shadow-purple-500/20 hover:shadow-lg transition-all duration-300 cursor-pointer flex items-center justify-center"
                       style={{
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden'
@@ -299,24 +346,25 @@ const Technologies: React.FC = () => {
 
                     {/* Back of Card - Text */}
                     <div 
-                      className="absolute inset-0 bg-gray-800/90 backdrop-blur-sm border border-purple-500/50 rounded-lg p-3 sm:p-4 shadow-lg shadow-purple-500/20 flex flex-col items-center justify-center text-center"
+                      className="absolute inset-0 bg-white dark:bg-gray-800/90 backdrop-blur-sm border border-purple-500/50 rounded-lg p-3 sm:p-4 shadow-lg shadow-purple-500/20 flex flex-col items-center justify-center text-center"
                       style={{
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden'
                       }}
                     >
-                      <div className="font-semibold text-sm sm:text-base mb-1 text-white">
+                      <div className="font-semibold text-sm sm:text-base mb-1 text-gray-900 dark:text-white">
                         {t(tech.nameKey)}
                       </div>
-                      <div className="text-xs text-gray-300 leading-tight">
+                      <div className="text-xs text-gray-700 dark:text-gray-300 leading-tight">
                         {t(tech.descriptionKey)}
                       </div>
                     </div>
                   </motion.div>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </motion.div>
 
@@ -325,6 +373,11 @@ const Technologies: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          onMouseEnter={() => setHoveredCategory('backend')}
+          onMouseLeave={() => {
+            setHoveredCategory(null);
+            setHoveredCard(null);
+          }}
         >
           <div className="flex items-center gap-3 mb-6">
             <span className="text-lg sm:text-xl font-semibold text-green-400 bg-green-500/10 px-4 py-2 rounded-lg border border-green-500/30">
@@ -338,7 +391,9 @@ const Technologies: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {technologiesByCategory.backend.map((tech, index) => (
+            {technologiesByCategory.backend.map((tech, index) => {
+              const cardDelay = getCardDelay(tech.iconKey, 'backend');
+              return (
               <motion.div
                 key={tech.iconKey}
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -365,10 +420,11 @@ const Technologies: React.FC = () => {
                   <motion.div
                     className="relative w-full h-full"
                     animate={{
-                      rotateY: hoveredCard === tech.iconKey ? 180 : 0
+                      rotateY: hoveredCategory === 'backend' ? 180 : 0
                     }}
                     transition={{
                       duration: 0.6,
+                      delay: cardDelay,
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
                     style={{
@@ -397,24 +453,25 @@ const Technologies: React.FC = () => {
 
                     {/* Back of Card - Text */}
                     <div 
-                      className="absolute inset-0 bg-gray-800/90 backdrop-blur-sm border border-green-500/50 rounded-lg p-3 sm:p-4 shadow-lg shadow-green-500/20 flex flex-col items-center justify-center text-center"
+                      className="absolute inset-0 bg-white dark:bg-gray-800/90 backdrop-blur-sm border border-purple-500/50 rounded-lg p-3 sm:p-4 shadow-lg shadow-purple-500/20 flex flex-col items-center justify-center text-center"
                       style={{
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden'
                       }}
                     >
-                      <div className="font-semibold text-sm sm:text-base mb-1 text-white">
+                      <div className="font-semibold text-sm sm:text-base mb-1 text-gray-900 dark:text-white">
                         {t(tech.nameKey)}
                       </div>
-                      <div className="text-xs text-gray-300 leading-tight">
+                      <div className="text-xs text-gray-700 dark:text-gray-300 leading-tight">
                         {t(tech.descriptionKey)}
                       </div>
                     </div>
                   </motion.div>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </motion.div>
 
@@ -423,7 +480,12 @@ const Technologies: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-12 sm:mb-16"
+          className="mb-0"
+          onMouseEnter={() => setHoveredCategory('tools')}
+          onMouseLeave={() => {
+            setHoveredCategory(null);
+            setHoveredCard(null);
+          }}
         >
           <div className="flex items-center gap-3 mb-6">
             <span className="text-lg sm:text-xl font-semibold text-blue-400 bg-blue-500/10 px-4 py-2 rounded-lg border border-blue-500/30">
@@ -437,7 +499,9 @@ const Technologies: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            {technologiesByCategory.tools.map((tech, index) => (
+            {technologiesByCategory.tools.map((tech, index) => {
+              const cardDelay = getCardDelay(tech.iconKey, 'tools');
+              return (
               <motion.div
                 key={tech.iconKey}
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -464,10 +528,11 @@ const Technologies: React.FC = () => {
                   <motion.div
                     className="relative w-full h-full"
                     animate={{
-                      rotateY: hoveredCard === tech.iconKey ? 180 : 0
+                      rotateY: hoveredCategory === 'tools' ? 180 : 0
                     }}
                     transition={{
                       duration: 0.6,
+                      delay: cardDelay,
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
                     style={{
@@ -496,24 +561,25 @@ const Technologies: React.FC = () => {
 
                     {/* Back of Card - Text */}
                     <div 
-                      className="absolute inset-0 bg-gray-800/90 backdrop-blur-sm border border-blue-500/50 rounded-lg p-3 sm:p-4 shadow-lg shadow-blue-500/20 flex flex-col items-center justify-center text-center"
+                      className="absolute inset-0 bg-white dark:bg-gray-800/90 backdrop-blur-sm border border-purple-500/50 rounded-lg p-3 sm:p-4 shadow-lg shadow-purple-500/20 flex flex-col items-center justify-center text-center"
                       style={{
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden'
                       }}
                     >
-                      <div className="font-semibold text-sm sm:text-base mb-1 text-white">
+                      <div className="font-semibold text-sm sm:text-base mb-1 text-gray-900 dark:text-white">
                         {t(tech.nameKey)}
                       </div>
-                      <div className="text-xs text-gray-300 leading-tight">
+                      <div className="text-xs text-gray-700 dark:text-gray-300 leading-tight">
                         {t(tech.descriptionKey)}
                       </div>
                     </div>
                   </motion.div>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </motion.div>
       </div>

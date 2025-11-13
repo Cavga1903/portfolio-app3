@@ -116,7 +116,7 @@ const Services: React.FC = () => {
   return (
     <section 
       id="services" 
-      className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white p-6 py-20 overflow-hidden mt-2"
+      className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden"
     >
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -149,16 +149,16 @@ const Services: React.FC = () => {
             {b2bServices.map((service, index) => (
               <div
                 key={service.titleKey}
-                className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer hover:scale-[1.05]"
+                className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl hover:shadow-2xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300 p-6 group cursor-pointer hover:scale-[1.05]"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`inline-flex p-4 bg-gradient-to-br ${service.gradient} rounded-xl shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <div className="text-white">
+                  <div className="text-gray-900 dark:text-white">
                     {service.icon}
                   </div>
                 </div>
 
-                <h4 className={`text-xl font-bold mb-2 ${service.color} group-hover:text-white transition-colors duration-300`}>
+                <h4 className={`text-xl font-bold mb-2 ${service.color} group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300`}>
                   {t(service.titleKey)}
                 </h4>
 
@@ -184,16 +184,16 @@ const Services: React.FC = () => {
             {b2cServices.map((service, index) => (
               <div
                 key={service.titleKey}
-                className="card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer hover:scale-[1.05]"
+                className="card bg-white/60 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-xl hover:shadow-2xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300 p-6 group cursor-pointer hover:scale-[1.05]"
                 style={{ animationDelay: `${(index + b2bServices.length) * 100}ms` }}
               >
                 <div className={`inline-flex p-4 bg-gradient-to-br ${service.gradient} rounded-xl shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <div className="text-white">
+                  <div className="text-gray-900 dark:text-white">
                     {service.icon}
                   </div>
                 </div>
 
-                <h4 className={`text-xl font-bold mb-2 ${service.color} group-hover:text-white transition-colors duration-300`}>
+                <h4 className={`text-xl font-bold mb-2 ${service.color} group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300`}>
                   {t(service.titleKey)}
                 </h4>
 

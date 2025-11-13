@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaBriefcase, FaGraduationCap, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaMapMarkerAlt, FaCalendarAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 interface TimelineItem {
   type: 'work' | 'education';
@@ -16,6 +17,7 @@ interface TimelineItem {
 
 const Experience: React.FC = () => {
   const { t } = useTranslation();
+  const [showAll, setShowAll] = useState(false);
 
   const experiences: TimelineItem[] = [
     {
@@ -97,8 +99,12 @@ const Experience: React.FC = () => {
     }
   ];
 
+  // İlk deneyim tam görünsün, "Daha Fazla Göster"e basmadan ikincisi görünmesin
+  const visibleExperiences = showAll ? experiences : experiences.slice(0, 1);
+  const hasMore = experiences.length > 1;
+
   return (
-    <section id="experience" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white p-6 overflow-hidden">
+    <section id="experience" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-800 via-gray-900 to-black text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -112,18 +118,88 @@ const Experience: React.FC = () => {
 
       <div className="relative z-10 w-full max-w-4xl">
         {/* Timeline */}
-        <div className="relative">
+        <motion.div 
+          className="relative"
+          layout
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            mass: 0.5
+          }}
+        >
           {/* Center line */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 via-teal-500 to-cyan-500 opacity-30 z-10"></div>
 
           {/* Timeline items */}
-          {experiences.map((item, index) => (
-            <div key={index} className={`relative mb-12 ${index % 2 === 0 ? 'md:pr-1/2' : 'md:pl-1/2 md:text-right'} fade-in-up group`}>
-              {/* Timeline dot - On timeline center */}
-              <div className="hidden md:block absolute top-[-15px] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full border-4 border-gray-900 shadow-lg shadow-emerald-500/50 z-30 group-hover:scale-125 transition-transform duration-300"></div>
+          <AnimatePresence mode="popLayout" initial={false}>
+            {visibleExperiences.map((item, index) => {
+              // İlk deneyim (index 0) her zaman görünür, animasyon yok
+              // Yeni eklenen deneyimler (index > 0) aşağıdan kayarak gelir
+              const isNewItem = index > 0;
+              
+              return (
+              <motion.div
+                key={`${item.company}-${item.period}`}
+                layout
+                initial={isNewItem ? { 
+                  opacity: 0, 
+                  y: 100, 
+                  scale: 0.9,
+                  filter: "blur(4px)"
+                } : false}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: 1,
+                  filter: "blur(0px)"
+                }}
+                exit={{ 
+                  opacity: 0, 
+                  y: -100, 
+                  scale: 0.9,
+                  filter: "blur(4px)"
+                }}
+                transition={{
+                  layout: { 
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 20,
+                    mass: 0.5
+                  },
+                  opacity: { 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    mass: 0.8,
+                    delay: isNewItem ? (index - 1) * 0.1 : 0
+                  },
+                  y: { 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    mass: 0.8,
+                    delay: isNewItem ? (index - 1) * 0.1 : 0
+                  },
+                  scale: { 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    mass: 0.8,
+                    delay: isNewItem ? (index - 1) * 0.1 : 0
+                  },
+                  filter: { 
+                    duration: 0.3,
+                    delay: isNewItem ? (index - 1) * 0.1 : 0
+                  }
+                }}
+                className={`relative mb-12 ${index % 2 === 0 ? 'md:pr-1/2' : 'md:pl-1/2 md:text-right'} group`}
+              >
+                {/* Timeline dot - On timeline center */}
+                <div className="hidden md:block absolute top-[-15px] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full border-4 border-gray-900 shadow-lg shadow-emerald-500/50 z-30 group-hover:scale-125 transition-transform duration-300"></div>
 
-              {/* Content card */}
-              <div className={`card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-6 hover:scale-[1.02] ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'} relative`}>
+                {/* Content card */}
+                <div className={`card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 p-6 hover:scale-[1.02] ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'} relative`}>
                 {/* Company Logo & Info */}
                 <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? 'flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Company Logo or Icon */}
@@ -202,9 +278,28 @@ const Experience: React.FC = () => {
                   </div>
                 )}
               </div>
-            </div>
-          ))}
-        </div>
+            </motion.div>
+            );
+          })}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Show More / Show Less Button */}
+        {hasMore && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <span>{showAll ? t('experience.showLess') : t('experience.showMore')}</span>
+              {showAll ? (
+                <FaChevronUp className="w-4 h-4 group-hover:translate-y-[-2px] transition-transform duration-300" />
+              ) : (
+                <FaChevronDown className="w-4 h-4 group-hover:translate-y-[2px] transition-transform duration-300" />
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

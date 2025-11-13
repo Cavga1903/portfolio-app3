@@ -105,8 +105,8 @@ const Home: React.FC = () => {
         {/* Social Proof Section */}
         <SocialProof />
         
-        {/* Portfolio Share CTA */}
-        <PortfolioShareCTA />
+        {/* Portfolio Share CTA - Only in development */}
+        {process.env.NODE_ENV === 'development' && <PortfolioShareCTA />}
         
         <Suspense fallback={<SkeletonLoader type="contact" />}>
           <Contact />

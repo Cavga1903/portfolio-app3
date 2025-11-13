@@ -2,140 +2,142 @@
   "pageTitle": "Tolga Çavga | Frontend Developer - Portfolio",
   "nav": {
     "home": "Home",
-    "about": "About",
-    "technologies": "Technologies",
-    "services": "Services",
+    "about": "Chi sono",
+    "technologies": "Tecnologie",
+    "services": "Servizi",
     "projects": "Portfolio",
-    "contact": "Contact",
+    "contact": "Contatti",
     "blog": "Blog"
   },
   "hero": {
-    "greeting": "Hello, I'm Tolga! 👋",
-    "description": "As a Frontend Developer, I build creative and modern web projects.",
-    "ctaAbout": "Learn More About Me",
-    "ctaProjects": "View My Projects",
+    "greeting": "Ciao, sono Tolga! 👋",
+    "description": "Come Frontend Developer, creo progetti web creativi e moderni.",
+    "ctaAbout": "Scopri di più su di me",
+    "ctaProjects": "Vedi i miei progetti",
     "typing": {
       "frontendDeveloper": "Frontend Developer",
-      "reactSpecialist": "React Specialist",
-      "uiuxEnthusiast": "UI/UX Enthusiast",
-      "creativeCoder": "Creative Coder"
+      "reactSpecialist": "Specialista React",
+      "uiuxEnthusiast": "Appassionato UI/UX",
+      "creativeCoder": "Programmatore Creativo"
     }
   },
     "modal": {
-      "clickOutsideToClose": "Click outside to close",
-      "technologiesUsed": "Technologies Used",
-      "projectOverview": "Project Overview",
-      "keyFeatures": "Key Features",
-      "challenges": "Challenges",
-      "solutions": "Solutions"
+      "clickOutsideToClose": "Clicca fuori per chiudere",
+      "technologiesUsed": "Tecnologie Utilizzate",
+      "projectOverview": "Panoramica del Progetto",
+      "keyFeatures": "Caratteristiche Principali",
+      "challenges": "Sfide",
+      "solutions": "Soluzioni"
     },
   "about": {
-    "title": "About Me",
+    "title": "Chi sono",
     "name": "Tolga Çavga",
     "role": "Frontend Developer",
-    "githubPhotoAlt": "GitHub Profile Photo",
+    "githubPhotoAlt": "Foto Profilo GitHub",
     "developerEmojiAlt": "Developer Emoji",
-    "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports.",
+    "description": "Ciao! Sono Tolga. Sono entrato nel mondo dello sviluppo software con grande passione. Come Frontend Developer, mi piace creare applicazioni web creative e user-friendly. Nel tempo libero, mi interesso di imparare nuove tecnologie, leggere libri e fare sport.",
     "stats": {
       "focus": {
         "label": "Focus",
         "value": "Frontend Dev"
       },
       "passion": {
-        "label": "Passion",
-        "value": "Innovation"
+        "label": "Passione",
+        "value": "Innovazione"
       },
       "love": {
-        "label": "Love",
-        "value": "Clean Code"
+        "label": "Amore",
+        "value": "Codice Pulito"
       }
     },
     "softSkills": {
-      "title": "Professional Competencies",
+      "title": "Competenze Professionali",
       "corporate": {
-        "title": "Corporate Experience",
-        "description": "Experience working in large teams and managing complex projects"
+        "title": "Esperienza Aziendale",
+        "description": "Esperienza lavorativa in grandi team e gestione di progetti complessi"
       },
       "learning": {
-        "title": "Fast Learning",
-        "description": "Ability to quickly learn new technologies and apply them in projects"
+        "title": "Apprendimento Rapido",
+        "description": "Capacità di apprendere rapidamente nuove tecnologie e applicarle nei progetti"
       },
       "teamwork": {
-        "title": "Teamwork",
-        "description": "Experience working in different roles and team leadership"
+        "title": "Lavoro di Squadra",
+        "description": "Esperienza lavorativa in ruoli diversi e leadership di team"
       }
     }
   },
   "experience": {
-    "title": "Experience & Education",
+    "title": "Esperienza & Istruzione",
+    "showMore": "Mostra di più",
+    "showLess": "Mostra di meno",
     "skills": {
       "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
-      "turkcell": ["Customer Service", "Problem Solving", "Communication"],
+      "turkcell": ["Servizio Clienti", "Risoluzione Problemi", "Comunicazione"],
       "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
-      "concentrix": ["Salesforce CRM", "Customer Satisfaction", "Banking"],
-      "izmir": ["Hardware & Software", "System Administration", "Technical Support", "Teamwork"],
-      "uopeople": ["Computer Science", "Algorithms", "Data Structures"],
-      "anadolu": ["Computer Programming", "Software Development"]
+      "concentrix": ["Salesforce CRM", "Soddisfazione Cliente", "Settore Bancario"],
+      "izmir": ["Hardware & Software", "Amministrazione Sistema", "Supporto Tecnico", "Lavoro di Squadra"],
+      "uopeople": ["Informatica", "Algoritmi", "Strutture Dati"],
+      "anadolu": ["Programmazione Informatica", "Sviluppo Software"]
     },
     "turkcell": {
-      "title": "Customer Service Representative",
+      "title": "Rappresentante Servizio Clienti",
       "company": "Turkcell Global Bilgi",
-      "location": "Bornova, Izmir, Türkiye",
-      "period": "August 2025 - November 2025",
-      "description": "Supporting customers and resolving issues at Turkcell Global Bilgi, with a focus on clear communication, problem-solving, and technical support."
+      "location": "Bornova, İzmir, Turchia",
+      "period": "Agosto 2025 - Novembre 2025",
+      "description": "Supporto clienti e risoluzione problemi presso Turkcell Global Bilgi, con focus su comunicazione chiara, risoluzione problemi e supporto tecnico."
     },
     "upwork": {
       "title": "React Native Developer | Freelance Frontend Developer",
       "company": "Upwork",
-      "location": "İzmir, Türkiye",
-      "period": "July 2025 - Present",
-      "description": "Built cross-platform mobile apps with React Native. Integrated RESTful APIs & Supabase. Designed dynamic UIs with Tailwind CSS, improving user retention by 30%."
+      "location": "İzmir, Turchia",
+      "period": "Luglio 2025 - In corso",
+      "description": "Sviluppato app mobili cross-platform con React Native. Integrato RESTful APIs & Supabase. Progettato UI dinamiche con Tailwind CSS, migliorando la ritenzione utenti del 30%."
     },
     "siliconmade": {
-      "title": "Mobile and Frontend Development Trainee",
+      "title": "Tirocinante Mobile e Frontend Development",
       "company": "Siliconmade Academy",
       "location": "Online",
-      "period": "February 2025 - July 2025",
-      "description": "Completed 6-month / 184-hour traineeship. Developed real-world projects. Gained hands-on expertise in React, React Native, REST API, Supabase, Tailwind CSS, and Firebase."
+      "period": "Febbraio 2025 - Luglio 2025",
+      "description": "Completato tirocinio di 6 mesi / 184 ore. Sviluppato progetti reali. Acquisito competenze pratiche in React, React Native, REST API, Supabase, Tailwind CSS e Firebase."
     },
     "izmir": {
-      "title": "Information Technology Intern",
-      "company": "Izmir Metropolitan Municipality",
-      "location": "İzmir, Türkiye",
-      "period": "September 2017 - June 2018",
-      "description": "Assisted in system setup and hardware identification, enhancing operational efficiency. Provided technical support to users, resolving IT issues and improving user satisfaction. Collaborated with team members on troubleshooting, fostering a cooperative work environment."
+      "title": "Tirocinante Tecnologie Informatiche",
+      "company": "Comune Metropolitano di İzmir",
+      "location": "İzmir, Turchia",
+      "period": "Settembre 2017 - Giugno 2018",
+      "description": "Assistito nella configurazione di sistemi e identificazione hardware, migliorando l'efficienza operativa. Fornito supporto tecnico agli utenti, risolvendo problemi IT e migliorando la soddisfazione utente. Collaborato con i membri del team nella risoluzione dei problemi, promuovendo un ambiente di lavoro cooperativo."
     },
     "concentrix": {
-      "title": "Customer Service Representative – Banking Sector",
+      "title": "Rappresentante Servizio Clienti – Settore Bancario",
       "company": "Concentrix",
-      "location": "İzmir, Türkiye",
-      "period": "December 2022 - October 2024",
-      "description": "Provided front-line banking support. Maintained 95% customer satisfaction. Managed service tickets with Salesforce CRM."
+      "location": "İzmir, Turchia",
+      "period": "Dicembre 2022 - Ottobre 2024",
+      "description": "Fornito supporto bancario di prima linea. Mantenuto 95% di soddisfazione clienti. Gestito ticket di servizio con Salesforce CRM."
     },
     "uopeople": {
-      "title": "Bachelor of Science, Computer Science",
+      "title": "Laurea in Informatica",
       "company": "University of the People",
       "location": "Online",
-      "period": "June 2025 - In Progress",
-      "description": "Currently pursuing a Bachelor of Science in Computer Science. Studying algorithms, data structures, and software engineering principles."
+      "period": "Giugno 2025 - In corso",
+      "description": "Attualmente sto conseguendo una Laurea in Informatica. Studio algoritmi, strutture dati e principi di ingegneria del software."
     },
     "anadolu": {
-      "title": "Associate's Degree, Computer Programming",
-      "company": "Anadolu University",
-      "location": "Eskişehir, Türkiye",
-      "period": "In Progress",
-      "description": "Currently pursuing Associate's Degree in Computer Programming. Learning programming fundamentals and software development processes."
+      "title": "Diploma, Programmazione Informatica",
+      "company": "Università Anadolu",
+      "location": "Eskişehir, Turchia",
+      "period": "In corso",
+      "description": "Attualmente sto conseguendo un Diploma in Programmazione Informatica. Sto imparando i fondamenti della programmazione e i processi di sviluppo software."
     }
   },
   "technologies": {
-    "title": "Creativity needs a lot of tools",
-    "subtitle": "Have a lot of tools in my toolbox, and i'm always learning new ones.",
+    "title": "La creatività ha bisogno di molti strumenti",
+    "subtitle": "Ho molti strumenti nella mia cassetta degli attrezzi e sto sempre imparando nuovi.",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
       "database": "Database",
-      "tools": "Tools",
-      "languages": "Languages"
+      "tools": "Strumenti",
+      "languages": "Lingue"
     },
     "react": "React.js",
     "javascript": "JavaScript",
@@ -156,9 +158,9 @@
     "docker": "Docker",
     "opengraph": "OpenGraph",
     "googleAnalytics": "Google Analytics",
-    "turkish": "Turkish",
-    "english": "English",
-    "german": "German",
+    "turkish": "Turco",
+    "english": "Inglese",
+    "german": "Tedesco",
     "descriptions": {
       "react": "react & native & next",
       "typescript": "type-safe & modern",
@@ -176,14 +178,14 @@
       "vercel": "deployment & hosting",
       "docker": "containers & CI/CD",
       "googleAnalytics": "tracking & insights",
-      "turkish": "native speaker",
-      "english": "professional",
-      "german": "beginner"
+      "turkish": "madrelingua",
+      "english": "professionale",
+      "german": "principiante"
     }
   },
   "certificates": {
-    "title": "Certificates & Achievements",
-    "subtitle": "Certifications and achievements earned during my learning journey",
+    "title": "Certificati & Risultati",
+    "subtitle": "Certificazioni e risultati ottenuti durante il mio percorso di apprendimento",
     "skills": {
       "siliconmade": ["React", "React Native", "Mobile Development"],
       "frontend": ["HTML", "CSS", "JavaScript"],
@@ -193,116 +195,116 @@
       "git": ["Git", "GitHub", "Version Control"]
     },
     "siliconmade": {
-      "title": "Mobile & Frontend Development Certificate",
+      "title": "Certificato Mobile & Frontend Development",
       "issuer": "Siliconmade Academy",
-      "date": "July 2025",
-      "description": "184-hour intensive training program. Mobile app development with React and React Native."
+      "date": "Luglio 2025",
+      "description": "Programma di formazione intensiva di 184 ore. Sviluppo app mobili con React e React Native."
     },
     "frontend": {
-      "title": "Frontend Development Fundamentals",
-      "issuer": "Online Learning Platform",
+      "title": "Fondamenti di Frontend Development",
+      "issuer": "Piattaforma di Apprendimento Online",
       "date": "2024",
-      "description": "Comprehensive training covering HTML, CSS, and JavaScript fundamentals."
+      "description": "Formazione completa che copre i fondamenti di HTML, CSS e JavaScript."
     },
     "react": {
       "title": "React.js Mastery",
-      "issuer": "Online Learning Platform",
+      "issuer": "Piattaforma di Apprendimento Online",
       "date": "2024",
-      "description": "Advanced training in React components, hooks, and state management."
+      "description": "Formazione avanzata su componenti React, hooks e gestione dello stato."
     },
     "responsive": {
       "title": "Responsive Web Design",
-      "issuer": "Online Learning Platform",
+      "issuer": "Piattaforma di Apprendimento Online",
       "date": "2024",
-      "description": "Mobile-first approach and responsive design principles."
+      "description": "Approccio mobile-first e principi di design responsive."
     },
     "javascript": {
       "title": "Modern JavaScript (ES6+)",
-      "issuer": "Online Learning Platform",
+      "issuer": "Piattaforma di Apprendimento Online",
       "date": "2024",
-      "description": "ES6+ features, async/await, and modern JavaScript techniques."
+      "description": "Caratteristiche ES6+, async/await e tecniche JavaScript moderne."
     },
     "git": {
       "title": "Git & GitHub Mastery",
-      "issuer": "Online Learning Platform",
+      "issuer": "Piattaforma di Apprendimento Online",
       "date": "2024",
-      "description": "Version control, branching strategies, and collaborative development."
+      "description": "Controllo versione, strategie di branching e sviluppo collaborativo."
     },
     "stats": {
-      "certificates": "Certificates",
-      "hours": "Training Hours",
-      "projects": "Projects",
-      "experience": "Years Experience"
+      "certificates": "Certificati",
+      "hours": "Ore di Formazione",
+      "projects": "Progetti",
+      "experience": "Anni di Esperienza"
     }
   },
   "services": {
-    "title": "My Services",
-    "subtitle": "Creative and user-friendly web solutions with modern technologies",
-    "b2b": "Business Services",
-    "b2c": "Personal Services",
-    "cta": "Want to work with me on your project?",
-    "contactButton": "Get In Touch",
+    "title": "I Miei Servizi",
+    "subtitle": "Soluzioni web creative e user-friendly con tecnologie moderne",
+    "b2b": "Servizi Aziendali",
+    "b2c": "Servizi Personali",
+    "cta": "Vuoi lavorare con me sul tuo progetto?",
+    "contactButton": "Contattami",
     "corporate": {
-      "title": "Corporate Website",
-      "description": "Modern, professional and responsive corporate websites. Secure and scalable solutions with React and TypeScript."
+      "title": "Sito Web Aziendale",
+      "description": "Siti web aziendali moderni, professionali e responsive. Soluzioni sicure e scalabili con React e TypeScript."
     },
     "landing": {
       "title": "Landing Page",
-      "description": "High-conversion landing pages that load fast and are SEO-friendly. Impressive animations with Framer Motion."
+      "description": "Landing page ad alta conversione che si caricano velocemente e sono SEO-friendly. Animazioni impressionanti con Framer Motion."
     },
     "ecommerce": {
       "title": "E-Commerce Frontend",
-      "description": "User-friendly e-commerce interfaces. Payment integrations, product catalogs and cart management."
+      "description": "Interfacce e-commerce user-friendly. Integrazioni di pagamento, cataloghi prodotti e gestione carrello."
     },
     "dashboard": {
       "title": "Admin Dashboard",
-      "description": "Interactive dashboards for data-driven decision making. Charts, tables and real-time updates."
+      "description": "Dashboard interattive per decisioni basate sui dati. Grafici, tabelle e aggiornamenti in tempo reale."
     },
     "redesign": {
-      "title": "Website Redesign",
-      "description": "Renew your existing website with modern technologies. Performance optimization and UX improvements."
+      "title": "Rinnovamento Sito Web",
+      "description": "Rinnova il tuo sito web esistente con tecnologie moderne. Ottimizzazione delle prestazioni e miglioramenti UX."
     },
     "responsive": {
-      "title": "Responsive Design",
-      "description": "Responsive websites that look perfect on mobile, tablet and desktop. Mobile-first approach."
+      "title": "Design Responsive",
+      "description": "Siti web responsive che sembrano perfetti su mobile, tablet e desktop. Approccio mobile-first."
     },
     "portfolio": {
-      "title": "Portfolio Website",
-      "description": "Personal portfolio and resume websites. Stand out with modern design, animations and SEO optimization."
+      "title": "Sito Web Portfolio",
+      "description": "Siti web portfolio personali e curriculum. Distinguiti con design moderno, animazioni e ottimizzazione SEO."
     },
     "smallBusiness": {
-      "title": "Small Business Website",
-      "description": "Affordable, effective websites for local businesses. Google My Business integration and local SEO."
+      "title": "Sito Web Piccole Imprese",
+      "description": "Siti web convenienti ed efficaci per imprese locali. Integrazione Google My Business e SEO locale."
     },
     "restaurant": {
-      "title": "Restaurant/Cafe Website",
-      "description": "Restaurant websites with digital menu, reservation system and photo gallery. QR code menu support."
+      "title": "Sito Web Ristorante/Caffè",
+      "description": "Siti web ristoranti con menù digitale, sistema di prenotazione e galleria fotografica. Supporto menù QR code."
     },
     "personal": {
-      "title": "Personal Website",
-      "description": "Custom designed websites for blog, resume or personal brand. Content management and social media integration."
+      "title": "Sito Web Personale",
+      "description": "Siti web personalizzati per blog, curriculum o brand personale. Gestione contenuti e integrazione social media."
     }
   },
   "projects": {
-    "title": "My Projects",
-    "subtitle": "Projects I developed using modern web technologies",
-    "details": "Details",
-    "tech": "Technologies:",
+    "title": "I Miei Progetti",
+    "subtitle": "Progetti che ho sviluppato utilizzando tecnologie web moderne",
+    "details": "Dettagli",
+    "tech": "Tecnologie:",
     "github": "GitHub",
     "demo": "Demo",
-    "liveDemo": "Live Demo",
-    "livePreview": "Live Preview",
-    "clickToViewDetails": "Click to view details",
+    "liveDemo": "Demo Live",
+    "livePreview": "Anteprima Live",
+    "clickToViewDetails": "Clicca per vedere i dettagli",
     "roles": {
       "fullStack": "Full Stack Developer",
       "frontend": "Frontend Developer",
       "backend": "Backend Developer"
     },
     "durations": {
-      "week": "{{count}} week",
-      "weeks": "{{count}} weeks",
-      "month": "{{count}} month",
-      "months": "{{count}} months"
+      "week": "{{count}} settimana",
+      "weeks": "{{count}} settimane",
+      "month": "{{count}} mese",
+      "months": "{{count}} mesi"
     },
     "items": {
       "iot": {
@@ -451,52 +453,52 @@
     }
   },
   "contact": {
-    "title": "Contact",
-    "description": "Get in touch with me! Fill out the form below to send me a direct email.",
+    "title": "Contatti",
+    "description": "Mettiti in contatto con me! Compila il modulo qui sotto per inviarmi un'email diretta.",
     "freeQuote": {
-      "title": "Get Free Quote",
-      "description": "I analyze your website and provide recommendations to improve your performance",
+      "title": "Ottieni Preventivo Gratuito",
+      "description": "Analizzo il tuo sito web e fornisco raccomandazioni per migliorare le prestazioni",
       "siteAnalysis": {
-        "title": "Site Analysis",
-        "description": "I analyze your website's current SEO status in detail"
+        "title": "Analisi Sito",
+        "description": "Analizzo lo stato SEO attuale del tuo sito web in dettaglio"
       },
       "performanceReport": {
-        "title": "Performance Report",
-        "description": "Google PageSpeed, Core Web Vitals and technical SEO analysis"
+        "title": "Rapporto Prestazioni",
+        "description": "Google PageSpeed, Core Web Vitals e analisi SEO tecnica"
       },
       "optimizationSuggestions": {
-        "title": "Optimization Suggestions",
-        "description": "Concrete recommendations to rank higher in search engines"
+        "title": "Suggerimenti di Ottimizzazione",
+        "description": "Raccomandazioni concrete per classificarsi più in alto nei motori di ricerca"
       },
       "competitorAnalysis": {
-        "title": "Competitor Analysis",
-        "description": "I analyze your competitors and suggest strategic advantages"
+        "title": "Analisi Concorrenti",
+        "description": "Analizzo i tuoi concorrenti e suggerisco vantaggi strategici"
       },
-      "completelyFree": "Completely Free",
-      "completelyFreeDescription": "This analysis and recommendations are completely free. You are under no obligation.",
-      "sendMessageForQuote": "Send a message to get a quote",
-      "exampleMessage": "Hello! I would like to get free support for my website. Can you please do a detailed analysis?"
+      "completelyFree": "Completamente Gratuito",
+      "completelyFreeDescription": "Questa analisi e le raccomandazioni sono completamente gratuite. Non hai alcun obbligo.",
+      "sendMessageForQuote": "Invia un messaggio per ottenere un preventivo",
+      "exampleMessage": "Ciao! Vorrei ottenere supporto gratuito per il mio sito web. Puoi fare un'analisi dettagliata?"
     },
     "form": {
-      "title": "Send a Message",
-      "name": "Your Name",
-      "namePlaceholder": "Enter your name",
-      "email": "Your Email",
-      "emailPlaceholder": "example@email.com",
-      "message": "Your Message",
-      "messagePlaceholder": "Write your message here...",
-      "send": "Send",
-      "sending": "Sending...",
-      "success": "✅ Your message was sent successfully!",
-      "error": "❌ An error occurred. Please try again.",
+      "title": "Invia un Messaggio",
+      "name": "Il Tuo Nome",
+      "namePlaceholder": "Inserisci il tuo nome",
+      "email": "La Tua Email",
+      "emailPlaceholder": "esempio@email.com",
+      "message": "Il Tuo Messaggio",
+      "messagePlaceholder": "Scrivi il tuo messaggio qui...",
+      "send": "Invia",
+      "sending": "Invio...",
+      "success": "✅ Il tuo messaggio è stato inviato con successo!",
+      "error": "❌ Si è verificato un errore. Per favore riprova.",
       "errors": {
-        "nameRequired": "Name field is required",
-        "nameMinLength": "Name must be at least 2 characters",
-        "emailRequired": "Email field is required",
-        "emailInvalid": "Please enter a valid email address",
-        "messageRequired": "Message field is required",
-        "messageMinLength": "Message must be at least 10 characters",
-        "messageMaxLength": "Message cannot exceed 1000 characters",
+        "nameRequired": "Il campo nome è obbligatorio",
+        "nameMinLength": "Il nome deve contenere almeno 2 caratteri",
+        "emailRequired": "Il campo email è obbligatorio",
+        "emailInvalid": "Per favore inserisci un indirizzo email valido",
+        "messageRequired": "Il campo messaggio è obbligatorio",
+        "messageMinLength": "Il messaggio deve contenere almeno 10 caratteri",
+        "messageMaxLength": "Il messaggio non può superare i 1000 caratteri",
         "recaptchaRequired": "Si prega di completare la verifica reCAPTCHA",
         "recaptchaExpired": "La verifica reCAPTCHA è scaduta. Si prega di riprovare.",
         "recaptchaError": "La verifica reCAPTCHA è fallita. Si prega di riprovare."
@@ -506,35 +508,35 @@
         "notConfigured": "reCAPTCHA non è configurato. Si prega di contattare l'amministratore."
       },
       "captcha": {
-        "label": "Security Verification",
-        "placeholder": "Enter the result",
-        "refresh": "Refresh"
+        "label": "Verifica di Sicurezza",
+        "placeholder": "Inserisci il risultato",
+        "refresh": "Aggiorna"
       }
     },
-    "or": "or",
-    "email": "Send Email",
+    "or": "o",
+    "email": "Invia Email",
     "linkedin": "LinkedIn"
   },
   "footer": {
-    "rights": "All Rights Reserved.",
+    "rights": "Tutti i Diritti Riservati.",
     "madeWith": "Made with",
     "by": "by Tolga | Frontend Developer",
-    "downloadCV": "Download Resume",
-    "buyMeACoffee": "Buy Me a Coffee ☕"
+    "downloadCV": "Scarica Curriculum",
+    "buyMeACoffee": "Offrimi un Caffè ☕"
   },
-  "scrollToTop": "Scroll to top",
+  "scrollToTop": "Torna su",
   "cv": {
-    "professionalSummary": "Professional Summary",
-    "summaryText": "I develop creative and modern web projects as a Frontend Developer. I create user-friendly applications with React, TypeScript and TailwindCSS. I specialize in cross-platform mobile applications and responsive websites.",
-    "technicalSkills": "Technical Skills",
-    "workExperience": "Work Experience",
-    "education": "Education",
-    "certificates": "Certificates",
-    "languages": "Languages",
-    "generatePDF": "Generate PDF",
-    "printCV": "Print",
-    "turkcellDescription": "I support customers and solve problems at Turkcell Global Bilgi. I specialize in clear communication, problem solving and technical support.",
-    "upworkDescription": "I developed cross-platform mobile applications. I integrated RESTful APIs and Supabase. I designed dynamic UIs with Tailwind CSS, increasing user retention by 30%."
+    "professionalSummary": "Riepilogo Professionale",
+    "summaryText": "Sviluppo progetti web creativi e moderni come Frontend Developer. Creo applicazioni user-friendly con React, TypeScript e TailwindCSS. Mi specializzo in applicazioni mobili cross-platform e siti web responsive.",
+    "technicalSkills": "Competenze Tecniche",
+    "workExperience": "Esperienza Lavorativa",
+    "education": "Istruzione",
+    "certificates": "Certificati",
+    "languages": "Lingue",
+    "generatePDF": "Genera PDF",
+    "printCV": "Stampa",
+    "turkcellDescription": "Supporto clienti e risolvo problemi presso Turkcell Global Bilgi. Mi specializzo in comunicazione chiara, risoluzione problemi e supporto tecnico.",
+    "upworkDescription": "Ho sviluppato applicazioni mobili cross-platform. Ho integrato RESTful APIs e Supabase. Ho progettato UI dinamiche con Tailwind CSS, aumentando la ritenzione utenti del 30%."
   },
   "meta": {
     "home": {
@@ -569,68 +571,68 @@
     }
   },
   "share": {
-    "title": "Share",
-    "shareOn": "Share on",
-    "copyLink": "Copy Link",
-    "linkCopied": "Link copied! ✅"
+    "title": "Condividi",
+    "shareOn": "Condividi su",
+    "copyLink": "Copia Link",
+    "linkCopied": "Link copiato! ✅"
   },
   "socialProof": {
-    "title": "Follow Me on Social Media",
-    "subtitle": "Follow my projects, stay updated, and connect with me!",
-    "followMe": "Follow",
-    "cta": "Want to stay updated with new projects and content?",
-    "followGitHub": "Follow on GitHub",
-    "connectLinkedIn": "Connect on LinkedIn",
+    "title": "Seguimi sui Social Media",
+    "subtitle": "Segui i miei progetti, resta aggiornato e connettiti con me!",
+    "followMe": "Segui",
+    "cta": "Vuoi rimanere aggiornato con nuovi progetti e contenuti?",
+    "followGitHub": "Segui su GitHub",
+    "connectLinkedIn": "Connettiti su LinkedIn",
     "github": {
-      "stats": "20+ Repos",
-      "description": "Open source projects and code examples"
+      "stats": "20+ Repository",
+      "description": "Progetti open source ed esempi di codice"
     },
     "linkedin": {
-      "stats": "500+ Connections",
-      "description": "Professional network and career development"
+      "stats": "500+ Connessioni",
+      "description": "Rete professionale e sviluppo di carriera"
     },
     "instagram": {
-      "description": "Coding tips and daily development content"
+      "description": "Consigli di programmazione e contenuti quotidiani di sviluppo"
     }
   },
   "portfolioShare": {
-    "title": "Like My Portfolio?",
-    "description": "If you enjoyed this portfolio and want to share it with your friends, feel free to use the buttons below. Every share motivates me! 🚀",
-    "shareTitle": "Check out Tolga Çavga's amazing portfolio!",
-    "shareDescription": "Modern and creative frontend developer portfolio - React, TypeScript and more!",
-    "thankYou": "Thank you for your support!"
+    "title": "Ti piace il mio Portfolio?",
+    "description": "Se ti è piaciuto questo portfolio e vuoi condividerlo con i tuoi amici, sentiti libero di usare i pulsanti qui sotto. Ogni condivisione mi motiva! 🚀",
+    "shareTitle": "Dai un'occhiata al fantastico portfolio di Tolga Çavga!",
+    "shareDescription": "Portfolio moderno e creativo di frontend developer - React, TypeScript e altro ancora!",
+    "thankYou": "Grazie per il tuo supporto!"
   },
   "notFound": {
-    "title": "Oops! You Seem Lost! 🗺️",
-    "message": "The page you're looking for might be in a parallel universe... Or it never existed. Who knows? 🤷‍♂️",
-    "funFact": "💡 Fun Fact: You unlocked a secret achievement by finding this 404 page!",
-    "goHome": "Go Home",
-    "goBack": "Go Back",
-    "tip": "Try the Konami code, something might happen..."
+    "title": "Ops! Sembra che tu sia perso! 🗺️",
+    "message": "La pagina che stai cercando potrebbe essere in un universo parallelo... O non è mai esistita. Chi lo sa? 🤷‍♂️",
+    "funFact": "💡 Curiosità: Hai sbloccato un risultato segreto trovando questa pagina 404!",
+    "goHome": "Vai alla Home",
+    "goBack": "Torna Indietro",
+    "tip": "Prova il codice Konami, potrebbe succedere qualcosa..."
   },
   "common": {
     "name": "Tolga Çavga",
     "role": "Frontend Developer",
-    "resume": "Resume",
+    "resume": "Curriculum",
     "developerLogo": "Developer Logo",
-    "closeMenu": "Close Menu",
+    "closeMenu": "Chiudi Menu",
     "languages": {
-      "turkish": "Turkish",
-      "azerbaijani": "Azerbaijani Turkish",
-      "english": "English",
-      "german": "German"
+      "turkish": "Turco",
+      "azerbaijani": "Turco Azero",
+      "english": "Inglese",
+      "german": "Tedesco"
     }
   },
   "projectLike": {
-    "like": "Like project",
-    "unlike": "Unlike project",
-    "dislike": "Dislike project",
-    "removeDislike": "Remove dislike",
-    "liked": "Project liked! ❤️",
-    "unliked": "Like removed",
-    "disliked": "Project disliked 👎",
-    "dislikeRemoved": "Dislike removed",
-    "error": "An error occurred, please try again"
+    "like": "Mi piace il progetto",
+    "unlike": "Non mi piace più il progetto",
+    "dislike": "Non mi piace il progetto",
+    "removeDislike": "Rimuovi 'non mi piace'",
+    "liked": "Progetto piaciuto! ❤️",
+    "unliked": "Mi piace rimosso",
+    "disliked": "Progetto non piaciuto 👎",
+    "dislikeRemoved": "Non mi piace rimosso",
+    "error": "Si è verificato un errore, per favore riprova"
   }
 }
 
