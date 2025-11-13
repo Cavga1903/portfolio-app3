@@ -53,9 +53,9 @@ Vercel Dashboard'da:
 ```env
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=contact@cavga.dev
+SMTP_USER=contact@cavgalabs.com
 SMTP_PASS=your-app-password
-CONTACT_EMAIL=contact@cavga.dev
+CONTACT_EMAIL=contact@cavgalabs.com
 RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
 ALLOWED_ORIGIN=https://cavga.dev
 ```

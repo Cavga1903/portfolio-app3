@@ -257,34 +257,50 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       ]
     };
 
-    // Insert schemas
-    removeExistingScript('person-schema');
-    const personScript = document.createElement('script');
-    personScript.id = 'person-schema';
-    personScript.type = 'application/ld+json';
-    personScript.textContent = JSON.stringify(personSchema);
-    document.head.appendChild(personScript);
+    // Insert schemas with error handling
+    try {
+      removeExistingScript('person-schema');
+      const personScript = document.createElement('script');
+      personScript.id = 'person-schema';
+      personScript.type = 'application/ld+json';
+      personScript.textContent = JSON.stringify(personSchema);
+      document.head.appendChild(personScript);
+    } catch (error) {
+      console.warn('Failed to add person schema:', error);
+    }
 
-    removeExistingScript('website-schema');
-    const websiteScript = document.createElement('script');
-    websiteScript.id = 'website-schema';
-    websiteScript.type = 'application/ld+json';
-    websiteScript.textContent = JSON.stringify(websiteSchema);
-    document.head.appendChild(websiteScript);
+    try {
+      removeExistingScript('website-schema');
+      const websiteScript = document.createElement('script');
+      websiteScript.id = 'website-schema';
+      websiteScript.type = 'application/ld+json';
+      websiteScript.textContent = JSON.stringify(websiteSchema);
+      document.head.appendChild(websiteScript);
+    } catch (error) {
+      console.warn('Failed to add website schema:', error);
+    }
 
-    removeExistingScript('professional-schema');
-    const professionalScript = document.createElement('script');
-    professionalScript.id = 'professional-schema';
-    professionalScript.type = 'application/ld+json';
-    professionalScript.textContent = JSON.stringify(professionalServiceSchema);
-    document.head.appendChild(professionalScript);
+    try {
+      removeExistingScript('professional-schema');
+      const professionalScript = document.createElement('script');
+      professionalScript.id = 'professional-schema';
+      professionalScript.type = 'application/ld+json';
+      professionalScript.textContent = JSON.stringify(professionalServiceSchema);
+      document.head.appendChild(professionalScript);
+    } catch (error) {
+      console.warn('Failed to add professional schema:', error);
+    }
 
-    removeExistingScript('breadcrumb-schema');
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.id = 'breadcrumb-schema';
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
-    document.head.appendChild(breadcrumbScript);
+    try {
+      removeExistingScript('breadcrumb-schema');
+      const breadcrumbScript = document.createElement('script');
+      breadcrumbScript.id = 'breadcrumb-schema';
+      breadcrumbScript.type = 'application/ld+json';
+      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+      document.head.appendChild(breadcrumbScript);
+    } catch (error) {
+      console.warn('Failed to add breadcrumb schema:', error);
+    }
 
   }, [finalDescription, finalImage]);
 

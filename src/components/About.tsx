@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
@@ -47,14 +47,17 @@ const About: React.FC = () => {
   ];
 
   // Photo carousel functions
-  const nextPhoto = () => {
-    setCurrentPhotoIndex((prev) => (prev + 1) % profilePhotos.length);
-    trackEvent('about_photo_navigation', {
-      action: 'next',
-      photo_index: (currentPhotoIndex + 1) % profilePhotos.length,
-      total_photos: profilePhotos.length
+  const nextPhoto = useCallback(() => {
+    setCurrentPhotoIndex((prev) => {
+      const nextIndex = (prev + 1) % profilePhotos.length;
+      trackEvent('about_photo_navigation', {
+        action: 'next',
+        photo_index: nextIndex,
+        total_photos: profilePhotos.length
+      });
+      return nextIndex;
     });
-  };
+  }, [profilePhotos.length, trackEvent]);
 
   // Auto-play functionality for photos
   useEffect(() => {
@@ -63,7 +66,7 @@ const About: React.FC = () => {
     }, 4000); // 4 saniyede bir değişir
     
     return () => clearInterval(interval);
-  }, [currentPhotoIndex]);
+  }, [nextPhoto]);
 
   // Track section view when component mounts
   React.useEffect(() => {
