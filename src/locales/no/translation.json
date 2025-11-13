@@ -633,5 +633,65 @@
     "disliked": "Prosjekt ikke likt 👎",
     "dislikeRemoved": "Ikke like fjernet",
     "error": "En feil oppstod, vennligst prøv igjen"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashbord",
+      "welcome": "Velkommen tilbake",
+      "recentPosts": "Siste blogginnlegg",
+      "viewAll": "Se alle",
+      "published": "Publisert",
+      "draft": "Utkast",
+      "noPosts": "Ingen blogginnlegg ennå",
+      "createFirst": "Opprett ditt første innlegg"
+    },
+    "stats": {
+      "totalUsers": "Totalt brukere",
+      "totalPosts": "Totalt innlegg",
+      "totalViews": "Totalt visninger",
+      "growth": "Vekstrate"
+    },
+    "blog": {
+      "title": "Bloggadministrasjon",
+      "subtitle": "Administrer blogginnleggene dine",
+      "manage": "Administrer blogg",
+      "create": "Opprett nytt innlegg",
+      "editPost": "Rediger innlegg",
+      "createPost": "Opprett nytt innlegg",
+      "search": "Søk innlegg...",
+      "cancel": "Avbryt",
+      "save": "Lagre",
+      "saving": "Lagrer...",
+      "translate": "Oversett til alle språk",
+      "translating": "Oversetter...",
+      "translateSuccess": "Oversettelser fullført!",
+      "translateError": "Oversettelse mislyktes. Sjekk API-nøkkelen din.",
+      "slugTaken": "Denne slug-en er allerede i bruk",
+      "checkingSlug": "Sjekker...",
+      "minWords": "Min. 50 ord",
+      "upload": "Last opp",
+      "uploading": "Laster opp...",
+      "saveFirst": "Lagre først",
+      "published": "Publisert",
+      "draft": "Utkast",
+      "confirmDelete": "Er du sikker på at du vil slette dette innlegget?",
+      "table": {
+        "title": "Tittel",
+        "status": "Status",
+        "views": "Visninger",
+        "actions": "Handlinger"
+      },
+      "form": {
+        "title": "Tittel",
+        "slug": "Slug",
+        "slugHint": "URL-vennlig versjon av tittelen",
+        "excerpt": "Utdrag",
+        "content": "Innhold",
+        "contentPlaceholder": "Skriv innholdet ditt her...",
+        "image": "Bilde-URL",
+        "imageHint": "Skriv inn bilde-URL eller last opp et bilde",
+        "published": "Publisert"
+      }
+    }
   }
 }

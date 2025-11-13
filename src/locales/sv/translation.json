@@ -633,5 +633,65 @@
     "disliked": "Projekt ogillat 👎",
     "dislikeRemoved": "Ogillande borttaget",
     "error": "Ett fel uppstod, försök igen"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Instrumentpanel",
+      "welcome": "Välkommen tillbaka",
+      "recentPosts": "Senaste blogginlägg",
+      "viewAll": "Visa alla",
+      "published": "Publicerad",
+      "draft": "Utkast",
+      "noPosts": "Inga blogginlägg ännu",
+      "createFirst": "Skapa ditt första inlägg"
+    },
+    "stats": {
+      "totalUsers": "Totalt användare",
+      "totalPosts": "Totalt inlägg",
+      "totalViews": "Totalt visningar",
+      "growth": "Tillväxttakt"
+    },
+    "blog": {
+      "title": "Blogghantering",
+      "subtitle": "Hantera dina blogginlägg",
+      "manage": "Hantera blogg",
+      "create": "Skapa nytt inlägg",
+      "editPost": "Redigera inlägg",
+      "createPost": "Skapa nytt inlägg",
+      "search": "Sök inlägg...",
+      "cancel": "Avbryt",
+      "save": "Spara",
+      "saving": "Sparar...",
+      "translate": "Översätt till alla språk",
+      "translating": "Översätter...",
+      "translateSuccess": "Översättningar slutförda framgångsrikt!",
+      "translateError": "Översättning misslyckades. Kontrollera din API-nyckel.",
+      "slugTaken": "Denna slug används redan",
+      "checkingSlug": "Kontrollerar...",
+      "minWords": "Min. 50 ord",
+      "upload": "Ladda upp",
+      "uploading": "Laddar upp...",
+      "saveFirst": "Spara först",
+      "published": "Publicerad",
+      "draft": "Utkast",
+      "confirmDelete": "Är du säker på att du vill ta bort detta inlägg?",
+      "table": {
+        "title": "Titel",
+        "status": "Status",
+        "views": "Visningar",
+        "actions": "Åtgärder"
+      },
+      "form": {
+        "title": "Titel",
+        "slug": "Slug",
+        "slugHint": "URL-vänlig version av titeln",
+        "excerpt": "Utdrag",
+        "content": "Innehåll",
+        "contentPlaceholder": "Skriv ditt innehåll här...",
+        "image": "Bild-URL",
+        "imageHint": "Ange bild-URL eller ladda upp en bild",
+        "published": "Publicerad"
+      }
+    }
   }
 }

@@ -633,6 +633,66 @@
     "disliked": "プロジェクトを気に入りませんでした 👎",
     "dislikeRemoved": "気に入らないを解除しました",
     "error": "エラーが発生しました。もう一度お試しください"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "ダッシュボード",
+      "welcome": "おかえりなさい",
+      "recentPosts": "最近のブログ投稿",
+      "viewAll": "すべて表示",
+      "published": "公開済み",
+      "draft": "下書き",
+      "noPosts": "まだブログ投稿がありません",
+      "createFirst": "最初の投稿を作成"
+    },
+    "stats": {
+      "totalUsers": "総ユーザー数",
+      "totalPosts": "総投稿数",
+      "totalViews": "総閲覧数",
+      "growth": "成長率"
+    },
+    "blog": {
+      "title": "ブログ管理",
+      "subtitle": "ブログ投稿を管理",
+      "manage": "ブログを管理",
+      "create": "新しい投稿を作成",
+      "editPost": "投稿を編集",
+      "createPost": "新しい投稿を作成",
+      "search": "投稿を検索...",
+      "cancel": "キャンセル",
+      "save": "保存",
+      "saving": "保存中...",
+      "translate": "すべての言語に翻訳",
+      "translating": "翻訳中...",
+      "translateSuccess": "翻訳が正常に完了しました！",
+      "translateError": "翻訳に失敗しました。APIキーを確認してください。",
+      "slugTaken": "このスラッグは既に使用されています",
+      "checkingSlug": "確認中...",
+      "minWords": "最小50語",
+      "upload": "アップロード",
+      "uploading": "アップロード中...",
+      "saveFirst": "まず保存",
+      "published": "公開済み",
+      "draft": "下書き",
+      "confirmDelete": "この投稿を削除してもよろしいですか？",
+      "table": {
+        "title": "タイトル",
+        "status": "ステータス",
+        "views": "閲覧数",
+        "actions": "アクション"
+      },
+      "form": {
+        "title": "タイトル",
+        "slug": "スラッグ",
+        "slugHint": "タイトルのURLフレンドリーなバージョン",
+        "excerpt": "抜粋",
+        "content": "コンテンツ",
+        "contentPlaceholder": "ここにコンテンツを書いてください...",
+        "image": "画像URL",
+        "imageHint": "画像URLを入力するか、画像をアップロードしてください",
+        "published": "公開済み"
+      }
+    }
   }
 }
 

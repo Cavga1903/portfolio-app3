@@ -633,6 +633,66 @@
     "disliked": "Progetto non piaciuto 👎",
     "dislikeRemoved": "Non mi piace rimosso",
     "error": "Si è verificato un errore, per favore riprova"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Bentornato",
+      "recentPosts": "Post recenti del blog",
+      "viewAll": "Vedi tutti",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "noPosts": "Nessun post del blog ancora",
+      "createFirst": "Crea il tuo primo post"
+    },
+    "stats": {
+      "totalUsers": "Totale utenti",
+      "totalPosts": "Totale post",
+      "totalViews": "Totale visualizzazioni",
+      "growth": "Tasso di crescita"
+    },
+    "blog": {
+      "title": "Gestione blog",
+      "subtitle": "Gestisci i tuoi post del blog",
+      "manage": "Gestisci blog",
+      "create": "Crea nuovo post",
+      "editPost": "Modifica post",
+      "createPost": "Crea nuovo post",
+      "search": "Cerca post...",
+      "cancel": "Annulla",
+      "save": "Salva",
+      "saving": "Salvataggio...",
+      "translate": "Traduci in tutte le lingue",
+      "translating": "Traduzione...",
+      "translateSuccess": "Traduzioni completate con successo!",
+      "translateError": "Traduzione fallita. Controlla la tua chiave API.",
+      "slugTaken": "Questo slug è già in uso",
+      "checkingSlug": "Verifica...",
+      "minWords": "Min. 50 parole",
+      "upload": "Carica",
+      "uploading": "Caricamento...",
+      "saveFirst": "Salva prima",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "confirmDelete": "Sei sicuro di voler eliminare questo post?",
+      "table": {
+        "title": "Titolo",
+        "status": "Stato",
+        "views": "Visualizzazioni",
+        "actions": "Azioni"
+      },
+      "form": {
+        "title": "Titolo",
+        "slug": "Slug",
+        "slugHint": "Versione URL-friendly del titolo",
+        "excerpt": "Estratto",
+        "content": "Contenuto",
+        "contentPlaceholder": "Scrivi il tuo contenuto qui...",
+        "image": "URL immagine",
+        "imageHint": "Inserisci l'URL dell'immagine o carica un'immagine",
+        "published": "Pubblicato"
+      }
+    }
   }
 }
 

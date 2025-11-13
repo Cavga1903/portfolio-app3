@@ -633,6 +633,66 @@
     "disliked": "Project disliked 👎",
     "dislikeRemoved": "Dislike removed",
     "error": "An error occurred, please try again"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Panel de control",
+      "welcome": "Bienvenido de nuevo",
+      "recentPosts": "Publicaciones recientes del blog",
+      "viewAll": "Ver todo",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "noPosts": "Aún no hay publicaciones del blog",
+      "createFirst": "Crea tu primera publicación"
+    },
+    "stats": {
+      "totalUsers": "Total de usuarios",
+      "totalPosts": "Total de publicaciones",
+      "totalViews": "Total de vistas",
+      "growth": "Tasa de crecimiento"
+    },
+    "blog": {
+      "title": "Gestión del blog",
+      "subtitle": "Administra tus publicaciones del blog",
+      "manage": "Gestionar blog",
+      "create": "Crear nueva publicación",
+      "editPost": "Editar publicación",
+      "createPost": "Crear nueva publicación",
+      "search": "Buscar publicaciones...",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "translate": "Traducir a todos los idiomas",
+      "translating": "Traduciendo...",
+      "translateSuccess": "¡Traducciones completadas con éxito!",
+      "translateError": "Error en la traducción. Por favor, verifica tu clave API.",
+      "slugTaken": "Este slug ya está en uso",
+      "checkingSlug": "Verificando...",
+      "minWords": "Mín. 50 palabras",
+      "upload": "Subir",
+      "uploading": "Subiendo...",
+      "saveFirst": "Guardar primero",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "confirmDelete": "¿Estás seguro de que quieres eliminar esta publicación?",
+      "table": {
+        "title": "Título",
+        "status": "Estado",
+        "views": "Vistas",
+        "actions": "Acciones"
+      },
+      "form": {
+        "title": "Título",
+        "slug": "Slug",
+        "slugHint": "Versión amigable para URL del título",
+        "excerpt": "Extracto",
+        "content": "Contenido",
+        "contentPlaceholder": "Escribe tu contenido aquí...",
+        "image": "URL de la imagen",
+        "imageHint": "Ingresa la URL de la imagen o sube una imagen",
+        "published": "Publicado"
+      }
+    }
   }
 }
 

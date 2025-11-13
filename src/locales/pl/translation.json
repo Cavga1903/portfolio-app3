@@ -633,6 +633,66 @@
     "disliked": "Project disliked 👎",
     "dislikeRemoved": "Dislike removed",
     "error": "An error occurred, please try again"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Panel",
+      "welcome": "Witaj ponownie",
+      "recentPosts": "Ostatnie posty na blogu",
+      "viewAll": "Zobacz wszystkie",
+      "published": "Opublikowane",
+      "draft": "Szkic",
+      "noPosts": "Brak jeszcze postów na blogu",
+      "createFirst": "Utwórz swój pierwszy post"
+    },
+    "stats": {
+      "totalUsers": "Łącznie użytkowników",
+      "totalPosts": "Łącznie postów",
+      "totalViews": "Łącznie wyświetleń",
+      "growth": "Wskaźnik wzrostu"
+    },
+    "blog": {
+      "title": "Zarządzanie blogiem",
+      "subtitle": "Zarządzaj swoimi postami na blogu",
+      "manage": "Zarządzaj blogiem",
+      "create": "Utwórz nowy post",
+      "editPost": "Edytuj post",
+      "createPost": "Utwórz nowy post",
+      "search": "Szukaj postów...",
+      "cancel": "Anuluj",
+      "save": "Zapisz",
+      "saving": "Zapisywanie...",
+      "translate": "Tłumacz na wszystkie języki",
+      "translating": "Tłumaczenie...",
+      "translateSuccess": "Tłumaczenia zakończone pomyślnie!",
+      "translateError": "Tłumaczenie nie powiodło się. Sprawdź swój klucz API.",
+      "slugTaken": "Ten slug jest już używany",
+      "checkingSlug": "Sprawdzanie...",
+      "minWords": "Min. 50 słów",
+      "upload": "Prześlij",
+      "uploading": "Przesyłanie...",
+      "saveFirst": "Najpierw zapisz",
+      "published": "Opublikowane",
+      "draft": "Szkic",
+      "confirmDelete": "Czy na pewno chcesz usunąć ten post?",
+      "table": {
+        "title": "Tytuł",
+        "status": "Status",
+        "views": "Wyświetlenia",
+        "actions": "Akcje"
+      },
+      "form": {
+        "title": "Tytuł",
+        "slug": "Slug",
+        "slugHint": "Przyjazna dla URL wersja tytułu",
+        "excerpt": "Fragment",
+        "content": "Treść",
+        "contentPlaceholder": "Napisz swoją treść tutaj...",
+        "image": "URL obrazu",
+        "imageHint": "Wprowadź URL obrazu lub prześlij obraz",
+        "published": "Opublikowane"
+      }
+    }
   }
 }
 
