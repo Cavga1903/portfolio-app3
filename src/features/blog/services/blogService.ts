@@ -74,15 +74,6 @@ export const blogService = {
       return posts;
     } catch (error) {
       console.error('Error fetching blog posts:', error);
-      // Fallback to API if Firestore fails
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts`);
-        if (response.ok) {
-          return await response.json();
-        }
-      } catch (apiError) {
-        console.error('API fallback also failed:', apiError);
-      }
       throw error;
     }
   },
@@ -101,15 +92,6 @@ export const blogService = {
       return docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage);
     } catch (error) {
       console.error('Error fetching blog post:', error);
-      // Fallback to API
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts/${slug}`);
-        if (response.ok) {
-          return await response.json();
-        }
-      } catch (apiError) {
-        console.error('API fallback also failed:', apiError);
-      }
       throw error;
     }
   },
@@ -140,19 +122,6 @@ export const blogService = {
       return docToBlogPost(docSnapshot, docRef.id);
     } catch (error) {
       console.error('Error creating blog post:', error);
-      // Fallback to API
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(post),
-        });
-        if (response.ok) {
-          return await response.json();
-        }
-      } catch (apiError) {
-        console.error('API fallback also failed:', apiError);
-      }
       throw error;
     }
   },
@@ -183,19 +152,6 @@ export const blogService = {
       return docToBlogPost(docSnapshot, id);
     } catch (error) {
       console.error('Error updating blog post:', error);
-      // Fallback to API
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts/${id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(post),
-        });
-        if (response.ok) {
-          return await response.json();
-        }
-      } catch (apiError) {
-        console.error('API fallback also failed:', apiError);
-      }
       throw error;
     }
   },
@@ -206,18 +162,7 @@ export const blogService = {
       await deleteDoc(postRef);
     } catch (error) {
       console.error('Error deleting blog post:', error);
-      // Fallback to API
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts/${id}`, {
-          method: 'DELETE',
-        });
-        if (!response.ok) {
-          throw new Error('Failed to delete post');
-        }
-      } catch (apiError) {
-        console.error('API fallback also failed:', apiError);
-        throw error;
-      }
+      throw error;
     }
   },
 
