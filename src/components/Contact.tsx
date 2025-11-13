@@ -53,8 +53,19 @@ const Contact: React.FC = () => {
 
   // Load reCAPTCHA v3 script dynamically
   useEffect(() => {
+    // Skip reCAPTCHA on localhost (development only)
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
     if (!RECAPTCHA_SITE_KEY) {
-      console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
+      if (!isLocalhost) {
+        console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
+      }
+      return;
+    }
+
+    // On localhost, reCAPTCHA is optional (development)
+    if (isLocalhost) {
+      console.log('ℹ️ Localhost detected - reCAPTCHA is optional for development');
       return;
     }
 
@@ -63,7 +74,7 @@ const Contact: React.FC = () => {
       return;
     }
 
-    // Load reCAPTCHA v3 script
+    // Load reCAPTCHA v3 script (production only)
     const script = document.createElement('script');
     script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
     script.async = true;
@@ -134,9 +145,12 @@ const Contact: React.FC = () => {
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
-      // Get reCAPTCHA v3 token (if configured)
+      // Get reCAPTCHA v3 token (if configured and not localhost)
       let recaptchaToken = '';
-      if (RECAPTCHA_SITE_KEY) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      
+      // Skip reCAPTCHA on localhost (development only)
+      if (RECAPTCHA_SITE_KEY && !isLocalhost) {
         try {
           const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
           
@@ -168,6 +182,8 @@ const Contact: React.FC = () => {
           console.warn('reCAPTCHA error (continuing without token):', recaptchaError);
           // Continue without reCAPTCHA token if it fails
         }
+      } else if (isLocalhost) {
+        console.log('ℹ️ Localhost - reCAPTCHA skipped for development');
       }
 
       // Dil bilgisini al
