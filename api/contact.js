@@ -59,6 +59,25 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// OPTIONS request'ini manuel olarak handle et (Vercel redirect sorununu önlemek için)
+app.options('/api/contact', (req, res) => {
+  const origin = req.headers.origin;
+  const allowedOrigins = process.env.ALLOWED_ORIGIN 
+    ? process.env.ALLOWED_ORIGIN.split(',').map(o => o.trim())
+    : ['https://www.cavga.dev', 'https://cavga.dev', 'http://localhost:5173', 'http://localhost:3000'];
+  
+  // Origin kontrolü
+  if (origin && (allowedOrigins.includes(origin) || process.env.ALLOWED_ORIGIN === '*' || process.env.NODE_ENV !== 'production')) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Max-Age', '86400'); // 24 saat
+  }
+  
+  res.status(204).end();
+});
+
 // Rate limiting - spam koruması
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 dakika
@@ -94,6 +113,17 @@ const createTransporter = () => {
 
 // Contact form endpoint
 app.post('/api/contact', limiter, async (req, res) => {
+  // CORS header'larını manuel olarak set et
+  const origin = req.headers.origin;
+  const allowedOrigins = process.env.ALLOWED_ORIGIN 
+    ? process.env.ALLOWED_ORIGIN.split(',').map(o => o.trim())
+    : ['https://www.cavga.dev', 'https://cavga.dev', 'http://localhost:5173', 'http://localhost:3000'];
+  
+  if (origin && (allowedOrigins.includes(origin) || process.env.ALLOWED_ORIGIN === '*' || process.env.NODE_ENV !== 'production')) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  
   try {
     const { name, email, message, language, recaptchaToken } = req.body;
     
@@ -268,6 +298,17 @@ ${message}
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
+  // CORS header'larını manuel olarak set et
+  const origin = req.headers.origin;
+  const allowedOrigins = process.env.ALLOWED_ORIGIN 
+    ? process.env.ALLOWED_ORIGIN.split(',').map(o => o.trim())
+    : ['https://www.cavga.dev', 'https://cavga.dev', 'http://localhost:5173', 'http://localhost:3000'];
+  
+  if (origin && (allowedOrigins.includes(origin) || process.env.ALLOWED_ORIGIN === '*' || process.env.NODE_ENV !== 'production')) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
