@@ -54,6 +54,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       setEmailError(t('auth.emailInvalid') || 'Please enter a valid email address');
       return false;
     }
+    // Check domain
+    if (!emailValue.toLowerCase().endsWith('@cavgalabs.com')) {
+      setEmailError(t('auth.emailDomainNotAllowed') || 'Sadece @cavgalabs.com domainine sahip e-posta adresleri ile giriş yapabilirsiniz.');
+      return false;
+    }
     setEmailError('');
     return true;
   };

@@ -70,6 +70,10 @@ export const SignupModal: React.FC<SignupModalProps> = ({
         if (!emailRegex.test(value)) {
           return t('auth.emailInvalid') || 'Please enter a valid email address';
         }
+        // Check domain
+        if (!value.toLowerCase().endsWith('@cavgalabs.com')) {
+          return t('auth.emailDomainNotAllowed') || 'Sadece @cavgalabs.com domainine sahip e-posta adresleri ile kayıt olabilirsiniz.';
+        }
         return '';
       }
       case 'password':

@@ -38,9 +38,22 @@ const firebaseUserToAppUser = async (firebaseUser: FirebaseUser): Promise<User> 
   };
 };
 
+// Allowed email domain
+const ALLOWED_DOMAIN = '@cavgalabs.com';
+
+// Check if email domain is allowed
+const isEmailDomainAllowed = (email: string): boolean => {
+  return email.toLowerCase().endsWith(ALLOWED_DOMAIN);
+};
+
 export const authService = {
   login: async (email: string, password: string): Promise<LoginResponse> => {
     try {
+      // Check email domain
+      if (!isEmailDomainAllowed(email)) {
+        throw new Error(`Sadece ${ALLOWED_DOMAIN} domainine sahip e-posta adresleri ile giriş yapabilirsiniz.`);
+      }
+
       // Try Firebase Auth first
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const firebaseUser = userCredential.user;
@@ -107,6 +120,11 @@ export const authService = {
     name: string
   ): Promise<SignupResponse> => {
     try {
+      // Check email domain
+      if (!isEmailDomainAllowed(email)) {
+        throw new Error(`Sadece ${ALLOWED_DOMAIN} domainine sahip e-posta adresleri ile kayıt olabilirsiniz.`);
+      }
+
       // Try Firebase Auth first
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const firebaseUser = userCredential.user;
@@ -237,6 +255,13 @@ export const authService = {
       
       const result = await signInWithPopup(auth, provider);
       const firebaseUser = result.user;
+      
+      // Check email domain
+      if (!firebaseUser.email || !isEmailDomainAllowed(firebaseUser.email)) {
+        // Sign out the user if domain is not allowed
+        await signOut(auth);
+        throw new Error(`Sadece ${ALLOWED_DOMAIN} domainine sahip e-posta adresleri ile giriş yapabilirsiniz.`);
+      }
       
       // Check if user document exists, if not create it
       const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));

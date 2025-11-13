@@ -674,10 +674,11 @@
     "nameRequired": "Ad gereklidir",
     "nameTooShort": "Ad en az 2 karakter olmalıdır",
     "confirmPasswordRequired": "Şifre tekrarı gereklidir",
-    "googleLoginError": "Google ile giriş başarısız",
-    "googleSignupError": "Google ile kayıt başarısız",
-    "logout": "Çıkış Yap"
-  },
+        "googleLoginError": "Google ile giriş başarısız",
+        "googleSignupError": "Google ile kayıt başarısız",
+        "emailDomainNotAllowed": "Sadece @cavgalabs.com domainine sahip e-posta adresleri ile kayıt olabilirsiniz.",
+        "logout": "Çıkış Yap"
+      },
   "blog": {
     "title": "Blog",
     "subtitle": "En son içgörüleri, eğitimleri ve hikayeleri keşfedin",
@@ -735,6 +736,14 @@
       "saveFirst": "Önce kaydedin",
       "published": "Yayınlandı",
       "draft": "Taslak",
+      "publish": "Yayınla",
+      "unpublish": "Yayından Kaldır",
+      "bookmark": "Yer İşareti",
+      "favorite": "Favori",
+      "share": "Paylaş",
+      "archive": "Arşivle",
+      "selected": "seçili",
+      "selectMultiple": "Çoklu Seçim",
       "confirmDelete": "Bu postu silmek istediğinizden emin misiniz?",
       "table": {
         "title": "Başlık",

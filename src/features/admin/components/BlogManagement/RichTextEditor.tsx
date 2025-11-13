@@ -1,14 +1,20 @@
 /**
  * Rich Text Editor Component
- * Built with TipTap for blog content editing
+ * Built with Editor.js for blog content editing
  */
 
-import React, { useEffect } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import Link from '@tiptap/extension-link';
-import Placeholder from '@tiptap/extension-placeholder';
+import React, { useEffect, useRef } from 'react';
+import EditorJS, { OutputData } from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import List from '@editorjs/list';
+import Paragraph from '@editorjs/paragraph';
+import Image from '@editorjs/image';
+// @ts-expect-error - LinkTool doesn't have types
+import LinkTool from '@editorjs/link';
+import Quote from '@editorjs/quote';
+import Code from '@editorjs/code';
+import Delimiter from '@editorjs/delimiter';
+import Table from '@editorjs/table';
 
 interface RichTextEditorProps {
   content: string;
@@ -18,6 +24,256 @@ interface RichTextEditorProps {
   minHeight?: string;
 }
 
+// Convert Editor.js JSON to HTML
+const editorJsToHtml = (data: OutputData): string => {
+  if (!data || !data.blocks || !Array.isArray(data.blocks)) {
+    return '';
+  }
+
+  let html = '';
+
+  data.blocks.forEach((block) => {
+    switch (block.type) {
+      case 'paragraph': {
+        html += `<p>${block.data.text || ''}</p>`;
+        break;
+      }
+      case 'header': {
+        const level = block.data.level || 1;
+        const text = block.data.text || '';
+        html += `<h${level}>${text}</h${level}>`;
+        break;
+      }
+      case 'list': {
+        const listType = block.data.style === 'ordered' ? 'ol' : 'ul';
+        html += `<${listType}>`;
+        block.data.items?.forEach((item: string) => {
+          html += `<li>${item}</li>`;
+        });
+        html += `</${listType}>`;
+        break;
+      }
+      case 'quote': {
+        html += `<blockquote><p>${block.data.text || ''}</p>`;
+        if (block.data.caption) {
+          html += `<cite>${block.data.caption}</cite>`;
+        }
+        html += `</blockquote>`;
+        break;
+      }
+      case 'code': {
+        html += `<pre><code>${block.data.code || ''}</code></pre>`;
+        break;
+      }
+      case 'image': {
+        html += `<figure>`;
+        html += `<img src="${block.data.file?.url || block.data.url || ''}" alt="${block.data.caption || ''}" />`;
+        if (block.data.caption) {
+          html += `<figcaption>${block.data.caption}</figcaption>`;
+        }
+        html += `</figure>`;
+        break;
+      }
+      case 'linkTool': {
+        html += `<a href="${block.data.link || ''}" target="_blank" rel="noopener noreferrer">${block.data.meta?.title || block.data.link || ''}</a>`;
+        break;
+      }
+      case 'table': {
+        html += `<table>`;
+        if (block.data.content && Array.isArray(block.data.content)) {
+          block.data.content.forEach((row: string[]) => {
+            html += `<tr>`;
+            row.forEach((cell: string) => {
+              html += `<td>${cell}</td>`;
+            });
+            html += `</tr>`;
+          });
+        }
+        html += `</table>`;
+        break;
+      }
+      case 'delimiter': {
+        html += `<hr />`;
+        break;
+      }
+      default:
+        break;
+    }
+  });
+
+  return html;
+};
+
+// Convert HTML to Editor.js JSON (basic conversion)
+const htmlToEditorJs = (html: string): OutputData => {
+  if (!html || html.trim() === '') {
+    return {
+      time: Date.now(),
+      blocks: [],
+    };
+  }
+
+  // Create a temporary DOM element to parse HTML
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+
+  interface EditorBlock {
+    id: string;
+    type: string;
+    data: Record<string, unknown>;
+  }
+  const blocks: EditorBlock[] = [];
+  let blockId = 0;
+
+  const processNode = (node: Node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent?.trim();
+      if (text) {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'paragraph',
+          data: {
+            text: text,
+          },
+        });
+      }
+      return;
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      return;
+    }
+
+    const element = node as HTMLElement;
+    const tagName = element.tagName.toLowerCase();
+
+    switch (tagName) {
+      case 'p': {
+        const pText = element.textContent?.trim();
+        if (pText) {
+          blocks.push({
+            id: `block-${blockId++}`,
+            type: 'paragraph',
+            data: {
+              text: pText,
+            },
+          });
+        }
+        break;
+      }
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+      case 'h6': {
+        const level = parseInt(tagName.charAt(1));
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'header',
+          data: {
+            text: element.textContent?.trim() || '',
+            level: level,
+          },
+        });
+        break;
+      }
+      case 'ul':
+      case 'ol': {
+        const items: string[] = [];
+        element.querySelectorAll('li').forEach((li) => {
+          items.push(li.textContent?.trim() || '');
+        });
+        if (items.length > 0) {
+          blocks.push({
+            id: `block-${blockId++}`,
+            type: 'list',
+            data: {
+              style: tagName === 'ol' ? 'ordered' : 'unordered',
+              items: items,
+            },
+          });
+        }
+        break;
+      }
+      case 'blockquote': {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'quote',
+          data: {
+            text: element.textContent?.trim() || '',
+          },
+        });
+        break;
+      }
+      case 'pre': {
+        const codeElement = element.querySelector('code');
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'code',
+          data: {
+            code: codeElement?.textContent || element.textContent || '',
+          },
+        });
+        break;
+      }
+      case 'img': {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'image',
+          data: {
+            file: {
+              url: element.getAttribute('src') || '',
+            },
+            caption: element.getAttribute('alt') || '',
+          },
+        });
+        break;
+      }
+      case 'a': {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'linkTool',
+          data: {
+            link: element.getAttribute('href') || '',
+            meta: {
+              title: element.textContent?.trim() || '',
+            },
+          },
+        });
+        break;
+      }
+      case 'hr': {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'delimiter',
+          data: {},
+        });
+        break;
+      }
+      default:
+        // Process child nodes
+        Array.from(element.childNodes).forEach(processNode);
+        break;
+    }
+  };
+
+  Array.from(tempDiv.childNodes).forEach(processNode);
+
+  return {
+    time: Date.now(),
+    blocks: blocks.length > 0 ? blocks : [
+      {
+        id: 'block-0',
+        type: 'paragraph',
+        data: {
+          text: '',
+        },
+      },
+    ],
+  };
+};
+
 export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   content,
   onChange,
@@ -25,287 +281,184 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   error = false,
   minHeight = '300px',
 }) => {
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3],
-        },
-        bulletList: {
-          keepMarks: true,
-          keepAttributes: false,
-        },
-        orderedList: {
-          keepMarks: true,
-          keepAttributes: false,
-        },
-      }),
-      Image.configure({
-        inline: true,
-        allowBase64: true,
-      }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'text-blue-600 dark:text-blue-400 underline',
-        },
-      }),
-      Placeholder.configure({
-        placeholder,
-      }),
-    ],
-    content,
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
-    },
-    editorProps: {
-      attributes: {
-        class: `prose prose-sm sm:prose lg:prose-lg xl:prose-2xl dark:prose-invert max-w-none focus:outline-none ${
-          error ? 'border-red-500' : ''
-        }`,
-      },
-    },
-  });
+  const editorRef = useRef<EditorJS | null>(null);
+  const holderRef = useRef<HTMLDivElement>(null);
+  const isInitializedRef = useRef(false);
 
-  // Update editor content when prop changes
   useEffect(() => {
-    if (editor && content !== editor.getHTML()) {
-      editor.commands.setContent(content);
+    if (!holderRef.current || isInitializedRef.current) {
+      return;
     }
-  }, [content, editor]);
 
-  if (!editor) {
-    return null;
-  }
+    // Initialize Editor.js
+    const editor = new EditorJS({
+      holder: holderRef.current,
+      placeholder: placeholder,
+      data: htmlToEditorJs(content),
+      tools: {
+        header: {
+          // @ts-expect-error - Header type mismatch
+          class: Header,
+          config: {
+            placeholder: 'Başlık girin...',
+            levels: [1, 2, 3, 4, 5, 6],
+            defaultLevel: 2,
+          },
+        },
+        list: {
+          class: List,
+          inlineToolbar: true,
+          config: {
+            defaultStyle: 'unordered',
+          },
+        },
+        paragraph: {
+          // @ts-expect-error - Paragraph type mismatch
+          class: Paragraph,
+          inlineToolbar: true,
+        },
+        image: {
+          class: Image,
+          config: {
+            endpoints: {
+              byFile: '/api/upload-image', // You can configure this later
+            },
+            captionPlaceholder: 'Resim açıklaması...',
+            buttonContent: 'Resim Ekle',
+            uploader: {
+              async uploadByFile(file: File) {
+                // This will be handled by the image upload service
+                // For now, return a placeholder
+                return {
+                  success: 1,
+                  file: {
+                    url: URL.createObjectURL(file),
+                  },
+                };
+              },
+            },
+          },
+        },
+        linkTool: {
+          class: LinkTool,
+          config: {
+            endpoint: '/api/fetch-url', // You can configure this later
+          },
+        },
+        quote: {
+          class: Quote,
+          inlineToolbar: true,
+          shortcut: 'CMD+SHIFT+O',
+          config: {
+            quotePlaceholder: 'Alıntı metni...',
+            captionPlaceholder: 'Alıntı yazarı...',
+          },
+        },
+        code: {
+          class: Code,
+          config: {
+            placeholder: 'Kod bloğu girin...',
+          },
+        },
+        delimiter: Delimiter,
+        table: {
+          // @ts-expect-error - Table type mismatch
+          class: Table,
+          inlineToolbar: true,
+          config: {
+            rows: 2,
+            cols: 2,
+          },
+        },
+      },
+      onChange: async () => {
+        if (editorRef.current) {
+          try {
+            const outputData = await editorRef.current.save();
+            const html = editorJsToHtml(outputData);
+            onChange(html);
+          } catch (error) {
+            console.error('Error saving editor content:', error);
+          }
+        }
+      },
+    });
+
+    editorRef.current = editor;
+    isInitializedRef.current = true;
+
+    return () => {
+      if (editorRef.current && editorRef.current.destroy) {
+        editorRef.current.destroy();
+        editorRef.current = null;
+        isInitializedRef.current = false;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
+
+  // Update content when prop changes (but not on initial mount)
+  useEffect(() => {
+    if (editorRef.current && isInitializedRef.current && content) {
+      const editorJsData = htmlToEditorJs(content);
+      editorRef.current.render(editorJsData);
+    }
+  }, [content]);
 
   return (
-    <div className={`border rounded-lg overflow-hidden ${
-      error
-        ? 'border-red-500 focus-within:ring-2 focus-within:ring-red-500'
-        : 'border-gray-300 dark:border-gray-600 focus-within:ring-2 focus-within:ring-blue-500'
-    }`}>
-      {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 p-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        {/* Text Formatting */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          disabled={!editor.can().chain().focus().toggleBold().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('bold')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Bold"
-        >
-          <strong>B</strong>
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          disabled={!editor.can().chain().focus().toggleItalic().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('italic')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Italic"
-        >
-          <em>I</em>
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-          disabled={!editor.can().chain().focus().toggleStrike().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('strike')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Strikethrough"
-        >
-          <s>S</s>
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
-
-        {/* Headings */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('heading', { level: 1 })
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Heading 1"
-        >
-          H1
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('heading', { level: 2 })
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Heading 2"
-        >
-          H2
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('heading', { level: 3 })
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Heading 3"
-        >
-          H3
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
-
-        {/* Lists */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('bulletList')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Bullet List"
-        >
-          •
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('orderedList')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Numbered List"
-        >
-          1.
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
-
-        {/* Blockquote */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('blockquote')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Quote"
-        >
-          "
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
-
-        {/* Code */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('codeBlock')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Code Block"
-        >
-          {'</>'}
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
-
-        {/* Link */}
-        <button
-          type="button"
-          onClick={() => {
-            const url = window.prompt('Enter URL:');
-            if (url) {
-              editor.chain().focus().setLink({ href: url }).run();
-            }
-          }}
-          className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-            editor.isActive('link')
-              ? 'bg-blue-500 text-white'
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-          }`}
-          title="Add Link"
-        >
-          🔗
-        </button>
-        {editor.isActive('link') && (
-          <button
-            type="button"
-            onClick={() => editor.chain().focus().unsetLink().run()}
-            className="px-2 py-1 rounded text-sm bg-red-500 text-white hover:bg-red-600 transition-colors"
-            title="Remove Link"
-          >
-            Unlink
-          </button>
-        )}
-
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1" />
-
-        {/* Image */}
-        <button
-          type="button"
-          onClick={() => {
-            const url = window.prompt('Enter image URL:');
-            if (url) {
-              editor.chain().focus().setImage({ src: url }).run();
-            }
-          }}
-          className="px-2 py-1 rounded text-sm bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-          title="Add Image"
-        >
-          🖼️
-        </button>
-
-        <div className="flex-1" />
-
-        {/* Undo/Redo */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().chain().focus().undo().run()}
-          className="px-2 py-1 rounded text-sm bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          title="Undo"
-        >
-          ↶
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().chain().focus().redo().run()}
-          className="px-2 py-1 rounded text-sm bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          title="Redo"
-        >
-          ↷
-        </button>
-      </div>
-
-      {/* Editor Content */}
-      <div className="bg-white dark:bg-gray-700" style={{ minHeight }}>
-        <EditorContent
-          editor={editor}
-          className="focus:outline-none"
-        />
-      </div>
+    <div
+      className={`border rounded-lg overflow-hidden ${
+        error
+          ? 'border-red-500 focus-within:ring-2 focus-within:ring-red-500'
+          : 'border-gray-300 dark:border-gray-600 focus-within:ring-2 focus-within:ring-blue-500'
+      }`}
+    >
+      <div
+        ref={holderRef}
+        className="bg-white dark:bg-gray-700"
+        style={{ minHeight }}
+      />
+      <style>{`
+        .codex-editor {
+          padding: 1rem;
+        }
+        .codex-editor__redactor {
+          padding-bottom: 200px !important;
+        }
+        .ce-toolbar__content,
+        .ce-block__content {
+          max-width: 100% !important;
+        }
+        .ce-toolbar__plus,
+        .ce-toolbar__settings-btn {
+          color: #6b7280;
+        }
+        .ce-toolbar__plus:hover,
+        .ce-toolbar__settings-btn:hover {
+          color: #2563eb;
+        }
+        .dark .ce-toolbar__plus,
+        .dark .ce-toolbar__settings-btn {
+          color: #9ca3af;
+        }
+        .dark .ce-toolbar__plus:hover,
+        .dark .ce-toolbar__settings-btn:hover {
+          color: #60a5fa;
+        }
+        .ce-paragraph {
+          color: #1f2937;
+        }
+        .dark .ce-paragraph {
+          color: #f3f4f6;
+        }
+        .ce-header {
+          color: #1f2937;
+          font-weight: 700;
+        }
+        .dark .ce-header {
+          color: #f3f4f6;
+        }
+      `}</style>
     </div>
   );
 };
-
