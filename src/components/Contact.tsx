@@ -3,24 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { VALIDATION, TIMING } from '../utils/constants';
 import { getValidationError } from '../utils/validation';
+import emailjs from '@emailjs/browser';
 
 interface FormErrors {
   name: string;
   email: string;
   message: string;
-  recaptcha: string;
-}
-
-// Google reCAPTCHA Enterprise window interface
-interface WindowWithRecaptcha extends Window {
-  grecaptcha?: {
-    enterprise?: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
-    };
-    ready?: (callback: () => void) => void;
-    execute?: (siteKey: string, options: { action: string }) => Promise<string>;
-  };
 }
 
 const Contact: React.FC = () => {
@@ -36,41 +24,28 @@ const Contact: React.FC = () => {
     name: '',
     email: '',
     message: '',
-    recaptcha: '',
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
+  // EmailJS configuration
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
 
-  // Load reCAPTCHA Enterprise script dynamically
+  // Initialize EmailJS
   useEffect(() => {
-    if (!RECAPTCHA_SITE_KEY) {
-      console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
-      return;
+    if (EMAILJS_PUBLIC_KEY) {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
     }
+  }, [EMAILJS_PUBLIC_KEY]);
 
-    // Check if script is already loaded (Enterprise or regular)
-    if (document.querySelector(`script[src*="recaptcha/enterprise.js?render=${RECAPTCHA_SITE_KEY}"]`) ||
-        document.querySelector(`script[src*="recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}"]`)) {
-      return;
-    }
-
-    // Load reCAPTCHA Enterprise script
-    const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/enterprise.js?render=${RECAPTCHA_SITE_KEY}`;
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-  }, [RECAPTCHA_SITE_KEY]);
-
-  // Validate form fields (reCAPTCHA v3 token will be obtained during submit)
+  // Validate form fields
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {
       name: '',
       email: '',
       message: '',
-      recaptcha: '',
     };
     let isValid = true;
 
@@ -103,7 +78,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     
     // Clear previous errors
-    setErrors({ name: '', email: '', message: '', recaptcha: '' });
+    setErrors({ name: '', email: '', message: '' });
     setErrorMessage('');
 
     // Validate form
@@ -112,84 +87,22 @@ const Contact: React.FC = () => {
       return;
     }
 
+    // Check EmailJS configuration
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setStatus('error');
+      setErrorMessage(t('contact.form.error') + ' (EmailJS not configured)');
+      trackFormInteraction('contact_form', 'config_error');
+      setTimeout(() => {
+        setStatus('idle');
+        setErrorMessage('');
+      }, TIMING.ERROR_MESSAGE_DURATION);
+      return;
+    }
+
     setStatus('sending');
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
-      // Get reCAPTCHA v3 token
-      let recaptchaToken = '';
-      if (RECAPTCHA_SITE_KEY) {
-        const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
-        
-        // Wait for reCAPTCHA to be ready
-        if (!windowWithRecaptcha.grecaptcha) {
-          console.warn('reCAPTCHA not loaded, waiting...');
-          // Wait a bit for script to load
-          await new Promise(resolve => setTimeout(resolve, 1000));
-        }
-
-        // Try Enterprise first, fallback to regular
-        const grecaptcha = windowWithRecaptcha.grecaptcha;
-        const enterprise = grecaptcha?.enterprise;
-        const isEnterprise = !!enterprise;
-        
-        if (grecaptcha && (enterprise || grecaptcha.execute)) {
-          try {
-            // Use ready() to ensure reCAPTCHA is fully loaded
-            await new Promise<void>((resolve, reject) => {
-              const readyFn = isEnterprise 
-                ? enterprise!.ready.bind(enterprise)
-                : grecaptcha.ready!.bind(grecaptcha);
-              
-              readyFn(() => {
-                resolve();
-              });
-              // Timeout after 5 seconds
-              setTimeout(() => {
-                if (!grecaptcha) {
-                  reject(new Error('reCAPTCHA failed to load'));
-                }
-              }, 5000);
-            });
-
-            // Use Enterprise API if available, otherwise regular API
-            if (isEnterprise && enterprise.execute) {
-              recaptchaToken = await enterprise.execute(RECAPTCHA_SITE_KEY, {
-                action: 'contact_form_submit'
-              });
-            } else if (grecaptcha.execute) {
-              recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, {
-                action: 'contact_form_submit'
-              });
-            } else {
-              throw new Error('reCAPTCHA execute method not available');
-            }
-            
-            console.log('✅ reCAPTCHA token alındı:', recaptchaToken.substring(0, 20) + '...');
-          } catch (recaptchaError) {
-            console.error('reCAPTCHA error:', recaptchaError);
-            setStatus('error');
-            setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaError') }));
-            trackFormInteraction('contact_form', 'recaptcha_error');
-            setTimeout(() => {
-              setStatus('idle');
-              setErrors(prev => ({ ...prev, recaptcha: '' }));
-            }, TIMING.ERROR_MESSAGE_DURATION);
-            return;
-          }
-        } else {
-          console.warn('reCAPTCHA not loaded');
-          setStatus('error');
-          setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaError') }));
-          trackFormInteraction('contact_form', 'recaptcha_not_loaded');
-          setTimeout(() => {
-            setStatus('idle');
-            setErrors(prev => ({ ...prev, recaptcha: '' }));
-          }, TIMING.ERROR_MESSAGE_DURATION);
-          return;
-        }
-      }
-
       // Dil bilgisini al
       const languageNames: { [key: string]: string } = {
         'tr': 'Türkçe 🇹🇷',
@@ -198,49 +111,28 @@ const Contact: React.FC = () => {
         'az': 'Azərbaycan Türkcəsi 🇦🇿'
       };
       const currentLanguage = languageNames[i18n.language.split('-')[0]] || i18n.language;
-      
-      // Backend API endpoint
-      // www olmadan oluştur (CORS redirect sorununu önlemek için)
-      const getApiEndpoint = () => {
-        if (import.meta.env.VITE_API_ENDPOINT) {
-          return import.meta.env.VITE_API_ENDPOINT;
-        }
-        if (window.location.hostname === 'localhost') {
-          return 'http://localhost:3001/api/contact';
-        }
-        // www'yi kaldır ve protocol ile birleştir
-        const hostname = window.location.hostname.replace(/^www\./, '');
-        return `${window.location.protocol}//${hostname}/api/contact`;
+
+      // EmailJS ile email gönder
+      const templateParams = {
+        from_name: formData.name.trim(),
+        from_email: formData.email.trim(),
+        message: formData.message.trim(),
+        language: currentLanguage,
+        to_name: 'Tolga',
       };
-      const API_ENDPOINT = getApiEndpoint();
-      console.log('🌐 API Endpoint:', API_ENDPOINT);
-      
-      // Backend API'ye istek gönder
-      const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim(),
-          language: currentLanguage,
-          recaptchaToken: recaptchaToken,
-        }),
-      });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send email');
-      }
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
 
       setStatus('success');
       trackContactSubmission(formData);
       trackFormInteraction('contact_form', 'submit_success');
       setFormData({ name: '', email: '', message: '' });
-      setErrors({ name: '', email: '', message: '', recaptcha: '' });
+      setErrors({ name: '', email: '', message: '' });
       
       // Success mesajını kaldır
       setTimeout(() => setStatus('idle'), TIMING.SUCCESS_MESSAGE_DURATION);
@@ -529,14 +421,6 @@ const Contact: React.FC = () => {
               )}
             </div>
 
-            {/* Google reCAPTCHA v3 - Invisible, works in background */}
-            {errors.recaptcha && (
-              <div>
-                <p id="recaptcha-error" className="mt-2 text-sm text-red-400" role="alert">
-                  {errors.recaptcha}
-                </p>
-              </div>
-            )}
 
             {/* Submit Button */}
             <button
