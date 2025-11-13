@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaGithub, FaUser, FaHome, FaBlog, FaSignOutAlt, FaCog, FaChartLine } from "react-icons/fa";
+import { FaGithub, FaUser, FaHome, FaBlog, FaSignOutAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useAuthStore } from "../app/store/authStore";
+import { LoginModal, SignupModal } from "../features/auth";
 
 interface NavbarProps {
   onLoginClick?: () => void;
@@ -509,13 +510,56 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                 </div>
               </div>
             ) : (
-              <button
-                onClick={onLoginClick}
-                className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Login"
-              >
-                <FaUser className="w-4 h-4 text-white" />
-              </button>
+              <div className="relative profile-dropdown-container">
+                <button
+                  onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                  className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  aria-label="Login"
+                >
+                  <FaUser className="w-4 h-4 text-white" />
+                </button>
+                {/* Auth Dropdown Menu */}
+                <AnimatePresence>
+                  {isProfileDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50"
+                    >
+                      <div className="p-4">
+                        <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                          {t('auth.welcome') || 'Welcome!'}
+                        </h3>
+                        <div className="space-y-2">
+                          <button
+                            onClick={() => {
+                              setIsProfileDropdownOpen(false);
+                              setShowLoginModal(true);
+                              trackClick('nav_login', 'action', 'Login');
+                            }}
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors font-medium"
+                          >
+                            <FaUser className="w-4 h-4" />
+                            <span>{t('auth.login') || 'Login'}</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setIsProfileDropdownOpen(false);
+                              setShowSignupModal(true);
+                              trackClick('nav_signup', 'action', 'Signup');
+                            }}
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition-colors font-medium"
+                          >
+                            <FaUser className="w-4 h-4" />
+                            <span>{t('auth.signup') || 'Sign Up'}</span>
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             )}
           </div>
 
