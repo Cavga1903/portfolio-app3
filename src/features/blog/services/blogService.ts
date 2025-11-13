@@ -18,14 +18,29 @@ import { db } from '../../../lib/firebase/config';
 import { BlogPost } from '../types/blog.types';
 
 // Helper function to convert Firestore document to BlogPost
-const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: string): BlogPost => {
+const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: string, currentLanguage?: string): BlogPost => {
   const data = docSnapshot.data();
+  const translations = data.translations || {};
+  
+  // If translations exist and current language is not the source language, use translation
+  let title = data.title || '';
+  let content = data.content || '';
+  let excerpt = data.excerpt || '';
+  
+  if (currentLanguage && translations[currentLanguage]) {
+    const translation = translations[currentLanguage];
+    title = translation.title || title;
+    content = translation.content || content;
+    excerpt = translation.excerpt || excerpt;
+  }
+  
   return {
     id,
-    title: data.title || '',
+    title,
     slug: data.slug || '',
-    content: data.content || '',
-    excerpt: data.excerpt || '',
+    content,
+    excerpt,
+    translations: translations,
     author: data.author || { id: '1', name: 'Tolga Çavga' },
     publishedAt: data.publishedAt?.toDate?.()?.toISOString() || data.publishedAt || new Date().toISOString(),
     updatedAt: data.updatedAt?.toDate?.()?.toISOString() || data.updatedAt,
@@ -39,7 +54,7 @@ const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: str
 };
 
 export const blogService = {
-  getPosts: async (): Promise<BlogPost[]> => {
+  getPosts: async (currentLanguage?: string): Promise<BlogPost[]> => {
     try {
       const postsRef = collection(db, 'blogPosts');
       const q = query(
@@ -52,7 +67,7 @@ export const blogService = {
       const posts: BlogPost[] = [];
       
       querySnapshot.forEach((docSnapshot) => {
-        posts.push(docToBlogPost(docSnapshot, docSnapshot.id));
+        posts.push(docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage));
       });
       
       return posts;
@@ -71,7 +86,7 @@ export const blogService = {
     }
   },
 
-  getPost: async (slug: string): Promise<BlogPost> => {
+  getPost: async (slug: string, currentLanguage?: string): Promise<BlogPost> => {
     try {
       const postsRef = collection(db, 'blogPosts');
       const q = query(postsRef, where('slug', '==', slug));
@@ -82,7 +97,7 @@ export const blogService = {
       }
       
       const docSnapshot = querySnapshot.docs[0];
-      return docToBlogPost(docSnapshot, docSnapshot.id);
+      return docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage);
     } catch (error) {
       console.error('Error fetching blog post:', error);
       // Fallback to API

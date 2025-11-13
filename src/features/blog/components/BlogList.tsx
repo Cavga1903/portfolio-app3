@@ -12,13 +12,13 @@ interface BlogListProps {
 }
 
 const BlogList: React.FC<BlogListProps> = ({ searchQuery, category }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const { data: posts, isLoading } = useQuery({
-    queryKey: ['blogPosts', searchQuery, category],
+    queryKey: ['blogPosts', searchQuery, category, i18n.language],
     queryFn: async () => {
-      const allPosts = await blogService.getPosts();
+      const allPosts = await blogService.getPosts(i18n.language);
       
       // Filter by search query
       let filtered = allPosts;

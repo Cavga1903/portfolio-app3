@@ -633,6 +633,60 @@
     "disliked": "Project disliked 👎",
     "dislikeRemoved": "Dislike removed",
     "error": "An error occurred, please try again"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Discover the latest insights, tutorials, and stories",
+    "searchPlaceholder": "Search articles...",
+    "readMore": "Read more",
+    "noPosts": "No posts found",
+    "relatedPosts": "Related Posts",
+    "postNotFound": "Post not found",
+    "categories": {
+      "title": "Categories",
+      "all": "All Posts",
+      "tutorial": "Tutorials",
+      "article": "Articles",
+      "news": "News"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome back"
+    },
+    "stats": {
+      "totalUsers": "Total Users",
+      "totalPosts": "Total Posts",
+      "totalViews": "Total Views",
+      "growth": "Growth Rate"
+    },
+    "blog": {
+      "title": "Blog Management",
+      "subtitle": "Manage your blog posts",
+      "manage": "Manage Blog",
+      "create": "Create New Post",
+      "editPost": "Edit Post",
+      "createPost": "Create New Post",
+      "search": "Search posts...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving...",
+      "translate": "Translate to All Languages",
+      "translating": "Translating...",
+      "translateSuccess": "Translations completed successfully!",
+      "translateError": "Translation failed. Please check your API key.",
+      "form": {
+        "title": "Title",
+        "slug": "Slug",
+        "slugHint": "URL-friendly version of the title",
+        "excerpt": "Excerpt",
+        "content": "Content",
+        "image": "Image URL",
+        "imageHint": "Enter image URL or upload an image",
+        "published": "Published"
+      }
+    }
   }
 }
 

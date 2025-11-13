@@ -11,11 +11,11 @@ interface BlogPostContentProps {
 }
 
 const BlogPostContent: React.FC<BlogPostContentProps> = ({ slug }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { data: post, isLoading } = useQuery<BlogPost>({
-    queryKey: ['blogPost', slug],
-    queryFn: () => blogService.getPost(slug),
+    queryKey: ['blogPost', slug, i18n.language],
+    queryFn: () => blogService.getPost(slug, i18n.language),
   });
 
   if (isLoading) {

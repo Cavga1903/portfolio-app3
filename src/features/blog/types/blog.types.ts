@@ -1,9 +1,17 @@
+export interface BlogPostTranslation {
+  title: string;
+  content: string;
+  excerpt: string;
+}
+
 export interface BlogPost {
   id: string;
   title: string;
   slug: string;
   content: string;
   excerpt: string;
+  // Translations for different languages (e.g., { en: {...}, tr: {...}, de: {...} })
+  translations?: Record<string, BlogPostTranslation>;
   author: {
     id: string;
     name: string;

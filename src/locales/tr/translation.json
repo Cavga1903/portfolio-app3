@@ -678,6 +678,22 @@
     "googleSignupError": "Google ile kayıt başarısız",
     "logout": "Çıkış Yap"
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "En son içgörüleri, eğitimleri ve hikayeleri keşfedin",
+    "searchPlaceholder": "Makale ara...",
+    "readMore": "Devamını oku",
+    "noPosts": "Post bulunamadı",
+    "relatedPosts": "İlgili Postlar",
+    "postNotFound": "Post bulunamadı",
+    "categories": {
+      "title": "Kategoriler",
+      "all": "Tüm Postlar",
+      "tutorial": "Eğitimler",
+      "article": "Makaleler",
+      "news": "Haberler"
+    }
+  },
   "admin": {
     "dashboard": {
       "title": "Dashboard",
@@ -700,6 +716,10 @@
       "cancel": "İptal",
       "save": "Kaydet",
       "saving": "Kaydediliyor...",
+      "translate": "Tüm Dillere Çevir",
+      "translating": "Çevriliyor...",
+      "translateSuccess": "Çeviriler başarıyla tamamlandı!",
+      "translateError": "Çeviri başarısız. Lütfen API anahtarınızı kontrol edin.",
       "form": {
         "title": "Başlık",
         "slug": "Slug",

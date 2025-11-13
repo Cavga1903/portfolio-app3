@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaLanguage } from 'react-icons/fa';
 import { useAuthStore } from '../../../../app/store/authStore';
 import { blogService } from '../../../blog/services/blogService';
+import { translateBlogPost } from '../../../blog/services/translationService';
 import { BlogPost } from '../../../blog/types/blog.types';
 
 interface BlogEditorAdminProps {
@@ -18,7 +19,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
   onClose,
   onSave,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const queryClient = useQueryClient();
   const { user } = useAuthStore();
   const [formData, setFormData] = useState<Partial<BlogPost>>({
@@ -30,6 +31,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
     image: '',
     isPublished: false,
   });
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const { data: post } = useQuery<BlogPost>({
     queryKey: ['blogPost', postId],
@@ -47,6 +49,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
         tags: post.tags,
         image: post.image || '',
         isPublished: post.isPublished,
+        translations: post.translations,
       });
     }
   }, [post]);
@@ -81,6 +84,39 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
       title,
       slug: formData.slug || generateSlug(title),
     });
+  };
+
+  const handleTranslate = async () => {
+    if (!formData.title || !formData.content || !formData.excerpt) {
+      alert(t('admin.blog.translateError') || 'Please fill in title, content, and excerpt first');
+      return;
+    }
+
+    setIsTranslating(true);
+    try {
+      const sourceLanguage = i18n.language || 'tr';
+      const translations = await translateBlogPost(
+        formData.title,
+        formData.content,
+        formData.excerpt,
+        sourceLanguage
+      );
+
+      setFormData({
+        ...formData,
+        translations: {
+          ...formData.translations,
+          ...translations,
+        },
+      });
+
+      alert(t('admin.blog.translateSuccess') || 'Translations completed successfully!');
+    } catch (error) {
+      console.error('Translation error:', error);
+      alert(t('admin.blog.translateError') || 'Translation failed. Please check your API key.');
+    } finally {
+      setIsTranslating(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -216,7 +252,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
               />
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between gap-4">
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -230,6 +266,19 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
                   {t('admin.blog.form.published') || 'Published'}
                 </span>
               </label>
+              <button
+                type="button"
+                onClick={handleTranslate}
+                disabled={isTranslating || !formData.title || !formData.content || !formData.excerpt}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+              >
+                <FaLanguage />
+                <span>
+                  {isTranslating
+                    ? t('admin.blog.translating') || 'Translating...'
+                    : t('admin.blog.translate') || 'Translate to All Languages'}
+                </span>
+              </button>
             </div>
 
             <div className="flex justify-end gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
