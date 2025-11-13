@@ -115,7 +115,6 @@ const Services: React.FC = () => {
 
   return (
     <section id="services" 
-      id="services" 
       className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden"
     >
       {/* Animated Background Circles */}
