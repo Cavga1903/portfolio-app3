@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaGithub, FaUser, FaHome, FaBlog, FaChartLine, FaSignOutAlt } from "react-icons/fa";
+import { FaGithub, FaUser, FaHome, FaBlog, FaSignOutAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, useMotionValue, useSpring } from "framer-motion";
