@@ -1,78 +1,201 @@
-import apiClient from '../../../api/client';
-import { endpoints } from '../../../api/endpoints';
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  orderBy,
+  Timestamp,
+  DocumentData,
+  QueryDocumentSnapshot,
+} from 'firebase/firestore';
+import { db } from '../../../lib/firebase/config';
 import { BlogPost } from '../types/blog.types';
+
+// Helper function to convert Firestore document to BlogPost
+const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: string): BlogPost => {
+  const data = docSnapshot.data();
+  return {
+    id,
+    title: data.title || '',
+    slug: data.slug || '',
+    content: data.content || '',
+    excerpt: data.excerpt || '',
+    author: data.author || { id: '1', name: 'Tolga Çavga' },
+    publishedAt: data.publishedAt?.toDate?.()?.toISOString() || data.publishedAt || new Date().toISOString(),
+    updatedAt: data.updatedAt?.toDate?.()?.toISOString() || data.updatedAt,
+    tags: data.tags || [],
+    category: data.category,
+    image: data.image,
+    views: data.views || 0,
+    likes: data.likes || 0,
+    isPublished: data.isPublished ?? true,
+  };
+};
 
 export const blogService = {
   getPosts: async (): Promise<BlogPost[]> => {
-    // TODO: Replace with actual API call
-    // const response = await apiClient.get<BlogPost[]>(endpoints.blog.posts);
-    // return response.data;
-    
-    // Mock data for now
-    return [
-      {
-        id: '1',
-        title: 'Getting Started with React',
-        slug: 'getting-started-with-react',
-        content: 'Full content here...',
-        excerpt: 'Learn the basics of React and start building modern web applications.',
-        author: {
-          id: '1',
-          name: 'Tolga Çavga',
-          avatar: '/avatars/tolga.jpg',
-        },
-        publishedAt: new Date().toISOString(),
-        tags: ['React', 'JavaScript', 'Web Development'],
-        category: 'Tutorial',
-        image: '/blog/react-intro.jpg',
-        views: 1234,
-        likes: 56,
-        isPublished: true,
-      },
-      {
-        id: '2',
-        title: 'Building Scalable Applications',
-        slug: 'building-scalable-applications',
-        content: 'Full content here...',
-        excerpt: 'Best practices for building applications that scale.',
-        author: {
-          id: '1',
-          name: 'Tolga Çavga',
-        },
-        publishedAt: new Date().toISOString(),
-        tags: ['Architecture', 'Best Practices'],
-        category: 'Article',
-        views: 890,
-        likes: 42,
-        isPublished: true,
-      },
-    ];
+    try {
+      const postsRef = collection(db, 'blogPosts');
+      const q = query(
+        postsRef,
+        where('isPublished', '==', true),
+        orderBy('publishedAt', 'desc')
+      );
+      
+      const querySnapshot = await getDocs(q);
+      const posts: BlogPost[] = [];
+      
+      querySnapshot.forEach((docSnapshot) => {
+        posts.push(docToBlogPost(docSnapshot, docSnapshot.id));
+      });
+      
+      return posts;
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+      // Fallback to API if Firestore fails
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts`);
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (apiError) {
+        console.error('API fallback also failed:', apiError);
+      }
+      throw error;
+    }
   },
 
   getPost: async (slug: string): Promise<BlogPost> => {
-    // TODO: Replace with actual API call
-    // const response = await apiClient.get<BlogPost>(endpoints.blog.post(slug));
-    // return response.data;
-    
-    // Mock data
-    const posts = await blogService.getPosts();
-    const post = posts.find((p) => p.slug === slug);
-    if (!post) throw new Error('Post not found');
-    return post;
+    try {
+      const postsRef = collection(db, 'blogPosts');
+      const q = query(postsRef, where('slug', '==', slug));
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.empty) {
+        throw new Error('Post not found');
+      }
+      
+      const docSnapshot = querySnapshot.docs[0];
+      return docToBlogPost(docSnapshot, docSnapshot.id);
+    } catch (error) {
+      console.error('Error fetching blog post:', error);
+      // Fallback to API
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts/${slug}`);
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (apiError) {
+        console.error('API fallback also failed:', apiError);
+      }
+      throw error;
+    }
   },
 
   createPost: async (post: Partial<BlogPost>): Promise<BlogPost> => {
-    const response = await apiClient.post<BlogPost>(endpoints.blog.create, post);
-    return response.data;
+    try {
+      const postsRef = collection(db, 'blogPosts');
+      const postData = {
+        ...post,
+        publishedAt: post.publishedAt ? Timestamp.fromDate(new Date(post.publishedAt)) : Timestamp.now(),
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
+      };
+      
+      const docRef = await addDoc(postsRef, postData);
+      const docSnapshot = await getDoc(docRef);
+      
+      if (!docSnapshot.exists()) {
+        throw new Error('Failed to create post');
+      }
+      
+      return docToBlogPost(docSnapshot, docRef.id);
+    } catch (error) {
+      console.error('Error creating blog post:', error);
+      // Fallback to API
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post),
+        });
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (apiError) {
+        console.error('API fallback also failed:', apiError);
+      }
+      throw error;
+    }
   },
 
   updatePost: async (id: string, post: Partial<BlogPost>): Promise<BlogPost> => {
-    const response = await apiClient.put<BlogPost>(endpoints.blog.update(id), post);
-    return response.data;
+    try {
+      const postRef = doc(db, 'blogPosts', id);
+      const updateData: Record<string, unknown> = {
+        ...post,
+        updatedAt: Timestamp.now(),
+      };
+      
+      // Convert date strings to Timestamps if present
+      if (post.publishedAt) {
+        updateData.publishedAt = Timestamp.fromDate(new Date(post.publishedAt));
+      }
+      if (post.updatedAt) {
+        updateData.updatedAt = Timestamp.fromDate(new Date(post.updatedAt));
+      }
+      
+      await updateDoc(postRef, updateData);
+      const docSnapshot = await getDoc(postRef);
+      
+      if (!docSnapshot.exists()) {
+        throw new Error('Post not found');
+      }
+      
+      return docToBlogPost(docSnapshot, id);
+    } catch (error) {
+      console.error('Error updating blog post:', error);
+      // Fallback to API
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post),
+        });
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (apiError) {
+        console.error('API fallback also failed:', apiError);
+      }
+      throw error;
+    }
   },
 
   deletePost: async (id: string): Promise<void> => {
-    await apiClient.delete(endpoints.blog.delete(id));
+    try {
+      const postRef = doc(db, 'blogPosts', id);
+      await deleteDoc(postRef);
+    } catch (error) {
+      console.error('Error deleting blog post:', error);
+      // Fallback to API
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/blog/posts/${id}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          throw new Error('Failed to delete post');
+        }
+      } catch (apiError) {
+        console.error('API fallback also failed:', apiError);
+        throw error;
+      }
+    }
   },
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppProvider } from './app/providers/AppProvider';
 import { routes } from './app/router/routes';
@@ -16,17 +16,15 @@ const App: React.FC = () => {
 
   return (
     <AppProvider>
-      <BrowserRouter>
-        <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={route.element}
-            />
-          ))}
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        {routes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={route.element}
+          />
+        ))}
+      </Routes>
     </AppProvider>
   );
 };
