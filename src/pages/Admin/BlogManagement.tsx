@@ -5,7 +5,6 @@ import { useSearchParams } from 'react-router-dom';
 import { FaPlus, FaSearch } from 'react-icons/fa';
 import Navbar from '../../components/Navbar';
 import { LoginModal, SignupModal } from '../../features/auth';
-import { useAuthStore } from '../../app/store/authStore';
 
 // Blog management components
 const BlogListAdmin = React.lazy(() => import('../../features/admin/components/BlogManagement/BlogListAdmin'));
@@ -13,7 +12,6 @@ const BlogEditorAdmin = React.lazy(() => import('../../features/admin/components
 
 const AdminBlogManagement: React.FC = () => {
   const { t } = useTranslation();
-  const { user } = useAuthStore();
   const [searchParams, setSearchParams] = useSearchParams();
   const [showEditor, setShowEditor] = useState(false);
   const [editingPost, setEditingPost] = useState<string | null>(null);
