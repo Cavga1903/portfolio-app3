@@ -661,6 +661,66 @@
     "googleLoginError": "Google-Anmeldung fehlgeschlagen",
     "googleSignupError": "Google-Registrierung fehlgeschlagen",
     "logout": "Abmelden"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Willkommen zurück",
+      "recentPosts": "Letzte Blog-Posts",
+      "viewAll": "Alle anzeigen",
+      "published": "Veröffentlicht",
+      "draft": "Entwurf",
+      "noPosts": "Noch keine Blog-Posts",
+      "createFirst": "Erstellen Sie Ihren ersten Post"
+    },
+    "stats": {
+      "totalUsers": "Gesamt Benutzer",
+      "totalPosts": "Gesamt Posts",
+      "totalViews": "Gesamt Aufrufe",
+      "growth": "Wachstumsrate"
+    },
+    "blog": {
+      "title": "Blog-Verwaltung",
+      "subtitle": "Verwalten Sie Ihre Blog-Posts",
+      "manage": "Blog verwalten",
+      "create": "Neuen Post erstellen",
+      "editPost": "Post bearbeiten",
+      "createPost": "Neuen Post erstellen",
+      "search": "Posts suchen...",
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "saving": "Wird gespeichert...",
+      "translate": "In alle Sprachen übersetzen",
+      "translating": "Wird übersetzt...",
+      "translateSuccess": "Übersetzungen erfolgreich abgeschlossen!",
+      "translateError": "Übersetzung fehlgeschlagen. Bitte überprüfen Sie Ihren API-Schlüssel.",
+      "slugTaken": "Dieser Slug wird bereits verwendet",
+      "checkingSlug": "Wird überprüft...",
+      "minWords": "Min. 50 Wörter",
+      "upload": "Hochladen",
+      "uploading": "Wird hochgeladen...",
+      "saveFirst": "Zuerst speichern",
+      "published": "Veröffentlicht",
+      "draft": "Entwurf",
+      "confirmDelete": "Sind Sie sicher, dass Sie diesen Post löschen möchten?",
+      "table": {
+        "title": "Titel",
+        "status": "Status",
+        "views": "Aufrufe",
+        "actions": "Aktionen"
+      },
+      "form": {
+        "title": "Titel",
+        "slug": "Slug",
+        "slugHint": "URL-freundliche Version des Titels",
+        "excerpt": "Auszug",
+        "content": "Inhalt",
+        "contentPlaceholder": "Schreiben Sie Ihren Inhalt hier...",
+        "image": "Bild-URL",
+        "imageHint": "Bild-URL eingeben oder Bild hochladen",
+        "published": "Veröffentlicht"
+      }
+    }
   }
 }
 

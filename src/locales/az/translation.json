@@ -661,6 +661,66 @@
     "googleLoginError": "Google ilə daxil olma uğursuz oldu",
     "googleSignupError": "Google ilə qeydiyyat uğursuz oldu",
     "logout": "Çıxış"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "İdarə Paneli",
+      "welcome": "Xoş gəlmisiniz",
+      "recentPosts": "Son Blog Yazıları",
+      "viewAll": "Hamısını Gör",
+      "published": "Yayımlanıb",
+      "draft": "Qaralama",
+      "noPosts": "Hələ blog yazısı yoxdur",
+      "createFirst": "İlk Yazınızı Yaradın"
+    },
+    "stats": {
+      "totalUsers": "Ümumi İstifadəçi",
+      "totalPosts": "Ümumi Yazı",
+      "totalViews": "Ümumi Baxış",
+      "growth": "Artım Dərəcəsi"
+    },
+    "blog": {
+      "title": "Blog İdarəetməsi",
+      "subtitle": "Blog yazılarınızı idarə edin",
+      "manage": "Blogu İdarə Et",
+      "create": "Yeni Yazı Yarad",
+      "editPost": "Yazını Redaktə Et",
+      "createPost": "Yeni Yazı Yarad",
+      "search": "Yazı axtar...",
+      "cancel": "Ləğv et",
+      "save": "Saxla",
+      "saving": "Saxlanılır...",
+      "translate": "Bütün Dillərə Tərcümə Et",
+      "translating": "Tərcümə olunur...",
+      "translateSuccess": "Tərcümələr uğurla tamamlandı!",
+      "translateError": "Tərcümə uğursuz oldu. Xahiş edirik API açarınızı yoxlayın.",
+      "slugTaken": "Bu slug artıq istifadə olunur",
+      "checkingSlug": "Yoxlanılır...",
+      "minWords": "Min 50 söz",
+      "upload": "Yüklə",
+      "uploading": "Yüklənir...",
+      "saveFirst": "Əvvəlcə saxla",
+      "published": "Yayımlanıb",
+      "draft": "Qaralama",
+      "confirmDelete": "Bu yazını silmək istədiyinizə əminsiniz?",
+      "table": {
+        "title": "Başlıq",
+        "status": "Status",
+        "views": "Baxış",
+        "actions": "Əməliyyatlar"
+      },
+      "form": {
+        "title": "Başlıq",
+        "slug": "Slug",
+        "slugHint": "Başlığın URL-uyğun versiyası",
+        "excerpt": "Xülasə",
+        "content": "Məzmun",
+        "contentPlaceholder": "Məzmununuzu buraya yazın...",
+        "image": "Şəkil URL",
+        "imageHint": "Şəkil URL daxil edin və ya şəkil yükləyin",
+        "published": "Yayımlanıb"
+      }
+    }
   }
 }
 

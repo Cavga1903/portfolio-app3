@@ -674,5 +674,65 @@
     "googleLoginError": "Échec de la connexion Google",
     "googleSignupError": "Échec de l'inscription Google",
     "logout": "Déconnexion"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Tableau de bord",
+      "welcome": "Bon retour",
+      "recentPosts": "Derniers articles de blog",
+      "viewAll": "Voir tout",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "noPosts": "Aucun article de blog pour le moment",
+      "createFirst": "Créez votre premier article"
+    },
+    "stats": {
+      "totalUsers": "Total utilisateurs",
+      "totalPosts": "Total articles",
+      "totalViews": "Total vues",
+      "growth": "Taux de croissance"
+    },
+    "blog": {
+      "title": "Gestion du blog",
+      "subtitle": "Gérez vos articles de blog",
+      "manage": "Gérer le blog",
+      "create": "Créer un nouvel article",
+      "editPost": "Modifier l'article",
+      "createPost": "Créer un nouvel article",
+      "search": "Rechercher des articles...",
+      "cancel": "Annuler",
+      "save": "Enregistrer",
+      "saving": "Enregistrement...",
+      "translate": "Traduire dans toutes les langues",
+      "translating": "Traduction...",
+      "translateSuccess": "Traductions terminées avec succès !",
+      "translateError": "La traduction a échoué. Veuillez vérifier votre clé API.",
+      "slugTaken": "Ce slug est déjà utilisé",
+      "checkingSlug": "Vérification...",
+      "minWords": "Min 50 mots",
+      "upload": "Télécharger",
+      "uploading": "Téléchargement...",
+      "saveFirst": "Enregistrer d'abord",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet article ?",
+      "table": {
+        "title": "Titre",
+        "status": "Statut",
+        "views": "Vues",
+        "actions": "Actions"
+      },
+      "form": {
+        "title": "Titre",
+        "slug": "Slug",
+        "slugHint": "Version URL-friendly du titre",
+        "excerpt": "Extrait",
+        "content": "Contenu",
+        "contentPlaceholder": "Écrivez votre contenu ici...",
+        "image": "URL de l'image",
+        "imageHint": "Entrez l'URL de l'image ou téléchargez une image",
+        "published": "Publié"
+      }
+    }
   }
 }
