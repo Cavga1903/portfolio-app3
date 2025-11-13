@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { 
   FaUsers, 
   FaBlog, 
   FaChartLine, 
-  FaEye
+  FaEye,
+  FaPlus
 } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
 import Navbar from '../../components/Navbar';
 import { LoginModal, SignupModal } from '../../features/auth';
 import { useAuthStore } from '../../app/store/authStore';
+import { blogService } from '../../features/blog/services/blogService';
 
 // Dashboard components
 const StatsCards = React.lazy(() => import('../../features/admin/components/Dashboard/StatsCards'));
@@ -18,9 +22,16 @@ const RecentActivity = React.lazy(() => import('../../features/admin/components/
 
 const AdminDashboard: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { user } = useAuthStore();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+
+  // Fetch blog statistics
+  const { data: blogStats, isLoading: statsLoading } = useQuery({
+    queryKey: ['blogStats'],
+    queryFn: () => blogService.getStats(),
+  });
 
   const stats = [
     {
@@ -33,25 +44,27 @@ const AdminDashboard: React.FC = () => {
     },
     {
       title: t('admin.stats.totalPosts') || 'Total Posts',
-      value: '89',
-      change: '+5%',
+      value: statsLoading ? '...' : String(blogStats?.totalPosts || 0),
+      change: blogStats?.publishedPosts ? `${blogStats.publishedPosts} published` : '0',
       trend: 'up' as const,
       icon: FaBlog,
       color: 'from-purple-500 to-pink-500',
     },
     {
       title: t('admin.stats.totalViews') || 'Total Views',
-      value: '45.6K',
-      change: '+23%',
+      value: statsLoading ? '...' : blogStats?.totalViews ? `${(blogStats.totalViews / 1000).toFixed(1)}K` : '0',
+      change: blogStats?.draftPosts ? `${blogStats.draftPosts} drafts` : '0',
       trend: 'up' as const,
       icon: FaEye,
       color: 'from-green-500 to-emerald-500',
     },
     {
-      title: t('admin.stats.growth') || 'Growth Rate',
-      value: '18.2%',
-      change: '-2%',
-      trend: 'down' as const,
+      title: t('admin.stats.growth') || 'Published Rate',
+      value: statsLoading ? '...' : blogStats?.totalPosts 
+        ? `${Math.round((blogStats.publishedPosts / blogStats.totalPosts) * 100)}%`
+        : '0%',
+      change: blogStats?.draftPosts ? `${blogStats.draftPosts} drafts` : '0',
+      trend: 'up' as const,
       icon: FaChartLine,
       color: 'from-orange-500 to-red-500',
     },
@@ -71,6 +84,15 @@ const AdminDashboard: React.FC = () => {
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                 {t('admin.dashboard.welcome') || 'Welcome back'}, {user?.name}
               </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate('/admin/blog')}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:shadow-lg transition-all duration-300"
+              >
+                <FaPlus />
+                <span>{t('admin.blog.manage') || 'Manage Blog'}</span>
+              </button>
             </div>
           </div>
         </div>

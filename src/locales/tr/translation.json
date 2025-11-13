@@ -8,7 +8,9 @@
     "projects": "Portföy",
     "contact": "İletişim",
     "blog": "Blog",
-    "admin": "Admin Paneli"
+    "admin": "Admin Paneli",
+    "dashboard": "Dashboard",
+    "blogManagement": "Blog Yönetimi"
   },
   "hero": {
     "greeting": "Merhaba, ben Tolga! 👋",
@@ -675,6 +677,40 @@
     "googleLoginError": "Google ile giriş başarısız",
     "googleSignupError": "Google ile kayıt başarısız",
     "logout": "Çıkış Yap"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Hoş geldiniz"
+    },
+    "stats": {
+      "totalUsers": "Toplam Kullanıcı",
+      "totalPosts": "Toplam Post",
+      "totalViews": "Toplam Görüntülenme",
+      "growth": "Büyüme Oranı"
+    },
+    "blog": {
+      "title": "Blog Yönetimi",
+      "subtitle": "Blog postlarınızı yönetin",
+      "manage": "Blog Yönet",
+      "create": "Yeni Post Oluştur",
+      "editPost": "Post Düzenle",
+      "createPost": "Yeni Post Oluştur",
+      "search": "Post ara...",
+      "cancel": "İptal",
+      "save": "Kaydet",
+      "saving": "Kaydediliyor...",
+      "form": {
+        "title": "Başlık",
+        "slug": "Slug",
+        "slugHint": "Başlığın URL uyumlu versiyonu",
+        "excerpt": "Özet",
+        "content": "İçerik",
+        "image": "Görsel URL",
+        "imageHint": "Görsel URL'si girin veya görsel yükleyin",
+        "published": "Yayınlandı"
+      }
+    }
   }
 }
 

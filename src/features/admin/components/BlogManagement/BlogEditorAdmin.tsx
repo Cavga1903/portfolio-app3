@@ -27,6 +27,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
     content: '',
     excerpt: '',
     tags: [],
+    image: '',
     isPublished: false,
   });
 
@@ -44,6 +45,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
         content: post.content,
         excerpt: post.excerpt,
         tags: post.tags,
+        image: post.image || '',
         isPublished: post.isPublished,
       });
     }
@@ -158,6 +160,34 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
               />
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                 {t('admin.blog.form.slugHint') || 'URL-friendly version of the title'}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {t('admin.blog.form.image') || 'Image URL'}
+              </label>
+              <input
+                type="text"
+                value={formData.image || ''}
+                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                placeholder="https://example.com/image.jpg"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+              {formData.image && (
+                <div className="mt-2">
+                  <img
+                    src={formData.image}
+                    alt="Preview"
+                    className="w-full h-48 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                {t('admin.blog.form.imageHint') || 'Enter image URL or upload an image'}
               </p>
             </div>
 

@@ -198,5 +198,48 @@ export const blogService = {
       }
     }
   },
+
+  // Get blog statistics
+  getStats: async () => {
+    try {
+      const postsRef = collection(db, 'blogPosts');
+      
+      // Get all posts
+      const allPostsSnapshot = await getDocs(postsRef);
+      const allPosts = allPostsSnapshot.size;
+      
+      // Get published posts
+      const publishedQuery = query(postsRef, where('isPublished', '==', true));
+      const publishedSnapshot = await getDocs(publishedQuery);
+      const publishedPosts = publishedSnapshot.size;
+      
+      // Get draft posts
+      const draftQuery = query(postsRef, where('isPublished', '==', false));
+      const draftSnapshot = await getDocs(draftQuery);
+      const draftPosts = draftSnapshot.size;
+      
+      // Calculate total views
+      let totalViews = 0;
+      allPostsSnapshot.forEach((doc) => {
+        const data = doc.data();
+        totalViews += data.views || 0;
+      });
+      
+      return {
+        totalPosts: allPosts,
+        publishedPosts,
+        draftPosts,
+        totalViews,
+      };
+    } catch (error) {
+      console.error('Error fetching blog stats:', error);
+      return {
+        totalPosts: 0,
+        publishedPosts: 0,
+        draftPosts: 0,
+        totalViews: 0,
+      };
+    }
+  },
 };
 
