@@ -11,14 +11,11 @@ interface FormErrors {
   recaptcha: string;
 }
 
-// Google reCAPTCHA window interface
+// Google reCAPTCHA v3 window interface
 interface WindowWithRecaptcha extends Window {
   grecaptcha?: {
     ready: (callback: () => void) => void;
     execute: (siteKey: string, options: { action: string }) => Promise<string>;
-    render: (element: HTMLElement, options: { sitekey: string; callback?: (token: string) => void; 'expired-callback'?: () => void; 'error-callback'?: () => void }) => number;
-    reset: (widgetId?: number) => void;
-    getResponse: (widgetId?: number) => string;
   };
 }
 
@@ -38,48 +35,31 @@ const Contact: React.FC = () => {
     recaptcha: '',
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [recaptchaToken, setRecaptchaToken] = useState<string>('');
-  const [recaptchaWidgetId, setRecaptchaWidgetId] = useState<number | null>(null);
-  const recaptchaRef = useRef<HTMLDivElement>(null);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
-  // Initialize reCAPTCHA
+  // Load reCAPTCHA v3 script dynamically
   useEffect(() => {
     if (!RECAPTCHA_SITE_KEY) {
       console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
       return;
     }
 
-    const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
-    
-    if (windowWithRecaptcha.grecaptcha && recaptchaRef.current) {
-      const grecaptcha = windowWithRecaptcha.grecaptcha;
-      grecaptcha.ready(() => {
-        if (recaptchaRef.current && grecaptcha) {
-          const widgetId = grecaptcha.render(recaptchaRef.current, {
-            sitekey: RECAPTCHA_SITE_KEY,
-            callback: (token: string) => {
-              setRecaptchaToken(token);
-              setErrors(prev => ({ ...prev, recaptcha: '' }));
-            },
-            'expired-callback': () => {
-              setRecaptchaToken('');
-              setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaExpired') }));
-            },
-            'error-callback': () => {
-              setRecaptchaToken('');
-              setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaError') }));
-            },
-          });
-          setRecaptchaWidgetId(widgetId);
-        }
-      });
+    // Check if script is already loaded
+    if (document.querySelector(`script[src*="recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}"]`)) {
+      return;
     }
-  }, [RECAPTCHA_SITE_KEY, t]);
 
-  // Validate form fields
+    // Load reCAPTCHA v3 script
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, [RECAPTCHA_SITE_KEY]);
+
+  // Validate form fields (reCAPTCHA v3 token will be obtained during submit)
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {
       name: '',
@@ -110,12 +90,6 @@ const Contact: React.FC = () => {
       isValid = false;
     }
 
-    // Validate reCAPTCHA
-    if (!recaptchaToken) {
-      newErrors.recaptcha = t('contact.form.errors.recaptchaRequired');
-      isValid = false;
-    }
-
     setErrors(newErrors);
     return isValid;
   };
@@ -137,6 +111,61 @@ const Contact: React.FC = () => {
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
+      // Get reCAPTCHA v3 token
+      let recaptchaToken = '';
+      if (RECAPTCHA_SITE_KEY) {
+        const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
+        
+        // Wait for reCAPTCHA to be ready
+        if (!windowWithRecaptcha.grecaptcha) {
+          console.warn('reCAPTCHA not loaded, waiting...');
+          // Wait a bit for script to load
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+        if (windowWithRecaptcha.grecaptcha) {
+          try {
+            // Use ready() to ensure reCAPTCHA is fully loaded
+            await new Promise<void>((resolve, reject) => {
+              windowWithRecaptcha.grecaptcha!.ready(() => {
+                resolve();
+              });
+              // Timeout after 5 seconds
+              setTimeout(() => {
+                if (!windowWithRecaptcha.grecaptcha) {
+                  reject(new Error('reCAPTCHA failed to load'));
+                }
+              }, 5000);
+            });
+
+            recaptchaToken = await windowWithRecaptcha.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
+              action: 'contact_form_submit'
+            });
+            console.log('✅ reCAPTCHA token alındı:', recaptchaToken.substring(0, 20) + '...');
+          } catch (recaptchaError) {
+            console.error('reCAPTCHA error:', recaptchaError);
+            setStatus('error');
+            setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaError') }));
+            trackFormInteraction('contact_form', 'recaptcha_error');
+            setTimeout(() => {
+              setStatus('idle');
+              setErrors(prev => ({ ...prev, recaptcha: '' }));
+            }, TIMING.ERROR_MESSAGE_DURATION);
+            return;
+          }
+        } else {
+          console.warn('reCAPTCHA not loaded');
+          setStatus('error');
+          setErrors(prev => ({ ...prev, recaptcha: t('contact.form.errors.recaptchaError') }));
+          trackFormInteraction('contact_form', 'recaptcha_not_loaded');
+          setTimeout(() => {
+            setStatus('idle');
+            setErrors(prev => ({ ...prev, recaptcha: '' }));
+          }, TIMING.ERROR_MESSAGE_DURATION);
+          return;
+        }
+      }
+
       // Dil bilgisini al
       const languageNames: { [key: string]: string } = {
         'tr': 'Türkçe 🇹🇷',
@@ -175,13 +204,6 @@ const Contact: React.FC = () => {
       trackFormInteraction('contact_form', 'submit_success');
       setFormData({ name: '', email: '', message: '' });
       setErrors({ name: '', email: '', message: '', recaptcha: '' });
-      setRecaptchaToken('');
-      
-      // Reset reCAPTCHA
-      const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
-      if (windowWithRecaptcha.grecaptcha && recaptchaWidgetId !== null) {
-        windowWithRecaptcha.grecaptcha.reset(recaptchaWidgetId);
-      }
       
       // Success mesajını kaldır
       setTimeout(() => setStatus('idle'), TIMING.SUCCESS_MESSAGE_DURATION);
@@ -470,24 +492,12 @@ const Contact: React.FC = () => {
               )}
             </div>
 
-            {/* Google reCAPTCHA */}
-            {RECAPTCHA_SITE_KEY && (
+            {/* Google reCAPTCHA v3 - Invisible, works in background */}
+            {errors.recaptcha && (
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-200">
-                  {t('contact.form.recaptcha.label')}
-                  <span className="text-red-400 ml-1" aria-label="required">*</span>
-                </label>
-                <div ref={recaptchaRef} className="flex justify-center"></div>
-                {errors.recaptcha && (
-                  <p id="recaptcha-error" className="mt-2 text-sm text-red-400" role="alert">
-                    {errors.recaptcha}
-                  </p>
-                )}
-                {!RECAPTCHA_SITE_KEY && (
-                  <p className="mt-2 text-sm text-yellow-400">
-                    {t('contact.form.recaptcha.notConfigured')}
-                  </p>
-                )}
+                <p id="recaptcha-error" className="mt-2 text-sm text-red-400" role="alert">
+                  {errors.recaptcha}
+                </p>
               </div>
             )}
 

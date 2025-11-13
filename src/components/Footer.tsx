@@ -1,40 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaGithub, FaLinkedin, FaHeart, FaInstagram, FaCoffee, FaDownload } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 
 const Footer: React.FC = () => {
-  const { t, i18n } = useTranslation();
-  const { trackSocialClick, trackCVDownload, trackClick, trackLanguageChange } = useAnalytics();
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-
-  const languages = [
-    { code: "tr", name: "Türkçe", flag: "🇹🇷" },
-    { code: "az", name: "Azərbaycan Türkcəsi", flag: "🇦🇿" },
-    { code: "en", name: "English", flag: "🇬🇧" },
-    { code: "de", name: "Deutsch", flag: "🇩🇪" },
-  ];
-
-  const normalizedLang = i18n.language.split("-")[0].toLowerCase();
-  const currentLanguage =
-    languages.find((lang) => lang.code === normalizedLang) || languages[2]; // Fallback: English
-
-  const getLanguageFlag = (code: string) => {
-    const flags: { [key: string]: string } = {
-      'en': '🇺🇸',
-      'tr': '🇹🇷',
-      'de': '🇩🇪',
-      'az': '🇦🇿'
-    };
-    return flags[code] || '🌐';
-  };
-
-  const changeLanguage = (lng: string) => {
-    const currentLang = i18n.language.split("-")[0];
-    i18n.changeLanguage(lng);
-    setIsLangMenuOpen(false);
-    trackLanguageChange(currentLang, lng);
-  };
+  const { t } = useTranslation();
+  const { trackSocialClick, trackCVDownload, trackClick } = useAnalytics();
   
   return (
     <footer className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-8 flex flex-col items-center justify-center border-t border-gray-300 dark:border-gray-700">
@@ -109,39 +80,6 @@ const Footer: React.FC = () => {
       <p className="text-center text-xs mt-1 flex items-center justify-center gap-1">
         {t('footer.madeWith')} <FaHeart className="text-red-500 animate-pulse" /> {t('footer.by')}
       </p>
-
-      {/* Language Selector */}
-      <div className="mt-4 relative">
-        <button
-          onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          aria-label="Change language"
-        >
-          <span className="text-lg">{getLanguageFlag(currentLanguage.code)}</span>
-          <span className="text-sm font-medium">{currentLanguage.name}</span>
-        </button>
-
-        {isLangMenuOpen && (
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => changeLanguage(lang.code)}
-                className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                  i18n.language === lang.code || normalizedLang === lang.code
-                    ? "bg-blue-50 dark:bg-gray-700"
-                    : ""
-                } first:rounded-t-lg last:rounded-b-lg`}
-              >
-                <span className="text-lg">{getLanguageFlag(lang.code)}</span>
-                <span className="text-sm font-medium text-gray-800 dark:text-white">
-                  {lang.name}
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
     </footer>
   );
 };

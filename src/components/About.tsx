@@ -38,11 +38,11 @@ const About: React.FC = () => {
       fallback: '/profilePhoto.jpg'
     },
     {
-      id: 'emoji',
-      type: 'emoji',
-      emoji: '👨‍💻',
-      alt: t('about.developerEmojiAlt'),
-      description: t('about.developerEmojiAlt')
+      id: 'logo',
+      type: 'image',
+      image: '/tabLogo.svg',
+      alt: t('about.logoAlt'),
+      description: t('about.logoAlt')
     }
   ];
 

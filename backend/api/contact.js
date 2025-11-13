@@ -20,6 +20,8 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
+const { render } = require('@react-email/render');
+const ContactEmail = require('./templates/ContactEmail');
 
 const app = express();
 
@@ -39,10 +41,13 @@ const limiter = rateLimit({
 
 // Email transporter oluştur
 const createTransporter = () => {
+  const port = parseInt(process.env.SMTP_PORT || '587');
+  const secure = port === 465; // 465 için SSL, 587 için TLS
+  
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: false, // true for 465, false for other ports
+    port: port,
+    secure: secure, // true for 465 (SSL), false for 587 (TLS)
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -144,44 +149,42 @@ app.post('/api/contact', limiter, async (req, res) => {
     const transporter = createTransporter();
     const recipientEmail = process.env.CONTACT_EMAIL || process.env.SMTP_USER;
 
-    const mailOptions = {
-      from: `"${name}" <${process.env.SMTP_USER}>`,
-      to: recipientEmail,
-      replyTo: email,
-      subject: `Portfolio Contact Form - ${name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333;">New Contact Form Submission</h2>
-          <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Language:</strong> ${language || 'Unknown'}</p>
-            <p><strong>Time:</strong> ${new Date().toLocaleString('en-US', { 
-              dateStyle: 'full', 
-              timeStyle: 'short' 
-            })}</p>
-          </div>
-          <div style="background-color: #fff; padding: 20px; border-left: 4px solid #4CAF50; margin: 20px 0;">
-            <h3 style="color: #333; margin-top: 0;">Message:</h3>
-            <p style="white-space: pre-wrap; color: #666;">${message}</p>
-          </div>
-          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-          <p style="color: #999; font-size: 12px;">
-            This email was sent from your portfolio contact form.
-          </p>
-        </div>
-      `,
-      text: `
+    // React Email template'ini render et
+    const timestamp = new Date().toLocaleString('en-US', { 
+      dateStyle: 'full', 
+      timeStyle: 'short' 
+    });
+
+    const emailHtml = await render(
+      ContactEmail({
+        name,
+        email,
+        message,
+        language: language || 'Unknown',
+        timestamp,
+      })
+    );
+
+    // Plain text versiyonu
+    const emailText = `
 New Contact Form Submission
 
 Name: ${name}
 Email: ${email}
 Language: ${language || 'Unknown'}
-Time: ${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}
+Time: ${timestamp}
 
 Message:
 ${message}
-      `
+    `;
+
+    const mailOptions = {
+      from: `"${name}" <${process.env.SMTP_USER}>`,
+      to: recipientEmail,
+      replyTo: email,
+      subject: `Portfolio Contact Form - ${name}`,
+      html: emailHtml,
+      text: emailText,
     };
 
     await transporter.sendMail(mailOptions);
@@ -193,8 +196,15 @@ ${message}
 
   } catch (error) {
     console.error('Error sending email:', error);
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+      smtpUser: process.env.SMTP_USER ? 'Set' : 'Missing',
+      smtpPass: process.env.SMTP_PASS ? 'Set' : 'Missing',
+    });
     res.status(500).json({ 
-      error: 'Failed to send email. Please try again later.' 
+      error: 'Failed to send email. Please try again later.',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });

@@ -2,6 +2,8 @@
 
 Bağımsız backend API - EmailJS yerine kendi backend'iniz ile e-posta gönderimi.
 
+**✨ React Email ile profesyonel email template'leri kullanır.**
+
 ## 🚀 Kurulum
 
 ### 1. Bağımlılıkları Yükleyin
@@ -24,6 +26,9 @@ SMTP_PASS=your-app-password
 
 # E-posta Alıcı
 CONTACT_EMAIL=your-email@gmail.com
+
+# Google reCAPTCHA v3 (Opsiyonel)
+RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
 
 # CORS (Production'da spesifik domain kullanın)
 ALLOWED_ORIGIN=https://yourdomain.com
@@ -98,9 +103,16 @@ const data = await response.json();
 
 - ✅ Rate limiting (15 dakikada 5 istek)
 - ✅ Input validation
-- ✅ CAPTCHA doğrulama
+- ✅ Google reCAPTCHA v3 doğrulama
 - ✅ CORS koruması
 - ✅ Email format validation
+
+## 📧 React Email Template
+
+Backend, React Email ile oluşturulmuş profesyonel email template'leri kullanır:
+- `backend/api/templates/ContactEmail.js` - Contact form email template'i
+- Responsive ve modern tasarım
+- Tüm email client'larında düzgün görüntülenir
 
 ## 📝 API Endpoints
 
@@ -115,8 +127,7 @@ Contact form submission.
   "email": "john@example.com",
   "message": "Hello!",
   "language": "English 🇬🇧",
-  "captchaAnswer": "8",
-  "captchaQuestion": "What is 5 + 3?"
+  "recaptchaToken": "03AGdBq24..."
 }
 ```
 

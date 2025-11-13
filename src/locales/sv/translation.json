@@ -1,0 +1,635 @@
+{
+  "pageTitle": "Tolga Çavga | Frontend-utvecklare - Portfolio",
+  "nav": {
+    "home": "Hem",
+    "about": "Om mig",
+    "technologies": "Teknologier",
+    "services": "Tjänster",
+    "projects": "Portfolio",
+    "contact": "Kontakt",
+    "blog": "Blogg"
+  },
+  "hero": {
+    "greeting": "Hej, jag är Tolga! 👋",
+    "description": "Som Frontend-utvecklare bygger jag kreativa och moderna webbprojekt.",
+    "ctaAbout": "Läs mer om mig",
+    "ctaProjects": "Se mina projekt",
+    "typing": {
+      "frontendDeveloper": "Frontend-utvecklare",
+      "reactSpecialist": "React-specialist",
+      "uiuxEnthusiast": "UI/UX-entusiast",
+      "creativeCoder": "Kreativ kodare"
+    }
+  },
+  "modal": {
+    "clickOutsideToClose": "Klicka utanför för att stänga",
+    "technologiesUsed": "Använda teknologier",
+    "projectOverview": "Projektöversikt",
+    "keyFeatures": "Nyckelfunktioner",
+    "challenges": "Utmaningar",
+    "solutions": "Lösningar"
+  },
+  "about": {
+    "title": "Om mig",
+    "name": "Tolga Çavga",
+    "role": "Frontend-utvecklare",
+    "githubPhotoAlt": "GitHub-profilfoto",
+    "developerEmojiAlt": "Utvecklare-emoji",
+    "description": "Hej! Jag är Tolga. Jag kom in i mjukvaruutvecklingsvärlden med stor passion. Som Frontend-utvecklare gillar jag att skapa kreativa och användarvänliga webbapplikationer. På min fritid är jag intresserad av att lära mig nya teknologier, läsa böcker och idrotta.",
+    "stats": {
+      "focus": {
+        "label": "Fokus",
+        "value": "Frontend-utveckling"
+      },
+      "passion": {
+        "label": "Passion",
+        "value": "Innovation"
+      },
+      "love": {
+        "label": "Kärlek",
+        "value": "Ren kod"
+      }
+    },
+    "softSkills": {
+      "title": "Professionella kompetenser",
+      "corporate": {
+        "title": "Företagserfarenhet",
+        "description": "Erfarenhet av att arbeta i stora team och hantera komplexa projekt"
+      },
+      "learning": {
+        "title": "Snabb inlärning",
+        "description": "Förmåga att snabbt lära sig nya teknologier och tillämpa dem i projekt"
+      },
+      "teamwork": {
+        "title": "Teamarbete",
+        "description": "Erfarenhet av att arbeta i olika roller och teamledarskap"
+      }
+    }
+  },
+  "experience": {
+    "title": "Erfarenhet och utbildning",
+    "skills": {
+      "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
+      "turkcell": ["Kundservice", "Problemlösning", "Kommunikation"],
+      "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
+      "concentrix": ["Salesforce CRM", "Kundnöjdhet", "Bankverksamhet"],
+      "izmir": ["Hårdvara och mjukvara", "Systemadministration", "Teknisk support", "Teamarbete"],
+      "uopeople": ["Datavetenskap", "Algoritmer", "Datastrukturer"],
+      "anadolu": ["Datorprogrammering", "Mjukvaruutveckling"]
+    },
+    "turkcell": {
+      "title": "Kundservicerepresentant",
+      "company": "Turkcell Global Bilgi",
+      "location": "Bornova, Izmir, Turkiet",
+      "period": "Augusti 2025 - November 2025",
+      "description": "Stödjer kunder och löser problem på Turkcell Global Bilgi, med fokus på tydlig kommunikation, problemlösning och teknisk support."
+    },
+    "upwork": {
+      "title": "React Native-utvecklare | Frilansande Frontend-utvecklare",
+      "company": "Upwork",
+      "location": "İzmir, Turkiet",
+      "period": "Juli 2025 - Nuvarande",
+      "description": "Byggde plattformsoberoende mobilappar med React Native. Integrerade RESTful API:er och Supabase. Designade dynamiska användargränssnitt med Tailwind CSS, vilket förbättrade användarretentionen med 30%."
+    },
+    "siliconmade": {
+      "title": "Praktikant inom mobil- och frontend-utveckling",
+      "company": "Siliconmade Academy",
+      "location": "Online",
+      "period": "Februari 2025 - Juli 2025",
+      "description": "Genomförde 6-månaders / 184-timmars praktik. Utvecklade verkliga projekt. Fick praktisk expertis inom React, React Native, REST API, Supabase, Tailwind CSS och Firebase."
+    },
+    "izmir": {
+      "title": "IT-praktikant",
+      "company": "Izmir Metropolitan Municipality",
+      "location": "İzmir, Turkiet",
+      "period": "September 2017 - Juni 2018",
+      "description": "Assisterade vid systeminstallation och hårdvaruidentifiering, vilket förbättrade den operativa effektiviteten. Tillhandahöll teknisk support till användare, löste IT-problem och förbättrade användarnöjdheten. Samarbetade med teammedlemmar om felsökning, vilket främjade en samarbetsvillig arbetsmiljö."
+    },
+    "concentrix": {
+      "title": "Kundservicerepresentant – Banksektorn",
+      "company": "Concentrix",
+      "location": "İzmir, Turkiet",
+      "period": "December 2022 - Oktober 2024",
+      "description": "Tillhandahöll första linjens banksupport. Upprätthöll 95% kundnöjdhet. Hanterade servicetickets med Salesforce CRM."
+    },
+    "uopeople": {
+      "title": "Kandidatexamen, Datavetenskap",
+      "company": "University of the People",
+      "location": "Online",
+      "period": "Juni 2025 - Pågående",
+      "description": "Pursuer för närvarande en kandidatexamen i datavetenskap. Studerar algoritmer, datastrukturer och mjukvaruutvecklingsprinciper."
+    },
+    "anadolu": {
+      "title": "Associate's Degree, Datorprogrammering",
+      "company": "Anadolu University",
+      "location": "Eskişehir, Turkiet",
+      "period": "Pågående",
+      "description": "Pursuer för närvarande en Associate's Degree i datorprogrammering. Lär sig programmeringsgrunderna och mjukvaruutvecklingsprocesser."
+    }
+  },
+  "technologies": {
+    "title": "Kreativitet behöver många verktyg",
+    "subtitle": "Har många verktyg i min verktygslåda, och jag lär mig alltid nya.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Databas",
+      "tools": "Verktyg",
+      "languages": "Språk"
+    },
+    "react": "React.js",
+    "javascript": "JavaScript",
+    "typescript": "TypeScript",
+    "expo": "Expo",
+    "tailwind": "Tailwind CSS",
+    "html": "HTML5",
+    "css": "CSS3",
+    "nextjs": "Next.js",
+    "nodejs": "Node.js",
+    "express": "Express.js",
+    "postgresql": "PostgreSQL",
+    "git": "Git & GitHub",
+    "redis": "Redis",
+    "agile": "Agile",
+    "figma": "Figma",
+    "vercel": "Vercel",
+    "docker": "Docker",
+    "opengraph": "OpenGraph",
+    "googleAnalytics": "Google Analytics",
+    "turkish": "Turkiska",
+    "english": "Engelska",
+    "german": "Tyska",
+    "descriptions": {
+      "react": "react & native & next",
+      "typescript": "typsäker & modern",
+      "expo": "mobil & plattformsoberoende",
+      "tailwind": "utility-first & responsiv",
+      "html": "semantisk & tillgänglig",
+      "css": "modern & animationer",
+      "nextjs": "SSR & SSG & API-rutter",
+      "nodejs": "runtime & backend",
+      "express": "REST API & middleware",
+      "postgresql": "relationell & ACID",
+      "git": "versionskontroll & samarbete",
+      "redis": "caching & sessioner",
+      "figma": "design & prototypering",
+      "vercel": "distribution & hosting",
+      "docker": "containrar & CI/CD",
+      "googleAnalytics": "spårning & insikter",
+      "turkish": "modersmålstalare",
+      "english": "professionell",
+      "german": "nybörjare"
+    }
+  },
+  "certificates": {
+    "title": "Certifikat och prestationer",
+    "subtitle": "Certifieringar och prestationer som jag fått under min inlärningsresa",
+    "skills": {
+      "siliconmade": ["React", "React Native", "Mobilutveckling"],
+      "frontend": ["HTML", "CSS", "JavaScript"],
+      "react": ["React", "Komponenter", "Hooks"],
+      "responsive": ["Responsiv design", "Mobile First", "CSS Grid"],
+      "javascript": ["JavaScript", "ES6+", "Async/Await"],
+      "git": ["Git", "GitHub", "Versionskontroll"]
+    },
+    "siliconmade": {
+      "title": "Certifikat i mobil- och frontend-utveckling",
+      "issuer": "Siliconmade Academy",
+      "date": "Juli 2025",
+      "description": "Intensivt utbildningsprogram på 184 timmar. Mobilapputveckling med React och React Native."
+    },
+    "frontend": {
+      "title": "Grundläggande frontend-utveckling",
+      "issuer": "Onlineutbildningsplattform",
+      "date": "2024",
+      "description": "Omfattande utbildning som täcker HTML-, CSS- och JavaScript-grunderna."
+    },
+    "react": {
+      "title": "React.js-mästerskap",
+      "issuer": "Onlineutbildningsplattform",
+      "date": "2024",
+      "description": "Avancerad utbildning i React-komponenter, hooks och tillståndshantering."
+    },
+    "responsive": {
+      "title": "Responsiv webbdesign",
+      "issuer": "Onlineutbildningsplattform",
+      "date": "2024",
+      "description": "Mobile-first-tillvägagångssätt och principer för responsiv design."
+    },
+    "javascript": {
+      "title": "Modern JavaScript (ES6+)",
+      "issuer": "Onlineutbildningsplattform",
+      "date": "2024",
+      "description": "ES6+-funktioner, async/await och moderna JavaScript-tekniker."
+    },
+    "git": {
+      "title": "Git & GitHub-mästerskap",
+      "issuer": "Onlineutbildningsplattform",
+      "date": "2024",
+      "description": "Versionskontroll, branchstrategier och samarbetsutveckling."
+    },
+    "stats": {
+      "certificates": "Certifikat",
+      "hours": "Utbildningstimmar",
+      "projects": "Projekt",
+      "experience": "Års erfarenhet"
+    }
+  },
+  "services": {
+    "title": "Mina tjänster",
+    "subtitle": "Kreativa och användarvänliga webbplatslösningar med moderna teknologier",
+    "b2b": "Företagstjänster",
+    "b2c": "Personliga tjänster",
+    "cta": "Vill du arbeta med mig på ditt projekt?",
+    "contactButton": "Kontakta mig",
+    "corporate": {
+      "title": "Företagswebbplats",
+      "description": "Moderna, professionella och responsiva företagswebbplatser. Säker och skalbar lösning med React och TypeScript."
+    },
+    "landing": {
+      "title": "Landningssida",
+      "description": "Landningssidor med hög konvertering som laddas snabbt och är SEO-vänliga. Imponerande animationer med Framer Motion."
+    },
+    "ecommerce": {
+      "title": "E-handelsfrontend",
+      "description": "Användarvänliga e-handelsgränssnitt. Betalningsintegrationer, produktkataloger och varukorgshantering."
+    },
+    "dashboard": {
+      "title": "Admin-dashboard",
+      "description": "Interaktiva dashboards för datadriven beslutsfattande. Diagram, tabeller och uppdateringar i realtid."
+    },
+    "redesign": {
+      "title": "Webbplatsomdesign",
+      "description": "Förnya din befintliga webbplats med moderna teknologier. Prestandaoptimering och UX-förbättringar."
+    },
+    "responsive": {
+      "title": "Responsiv design",
+      "description": "Responsiva webbplatser som ser perfekta ut på mobil, surfplatta och dator. Mobile-first-tillvägagångssätt."
+    },
+    "portfolio": {
+      "title": "Portfolio-webbplats",
+      "description": "Personliga portfolio- och CV-webbplatser. Stick ut med modern design, animationer och SEO-optimering."
+    },
+    "smallBusiness": {
+      "title": "Webbplats för småföretag",
+      "description": "Prisvärda, effektiva webbplatser för lokala företag. Google My Business-integration och lokal SEO."
+    },
+    "restaurant": {
+      "title": "Restaurang/Kafé-webbplats",
+      "description": "Restaurangwebbplatser med digital meny, bokningssystem och fotogalleri. QR-kodmeny-support."
+    },
+    "personal": {
+      "title": "Personlig webbplats",
+      "description": "Skräddarsydda webbplatser för blogg, CV eller personligt varumärke. Innehållshantering och sociala medier-integration."
+    }
+  },
+  "projects": {
+    "title": "Mina projekt",
+    "subtitle": "Projekt som jag utvecklat med moderna webbteknologier",
+    "details": "Detaljer",
+    "tech": "Teknologier:",
+    "github": "GitHub",
+    "demo": "Demo",
+    "liveDemo": "Live-demo",
+    "livePreview": "Live-förhandsvisning",
+    "clickToViewDetails": "Klicka för att se detaljer",
+    "roles": {
+      "fullStack": "Full Stack-utvecklare",
+      "frontend": "Frontend-utvecklare",
+      "backend": "Backend-utvecklare"
+    },
+    "durations": {
+      "week": "{{count}} vecka",
+      "weeks": "{{count}} veckor",
+      "month": "{{count}} månad",
+      "months": "{{count}} månader"
+    },
+    "items": {
+      "iot": {
+        "title": "IoT-enhetssimulator",
+        "description": "IoT-enhetssimulator utvecklad med Node.js, Express, Autentisering, Statistik och flerspråkigt stöd. Funktioner Docker-stöd och QR-kodgenerering.",
+        "longDescription": "Webbapplikation som simulerar IoT-enheter. Visualisering av data i realtid och QR-kodintegration.",
+        "features": ["Visualisering av data i realtid", "QR-kodintegration", "Docker-containerisering", "WebSocket-anslutning"],
+        "duration": "1 månad",
+        "role": "Backend-utvecklare"
+      },
+      "todo": {
+        "title": "Todo-app (Instagram-stil)",
+        "description": "Modern todo-applikation utvecklad med Instagram-liknande gränssnitt. Byggd med React och moderna webbteknologier.",
+        "longDescription": "Uppgiftshanteringsapplikation. CRUD-operationer och lokal lagringsintegration.",
+        "features": ["Lägg till/ta bort uppgifter", "Statusuppdateringar", "Lokal lagring", "Responsiv design"],
+        "duration": "1 vecka",
+        "role": "Frontend-utvecklare"
+      },
+      "workshop": {
+        "title": "Workshop-tracker",
+        "description": "Webbapplikation utvecklad för workshop- och evenemangsspårning. Funktioner för deltagarhantering och evenemangsorganisation.",
+        "longDescription": "Workshop- och evenemangsspårningssystem. Modern plattform där deltagare kan registrera sig och se evenemangsdetaljer.",
+        "features": ["Användarregistreringssystem", "Evenemangshantering", "Uppdateringar i realtid", "Admin-panel"],
+        "duration": "1,5 månader",
+        "role": "Full Stack-utvecklare"
+      },
+      "productManager": {
+        "title": "React Supabase-produkthanterare",
+        "description": "Produkthanteringssystem utvecklat med Supabase-backend. Funktioner för CRUD-operationer och datasynkronisering i realtid.",
+        "longDescription": "Produkthanteringssystem. CRUD-operationer och användarautentisering med Supabase-backend.",
+        "features": ["Produkt-CRUD-operationer", "Användarautentisering", "Supabase-integration", "Uppdateringar i realtid"],
+        "duration": "3 veckor",
+        "role": "Full Stack-utvecklare"
+      },
+      "grocery": {
+        "title": "Online matvaruapp",
+        "description": "Online marknadsplatsapplikation utvecklad som e-handelsplattform. Funktioner för varukorgshantering och betalningsintegration.",
+        "longDescription": "Online marknadsplatsapplikation. Försäljning av livsmedelsprodukter och leveransspårning.",
+        "features": ["Produktkategorier", "Sökning och filtrering", "Leveransspårning", "Användarkonton"],
+        "duration": "2,5 veckor",
+        "role": "Full Stack-utvecklare"
+      },
+      "productList": {
+        "title": "Produktlista (Förbättrad)",
+        "description": "Produktlistapplikation utrustad med avancerade funktioner. Funktioner för filtrering, sökning och kategorisering."
+      },
+      "paymentForm": {
+        "title": "Betalningsformulär",
+        "description": "Formulärapplikation utvecklad för säkra betalningstransaktioner. Funktioner för formulärvalidering och användarvänligt gränssnitt."
+      },
+      "payment": {
+        "title": "Betalningsformulärapplikation",
+        "description": "Betalningsformulärapplikation. Formulärvalidering och säkra betalningstransaktioner.",
+        "longDescription": "Säker betalningsformulärapplikation utvecklad med moderna webbteknologier. Tillhandahåller säkra betalningstransaktioner med användarvänligt gränssnitt och omfattande formulärvalidering.",
+        "features": [
+          "Formulärvalidering",
+          "Säker betalning",
+          "Responsiv design",
+          "Felhantering"
+        ],
+        "challenges": [
+          "Säker datahantering",
+          "Användarupplevelseoptimering"
+        ],
+        "solutions": [
+          "Moderna valideringsbibliotek",
+          "Principer för responsiv design"
+        ]
+      },
+      "exchange": {
+        "title": "Valutaväxlingsspårningsapp",
+        "description": "Valutakurser och handelsskärm. Data i realtid och diagramvisualisering.",
+        "longDescription": "Valutakurser och handelsskärm. Data i realtid och diagramvisualisering.",
+        "features": ["Valutakurser i realtid", "Diagramvisualisering", "Handelssimulering", "Responsiv design"],
+        "challenges": ["Integration av data i realtid", "Prestandaoptimering"],
+        "solutions": ["WebSocket-anslutningar", "Effektiv datacaching"],
+        "duration": "1,5 veckor",
+        "role": "Frontend-utvecklare"
+      },
+      "globalIdentity": {
+        "title": "Global identitet",
+        "description": "Globalt identitetsverifieringssystem. Funktioner för multi-plattformsstöd och säker autentisering.",
+        "longDescription": "Globalt identitetshanteringssystem. Användarprofiler och autentisering.",
+        "features": ["Användarprofiler", "Autentisering", "Säkerhetsåtgärder", "Flerspråkigt stöd"],
+        "duration": "2 veckor",
+        "role": "Full Stack-utvecklare"
+      },
+      "noteTracker": {
+        "title": "Enkelt anteckningsspårningssystem",
+        "description": "Personligt antecknings- och spårningssystem. Funktioner för användarvänligt gränssnitt och effektiv anteckningshantering."
+      },
+      "loginUI": {
+        "title": "Inloggningsgränssnitt (TypeScript)",
+        "description": "Modernt inloggningsgränssnitt utvecklat med TypeScript. Funktioner för responsiv design och formulärvalidering."
+      },
+      "nodeNotes": {
+        "title": "Node.js-anteckningsapplikation",
+        "description": "Anteckningsapplikation utvecklad med Node.js-backend. Funktioner för RESTful API och databasintegration."
+      },
+      "portfolio": {
+        "title": "Personligt portfolio",
+        "description": "Personlig portfoliowebbplats utvecklad med modern React och TypeScript. Funktioner för responsiv design och flerspråkigt stöd.",
+        "longDescription": "Modern och responsiv portfoliowebbplats. Utvecklad med React, TypeScript och TailwindCSS. Smidiga animationer med Framer Motion och flerspråkigt stöd.",
+        "features": ["Responsiv design", "Flerspråkigt stöd (TR, EN, DE, AZ)", "Smidiga animationer", "SEO-optimering", "Mörkt/Ljust tema"],
+        "challenges": ["Prestandaoptimering", "Flerspråkig hantering", "Responsiv design"],
+        "solutions": ["Lazy loading och koduppdelning", "i18next-bibliotek", "Mobile-first-tillvägagångssätt"],
+        "duration": "2 månader",
+        "role": "Full Stack-utvecklare"
+      },
+      "ecommerce": {
+        "title": "E-handelswebbplats",
+        "description": "Fullständig e-handelsplattform utvecklad med React. Inkluderar varukorgshantering, produktkatalog och betalningssystem."
+      },
+      "cvPreparation": {
+        "title": "CV-förberedelseapp",
+        "description": "Webbapplikation för dynamisk CV-skapande och PDF-nedladdning. Funktioner för användarvänligt gränssnitt och mallsystem.",
+        "longDescription": "Webbapplikation med funktioner för dynamisk CV-skapande och PDF-nedladdning. Användarvänligt gränssnitt och mallsystem.",
+        "features": ["Dynamisk CV-skapande", "PDF-export", "Mallsystem", "Förhandsvisning i realtid"],
+        "duration": "2 veckor",
+        "role": "Frontend-utvecklare"
+      },
+      "furniro": {
+        "title": "Furniro E-handel",
+        "description": "E-handelsplattform fokuserad på möbler och heminredning. Modern design och användarvänligt gränssnitt.",
+        "longDescription": "Möbel-e-handelssajt. Försäljning av möbelprodukter med modern design och användarvänligt gränssnitt.",
+        "features": ["Produktkatalog", "Varukorgshantering", "Betalningssystem", "Responsiv design"],
+        "duration": "3 veckor",
+        "role": "Frontend-utvecklare"
+      },
+      "exchangeScreen": {
+        "title": "Valutakursskärm",
+        "description": "Interaktiv webbapplikation som visar valutakurser i realtid. Stöder USD, EUR, BTC, ETH."
+      },
+      "dashboard": {
+        "title": "Finansiell dashboard",
+        "description": "Dashboard-applikation utvecklad för aktie- och kryptospårning. Visar data från företag som NVIDIA, Tesla.",
+        "longDescription": "Analytisk dashboard-applikation. System för datavisualisering och rapportering.",
+        "features": ["Datavisualisering", "Analytiska rapporter", "Interaktiva diagram", "Exportfunktionalitet"],
+        "duration": "2 veckor",
+        "role": "Frontend-utvecklare"
+      },
+      "odev": {
+        "title": "Sociala medier-dashboard",
+        "description": "Dashboard-applikation som spårar flera sociala medieplattformar på en enda skärm. Modern och responsiv design."
+      }
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Kontakta mig! Fyll i formuläret nedan för att skicka mig ett direkt e-postmeddelande.",
+    "freeQuote": {
+      "title": "Få gratis offert",
+      "description": "Jag analyserar din webbplats och ger rekommendationer för att förbättra dina prestanda",
+      "siteAnalysis": {
+        "title": "Webbplatsanalys",
+        "description": "Jag analyserar din webbplats nuvarande SEO-status i detalj"
+      },
+      "performanceReport": {
+        "title": "Prestandarapport",
+        "description": "Google PageSpeed, Core Web Vitals och teknisk SEO-analys"
+      },
+      "optimizationSuggestions": {
+        "title": "Optimeringsförslag",
+        "description": "Konkreta rekommendationer för att ranka högre i sökmotorer"
+      },
+      "competitorAnalysis": {
+        "title": "Konkurrentanalys",
+        "description": "Jag analyserar dina konkurrenter och föreslår strategiska fördelar"
+      },
+      "completelyFree": "Helt gratis",
+      "completelyFreeDescription": "Denna analys och rekommendationer är helt gratis. Du har inga åtaganden.",
+      "sendMessageForQuote": "Skicka ett meddelande för att få en offert",
+      "exampleMessage": "Hej! Jag skulle vilja få gratis support för min webbplats. Kan du göra en detaljerad analys?"
+    },
+    "form": {
+      "title": "Skicka ett meddelande",
+      "name": "Ditt namn",
+      "namePlaceholder": "Ange ditt namn",
+      "email": "Din e-post",
+      "emailPlaceholder": "exempel@email.com",
+      "message": "Ditt meddelande",
+      "messagePlaceholder": "Skriv ditt meddelande här...",
+      "send": "Skicka",
+      "sending": "Skickar...",
+      "success": "✅ Ditt meddelande skickades framgångsrikt!",
+      "error": "❌ Ett fel uppstod. Försök igen.",
+      "errors": {
+        "nameRequired": "Namnfältet är obligatoriskt",
+        "nameMinLength": "Namnet måste vara minst 2 tecken",
+        "emailRequired": "E-postfältet är obligatoriskt",
+        "emailInvalid": "Vänligen ange en giltig e-postadress",
+        "messageRequired": "Meddelandefältet är obligatoriskt",
+        "messageMinLength": "Meddelandet måste vara minst 10 tecken",
+        "messageMaxLength": "Meddelandet får inte överstiga 1000 tecken",
+        "recaptchaRequired": "Vänligen slutför reCAPTCHA-verifieringen",
+        "recaptchaExpired": "reCAPTCHA-verifieringen har gått ut. Försök igen.",
+        "recaptchaError": "reCAPTCHA-verifieringen misslyckades. Försök igen."
+      },
+      "recaptcha": {
+        "label": "Säkerhetsverifiering",
+        "notConfigured": "reCAPTCHA är inte konfigurerad. Vänligen kontakta administratören."
+      },
+      "captcha": {
+        "label": "Säkerhetsverifiering",
+        "placeholder": "Ange resultatet",
+        "refresh": "Uppdatera"
+      }
+    },
+    "or": "eller",
+    "email": "Skicka e-post",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "rights": "Alla rättigheter förbehållna.",
+    "madeWith": "Gjord med",
+    "by": "av Tolga | Frontend-utvecklare",
+    "downloadCV": "Ladda ner CV",
+    "buyMeACoffee": "Köp mig en kaffe ☕"
+  },
+  "scrollToTop": "Scrolla till toppen",
+  "cv": {
+    "professionalSummary": "Professionell sammanfattning",
+    "summaryText": "Jag utvecklar kreativa och moderna webbprojekt som Frontend-utvecklare. Jag skapar användarvänliga applikationer med React, TypeScript och TailwindCSS. Jag specialiserar mig på plattformsoberoende mobilapplikationer och responsiva webbplatser.",
+    "technicalSkills": "Tekniska färdigheter",
+    "workExperience": "Arbetserfarenhet",
+    "education": "Utbildning",
+    "certificates": "Certifikat",
+    "languages": "Språk",
+    "generatePDF": "Generera PDF",
+    "printCV": "Skriv ut",
+    "turkcellDescription": "Jag stödjer kunder och löser problem på Turkcell Global Bilgi. Jag specialiserar mig på tydlig kommunikation, problemlösning och teknisk support.",
+    "upworkDescription": "Jag utvecklade plattformsoberoende mobilapplikationer. Jag integrerade RESTful API:er och Supabase. Jag designade dynamiska användargränssnitt med Tailwind CSS, vilket ökade användarretentionen med 30%."
+  },
+  "meta": {
+    "home": {
+      "title": "Tolga Çavga | Frontend-utvecklare - Moderna webbapplikationer",
+      "description": "Frontend-utvecklare som skapar moderna webbapplikationer med React, TypeScript och TailwindCSS. Användarvänliga gränssnitt och prestandafokuserade lösningar.",
+      "keywords": "Frontend-utvecklare, React, TypeScript, JavaScript, Webbutveckling, UI/UX, Modern webb"
+    },
+    "about": {
+      "title": "Om mig | Tolga Çavga - Frontend-utvecklare",
+      "description": "Frontend-utvecklare som steg in i mjukvaruutvecklingsvärlden med stor passion. Jag utvecklar kreativa och användarvänliga webbapplikationer.",
+      "keywords": "Om mig, Frontend-utvecklare, Mjukvaruutvecklare, Personlig information, Erfarenhet"
+    },
+    "projects": {
+      "title": "Mina projekt | Tolga Çavga - Portfolio",
+      "description": "Projekt som jag utvecklat med React, Node.js och moderna webbteknologier. E-handel, IoT, hanteringspaneler och mer.",
+      "keywords": "Projekt, Portfolio, React-projekt, Webbapplikationer, E-handel, IoT"
+    },
+    "technologies": {
+      "title": "Teknologier | Tolga Çavga - Mina färdigheter",
+      "description": "Expertis inom 20+ teknologier inom Frontend-, Backend-, Databas- och Verktygskategorier. React, TypeScript, Node.js och mer.",
+      "keywords": "Teknologier, Färdigheter, React, TypeScript, Node.js, Frontend, Backend"
+    },
+    "contact": {
+      "title": "Kontakt | Tolga Çavga - Frontend-utvecklare",
+      "description": "Kontakta mig för dina projekt. Jag specialiserar mig på att utveckla moderna webbapplikationer och användarvänliga gränssnitt.",
+      "keywords": "Kontakt, Kontaktformulär, Projektförslag, Webbutveckling, Frontend"
+    },
+    "cv": {
+      "title": "Ladda ner CV | Tolga Çavga - Frontend-utvecklare",
+      "description": "Ladda ner Tolga Çavgas nuvarande CV. Expert Frontend-utvecklare inom React, TypeScript och moderna webbteknologier.",
+      "keywords": "CV, Frontend-utvecklare, React, TypeScript, Jobbansökan"
+    }
+  },
+  "share": {
+    "title": "Dela",
+    "shareOn": "Dela på",
+    "copyLink": "Kopiera länk",
+    "linkCopied": "Länk kopierad! ✅"
+  },
+  "socialProof": {
+    "title": "Följ mig på sociala medier",
+    "subtitle": "Följ mina projekt, håll dig uppdaterad och kontakta mig!",
+    "followMe": "Följ",
+    "cta": "Vill du hålla dig uppdaterad med nya projekt och innehåll?",
+    "followGitHub": "Följ på GitHub",
+    "connectLinkedIn": "Anslut på LinkedIn",
+    "github": {
+      "stats": "20+ Repos",
+      "description": "Open source-projekt och kodexempel"
+    },
+    "linkedin": {
+      "stats": "500+ Anslutningar",
+      "description": "Professionellt nätverk och karriärutveckling"
+    },
+    "instagram": {
+      "description": "Kodningstips och dagligt utvecklingsinnehåll"
+    }
+  },
+  "portfolioShare": {
+    "title": "Gillar du mitt portfolio?",
+    "description": "Om du gillade detta portfolio och vill dela det med dina vänner, använd gärna knapparna nedan. Varje delning motiverar mig! 🚀",
+    "shareTitle": "Kolla in Tolga Çavgas fantastiska portfolio!",
+    "shareDescription": "Modernt och kreativt frontend-utvecklarportfolio - React, TypeScript och mer!",
+    "thankYou": "Tack för ditt stöd!"
+  },
+  "notFound": {
+    "title": "Hoppsan! Du verkar vilse! 🗺️",
+    "message": "Sidan du letar efter kan vara i ett parallellt universum... Eller så har den aldrig funnits. Vem vet? 🤷‍♂️",
+    "funFact": "💡 Roligt faktum: Du låste upp en hemlig prestation genom att hitta denna 404-sida!",
+    "goHome": "Gå hem",
+    "goBack": "Gå tillbaka",
+    "tip": "Prova Konami-koden, något kan hända..."
+  },
+  "common": {
+    "name": "Tolga Çavga",
+    "role": "Frontend-utvecklare",
+    "resume": "CV",
+    "developerLogo": "Utvecklarlogo",
+    "closeMenu": "Stäng meny",
+    "languages": {
+      "turkish": "Turkiska",
+      "azerbaijani": "Azerbajdzjanska turkiska",
+      "english": "Engelska",
+      "german": "Tyska"
+    }
+  },
+  "projectLike": {
+    "like": "Gilla projekt",
+    "unlike": "Ogilla projekt",
+    "dislike": "Ogilla projekt",
+    "removeDislike": "Ta bort ogillande",
+    "liked": "Projekt gillat! ❤️",
+    "unliked": "Gillande borttaget",
+    "disliked": "Projekt ogillat 👎",
+    "dislikeRemoved": "Ogillande borttaget",
+    "error": "Ett fel uppstod, försök igen"
+  }
+}

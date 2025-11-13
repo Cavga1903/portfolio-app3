@@ -423,6 +423,7 @@ const Technologies: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-12 sm:mb-16"
         >
           <div className="flex items-center gap-3 mb-6">
             <span className="text-lg sm:text-xl font-semibold text-blue-400 bg-blue-500/10 px-4 py-2 rounded-lg border border-blue-500/30">

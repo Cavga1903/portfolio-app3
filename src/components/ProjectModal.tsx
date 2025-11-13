@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaRocket, FaCalendar, FaTag } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -27,25 +27,92 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   const { t } = useTranslation();
+  const scrollPositionRef = useRef<number>(0);
+  const isRestoringScrollRef = useRef<boolean>(false);
 
   // Prevent background page scroll while modal is open; restore on close
   useEffect(() => {
     if (isOpen) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
+      // Save current scroll position before opening modal
+      scrollPositionRef.current = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      isRestoringScrollRef.current = false;
+      
       // Disable body scroll
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.width = '100%';
       
       return () => {
-        // Restore scroll position and styles
+        // Restore scroll position and styles when modal closes
+        const scrollY = scrollPositionRef.current;
+        isRestoringScrollRef.current = true;
+        
+        // First, restore body styles
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.width = '';
-        window.scrollTo(0, scrollY);
+        
+        // Prevent any unwanted scroll during restoration
+        const preventScroll = (e: Event) => {
+          if (isRestoringScrollRef.current) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        };
+        
+        // Add scroll prevention immediately
+        window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+        document.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+        window.addEventListener('wheel', preventScroll, { passive: false, capture: true });
+        window.addEventListener('touchmove', preventScroll, { passive: false, capture: true });
+        
+        // Wait for the exit animation to complete before restoring scroll
+        // Exit animation duration is 0.28s, so we wait a bit longer
+        setTimeout(() => {
+          // Use requestAnimationFrame to ensure DOM is ready
+          requestAnimationFrame(() => {
+            // Restore scroll position using multiple methods
+            window.scrollTo({
+              top: scrollY,
+              left: 0,
+              behavior: 'auto'
+            });
+            document.documentElement.scrollTop = scrollY;
+            document.body.scrollTop = scrollY;
+            
+            // Force scroll restoration with another frame if needed
+            requestAnimationFrame(() => {
+              window.scrollTo({
+                top: scrollY,
+                left: 0,
+                behavior: 'auto'
+              });
+              document.documentElement.scrollTop = scrollY;
+              document.body.scrollTop = scrollY;
+              
+              // Keep scroll position locked for a bit longer
+              requestAnimationFrame(() => {
+                window.scrollTo({
+                  top: scrollY,
+                  left: 0,
+                  behavior: 'auto'
+                });
+                
+                // Remove scroll prevention after ensuring position is restored
+                setTimeout(() => {
+                  window.removeEventListener('scroll', preventScroll, { capture: true });
+                  document.removeEventListener('scroll', preventScroll, { capture: true });
+                  window.removeEventListener('wheel', preventScroll, { capture: true });
+                  window.removeEventListener('touchmove', preventScroll, { capture: true });
+                  isRestoringScrollRef.current = false;
+                }, 50);
+              });
+            });
+          });
+        }, 300); // Wait for exit animation (280ms) + small buffer
       };
     }
   }, [isOpen]);

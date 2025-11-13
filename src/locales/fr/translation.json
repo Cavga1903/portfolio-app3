@@ -1,0 +1,635 @@
+{
+  "pageTitle": "Tolga Çavga | Développeur Frontend - Portfolio",
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "technologies": "Technologies",
+    "services": "Services",
+    "projects": "Portfolio",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "hero": {
+    "greeting": "Bonjour, je suis Tolga ! 👋",
+    "description": "En tant que Développeur Frontend, je crée des projets web créatifs et modernes.",
+    "ctaAbout": "En savoir plus sur moi",
+    "ctaProjects": "Voir mes projets",
+    "typing": {
+      "frontendDeveloper": "Développeur Frontend",
+      "reactSpecialist": "Spécialiste React",
+      "uiuxEnthusiast": "Passionné UI/UX",
+      "creativeCoder": "Codeur Créatif"
+    }
+  },
+  "modal": {
+    "clickOutsideToClose": "Cliquez à l'extérieur pour fermer",
+    "technologiesUsed": "Technologies utilisées",
+    "projectOverview": "Aperçu du projet",
+    "keyFeatures": "Fonctionnalités clés",
+    "challenges": "Défis",
+    "solutions": "Solutions"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "name": "Tolga Çavga",
+    "role": "Développeur Frontend",
+    "githubPhotoAlt": "Photo de profil GitHub",
+    "developerEmojiAlt": "Emoji développeur",
+    "description": "Bonjour ! Je suis Tolga. J'ai entré dans le monde du développement logiciel avec une grande passion. En tant que Développeur Frontend, j'aime créer des applications web créatives et conviviales. Dans mon temps libre, je m'intéresse à l'apprentissage de nouvelles technologies, à la lecture de livres et au sport.",
+    "stats": {
+      "focus": {
+        "label": "Focus",
+        "value": "Développement Frontend"
+      },
+      "passion": {
+        "label": "Passion",
+        "value": "Innovation"
+      },
+      "love": {
+        "label": "Amour",
+        "value": "Code Propre"
+      }
+    },
+    "softSkills": {
+      "title": "Compétences professionnelles",
+      "corporate": {
+        "title": "Expérience d'entreprise",
+        "description": "Expérience de travail dans de grandes équipes et de gestion de projets complexes"
+      },
+      "learning": {
+        "title": "Apprentissage rapide",
+        "description": "Capacité à apprendre rapidement de nouvelles technologies et à les appliquer dans des projets"
+      },
+      "teamwork": {
+        "title": "Travail d'équipe",
+        "description": "Expérience de travail dans différents rôles et leadership d'équipe"
+      }
+    }
+  },
+  "experience": {
+    "title": "Expérience et Éducation",
+    "skills": {
+      "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
+      "turkcell": ["Service client", "Résolution de problèmes", "Communication"],
+      "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
+      "concentrix": ["Salesforce CRM", "Satisfaction client", "Banque"],
+      "izmir": ["Matériel et logiciel", "Administration système", "Support technique", "Travail d'équipe"],
+      "uopeople": ["Informatique", "Algorithmes", "Structures de données"],
+      "anadolu": ["Programmation informatique", "Développement logiciel"]
+    },
+    "turkcell": {
+      "title": "Représentant du service client",
+      "company": "Turkcell Global Bilgi",
+      "location": "Bornova, Izmir, Turquie",
+      "period": "Août 2025 - Novembre 2025",
+      "description": "Soutien aux clients et résolution des problèmes chez Turkcell Global Bilgi, avec un accent sur la communication claire, la résolution de problèmes et le support technique."
+    },
+    "upwork": {
+      "title": "Développeur React Native | Développeur Frontend Freelance",
+      "company": "Upwork",
+      "location": "İzmir, Turquie",
+      "period": "Juillet 2025 - Présent",
+      "description": "Développé des applications mobiles multiplateformes avec React Native. Intégré des API RESTful et Supabase. Conçu des interfaces utilisateur dynamiques avec Tailwind CSS, améliorant la rétention des utilisateurs de 30%."
+    },
+    "siliconmade": {
+      "title": "Stagiaire en développement mobile et frontend",
+      "company": "Siliconmade Academy",
+      "location": "En ligne",
+      "period": "Février 2025 - Juillet 2025",
+      "description": "Terminé un stage de 6 mois / 184 heures. Développé des projets réels. Acquéri une expertise pratique en React, React Native, REST API, Supabase, Tailwind CSS et Firebase."
+    },
+    "izmir": {
+      "title": "Stagiaire en technologies de l'information",
+      "company": "Municipalité métropolitaine d'Izmir",
+      "location": "İzmir, Turquie",
+      "period": "Septembre 2017 - Juin 2018",
+      "description": "Assisté à la configuration du système et à l'identification du matériel, améliorant l'efficacité opérationnelle. Fourni un support technique aux utilisateurs, résolu les problèmes informatiques et amélioré la satisfaction des utilisateurs. Collaboré avec les membres de l'équipe sur le dépannage, favorisant un environnement de travail coopératif."
+    },
+    "concentrix": {
+      "title": "Représentant du service client – Secteur bancaire",
+      "company": "Concentrix",
+      "location": "İzmir, Turquie",
+      "period": "Décembre 2022 - Octobre 2024",
+      "description": "Fourni un support bancaire de première ligne. Maintenu 95% de satisfaction client. Géré les tickets de service avec Salesforce CRM."
+    },
+    "uopeople": {
+      "title": "Baccalauréat en sciences, Informatique",
+      "company": "University of the People",
+      "location": "En ligne",
+      "period": "Juin 2025 - En cours",
+      "description": "Actuellement en train de poursuivre un baccalauréat en sciences en informatique. Étude des algorithmes, des structures de données et des principes d'ingénierie logicielle."
+    },
+    "anadolu": {
+      "title": "Diplôme d'associé, Programmation informatique",
+      "company": "Université Anadolu",
+      "location": "Eskişehir, Turquie",
+      "period": "En cours",
+      "description": "Actuellement en train de poursuivre un diplôme d'associé en programmation informatique. Apprentissage des fondamentaux de la programmation et des processus de développement logiciel."
+    }
+  },
+  "technologies": {
+    "title": "La créativité nécessite beaucoup d'outils",
+    "subtitle": "J'ai beaucoup d'outils dans ma boîte à outils, et j'en apprends toujours de nouveaux.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Base de données",
+      "tools": "Outils",
+      "languages": "Langues"
+    },
+    "react": "React.js",
+    "javascript": "JavaScript",
+    "typescript": "TypeScript",
+    "expo": "Expo",
+    "tailwind": "Tailwind CSS",
+    "html": "HTML5",
+    "css": "CSS3",
+    "nextjs": "Next.js",
+    "nodejs": "Node.js",
+    "express": "Express.js",
+    "postgresql": "PostgreSQL",
+    "git": "Git & GitHub",
+    "redis": "Redis",
+    "agile": "Agile",
+    "figma": "Figma",
+    "vercel": "Vercel",
+    "docker": "Docker",
+    "opengraph": "OpenGraph",
+    "googleAnalytics": "Google Analytics",
+    "turkish": "Turc",
+    "english": "Anglais",
+    "german": "Allemand",
+    "descriptions": {
+      "react": "react & native & next",
+      "typescript": "type-safe & moderne",
+      "expo": "mobile & multiplateforme",
+      "tailwind": "utility-first & responsive",
+      "html": "sémantique & accessible",
+      "css": "moderne & animations",
+      "nextjs": "SSR & SSG & routes API",
+      "nodejs": "runtime & backend",
+      "express": "REST API & middleware",
+      "postgresql": "relationnel & ACID",
+      "git": "contrôle de version & collaboration",
+      "redis": "cache & sessions",
+      "figma": "design & prototypage",
+      "vercel": "déploiement & hébergement",
+      "docker": "conteneurs & CI/CD",
+      "googleAnalytics": "suivi & insights",
+      "turkish": "locuteur natif",
+      "english": "professionnel",
+      "german": "débutant"
+    }
+  },
+  "certificates": {
+    "title": "Certificats et Réalisations",
+    "subtitle": "Certifications et réalisations obtenues pendant mon parcours d'apprentissage",
+    "skills": {
+      "siliconmade": ["React", "React Native", "Développement mobile"],
+      "frontend": ["HTML", "CSS", "JavaScript"],
+      "react": ["React", "Composants", "Hooks"],
+      "responsive": ["Design responsive", "Mobile First", "CSS Grid"],
+      "javascript": ["JavaScript", "ES6+", "Async/Await"],
+      "git": ["Git", "GitHub", "Contrôle de version"]
+    },
+    "siliconmade": {
+      "title": "Certificat de développement mobile et frontend",
+      "issuer": "Siliconmade Academy",
+      "date": "Juillet 2025",
+      "description": "Programme de formation intensive de 184 heures. Développement d'applications mobiles avec React et React Native."
+    },
+    "frontend": {
+      "title": "Fondamentaux du développement frontend",
+      "issuer": "Plateforme d'apprentissage en ligne",
+      "date": "2024",
+      "description": "Formation complète couvrant les fondamentaux HTML, CSS et JavaScript."
+    },
+    "react": {
+      "title": "Maîtrise de React.js",
+      "issuer": "Plateforme d'apprentissage en ligne",
+      "date": "2024",
+      "description": "Formation avancée sur les composants React, les hooks et la gestion d'état."
+    },
+    "responsive": {
+      "title": "Design web responsive",
+      "issuer": "Plateforme d'apprentissage en ligne",
+      "date": "2024",
+      "description": "Approche mobile-first et principes de design responsive."
+    },
+    "javascript": {
+      "title": "JavaScript moderne (ES6+)",
+      "issuer": "Plateforme d'apprentissage en ligne",
+      "date": "2024",
+      "description": "Fonctionnalités ES6+, async/await et techniques JavaScript modernes."
+    },
+    "git": {
+      "title": "Maîtrise de Git & GitHub",
+      "issuer": "Plateforme d'apprentissage en ligne",
+      "date": "2024",
+      "description": "Contrôle de version, stratégies de branchement et développement collaboratif."
+    },
+    "stats": {
+      "certificates": "Certificats",
+      "hours": "Heures de formation",
+      "projects": "Projets",
+      "experience": "Années d'expérience"
+    }
+  },
+  "services": {
+    "title": "Mes Services",
+    "subtitle": "Solutions web créatives et conviviales avec des technologies modernes",
+    "b2b": "Services aux entreprises",
+    "b2c": "Services personnels",
+    "cta": "Vous voulez travailler avec moi sur votre projet ?",
+    "contactButton": "Me contacter",
+    "corporate": {
+      "title": "Site web d'entreprise",
+      "description": "Sites web d'entreprise modernes, professionnels et responsives. Solutions sécurisées et évolutives avec React et TypeScript."
+    },
+    "landing": {
+      "title": "Page d'atterrissage",
+      "description": "Pages d'atterrissage à conversion élevée qui se chargent rapidement et sont optimisées pour le SEO. Animations impressionnantes avec Framer Motion."
+    },
+    "ecommerce": {
+      "title": "Frontend E-Commerce",
+      "description": "Interfaces e-commerce conviviales. Intégrations de paiement, catalogues de produits et gestion de panier."
+    },
+    "dashboard": {
+      "title": "Tableau de bord administrateur",
+      "description": "Tableaux de bord interactifs pour la prise de décision basée sur les données. Graphiques, tableaux et mises à jour en temps réel."
+    },
+    "redesign": {
+      "title": "Refonte de site web",
+      "description": "Renouvelez votre site web existant avec des technologies modernes. Optimisation des performances et améliorations UX."
+    },
+    "responsive": {
+      "title": "Design responsive",
+      "description": "Sites web responsives qui ont l'air parfaits sur mobile, tablette et ordinateur. Approche mobile-first."
+    },
+    "portfolio": {
+      "title": "Site web portfolio",
+      "description": "Sites web portfolio et CV personnels. Distinguez-vous avec un design moderne, des animations et une optimisation SEO."
+    },
+    "smallBusiness": {
+      "title": "Site web pour petite entreprise",
+      "description": "Sites web abordables et efficaces pour les entreprises locales. Intégration Google My Business et SEO local."
+    },
+    "restaurant": {
+      "title": "Site web restaurant/café",
+      "description": "Sites web de restaurant avec menu numérique, système de réservation et galerie photo. Support de menu QR code."
+    },
+    "personal": {
+      "title": "Site web personnel",
+      "description": "Sites web sur mesure pour blog, CV ou marque personnelle. Gestion de contenu et intégration des réseaux sociaux."
+    }
+  },
+  "projects": {
+    "title": "Mes Projets",
+    "subtitle": "Projets que j'ai développés en utilisant des technologies web modernes",
+    "details": "Détails",
+    "tech": "Technologies :",
+    "github": "GitHub",
+    "demo": "Démo",
+    "liveDemo": "Démo en direct",
+    "livePreview": "Aperçu en direct",
+    "clickToViewDetails": "Cliquez pour voir les détails",
+    "roles": {
+      "fullStack": "Développeur Full Stack",
+      "frontend": "Développeur Frontend",
+      "backend": "Développeur Backend"
+    },
+    "durations": {
+      "week": "{{count}} semaine",
+      "weeks": "{{count}} semaines",
+      "month": "{{count}} mois",
+      "months": "{{count}} mois"
+    },
+    "items": {
+      "iot": {
+        "title": "Simulateur d'appareil IoT",
+        "description": "Simulateur d'appareil IoT développé avec Node.js, Express, Authentification, Statistiques et Support multilingue. Fonctionnalités de support Docker et génération de code QR.",
+        "longDescription": "Application web qui simule des appareils IoT. Visualisation de données en temps réel et intégration de code QR.",
+        "features": ["Visualisation de données en temps réel", "Intégration de code QR", "Containerisation Docker", "Connexion WebSocket"],
+        "duration": "1 mois",
+        "role": "Développeur Backend"
+      },
+      "todo": {
+        "title": "Application Todo (Style Instagram)",
+        "description": "Application todo moderne développée avec une interface de type Instagram. Construite en utilisant React et des technologies web modernes.",
+        "longDescription": "Application de gestion de tâches. Opérations CRUD et intégration de stockage local.",
+        "features": ["Ajouter/supprimer des tâches", "Mises à jour de statut", "Stockage local", "Design responsive"],
+        "duration": "1 semaine",
+        "role": "Développeur Frontend"
+      },
+      "workshop": {
+        "title": "Suivi d'atelier",
+        "description": "Application web développée pour le suivi d'ateliers et d'événements. Fonctionnalités de gestion des participants et d'organisation d'événements.",
+        "longDescription": "Système de suivi d'ateliers et d'événements. Plateforme moderne où les participants peuvent s'inscrire et voir les détails des événements.",
+        "features": ["Système d'inscription utilisateur", "Gestion d'événements", "Mises à jour en temps réel", "Panneau d'administration"],
+        "duration": "1,5 mois",
+        "role": "Développeur Full Stack"
+      },
+      "productManager": {
+        "title": "Gestionnaire de produits React Supabase",
+        "description": "Système de gestion de produits développé avec backend Supabase. Fonctionnalités d'opérations CRUD et de synchronisation de données en temps réel.",
+        "longDescription": "Système de gestion de produits. Opérations CRUD et authentification utilisateur avec backend Supabase.",
+        "features": ["Opérations CRUD de produits", "Authentification utilisateur", "Intégration Supabase", "Mises à jour en temps réel"],
+        "duration": "3 semaines",
+        "role": "Développeur Full Stack"
+      },
+      "grocery": {
+        "title": "Application d'épicerie en ligne",
+        "description": "Application de marché en ligne développée comme plateforme e-commerce. Fonctionnalités de gestion de panier et d'intégration de paiement.",
+        "longDescription": "Application de marché en ligne. Vente de produits alimentaires et suivi de livraison.",
+        "features": ["Catégories de produits", "Recherche et filtrage", "Suivi de livraison", "Comptes utilisateur"],
+        "duration": "2,5 semaines",
+        "role": "Développeur Full Stack"
+      },
+      "productList": {
+        "title": "Liste de produits (Améliorée)",
+        "description": "Application de liste de produits équipée de fonctionnalités avancées. Fonctionnalités de filtrage, recherche et catégorisation."
+      },
+      "paymentForm": {
+        "title": "Formulaire de paiement",
+        "description": "Application de formulaire développée pour des transactions de paiement sécurisées. Fonctionnalités de validation de formulaire et d'interface conviviale."
+      },
+      "payment": {
+        "title": "Application de formulaire de paiement",
+        "description": "Application de formulaire de paiement. Validation de formulaire et transactions de paiement sécurisées.",
+        "longDescription": "Application de formulaire de paiement sécurisée développée en utilisant des technologies web modernes. Fournit des transactions de paiement sécurisées avec une interface conviviale et une validation de formulaire complète.",
+        "features": [
+          "Validation de formulaire",
+          "Paiement sécurisé",
+          "Design responsive",
+          "Gestion des erreurs"
+        ],
+        "challenges": [
+          "Traitement sécurisé des données",
+          "Optimisation de l'expérience utilisateur"
+        ],
+        "solutions": [
+          "Bibliothèques de validation modernes",
+          "Principes de design responsive"
+        ]
+      },
+      "exchange": {
+        "title": "Application de suivi des changes",
+        "description": "Suivi des taux de change et écran de trading. Données en temps réel et visualisation de graphiques.",
+        "longDescription": "Suivi des taux de change et écran de trading. Données en temps réel et visualisation de graphiques.",
+        "features": ["Taux de change en temps réel", "Visualisation de graphiques", "Simulation de trading", "Design responsive"],
+        "challenges": ["Intégration de données en temps réel", "Optimisation des performances"],
+        "solutions": ["Connexions WebSocket", "Mise en cache efficace des données"],
+        "duration": "1,5 semaines",
+        "role": "Développeur Frontend"
+      },
+      "globalIdentity": {
+        "title": "Identité globale",
+        "description": "Système de vérification d'identité globale. Fonctionnalités de support multi-plateforme et d'authentification sécurisée.",
+        "longDescription": "Système de gestion d'identité globale. Profils utilisateur et authentification.",
+        "features": ["Profils utilisateur", "Authentification", "Mesures de sécurité", "Support multilingue"],
+        "duration": "2 semaines",
+        "role": "Développeur Full Stack"
+      },
+      "noteTracker": {
+        "title": "Système de suivi de notes simple",
+        "description": "Système personnel de prise de notes et de suivi. Fonctionnalités d'interface conviviale et de gestion efficace des notes."
+      },
+      "loginUI": {
+        "title": "Interface de connexion (TypeScript)",
+        "description": "Interface de connexion moderne développée avec TypeScript. Fonctionnalités de design responsive et de validation de formulaire."
+      },
+      "nodeNotes": {
+        "title": "Application de notes Node.js",
+        "description": "Application de prise de notes développée avec backend Node.js. Fonctionnalités d'API RESTful et d'intégration de base de données."
+      },
+      "portfolio": {
+        "title": "Portfolio personnel",
+        "description": "Site web portfolio personnel développé avec React et TypeScript modernes. Fonctionnalités de design responsive et de support multilingue.",
+        "longDescription": "Site web portfolio moderne et responsive. Développé avec React, TypeScript et TailwindCSS. Animations fluides avec Framer Motion et support multilingue.",
+        "features": ["Design responsive", "Support multilingue (TR, EN, DE, AZ)", "Animations fluides", "Optimisation SEO", "Thème sombre/clair"],
+        "challenges": ["Optimisation des performances", "Gestion multilingue", "Design responsive"],
+        "solutions": ["Chargement paresseux et division du code", "Bibliothèque i18next", "Approche mobile-first"],
+        "duration": "2 mois",
+        "role": "Développeur Full Stack"
+      },
+      "ecommerce": {
+        "title": "Site web E-commerce",
+        "description": "Plateforme e-commerce complète développée avec React. Inclut la gestion de panier, le catalogue de produits et le système de paiement."
+      },
+      "cvPreparation": {
+        "title": "Application de préparation de CV",
+        "description": "Application web pour la création dynamique de CV et le téléchargement PDF. Fonctionnalités d'interface conviviale et de système de modèles.",
+        "longDescription": "Application web avec fonctionnalités de création de CV dynamique et de téléchargement PDF. Interface conviviale et système de modèles.",
+        "features": ["Création de CV dynamique", "Export PDF", "Système de modèles", "Aperçu en temps réel"],
+        "duration": "2 semaines",
+        "role": "Développeur Frontend"
+      },
+      "furniro": {
+        "title": "E-commerce Furniro",
+        "description": "Plateforme e-commerce axée sur les meubles et la décoration intérieure. Design moderne et interface conviviale.",
+        "longDescription": "Site e-commerce de meubles. Vente de produits de mobilier avec design moderne et interface conviviale.",
+        "features": ["Catalogue de produits", "Gestion de panier", "Système de paiement", "Design responsive"],
+        "duration": "3 semaines",
+        "role": "Développeur Frontend"
+      },
+      "exchangeScreen": {
+        "title": "Écran de taux de change",
+        "description": "Application web interactive affichant les taux de change en temps réel. Prend en charge USD, EUR, BTC, ETH."
+      },
+      "dashboard": {
+        "title": "Tableau de bord financier",
+        "description": "Application de tableau de bord développée pour le suivi des actions et crypto. Affiche les données d'entreprises comme NVIDIA, Tesla.",
+        "longDescription": "Application de tableau de bord analytique. Système de visualisation de données et de reporting.",
+        "features": ["Visualisation de données", "Rapports analytiques", "Graphiques interactifs", "Fonctionnalité d'export"],
+        "duration": "2 semaines",
+        "role": "Développeur Frontend"
+      },
+      "odev": {
+        "title": "Tableau de bord des réseaux sociaux",
+        "description": "Application de tableau de bord qui suit plusieurs plateformes de réseaux sociaux sur un seul écran. Design moderne et responsive."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Contactez-moi ! Remplissez le formulaire ci-dessous pour m'envoyer un email direct.",
+    "freeQuote": {
+      "title": "Obtenir un devis gratuit",
+      "description": "J'analyse votre site web et fournis des recommandations pour améliorer vos performances",
+      "siteAnalysis": {
+        "title": "Analyse de site",
+        "description": "J'analyse en détail le statut SEO actuel de votre site web"
+      },
+      "performanceReport": {
+        "title": "Rapport de performance",
+        "description": "Google PageSpeed, Core Web Vitals et analyse SEO technique"
+      },
+      "optimizationSuggestions": {
+        "title": "Suggestions d'optimisation",
+        "description": "Recommandations concrètes pour mieux se classer dans les moteurs de recherche"
+      },
+      "competitorAnalysis": {
+        "title": "Analyse concurrentielle",
+        "description": "J'analyse vos concurrents et suggère des avantages stratégiques"
+      },
+      "completelyFree": "Complètement gratuit",
+      "completelyFreeDescription": "Cette analyse et ces recommandations sont complètement gratuites. Vous n'avez aucune obligation.",
+      "sendMessageForQuote": "Envoyez un message pour obtenir un devis",
+      "exampleMessage": "Bonjour ! J'aimerais obtenir un support gratuit pour mon site web. Pouvez-vous faire une analyse détaillée ?"
+    },
+    "form": {
+      "title": "Envoyer un message",
+      "name": "Votre nom",
+      "namePlaceholder": "Entrez votre nom",
+      "email": "Votre email",
+      "emailPlaceholder": "exemple@email.com",
+      "message": "Votre message",
+      "messagePlaceholder": "Écrivez votre message ici...",
+      "send": "Envoyer",
+      "sending": "Envoi...",
+      "success": "✅ Votre message a été envoyé avec succès !",
+      "error": "❌ Une erreur s'est produite. Veuillez réessayer.",
+      "errors": {
+        "nameRequired": "Le champ nom est requis",
+        "nameMinLength": "Le nom doit contenir au moins 2 caractères",
+        "emailRequired": "Le champ email est requis",
+        "emailInvalid": "Veuillez entrer une adresse email valide",
+        "messageRequired": "Le champ message est requis",
+        "messageMinLength": "Le message doit contenir au moins 10 caractères",
+        "messageMaxLength": "Le message ne peut pas dépasser 1000 caractères",
+        "recaptchaRequired": "Veuillez compléter la vérification reCAPTCHA",
+        "recaptchaExpired": "La vérification reCAPTCHA a expiré. Veuillez réessayer.",
+        "recaptchaError": "La vérification reCAPTCHA a échoué. Veuillez réessayer."
+      },
+      "recaptcha": {
+        "label": "Vérification de sécurité",
+        "notConfigured": "reCAPTCHA n'est pas configuré. Veuillez contacter l'administrateur."
+      },
+      "captcha": {
+        "label": "Vérification de sécurité",
+        "placeholder": "Entrez le résultat",
+        "refresh": "Actualiser"
+      }
+    },
+    "or": "ou",
+    "email": "Envoyer un email",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "madeWith": "Fait avec",
+    "by": "par Tolga | Développeur Frontend",
+    "downloadCV": "Télécharger le CV",
+    "buyMeACoffee": "Offrez-moi un café ☕"
+  },
+  "scrollToTop": "Aller en haut",
+  "cv": {
+    "professionalSummary": "Résumé professionnel",
+    "summaryText": "Je développe des projets web créatifs et modernes en tant que Développeur Frontend. Je crée des applications conviviales avec React, TypeScript et TailwindCSS. Je me spécialise dans les applications mobiles multiplateformes et les sites web responsives.",
+    "technicalSkills": "Compétences techniques",
+    "workExperience": "Expérience professionnelle",
+    "education": "Éducation",
+    "certificates": "Certificats",
+    "languages": "Langues",
+    "generatePDF": "Générer PDF",
+    "printCV": "Imprimer",
+    "turkcellDescription": "Je soutiens les clients et résous les problèmes chez Turkcell Global Bilgi. Je me spécialise dans la communication claire, la résolution de problèmes et le support technique.",
+    "upworkDescription": "J'ai développé des applications mobiles multiplateformes. J'ai intégré des API RESTful et Supabase. J'ai conçu des interfaces utilisateur dynamiques avec Tailwind CSS, augmentant la rétention des utilisateurs de 30%."
+  },
+  "meta": {
+    "home": {
+      "title": "Tolga Çavga | Développeur Frontend - Applications Web Modernes",
+      "description": "Développeur Frontend créant des applications web modernes avec React, TypeScript et TailwindCSS. Interfaces conviviales et solutions axées sur les performances.",
+      "keywords": "Développeur Frontend, React, TypeScript, JavaScript, Développement Web, UI/UX, Web Moderne"
+    },
+    "about": {
+      "title": "À propos de moi | Tolga Çavga - Développeur Frontend",
+      "description": "Développeur Frontend qui est entré dans le monde du développement logiciel avec une grande passion. Je développe des applications web créatives et conviviales.",
+      "keywords": "À propos de moi, Développeur Frontend, Développeur Logiciel, Informations personnelles, Expérience"
+    },
+    "projects": {
+      "title": "Mes Projets | Tolga Çavga - Portfolio",
+      "description": "Projets que j'ai développés avec React, Node.js et des technologies web modernes. E-commerce, IoT, panneaux de gestion et plus encore.",
+      "keywords": "Projets, Portfolio, Projets React, Applications Web, E-commerce, IoT"
+    },
+    "technologies": {
+      "title": "Technologies | Tolga Çavga - Mes Compétences",
+      "description": "Expertise dans plus de 20 technologies dans les catégories Frontend, Backend, Base de données et Outils. React, TypeScript, Node.js et plus encore.",
+      "keywords": "Technologies, Compétences, React, TypeScript, Node.js, Frontend, Backend"
+    },
+    "contact": {
+      "title": "Contact | Tolga Çavga - Développeur Frontend",
+      "description": "Contactez-moi pour vos projets. Je me spécialise dans le développement d'applications web modernes et d'interfaces conviviales.",
+      "keywords": "Contact, Formulaire de contact, Proposition de projet, Développement Web, Frontend"
+    },
+    "cv": {
+      "title": "Télécharger le CV | Tolga Çavga - Développeur Frontend",
+      "description": "Téléchargez le CV actuel de Tolga Çavga. Expert Développeur Frontend en React, TypeScript et technologies web modernes.",
+      "keywords": "CV, Développeur Frontend, React, TypeScript, Candidature"
+    }
+  },
+  "share": {
+    "title": "Partager",
+    "shareOn": "Partager sur",
+    "copyLink": "Copier le lien",
+    "linkCopied": "Lien copié ! ✅"
+  },
+  "socialProof": {
+    "title": "Suivez-moi sur les réseaux sociaux",
+    "subtitle": "Suivez mes projets, restez à jour et connectez-vous avec moi !",
+    "followMe": "Suivre",
+    "cta": "Vous voulez rester à jour avec de nouveaux projets et du contenu ?",
+    "followGitHub": "Suivre sur GitHub",
+    "connectLinkedIn": "Se connecter sur LinkedIn",
+    "github": {
+      "stats": "20+ Dépôts",
+      "description": "Projets open source et exemples de code"
+    },
+    "linkedin": {
+      "stats": "500+ Connexions",
+      "description": "Réseau professionnel et développement de carrière"
+    },
+    "instagram": {
+      "description": "Conseils de codage et contenu de développement quotidien"
+    }
+  },
+  "portfolioShare": {
+    "title": "Vous aimez mon portfolio ?",
+    "description": "Si vous avez apprécié ce portfolio et souhaitez le partager avec vos amis, n'hésitez pas à utiliser les boutons ci-dessous. Chaque partage me motive ! 🚀",
+    "shareTitle": "Découvrez le portfolio incroyable de Tolga Çavga !",
+    "shareDescription": "Portfolio de développeur frontend moderne et créatif - React, TypeScript et plus encore !",
+    "thankYou": "Merci pour votre soutien !"
+  },
+  "notFound": {
+    "title": "Oups ! Vous semblez perdu ! 🗺️",
+    "message": "La page que vous recherchez pourrait être dans un univers parallèle... Ou elle n'a jamais existé. Qui sait ? 🤷‍♂️",
+    "funFact": "💡 Fait amusant : Vous avez débloqué un succès secret en trouvant cette page 404 !",
+    "goHome": "Aller à l'accueil",
+    "goBack": "Retour",
+    "tip": "Essayez le code Konami, quelque chose pourrait se passer..."
+  },
+  "common": {
+    "name": "Tolga Çavga",
+    "role": "Développeur Frontend",
+    "resume": "CV",
+    "developerLogo": "Logo développeur",
+    "closeMenu": "Fermer le menu",
+    "languages": {
+      "turkish": "Turc",
+      "azerbaijani": "Turc azerbaïdjanais",
+      "english": "Anglais",
+      "german": "Allemand"
+    }
+  },
+  "projectLike": {
+    "like": "Aimer le projet",
+    "unlike": "Ne plus aimer le projet",
+    "dislike": "Ne pas aimer le projet",
+    "removeDislike": "Retirer le dislike",
+    "liked": "Projet aimé ! ❤️",
+    "unliked": "Like retiré",
+    "disliked": "Projet non aimé 👎",
+    "dislikeRemoved": "Dislike retiré",
+    "error": "Une erreur s'est produite, veuillez réessayer"
+  }
+}

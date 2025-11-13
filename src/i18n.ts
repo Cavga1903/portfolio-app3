@@ -7,6 +7,15 @@ import translationTR from './locales/tr/translation.json';
 import translationEN from './locales/en/translation.json';
 import translationDE from './locales/de/translation.json';
 import translationAZ from './locales/az/translation.json';
+import translationFR from './locales/fr/translation.json';
+import translationSV from './locales/sv/translation.json';
+import translationNO from './locales/no/translation.json';
+import translationEL from './locales/el/translation.json';
+import translationUK from './locales/uk/translation.json';
+import translationIT from './locales/it/translation.json';
+import translationJA from './locales/ja/translation.json';
+import translationPL from './locales/pl/translation.json';
+import translationES from './locales/es/translation.json';
 
 const resources = {
   tr: {
@@ -20,6 +29,33 @@ const resources = {
   },
   az: {
     translation: translationAZ,
+  },
+  fr: {
+    translation: translationFR,
+  },
+  sv: {
+    translation: translationSV,
+  },
+  no: {
+    translation: translationNO,
+  },
+  el: {
+    translation: translationEL,
+  },
+  uk: {
+    translation: translationUK,
+  },
+  it: {
+    translation: translationIT,
+  },
+  ja: {
+    translation: translationJA,
+  },
+  pl: {
+    translation: translationPL,
+  },
+  es: {
+    translation: translationES,
   },
 };
 
@@ -36,7 +72,8 @@ languageDetector.addDetector({
     // localStorage'dan kontrol et
     try {
       const storedLang = localStorage.getItem('i18nextLng');
-      if (storedLang && ['tr', 'en', 'de', 'az'].includes(storedLang)) {
+      const supportedLangs = ['tr', 'en', 'de', 'az', 'fr', 'sv', 'no', 'el', 'uk', 'it', 'ja', 'pl', 'es'];
+      if (storedLang && supportedLangs.includes(storedLang)) {
         return storedLang;
       }
     } catch (e) {
@@ -49,10 +86,27 @@ languageDetector.addDetector({
       const browserLang = navigator.language || (navigator as any).userLanguage;
       const langCode = browserLang.toLowerCase().split('-')[0]; // 'en-US' -> 'en'
       
-      // Türkçe ise tr, Almanca ise de, Azərbaycanca ise az, diğerleri en
-      if (langCode === 'tr') return 'tr';
-      if (langCode === 'de') return 'de';
-      if (langCode === 'az') return 'az';
+      // Desteklenen dilleri kontrol et
+      const langMap: { [key: string]: string } = {
+        'tr': 'tr',
+        'de': 'de',
+        'az': 'az',
+        'fr': 'fr',
+        'sv': 'sv',
+        'no': 'no',
+        'nb': 'no', // Norwegian Bokmål
+        'nn': 'no', // Norwegian Nynorsk
+        'el': 'el',
+        'uk': 'uk',
+        'it': 'it',
+        'ja': 'ja',
+        'pl': 'pl',
+        'es': 'es'
+      };
+      
+      if (langMap[langCode]) {
+        return langMap[langCode];
+      }
     }
     
     return 'en'; // Fallback: Diğer tüm diller İngilizce
@@ -78,7 +132,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en', // Fallback dil İngilizce
-    supportedLngs: ['tr', 'en', 'de', 'az'],
+    supportedLngs: ['tr', 'en', 'de', 'az', 'fr', 'sv', 'no', 'el', 'uk', 'it', 'ja', 'pl', 'es'],
     debug: false,
     interpolation: {
       escapeValue: false,

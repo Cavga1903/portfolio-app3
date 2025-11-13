@@ -1,8 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaGithub, FaUser, FaMoon, FaSun } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "../hooks/useAnalytics";
+
+// Dil listesi - component dışında tanımlı (public/png klasöründeki bayraklara göre)
+const languages = [
+  { code: "tr", name: "Türkçe", flagImage: "/png/005-turkey.png" },
+  { code: "az", name: "Azərbaycan Türkcəsi", flagImage: "/png/007-azerbaijan.png" },
+  { code: "en", name: "English", flagImage: "/png/001-united-kingdom.png" },
+  { code: "de", name: "Deutsch", flagImage: "/png/002-germany.png" },
+  { code: "fr", name: "Français", flagImage: "/png/003-france.png" },
+  { code: "sv", name: "Svenska", flagImage: "/png/004-sweden.png" },
+  { code: "no", name: "Norsk", flagImage: "/png/006-norway.png" },
+  { code: "el", name: "Ελληνικά", flagImage: "/png/008-greece.png" },
+  { code: "uk", name: "Українська", flagImage: "/png/009-ukraine.png" },
+  { code: "it", name: "Italiano", flagImage: "/png/010-italy.png" },
+  { code: "ja", name: "日本語", flagImage: "/png/011-japan.png" },
+  { code: "pl", name: "Polski", flagImage: "/png/012-poland.png" },
+  { code: "es", name: "Español", flagImage: "/png/013-spain.png" },
+];
+
+// Bayrak görseli komponenti
+const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, className = "w-6 h-6" }) => {
+  const language = languages.find(lang => lang.code === code);
+  if (!language) return <div className={className} />;
+  
+  return (
+    <img 
+      src={language.flagImage} 
+      alt={language.name}
+      className={className}
+      style={{ objectFit: 'contain' }}
+    />
+  );
+};
 
 type NavLink = {
   id: string;
@@ -19,8 +51,24 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { t } = useTranslation();
-  const { trackClick } = useAnalytics();
+  const { t, i18n } = useTranslation();
+  const { trackClick, trackLanguageChange } = useAnalytics();
+
+  const normalizedLang = i18n.language.split("-")[0].toLowerCase();
+  const currentLanguageIndex = useMemo(() => {
+    const index = languages.findIndex((lang) => lang.code === normalizedLang);
+    return index >= 0 ? index : languages.findIndex((lang) => lang.code === 'en');
+  }, [normalizedLang]);
+
+  const currentLanguage = languages[currentLanguageIndex];
+
+  const cycleToNextLanguage = () => {
+    const nextIndex = (currentLanguageIndex + 1) % languages.length;
+    const nextLang = languages[nextIndex];
+    const currentLang = i18n.language.split("-")[0];
+    i18n.changeLanguage(nextLang.code);
+    trackLanguageChange(currentLang, nextLang.code);
+  };
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -64,7 +112,7 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <nav className="bg-gray-800/90 backdrop-blur-sm relative z-50 border-b border-gray-700/50 w-full">
+    <nav className="bg-gray-800/90 backdrop-blur-sm fixed z-50 border-b border-gray-700/50 w-full top-0 left-0 right-0">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           {/* Logo - Left Side */}
@@ -94,6 +142,16 @@ const Navbar: React.FC = () => {
               ) : (
                 <FaMoon className="w-5 h-5" />
               )}
+            </button>
+
+            {/* Language Selector */}
+            <button
+              onClick={cycleToNextLanguage}
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+              aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
+              title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
+            >
+              <FlagIcon code={currentLanguage.code} className="w-6 h-6" />
             </button>
 
             {/* Navigation Links */}
@@ -153,6 +211,16 @@ const Navbar: React.FC = () => {
               )}
             </button>
 
+            {/* Language Selector - Mobile */}
+            <button
+              onClick={cycleToNextLanguage}
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+              aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
+              title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
+            >
+              <FlagIcon code={currentLanguage.code} className="w-5 h-5" />
+            </button>
+
             {/* Hamburger Menu - Mobile */}
             <button
               onClick={toggleMenu}
@@ -171,113 +239,99 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - Compact Horizontal Design */}
+        {/* Mobile Menu */}
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } fixed inset-0 z-50 mobile-menu`}
+          } fixed inset-0 z-50`}
           id="mobile-menu"
         >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-gradient-to-b from-black/80 via-purple-900/60 to-transparent backdrop-blur-md"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           />
           
-          {/* Menu Panel - Compact Horizontal */}
-          <div className="fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-2xl transform transition-all duration-500 ease-out">
-            {/* Header - Compact */}
-            <div className="px-4 py-3 border-b border-white/10">
+          {/* Menu Panel */}
+          <div className="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-md border-b border-gray-700/50 shadow-xl">
+            {/* Header */}
+            <div className="px-4 py-3 border-b border-gray-700/50">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-                      <img
-                        src="/tabLogo.svg"
-                        alt={t('common.developerLogo')}
-                        className="w-6 h-6 filter brightness-0 invert"
-                      />
-                    </div>
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-bold text-white">{t('common.name')}</h2>
-                    <p className="text-blue-200 text-xs">{t('common.role')}</p>
-                  </div>
-                </div>
+                {/* Logo */}
+                <a
+                  href="#hero"
+                  className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    smoothScrollTo("hero");
+                    trackClick("nav_hero", "navigation_link", "Tolga Çavga");
+                  }}
+                >
+                  <span className="text-xl font-mono">{"</>"}</span>
+                  <span className="text-lg font-medium">cavga.dev</span>
+                </a>
+                
+                {/* Close Button */}
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 hover:rotate-90"
-                  aria-label={t('common.closeMenu')}
+                  className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200"
+                  aria-label="Close menu"
                 >
-                  <HiX className="w-5 h-5" />
+                  <HiX className="w-6 h-6" />
                 </button>
               </div>
             </div>
 
-            {/* Navigation Links - Compact Vertical */}
-            <div className="px-4 py-3">
-              <div className="grid grid-cols-2 gap-2">
-                {navLinks.map((link, index) => (
-                  <div
-                    key={link.id}
-                    className="group relative"
-                    style={{
-                      animationDelay: `${index * 80}ms`
-                    }}
-                  >
-                    <a
-                      href={`#${link.id}`}
-                      className="block relative p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsMenuOpen(false);
-                        smoothScrollTo(link.id);
-                        trackClick(
-                          `nav_${link.id}`,
-                          "navigation_link",
-                          t(link.labelKey)
-                        );
-                      }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/30 to-purple-500/30 group-hover:from-blue-500/50 group-hover:to-purple-500/50 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                          <span className="text-sm font-bold text-white group-hover:text-blue-100">
-                            {link.id.charAt(0).toUpperCase()}
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <div className="text-xs font-semibold text-white group-hover:text-blue-100 transition-colors">
-                            {t(link.labelKey)}
-                          </div>
-                        </div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-blue-400 transition-all duration-300 group-hover:scale-150"></div>
-                      </div>
-                      
-                      {/* Hover effect overlay */}
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
-                    </a>
-                  </div>
-                ))}
-              </div>
+            {/* Navigation Links */}
+            <div className="px-4 py-4 space-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="block px-3 py-2.5 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 relative group"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    smoothScrollTo(link.id);
+                    trackClick(
+                      `nav_${link.id}`,
+                      "navigation_link",
+                      t(link.labelKey)
+                    );
+                  }}
+                >
+                  {t(link.labelKey)}
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+              ))}
             </div>
 
-            {/* Footer - Compact Actions */}
-            <div className="px-4 py-2 border-t border-white/10 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10">
+            {/* Footer Actions */}
+            <div className="px-4 py-3 border-t border-gray-700/50">
               <div className="flex items-center justify-center gap-3">
-                {/* Quick Actions - Compact */}
-                <button 
+                {/* GitHub Icon */}
+                <a
+                  href="https://github.com/Cavga1903"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200"
+                  aria-label="GitHub"
                   onClick={() => {
-                    // CV indirme fonksiyonu
-                    const link = document.createElement('a');
-                    link.href = '/Tolga_Cavga_CV.pdf';
-                    link.download = 'Tolga_Cavga_Resume.pdf';
-                    link.click();
-                    trackClick('resume_download', 'file_download', 'Resume Download');
+                    setIsMenuOpen(false);
+                    trackClick('github', 'social_link', 'GitHub');
                   }}
-                  className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-white rounded-lg border border-white/20 hover:border-white/30 transition-all duration-300 text-xs font-medium hover:scale-105"
                 >
-                  {t('common.resume')}
+                  <FaGithub className="w-5 h-5" />
+                </a>
+
+                {/* Profile Icon */}
+                <button
+                  className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200"
+                  aria-label="Profile"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <FaUser className="w-4 h-4 text-white" />
                 </button>
               </div>
             </div>

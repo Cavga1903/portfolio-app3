@@ -62,7 +62,7 @@ const PortfolioShareCTA: React.FC = () => {
         {/* Share Buttons */}
         <div className="flex justify-center mb-8">
           <ShareButtons 
-            url="https://www.tolgacavga.com"
+            url="https://www.cavga.dev"
             title={t('portfolioShare.shareTitle')}
             description={t('portfolioShare.shareDescription')}
             hashtags={['FrontendDeveloper', 'React', 'WebDevelopment', 'Portfolio']}
