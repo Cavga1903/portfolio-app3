@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaCalendarAlt, FaTag, FaArrowLeft, FaUser } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 // Lazy load blog components
