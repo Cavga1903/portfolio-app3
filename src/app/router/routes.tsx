@@ -29,7 +29,7 @@ export const routes = [
     path: '/admin',
     element: (
       <PrivateRoute requiredRole="admin">
-        <AdminDashboard />
+        <AdminBlogManagement />
       </PrivateRoute>
     ),
     public: false,

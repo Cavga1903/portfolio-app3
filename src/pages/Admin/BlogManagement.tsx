@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { FaPlus, FaSearch } from 'react-icons/fa';
 import Navbar from '../../components/Navbar';
 import { LoginModal, SignupModal } from '../../features/auth';
+import { useAuthStore } from '../../app/store/authStore';
 
 // Blog management components
 const BlogListAdmin = React.lazy(() => import('../../features/admin/components/BlogManagement/BlogListAdmin'));
@@ -54,10 +55,10 @@ const AdminBlogManagement: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {t('admin.blog.title') || 'Blog Management'}
+                {t('admin.dashboard.title') || 'Dashboard'}
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                {t('admin.blog.subtitle') || 'Manage your blog posts'}
+                {t('admin.dashboard.welcome') || 'Welcome back'}, {user?.name || 'Admin'}
               </p>
             </div>
             <button
