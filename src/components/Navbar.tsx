@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaGithub, FaUser } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useAuthStore } from "../app/store/authStore";
@@ -73,6 +74,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState("hero");
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { trackClick, trackLanguageChange } = useAnalytics();
   const { isAuthenticated, user, logout } = useAuthStore();
   
@@ -208,6 +211,29 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
   // Smooth scroll function
   const smoothScrollTo = (elementId: string) => {
+    // If blog link, navigate to /blog route
+    if (elementId === 'blog') {
+      navigate('/blog');
+      return;
+    }
+    
+    // If not on home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+        handleLinkClick(elementId);
+      }, 100);
+      return;
+    }
+    
     const element = document.getElementById(elementId);
     if (element) {
       element.scrollIntoView({

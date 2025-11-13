@@ -52,7 +52,41 @@ export const authService = {
         token,
       };
     } catch (error) {
-      console.error('Firebase login failed, trying API fallback:', error);
+      console.error('Firebase login failed:', error);
+      
+      // Handle specific Firebase errors
+      if (error && typeof error === 'object' && 'code' in error) {
+        const firebaseError = error as { code: string; message?: string };
+        
+        if (firebaseError.code === 'auth/invalid-email') {
+          throw new Error('Geçersiz e-posta adresi. Lütfen doğru bir e-posta adresi giriniz.');
+        }
+        
+        if (firebaseError.code === 'auth/user-disabled') {
+          throw new Error('Bu kullanıcı hesabı devre dışı bırakılmış. Lütfen yönetici ile iletişime geçin.');
+        }
+        
+        if (firebaseError.code === 'auth/user-not-found') {
+          throw new Error('Bu e-posta adresi ile kayıtlı kullanıcı bulunamadı. Lütfen önce kayıt olun.');
+        }
+        
+        if (firebaseError.code === 'auth/wrong-password') {
+          throw new Error('Şifre yanlış. Lütfen tekrar deneyin.');
+        }
+        
+        if (firebaseError.code === 'auth/invalid-credential' || firebaseError.code === 'auth/invalid-login-credentials') {
+          throw new Error('E-posta veya şifre yanlış. Lütfen bilgilerinizi kontrol edin.');
+        }
+        
+        if (firebaseError.code === 'auth/too-many-requests') {
+          throw new Error('Çok fazla başarısız deneme. Lütfen bir süre sonra tekrar deneyin.');
+        }
+        
+        if (firebaseError.message) {
+          throw new Error(firebaseError.message);
+        }
+      }
+      
       // Fallback to API
       try {
         const response = await apiClient.post<LoginResponse>(endpoints.auth.login, {
@@ -62,7 +96,7 @@ export const authService = {
         return response.data;
       } catch (apiError) {
         console.error('API login also failed:', apiError);
-        throw error;
+        throw error instanceof Error ? error : new Error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
       }
     }
   },

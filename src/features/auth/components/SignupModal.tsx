@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../app/store/authStore';
 import { useTranslation } from 'react-i18next';
 import { FaTimes, FaGoogle, FaGithub } from 'react-icons/fa';
@@ -16,6 +17,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({
   onSwitchToLogin,
 }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { signup, loginWithGoogle, isLoading } = useAuthStore();
   const [formData, setFormData] = React.useState({
     name: '',
@@ -111,6 +113,15 @@ export const SignupModal: React.FC<SignupModalProps> = ({
     try {
       await signup(formData.email, formData.password, formData.name);
       onClose();
+      // Redirect based on user role - wait a bit for state to update
+      setTimeout(() => {
+        const currentUser = useAuthStore.getState().user;
+        if (currentUser?.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/blog');
+        }
+      }, 100);
     } catch {
       setError(t('auth.signupError') || 'Signup failed');
     }
@@ -349,6 +360,15 @@ export const SignupModal: React.FC<SignupModalProps> = ({
                         try {
                           await loginWithGoogle();
                           onClose();
+                          // Redirect based on user role - wait a bit for state to update
+                          setTimeout(() => {
+                            const currentUser = useAuthStore.getState().user;
+                            if (currentUser?.role === 'admin') {
+                              navigate('/admin');
+                            } else {
+                              navigate('/blog');
+                            }
+                          }, 100);
                         } catch (error) {
                           const errorMessage = error instanceof Error ? error.message : t('auth.googleSignupError') || 'Google sign up failed';
                           setError(errorMessage);

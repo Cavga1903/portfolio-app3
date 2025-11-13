@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../app/store/authStore';
 import { useTranslation } from 'react-i18next';
 import { FaTimes, FaGoogle, FaGithub } from 'react-icons/fa';
@@ -16,7 +17,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   onSwitchToSignup,
 }) => {
   const { t } = useTranslation();
-  const { login, loginWithGoogle, isLoading } = useAuthStore();
+  const navigate = useNavigate();
+  const { login, loginWithGoogle, isLoading, user } = useAuthStore();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
@@ -101,8 +103,18 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     try {
       await login(email, password);
       onClose();
-    } catch {
-      setError(t('auth.loginError') || 'Login failed');
+      // Redirect based on user role - wait a bit for state to update
+      setTimeout(() => {
+        const currentUser = useAuthStore.getState().user;
+        if (currentUser?.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/blog');
+        }
+      }, 100);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : t('auth.loginError') || 'Login failed';
+      setError(errorMessage);
     }
   };
 
@@ -275,6 +287,15 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                         try {
                           await loginWithGoogle();
                           onClose();
+                          // Redirect based on user role - wait a bit for state to update
+                          setTimeout(() => {
+                            const currentUser = useAuthStore.getState().user;
+                            if (currentUser?.role === 'admin') {
+                              navigate('/admin');
+                            } else {
+                              navigate('/blog');
+                            }
+                          }, 100);
                         } catch (error) {
                           const errorMessage = error instanceof Error ? error.message : t('auth.googleLoginError') || 'Google sign in failed';
                           setError(errorMessage);

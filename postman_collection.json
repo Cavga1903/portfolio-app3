@@ -1,0 +1,421 @@
+{
+  "info": {
+    "name": "Portfolio App API Tests",
+    "description": "API test collection for portfolio application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\",\n  \"name\": \"Test User\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signup",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "me"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Blog Posts",
+      "item": [
+        {
+          "name": "Get All Blog Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/blog/posts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "blog", "posts"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Published Blog Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/blog/posts?published=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "blog", "posts"],
+              "query": [
+                {
+                  "key": "published",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Blog Post by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/blog/posts/example-post-slug",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "blog", "posts", "example-post-slug"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Blog Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Test Blog Post\",\n  \"slug\": \"test-blog-post\",\n  \"content\": \"This is a test blog post content.\",\n  \"excerpt\": \"Test excerpt\",\n  \"category\": \"Technology\",\n  \"tags\": [\"test\", \"blog\"],\n  \"isPublished\": false,\n  \"author\": {\n    \"id\": \"user-id\",\n    \"name\": \"Test User\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/blog/posts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "blog", "posts"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Blog Post",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Blog Post\",\n  \"content\": \"Updated content\",\n  \"isPublished\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/blog/posts/:postId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "blog", "posts", ":postId"],
+              "variable": [
+                {
+                  "key": "postId",
+                  "value": "post-id-here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Blog Post",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/blog/posts/:postId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "blog", "posts", ":postId"],
+              "variable": [
+                {
+                  "key": "postId",
+                  "value": "post-id-here"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Firebase Auth (Direct)",
+      "item": [
+        {
+          "name": "Firebase Auth - Sign In with Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"returnSecureToken\": true\n}"
+            },
+            "url": {
+              "raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{firebaseApiKey}}",
+              "protocol": "https",
+              "host": ["identitytoolkit", "googleapis", "com"],
+              "path": ["v1", "accounts:signInWithPassword"],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{firebaseApiKey}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Firebase Auth - Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\",\n  \"returnSecureToken\": true\n}"
+            },
+            "url": {
+              "raw": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={{firebaseApiKey}}",
+              "protocol": "https",
+              "host": ["identitytoolkit", "googleapis", "com"],
+              "path": ["v1", "accounts:signUp"],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{firebaseApiKey}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Firebase Auth - Get User Info",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idToken\": \"{{firebaseIdToken}}\"\n}"
+            },
+            "url": {
+              "raw": "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={{firebaseApiKey}}",
+              "protocol": "https",
+              "host": ["identitytoolkit", "googleapis", "com"],
+              "path": ["v1", "accounts:lookup"],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{firebaseApiKey}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Firestore (Direct)",
+      "item": [
+        {
+          "name": "Firestore - Get User Document",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{firebaseIdToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://firestore.googleapis.com/v1/projects/{{firebaseProjectId}}/databases/(default)/documents/users/{{userId}}",
+              "protocol": "https",
+              "host": ["firestore", "googleapis", "com"],
+              "path": ["v1", "projects", "{{firebaseProjectId}}", "databases", "(default)", "documents", "users", "{{userId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Firestore - Create User Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{firebaseIdToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": {\n    \"name\": {\n      \"stringValue\": \"Test User\"\n    },\n    \"email\": {\n      \"stringValue\": \"test@example.com\"\n    },\n    \"role\": {\n      \"stringValue\": \"user\"\n    },\n    \"createdAt\": {\n      \"timestampValue\": \"2024-01-01T00:00:00Z\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "https://firestore.googleapis.com/v1/projects/{{firebaseProjectId}}/databases/(default)/documents/users/{{userId}}",
+              "protocol": "https",
+              "host": ["firestore", "googleapis", "com"],
+              "path": ["v1", "projects", "{{firebaseProjectId}}", "databases", "(default)", "documents", "users", "{{userId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Firestore - Get Blog Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{firebaseIdToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://firestore.googleapis.com/v1/projects/{{firebaseProjectId}}/databases/(default)/documents/blogPosts",
+              "protocol": "https",
+              "host": ["firestore", "googleapis", "com"],
+              "path": ["v1", "projects", "{{firebaseProjectId}}", "databases", "(default)", "documents", "blogPosts"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "firebaseApiKey",
+      "value": "YOUR_FIREBASE_API_KEY",
+      "type": "string"
+    },
+    {
+      "key": "firebaseProjectId",
+      "value": "myportfolio-1e13b",
+      "type": "string"
+    },
+    {
+      "key": "firebaseIdToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
+
