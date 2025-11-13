@@ -64,6 +64,9 @@ type NavLink = {
 
 const navLinks: NavLink[] = [
   { id: "hero", labelKey: "nav.home" },
+  { id: "about", labelKey: "nav.about" },
+  { id: "technologies", labelKey: "nav.technologies" },
+  { id: "services", labelKey: "nav.services" },
   { id: "projects", labelKey: "nav.projects" },
   { id: "contact", labelKey: "nav.contact" },
   { id: "blog", labelKey: "nav.blog" },
@@ -214,6 +217,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
     // If blog link, navigate to /blog route
     if (elementId === 'blog') {
       navigate('/blog');
+      setActiveLink('blog');
       return;
     }
     
@@ -230,7 +234,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
           });
         }
         handleLinkClick(elementId);
-      }, 100);
+      }, 300);
       return;
     }
     
@@ -240,8 +244,11 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
         behavior: "smooth",
         block: "start",
       });
+      handleLinkClick(elementId);
+    } else {
+      // If element not found, just set active link
+      handleLinkClick(elementId);
     }
-    handleLinkClick(elementId);
   };
 
   // Set active link based on current route
@@ -298,11 +305,15 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
           {/* Logo and Toggles - Left Side */}
           <div className="flex items-center gap-3">
             <a
-              href="#hero"
+              href="/"
               className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white cursor-pointer transition-colors duration-300 group"
               onClick={(e) => {
                 e.preventDefault();
-                smoothScrollTo("hero");
+                if (location.pathname !== '/') {
+                  navigate('/');
+                } else {
+                  smoothScrollTo("hero");
+                }
                 trackClick("nav_hero", "navigation_link", "Tolga Çavga");
               }}
             >
@@ -544,12 +555,16 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                 {/* Logo and Toggles */}
                 <div className="flex items-center gap-3">
                   <a
-                    href="#hero"
+                    href="/"
                     className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
                     onClick={(e) => {
                       e.preventDefault();
                       setIsMenuOpen(false);
-                      smoothScrollTo("hero");
+                      if (location.pathname !== '/') {
+                        navigate('/');
+                      } else {
+                        smoothScrollTo("hero");
+                      }
                       trackClick("nav_hero", "navigation_link", "Tolga Çavga");
                     }}
                   >
@@ -644,7 +659,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                     {user?.role === 'admin' && (
                       <a
                         href="/admin"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate('/admin');
+                          setIsMenuOpen(false);
+                          trackClick('nav_admin_mobile', 'navigation_link', 'Admin Panel');
+                        }}
                         className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                       >
                         {t('nav.admin') || 'Admin Panel'}
@@ -654,6 +674,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                       onClick={() => {
                         logout();
                         setIsMenuOpen(false);
+                        navigate('/');
+                        trackClick('nav_logout_mobile', 'action', 'Logout');
                       }}
                       className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                     >
