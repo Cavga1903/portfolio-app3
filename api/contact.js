@@ -69,6 +69,24 @@ const createTransporter = () => {
 app.post('/api/contact', limiter, async (req, res) => {
   try {
     const { name, email, message, language, recaptchaToken } = req.body;
+    
+    // Debug: Log received data (without sensitive info)
+    console.log('Contact form submission:', {
+      name: name ? 'provided' : 'missing',
+      email: email ? 'provided' : 'missing',
+      message: message ? `length: ${message.length}` : 'missing',
+      language: language || 'not provided',
+      recaptchaToken: recaptchaToken ? `provided (${recaptchaToken.substring(0, 20)}...)` : 'missing'
+    });
+    
+    // Debug: Log received data (without sensitive info)
+    console.log('Contact form submission:', {
+      name: name ? 'provided' : 'missing',
+      email: email ? 'provided' : 'missing',
+      message: message ? `length: ${message.length}` : 'missing',
+      language: language || 'not provided',
+      recaptchaToken: recaptchaToken ? `provided (${recaptchaToken.substring(0, 20)}...)` : 'missing'
+    });
 
     // Validation
     if (!name || !email || !message) {
@@ -111,44 +129,58 @@ app.post('/api/contact', limiter, async (req, res) => {
     if (!recaptchaSecretKey) {
       console.warn('RECAPTCHA_SECRET_KEY not set. Skipping reCAPTCHA verification.');
     } else {
-      if (!recaptchaToken) {
-        return res.status(400).json({ 
-          error: 'reCAPTCHA verification is required.' 
-        });
+      // reCAPTCHA token kontrolü - eğer token yoksa ve production değilse uyarı ver
+      if (!recaptchaToken || recaptchaToken.trim() === '') {
+        console.error('reCAPTCHA token missing or empty. Received:', recaptchaToken);
+        // Production'da zorunlu, development'ta uyarı
+        if (process.env.NODE_ENV === 'production') {
+          return res.status(400).json({ 
+            error: 'reCAPTCHA verification is required.' 
+          });
+        } else {
+          console.warn('reCAPTCHA token missing in development mode. Continuing without verification.');
+        }
       }
 
-      // Verify reCAPTCHA token with Google
-      try {
-        const recaptchaVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
-        const verifyResponse = await fetch(recaptchaVerifyUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `secret=${recaptchaSecretKey}&response=${recaptchaToken}`,
-        });
+      // Verify reCAPTCHA token with Google (only if token is provided)
+      if (recaptchaToken && recaptchaToken.trim() !== '') {
+        try {
+          const recaptchaVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
+          const verifyResponse = await fetch(recaptchaVerifyUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `secret=${recaptchaSecretKey}&response=${recaptchaToken}`,
+          });
 
-        const verifyData = await verifyResponse.json();
+          const verifyData = await verifyResponse.json();
 
-        if (!verifyData.success) {
-          console.error('reCAPTCHA verification failed:', verifyData['error-codes']);
-          return res.status(400).json({ 
-            error: 'reCAPTCHA verification failed. Please try again.' 
+          if (!verifyData.success) {
+            console.error('reCAPTCHA verification failed:', verifyData['error-codes']);
+            return res.status(400).json({ 
+              error: 'reCAPTCHA verification failed. Please try again.' 
+            });
+          }
+
+          // Optional: Check score for reCAPTCHA v3 (if using v3)
+          // For v2, success is enough
+          if (verifyData.score !== undefined && verifyData.score < 0.5) {
+            console.warn('reCAPTCHA score too low:', verifyData.score);
+            return res.status(400).json({ 
+              error: 'reCAPTCHA verification failed. Please try again.' 
+            });
+          }
+          
+          console.log('✅ reCAPTCHA verified successfully. Score:', verifyData.score);
+        } catch (recaptchaError) {
+          console.error('Error verifying reCAPTCHA:', recaptchaError);
+          return res.status(500).json({ 
+            error: 'Failed to verify reCAPTCHA. Please try again later.' 
           });
         }
-
-        // Optional: Check score for reCAPTCHA v3 (if using v3)
-        // For v2, success is enough
-        if (verifyData.score !== undefined && verifyData.score < 0.5) {
-          return res.status(400).json({ 
-            error: 'reCAPTCHA verification failed. Please try again.' 
-          });
-        }
-      } catch (recaptchaError) {
-        console.error('Error verifying reCAPTCHA:', recaptchaError);
-        return res.status(500).json({ 
-          error: 'Failed to verify reCAPTCHA. Please try again later.' 
-        });
+      } else {
+        console.warn('reCAPTCHA token not provided, skipping verification');
       }
     }
 
