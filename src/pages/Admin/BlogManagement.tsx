@@ -13,6 +13,7 @@ const BlogEditorAdmin = React.lazy(() => import('../../features/admin/components
 
 const AdminBlogManagement: React.FC = () => {
   const { t } = useTranslation();
+  const { user } = useAuthStore();
   const [searchParams, setSearchParams] = useSearchParams();
   const [showEditor, setShowEditor] = useState(false);
   const [editingPost, setEditingPost] = useState<string | null>(null);
