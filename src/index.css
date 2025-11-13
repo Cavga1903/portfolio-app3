@@ -4,14 +4,24 @@ html {
     /* scrollbar-gutter: stable; */ /* Opera'da çalışmıyor */
     overflow-y: scroll; /* Her zaman scrollbar göster - kesin çözüm */
     /* iPhone Safe Area Support */
-    background-color: #0F172A; /* Sitenin koyu arkaplan rengi */
+    background-color: #ffffff; /* Light tema arkaplan rengi */
     /* View Transitions API support */
     view-transition-name: root;
   }
 
+/* Dark theme background */
+html.dark {
+  background-color: #0F172A; /* Dark tema arkaplan rengi */
+}
+
 /* iPhone Safe Area Support */
 body {
-  background-color: #0F172A; /* Sitenin koyu arkaplan rengi */
+  background-color: #ffffff; /* Light tema arkaplan rengi */
+}
+
+/* Dark theme body background */
+body.dark {
+  background-color: #0F172A; /* Dark tema arkaplan rengi */
 }
 
 /* Safe Area Container - Ana kapsayıcı için */

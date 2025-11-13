@@ -185,13 +185,13 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <nav className="bg-gray-800/90 backdrop-blur-sm fixed z-50 border-b border-gray-700/50 w-full top-0 left-0 right-0">
+    <nav className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm fixed z-50 border-b border-gray-200/50 dark:border-gray-700/50 w-full top-0 left-0 right-0">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           {/* Logo - Left Side */}
           <a
             href="#hero"
-            className="flex items-center gap-2 text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 group"
+            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-colors duration-300 group"
             onClick={(e) => {
               e.preventDefault();
               smoothScrollTo("hero");
@@ -207,7 +207,7 @@ const Navbar: React.FC = () => {
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -220,7 +220,7 @@ const Navbar: React.FC = () => {
             {/* Language Selector */}
             <button
               onClick={cycleToNextLanguage}
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
               aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
               title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
             >
@@ -232,7 +232,7 @@ const Navbar: React.FC = () => {
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className="text-sm text-gray-300 hover:text-white cursor-pointer transition-all duration-300 relative group px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-all duration-300 relative group px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
                 onClick={(e) => {
                   e.preventDefault();
                   smoothScrollTo(link.id);
@@ -253,7 +253,7 @@ const Navbar: React.FC = () => {
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="GitHub"
               onClick={() => trackClick('github', 'social_link', 'GitHub')}
             >
@@ -274,7 +274,7 @@ const Navbar: React.FC = () => {
             {/* Dark Mode Toggle - Mobile */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -287,7 +287,7 @@ const Navbar: React.FC = () => {
             {/* Language Selector - Mobile */}
             <button
               onClick={cycleToNextLanguage}
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95"
               aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
               title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
             >
@@ -298,7 +298,7 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-controls="mobile-menu"
               aria-expanded={isMenuOpen}
               aria-label="Toggle menu"
@@ -321,19 +321,19 @@ const Navbar: React.FC = () => {
         >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           />
           
           {/* Menu Panel */}
-          <div className="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-md border-b border-gray-700/50 shadow-xl">
+          <div className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-xl">
             {/* Header */}
-            <div className="px-4 py-3 border-b border-gray-700/50">
+              <div className="px-4 py-3 border-b border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-between">
                 {/* Logo */}
                 <a
                   href="#hero"
-                  className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300"
+                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
                   onClick={(e) => {
                     e.preventDefault();
                     setIsMenuOpen(false);
@@ -348,7 +348,7 @@ const Navbar: React.FC = () => {
                 {/* Close Button */}
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200"
+                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200"
                   aria-label="Close menu"
                 >
                   <HiX className="w-6 h-6" />
@@ -362,7 +362,7 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.id}
                   href={`#${link.id}`}
-                  className="block px-3 py-2.5 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 relative group"
+                  className="block px-3 py-2.5 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 relative group"
                   onClick={(e) => {
                     e.preventDefault();
                     setIsMenuOpen(false);
@@ -381,14 +381,14 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Footer Actions */}
-            <div className="px-4 py-3 border-t border-gray-700/50">
+              <div className="px-4 py-3 border-t border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center gap-3">
                 {/* GitHub Icon */}
                 <a
                   href="https://github.com/Cavga1903"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200"
+                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200"
                   aria-label="GitHub"
                   onClick={() => {
                     setIsMenuOpen(false);
