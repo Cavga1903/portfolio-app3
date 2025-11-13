@@ -1,141 +1,141 @@
 {
-  "pageTitle": "Tolga Çavga | Frontend Developer - Portfolio",
+  "pageTitle": "Tolga Çavga | Frontend-utvikler - Portfolio",
   "nav": {
-    "home": "Home",
-    "about": "About",
-    "technologies": "Technologies",
-    "services": "Services",
+    "home": "Hjem",
+    "about": "Om meg",
+    "technologies": "Teknologier",
+    "services": "Tjenester",
     "projects": "Portfolio",
-    "contact": "Contact",
-    "blog": "Blog"
+    "contact": "Kontakt",
+    "blog": "Blogg"
   },
   "hero": {
-    "greeting": "Hello, I'm Tolga! 👋",
-    "description": "As a Frontend Developer, I build creative and modern web projects.",
-    "ctaAbout": "Learn More About Me",
-    "ctaProjects": "View My Projects",
+    "greeting": "Hei, jeg er Tolga! 👋",
+    "description": "Som Frontend-utvikler bygger jeg kreative og moderne nettprosjekter.",
+    "ctaAbout": "Lær mer om meg",
+    "ctaProjects": "Se prosjektene mine",
     "typing": {
-      "frontendDeveloper": "Frontend Developer",
-      "reactSpecialist": "React Specialist",
-      "uiuxEnthusiast": "UI/UX Enthusiast",
-      "creativeCoder": "Creative Coder"
+      "frontendDeveloper": "Frontend-utvikler",
+      "reactSpecialist": "React-spesialist",
+      "uiuxEnthusiast": "UI/UX-entusiast",
+      "creativeCoder": "Kreativ koder"
     }
   },
-    "modal": {
-      "clickOutsideToClose": "Click outside to close",
-      "technologiesUsed": "Technologies Used",
-      "projectOverview": "Project Overview",
-      "keyFeatures": "Key Features",
-      "challenges": "Challenges",
-      "solutions": "Solutions"
-    },
+  "modal": {
+    "clickOutsideToClose": "Klikk utenfor for å lukke",
+    "technologiesUsed": "Brukte teknologier",
+    "projectOverview": "Prosjektoversikt",
+    "keyFeatures": "Nøkkelfunksjoner",
+    "challenges": "Utfordringer",
+    "solutions": "Løsninger"
+  },
   "about": {
-    "title": "About Me",
+    "title": "Om meg",
     "name": "Tolga Çavga",
-    "role": "Frontend Developer",
-    "githubPhotoAlt": "GitHub Profile Photo",
-    "developerEmojiAlt": "Developer Emoji",
-    "description": "Hello! I'm Tolga. I entered the world of software development with great passion. As a Frontend Developer, I enjoy creating creative and user-friendly web applications. In my free time, I'm interested in learning new technologies, reading books, and doing sports.",
+    "role": "Frontend-utvikler",
+    "githubPhotoAlt": "GitHub-profilbilde",
+    "developerEmojiAlt": "Utvikler-emoji",
+    "description": "Hei! Jeg er Tolga. Jeg kom inn i programvareutviklingsverdenen med stor lidenskap. Som Frontend-utvikler liker jeg å lage kreative og brukervennlige nettapplikasjoner. På fritiden er jeg interessert i å lære nye teknologier, lese bøker og drive med sport.",
     "stats": {
       "focus": {
-        "label": "Focus",
-        "value": "Frontend Dev"
+        "label": "Fokus",
+        "value": "Frontend-utvikling"
       },
       "passion": {
-        "label": "Passion",
-        "value": "Innovation"
+        "label": "Lidenskap",
+        "value": "Innovasjon"
       },
       "love": {
-        "label": "Love",
-        "value": "Clean Code"
+        "label": "Kjærlighet",
+        "value": "Ren kode"
       }
     },
     "softSkills": {
-      "title": "Professional Competencies",
+      "title": "Profesjonelle kompetanser",
       "corporate": {
-        "title": "Corporate Experience",
-        "description": "Experience working in large teams and managing complex projects"
+        "title": "Bedriftserfaring",
+        "description": "Erfaring med å jobbe i store team og administrere komplekse prosjekter"
       },
       "learning": {
-        "title": "Fast Learning",
-        "description": "Ability to quickly learn new technologies and apply them in projects"
+        "title": "Rask læring",
+        "description": "Evne til raskt å lære nye teknologier og anvende dem i prosjekter"
       },
       "teamwork": {
-        "title": "Teamwork",
-        "description": "Experience working in different roles and team leadership"
+        "title": "Teamarbeid",
+        "description": "Erfaring med å jobbe i forskjellige roller og teamledelse"
       }
     }
   },
   "experience": {
-    "title": "Experience & Education",
+    "title": "Erfaring og utdanning",
     "skills": {
       "upwork": ["React Native", "REST API", "Supabase", "Tailwind CSS", "Firebase", "JWT"],
-      "turkcell": ["Customer Service", "Problem Solving", "Communication"],
+      "turkcell": ["Kundeservice", "Problemløsing", "Kommunikasjon"],
       "siliconmade": ["React", "React Native", "REST API", "Supabase", "Tailwind CSS", "Git"],
-      "concentrix": ["Salesforce CRM", "Customer Satisfaction", "Banking"],
-      "izmir": ["Hardware & Software", "System Administration", "Technical Support", "Teamwork"],
-      "uopeople": ["Computer Science", "Algorithms", "Data Structures"],
-      "anadolu": ["Computer Programming", "Software Development"]
+      "concentrix": ["Salesforce CRM", "Kundetilfredshet", "Banking"],
+      "izmir": ["Maskinvare og programvare", "Systemadministrasjon", "Teknisk støtte", "Teamarbeid"],
+      "uopeople": ["Informatikk", "Algoritmer", "Datastrukturer"],
+      "anadolu": ["Dataprogrammering", "Programvareutvikling"]
     },
     "turkcell": {
-      "title": "Customer Service Representative",
+      "title": "Kundeservicerepresentant",
       "company": "Turkcell Global Bilgi",
-      "location": "Bornova, Izmir, Türkiye",
+      "location": "Bornova, Izmir, Tyrkia",
       "period": "August 2025 - November 2025",
-      "description": "Supporting customers and resolving issues at Turkcell Global Bilgi, with a focus on clear communication, problem-solving, and technical support."
+      "description": "Støttet kunder og løste problemer hos Turkcell Global Bilgi, med fokus på tydelig kommunikasjon, problemløsing og teknisk støtte."
     },
     "upwork": {
-      "title": "React Native Developer | Freelance Frontend Developer",
+      "title": "React Native-utvikler | Frilans Frontend-utvikler",
       "company": "Upwork",
-      "location": "İzmir, Türkiye",
-      "period": "July 2025 - Present",
-      "description": "Built cross-platform mobile apps with React Native. Integrated RESTful APIs & Supabase. Designed dynamic UIs with Tailwind CSS, improving user retention by 30%."
+      "location": "İzmir, Tyrkia",
+      "period": "Juli 2025 - Nåværende",
+      "description": "Bygde tverrplattform mobile apper med React Native. Integrerte RESTful APIer og Supabase. Designet dynamiske brukergrensesnitt med Tailwind CSS, og forbedret brukerbevaring med 30%."
     },
     "siliconmade": {
-      "title": "Mobile and Frontend Development Trainee",
+      "title": "Mobil- og Frontend-utvikling lærling",
       "company": "Siliconmade Academy",
       "location": "Online",
-      "period": "February 2025 - July 2025",
-      "description": "Completed 6-month / 184-hour traineeship. Developed real-world projects. Gained hands-on expertise in React, React Native, REST API, Supabase, Tailwind CSS, and Firebase."
+      "period": "Februar 2025 - Juli 2025",
+      "description": "Fullførte 6-måneders / 184-timers læreperiode. Utviklet virkelige prosjekter. Oppnådde praktisk ekspertise i React, React Native, REST API, Supabase, Tailwind CSS og Firebase."
     },
     "izmir": {
-      "title": "Information Technology Intern",
+      "title": "Informasjonsteknologi praktikant",
       "company": "Izmir Metropolitan Municipality",
-      "location": "İzmir, Türkiye",
-      "period": "September 2017 - June 2018",
-      "description": "Assisted in system setup and hardware identification, enhancing operational efficiency. Provided technical support to users, resolving IT issues and improving user satisfaction. Collaborated with team members on troubleshooting, fostering a cooperative work environment."
+      "location": "İzmir, Tyrkia",
+      "period": "September 2017 - Juni 2018",
+      "description": "Assisterte i systemoppsett og maskinvareidentifikasjon, og forbedret operasjonell effektivitet. Ga teknisk støtte til brukere, løste IT-problemer og forbedret brukertilfredshet. Samarbeidet med teammedlemmer om feilsøking, og fremmet et samarbeidsvillig arbeidsmiljø."
     },
     "concentrix": {
-      "title": "Customer Service Representative – Banking Sector",
+      "title": "Kundeservicerepresentant – Banksektor",
       "company": "Concentrix",
-      "location": "İzmir, Türkiye",
-      "period": "December 2022 - October 2024",
-      "description": "Provided front-line banking support. Maintained 95% customer satisfaction. Managed service tickets with Salesforce CRM."
+      "location": "İzmir, Tyrkia",
+      "period": "Desember 2022 - Oktober 2024",
+      "description": "Ga førstelinje bankstøtte. Opprettholdt 95% kundetilfredshet. Administrerte servicemeldinger med Salesforce CRM."
     },
     "uopeople": {
-      "title": "Bachelor of Science, Computer Science",
+      "title": "Bachelor of Science, Informatikk",
       "company": "University of the People",
       "location": "Online",
-      "period": "June 2025 - In Progress",
-      "description": "Currently pursuing a Bachelor of Science in Computer Science. Studying algorithms, data structures, and software engineering principles."
+      "period": "Juni 2025 - Pågår",
+      "description": "Studerer for tiden Bachelor of Science i Informatikk. Studerer algoritmer, datastrukturer og programvareutviklingsprinsipper."
     },
     "anadolu": {
-      "title": "Associate's Degree, Computer Programming",
+      "title": "Associate's Degree, Dataprogrammering",
       "company": "Anadolu University",
-      "location": "Eskişehir, Türkiye",
-      "period": "In Progress",
-      "description": "Currently pursuing Associate's Degree in Computer Programming. Learning programming fundamentals and software development processes."
+      "location": "Eskişehir, Tyrkia",
+      "period": "Pågår",
+      "description": "Studerer for tiden Associate's Degree i Dataprogrammering. Lærer programmeringsgrunnleggende og programvareutviklingsprosesser."
     }
   },
   "technologies": {
-    "title": "Creativity needs a lot of tools",
-    "subtitle": "Have a lot of tools in my toolbox, and i'm always learning new ones.",
+    "title": "Kreativitet trenger mange verktøy",
+    "subtitle": "Har mange verktøy i verktøykassen min, og jeg lærer alltid nye.",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
       "database": "Database",
-      "tools": "Tools",
-      "languages": "Languages"
+      "tools": "Verktøy",
+      "languages": "Språk"
     },
     "react": "React.js",
     "javascript": "JavaScript",
@@ -156,347 +156,347 @@
     "docker": "Docker",
     "opengraph": "OpenGraph",
     "googleAnalytics": "Google Analytics",
-    "turkish": "Turkish",
-    "english": "English",
-    "german": "German",
+    "turkish": "Tyrkisk",
+    "english": "Engelsk",
+    "german": "Tysk",
     "descriptions": {
       "react": "react & native & next",
-      "typescript": "type-safe & modern",
-      "expo": "mobile & cross-platform",
-      "tailwind": "utility-first & responsive",
-      "html": "semantic & accessible",
-      "css": "modern & animations",
-      "nextjs": "SSR & SSG & API routes",
+      "typescript": "typesikker & moderne",
+      "expo": "mobil & tverrplattform",
+      "tailwind": "utility-first & responsiv",
+      "html": "semantisk & tilgjengelig",
+      "css": "moderne & animasjoner",
+      "nextjs": "SSR & SSG & API-ruter",
       "nodejs": "runtime & backend",
       "express": "REST API & middleware",
-      "postgresql": "relational & ACID",
-      "git": "version control & collaboration",
-      "redis": "caching & sessions",
+      "postgresql": "relasjonell & ACID",
+      "git": "versjonskontroll & samarbeid",
+      "redis": "caching & sesjoner",
       "figma": "design & prototyping",
       "vercel": "deployment & hosting",
-      "docker": "containers & CI/CD",
-      "googleAnalytics": "tracking & insights",
-      "turkish": "native speaker",
-      "english": "professional",
-      "german": "beginner"
+      "docker": "containere & CI/CD",
+      "googleAnalytics": "sporing & innsikt",
+      "turkish": "morsmål",
+      "english": "profesjonell",
+      "german": "nybegynner"
     }
   },
   "certificates": {
-    "title": "Certificates & Achievements",
-    "subtitle": "Certifications and achievements earned during my learning journey",
+    "title": "Sertifikater og prestasjoner",
+    "subtitle": "Sertifiseringer og prestasjoner oppnådd under min læringsreise",
     "skills": {
-      "siliconmade": ["React", "React Native", "Mobile Development"],
+      "siliconmade": ["React", "React Native", "Mobilutvikling"],
       "frontend": ["HTML", "CSS", "JavaScript"],
-      "react": ["React", "Components", "Hooks"],
-      "responsive": ["Responsive Design", "Mobile First", "CSS Grid"],
+      "react": ["React", "Komponenter", "Hooks"],
+      "responsive": ["Responsivt design", "Mobile First", "CSS Grid"],
       "javascript": ["JavaScript", "ES6+", "Async/Await"],
-      "git": ["Git", "GitHub", "Version Control"]
+      "git": ["Git", "GitHub", "Versjonskontroll"]
     },
     "siliconmade": {
-      "title": "Mobile & Frontend Development Certificate",
+      "title": "Mobil- og Frontend-utvikling sertifikat",
       "issuer": "Siliconmade Academy",
-      "date": "July 2025",
-      "description": "184-hour intensive training program. Mobile app development with React and React Native."
+      "date": "Juli 2025",
+      "description": "184-timers intensivt opplæringsprogram. Mobilapputvikling med React og React Native."
     },
     "frontend": {
-      "title": "Frontend Development Fundamentals",
-      "issuer": "Online Learning Platform",
+      "title": "Frontend-utvikling grunnleggende",
+      "issuer": "Online læringsplattform",
       "date": "2024",
-      "description": "Comprehensive training covering HTML, CSS, and JavaScript fundamentals."
+      "description": "Omfattende opplæring som dekker HTML, CSS og JavaScript-grunnleggende."
     },
     "react": {
-      "title": "React.js Mastery",
-      "issuer": "Online Learning Platform",
+      "title": "React.js mestring",
+      "issuer": "Online læringsplattform",
       "date": "2024",
-      "description": "Advanced training in React components, hooks, and state management."
+      "description": "Avansert opplæring i React-komponenter, hooks og tilstandshåndtering."
     },
     "responsive": {
-      "title": "Responsive Web Design",
-      "issuer": "Online Learning Platform",
+      "title": "Responsivt nettdesign",
+      "issuer": "Online læringsplattform",
       "date": "2024",
-      "description": "Mobile-first approach and responsive design principles."
+      "description": "Mobile-first tilnærming og responsivt designprinsipper."
     },
     "javascript": {
-      "title": "Modern JavaScript (ES6+)",
-      "issuer": "Online Learning Platform",
+      "title": "Moderne JavaScript (ES6+)",
+      "issuer": "Online læringsplattform",
       "date": "2024",
-      "description": "ES6+ features, async/await, and modern JavaScript techniques."
+      "description": "ES6+ funksjoner, async/await og moderne JavaScript-teknikker."
     },
     "git": {
-      "title": "Git & GitHub Mastery",
-      "issuer": "Online Learning Platform",
+      "title": "Git & GitHub mestring",
+      "issuer": "Online læringsplattform",
       "date": "2024",
-      "description": "Version control, branching strategies, and collaborative development."
+      "description": "Versjonskontroll, grenestrategier og samarbeidsutvikling."
     },
     "stats": {
-      "certificates": "Certificates",
-      "hours": "Training Hours",
-      "projects": "Projects",
-      "experience": "Years Experience"
+      "certificates": "Sertifikater",
+      "hours": "Opplæringstimer",
+      "projects": "Prosjekter",
+      "experience": "Års erfaring"
     }
   },
   "services": {
-    "title": "My Services",
-    "subtitle": "Creative and user-friendly web solutions with modern technologies",
-    "b2b": "Business Services",
-    "b2c": "Personal Services",
-    "cta": "Want to work with me on your project?",
-    "contactButton": "Get In Touch",
+    "title": "Mine tjenester",
+    "subtitle": "Kreative og brukervennlige nettløsninger med moderne teknologier",
+    "b2b": "Bedriftstjenester",
+    "b2c": "Personlige tjenester",
+    "cta": "Vil du jobbe med meg på prosjektet ditt?",
+    "contactButton": "Ta kontakt",
     "corporate": {
-      "title": "Corporate Website",
-      "description": "Modern, professional and responsive corporate websites. Secure and scalable solutions with React and TypeScript."
+      "title": "Bedriftsnettsted",
+      "description": "Moderne, profesjonelle og responsive bedriftsnettsteder. Sikre og skalerbare løsninger med React og TypeScript."
     },
     "landing": {
-      "title": "Landing Page",
-      "description": "High-conversion landing pages that load fast and are SEO-friendly. Impressive animations with Framer Motion."
+      "title": "Landingsside",
+      "description": "Høykonverterende landingssider som laster raskt og er SEO-vennlige. Imponerende animasjoner med Framer Motion."
     },
     "ecommerce": {
-      "title": "E-Commerce Frontend",
-      "description": "User-friendly e-commerce interfaces. Payment integrations, product catalogs and cart management."
+      "title": "E-handel Frontend",
+      "description": "Brukervennlige e-handelgrensesnitt. Betalingsintegrasjoner, produktkataloger og handlekurvadministrasjon."
     },
     "dashboard": {
-      "title": "Admin Dashboard",
-      "description": "Interactive dashboards for data-driven decision making. Charts, tables and real-time updates."
+      "title": "Admin-dashboard",
+      "description": "Interaktive dashboards for datadrevet beslutningstaking. Diagrammer, tabeller og sanntidsoppdateringer."
     },
     "redesign": {
-      "title": "Website Redesign",
-      "description": "Renew your existing website with modern technologies. Performance optimization and UX improvements."
+      "title": "Nettsted redesign",
+      "description": "Forny ditt eksisterende nettsted med moderne teknologier. Ytelsesoptimalisering og UX-forbedringer."
     },
     "responsive": {
-      "title": "Responsive Design",
-      "description": "Responsive websites that look perfect on mobile, tablet and desktop. Mobile-first approach."
+      "title": "Responsivt design",
+      "description": "Responsive nettsteder som ser perfekte ut på mobil, nettbrett og desktop. Mobile-first tilnærming."
     },
     "portfolio": {
-      "title": "Portfolio Website",
-      "description": "Personal portfolio and resume websites. Stand out with modern design, animations and SEO optimization."
+      "title": "Portfolio-nettsted",
+      "description": "Personlige portfolio- og CV-nettsteder. Skill deg ut med moderne design, animasjoner og SEO-optimalisering."
     },
     "smallBusiness": {
-      "title": "Small Business Website",
-      "description": "Affordable, effective websites for local businesses. Google My Business integration and local SEO."
+      "title": "Småbedriftsnettsted",
+      "description": "Rimelige, effektive nettsteder for lokale bedrifter. Google My Business-integrasjon og lokal SEO."
     },
     "restaurant": {
-      "title": "Restaurant/Cafe Website",
-      "description": "Restaurant websites with digital menu, reservation system and photo gallery. QR code menu support."
+      "title": "Restaurant/Kafé-nettsted",
+      "description": "Restaurantnettsteder med digital meny, reservasjonssystem og fotogalleri. QR-kode meny-støtte."
     },
     "personal": {
-      "title": "Personal Website",
-      "description": "Custom designed websites for blog, resume or personal brand. Content management and social media integration."
+      "title": "Personlig nettsted",
+      "description": "Tilpassede designede nettsteder for blogg, CV eller personlig merkevare. Innholdsadministrasjon og sosiale medier-integrasjon."
     }
   },
   "projects": {
-    "title": "My Projects",
-    "subtitle": "Projects I developed using modern web technologies",
-    "details": "Details",
-    "tech": "Technologies:",
+    "title": "Mine prosjekter",
+    "subtitle": "Prosjekter jeg utviklet med moderne nett-teknologier",
+    "details": "Detaljer",
+    "tech": "Teknologier:",
     "github": "GitHub",
     "demo": "Demo",
     "liveDemo": "Live Demo",
-    "livePreview": "Live Preview",
-    "clickToViewDetails": "Click to view details",
+    "livePreview": "Live forhåndsvisning",
+    "clickToViewDetails": "Klikk for å se detaljer",
     "roles": {
-      "fullStack": "Full Stack Developer",
-      "frontend": "Frontend Developer",
-      "backend": "Backend Developer"
+      "fullStack": "Full Stack-utvikler",
+      "frontend": "Frontend-utvikler",
+      "backend": "Backend-utvikler"
     },
     "durations": {
-      "week": "{{count}} week",
-      "weeks": "{{count}} weeks",
-      "month": "{{count}} month",
-      "months": "{{count}} months"
+      "week": "{{count}} uke",
+      "weeks": "{{count}} uker",
+      "month": "{{count}} måned",
+      "months": "{{count}} måneder"
     },
     "items": {
       "iot": {
-        "title": "IoT Device Simulator",
-        "description": "IoT device simulator developed with Node.js, Express, Authentication, Statistics & Multi-language Support. Features Docker support and QR code generation.",
-        "longDescription": "Web application that simulates IoT devices. Real-time data visualization and QR code integration.",
-        "features": ["Real-time data visualization", "QR code integration", "Docker containerization", "WebSocket connection"],
-        "duration": "1 month",
-        "role": "Backend Developer"
+        "title": "IoT-enhetssimulator",
+        "description": "IoT-enhetssimulator utviklet med Node.js, Express, autentisering, statistikk og flerspråklig støtte. Har Docker-støtte og QR-kodegenerering.",
+        "longDescription": "Nettapplikasjon som simulerer IoT-enheter. Sanntidsdatavisualisering og QR-kodeintegrasjon.",
+        "features": ["Sanntidsdatavisualisering", "QR-kodeintegrasjon", "Docker-containerisering", "WebSocket-tilkobling"],
+        "duration": "1 måned",
+        "role": "Backend-utvikler"
       },
       "todo": {
-        "title": "Todo App (Instagram Style)",
-        "description": "Modern todo application developed with Instagram-like interface. Built using React and modern web technologies.",
-        "longDescription": "Task management application. CRUD operations and local storage integration.",
-        "features": ["Add/delete tasks", "Status updates", "Local storage", "Responsive design"],
-        "duration": "1 week",
-        "role": "Frontend Developer"
+        "title": "Todo-app (Instagram-stil)",
+        "description": "Moderne todo-applikasjon utviklet med Instagram-lignende grensesnitt. Bygget med React og moderne nett-teknologier.",
+        "longDescription": "Oppgavestyringsapplikasjon. CRUD-operasjoner og lokal lagringsintegrasjon.",
+        "features": ["Legg til/slett oppgaver", "Statusoppdateringer", "Lokal lagring", "Responsivt design"],
+        "duration": "1 uke",
+        "role": "Frontend-utvikler"
       },
       "workshop": {
         "title": "Workshop Tracker",
-        "description": "Web application developed for workshop and event tracking. Features participant management and event organization capabilities.",
-        "longDescription": "Workshop and event tracking system. Modern platform where participants can register and view event details.",
-        "features": ["User registration system", "Event management", "Real-time updates", "Admin panel"],
-        "duration": "1.5 months",
-        "role": "Full Stack Developer"
+        "description": "Nettapplikasjon utviklet for workshop- og arrangementssporing. Har deltakeradministrasjon og arrangementorganiseringsfunksjoner.",
+        "longDescription": "Workshop- og arrangementssporingssystem. Moderne plattform der deltakere kan registrere seg og se arrangementdetaljer.",
+        "features": ["Brukerregistreringssystem", "Arrangementsadministrasjon", "Sanntidsoppdateringer", "Adminpanel"],
+        "duration": "1,5 måneder",
+        "role": "Full Stack-utvikler"
       },
       "productManager": {
         "title": "React Supabase Product Manager",
-        "description": "Product management system developed with Supabase backend. Features CRUD operations and real-time data synchronization.",
-        "longDescription": "Product management system. CRUD operations and user authentication with Supabase backend.",
-        "features": ["Product CRUD operations", "User authentication", "Supabase integration", "Real-time updates"],
-        "duration": "3 weeks",
-        "role": "Full Stack Developer"
+        "description": "Produktadministrasjonssystem utviklet med Supabase-backend. Har CRUD-operasjoner og sanntidsdatasynkronisering.",
+        "longDescription": "Produktadministrasjonssystem. CRUD-operasjoner og brukerautentisering med Supabase-backend.",
+        "features": ["Produkt CRUD-operasjoner", "Brukerautentisering", "Supabase-integrasjon", "Sanntidsoppdateringer"],
+        "duration": "3 uker",
+        "role": "Full Stack-utvikler"
       },
       "grocery": {
-        "title": "Online Grocery App",
-        "description": "Online marketplace application developed as an e-commerce platform. Features cart management and payment integration.",
-        "longDescription": "Online marketplace application. Sales of food products and delivery tracking.",
-        "features": ["Product categories", "Search and filtering", "Delivery tracking", "User accounts"],
-        "duration": "2.5 weeks",
-        "role": "Full Stack Developer"
+        "title": "Online dagligvareapp",
+        "description": "Online markedsplassapplikasjon utviklet som e-handelsplattform. Har handlekurvadministrasjon og betalingsintegrasjon.",
+        "longDescription": "Online markedsplassapplikasjon. Salg av matvarer og leveringssporing.",
+        "features": ["Produktkategorier", "Søk og filtrering", "Leveringssporing", "Brukerkontoer"],
+        "duration": "2,5 uker",
+        "role": "Full Stack-utvikler"
       },
       "productList": {
-        "title": "Product List (Enhanced)",
-        "description": "Product list application equipped with advanced features. Features filtering, search, and categorization capabilities."
+        "title": "Produktliste (utvidet)",
+        "description": "Produktlisteapplikasjon utstyrt med avanserte funksjoner. Har filtrering, søk og kategoriseringsfunksjoner."
       },
       "paymentForm": {
-        "title": "Payment Form",
-        "description": "Form application developed for secure payment transactions. Features form validation and user-friendly interface."
+        "title": "Betalingsskjema",
+        "description": "Skjemaapplikasjon utviklet for sikre betalingstransaksjoner. Har skjemavalidering og brukervennlig grensesnitt."
       },
       "payment": {
-        "title": "Payment Form Application",
-        "description": "Payment form application. Form validation and secure payment transactions.",
-        "longDescription": "Secure payment form application developed using modern web technologies. Provides secure payment transactions with user-friendly interface and comprehensive form validation.",
+        "title": "Betalingsskjemaapplikasjon",
+        "description": "Betalingsskjemaapplikasjon. Skjemavalidering og sikre betalingstransaksjoner.",
+        "longDescription": "Sikker betalingsskjemaapplikasjon utviklet med moderne nett-teknologier. Gir sikre betalingstransaksjoner med brukervennlig grensesnitt og omfattende skjemavalidering.",
         "features": [
-          "Form validation",
-          "Secure payment",
-          "Responsive design",
-          "Error handling"
+          "Skjemavalidering",
+          "Sikker betaling",
+          "Responsivt design",
+          "Feilhåndtering"
         ],
         "challenges": [
-          "Secure data processing",
-          "User experience optimization"
+          "Sikker databehandling",
+          "Brukeropplevelseoptimalisering"
         ],
         "solutions": [
-          "Modern validation libraries",
-          "Responsive design principles"
+          "Moderne valideringsbiblioteker",
+          "Responsivt designprinsipper"
         ]
       },
       "exchange": {
-        "title": "Currency Exchange Tracking App",
-        "description": "Currency exchange rate tracking and trading screen. Real-time data and chart visualization.",
-        "longDescription": "Currency exchange rate tracking and trading screen. Real-time data and chart visualization.",
-        "features": ["Real-time exchange rates", "Chart visualization", "Trading simulation", "Responsive design"],
-        "challenges": ["Real-time data integration", "Performance optimization"],
-        "solutions": ["WebSocket connections", "Efficient data caching"],
-        "duration": "1.5 weeks",
-        "role": "Frontend Developer"
+        "title": "Valutavekslingssporingsapp",
+        "description": "Valutakurs-sporing og handelsskjerm. Sanntidsdata og diagramvisualisering.",
+        "longDescription": "Valutakurs-sporing og handelsskjerm. Sanntidsdata og diagramvisualisering.",
+        "features": ["Sanntidsvalutakurser", "Diagramvisualisering", "Handelssimulering", "Responsivt design"],
+        "challenges": ["Sanntidsdataintegrasjon", "Ytelsesoptimalisering"],
+        "solutions": ["WebSocket-tilkoblinger", "Effektiv datacaching"],
+        "duration": "1,5 uker",
+        "role": "Frontend-utvikler"
       },
       "globalIdentity": {
-        "title": "Global Identity",
-        "description": "Global identity verification system. Features multi-platform support and secure authentication capabilities.",
-        "longDescription": "Global identity management system. User profiles and authentication.",
-        "features": ["User profiles", "Authentication", "Security measures", "Multi-language support"],
-        "duration": "2 weeks",
-        "role": "Full Stack Developer"
+        "title": "Global identitet",
+        "description": "Globalt identitetsverifiseringssystem. Har multiplattformstøtte og sikre autentiseringsfunksjoner.",
+        "longDescription": "Globalt identitetsadministrasjonssystem. Brukerprofiler og autentisering.",
+        "features": ["Brukerprofiler", "Autentisering", "Sikkerhetstiltak", "Flerspråklig støtte"],
+        "duration": "2 uker",
+        "role": "Full Stack-utvikler"
       },
       "noteTracker": {
-        "title": "Simple Note Tracking System",
-        "description": "Personal note-taking and tracking system. Features user-friendly interface and efficient note management."
+        "title": "Enkelt notatsporingssystem",
+        "description": "Personlig notat- og sporingssystem. Har brukervennlig grensesnitt og effektiv notatadministrasjon."
       },
       "loginUI": {
-        "title": "Login UI (TypeScript)",
-        "description": "Modern login interface developed with TypeScript. Features responsive design and form validation."
+        "title": "Innloggingsgrensesnitt (TypeScript)",
+        "description": "Moderne innloggingsgrensesnitt utviklet med TypeScript. Har responsivt design og skjemavalidering."
       },
       "nodeNotes": {
-        "title": "Node.js Notes Application",
-        "description": "Note-taking application developed with Node.js backend. Features RESTful API and database integration."
+        "title": "Node.js notatapplikasjon",
+        "description": "Notatapplikasjon utviklet med Node.js-backend. Har RESTful API og databaseintegrasjon."
       },
       "portfolio": {
-        "title": "Personal Portfolio",
-        "description": "Personal portfolio website developed with modern React and TypeScript. Features responsive design and multi-language support.",
-        "longDescription": "Modern and responsive portfolio website. Developed with React, TypeScript and TailwindCSS. Smooth animations with Framer Motion and multi-language support.",
-        "features": ["Responsive design", "Multi-language support (TR, EN, DE, AZ)", "Smooth animations", "SEO optimization", "Dark/Light theme"],
-        "challenges": ["Performance optimization", "Multi-language management", "Responsive design"],
-        "solutions": ["Lazy loading and code splitting", "i18next library", "Mobile-first approach"],
-        "duration": "2 months",
-        "role": "Full Stack Developer"
+        "title": "Personlig Portfolio",
+        "description": "Personlig portfolionettsted utviklet med moderne React og TypeScript. Har responsivt design og flerspråklig støtte.",
+        "longDescription": "Moderne og responsivt portfolionettsted. Utviklet med React, TypeScript og TailwindCSS. Myke animasjoner med Framer Motion og flerspråklig støtte.",
+        "features": ["Responsivt design", "Flerspråklig støtte (TR, EN, DE, AZ)", "Myke animasjoner", "SEO-optimalisering", "Mørk/Lys-tema"],
+        "challenges": ["Ytelsesoptimalisering", "Flerspråklig administrasjon", "Responsivt design"],
+        "solutions": ["Lazy loading og kodesplitting", "i18next-bibliotek", "Mobile-first tilnærming"],
+        "duration": "2 måneder",
+        "role": "Full Stack-utvikler"
       },
       "ecommerce": {
-        "title": "E-commerce Website",
-        "description": "Full-featured e-commerce platform developed with React. Includes cart management, product catalog, and payment system."
+        "title": "E-handelsnettsted",
+        "description": "Fullfunksjonell e-handelsplattform utviklet med React. Inkluderer handlekurvadministrasjon, produktkatalog og betalingssystem."
       },
       "cvPreparation": {
-        "title": "Resume Preparation App",
-        "description": "Web application for dynamic resume creation and PDF download. Features user-friendly interface and template system.",
-        "longDescription": "Web application with dynamic CV creation and PDF download features. User-friendly interface and template system.",
-        "features": ["Dynamic CV creation", "PDF export", "Template system", "Real-time preview"],
-        "duration": "2 weeks",
-        "role": "Frontend Developer"
+        "title": "CV-forberedelsesapp",
+        "description": "Nettapplikasjon for dynamisk CV-opprettelse og PDF-nedlasting. Har brukervennlig grensesnitt og mal-system.",
+        "longDescription": "Nettapplikasjon med dynamisk CV-opprettelse og PDF-nedlastingsfunksjoner. Brukervennlig grensesnitt og mal-system.",
+        "features": ["Dynamisk CV-opprettelse", "PDF-eksport", "Mal-system", "Sanntidsforhåndsvisning"],
+        "duration": "2 uker",
+        "role": "Frontend-utvikler"
       },
       "furniro": {
-        "title": "Furniro E-commerce",
-        "description": "Furniture and home decoration focused e-commerce platform. Modern design and user-friendly interface.",
-        "longDescription": "Furniture e-commerce site. Sales of furniture products with modern design and user-friendly interface.",
-        "features": ["Product catalog", "Cart management", "Payment system", "Responsive design"],
-        "duration": "3 weeks",
-        "role": "Frontend Developer"
+        "title": "Furniro E-handel",
+        "description": "Møbel- og hjeminnredningsfokusert e-handelsplattform. Moderne design og brukervennlig grensesnitt.",
+        "longDescription": "Møbele-handelsside. Salg av møbelprodukter med moderne design og brukervennlig grensesnitt.",
+        "features": ["Produktkatalog", "Handlekurvadministrasjon", "Betalingssystem", "Responsivt design"],
+        "duration": "3 uker",
+        "role": "Frontend-utvikler"
       },
       "exchangeScreen": {
-        "title": "Exchange Rate Screen",
-        "description": "Interactive web application displaying real-time exchange rates. Supports USD, EUR, BTC, ETH."
+        "title": "Valutakursskjerm",
+        "description": "Interaktiv nettapplikasjon som viser sanntidsvalutakurser. Støtter USD, EUR, BTC, ETH."
       },
       "dashboard": {
-        "title": "Financial Dashboard",
-        "description": "Dashboard application developed for stock and crypto tracking. Shows data from companies like NVIDIA, Tesla.",
-        "longDescription": "Analytics dashboard application. Data visualization and reporting system.",
-        "features": ["Data visualization", "Analytics reports", "Interactive charts", "Export functionality"],
-        "duration": "2 weeks",
-        "role": "Frontend Developer"
+        "title": "Finansiell dashboard",
+        "description": "Dashboard-applikasjon utviklet for aksje- og kryptosporing. Viser data fra selskaper som NVIDIA, Tesla.",
+        "longDescription": "Analytisk dashboard-applikasjon. Datavisualisering og rapporteringssystem.",
+        "features": ["Datavisualisering", "Analytiske rapporter", "Interaktive diagrammer", "Eksportfunksjonalitet"],
+        "duration": "2 uker",
+        "role": "Frontend-utvikler"
       },
       "odev": {
-        "title": "Social Media Dashboard",
-        "description": "Dashboard application that tracks multiple social media platforms on a single screen. Modern and responsive design."
+        "title": "Sosiale medier-dashboard",
+        "description": "Dashboard-applikasjon som sporer flere sosiale medier-plattformer på en enkelt skjerm. Moderne og responsivt design."
       }
     }
   },
   "contact": {
-    "title": "Contact",
-    "description": "Get in touch with me! Fill out the form below to send me a direct email.",
+    "title": "Kontakt",
+    "description": "Ta kontakt med meg! Fyll ut skjemaet nedenfor for å sende meg en direkte e-post.",
     "freeQuote": {
-      "title": "Get Free Quote",
-      "description": "I analyze your website and provide recommendations to improve your performance",
+      "title": "Få gratis tilbud",
+      "description": "Jeg analyserer nettstedet ditt og gir anbefalinger for å forbedre ytelsen din",
       "siteAnalysis": {
-        "title": "Site Analysis",
-        "description": "I analyze your website's current SEO status in detail"
+        "title": "Nettstedsanalyse",
+        "description": "Jeg analyserer nettstedets nåværende SEO-status i detalj"
       },
       "performanceReport": {
-        "title": "Performance Report",
-        "description": "Google PageSpeed, Core Web Vitals and technical SEO analysis"
+        "title": "Ytelsesrapport",
+        "description": "Google PageSpeed, Core Web Vitals og teknisk SEO-analyse"
       },
       "optimizationSuggestions": {
-        "title": "Optimization Suggestions",
-        "description": "Concrete recommendations to rank higher in search engines"
+        "title": "Optimaliseringsforslag",
+        "description": "Konkrete anbefalinger for å rangere høyere i søkemotorer"
       },
       "competitorAnalysis": {
-        "title": "Competitor Analysis",
-        "description": "I analyze your competitors and suggest strategic advantages"
+        "title": "Konkurrentanalyse",
+        "description": "Jeg analyserer konkurrentene dine og foreslår strategiske fordeler"
       },
-      "completelyFree": "Completely Free",
-      "completelyFreeDescription": "This analysis and recommendations are completely free. You are under no obligation.",
-      "sendMessageForQuote": "Send a message to get a quote",
-      "exampleMessage": "Hello! I would like to get free support for my website. Can you please do a detailed analysis?"
+      "completelyFree": "Helt gratis",
+      "completelyFreeDescription": "Denne analysen og anbefalingene er helt gratis. Du har ingen forpliktelse.",
+      "sendMessageForQuote": "Send en melding for å få et tilbud",
+      "exampleMessage": "Hei! Jeg vil gjerne få gratis støtte for nettstedet mitt. Kan du vennligst gjøre en detaljert analyse?"
     },
     "form": {
-      "title": "Send a Message",
-      "name": "Your Name",
-      "namePlaceholder": "Enter your name",
-      "email": "Your Email",
-      "emailPlaceholder": "example@email.com",
-      "message": "Your Message",
-      "messagePlaceholder": "Write your message here...",
+      "title": "Send en melding",
+      "name": "Ditt navn",
+      "namePlaceholder": "Skriv inn navnet ditt",
+      "email": "Din e-post",
+      "emailPlaceholder": "eksempel@epost.com",
+      "message": "Din melding",
+      "messagePlaceholder": "Skriv meldingen din her...",
       "send": "Send",
-      "sending": "Sending...",
-      "success": "✅ Your message was sent successfully!",
-      "error": "❌ An error occurred. Please try again.",
+      "sending": "Sender...",
+      "success": "✅ Meldingen din ble sendt!",
+      "error": "❌ En feil oppstod. Vennligst prøv igjen.",
       "errors": {
-        "nameRequired": "Name field is required",
-        "nameMinLength": "Name must be at least 2 characters",
-        "emailRequired": "Email field is required",
-        "emailInvalid": "Please enter a valid email address",
-        "messageRequired": "Message field is required",
-        "messageMinLength": "Message must be at least 10 characters",
-        "messageMaxLength": "Message cannot exceed 1000 characters",
+        "nameRequired": "Navnefeltet er påkrevd",
+        "nameMinLength": "Navnet må være minst 2 tegn",
+        "emailRequired": "E-postfeltet er påkrevd",
+        "emailInvalid": "Vennligst skriv inn en gyldig e-postadresse",
+        "messageRequired": "Meldingsfeltet er påkrevd",
+        "messageMinLength": "Meldingen må være minst 10 tegn",
+        "messageMaxLength": "Meldingen kan ikke overstige 1000 tegn",
         "recaptchaRequired": "Vennligst fullfør reCAPTCHA-verifiseringen",
         "recaptchaExpired": "reCAPTCHA-verifiseringen har utløpt. Vennligst prøv igjen.",
         "recaptchaError": "reCAPTCHA-verifiseringen mislyktes. Vennligst prøv igjen."
@@ -506,131 +506,130 @@
         "notConfigured": "reCAPTCHA er ikke konfigurert. Vennligst kontakt administratoren."
       },
       "captcha": {
-        "label": "Security Verification",
-        "placeholder": "Enter the result",
-        "refresh": "Refresh"
+        "label": "Sikkerhetsverifisering",
+        "placeholder": "Skriv inn resultatet",
+        "refresh": "Oppdater"
       }
     },
-    "or": "or",
-    "email": "Send Email",
+    "or": "eller",
+    "email": "Send e-post",
     "linkedin": "LinkedIn"
   },
   "footer": {
-    "rights": "All Rights Reserved.",
-    "madeWith": "Made with",
-    "by": "by Tolga | Frontend Developer",
-    "downloadCV": "Download Resume",
-    "buyMeACoffee": "Buy Me a Coffee ☕"
+    "rights": "Alle rettigheter forbeholdt.",
+    "madeWith": "Laget med",
+    "by": "av Tolga | Frontend-utvikler",
+    "downloadCV": "Last ned CV",
+    "buyMeACoffee": "Kjøp meg en kaffe ☕"
   },
-  "scrollToTop": "Scroll to top",
+  "scrollToTop": "Scroll til toppen",
   "cv": {
-    "professionalSummary": "Professional Summary",
-    "summaryText": "I develop creative and modern web projects as a Frontend Developer. I create user-friendly applications with React, TypeScript and TailwindCSS. I specialize in cross-platform mobile applications and responsive websites.",
-    "technicalSkills": "Technical Skills",
-    "workExperience": "Work Experience",
-    "education": "Education",
-    "certificates": "Certificates",
-    "languages": "Languages",
-    "generatePDF": "Generate PDF",
-    "printCV": "Print",
-    "turkcellDescription": "I support customers and solve problems at Turkcell Global Bilgi. I specialize in clear communication, problem solving and technical support.",
-    "upworkDescription": "I developed cross-platform mobile applications. I integrated RESTful APIs and Supabase. I designed dynamic UIs with Tailwind CSS, increasing user retention by 30%."
+    "professionalSummary": "Profesjonell sammendrag",
+    "summaryText": "Jeg utvikler kreative og moderne nettprosjekter som Frontend-utvikler. Jeg lager brukervennlige applikasjoner med React, TypeScript og TailwindCSS. Jeg spesialiserer meg på tverrplattform mobile applikasjoner og responsive nettsteder.",
+    "technicalSkills": "Tekniske ferdigheter",
+    "workExperience": "Arbeidserfaring",
+    "education": "Utdanning",
+    "certificates": "Sertifikater",
+    "languages": "Språk",
+    "generatePDF": "Generer PDF",
+    "printCV": "Skriv ut",
+    "turkcellDescription": "Jeg støtter kunder og løser problemer hos Turkcell Global Bilgi. Jeg spesialiserer meg på tydelig kommunikasjon, problemløsing og teknisk støtte.",
+    "upworkDescription": "Jeg utviklet tverrplattform mobile applikasjoner. Jeg integrerte RESTful APIer og Supabase. Jeg designet dynamiske brukergrensesnitt med Tailwind CSS, og økte brukerbevaring med 30%."
   },
   "meta": {
     "home": {
-      "title": "Tolga Çavga | Frontend Developer - Modern Web Applications",
-      "description": "Frontend Developer creating modern web applications with React, TypeScript and TailwindCSS. User-friendly interfaces and performance-focused solutions.",
-      "keywords": "Frontend Developer, React, TypeScript, JavaScript, Web Development, UI/UX, Modern Web"
+      "title": "Tolga Çavga | Frontend-utvikler - Moderne nettapplikasjoner",
+      "description": "Frontend-utvikler som lager moderne nettapplikasjoner med React, TypeScript og TailwindCSS. Brukervennlige grensesnitt og ytelsesfokuserte løsninger.",
+      "keywords": "Frontend-utvikler, React, TypeScript, JavaScript, Nettutvikling, UI/UX, Moderne nett"
     },
     "about": {
-      "title": "About Me | Tolga Çavga - Frontend Developer",
-      "description": "Frontend Developer who stepped into the world of software development with great passion. I develop creative and user-friendly web applications.",
-      "keywords": "About Me, Frontend Developer, Software Developer, Personal Information, Experience"
+      "title": "Om meg | Tolga Çavga - Frontend-utvikler",
+      "description": "Frontend-utvikler som trådte inn i programvareutviklingsverdenen med stor lidenskap. Jeg utvikler kreative og brukervennlige nettapplikasjoner.",
+      "keywords": "Om meg, Frontend-utvikler, Programvareutvikler, Personlig informasjon, Erfaring"
     },
     "projects": {
-      "title": "My Projects | Tolga Çavga - Portfolio",
-      "description": "Projects I developed with React, Node.js and modern web technologies. E-commerce, IoT, management panels and more.",
-      "keywords": "Projects, Portfolio, React Projects, Web Applications, E-commerce, IoT"
+      "title": "Mine prosjekter | Tolga Çavga - Portfolio",
+      "description": "Prosjekter jeg utviklet med React, Node.js og moderne nett-teknologier. E-handel, IoT, administrasjonspaneler og mer.",
+      "keywords": "Prosjekter, Portfolio, React-prosjekter, Nettapplikasjoner, E-handel, IoT"
     },
     "technologies": {
-      "title": "Technologies | Tolga Çavga - My Skills",
-      "description": "Expertise in 20+ technologies across Frontend, Backend, Database and Tools categories. React, TypeScript, Node.js and more.",
-      "keywords": "Technologies, Skills, React, TypeScript, Node.js, Frontend, Backend"
+      "title": "Teknologier | Tolga Çavga - Mine ferdigheter",
+      "description": "Ekspertise i 20+ teknologier på tvers av Frontend, Backend, Database og Verktøy-kategorier. React, TypeScript, Node.js og mer.",
+      "keywords": "Teknologier, Ferdigheter, React, TypeScript, Node.js, Frontend, Backend"
     },
     "contact": {
-      "title": "Contact | Tolga Çavga - Frontend Developer",
-      "description": "Get in touch with me for your projects. I specialize in developing modern web applications and user-friendly interfaces.",
-      "keywords": "Contact, Contact Form, Project Proposal, Web Development, Frontend"
+      "title": "Kontakt | Tolga Çavga - Frontend-utvikler",
+      "description": "Ta kontakt med meg for prosjektene dine. Jeg spesialiserer meg på å utvikle moderne nettapplikasjoner og brukervennlige grensesnitt.",
+      "keywords": "Kontakt, Kontaktskjema, Prosjektforslag, Nettutvikling, Frontend"
     },
     "cv": {
-      "title": "Download Resume | Tolga Çavga - Frontend Developer",
-      "description": "Download Tolga Çavga's current resume. Expert Frontend Developer in React, TypeScript and modern web technologies.",
-      "keywords": "Resume, CV, Frontend Developer, React, TypeScript, Job Application"
+      "title": "Last ned CV | Tolga Çavga - Frontend-utvikler",
+      "description": "Last ned Tolga Çavgas nåværende CV. Ekspert Frontend-utvikler i React, TypeScript og moderne nett-teknologier.",
+      "keywords": "CV, Frontend-utvikler, React, TypeScript, Jobbsøknad"
     }
   },
   "share": {
-    "title": "Share",
-    "shareOn": "Share on",
-    "copyLink": "Copy Link",
-    "linkCopied": "Link copied! ✅"
+    "title": "Del",
+    "shareOn": "Del på",
+    "copyLink": "Kopier lenke",
+    "linkCopied": "Lenke kopiert! ✅"
   },
   "socialProof": {
-    "title": "Follow Me on Social Media",
-    "subtitle": "Follow my projects, stay updated, and connect with me!",
-    "followMe": "Follow",
-    "cta": "Want to stay updated with new projects and content?",
-    "followGitHub": "Follow on GitHub",
-    "connectLinkedIn": "Connect on LinkedIn",
+    "title": "Følg meg på sosiale medier",
+    "subtitle": "Følg prosjektene mine, hold deg oppdatert og kontakt meg!",
+    "followMe": "Følg",
+    "cta": "Vil du holde deg oppdatert med nye prosjekter og innhold?",
+    "followGitHub": "Følg på GitHub",
+    "connectLinkedIn": "Koble til på LinkedIn",
     "github": {
       "stats": "20+ Repos",
-      "description": "Open source projects and code examples"
+      "description": "Åpne kildekode-prosjekter og kodeeksempler"
     },
     "linkedin": {
-      "stats": "500+ Connections",
-      "description": "Professional network and career development"
+      "stats": "500+ Tilkoblinger",
+      "description": "Profesjonelt nettverk og karriereutvikling"
     },
     "instagram": {
-      "description": "Coding tips and daily development content"
+      "description": "Kodingstips og daglig utviklingsinnhold"
     }
   },
   "portfolioShare": {
-    "title": "Like My Portfolio?",
-    "description": "If you enjoyed this portfolio and want to share it with your friends, feel free to use the buttons below. Every share motivates me! 🚀",
-    "shareTitle": "Check out Tolga Çavga's amazing portfolio!",
-    "shareDescription": "Modern and creative frontend developer portfolio - React, TypeScript and more!",
-    "thankYou": "Thank you for your support!"
+    "title": "Liker du porteføljen min?",
+    "description": "Hvis du likte denne porteføljen og vil dele den med vennene dine, bruk gjerne knappene nedenfor. Hver deling motiverer meg! 🚀",
+    "shareTitle": "Sjekk ut Tolga Çavgas fantastiske portefølje!",
+    "shareDescription": "Moderne og kreativ frontend-utvikler portefølje - React, TypeScript og mer!",
+    "thankYou": "Takk for støtten din!"
   },
   "notFound": {
-    "title": "Oops! You Seem Lost! 🗺️",
-    "message": "The page you're looking for might be in a parallel universe... Or it never existed. Who knows? 🤷‍♂️",
-    "funFact": "💡 Fun Fact: You unlocked a secret achievement by finding this 404 page!",
-    "goHome": "Go Home",
-    "goBack": "Go Back",
-    "tip": "Try the Konami code, something might happen..."
+    "title": "Oops! Du ser ut til å være borte! 🗺️",
+    "message": "Siden du leter etter kan være i et parallelt univers... Eller den eksisterte aldri. Hvem vet? 🤷‍♂️",
+    "funFact": "💡 Morsomt faktum: Du låste opp en hemmelig prestasjon ved å finne denne 404-siden!",
+    "goHome": "Gå hjem",
+    "goBack": "Gå tilbake",
+    "tip": "Prøv Konami-koden, noe kan skje..."
   },
   "common": {
     "name": "Tolga Çavga",
-    "role": "Frontend Developer",
-    "resume": "Resume",
-    "developerLogo": "Developer Logo",
-    "closeMenu": "Close Menu",
+    "role": "Frontend-utvikler",
+    "resume": "CV",
+    "developerLogo": "Utviklerlogo",
+    "closeMenu": "Lukk meny",
     "languages": {
-      "turkish": "Turkish",
-      "azerbaijani": "Azerbaijani Turkish",
-      "english": "English",
-      "german": "German"
+      "turkish": "Tyrkisk",
+      "azerbaijani": "Aserbajdsjansk tyrkisk",
+      "english": "Engelsk",
+      "german": "Tysk"
     }
   },
   "projectLike": {
-    "like": "Like project",
-    "unlike": "Unlike project",
-    "dislike": "Dislike project",
-    "removeDislike": "Remove dislike",
-    "liked": "Project liked! ❤️",
-    "unliked": "Like removed",
-    "disliked": "Project disliked 👎",
-    "dislikeRemoved": "Dislike removed",
-    "error": "An error occurred, please try again"
+    "like": "Lik prosjekt",
+    "unlike": "Fjern like",
+    "dislike": "Ikke lik prosjekt",
+    "removeDislike": "Fjern ikke like",
+    "liked": "Prosjekt likt! ❤️",
+    "unliked": "Like fjernet",
+    "disliked": "Prosjekt ikke likt 👎",
+    "dislikeRemoved": "Ikke like fjernet",
+    "error": "En feil oppstod, vennligst prøv igjen"
   }
 }
-
