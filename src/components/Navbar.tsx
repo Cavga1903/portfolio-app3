@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaGithub, FaUser, FaHome, FaBlog, FaSignOutAlt } from "react-icons/fa";
+import { FaGithub, FaUser, FaHome, FaBlog, FaSignOutAlt, FaCog, FaChartLine } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, useMotionValue, useSpring } from "framer-motion";
@@ -75,6 +75,8 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState("hero");
   const { t, i18n } = useTranslation();
@@ -726,6 +728,30 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
         </div>
 
       </div>
+
+      {/* Auth Modals */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => {
+          setShowLoginModal(false);
+          setIsProfileDropdownOpen(false);
+        }}
+        onSwitchToSignup={() => {
+          setShowLoginModal(false);
+          setShowSignupModal(true);
+        }}
+      />
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={() => {
+          setShowSignupModal(false);
+          setIsProfileDropdownOpen(false);
+        }}
+        onSwitchToLogin={() => {
+          setShowSignupModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </nav>
   );
 };
