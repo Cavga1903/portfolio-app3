@@ -5,6 +5,8 @@ html {
     overflow-y: scroll; /* Her zaman scrollbar göster - kesin çözüm */
     /* iPhone Safe Area Support */
     background-color: #0F172A; /* Sitenin koyu arkaplan rengi */
+    /* View Transitions API support */
+    view-transition-name: root;
   }
 
 /* iPhone Safe Area Support */

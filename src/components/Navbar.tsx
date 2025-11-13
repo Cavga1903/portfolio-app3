@@ -72,16 +72,71 @@ const Navbar: React.FC = () => {
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
-  // Dark mode toggle
+  // Dark mode toggle with circle-blur animation
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+    
+    // Check if View Transitions API is supported
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        setIsDarkMode(newMode);
+        if (newMode) {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+      
+      // Inject circle-blur animation styles
+      const styleId = `theme-transition-${Date.now()}`;
+      const style = document.createElement('style');
+      style.id = styleId;
+      
+      const css = `
+        @supports (view-transition-name: root) {
+          ::view-transition-old(root) { 
+            animation: none;
+          }
+          ::view-transition-new(root) {
+            animation: circle-blur-expand 0.5s ease-out;
+            transform-origin: top right;
+            filter: blur(0);
+          }
+          @keyframes circle-blur-expand {
+            from {
+              clip-path: circle(0% at 100% 0%);
+              filter: blur(4px);
+            }
+            to {
+              clip-path: circle(150% at 100% 0%);
+              filter: blur(0);
+            }
+          }
+        }
+      `;
+      
+      style.textContent = css;
+      document.head.appendChild(style);
+      
+      // Clean up animation styles after transition
+      setTimeout(() => {
+        const styleEl = document.getElementById(styleId);
+        if (styleEl) {
+          styleEl.remove();
+        }
+      }, 3000);
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      // Fallback for browsers without View Transitions API
+      setIsDarkMode(newMode);
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
     }
   };
 
