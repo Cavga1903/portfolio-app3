@@ -47,12 +47,13 @@ export const useUIStore = create<UIState>((set) => ({
     }));
     
     // Auto remove after duration
-    if (newToast.duration > 0) {
+    const duration = newToast.duration ?? 5000;
+    if (duration > 0) {
       setTimeout(() => {
         set((state) => ({
           toasts: state.toasts.filter((t) => t.id !== id),
         }));
-      }, newToast.duration);
+      }, duration);
     }
   },
   
@@ -87,13 +88,18 @@ export const useUIStore = create<UIState>((set) => ({
   },
   
   closeAllModals: () => {
-    set((state) => {
-      const closedModals: Record<string, boolean> = {};
-      Object.keys(state.modals).forEach((key) => {
-        closedModals[key] = false;
-      });
-      return { modals: closedModals };
-    });
+    set((state) => ({
+      modals: {
+        login: false,
+        signup: false,
+        ...Object.keys(state.modals).reduce((acc, key) => {
+          if (key !== 'login' && key !== 'signup') {
+            acc[key] = false;
+          }
+          return acc;
+        }, {} as Record<string, boolean>),
+      },
+    }));
   },
   
   // Loading state

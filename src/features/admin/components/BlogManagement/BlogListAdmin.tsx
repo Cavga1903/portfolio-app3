@@ -1,8 +1,8 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { blogService } from '../../../blog/services/blogService';
 import { BlogPost } from '../../../blog/types/blog.types';
 
@@ -13,6 +13,7 @@ interface BlogListAdminProps {
 
 const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) => {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
   const { data: posts, isLoading } = useQuery<BlogPost[]>({
     queryKey: ['blogPosts', searchQuery],
@@ -27,10 +28,16 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => blogService.deletePost(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+    },
+  });
+
   const handleDelete = async (id: string) => {
     if (window.confirm(t('admin.blog.confirmDelete') || 'Are you sure you want to delete this post?')) {
-      await blogService.deletePost(id);
-      // TODO: Invalidate query
+      deleteMutation.mutate(id);
     }
   };
 

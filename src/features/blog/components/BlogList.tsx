@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCalendarAlt, FaTag, FaArrowRight } from 'react-icons/fa';
 import { blogService } from '../services/blogService';
-import { BlogPost } from '../types/blog.types';
 
 interface BlogListProps {
   searchQuery: string;

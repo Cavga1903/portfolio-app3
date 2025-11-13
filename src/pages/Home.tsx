@@ -7,6 +7,7 @@ import SkeletonLoader from '../components/SkeletonLoader';
 import SEOHead from '../components/SEOHead';
 import SocialProof from '../components/SocialProof';
 import PortfolioShareCTA from '../components/PortfolioShareCTA';
+import { LoginModal, SignupModal } from '../features/auth';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { useScrollTracking } from '../hooks/useScrollTracking';
 import { useTimeTracking } from '../hooks/useTimeTracking';
@@ -30,6 +31,8 @@ const Footer = lazy(() => import('../components/Footer'));
 const Home: React.FC = () => {
   const { trackPageView } = useAnalytics();
   const [showDebugPanel, setShowDebugPanel] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
   
   // Initialize all tracking hooks
   useScrollTracking();
@@ -72,7 +75,7 @@ const Home: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
         <ScrollProgress />
-        <Navbar />
+        <Navbar onLoginClick={() => setShowLoginModal(true)} />
         
         <Suspense fallback={<SkeletonLoader type="hero" />}>
           <Hero />
@@ -119,6 +122,25 @@ const Home: React.FC = () => {
         <ScrollToTop 
           onToggleDebugPanel={() => setShowDebugPanel(!showDebugPanel)}
           showDebugPanel={showDebugPanel}
+        />
+        
+        {/* Auth Modals - Rendered at page level, not navbar */}
+        <LoginModal
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          onSwitchToSignup={() => {
+            setShowLoginModal(false);
+            setShowSignupModal(true);
+          }}
+        />
+
+        <SignupModal
+          isOpen={showSignupModal}
+          onClose={() => setShowSignupModal(false)}
+          onSwitchToLogin={() => {
+            setShowSignupModal(false);
+            setShowLoginModal(true);
+          }}
         />
         
         {/* LocalStorage Debug Panel - Only in development */}

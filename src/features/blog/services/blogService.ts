@@ -12,6 +12,7 @@ import {
   Timestamp,
   DocumentData,
   QueryDocumentSnapshot,
+  FieldValue,
 } from 'firebase/firestore';
 import { db } from '../../../lib/firebase/config';
 import { BlogPost } from '../types/blog.types';
@@ -137,7 +138,7 @@ export const blogService = {
   updatePost: async (id: string, post: Partial<BlogPost>): Promise<BlogPost> => {
     try {
       const postRef = doc(db, 'blogPosts', id);
-      const updateData: Record<string, unknown> = {
+      const updateData: Record<string, FieldValue | unknown> = {
         ...post,
         updatedAt: Timestamp.now(),
       };
@@ -150,7 +151,7 @@ export const blogService = {
         updateData.updatedAt = Timestamp.fromDate(new Date(post.updatedAt));
       }
       
-      await updateDoc(postRef, updateData);
+      await updateDoc(postRef, updateData as Record<string, FieldValue>);
       const docSnapshot = await getDoc(postRef);
       
       if (!docSnapshot.exists()) {

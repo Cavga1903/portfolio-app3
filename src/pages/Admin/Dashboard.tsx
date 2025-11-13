@@ -5,9 +5,7 @@ import {
   FaUsers, 
   FaBlog, 
   FaChartLine, 
-  FaEye,
-  FaArrowUp,
-  FaArrowDown
+  FaEye
 } from 'react-icons/fa';
 import { useAuthStore } from '../../app/store/authStore';
 

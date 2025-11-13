@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '../../../app/store/authStore';
 import { useTranslation } from 'react-i18next';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaGoogle, FaGithub } from 'react-icons/fa';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -16,19 +16,92 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   onSwitchToSignup,
 }) => {
   const { t } = useTranslation();
-  const { login, isLoading } = useAuthStore();
+  const { login, loginWithGoogle, isLoading } = useAuthStore();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
+  const [emailError, setEmailError] = React.useState('');
+  const [passwordError, setPasswordError] = React.useState('');
+  const [navbarHeight, setNavbarHeight] = React.useState(64);
+
+  React.useEffect(() => {
+    // Navbar yüksekliğini dinamik olarak hesapla
+    const calculateNavbarHeight = () => {
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        setNavbarHeight(navbar.offsetHeight);
+      }
+    };
+    
+    calculateNavbarHeight();
+    
+    // Modal açıldığında ve window resize olduğunda tekrar hesapla
+    if (isOpen) {
+      window.addEventListener('resize', calculateNavbarHeight);
+      return () => window.removeEventListener('resize', calculateNavbarHeight);
+    }
+  }, [isOpen]);
+
+  const validateEmail = (emailValue: string): boolean => {
+    if (!emailValue) {
+      setEmailError(t('auth.emailRequired') || 'Email is required');
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailValue)) {
+      setEmailError(t('auth.emailInvalid') || 'Please enter a valid email address');
+      return false;
+    }
+    setEmailError('');
+    return true;
+  };
+
+  const validatePassword = (passwordValue: string): boolean => {
+    if (!passwordValue) {
+      setPasswordError(t('auth.passwordRequired') || 'Password is required');
+      return false;
+    }
+    if (passwordValue.length < 6) {
+      setPasswordError(t('auth.passwordTooShort') || 'Password must be at least 6 characters');
+      return false;
+    }
+    setPasswordError('');
+    return true;
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (emailError) {
+      validateEmail(value);
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    if (passwordError) {
+      validatePassword(value);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setEmailError('');
+    setPasswordError('');
+    
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+    
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
     
     try {
       await login(email, password);
       onClose();
-    } catch (err) {
+    } catch {
       setError(t('auth.loginError') || 'Login failed');
     }
   };
@@ -37,95 +110,204 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop - Below navbar */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed left-0 right-0 bottom-0 bg-black/50 backdrop-blur-md z-[9998]"
+            style={{ 
+              pointerEvents: 'auto',
+              top: `${navbarHeight}px` // Navbar yüksekliği kadar
+            }}
           />
           
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed inset-0 z-[10000] flex items-center justify-center p-4 pointer-events-none"
+            style={{ pointerEvents: 'auto' }}
           >
-            <div className="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md p-6 relative">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-6xl overflow-hidden relative border border-gray-200 dark:border-gray-800">
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                className="absolute top-4 right-4 z-10 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-2"
               >
                 <FaTimes className="w-5 h-5" />
               </button>
 
-              {/* Header */}
-              <h2 className="text-2xl font-bold text-white mb-2">
-                {t('auth.login') || 'Login'}
-              </h2>
-              <p className="text-gray-400 mb-6">
-                {t('auth.loginSubtitle') || 'Welcome back!'}
-              </p>
-
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {error && (
-                  <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-sm">
-                    {error}
+              <div className="flex flex-col lg:flex-row min-h-[600px]">
+                {/* Left Side - Illustration */}
+                <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 p-12 flex-col justify-center items-center text-white relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/10"></div>
+                  <div className="relative z-10 text-center">
+                    <div className="text-6xl mb-6">👋</div>
+                    <h2 className="text-4xl font-bold mb-4">
+                      {t('auth.welcomeBack') || 'Welcome Back!'}
+                    </h2>
+                    <p className="text-xl text-white/90">
+                      {t('auth.loginSubtitle') || 'Sign in to continue your journey'}
+                    </p>
                   </div>
-                )}
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    {t('auth.email') || 'Email'}
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    placeholder={t('auth.emailPlaceholder') || 'your@email.com'}
-                  />
+                  {/* Decorative circles */}
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    {t('auth.password') || 'Password'}
-                  </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    placeholder={t('auth.passwordPlaceholder') || '••••••••'}
-                  />
+                {/* Right Side - Form */}
+                <div className="w-full lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                  {/* Header */}
+                  <div className="mb-8">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                      {t('auth.login') || 'Sign In'}
+                    </h2>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {t('auth.loginSubtitle') || 'Enter your credentials to access your account'}
+                    </p>
+                  </div>
+
+                  {/* Form */}
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    {error && (
+                      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+                        {error}
+                      </div>
+                    )}
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('auth.email') || 'Email'}
+                      </label>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={handleEmailChange}
+                        onBlur={() => validateEmail(email)}
+                        className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 transition-all ${
+                          emailError
+                            ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                            : 'border-gray-300 dark:border-gray-700 focus:ring-blue-500 focus:border-transparent'
+                        }`}
+                        placeholder={t('auth.emailPlaceholder') || 'your@email.com'}
+                      />
+                      {emailError && (
+                        <div className="mt-2 flex items-start gap-2 text-sm text-red-600 dark:text-red-400">
+                          <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          <span>{emailError}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('auth.password') || 'Password'}
+                      </label>
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        onBlur={() => validatePassword(password)}
+                        className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 transition-all ${
+                          passwordError
+                            ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                            : 'border-gray-300 dark:border-gray-700 focus:ring-blue-500 focus:border-transparent'
+                        }`}
+                        placeholder={t('auth.passwordPlaceholder') || '••••••••'}
+                      />
+                      {passwordError && (
+                        <div className="mt-2 flex items-start gap-2 text-sm text-red-600 dark:text-red-400">
+                          <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          <span>{passwordError}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Remember Me & Forgot Password */}
+                    <div className="flex items-center justify-between">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        />
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                          {t('auth.rememberMe') || 'Remember me'}
+                        </span>
+                      </label>
+                      <button
+                        type="button"
+                        className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                      >
+                        {t('auth.forgotPassword') || 'Forgot password?'}
+                      </button>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+                    >
+                      {isLoading ? t('auth.loading') || 'Loading...' : t('auth.login') || 'Sign In'}
+                    </button>
+                  </form>
+
+                  {/* Divider */}
+                  <div className="flex items-center my-6">
+                    <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+                    <span className="px-4 text-sm text-gray-500 dark:text-gray-400">
+                      {t('auth.or') || 'or'}
+                    </span>
+                    <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+                  </div>
+
+                  {/* Social Login */}
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        try {
+                          await loginWithGoogle();
+                          onClose();
+                        } catch (error) {
+                          const errorMessage = error instanceof Error ? error.message : t('auth.googleLoginError') || 'Google sign in failed';
+                          setError(errorMessage);
+                        }
+                      }}
+                      disabled={isLoading}
+                      className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <FaGoogle className="w-5 h-5" />
+                      <span>{isLoading ? t('auth.loading') || 'Loading...' : t('auth.loginWithGoogle') || 'Sign in with Google'}</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+                    >
+                      <FaGithub className="w-5 h-5" />
+                      <span>{t('auth.loginWithGitHub') || 'Sign in with GitHub'}</span>
+                    </button>
+                  </div>
+
+                  {/* Switch to Signup */}
+                  <div className="mt-6 text-center">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {t('auth.noAccount') || "Don't have an account?"}{' '}
+                      <button
+                        onClick={onSwitchToSignup}
+                        className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                      >
+                        {t('auth.signup') || 'Sign up'}
+                      </button>
+                    </p>
+                  </div>
                 </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? t('auth.loading') || 'Loading...' : t('auth.login') || 'Login'}
-                </button>
-              </form>
-
-              {/* Switch to Signup */}
-              <div className="mt-6 text-center">
-                <p className="text-gray-400 text-sm">
-                  {t('auth.noAccount') || "Don't have an account?"}{' '}
-                  <button
-                    onClick={onSwitchToSignup}
-                    className="text-emerald-400 hover:text-emerald-300 font-medium"
-                  >
-                    {t('auth.signup') || 'Sign up'}
-                  </button>
-                </p>
               </div>
             </div>
           </motion.div>

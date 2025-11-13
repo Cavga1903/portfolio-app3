@@ -7,7 +7,8 @@
     "services": "Hizmetler",
     "projects": "Portföy",
     "contact": "İletişim",
-    "blog": "Blog"
+    "blog": "Blog",
+    "admin": "Admin Paneli"
   },
   "hero": {
     "greeting": "Merhaba, ben Tolga! 👋",
@@ -633,6 +634,47 @@
     "disliked": "Proje beğenilmedi 👎",
     "dislikeRemoved": "Beğenmeme kaldırıldı",
     "error": "Bir hata oluştu, lütfen tekrar deneyin"
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "signup": "Kayıt Ol",
+    "loginSubtitle": "Hesabınıza giriş yapın",
+    "signupSubtitle": "Hesabınızı oluşturun ve başlayın",
+    "welcome": "Hoş Geldiniz!",
+    "welcomeBack": "Tekrar Hoş Geldiniz!",
+    "joinUs": "Bize katılın ve yolculuğunuza başlayın",
+    "email": "E-posta",
+    "emailPlaceholder": "ornek@email.com",
+    "password": "Şifre",
+    "passwordPlaceholder": "••••••••",
+    "name": "Ad",
+    "namePlaceholder": "Adınız",
+    "confirmPassword": "Şifre Tekrar",
+    "rememberMe": "Beni hatırla",
+    "forgotPassword": "Şifremi unuttum?",
+    "noAccount": "Hesabınız yok mu?",
+    "haveAccount": "Zaten hesabınız var mı?",
+    "loginWithGoogle": "Google ile giriş yap",
+    "loginWithFacebook": "Facebook ile giriş yap",
+    "signupWithGoogle": "Google ile kayıt ol",
+    "signupWithFacebook": "Facebook ile kayıt ol",
+    "loginWithGitHub": "GitHub ile giriş yap",
+    "signupWithGitHub": "GitHub ile kayıt ol",
+    "or": "veya",
+    "loading": "Yükleniyor...",
+    "loginError": "Giriş başarısız",
+    "signupError": "Kayıt başarısız",
+    "passwordMismatch": "Şifreler eşleşmiyor",
+    "passwordTooShort": "Şifre en az 6 karakter olmalıdır",
+    "passwordRequired": "Şifre gereklidir",
+    "emailRequired": "E-posta gereklidir",
+    "emailInvalid": "Geçerli bir e-posta adresi giriniz",
+    "nameRequired": "Ad gereklidir",
+    "nameTooShort": "Ad en az 2 karakter olmalıdır",
+    "confirmPasswordRequired": "Şifre tekrarı gereklidir",
+    "googleLoginError": "Google ile giriş başarısız",
+    "googleSignupError": "Google ile kayıt başarısız",
+    "logout": "Çıkış Yap"
   }
 }
 

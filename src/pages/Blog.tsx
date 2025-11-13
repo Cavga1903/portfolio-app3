@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaSearch, FaCalendarAlt, FaTag, FaArrowRight } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 // Lazy load blog components

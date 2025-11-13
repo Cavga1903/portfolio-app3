@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaArrowDown, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -6,9 +6,13 @@ import { TypeAnimation } from 'react-type-animation';
 
 const Hero: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const sectionRef = useRef<HTMLElement>(null);
   
-  // Parallax scroll effect
-  const { scrollY } = useScroll();
+  // Parallax scroll effect with container ref
+  const { scrollY } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -56,7 +60,11 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative flex flex-col items-center justify-center text-center min-h-screen bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
+    <section 
+      ref={sectionRef}
+      id="hero" 
+      className="relative flex flex-col items-center justify-center text-center min-h-screen bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden"
+    >
       {/* Animated Background Circles with Parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 

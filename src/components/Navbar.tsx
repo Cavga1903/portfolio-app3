@@ -4,6 +4,11 @@ import { FaGithub, FaUser } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useAnalytics } from "../hooks/useAnalytics";
+import { useAuthStore } from "../app/store/authStore";
+
+interface NavbarProps {
+  onLoginClick?: () => void;
+}
 
 // Dil listesi - component dışında tanımlı (public/png klasöründeki bayraklara göre)
 const languages = [
@@ -63,12 +68,13 @@ const navLinks: NavLink[] = [
   { id: "blog", labelKey: "nav.blog" },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState("hero");
   const { t, i18n } = useTranslation();
   const { trackClick, trackLanguageChange } = useAnalytics();
+  const { isAuthenticated, user, logout } = useAuthStore();
   
   // Refs for link positions
   const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
@@ -346,13 +352,51 @@ const Navbar: React.FC = () => {
               <FaGithub className="w-5 h-5" />
             </a>
 
-            {/* Profile Icon */}
-            <button
-              className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Profile"
-            >
-              <FaUser className="w-4 h-4 text-white" />
-            </button>
+            {/* Profile Icon / User Menu */}
+            {isAuthenticated ? (
+              <div className="relative group">
+                <button
+                  className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  aria-label="Profile"
+                >
+                  <FaUser className="w-4 h-4 text-white" />
+                </button>
+                {/* Dropdown Menu */}
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="p-2">
+                    <div className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                      <div className="font-semibold">{user?.name}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</div>
+                    </div>
+                    {user?.role === 'admin' && (
+                      <a
+                        href="/admin"
+                        className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                      >
+                        {t('nav.admin') || 'Admin Panel'}
+                      </a>
+                    )}
+                    <button
+                      onClick={() => {
+                        logout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                    >
+                      {t('auth.logout') || 'Logout'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={onLoginClick}
+                className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Login"
+              >
+                <FaUser className="w-4 h-4 text-white" />
+              </button>
+            )}
           </div>
 
           {/* Mobile Controls */}
@@ -509,14 +553,44 @@ const Navbar: React.FC = () => {
                   <FaGithub className="w-5 h-5" />
                 </a>
 
-                {/* Profile Icon */}
-                <button
-                  className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200"
-                  aria-label="Profile"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <FaUser className="w-4 h-4 text-white" />
-                </button>
+                {/* Profile Icon / User Menu */}
+                {isAuthenticated ? (
+                  <div className="space-y-2">
+                    <div className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                      <div className="font-semibold">{user?.name}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</div>
+                    </div>
+                    {user?.role === 'admin' && (
+                      <a
+                        href="/admin"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                      >
+                        {t('nav.admin') || 'Admin Panel'}
+                      </a>
+                    )}
+                    <button
+                      onClick={() => {
+                        logout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                    >
+                      {t('auth.logout') || 'Logout'}
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      onLoginClick?.();
+                      setIsMenuOpen(false);
+                    }}
+                    className="p-2 bg-blue-500 hover:bg-blue-600 rounded-full transition-all duration-200"
+                    aria-label="Login"
+                  >
+                    <FaUser className="w-4 h-4 text-white" />
+                  </button>
+                )}
               </div>
             </div>
           </div>

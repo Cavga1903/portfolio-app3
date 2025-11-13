@@ -61,9 +61,35 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
     },
   });
 
+  // Generate slug from title
+  const generateSlug = (title: string): string => {
+    return title
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
+  const handleTitleChange = (title: string) => {
+    setFormData({
+      ...formData,
+      title,
+      slug: formData.slug || generateSlug(title),
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    const dataToSubmit = {
+      ...formData,
+      slug: formData.slug || generateSlug(formData.title || ''),
+      author: {
+        id: '1',
+        name: 'Tolga Çavga',
+      },
+    };
+    mutation.mutate(dataToSubmit);
   };
 
   return (
@@ -104,10 +130,26 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
               <input
                 type="text"
                 value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) => handleTitleChange(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {t('admin.blog.form.slug') || 'Slug'}
+              </label>
+              <input
+                type="text"
+                value={formData.slug}
+                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                placeholder={generateSlug(formData.title || '')}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                {t('admin.blog.form.slugHint') || 'URL-friendly version of the title'}
+              </p>
             </div>
 
             <div>

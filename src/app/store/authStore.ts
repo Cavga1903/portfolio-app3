@@ -15,8 +15,9 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
   signup: (email: string, password: string, name: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   setUser: (user: User) => void;
   setToken: (token: string) => void;
 }
@@ -47,6 +48,24 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       
+      loginWithGoogle: async () => {
+        set({ isLoading: true });
+        try {
+          // Dynamic import to avoid circular dependency
+          const { authService } = await import('../../features/auth/services/authService');
+          const response = await authService.loginWithGoogle();
+          set({ 
+            user: response.user, 
+            token: response.token, 
+            isAuthenticated: true,
+            isLoading: false 
+          });
+        } catch (error) {
+          set({ isLoading: false });
+          throw error;
+        }
+      },
+      
       signup: async (email: string, password: string, name: string) => {
         set({ isLoading: true });
         try {
@@ -65,12 +84,20 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       
-      logout: () => {
-        set({ 
-          user: null, 
-          token: null, 
-          isAuthenticated: false 
-        });
+      logout: async () => {
+        try {
+          // Dynamic import to avoid circular dependency
+          const { authService } = await import('../../features/auth/services/authService');
+          await authService.logout();
+        } catch (error) {
+          console.error('Logout error:', error);
+        } finally {
+          set({ 
+            user: null, 
+            token: null, 
+            isAuthenticated: false 
+          });
+        }
       },
       
       setUser: (user: User) => {

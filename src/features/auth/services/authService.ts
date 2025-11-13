@@ -4,6 +4,8 @@ import {
   signOut,
   onAuthStateChanged,
   User as FirebaseUser,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../../../lib/firebase/config';
@@ -162,6 +164,78 @@ export const authService = {
         console.error('API refreshToken also failed:', apiError);
         throw error;
       }
+    }
+  },
+
+  // Google Sign-In
+  loginWithGoogle: async (): Promise<LoginResponse> => {
+    try {
+      const provider = new GoogleAuthProvider();
+      // Add scopes if needed
+      provider.addScope('profile');
+      provider.addScope('email');
+      
+      const result = await signInWithPopup(auth, provider);
+      const firebaseUser = result.user;
+      
+      // Check if user document exists, if not create it
+      const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
+      if (!userDoc.exists()) {
+        await setDoc(doc(db, 'users', firebaseUser.uid), {
+          name: firebaseUser.displayName || 'User',
+          email: firebaseUser.email || '',
+          role: 'user',
+          avatar: firebaseUser.photoURL,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        });
+      }
+      
+      const appUser = await firebaseUserToAppUser(firebaseUser);
+      const token = await firebaseUser.getIdToken();
+      
+      return {
+        user: appUser,
+        token,
+      };
+    } catch (error) {
+      console.error('Google login failed:', error);
+      // Handle specific Firebase errors
+      if (error && typeof error === 'object' && 'code' in error) {
+        const firebaseError = error as { code: string; message?: string };
+        
+        if (firebaseError.code === 'auth/configuration-not-found') {
+          throw new Error(
+            'Firebase Auth yapılandırması bulunamadı. ' +
+            'Lütfen Firebase Console\'da Google Authentication provider\'ını aktifleştirin. ' +
+            'Detaylar için FIREBASE_AUTH_CONFIGURATION_FIX.md dosyasına bakın.'
+          );
+        }
+        
+        if (firebaseError.code === 'auth/popup-closed-by-user') {
+          throw new Error('Popup kapatıldı. Lütfen tekrar deneyin.');
+        }
+        
+        if (firebaseError.code === 'auth/cancelled-popup-request') {
+          throw new Error('Aynı anda sadece bir popup açılabilir. Lütfen bekleyin.');
+        }
+        
+        if (firebaseError.code === 'auth/popup-blocked') {
+          throw new Error('Popup engellendi. Lütfen tarayıcı ayarlarından popup\'ları izin verin.');
+        }
+        
+        if (firebaseError.code === 'auth/unauthorized-domain') {
+          throw new Error(
+            'Bu domain yetkilendirilmemiş. ' +
+            'Firebase Console > Authentication > Settings > Authorized domains\'e domain\'i ekleyin.'
+          );
+        }
+        
+        if (firebaseError.message) {
+          throw new Error(firebaseError.message);
+        }
+      }
+      throw error instanceof Error ? error : new Error('Google ile giriş başarısız');
     }
   },
 
