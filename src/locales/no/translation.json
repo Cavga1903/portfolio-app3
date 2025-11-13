@@ -674,6 +674,7 @@
       "saveFirst": "Lagre først",
       "published": "Publisert",
       "draft": "Utkast",
+      "toggleError": "Operasjonen mislyktes. Vennligst prøv igjen.",
       "confirmDelete": "Er du sikker på at du vil slette dette innlegget?",
       "table": {
         "title": "Tittel",

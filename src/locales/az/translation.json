@@ -702,6 +702,7 @@
       "saveFirst": "Əvvəlcə saxla",
       "published": "Yayımlanıb",
       "draft": "Qaralama",
+      "toggleError": "Əməliyyat uğursuz oldu. Xahiş edirik yenidən cəhd edin.",
       "confirmDelete": "Bu yazını silmək istədiyinizə əminsiniz?",
       "table": {
         "title": "Başlıq",

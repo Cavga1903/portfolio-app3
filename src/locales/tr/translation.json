@@ -749,6 +749,7 @@
       "archived": "Arşiv",
       "selected": "seçili",
       "selectMultiple": "Çoklu Seçim",
+      "toggleError": "İşlem başarısız oldu. Lütfen tekrar deneyin.",
       "confirmDelete": "Bu postu silmek istediğinizden emin misiniz?",
       "table": {
         "title": "Başlık",

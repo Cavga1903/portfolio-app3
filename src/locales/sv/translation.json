@@ -674,6 +674,7 @@
       "saveFirst": "Spara först",
       "published": "Publicerad",
       "draft": "Utkast",
+      "toggleError": "Åtgärden misslyckades. Försök igen.",
       "confirmDelete": "Är du säker på att du vill ta bort detta inlägg?",
       "table": {
         "title": "Titel",

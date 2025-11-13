@@ -746,6 +746,7 @@
       "archived": "Archived",
       "selected": "selected",
       "selectMultiple": "Select Multiple",
+      "toggleError": "Operation failed. Please try again.",
       "confirmDelete": "Are you sure you want to delete this post?",
       "table": {
         "title": "Title",

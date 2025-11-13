@@ -674,6 +674,7 @@
       "saveFirst": "Salva prima",
       "published": "Pubblicato",
       "draft": "Bozza",
+      "toggleError": "Operazione fallita. Riprova.",
       "confirmDelete": "Sei sicuro di voler eliminare questo post?",
       "table": {
         "title": "Titolo",

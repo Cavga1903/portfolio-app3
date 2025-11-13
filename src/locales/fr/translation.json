@@ -715,6 +715,7 @@
       "saveFirst": "Enregistrer d'abord",
       "published": "Publié",
       "draft": "Brouillon",
+      "toggleError": "L'opération a échoué. Veuillez réessayer.",
       "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet article ?",
       "table": {
         "title": "Titre",

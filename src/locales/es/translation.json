@@ -674,6 +674,7 @@
       "saveFirst": "Guardar primero",
       "published": "Publicado",
       "draft": "Borrador",
+      "toggleError": "La operación falló. Por favor, inténtalo de nuevo.",
       "confirmDelete": "¿Estás seguro de que quieres eliminar esta publicación?",
       "table": {
         "title": "Título",

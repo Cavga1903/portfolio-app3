@@ -702,6 +702,7 @@
       "saveFirst": "Zuerst speichern",
       "published": "Veröffentlicht",
       "draft": "Entwurf",
+      "toggleError": "Vorgang fehlgeschlagen. Bitte versuchen Sie es erneut.",
       "confirmDelete": "Sind Sie sicher, dass Sie diesen Post löschen möchten?",
       "table": {
         "title": "Titel",

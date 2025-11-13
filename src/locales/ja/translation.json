@@ -674,6 +674,7 @@
       "saveFirst": "まず保存",
       "published": "公開済み",
       "draft": "下書き",
+      "toggleError": "操作に失敗しました。もう一度お試しください。",
       "confirmDelete": "この投稿を削除してもよろしいですか？",
       "table": {
         "title": "タイトル",

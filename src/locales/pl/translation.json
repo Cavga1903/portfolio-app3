@@ -674,6 +674,7 @@
       "saveFirst": "Najpierw zapisz",
       "published": "Opublikowane",
       "draft": "Szkic",
+      "toggleError": "Operacja nie powiodła się. Spróbuj ponownie.",
       "confirmDelete": "Czy na pewno chcesz usunąć ten post?",
       "table": {
         "title": "Tytuł",
