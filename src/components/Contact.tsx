@@ -11,6 +11,14 @@ interface FormErrors {
   message: string;
 }
 
+// Google reCAPTCHA v3 window interface
+interface WindowWithRecaptcha extends Window {
+  grecaptcha?: {
+    ready: (callback: () => void) => void;
+    execute: (siteKey: string, options: { action: string }) => Promise<string>;
+  };
+}
+
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { trackContactSubmission, trackFormInteraction } = useAnalytics();
@@ -32,6 +40,9 @@ const Contact: React.FC = () => {
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+  
+  // reCAPTCHA v3 configuration
+  const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
   // Initialize EmailJS
   useEffect(() => {
@@ -39,6 +50,26 @@ const Contact: React.FC = () => {
       emailjs.init(EMAILJS_PUBLIC_KEY);
     }
   }, [EMAILJS_PUBLIC_KEY]);
+
+  // Load reCAPTCHA v3 script dynamically
+  useEffect(() => {
+    if (!RECAPTCHA_SITE_KEY) {
+      console.warn('reCAPTCHA site key not found. Please set VITE_RECAPTCHA_SITE_KEY in your .env file.');
+      return;
+    }
+
+    // Check if script is already loaded
+    if (document.querySelector(`script[src*="recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}"]`)) {
+      return;
+    }
+
+    // Load reCAPTCHA v3 script
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, [RECAPTCHA_SITE_KEY]);
 
   // Validate form fields
   const validateForm = (): boolean => {
@@ -103,6 +134,42 @@ const Contact: React.FC = () => {
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
+      // Get reCAPTCHA v3 token (if configured)
+      let recaptchaToken = '';
+      if (RECAPTCHA_SITE_KEY) {
+        try {
+          const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
+          
+          // Wait for reCAPTCHA to be ready
+          if (!windowWithRecaptcha.grecaptcha) {
+            console.warn('reCAPTCHA not loaded, waiting...');
+            await new Promise(resolve => setTimeout(resolve, 1000));
+          }
+
+          if (windowWithRecaptcha.grecaptcha) {
+            // Use ready() to ensure reCAPTCHA is fully loaded
+            await new Promise<void>((resolve) => {
+              windowWithRecaptcha.grecaptcha!.ready(() => {
+                resolve();
+              });
+              // Timeout after 5 seconds
+              setTimeout(() => resolve(), 5000);
+            });
+
+            // Get reCAPTCHA token
+            if (windowWithRecaptcha.grecaptcha.execute) {
+              recaptchaToken = await windowWithRecaptcha.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
+                action: 'contact_form_submit'
+              });
+              console.log('✅ reCAPTCHA token alındı');
+            }
+          }
+        } catch (recaptchaError) {
+          console.warn('reCAPTCHA error (continuing without token):', recaptchaError);
+          // Continue without reCAPTCHA token if it fails
+        }
+      }
+
       // Dil bilgisini al
       const languageNames: { [key: string]: string } = {
         'tr': 'Türkçe 🇹🇷',
@@ -112,13 +179,14 @@ const Contact: React.FC = () => {
       };
       const currentLanguage = languageNames[i18n.language.split('-')[0]] || i18n.language;
 
-      // EmailJS ile email gönder
+      // EmailJS ile email gönder (reCAPTCHA token'ı da ekle)
       const templateParams = {
         from_name: formData.name.trim(),
         from_email: formData.email.trim(),
         message: formData.message.trim(),
         language: currentLanguage,
         to_name: 'Tolga',
+        recaptcha_token: recaptchaToken, // reCAPTCHA token'ı template'e ekle
       };
 
       await emailjs.send(
