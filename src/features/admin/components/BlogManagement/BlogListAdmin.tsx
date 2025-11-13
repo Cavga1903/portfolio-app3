@@ -63,45 +63,82 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
       // If unpublishing, keep publishedAt but mark as draft
       // (We don't delete publishedAt to keep history)
       
-      return blogService.updatePost(id, updateData);
+      try {
+        const result = await blogService.updatePost(id, updateData);
+        return result;
+      } catch (error) {
+        console.error('Error toggling publish status:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
       queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
+    },
+    onError: (error) => {
+      console.error('Failed to toggle publish status:', error);
+      alert(t('admin.blog.toggleError') || 'Durum değiştirilemedi. Lütfen tekrar deneyin.');
     },
   });
 
   const toggleBookmarkMutation = useMutation({
     mutationFn: async ({ id, isBookmarked }: { id: string; isBookmarked: boolean }) => {
-      return blogService.updatePost(id, { isBookmarked: !isBookmarked });
+      try {
+        return await blogService.updatePost(id, { isBookmarked: !isBookmarked });
+      } catch (error) {
+        console.error('Error toggling bookmark:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
       queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
+    },
+    onError: (error) => {
+      console.error('Failed to toggle bookmark:', error);
+      alert(t('admin.blog.toggleError') || 'Yer işareti durumu değiştirilemedi. Lütfen tekrar deneyin.');
     },
   });
 
   const toggleFavoriteMutation = useMutation({
     mutationFn: async ({ id, isFavorited }: { id: string; isFavorited: boolean }) => {
-      return blogService.updatePost(id, { isFavorited: !isFavorited });
+      try {
+        return await blogService.updatePost(id, { isFavorited: !isFavorited });
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
       queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
+    },
+    onError: (error) => {
+      console.error('Failed to toggle favorite:', error);
+      alert(t('admin.blog.toggleError') || 'Favori durumu değiştirilemedi. Lütfen tekrar deneyin.');
     },
   });
 
   const toggleArchiveMutation = useMutation({
     mutationFn: async ({ id, isArchived }: { id: string; isArchived: boolean }) => {
-      return blogService.updatePost(id, { isArchived: !isArchived });
+      try {
+        return await blogService.updatePost(id, { isArchived: !isArchived });
+      } catch (error) {
+        console.error('Error toggling archive:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
       queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
+    },
+    onError: (error) => {
+      console.error('Failed to toggle archive:', error);
+      alert(t('admin.blog.toggleError') || 'Arşiv durumu değiştirilemedi. Lütfen tekrar deneyin.');
     },
   });
 

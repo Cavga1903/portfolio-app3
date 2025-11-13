@@ -152,13 +152,38 @@ export const blogService = {
       const metaDescription = post.metaDescription || 
         (post.content ? generateMetaDescription(post.content) : undefined);
       
-      const postData = {
-        ...post,
-        metaDescription,
-        publishedAt: post.publishedAt ? Timestamp.fromDate(new Date(post.publishedAt)) : Timestamp.now(),
+      // Prepare post data with proper types
+      const postData: Record<string, unknown> = {
+        title: post.title || '',
+        slug: post.slug || '',
+        content: post.content || '',
+        excerpt: post.excerpt || '',
+        author: post.author || { id: 'unknown', name: 'Unknown' },
+        tags: post.tags || [],
+        category: post.category || '',
+        image: post.image || '',
+        isPublished: post.isPublished || false,
+        isBookmarked: post.isBookmarked || false,
+        isFavorited: post.isFavorited || false,
+        isArchived: post.isArchived || false,
+        views: post.views || 0,
+        likes: post.likes || 0,
+        metaDescription: metaDescription || '',
+        seoTitle: post.seoTitle || '',
+        seoKeywords: post.seoKeywords || [],
+        translations: post.translations || {},
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       };
+      
+      // Only set publishedAt if post is published
+      if (post.isPublished) {
+        if (post.publishedAt) {
+          postData.publishedAt = Timestamp.fromDate(new Date(post.publishedAt));
+        } else {
+          postData.publishedAt = Timestamp.now();
+        }
+      }
       
       const docRef = await addDoc(postsRef, postData);
       const docSnapshot = await getDoc(docRef);
@@ -178,17 +203,38 @@ export const blogService = {
     try {
       const postRef = doc(db, 'blogPosts', id);
       const updateData: Record<string, FieldValue | unknown> = {
-        ...post,
         updatedAt: Timestamp.now(),
       };
       
-      // Convert date strings to Timestamps if present
+      // Only update fields that are provided
+      if (post.title !== undefined) updateData.title = post.title;
+      if (post.slug !== undefined) updateData.slug = post.slug;
+      if (post.content !== undefined) updateData.content = post.content;
+      if (post.excerpt !== undefined) updateData.excerpt = post.excerpt;
+      if (post.tags !== undefined) updateData.tags = post.tags;
+      if (post.category !== undefined) updateData.category = post.category;
+      if (post.image !== undefined) updateData.image = post.image;
+      if (post.isPublished !== undefined) updateData.isPublished = post.isPublished;
+      if (post.isBookmarked !== undefined) updateData.isBookmarked = post.isBookmarked;
+      if (post.isFavorited !== undefined) updateData.isFavorited = post.isFavorited;
+      if (post.isArchived !== undefined) updateData.isArchived = post.isArchived;
+      if (post.views !== undefined) updateData.views = post.views;
+      if (post.likes !== undefined) updateData.likes = post.likes;
+      if (post.metaDescription !== undefined) updateData.metaDescription = post.metaDescription;
+      if (post.seoTitle !== undefined) updateData.seoTitle = post.seoTitle;
+      if (post.seoKeywords !== undefined) updateData.seoKeywords = post.seoKeywords;
+      if (post.translations !== undefined) updateData.translations = post.translations;
+      
+      // Handle publishedAt: only set if publishing (isPublished becomes true)
+      // If publishedAt is provided as a string, convert it to Timestamp
       if (post.publishedAt) {
         updateData.publishedAt = Timestamp.fromDate(new Date(post.publishedAt));
+      } else if (post.isPublished === true) {
+        // If publishing but no publishedAt provided, set it to now
+        updateData.publishedAt = Timestamp.now();
       }
-      if (post.updatedAt) {
-        updateData.updatedAt = Timestamp.fromDate(new Date(post.updatedAt));
-      }
+      // If unpublishing (isPublished becomes false), we keep publishedAt for history
+      // but don't need to update it
       
       await updateDoc(postRef, updateData as Record<string, FieldValue>);
       const docSnapshot = await getDoc(postRef);

@@ -71,8 +71,15 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
       }
     },
     onSuccess: () => {
+      // Invalidate both admin and public queries
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
+      queryClient.invalidateQueries({ queryKey: ['blogPost', postId] });
       onSave();
+    },
+    onError: (error) => {
+      console.error('Error saving post:', error);
+      // You can add toast notification here if needed
     },
   });
 
