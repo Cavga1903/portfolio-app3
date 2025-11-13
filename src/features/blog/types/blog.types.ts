@@ -25,6 +25,9 @@ export interface BlogPost {
   views?: number;
   likes?: number;
   isPublished: boolean;
+  isBookmarked?: boolean;
+  isFavorited?: boolean;
+  isArchived?: boolean;
   // SEO fields
   metaDescription?: string;
   seoTitle?: string;

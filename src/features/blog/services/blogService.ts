@@ -51,6 +51,12 @@ const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: str
     views: data.views || 0,
     likes: data.likes || 0,
     isPublished: data.isPublished ?? true,
+    isBookmarked: data.isBookmarked || false,
+    isFavorited: data.isFavorited || false,
+    isArchived: data.isArchived || false,
+    metaDescription: data.metaDescription,
+    seoTitle: data.seoTitle,
+    seoKeywords: data.seoKeywords || [],
   };
 };
 

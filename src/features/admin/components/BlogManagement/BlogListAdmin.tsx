@@ -14,6 +14,7 @@ import {
   EditIcon,
   DeleteIcon,
   ArchiveIcon,
+  UnarchiveIcon,
   ShareIcon,
 } from './BlogIcons';
 
@@ -60,6 +61,33 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
     },
   });
 
+  const toggleBookmarkMutation = useMutation({
+    mutationFn: async ({ id, isBookmarked }: { id: string; isBookmarked: boolean }) => {
+      return blogService.updatePost(id, { isBookmarked: !isBookmarked });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+    },
+  });
+
+  const toggleFavoriteMutation = useMutation({
+    mutationFn: async ({ id, isFavorited }: { id: string; isFavorited: boolean }) => {
+      return blogService.updatePost(id, { isFavorited: !isFavorited });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+    },
+  });
+
+  const toggleArchiveMutation = useMutation({
+    mutationFn: async ({ id, isArchived }: { id: string; isArchived: boolean }) => {
+      return blogService.updatePost(id, { isArchived: !isArchived });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
+    },
+  });
+
   const handleDelete = async (id: string) => {
     if (window.confirm(t('admin.blog.confirmDelete') || 'Are you sure you want to delete this post?')) {
       deleteMutation.mutate(id);
@@ -68,6 +96,48 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
 
   const handleTogglePublish = (post: BlogPost) => {
     togglePublishMutation.mutate({ id: post.id, isPublished: post.isPublished });
+  };
+
+  const handleToggleBookmark = (post: BlogPost) => {
+    toggleBookmarkMutation.mutate({ id: post.id, isBookmarked: post.isBookmarked || false });
+  };
+
+  const handleToggleFavorite = (post: BlogPost) => {
+    toggleFavoriteMutation.mutate({ id: post.id, isFavorited: post.isFavorited || false });
+  };
+
+  const handleToggleArchive = (post: BlogPost) => {
+    toggleArchiveMutation.mutate({ id: post.id, isArchived: post.isArchived || false });
+  };
+
+  const handleShare = async (post: BlogPost) => {
+    const url = `${window.location.origin}/blog/${post.slug}`;
+    const shareData = {
+      title: post.title,
+      text: post.excerpt,
+      url: url,
+    };
+
+    try {
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback: Copy to clipboard
+        await navigator.clipboard.writeText(url);
+        alert(t('admin.blog.shareCopied') || 'Link kopyalandı!');
+      }
+    } catch (error) {
+      // User cancelled or error occurred
+      if ((error as Error).name !== 'AbortError') {
+        // Fallback: Copy to clipboard
+        try {
+          await navigator.clipboard.writeText(url);
+          alert(t('admin.blog.shareCopied') || 'Link kopyalandı!');
+        } catch (clipboardError) {
+          console.error('Failed to copy to clipboard:', clipboardError);
+        }
+      }
+    }
   };
 
   const handleToggleSelection = (postId: string) => {
@@ -247,22 +317,35 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
 
                   {/* Bookmark */}
                   <button
-                    className="p-2 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 rounded-lg transition-all cursor-pointer"
-                    title={t('admin.blog.bookmark') || 'Bookmark'}
+                    onClick={() => handleToggleBookmark(post)}
+                    disabled={toggleBookmarkMutation.isPending}
+                    className={`p-2 rounded-lg transition-all ${
+                      post.isBookmarked
+                        ? 'text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900/30'
+                        : 'text-yellow-600 dark:text-yellow-400 hover:bg-yellow-100 dark:hover:bg-yellow-900/30'
+                    } ${toggleBookmarkMutation.isPending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                    title={post.isBookmarked ? t('admin.blog.unbookmark') || 'Remove Bookmark' : t('admin.blog.bookmark') || 'Bookmark'}
                   >
                     <BookmarkIcon size={20} />
                   </button>
 
                   {/* Favorite */}
                   <button
-                    className="p-2 text-pink-600 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/30 rounded-lg transition-all cursor-pointer"
-                    title={t('admin.blog.favorite') || 'Favorite'}
+                    onClick={() => handleToggleFavorite(post)}
+                    disabled={toggleFavoriteMutation.isPending}
+                    className={`p-2 rounded-lg transition-all ${
+                      post.isFavorited
+                        ? 'text-pink-600 dark:text-pink-400 bg-pink-100 dark:bg-pink-900/30'
+                        : 'text-pink-600 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/30'
+                    } ${toggleFavoriteMutation.isPending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                    title={post.isFavorited ? t('admin.blog.unfavorite') || 'Remove Favorite' : t('admin.blog.favorite') || 'Favorite'}
                   >
                     <FavoriteIcon size={20} />
                   </button>
 
                   {/* Share */}
                   <button
+                    onClick={() => handleShare(post)}
                     className="p-2 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded-lg transition-all cursor-pointer"
                     title={t('admin.blog.share') || 'Share'}
                   >
@@ -271,10 +354,16 @@ const BlogListAdmin: React.FC<BlogListAdminProps> = ({ searchQuery, onEdit }) =>
 
                   {/* Archive/Unarchive */}
                   <button
-                    className="p-2 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30 rounded-lg transition-all cursor-pointer"
-                    title={t('admin.blog.archive') || 'Archive'}
+                    onClick={() => handleToggleArchive(post)}
+                    disabled={toggleArchiveMutation.isPending}
+                    className={`p-2 rounded-lg transition-all ${
+                      post.isArchived
+                        ? 'text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30'
+                        : 'text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30'
+                    } ${toggleArchiveMutation.isPending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                    title={post.isArchived ? t('admin.blog.unarchive') || 'Unarchive' : t('admin.blog.archive') || 'Archive'}
                   >
-                    <ArchiveIcon size={20} />
+                    {post.isArchived ? <UnarchiveIcon size={20} /> : <ArchiveIcon size={20} />}
                   </button>
 
                   {/* Delete */}
