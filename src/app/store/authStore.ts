@@ -32,20 +32,12 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string) => {
         set({ isLoading: true });
         try {
-          // TODO: Implement actual login API call
-          // const response = await authService.login(email, password);
-          // set({ user: response.user, token: response.token, isAuthenticated: true });
-          
-          // Mock for now
-          const mockUser: User = {
-            id: '1',
-            email,
-            name: 'Test User',
-            role: 'admin',
-          };
+          // Dynamic import to avoid circular dependency
+          const { authService } = await import('../../features/auth/services/authService');
+          const response = await authService.login(email, password);
           set({ 
-            user: mockUser, 
-            token: 'mock-token', 
+            user: response.user, 
+            token: response.token, 
             isAuthenticated: true,
             isLoading: false 
           });
@@ -58,16 +50,12 @@ export const useAuthStore = create<AuthState>()(
       signup: async (email: string, password: string, name: string) => {
         set({ isLoading: true });
         try {
-          // TODO: Implement actual signup API call
-          const mockUser: User = {
-            id: '1',
-            email,
-            name,
-            role: 'user',
-          };
+          // Dynamic import to avoid circular dependency
+          const { authService } = await import('../../features/auth/services/authService');
+          const response = await authService.signup(email, password, name);
           set({ 
-            user: mockUser, 
-            token: 'mock-token', 
+            user: response.user, 
+            token: response.token, 
             isAuthenticated: true,
             isLoading: false 
           });

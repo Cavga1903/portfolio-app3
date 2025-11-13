@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Home from './pages/Home';
-import NotFound from './components/NotFound';
+import { AppProvider } from './app/providers/AppProvider';
+import { routes } from './app/router/routes';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -14,12 +14,21 @@ const App: React.FC = () => {
     }
   }, [i18n.language, t]);
 
-      return (
+  return (
+    <AppProvider>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={route.element}
+            />
+          ))}
         </Routes>
-      );
+      </BrowserRouter>
+    </AppProvider>
+  );
 };
 
 export default App;
