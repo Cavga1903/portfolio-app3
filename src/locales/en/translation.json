@@ -730,6 +730,15 @@
       "upload": "Upload",
       "uploading": "Uploading...",
       "saveFirst": "Save first",
+      "published": "Published",
+      "draft": "Draft",
+      "confirmDelete": "Are you sure you want to delete this post?",
+      "table": {
+        "title": "Title",
+        "status": "Status",
+        "views": "Views",
+        "actions": "Actions"
+      },
       "form": {
         "title": "Title",
         "slug": "Slug",

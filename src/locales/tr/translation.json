@@ -733,6 +733,15 @@
       "upload": "Yükle",
       "uploading": "Yükleniyor...",
       "saveFirst": "Önce kaydedin",
+      "published": "Yayınlandı",
+      "draft": "Taslak",
+      "confirmDelete": "Bu postu silmek istediğinizden emin misiniz?",
+      "table": {
+        "title": "Başlık",
+        "status": "Durum",
+        "views": "Görüntülenme",
+        "actions": "İşlemler"
+      },
       "form": {
         "title": "Başlık",
         "slug": "Slug",
