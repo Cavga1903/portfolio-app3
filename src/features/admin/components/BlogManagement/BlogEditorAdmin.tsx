@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { FaTimes } from 'react-icons/fa';
+import { useAuthStore } from '../../../../app/store/authStore';
 import { blogService } from '../../../blog/services/blogService';
 import { BlogPost } from '../../../blog/types/blog.types';
 
@@ -19,6 +20,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
 }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
+  const { user } = useAuthStore();
   const [formData, setFormData] = useState<Partial<BlogPost>>({
     title: '',
     slug: '',
@@ -81,12 +83,19 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Ensure user is authenticated
+    if (!user) {
+      console.error('User not authenticated');
+      return;
+    }
+    
     const dataToSubmit = {
       ...formData,
       slug: formData.slug || generateSlug(formData.title || ''),
       author: {
-        id: '1',
-        name: 'Tolga Çavga',
+        id: user.id, // Use authenticated user's ID
+        name: user.name || 'Unknown User',
       },
     };
     mutation.mutate(dataToSubmit);

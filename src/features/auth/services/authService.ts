@@ -128,7 +128,33 @@ export const authService = {
         token,
       };
     } catch (error) {
-      console.error('Firebase signup failed, trying API fallback:', error);
+      console.error('Firebase signup failed:', error);
+      
+      // Handle specific Firebase errors
+      if (error && typeof error === 'object' && 'code' in error) {
+        const firebaseError = error as { code: string; message?: string };
+        
+        if (firebaseError.code === 'auth/email-already-in-use') {
+          throw new Error('Bu e-posta adresi zaten kullanılıyor. Lütfen giriş yapın veya farklı bir e-posta adresi kullanın.');
+        }
+        
+        if (firebaseError.code === 'auth/invalid-email') {
+          throw new Error('Geçersiz e-posta adresi. Lütfen doğru bir e-posta adresi giriniz.');
+        }
+        
+        if (firebaseError.code === 'auth/weak-password') {
+          throw new Error('Şifre çok zayıf. Lütfen en az 6 karakter içeren daha güçlü bir şifre kullanın.');
+        }
+        
+        if (firebaseError.code === 'auth/operation-not-allowed') {
+          throw new Error('E-posta/şifre ile kayıt olma özelliği devre dışı bırakılmış. Lütfen yönetici ile iletişime geçin.');
+        }
+        
+        if (firebaseError.message) {
+          throw new Error(firebaseError.message);
+        }
+      }
+      
       // Fallback to API
       try {
         const response = await apiClient.post<SignupResponse>(endpoints.auth.signup, {
@@ -139,7 +165,7 @@ export const authService = {
         return response.data;
       } catch (apiError) {
         console.error('API signup also failed:', apiError);
-        throw error;
+        throw error instanceof Error ? error : new Error('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.');
       }
     }
   },

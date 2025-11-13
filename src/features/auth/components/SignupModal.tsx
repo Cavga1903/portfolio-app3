@@ -122,8 +122,9 @@ export const SignupModal: React.FC<SignupModalProps> = ({
           navigate('/blog');
         }
       }, 100);
-    } catch {
-      setError(t('auth.signupError') || 'Signup failed');
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : t('auth.signupError') || 'Signup failed';
+      setError(errorMessage);
     }
   };
 
