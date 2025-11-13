@@ -116,10 +116,15 @@
     <meta property="fb:app_id" content="YOUR_FACEBOOK_APP_ID" />
     
     <!-- Schema.org JSON-LD for Person, Website & Professional Service -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+    <!-- Loaded after page load to avoid GTM parsing errors -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        try {
+          const schemaScript = document.createElement('script');
+          schemaScript.type = 'application/ld+json';
+          schemaScript.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
         {
           "@type": "Person",
           "name": "Tolga Çavga",
@@ -175,7 +180,12 @@
           }
         }
       ]
-    }
+    });
+        document.head.appendChild(schemaScript);
+        } catch (e) {
+          console.warn('JSON-LD schema error:', e);
+        }
+      });
     </script>
     
     <title>Tolga Çavga | Frontend Developer - Portfolio</title>

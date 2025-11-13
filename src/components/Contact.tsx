@@ -176,7 +176,10 @@ const Contact: React.FC = () => {
       const currentLanguage = languageNames[i18n.language.split('-')[0]] || i18n.language;
       
       // Backend API endpoint
-      const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'http://localhost:3001/api/contact';
+      const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 
+        (window.location.hostname === 'localhost' 
+          ? 'http://localhost:3001/api/contact' 
+          : `${window.location.origin}/api/contact`);
       
       // Backend API'ye istek gönder
       const response = await fetch(API_ENDPOINT, {
