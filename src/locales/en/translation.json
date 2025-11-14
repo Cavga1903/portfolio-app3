@@ -696,6 +696,7 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
+      "subtitle": "Manage your content",
       "welcome": "Welcome back",
       "recentPosts": "Recent Blog Posts",
       "viewAll": "View All",
@@ -703,6 +704,28 @@
       "draft": "Draft",
       "noPosts": "No blog posts yet",
       "createFirst": "Create Your First Post"
+    },
+    "actions": {
+      "create": "Create",
+      "general": "General Actions",
+      "organization": "Organization"
+    },
+    "projects": {
+      "title": "Project Management",
+      "create": "Add New Project",
+      "comingSoon": "Coming soon..."
+    },
+    "categories": {
+      "title": "Category Management",
+      "create": "Add Category",
+      "edit": "Edit Categories",
+      "name": "Category Name",
+      "namePlaceholder": "Enter category name",
+      "rows": "Number of Rows",
+      "rowsPlaceholder": "How many rows to display",
+      "save": "Save",
+      "cancel": "Cancel",
+      "comingSoon": "Coming soon..."
     },
     "stats": {
       "totalUsers": "Total Users",
@@ -748,6 +771,27 @@
       "selectMultiple": "Select Multiple",
       "toggleError": "Operation failed. Please try again.",
       "confirmDelete": "Are you sure you want to delete this post?",
+      "deleteConfirm": "Are you sure you want to delete {{count}} post(s)?",
+      "publishSuccess": "{{count}} post(s) published",
+      "publishError": "An error occurred while publishing posts",
+      "unpublishSuccess": "{{count}} post(s) unpublished",
+      "unpublishError": "An error occurred while unpublishing posts",
+      "archiveSuccess": "{{count}} post(s) archived",
+      "archiveError": "An error occurred while archiving posts",
+      "bookmarkSuccess": "{{count}} post(s) bookmarked",
+      "bookmarkRemoveSuccess": "{{count}} post(s) removed from bookmarks",
+      "bookmarkError": "An error occurred while bookmarking posts",
+      "favoriteSuccess": "{{count}} post(s) added to favorites",
+      "favoriteRemoveSuccess": "{{count}} post(s) removed from favorites",
+      "favoriteError": "An error occurred while favoriting posts",
+      "deleteSuccess": "{{count}} post(s) deleted",
+      "deleteError": "An error occurred while deleting posts",
+      "noSelection": "Please select at least one post",
+      "singleEditOnly": "Please select only one post",
+      "linkCopied": "Link copied",
+      "linkCopyError": "Failed to copy link",
+      "postNotFound": "Post not found",
+      "actionError": "An error occurred. Please try again.",
       "table": {
         "title": "Title",
         "status": "Status",

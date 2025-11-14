@@ -637,6 +637,7 @@
   "admin": {
     "dashboard": {
       "title": "Panel",
+      "subtitle": "Zarządzaj swoją zawartością",
       "welcome": "Witaj ponownie",
       "recentPosts": "Ostatnie posty na blogu",
       "viewAll": "Zobacz wszystkie",
@@ -644,6 +645,28 @@
       "draft": "Szkic",
       "noPosts": "Brak jeszcze postów na blogu",
       "createFirst": "Utwórz swój pierwszy post"
+    },
+    "actions": {
+      "create": "Utwórz",
+      "general": "Akcje ogólne",
+      "organization": "Organizacja"
+    },
+    "projects": {
+      "title": "Zarządzanie projektami",
+      "create": "Dodaj nowy projekt",
+      "comingSoon": "Wkrótce..."
+    },
+    "categories": {
+      "title": "Zarządzanie kategoriami",
+      "create": "Dodaj kategorię",
+      "edit": "Edytuj kategorie",
+      "name": "Nazwa kategorii",
+      "namePlaceholder": "Wprowadź nazwę kategorii",
+      "rows": "Liczba wierszy",
+      "rowsPlaceholder": "Ile wierszy wyświetlić",
+      "save": "Zapisz",
+      "cancel": "Anuluj",
+      "comingSoon": "Wkrótce..."
     },
     "stats": {
       "totalUsers": "Łącznie użytkowników",

@@ -665,6 +665,7 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
+      "subtitle": "Verwalten Sie Ihre Inhalte",
       "welcome": "Willkommen zurück",
       "recentPosts": "Letzte Blog-Posts",
       "viewAll": "Alle anzeigen",
@@ -672,6 +673,28 @@
       "draft": "Entwurf",
       "noPosts": "Noch keine Blog-Posts",
       "createFirst": "Erstellen Sie Ihren ersten Post"
+    },
+    "actions": {
+      "create": "Erstellen",
+      "general": "Allgemeine Aktionen",
+      "organization": "Organisation"
+    },
+    "projects": {
+      "title": "Projektverwaltung",
+      "create": "Neues Projekt hinzufügen",
+      "comingSoon": "Demnächst verfügbar..."
+    },
+    "categories": {
+      "title": "Kategorieverwaltung",
+      "create": "Kategorie hinzufügen",
+      "edit": "Kategorien bearbeiten",
+      "name": "Kategoriename",
+      "namePlaceholder": "Kategoriename eingeben",
+      "rows": "Anzahl der Zeilen",
+      "rowsPlaceholder": "Wie viele Zeilen angezeigt werden sollen",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "comingSoon": "Demnächst verfügbar..."
     },
     "stats": {
       "totalUsers": "Gesamt Benutzer",

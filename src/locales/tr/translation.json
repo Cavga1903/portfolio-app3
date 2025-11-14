@@ -699,6 +699,7 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
+      "subtitle": "İçeriklerinizi yönetin",
       "welcome": "Hoş geldiniz",
       "recentPosts": "Son Blog Postları",
       "viewAll": "Tümünü Gör",
@@ -706,6 +707,37 @@
       "draft": "Taslak",
       "noPosts": "Henüz blog post yok",
       "createFirst": "İlk Postunuzu Oluşturun"
+    },
+    "actions": {
+      "create": "Oluştur",
+      "general": "Genel İşlemler",
+      "organization": "Organizasyon"
+    },
+    "projects": {
+      "title": "Proje Yönetimi",
+      "create": "Yeni Proje Ekle",
+      "comingSoon": "Yakında eklenecek..."
+    },
+    "categories": {
+      "title": "Kategori Yönetimi",
+      "create": "Kategori Ekle",
+      "edit": "Kategori Düzenle",
+      "addNew": "Yeni Kategori Ekle",
+      "name": "Kategori Adı",
+      "namePlaceholder": "Kategori adını girin",
+      "slug": "URL Slug",
+      "slugPlaceholder": "kategori-url-slug",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Kategori açıklaması",
+      "color": "Renk",
+      "rows": "Satır Sayısı",
+      "rowsPlaceholder": "Kaç satır gösterilecek",
+      "isActive": "Aktif",
+      "save": "Kaydet",
+      "cancel": "İptal",
+      "delete": "Sil",
+      "deleteConfirm": "Bu kategoriyi silmek istediğinize emin misiniz?",
+      "comingSoon": "Yakında eklenecek..."
     },
     "stats": {
       "totalUsers": "Toplam Kullanıcı",
@@ -751,6 +783,27 @@
       "selectMultiple": "Çoklu Seçim",
       "toggleError": "İşlem başarısız oldu. Lütfen tekrar deneyin.",
       "confirmDelete": "Bu postu silmek istediğinizden emin misiniz?",
+      "deleteConfirm": "{{count}} postu silmek istediğinize emin misiniz?",
+      "publishSuccess": "{{count}} post yayınlandı",
+      "publishError": "Postlar yayınlanırken bir hata oluştu",
+      "unpublishSuccess": "{{count}} post yayından kaldırıldı",
+      "unpublishError": "Postlar yayından kaldırılırken bir hata oluştu",
+      "archiveSuccess": "{{count}} post arşivlendi",
+      "archiveError": "Postlar arşivlenirken bir hata oluştu",
+      "bookmarkSuccess": "{{count}} post yer işareti eklendi",
+      "bookmarkRemoveSuccess": "{{count}} post yer işaretinden kaldırıldı",
+      "bookmarkError": "Yer işareti işlemi sırasında bir hata oluştu",
+      "favoriteSuccess": "{{count}} post favorilere eklendi",
+      "favoriteRemoveSuccess": "{{count}} post favorilerden kaldırıldı",
+      "favoriteError": "Favori işlemi sırasında bir hata oluştu",
+      "deleteSuccess": "{{count}} post silindi",
+      "deleteError": "Postlar silinirken bir hata oluştu",
+      "noSelection": "Lütfen en az bir post seçin",
+      "singleEditOnly": "Lütfen sadece bir post seçin",
+      "linkCopied": "Link kopyalandı",
+      "linkCopyError": "Link kopyalanamadı",
+      "postNotFound": "Post bulunamadı",
+      "actionError": "Bir hata oluştu. Lütfen tekrar deneyin.",
       "table": {
         "title": "Başlık",
         "status": "Durum",

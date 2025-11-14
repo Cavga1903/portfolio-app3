@@ -27,7 +27,7 @@ Her bir variable için:
 #### 1. VITE_FIREBASE_API_KEY
 ```
 Name: VITE_FIREBASE_API_KEY
-Value: AIzaSyA6UCz0o9V4OLH2vGw8n1GU-CdRTb8hPxg
+Value: [Your Firebase API Key from Firebase Console]
 Environment: Production, Preview, Development
 ```
 
@@ -69,7 +69,7 @@ Environment: Production, Preview, Development
 #### 7. VITE_FIREBASE_MEASUREMENT_ID
 ```
 Name: VITE_FIREBASE_MEASUREMENT_ID
-Value: G-TTT8JF69GR
+Value: [Your Firebase Measurement ID from Firebase Console]
 Environment: Production, Preview, Development
 ```
 

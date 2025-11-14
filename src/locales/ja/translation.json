@@ -637,6 +637,7 @@
   "admin": {
     "dashboard": {
       "title": "ダッシュボード",
+      "subtitle": "コンテンツを管理",
       "welcome": "おかえりなさい",
       "recentPosts": "最近のブログ投稿",
       "viewAll": "すべて表示",
@@ -644,6 +645,28 @@
       "draft": "下書き",
       "noPosts": "まだブログ投稿がありません",
       "createFirst": "最初の投稿を作成"
+    },
+    "actions": {
+      "create": "作成",
+      "general": "一般的な操作",
+      "organization": "整理"
+    },
+    "projects": {
+      "title": "プロジェクト管理",
+      "create": "新しいプロジェクトを追加",
+      "comingSoon": "近日公開..."
+    },
+    "categories": {
+      "title": "カテゴリ管理",
+      "create": "カテゴリを追加",
+      "edit": "カテゴリを編集",
+      "name": "カテゴリ名",
+      "namePlaceholder": "カテゴリ名を入力",
+      "rows": "行数",
+      "rowsPlaceholder": "表示する行数",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "comingSoon": "近日公開..."
     },
     "stats": {
       "totalUsers": "総ユーザー数",

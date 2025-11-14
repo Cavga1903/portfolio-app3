@@ -11,16 +11,25 @@
 
 ### 2. Environment Variables
 
-`.env` dosyasına ekle:
+`env.example` dosyasını `.env` olarak kopyalayın ve değerleri doldurun:
+
+```bash
+cp env.example .env
+```
+
+`.env` dosyasına Firebase Console'dan aldığınız değerleri ekleyin:
 
 ```env
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=your-project-id
-VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
-VITE_FIREBASE_APP_ID=your-app-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456789012
+VITE_FIREBASE_APP_ID=1:123456789012:web:abcdef1234567890
+VITE_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
+
+**Önemli:** `.env` dosyasını asla git'e commit etmeyin! (`.gitignore`'da zaten var)
 
 ### 3. Firestore Database Oluştur
 

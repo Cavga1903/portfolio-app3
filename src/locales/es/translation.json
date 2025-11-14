@@ -637,6 +637,7 @@
   "admin": {
     "dashboard": {
       "title": "Panel de control",
+      "subtitle": "Gestiona tu contenido",
       "welcome": "Bienvenido de nuevo",
       "recentPosts": "Publicaciones recientes del blog",
       "viewAll": "Ver todo",
@@ -644,6 +645,28 @@
       "draft": "Borrador",
       "noPosts": "Aún no hay publicaciones del blog",
       "createFirst": "Crea tu primera publicación"
+    },
+    "actions": {
+      "create": "Crear",
+      "general": "Acciones generales",
+      "organization": "Organización"
+    },
+    "projects": {
+      "title": "Gestión de proyectos",
+      "create": "Agregar nuevo proyecto",
+      "comingSoon": "Próximamente..."
+    },
+    "categories": {
+      "title": "Gestión de categorías",
+      "create": "Agregar categoría",
+      "edit": "Editar categorías",
+      "name": "Nombre de la categoría",
+      "namePlaceholder": "Ingrese el nombre de la categoría",
+      "rows": "Número de filas",
+      "rowsPlaceholder": "Cuántas filas mostrar",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "comingSoon": "Próximamente..."
     },
     "stats": {
       "totalUsers": "Total de usuarios",

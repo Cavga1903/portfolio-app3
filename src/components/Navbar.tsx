@@ -199,12 +199,15 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
   // Update underline position based on active link
   const updateUnderline = React.useCallback((linkId: string) => {
-    const linkElement = linkRefs.current[linkId];
-    if (linkElement) {
-      const { offsetLeft, offsetWidth } = linkElement;
-      underlineX.set(offsetLeft);
-      underlineWidth.set(offsetWidth);
-    }
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      const linkElement = linkRefs.current[linkId];
+      if (linkElement) {
+        const { offsetLeft, offsetWidth } = linkElement;
+        underlineX.set(offsetLeft);
+        underlineWidth.set(offsetWidth);
+      }
+    });
   }, [underlineX, underlineWidth]);
 
   // Set active link and update underline
@@ -222,6 +225,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
       return;
     }
     
+    // Navbar height for offset calculation
+    const navbarHeight = 64; // Approximate navbar height
+    
     // If not on home page, navigate to home first
     if (location.pathname !== '/') {
       navigate('/');
@@ -229,9 +235,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
       setTimeout(() => {
         const element = document.getElementById(elementId);
         if (element) {
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
           });
         }
         handleLinkClick(elementId);
@@ -241,9 +250,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
     
     const element = document.getElementById(elementId);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
       });
       handleLinkClick(elementId);
     } else {
@@ -295,7 +307,11 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
   // Update underline when active link changes
   useEffect(() => {
-    updateUnderline(activeLink);
+    // Add a small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      updateUnderline(activeLink);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [activeLink, updateUnderline]);
 
   // Close dropdown when clicking outside
@@ -372,7 +388,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                     linkRefs.current[link.id] = el;
                   }}
                   href={`#${link.id}`}
-                  className={`text-sm cursor-pointer transition-all duration-300 relative px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded ${
+                  className={`text-sm cursor-pointer transition-all duration-300 relative px-2 py-1 focus:outline-none ${
                     activeLink === link.id
                       ? "text-blue-600 dark:text-blue-400 font-medium"
                       : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
@@ -393,7 +409,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
               
               {/* Animated Underline */}
               <motion.div
-                className="absolute bottom-0 h-0.5 bg-blue-500 dark:bg-blue-400 rounded-full"
+                className="absolute bottom-0 h-0.5 bg-blue-500 dark:bg-blue-400"
                 style={{
                   x: underlineXSpring,
                   width: underlineWidthSpring,
@@ -425,7 +441,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                   <FaUser className="w-4 h-4 text-white" />
                 </button>
                 {/* Dropdown Menu */}
-                <div className={`absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-200 z-50 ${
+                <div className={`absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-200 z-[60] ${
                   isProfileDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}>
                   <div className="p-2">
@@ -577,24 +593,24 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
+      {/* Mobile Menu */}
+      {isMenuOpen && (
         <div
-          className={`${
-            isMenuOpen ? "block" : "hidden"
-          } fixed inset-0 z-50`}
+          className="fixed inset-0 z-50"
           id="mobile-menu"
         >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40"
             onClick={() => setIsMenuOpen(false)}
           />
           
           {/* Menu Panel */}
-          <div className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-700/50 shadow-xl">
+          <div className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-700/50 shadow-xl z-50">
             {/* Header */}
-              <div className="px-4 py-3 border-b border-gray-200/50 dark:border-gray-700/50">
+            <div className="px-4 py-3 border-b border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-between">
                 {/* Logo and Toggles */}
                 <div className="flex items-center gap-3">
@@ -676,7 +692,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
             </div>
 
             {/* Footer Actions */}
-              <div className="px-4 py-3 border-t border-gray-200/50 dark:border-gray-700/50">
+            <div className="px-4 py-3 border-t border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center gap-3">
                 {/* GitHub Icon */}
                 <a
@@ -695,36 +711,115 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
                 {/* Profile Icon / User Menu */}
                 {isAuthenticated ? (
-                  <div className="space-y-2">
-                    <div className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
-                      <div className="font-semibold">{user?.name}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</div>
-                    </div>
-                    {user?.role === 'admin' && (
-                      <a
-                        href="/admin"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate('/admin');
-                          setIsMenuOpen(false);
-                          trackClick('nav_admin_mobile', 'navigation_link', 'Admin Panel');
-                        }}
-                        className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                      >
-                        {t('nav.admin') || 'Admin Panel'}
-                      </a>
-                    )}
+                  <div className="relative profile-dropdown-container w-full">
                     <button
-                      onClick={() => {
-                        logout();
-                        setIsMenuOpen(false);
-                        navigate('/');
-                        trackClick('nav_logout_mobile', 'action', 'Logout');
-                      }}
-                      className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                      onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                      aria-label="Profile"
                     >
-                      {t('auth.logout') || 'Logout'}
+                      <FaUser className="w-4 h-4" />
+                      <span className="font-semibold">{user?.name}</span>
                     </button>
+                    {/* Dropdown Menu - Mobile */}
+                    <div className={`absolute left-0 mt-2 w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-200 z-[60] ${
+                      isProfileDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    }`}>
+                      <div className="p-2">
+                        {/* User Info */}
+                        <div className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                          <div className="font-semibold">{user?.name}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</div>
+                        </div>
+                        
+                        {/* Navigation Links */}
+                        <div className="py-1">
+                          <a
+                            href="/"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setIsProfileDropdownOpen(false);
+                              setIsMenuOpen(false);
+                              if (location.pathname !== '/') {
+                                navigate('/');
+                              } else {
+                                smoothScrollTo("hero");
+                              }
+                              trackClick('nav_home_profile', 'navigation_link', 'Home');
+                            }}
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                          >
+                            <FaHome className="w-4 h-4" />
+                            <span>{t('nav.home') || 'Home'}</span>
+                          </a>
+                          
+                          <a
+                            href="/blog"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setIsProfileDropdownOpen(false);
+                              setIsMenuOpen(false);
+                              navigate('/blog');
+                              trackClick('nav_blog_profile', 'navigation_link', 'Blog');
+                            }}
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                          >
+                            <FaBlog className="w-4 h-4" />
+                            <span>{t('nav.blog') || 'Blog'}</span>
+                          </a>
+                          
+                          <div className="px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-t border-gray-200 dark:border-gray-700 mt-1 pt-2">
+                            {t('nav.admin') || 'Admin'}
+                          </div>
+                          {user?.role === 'admin' && (
+                            <a
+                              href="/admin/dashboard"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsProfileDropdownOpen(false);
+                                setIsMenuOpen(false);
+                                navigate('/admin/dashboard');
+                                trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
+                              }}
+                              className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                            >
+                              <FaChartLine className="w-4 h-4" />
+                              <span>{t('nav.dashboard') || 'Dashboard'}</span>
+                            </a>
+                          )}
+                          <a
+                            href="/admin"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setIsProfileDropdownOpen(false);
+                              setIsMenuOpen(false);
+                              navigate('/admin');
+                              trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
+                            }}
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                          >
+                            <FaBlog className="w-4 h-4" />
+                            <span>{t('nav.blogManagement') || 'Blog Management'}</span>
+                          </a>
+                        </div>
+                        
+                        {/* Logout */}
+                        <div className="pt-1 border-t border-gray-200 dark:border-gray-700 mt-1">
+                          <button
+                            onClick={async () => {
+                              setIsProfileDropdownOpen(false);
+                              setIsMenuOpen(false);
+                              await logout();
+                              navigate('/');
+                              trackClick('nav_logout', 'action', 'Logout');
+                            }}
+                            className="w-full flex items-center gap-2 text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                          >
+                            <FaSignOutAlt className="w-4 h-4" />
+                            <span>{t('auth.logout') || 'Logout'}</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <button
@@ -742,8 +837,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
             </div>
           </div>
         </div>
-
-      </div>
+      )}
     </nav>
   );
 };

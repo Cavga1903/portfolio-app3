@@ -43,7 +43,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
 
   const { data: post } = useQuery<BlogPost>({
     queryKey: ['blogPost', postId],
-    queryFn: () => blogService.getPost(postId!),
+    queryFn: () => blogService.getPostById(postId!),
     enabled: !!postId,
   });
 
@@ -411,7 +411,8 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
               <RichTextEditor
                 content={formData.content || ''}
                 onChange={(html) => {
-                  setFormData({ ...formData, content: html });
+                  // Only update content field, preserve other fields
+                  setFormData((prev) => ({ ...prev, content: html }));
                   if (hasFieldError(validationErrors, 'content')) {
                     setValidationErrors(validationErrors.filter(e => e.field !== 'content'));
                   }

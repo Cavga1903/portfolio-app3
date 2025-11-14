@@ -144,6 +144,22 @@ export const blogService = {
     }
   },
 
+  getPostById: async (id: string, currentLanguage?: string): Promise<BlogPost> => {
+    try {
+      const postRef = doc(db, 'blogPosts', id);
+      const docSnapshot = await getDoc(postRef);
+      
+      if (!docSnapshot.exists()) {
+        throw new Error('Post not found');
+      }
+      
+      return docToBlogPost(docSnapshot as QueryDocumentSnapshot<DocumentData>, id, currentLanguage);
+    } catch (error) {
+      console.error('Error fetching blog post by ID:', error);
+      throw error;
+    }
+  },
+
   createPost: async (post: Partial<BlogPost>): Promise<BlogPost> => {
     try {
       const postsRef = collection(db, 'blogPosts');

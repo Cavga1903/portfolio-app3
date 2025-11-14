@@ -15,6 +15,17 @@ import Quote from '@editorjs/quote';
 import Code from '@editorjs/code';
 import Delimiter from '@editorjs/delimiter';
 import Table from '@editorjs/table';
+// @ts-expect-error - Checklist doesn't have types
+import Checklist from '@editorjs/checklist';
+// @ts-expect-error - Marker doesn't have types
+import Marker from '@editorjs/marker';
+import Underline from '@editorjs/underline';
+import InlineCode from '@editorjs/inline-code';
+import Warning from '@editorjs/warning';
+// @ts-expect-error - Embed type resolution issue
+import Embed from '@editorjs/embed';
+// @ts-expect-error - Raw doesn't have types
+import Raw from '@editorjs/raw';
 
 interface RichTextEditorProps {
   content: string;
@@ -94,6 +105,36 @@ const editorJsToHtml = (data: OutputData): string => {
       }
       case 'delimiter': {
         html += `<hr />`;
+        break;
+      }
+      case 'checklist': {
+        html += `<ul class="checklist">`;
+        block.data.items?.forEach((item: { text: string; checked: boolean }) => {
+          const checked = item.checked ? 'checked' : '';
+          html += `<li class="checklist-item"><input type="checkbox" ${checked} disabled /> ${item.text || ''}</li>`;
+        });
+        html += `</ul>`;
+        break;
+      }
+      case 'warning': {
+        html += `<div class="warning-block">`;
+        html += `<div class="warning-title">${block.data.title || 'Uyarı'}</div>`;
+        html += `<div class="warning-message">${block.data.message || ''}</div>`;
+        html += `</div>`;
+        break;
+      }
+      case 'embed': {
+        html += `<div class="embed-wrapper">`;
+        if (block.data.embed) {
+          html += block.data.embed;
+        } else if (block.data.source) {
+          html += `<iframe src="${block.data.source}" frameborder="0" allowfullscreen></iframe>`;
+        }
+        html += `</div>`;
+        break;
+      }
+      case 'raw': {
+        html += block.data.html || '';
         break;
       }
       default:
@@ -178,7 +219,45 @@ const htmlToEditorJs = (html: string): OutputData => {
         });
         break;
       }
-      case 'ul':
+      case 'ul': {
+        // Check for checklist
+        if (element.classList.contains('checklist')) {
+          const items: Array<{ text: string; checked: boolean }> = [];
+          element.querySelectorAll('li.checklist-item').forEach((li) => {
+            const checkbox = li.querySelector('input[type="checkbox"]');
+            items.push({
+              text: li.textContent?.trim() || '',
+              checked: checkbox?.hasAttribute('checked') || false,
+            });
+          });
+          if (items.length > 0) {
+            blocks.push({
+              id: `block-${blockId++}`,
+              type: 'checklist',
+              data: {
+                items: items,
+              },
+            });
+          }
+          break;
+        }
+        // Regular unordered list
+        const items: string[] = [];
+        element.querySelectorAll('li').forEach((li) => {
+          items.push(li.textContent?.trim() || '');
+        });
+        if (items.length > 0) {
+          blocks.push({
+            id: `block-${blockId++}`,
+            type: 'list',
+            data: {
+              style: 'unordered',
+              items: items,
+            },
+          });
+        }
+        break;
+      }
       case 'ol': {
         const items: string[] = [];
         element.querySelectorAll('li').forEach((li) => {
@@ -189,7 +268,7 @@ const htmlToEditorJs = (html: string): OutputData => {
             id: `block-${blockId++}`,
             type: 'list',
             data: {
-              style: tagName === 'ol' ? 'ordered' : 'unordered',
+              style: 'ordered',
               items: items,
             },
           });
@@ -251,6 +330,38 @@ const htmlToEditorJs = (html: string): OutputData => {
         });
         break;
       }
+      case 'div': {
+        // Check for warning blocks
+        if (element.classList.contains('warning-block') || element.classList.contains('warning')) {
+          const title = element.querySelector('.warning-title')?.textContent || 'Uyarı';
+          const message = element.querySelector('.warning-message')?.textContent || element.textContent || '';
+          blocks.push({
+            id: `block-${blockId++}`,
+            type: 'warning',
+            data: {
+              title: title,
+              message: message,
+            },
+          });
+          break;
+        }
+        // Check for embed blocks
+        if (element.classList.contains('embed-wrapper') || element.querySelector('iframe')) {
+          const iframe = element.querySelector('iframe');
+          blocks.push({
+            id: `block-${blockId++}`,
+            type: 'embed',
+            data: {
+              source: iframe?.getAttribute('src') || '',
+              embed: element.innerHTML,
+            },
+          });
+          break;
+        }
+        // Process child nodes for other divs
+        Array.from(element.childNodes).forEach(processNode);
+        break;
+      }
       default:
         // Process child nodes
         Array.from(element.childNodes).forEach(processNode);
@@ -284,6 +395,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   const editorRef = useRef<EditorJS | null>(null);
   const holderRef = useRef<HTMLDivElement>(null);
   const isInitializedRef = useRef(false);
+  const initialContentRef = useRef<string>(content);
+  const isUpdatingFromPropRef = useRef(false);
 
   useEffect(() => {
     if (!holderRef.current || isInitializedRef.current) {
@@ -294,7 +407,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     const editor = new EditorJS({
       holder: holderRef.current,
       placeholder: placeholder,
-      data: htmlToEditorJs(content),
+      data: htmlToEditorJs(initialContentRef.current),
       tools: {
         header: {
           // @ts-expect-error - Header type mismatch
@@ -304,18 +417,23 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
             levels: [1, 2, 3, 4, 5, 6],
             defaultLevel: 2,
           },
+          inlineToolbar: ['link', 'marker', 'underline'],
         },
         list: {
           class: List,
-          inlineToolbar: true,
+          inlineToolbar: ['link', 'bold', 'italic', 'marker', 'underline'],
           config: {
             defaultStyle: 'unordered',
           },
         },
+        checklist: {
+          class: Checklist,
+          inlineToolbar: ['link', 'bold', 'italic'],
+        },
         paragraph: {
           // @ts-expect-error - Paragraph type mismatch
           class: Paragraph,
-          inlineToolbar: true,
+          inlineToolbar: ['bold', 'italic', 'link', 'marker', 'underline', 'inlineCode'],
         },
         image: {
           class: Image,
@@ -347,11 +465,39 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         },
         quote: {
           class: Quote,
-          inlineToolbar: true,
+          inlineToolbar: ['link', 'bold', 'italic', 'marker'],
           shortcut: 'CMD+SHIFT+O',
           config: {
             quotePlaceholder: 'Alıntı metni...',
             captionPlaceholder: 'Alıntı yazarı...',
+          },
+        },
+        warning: {
+          class: Warning,
+          inlineToolbar: true,
+          shortcut: 'CMD+SHIFT+W',
+          config: {
+            titlePlaceholder: 'Uyarı başlığı...',
+            messagePlaceholder: 'Uyarı mesajı...',
+          },
+        },
+        embed: {
+          class: Embed,
+          config: {
+            services: {
+              youtube: true,
+              coub: true,
+              codepen: true,
+              imgur: true,
+              vimeo: true,
+              gfycat: true,
+            },
+          },
+        },
+        raw: {
+          class: Raw,
+          config: {
+            placeholder: 'HTML kodunu buraya yapıştırın...',
           },
         },
         code: {
@@ -370,16 +516,22 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
             cols: 2,
           },
         },
+        // Inline Tools
+        marker: Marker,
+        underline: Underline,
+        inlineCode: InlineCode,
       },
       onChange: async () => {
-        if (editorRef.current) {
-          try {
-            const outputData = await editorRef.current.save();
-            const html = editorJsToHtml(outputData);
-            onChange(html);
-          } catch (error) {
-            console.error('Error saving editor content:', error);
-          }
+        // Don't trigger onChange if we're updating from prop
+        if (isUpdatingFromPropRef.current || !editorRef.current) {
+          return;
+        }
+        try {
+          const outputData = await editorRef.current.save();
+          const html = editorJsToHtml(outputData);
+          onChange(html);
+        } catch (error) {
+          console.error('Error saving editor content:', error);
         }
       },
     });
@@ -397,11 +549,28 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
 
-  // Update content when prop changes (but not on initial mount)
+  // Update content when prop changes externally (e.g., when loading a post)
+  // But only if it's different from what we already have
   useEffect(() => {
-    if (editorRef.current && isInitializedRef.current && content) {
-      const editorJsData = htmlToEditorJs(content);
-      editorRef.current.render(editorJsData);
+    if (editorRef.current && isInitializedRef.current) {
+      // Only update if content is different and not empty
+      // This prevents clearing the editor when user is typing
+      const currentContent = initialContentRef.current;
+      if (content !== currentContent && content !== '') {
+        isUpdatingFromPropRef.current = true;
+        try {
+          const editorJsData = htmlToEditorJs(content);
+          editorRef.current.render(editorJsData).then(() => {
+            initialContentRef.current = content;
+            isUpdatingFromPropRef.current = false;
+          }).catch(() => {
+            isUpdatingFromPropRef.current = false;
+          });
+        } catch (error) {
+          console.error('Error rendering editor content:', error);
+          isUpdatingFromPropRef.current = false;
+        }
+      }
     }
   }, [content]);
 
@@ -457,6 +626,71 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         }
         .dark .ce-header {
           color: #f3f4f6;
+        }
+        /* Checklist styles */
+        .checklist {
+          list-style: none;
+          padding-left: 0;
+        }
+        .checklist-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .checklist-item input[type="checkbox"] {
+          margin-top: 0.25rem;
+          cursor: default;
+        }
+        /* Warning block styles */
+        .warning-block {
+          background-color: #fef3c7;
+          border-left: 4px solid #f59e0b;
+          padding: 1rem;
+          margin: 1rem 0;
+          border-radius: 0.25rem;
+        }
+        .dark .warning-block {
+          background-color: #78350f;
+          border-left-color: #fbbf24;
+        }
+        .warning-title {
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          color: #92400e;
+        }
+        .dark .warning-title {
+          color: #fcd34d;
+        }
+        .warning-message {
+          color: #78350f;
+        }
+        .dark .warning-message {
+          color: #fde68a;
+        }
+        /* Embed styles */
+        .embed-wrapper {
+          margin: 1rem 0;
+        }
+        .embed-wrapper iframe {
+          width: 100%;
+          max-width: 100%;
+          border-radius: 0.5rem;
+        }
+        /* Marker (highlight) styles */
+        .ce-inline-toolbar__dropdown {
+          z-index: 1000;
+        }
+        /* Inline code styles */
+        .inline-code {
+          background-color: #f3f4f6;
+          padding: 0.125rem 0.25rem;
+          border-radius: 0.25rem;
+          font-family: 'Courier New', monospace;
+          font-size: 0.875em;
+        }
+        .dark .inline-code {
+          background-color: #374151;
         }
       `}</style>
     </div>

@@ -5,8 +5,8 @@ import { getStorage } from 'firebase/storage';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 
 // Firebase configuration
-// Priority: Environment variables > Hardcoded config (fallback for development)
-// Note: In production, use environment variables for better security
+// IMPORTANT: All values must come from environment variables for security
+// Never commit API keys or secrets to the repository
 const firebaseConfig: {
   apiKey: string;
   authDomain: string;
@@ -16,15 +16,24 @@ const firebaseConfig: {
   appId: string;
   measurementId?: string;
 } = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyA6UCz0o9V4OLH2vGw8n1GU-CdRTb8hPxg",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "myportfolio-1e13b.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "myportfolio-1e13b",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "myportfolio-1e13b.firebasestorage.app",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "419940030464",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:419940030464:web:4370506fa0b2e9b934a0e5",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "",
   // measurementId - Firebase Analytics için
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-TTT8JF69GR",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "",
 };
+
+// Validate that all required environment variables are set
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+  throw new Error(
+    "Missing required Firebase environment variables. " +
+    "Please check your .env file and ensure all VITE_FIREBASE_* variables are set. " +
+    "See .env.example for reference."
+  );
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

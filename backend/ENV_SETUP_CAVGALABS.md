@@ -4,14 +4,14 @@
 
 ## 📝 .env Dosyası
 
-Backend klasöründe `.env` dosyası oluşturun:
+Backend klasöründe `.env.example` dosyasını `.env` olarak kopyalayın:
 
 ```bash
 cd backend
-nano .env
+cp .env.example .env
 ```
 
-Aşağıdaki içeriği ekleyin:
+`.env` dosyasını düzenleyip gerçek değerleri ekleyin:
 
 ```env
 # Google Workspace SMTP Ayarları

@@ -665,6 +665,7 @@
   "admin": {
     "dashboard": {
       "title": "İdarə Paneli",
+      "subtitle": "Məzmununuzu idarə edin",
       "welcome": "Xoş gəlmisiniz",
       "recentPosts": "Son Blog Yazıları",
       "viewAll": "Hamısını Gör",
@@ -672,6 +673,28 @@
       "draft": "Qaralama",
       "noPosts": "Hələ blog yazısı yoxdur",
       "createFirst": "İlk Yazınızı Yaradın"
+    },
+    "actions": {
+      "create": "Yarat",
+      "general": "Ümumi Əməliyyatlar",
+      "organization": "Təşkilat"
+    },
+    "projects": {
+      "title": "Layihə İdarəetməsi",
+      "create": "Yeni Layihə Əlavə Et",
+      "comingSoon": "Tezliklə əlavə olunacaq..."
+    },
+    "categories": {
+      "title": "Kateqoriya İdarəetməsi",
+      "create": "Kateqoriya Əlavə Et",
+      "edit": "Kateqoriyaları Redaktə Et",
+      "name": "Kateqoriya Adı",
+      "namePlaceholder": "Kateqoriya adını daxil edin",
+      "rows": "Sətir Sayı",
+      "rowsPlaceholder": "Neçə sətir göstəriləcək",
+      "save": "Saxla",
+      "cancel": "Ləğv et",
+      "comingSoon": "Tezliklə əlavə olunacaq..."
     },
     "stats": {
       "totalUsers": "Ümumi İstifadəçi",

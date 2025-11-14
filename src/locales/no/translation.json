@@ -637,6 +637,7 @@
   "admin": {
     "dashboard": {
       "title": "Dashbord",
+      "subtitle": "Administrer innholdet ditt",
       "welcome": "Velkommen tilbake",
       "recentPosts": "Siste blogginnlegg",
       "viewAll": "Se alle",
@@ -644,6 +645,28 @@
       "draft": "Utkast",
       "noPosts": "Ingen blogginnlegg ennå",
       "createFirst": "Opprett ditt første innlegg"
+    },
+    "actions": {
+      "create": "Opprett",
+      "general": "Generelle handlinger",
+      "organization": "Organisering"
+    },
+    "projects": {
+      "title": "Prosjektstyring",
+      "create": "Legg til nytt prosjekt",
+      "comingSoon": "Kommer snart..."
+    },
+    "categories": {
+      "title": "Kategoristyring",
+      "create": "Legg til kategori",
+      "edit": "Rediger kategorier",
+      "name": "Kategorinavn",
+      "namePlaceholder": "Skriv inn kategorinavn",
+      "rows": "Antall rader",
+      "rowsPlaceholder": "Hvor mange rader å vise",
+      "save": "Lagre",
+      "cancel": "Avbryt",
+      "comingSoon": "Kommer snart..."
     },
     "stats": {
       "totalUsers": "Totalt brukere",

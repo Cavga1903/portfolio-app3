@@ -515,12 +515,18 @@ If you like this project, please consider:
 5. Project Settings > General > Your apps > Web app'i ekleyin
 6. `.env` dosyasına Firebase config bilgilerini ekleyin:
    ```
-   REACT_APP_FIREBASE_API_KEY=your_api_key
-   REACT_APP_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
-   REACT_APP_FIREBASE_PROJECT_ID=your-project-id
-   REACT_APP_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
-   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=123456789
-   REACT_APP_FIREBASE_APP_ID=your-app-id
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+   VITE_FIREBASE_PROJECT_ID=your-project-id
+   VITE_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+   VITE_FIREBASE_MESSAGING_SENDER_ID=123456789012
+   VITE_FIREBASE_APP_ID=1:123456789012:web:abcdef1234567890
+   VITE_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
+   ```
+   
+   **Not:** `env.example` dosyasını `.env` olarak kopyalayıp değerleri doldurun:
+   ```bash
+   cp env.example .env
    ```
 
 ---

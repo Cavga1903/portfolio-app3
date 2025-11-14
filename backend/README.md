@@ -15,7 +15,16 @@ npm install
 
 ### 2. Environment Variables Ayarlayın
 
-`.env` dosyası oluşturun:
+Backend klasöründe `.env.example` dosyasını `.env` olarak kopyalayın (eğer yoksa oluşturun):
+
+```bash
+cd backend
+cp .env.example .env  # Eğer .env.example varsa
+# veya
+touch .env  # Eğer yoksa
+```
+
+`.env` dosyasını düzenleyip gerçek değerleri ekleyin:
 
 ```env
 # SMTP Ayarları
@@ -33,6 +42,8 @@ RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
 # CORS (Production'da spesifik domain kullanın)
 ALLOWED_ORIGIN=https://yourdomain.com
 ```
+
+**Önemli:** `.env` dosyasını asla git'e commit etmeyin! (`.gitignore`'da zaten var)
 
 ### 3. Gmail App Password Oluşturma
 

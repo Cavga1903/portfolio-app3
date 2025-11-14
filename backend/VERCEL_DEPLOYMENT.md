@@ -174,7 +174,8 @@ Email gönderimi genellikle 1-2 saniye sürer, sorun olmaz.
 
 - Production, Preview, Development için ayrı ayrı ayarlayın
 - Hassas bilgileri (App Password) güvenli tutun
-- `.env` dosyasını git'e eklemeyin
+- `.env` dosyasını git'e eklemeyin (`.gitignore`'da zaten var)
+- `.env.example` dosyasını template olarak kullanabilirsiniz
 
 ## 🔄 Adım 8: Güncelleme
 

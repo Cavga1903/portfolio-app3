@@ -637,6 +637,7 @@
   "admin": {
     "dashboard": {
       "title": "Instrumentpanel",
+      "subtitle": "Hantera ditt innehåll",
       "welcome": "Välkommen tillbaka",
       "recentPosts": "Senaste blogginlägg",
       "viewAll": "Visa alla",
@@ -644,6 +645,28 @@
       "draft": "Utkast",
       "noPosts": "Inga blogginlägg ännu",
       "createFirst": "Skapa ditt första inlägg"
+    },
+    "actions": {
+      "create": "Skapa",
+      "general": "Allmänna åtgärder",
+      "organization": "Organisation"
+    },
+    "projects": {
+      "title": "Projekthantering",
+      "create": "Lägg till nytt projekt",
+      "comingSoon": "Kommer snart..."
+    },
+    "categories": {
+      "title": "Kategorihantering",
+      "create": "Lägg till kategori",
+      "edit": "Redigera kategorier",
+      "name": "Kategorinamn",
+      "namePlaceholder": "Ange kategorinamn",
+      "rows": "Antal rader",
+      "rowsPlaceholder": "Hur många rader att visa",
+      "save": "Spara",
+      "cancel": "Avbryt",
+      "comingSoon": "Kommer snart..."
     },
     "stats": {
       "totalUsers": "Totalt användare",
