@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { FaTimes, FaLanguage, FaExclamationCircle } from 'react-icons/fa';
 import { useAuthStore } from '../../../../app/store/authStore';
+import { useUIStore } from '../../../../app/store/uiStore';
 import { blogService } from '../../../blog/services/blogService';
 import { translateBlogPost } from '../../../blog/services/translationService';
 import { validateDraft, validateForPublish, getFieldError, hasFieldError, ValidationError } from '../../services/blogValidationService';
@@ -26,6 +27,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
   const { t, i18n } = useTranslation();
   const queryClient = useQueryClient();
   const { user } = useAuthStore();
+  const { addToast } = useUIStore();
   const [formData, setFormData] = useState<Partial<BlogPost>>({
     title: '',
     slug: '',
@@ -40,6 +42,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
   const [isCheckingSlug, setIsCheckingSlug] = useState(false);
   const [slugError, setSlugError] = useState<string | null>(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
   const { data: post } = useQuery<BlogPost>({
     queryKey: ['blogPost', postId],
@@ -61,6 +64,8 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
         isPublished: post.isPublished,
         translations: post.translations,
       });
+      // Reset slugManuallyEdited when loading a post
+      setSlugManuallyEdited(false);
     }
   }, [post]);
 
@@ -77,16 +82,47 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
       queryClient.invalidateQueries({ queryKey: ['blogPosts'] });
       queryClient.invalidateQueries({ queryKey: ['blogPosts', 'admin'] });
       queryClient.invalidateQueries({ queryKey: ['blogPost', postId] });
+      addToast({
+        message: postId 
+          ? (t('admin.blog.updateSuccess') || 'Post başarıyla güncellendi')
+          : (t('admin.blog.createSuccess') || 'Post başarıyla oluşturuldu'),
+        type: 'success',
+      });
       onSave();
     },
-    onError: (error) => {
+    onError: (error: unknown) => {
       console.error('Error saving post:', error);
-      // You can add toast notification here if needed
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : (t('admin.blog.saveError') || 'Post kaydedilirken bir hata oluştu');
+      addToast({
+        message: errorMessage,
+        type: 'error',
+      });
     },
   });
 
   const handleTitleChange = (title: string) => {
-    const newSlug = formData.slug || generateSlug(title);
+    // Only auto-generate slug if:
+    // 1. Slug is empty, OR
+    // 2. Slug hasn't been manually edited, OR
+    // 3. Slug matches the auto-generated version from the previous title
+    let newSlug = formData.slug;
+    if (!slugManuallyEdited) {
+      if (!formData.slug || formData.slug.trim() === '') {
+        // Slug is empty, generate new one
+        newSlug = generateSlug(title);
+      } else {
+        // Check if current slug matches the auto-generated version
+        const previousTitleSlug = generateSlug(formData.title || '');
+        if (formData.slug === previousTitleSlug) {
+          // Slug was auto-generated, update it
+          newSlug = generateSlug(title);
+        }
+        // Otherwise, keep the existing slug (it was manually edited)
+      }
+    }
+    
     setFormData({
       ...formData,
       title,
@@ -170,7 +206,10 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
     
     // Ensure user is authenticated
     if (!user) {
-      console.error('User not authenticated');
+      addToast({
+        message: t('admin.blog.authError') || 'Kullanıcı doğrulanamadı. Lütfen tekrar giriş yapın.',
+        type: 'error',
+      });
       return;
     }
 
@@ -192,6 +231,14 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
 
     if (!validation.isValid) {
       setValidationErrors(validation.errors);
+      // Show error toast
+      const firstError = validation.errors[0];
+      if (firstError) {
+        addToast({
+          message: getFieldError(validation.errors, firstError.field) || (t('admin.blog.validationError') || 'Lütfen formu kontrol edin'),
+          type: 'error',
+        });
+      }
       // Scroll to first error
       const firstErrorField = validation.errors[0]?.field;
       if (firstErrorField) {
@@ -287,6 +334,7 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
                 onChange={(e) => {
                   const newSlug = e.target.value.toLowerCase().trim();
                   setFormData({ ...formData, slug: newSlug });
+                  setSlugManuallyEdited(true); // Mark as manually edited
                   setSlugError(null);
                   if (hasFieldError(validationErrors, 'slug')) {
                     setValidationErrors(validationErrors.filter(e => e.field !== 'slug'));

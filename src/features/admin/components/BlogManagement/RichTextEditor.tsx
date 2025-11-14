@@ -33,6 +33,7 @@ interface RichTextEditorProps {
   placeholder?: string;
   error?: boolean;
   minHeight?: string;
+  enableMarkdown?: boolean; // Enable markdown support
 }
 
 // Convert Editor.js JSON to HTML
@@ -145,6 +146,260 @@ const editorJsToHtml = (data: OutputData): string => {
   return html;
 };
 
+// Convert Markdown to Editor.js JSON
+const markdownToEditorJs = (markdown: string): OutputData => {
+  if (!markdown || markdown.trim() === '') {
+    return {
+      time: Date.now(),
+      blocks: [],
+    };
+  }
+
+  interface EditorBlock {
+    id: string;
+    type: string;
+    data: Record<string, unknown>;
+  }
+  const blocks: EditorBlock[] = [];
+  let blockId = 0;
+  const lines = markdown.split('\n');
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i].trim();
+    
+    // Headers (# ## ### etc.)
+    const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
+    if (headerMatch) {
+      const level = headerMatch[1].length;
+      const text = headerMatch[2];
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'header',
+        data: {
+          text: text,
+          level: level,
+        },
+      });
+      i++;
+      continue;
+    }
+
+    // Code blocks (```)
+    if (line.startsWith('```')) {
+      // Language is optional, we'll just skip it for now
+      line.slice(3).trim(); // Skip language identifier
+      const codeLines: string[] = [];
+      i++;
+      while (i < lines.length && !lines[i].trim().startsWith('```')) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'code',
+        data: {
+          code: codeLines.join('\n'),
+        },
+      });
+      i++;
+      continue;
+    }
+
+    // Blockquotes (>)
+    if (line.startsWith('>')) {
+      const quoteText = line.slice(1).trim();
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'quote',
+        data: {
+          text: quoteText,
+          caption: '',
+        },
+      });
+      i++;
+      continue;
+    }
+
+    // Unordered lists (- or *)
+    if (line.match(/^[-*]\s+/)) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].trim().match(/^[-*]\s+/)) {
+        items.push(lines[i].trim().slice(2));
+        i++;
+      }
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'list',
+        data: {
+          style: 'unordered',
+          items: items,
+        },
+      });
+      continue;
+    }
+
+    // Ordered lists (1. 2. etc.)
+    if (line.match(/^\d+\.\s+/)) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].trim().match(/^\d+\.\s+/)) {
+        items.push(lines[i].trim().replace(/^\d+\.\s+/, ''));
+        i++;
+      }
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'list',
+        data: {
+          style: 'ordered',
+          items: items,
+        },
+      });
+      continue;
+    }
+
+    // Horizontal rule (--- or ***)
+    if (line.match(/^[-*]{3,}$/)) {
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'delimiter',
+        data: {},
+      });
+      i++;
+      continue;
+    }
+
+    // Images ![alt](url)
+    const imageMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+    if (imageMatch) {
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'image',
+        data: {
+          url: imageMatch[2],
+          caption: imageMatch[1],
+        },
+      });
+      i++;
+      continue;
+    }
+
+    // Links [text](url)
+    const linkMatch = line.match(/^\[([^\]]+)\]\(([^)]+)\)/);
+    if (linkMatch) {
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'paragraph',
+        data: {
+          text: `<a href="${linkMatch[2]}" target="_blank">${linkMatch[1]}</a>`,
+        },
+      });
+      i++;
+      continue;
+    }
+
+    // Regular paragraph
+    if (line) {
+      // Process inline markdown in paragraph
+      let processedText = line;
+      // Bold **text**
+      processedText = processedText.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+      // Italic *text*
+      processedText = processedText.replace(/\*([^*]+)\*/g, '<i>$1</i>');
+      // Inline code `code`
+      processedText = processedText.replace(/`([^`]+)`/g, '<code>$1</code>');
+      
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'paragraph',
+        data: {
+          text: processedText,
+        },
+      });
+    }
+    i++;
+  }
+
+  return {
+    time: Date.now(),
+    blocks: blocks.length > 0 ? blocks : [
+      {
+        id: 'block-0',
+        type: 'paragraph',
+        data: {
+          text: '',
+        },
+      },
+    ],
+  };
+};
+
+// Convert Editor.js JSON to Markdown
+const editorJsToMarkdown = (data: OutputData): string => {
+  if (!data || !data.blocks || !Array.isArray(data.blocks)) {
+    return '';
+  }
+
+  let markdown = '';
+
+  data.blocks.forEach((block) => {
+    switch (block.type) {
+      case 'paragraph': {
+        let text = block.data.text || '';
+        // Convert HTML back to markdown
+        text = text.replace(/<b>(.*?)<\/b>/g, '**$1**');
+        text = text.replace(/<i>(.*?)<\/i>/g, '*$1*');
+        text = text.replace(/<code>(.*?)<\/code>/g, '`$1`');
+        text = text.replace(/<a href="([^"]+)"[^>]*>(.*?)<\/a>/g, '[$2]($1)');
+        markdown += text + '\n\n';
+        break;
+      }
+      case 'header': {
+        const level = block.data.level || 1;
+        const text = block.data.text || '';
+        markdown += '#'.repeat(level) + ' ' + text + '\n\n';
+        break;
+      }
+      case 'list': {
+        const items = block.data.items || [];
+        const style = block.data.style || 'unordered';
+        items.forEach((item: string) => {
+          if (style === 'ordered') {
+            markdown += '1. ' + item + '\n';
+          } else {
+            markdown += '- ' + item + '\n';
+          }
+        });
+        markdown += '\n';
+        break;
+      }
+      case 'quote': {
+        const text = block.data.text || '';
+        markdown += '> ' + text + '\n\n';
+        break;
+      }
+      case 'code': {
+        const code = block.data.code || '';
+        markdown += '```\n' + code + '\n```\n\n';
+        break;
+      }
+      case 'image': {
+        const url = block.data.url || block.data.file?.url || '';
+        const caption = block.data.caption || '';
+        markdown += `![${caption}](${url})\n\n`;
+        break;
+      }
+      case 'delimiter': {
+        markdown += '---\n\n';
+        break;
+      }
+      default:
+        break;
+    }
+  });
+
+  return markdown.trim();
+};
+
 // Convert HTML to Editor.js JSON (basic conversion)
 const htmlToEditorJs = (html: string): OutputData => {
   if (!html || html.trim() === '') {
@@ -152,6 +407,13 @@ const htmlToEditorJs = (html: string): OutputData => {
       time: Date.now(),
       blocks: [],
     };
+  }
+
+  // Check if content is markdown (starts with #, -, >, etc.)
+  const trimmedHtml = html.trim();
+  if (trimmedHtml.match(/^[#->*`\d]/) && !trimmedHtml.startsWith('<')) {
+    // Likely markdown, try parsing as markdown
+    return markdownToEditorJs(html);
   }
 
   // Create a temporary DOM element to parse HTML
@@ -391,12 +653,14 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   placeholder = 'İçeriğinizi buraya yazın...',
   error = false,
   minHeight = '300px',
+  enableMarkdown = true, // Enable markdown by default
 }) => {
   const editorRef = useRef<EditorJS | null>(null);
   const holderRef = useRef<HTMLDivElement>(null);
   const isInitializedRef = useRef(false);
   const initialContentRef = useRef<string>(content);
   const isUpdatingFromPropRef = useRef(false);
+  const lastContentFromPropRef = useRef<string>(content);
 
   useEffect(() => {
     if (!holderRef.current || isInitializedRef.current) {
@@ -406,10 +670,14 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     // Initialize Editor.js
     // Ensure content is always a string
     const contentString = typeof initialContentRef.current === 'string' ? initialContentRef.current : '';
+    // Convert content to Editor.js format (supports both HTML and Markdown)
+    const editorData = enableMarkdown && contentString.trim().match(/^[#->*`\d]/) && !contentString.trim().startsWith('<')
+      ? markdownToEditorJs(contentString)
+      : htmlToEditorJs(contentString);
     const editor = new EditorJS({
       holder: holderRef.current,
       placeholder: placeholder,
-      data: htmlToEditorJs(contentString),
+      data: editorData,
       readOnly: false,
       autofocus: false,
       minHeight: 0,
@@ -533,12 +801,18 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         }
         try {
           const outputData = await editorRef.current.save();
-          const html = editorJsToHtml(outputData);
+          // If markdown is enabled, export as markdown, otherwise as HTML
+          const output = enableMarkdown 
+            ? editorJsToMarkdown(outputData)
+            : editorJsToHtml(outputData);
           // Ensure we always pass a string
-          if (typeof html === 'string') {
-            onChange(html);
+          if (typeof output === 'string') {
+            // Update our refs to prevent re-render loop
+            lastContentFromPropRef.current = output;
+            initialContentRef.current = output;
+            onChange(output);
           } else {
-            console.warn('Editor content is not a string:', html);
+            console.warn('Editor content is not a string:', output);
             onChange('');
           }
         } catch (error) {
@@ -562,19 +836,29 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   }, []); // Only run once on mount
 
   // Update content when prop changes externally (e.g., when loading a post)
-  // But only if it's different from what we already have
+  // But only if it's different from what we already have and it's an external change
   useEffect(() => {
     if (editorRef.current && isInitializedRef.current) {
       // Ensure content is always a string
       const contentString = typeof content === 'string' ? content : '';
       
-      // Only update if content is different and not empty
-      // This prevents clearing the editor when user is typing
-      const currentContent = initialContentRef.current;
-      if (contentString !== currentContent && contentString !== '') {
+      // Only update if:
+      // 1. Content is different from what we last received from props
+      // 2. Content is different from what we last saved (to avoid loops)
+      // 3. Content is not empty (unless we're clearing it intentionally)
+      const lastPropContent = lastContentFromPropRef.current;
+      const currentSavedContent = initialContentRef.current;
+      
+      // This is an external change (from props) if it's different from what we last received
+      // AND different from what we last saved (meaning it's not from our own onChange)
+      if (contentString !== lastPropContent && contentString !== currentSavedContent) {
         isUpdatingFromPropRef.current = true;
+        lastContentFromPropRef.current = contentString;
         try {
-          const editorJsData = htmlToEditorJs(contentString);
+          // Convert content to Editor.js format (supports both HTML and Markdown)
+          const editorJsData = enableMarkdown && contentString.trim().match(/^[#->*`\d]/) && !contentString.trim().startsWith('<')
+            ? markdownToEditorJs(contentString)
+            : htmlToEditorJs(contentString);
           editorRef.current.render(editorJsData).then(() => {
             initialContentRef.current = contentString;
             isUpdatingFromPropRef.current = false;
@@ -586,9 +870,13 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
           console.error('Error converting content to Editor.js format:', error);
           isUpdatingFromPropRef.current = false;
         }
+      } else if (contentString === lastPropContent && contentString !== currentSavedContent) {
+        // Content matches what we last received from props, but differs from saved
+        // This means user is typing, so update our ref but don't re-render
+        lastContentFromPropRef.current = contentString;
       }
     }
-  }, [content]);
+  }, [content, enableMarkdown]);
 
   return (
     <div

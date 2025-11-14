@@ -53,13 +53,20 @@ const validateContent = (content: string | undefined, minWords: number = 10): Va
       message: 'İçerik gereklidir',
     });
   } else {
-    // Remove HTML tags and markdown for word count
-    const textContent = content
-      .replace(/<[^>]*>/g, '') // Remove HTML tags
-      .replace(/[#*_`\[\]()]/g, '') // Remove markdown syntax
-      .replace(/\n+/g, ' ')
+    // Create a temporary DOM element to extract text content
+    // This properly handles nested HTML tags and entities
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    
+    // Get all text content, including from nested elements
+    let textContent = tempDiv.textContent || tempDiv.innerText || '';
+    
+    // Clean up: remove extra whitespace, normalize spaces
+    textContent = textContent
+      .replace(/\s+/g, ' ') // Replace multiple spaces/newlines with single space
       .trim();
     
+    // Count words (split by whitespace and filter empty strings)
     const wordCount = textContent.split(/\s+/).filter(word => word.length > 0).length;
     
     if (wordCount < minWords) {

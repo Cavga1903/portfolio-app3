@@ -10,13 +10,13 @@ const App: React.FC = () => {
   // Dil değiştiğinde sayfa başlığını güncelle
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      document.title = t('pageTitle');
+    document.title = t('pageTitle');
     }
   }, [i18n.language, t]);
 
-  return (
+      return (
     <AppProvider>
-      <Routes>
+        <Routes>
         {routes.map((route) => (
           <Route
             key={route.path}
@@ -24,9 +24,9 @@ const App: React.FC = () => {
             element={route.element}
           />
         ))}
-      </Routes>
+        </Routes>
     </AppProvider>
-  );
+      );
 };
 
 export default App;
