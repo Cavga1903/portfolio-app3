@@ -49,10 +49,12 @@ const BlogEditorAdmin: React.FC<BlogEditorAdminProps> = ({
 
   useEffect(() => {
     if (post) {
+      // Ensure content is always a string
+      const contentString = typeof post.content === 'string' ? post.content : '';
       setFormData({
         title: post.title,
         slug: post.slug,
-        content: post.content,
+        content: contentString,
         excerpt: post.excerpt,
         tags: post.tags,
         image: post.image || '',

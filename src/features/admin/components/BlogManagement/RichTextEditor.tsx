@@ -404,10 +404,15 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     }
 
     // Initialize Editor.js
+    // Ensure content is always a string
+    const contentString = typeof initialContentRef.current === 'string' ? initialContentRef.current : '';
     const editor = new EditorJS({
       holder: holderRef.current,
       placeholder: placeholder,
-      data: htmlToEditorJs(initialContentRef.current),
+      data: htmlToEditorJs(contentString),
+      readOnly: false,
+      autofocus: false,
+      minHeight: 0,
       tools: {
         header: {
           // @ts-expect-error - Header type mismatch
@@ -529,9 +534,16 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         try {
           const outputData = await editorRef.current.save();
           const html = editorJsToHtml(outputData);
-          onChange(html);
+          // Ensure we always pass a string
+          if (typeof html === 'string') {
+            onChange(html);
+          } else {
+            console.warn('Editor content is not a string:', html);
+            onChange('');
+          }
         } catch (error) {
           console.error('Error saving editor content:', error);
+          // If there's an error, don't update to prevent data loss
         }
       },
     });
@@ -553,21 +565,25 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   // But only if it's different from what we already have
   useEffect(() => {
     if (editorRef.current && isInitializedRef.current) {
+      // Ensure content is always a string
+      const contentString = typeof content === 'string' ? content : '';
+      
       // Only update if content is different and not empty
       // This prevents clearing the editor when user is typing
       const currentContent = initialContentRef.current;
-      if (content !== currentContent && content !== '') {
+      if (contentString !== currentContent && contentString !== '') {
         isUpdatingFromPropRef.current = true;
         try {
-          const editorJsData = htmlToEditorJs(content);
+          const editorJsData = htmlToEditorJs(contentString);
           editorRef.current.render(editorJsData).then(() => {
-            initialContentRef.current = content;
+            initialContentRef.current = contentString;
             isUpdatingFromPropRef.current = false;
-          }).catch(() => {
+          }).catch((error) => {
+            console.error('Error rendering editor content:', error);
             isUpdatingFromPropRef.current = false;
           });
         } catch (error) {
-          console.error('Error rendering editor content:', error);
+          console.error('Error converting content to Editor.js format:', error);
           isUpdatingFromPropRef.current = false;
         }
       }
