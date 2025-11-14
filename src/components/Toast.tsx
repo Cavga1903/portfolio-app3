@@ -8,7 +8,7 @@ interface ToastProps {
   isVisible: boolean;
   onClose: () => void;
   duration?: number;
-  type?: 'success' | 'error' | 'info';
+  type?: 'success' | 'error' | 'info' | 'warning';
 }
 
 const Toast: React.FC<ToastProps> = ({ 
@@ -46,6 +46,12 @@ const Toast: React.FC<ToastProps> = ({
       icon: 'text-blue-400',
       bg: 'bg-blue-500/20',
       border: 'border-blue-500/50'
+    },
+    warning: {
+      gradient: 'from-yellow-500 to-orange-500',
+      icon: 'text-yellow-400',
+      bg: 'bg-yellow-500/20',
+      border: 'border-yellow-500/50'
     }
   };
 

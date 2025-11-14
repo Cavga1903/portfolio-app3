@@ -6,7 +6,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { blogService } from '../../features/blog/services/blogService';
 import { useUIStore } from '../../app/store/uiStore';
 import Toast from '../../components/Toast';
-import { FaPlus, FaSearch, FaChevronDown, FaChevronUp, FaBlog, FaProjectDiagram, FaTags, FaEllipsisV, FaEye, FaEyeSlash, FaBookmark, FaHeart, FaShare, FaArchive, FaBoxOpen, FaTrash, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
+import { FaPlus, FaSearch, FaChevronDown, FaChevronUp, FaBlog, FaProjectDiagram, FaTags, FaEye, FaEyeSlash, FaBookmark, FaHeart, FaShare, FaArchive, FaTrash, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
+import { BlogPost } from '../../features/blog/types/blog.types';
 import Navbar from '../../components/Navbar';
 import { LoginModal, SignupModal } from '../../features/auth';
 
@@ -205,17 +206,18 @@ const AdminBlogManagement: React.FC = () => {
         type: 'success',
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       console.error('Error deleting posts:', error);
       let errorMessage = t('admin.blog.deleteError') || 'Postlar silinirken bir hata oluştu';
       
       // Check if it's a Firebase permission error
-      if (error?.code === 'permission-denied' || error?.message?.includes('permission')) {
+      const firebaseError = error as { code?: string; message?: string; stack?: string };
+      if (firebaseError?.code === 'permission-denied' || firebaseError?.message?.includes('permission')) {
         errorMessage = 'İzin hatası: Firebase security rules kontrol edin. Kullanıcınızın admin rolü olduğundan emin olun.';
         console.error('Firebase Permission Error Details:', {
-          code: error?.code,
-          message: error?.message,
-          stack: error?.stack,
+          code: firebaseError?.code,
+          message: firebaseError?.message,
+          stack: firebaseError?.stack,
         });
       }
       
