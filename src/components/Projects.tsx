@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
+import { useDarkMode } from '../hooks/useDarkMode';
 import ProjectModal from './ProjectModal';
 
 type Project = {
@@ -22,7 +23,7 @@ type Project = {
 };
 
 // Project placeholder component
-const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => string }> = memo(({ project, t }) => {
+const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => string; isDarkMode: boolean }> = memo(({ project, t, isDarkMode }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   
@@ -31,15 +32,23 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
   
   // GitHub-style placeholder with code-like appearance
   const renderGitHubPlaceholder = () => (
-    <div className="w-full h-full bg-gray-100 dark:bg-gray-900 flex flex-col">
+    <div className={`w-full h-full flex flex-col ${
+      isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+    }`}>
       {/* GitHub-style header */}
-      <div className="flex items-center justify-between px-3 py-1.5 bg-gray-200 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700">
+      <div className={`flex items-center justify-between px-3 py-1.5 border-b ${
+        isDarkMode
+          ? 'bg-gray-800 border-gray-700'
+          : 'bg-gray-200 border-gray-300'
+      }`}>
         <div className="flex items-center space-x-1.5">
           <div className="w-2 h-2 bg-red-500 rounded-full"></div>
           <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
         </div>
-        <div className="text-xs text-gray-600 dark:text-gray-400 font-mono">index.js</div>
+        <div className={`text-xs font-mono ${
+          isDarkMode ? 'text-gray-400' : 'text-gray-600'
+        }`}>index.js</div>
       </div>
       
       {/* Code-like content - more compact */}
@@ -61,7 +70,11 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
       </div>
       
       {/* GitHub-style footer - more compact */}
-      <div className="px-3 py-1.5 bg-gray-200 dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-xs text-gray-600 dark:text-gray-400">
+      <div className={`px-3 py-1.5 border-t text-xs ${
+        isDarkMode
+          ? 'bg-gray-800 border-gray-700 text-gray-400'
+          : 'bg-gray-200 border-gray-300 text-gray-600'
+      }`}>
         <div className="flex items-center justify-center">
           <span>{t('projects.clickToViewDetails')}</span>
         </div>
@@ -84,12 +97,14 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
       )}
       
       {/* Show GitHub-style placeholder if no screenshot or error */}
-      {(!imageLoaded || imageError) && renderGitHubPlaceholder()}
+      {(!imageLoaded || imageError) && renderGitHubPlaceholder(isDarkMode)}
       
       {/* Overlay for screenshot */}
       {imageLoaded && !imageError && (
         <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-            <div className="text-center text-gray-900 dark:text-white">
+            <div className={`text-center ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
               <div className="text-2xl mb-2">👁️</div>
               <div className="text-sm font-semibold">{t('projects.livePreview')}</div>
             </div>
@@ -101,6 +116,7 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
+  const { isDarkMode } = useDarkMode();
   const { trackClick } = useAnalytics();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -245,13 +261,19 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20 md:py-24 lg:py-28 bg-gray-50 dark:bg-gray-900">
+    <section id="projects" className={`py-20 md:py-24 lg:py-28 ${
+      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+    }`}>
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className={`text-4xl font-bold mb-4 ${
+            isDarkMode ? 'text-white' : 'text-gray-900'
+          }`}>
             {t('projects.title')}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className={`text-xl max-w-3xl mx-auto ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>
             {t('projects.subtitle')}
           </p>
         </div>
@@ -310,7 +332,11 @@ const Projects: React.FC = () => {
                     handleProjectClick(project);
                   }}
                 >
-                      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105 h-full flex flex-col border border-gray-200 dark:border-gray-700">
+                      <div className={`rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:scale-105 h-full flex flex-col border ${
+                        isDarkMode
+                          ? 'bg-gray-800 border-gray-700'
+                          : 'bg-white border-gray-200'
+                      }`}>
                     {/* Project Preview */}
                     <ProjectPlaceholder project={project} t={t} />
                     

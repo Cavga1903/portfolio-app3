@@ -2,20 +2,30 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaHeart, FaInstagram, FaCoffee, FaDownload } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
+  const { isDarkMode } = useDarkMode();
   const { trackSocialClick, trackCVDownload, trackClick } = useAnalytics();
   
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 p-8 flex flex-col items-center justify-center border-t border-gray-300 dark:border-gray-700">
+    <footer className={`p-8 flex flex-col items-center justify-center border-t ${
+      isDarkMode
+        ? 'bg-gray-800 text-gray-300 border-gray-700'
+        : 'bg-gray-100 text-gray-600 border-gray-300'
+    }`}>
       {/* Sosyal Medya İkonları */}
       <div className="flex gap-6 mb-4">
         <a
           href="https://github.com/Cavga1903"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-2xl text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-full group relative"
+          className={`text-2xl hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-full group relative ${
+            isDarkMode
+              ? 'text-gray-300 hover:text-white'
+              : 'text-gray-600 hover:text-black'
+          }`}
           aria-label="GitHub"
           title="GitHub - @Cavga1903"
           onClick={() => trackSocialClick('github', 'profile_click')}
@@ -26,7 +36,9 @@ const Footer: React.FC = () => {
           href="https://www.linkedin.com/in/tolgaacavgaa"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-2xl text-gray-600 dark:text-gray-300 hover:text-[#0A66C2] dark:hover:text-[#0A66C2] hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 rounded-full group"
+          className={`text-2xl hover:text-[#0A66C2] hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2 rounded-full group ${
+            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+          }`}
           aria-label="LinkedIn"
           title="LinkedIn - @tolgaacavgaa"
           onClick={() => trackSocialClick('linkedin', 'profile_click')}
@@ -37,7 +49,9 @@ const Footer: React.FC = () => {
           href="https://www.instagram.com/codewithcavga"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-2xl text-gray-600 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-500 hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 rounded-full group relative"
+          className={`text-2xl hover:text-pink-500 hover:scale-125 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 rounded-full group relative ${
+            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+          }`}
           aria-label="Instagram"  
           onClick={() => trackSocialClick('instagram', 'profile_click')}
         >
@@ -72,7 +86,9 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Copyright */}
-      <p className="text-center text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
+      <p className={`text-center text-sm transition-colors duration-300 ${
+        isDarkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'
+      }`}>
         &copy; {new Date().getFullYear()} Tolga Çavga. {t('footer.rights')}
       </p>
       

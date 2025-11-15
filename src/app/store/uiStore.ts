@@ -28,6 +28,11 @@ interface UIState {
     [key: string]: boolean;
   };
   setLoading: (key: string, value: boolean) => void;
+  
+  // Dark mode management
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+  setDarkMode: (value: boolean) => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -112,6 +117,58 @@ export const useUIStore = create<UIState>((set) => ({
         [key]: value,
       },
     }));
+  },
+  
+  // Dark mode state - Initialize from localStorage or default to dark
+  isDarkMode: (() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      return savedTheme === 'light' ? false : true; // Default to dark
+    }
+    return true; // Default to dark
+  })(),
+  
+  setDarkMode: (value) => {
+    set({ isDarkMode: value });
+    if (typeof window !== 'undefined') {
+      if (value) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+  },
+  
+  toggleDarkMode: () => {
+    set((state) => {
+      const newMode = !state.isDarkMode;
+      
+      // Check if View Transitions API is supported
+      if (typeof window !== 'undefined' && document.startViewTransition) {
+        document.startViewTransition(() => {
+          if (newMode) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          }
+        });
+      } else {
+        // Fallback for browsers without View Transitions API
+        if (newMode) {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+      }
+      
+      return { isDarkMode: newMode };
+    });
   },
 }));
 

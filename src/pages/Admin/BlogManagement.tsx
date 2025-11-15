@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { blogService } from '../../features/blog/services/blogService';
 import { useUIStore } from '../../app/store/uiStore';
+import { useDarkMode } from '../../hooks/useDarkMode';
 import Toast from '../../components/Toast';
 import { FaPlus, FaSearch, FaChevronDown, FaChevronUp, FaBlog, FaProjectDiagram, FaTags, FaEye, FaEyeSlash, FaBookmark, FaHeart, FaShare, FaArchive, FaTrash, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
 import { BlogPost } from '../../features/blog/types/blog.types';
@@ -41,6 +42,7 @@ const AdminBlogManagement: React.FC = () => {
   const categoryManagementRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
   const { addToast, toasts, removeToast } = useUIStore();
+  const { isDarkMode } = useDarkMode();
 
   // Check if edit parameter is in URL
   useEffect(() => {
@@ -355,24 +357,38 @@ const AdminBlogManagement: React.FC = () => {
   }, [isActionsMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16 flex flex-col">
+    <div className={`min-h-screen pt-16 flex flex-col ${
+      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+    }`}>
       <Navbar onLoginClick={() => setShowLoginModal(true)} />
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+      <header className={`shadow-sm border-b flex-shrink-0 ${
+        isDarkMode 
+          ? 'bg-gray-800 border-gray-700' 
+          : 'bg-white border-gray-200'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 className={`text-xl sm:text-2xl font-bold ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>
                 {t('admin.dashboard.title') || 'Dashboard'}
               </h1>
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <p className={`text-xs sm:text-sm mt-1 ${
+                isDarkMode ? 'text-gray-400' : 'text-gray-500'
+              }`}>
                 {t('admin.dashboard.subtitle') || 'Manage your content'}
               </p>
             </div>
             <div className="relative" ref={actionsMenuRef}>
               <button
                 onClick={() => setIsActionsMenuOpen(!isActionsMenuOpen)}
-                className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
+                className={`p-2 rounded-lg transition-all ${
+                  isDarkMode
+                    ? 'text-gray-400 hover:text-blue-400 hover:bg-gray-700'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-gray-100'
+                }`}
                 title={t('admin.blog.create') || 'İşlemler'}
               >
                 <FaPlus size={18} />
@@ -383,11 +399,17 @@ const AdminBlogManagement: React.FC = () => {
                     className="fixed inset-0 z-10"
                     onClick={() => setIsActionsMenuOpen(false)}
                   />
-                  <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-20 border border-gray-200 dark:border-gray-700">
+                  <div className={`absolute right-0 mt-2 w-64 rounded-lg shadow-xl z-20 border ${
+                    isDarkMode
+                      ? 'bg-gray-800 border-gray-700'
+                      : 'bg-white border-gray-200'
+                  }`}>
                     <div className="py-1">
                       {/* Create Actions */}
                       <div className="px-3 py-2">
-                        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
+                        <p className={`text-xs font-semibold uppercase tracking-wider mb-1 ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
                           {t('admin.actions.create') || 'Oluştur'}
                         </p>
                       </div>
@@ -396,9 +418,13 @@ const AdminBlogManagement: React.FC = () => {
                           handleCreate();
                           setIsActionsMenuOpen(false);
                         }}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
-                        <FaPlus size={18} className="text-blue-600 dark:text-blue-400" />
+                        <FaPlus size={18} className={isDarkMode ? "text-blue-400" : "text-blue-600"} />
                         <span>{t('admin.blog.create') || 'Yeni Post Oluştur'}</span>
                       </button>
                       <button
@@ -406,9 +432,13 @@ const AdminBlogManagement: React.FC = () => {
                           // TODO: Implement project creation
                           setIsActionsMenuOpen(false);
                         }}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
-                        <FaPlus size={18} className="text-purple-600 dark:text-purple-400" />
+                        <FaPlus size={18} className={isDarkMode ? "text-purple-400" : "text-purple-600"} />
                         <span>{t('admin.projects.create') || 'Yeni Proje Ekle'}</span>
                       </button>
                       <button
@@ -422,25 +452,37 @@ const AdminBlogManagement: React.FC = () => {
                             });
                           }, 100);
                         }}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
-                        <FaPlus size={18} className="text-green-600 dark:text-green-400" />
+                        <FaPlus size={18} className={isDarkMode ? "text-green-400" : "text-green-600"} />
                         <span>{t('admin.categories.create') || 'Kategori Ekle'}</span>
                       </button>
                       
-                      <div className="border-t border-gray-200 dark:border-gray-700 my-1" />
+                      <div className={`border-t my-1 ${
+                        isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                      }`} />
                       
                       {/* General Actions */}
                       <div className="px-3 py-2">
-                        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
+                        <p className={`text-xs font-semibold uppercase tracking-wider mb-1 ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
                           {t('admin.actions.general') || 'Genel İşlemler'}
                         </p>
                       </div>
                       <button
                         onClick={() => handleBulkAction('publish')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
-                        <FaEye size={18} className="text-green-600 dark:text-green-400" />
+                        <FaEye size={18} className={isDarkMode ? "text-green-400" : "text-green-600"} />
                         <span>{t('admin.blog.publish') || 'Yayınla'}</span>
                         {selectedPosts.size > 0 && (
                           <span className="ml-auto text-xs text-gray-500">({selectedPosts.size})</span>
@@ -448,9 +490,13 @@ const AdminBlogManagement: React.FC = () => {
                       </button>
                       <button
                         onClick={() => handleBulkAction('unpublish')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
-                        <FaEyeSlash size={18} className="text-gray-600 dark:text-gray-400" />
+                        <FaEyeSlash size={18} className={isDarkMode ? "text-gray-400" : "text-gray-600"} />
                         <span>{t('admin.blog.unpublish') || 'Yayından Kaldır'}</span>
                         {selectedPosts.size > 0 && (
                           <span className="ml-auto text-xs text-gray-500">({selectedPosts.size})</span>
@@ -458,23 +504,35 @@ const AdminBlogManagement: React.FC = () => {
                       </button>
                       <button
                         onClick={() => handleBulkAction('edit')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
-                        <FaEdit size={18} className="text-blue-600 dark:text-blue-400" />
+                        <FaEdit size={18} className={isDarkMode ? "text-blue-400" : "text-blue-600"} />
                         <span>{t('admin.blog.editPost') || 'Düzenle'}</span>
                       </button>
                       
-                      <div className="border-t border-gray-200 dark:border-gray-700 my-1" />
+                      <div className={`border-t my-1 ${
+                        isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                      }`} />
                       
                       {/* Organization Actions */}
                       <div className="px-3 py-2">
-                        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
+                        <p className={`text-xs font-semibold uppercase tracking-wider mb-1 ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
                           {t('admin.actions.organization') || 'Organizasyon'}
                         </p>
                       </div>
                       <button
                         onClick={() => handleBulkAction('bookmark')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
                         <FaBookmark size={18} className="text-yellow-600 dark:text-yellow-400" />
                         <span>{t('admin.blog.bookmark') || 'Yer İşareti'}</span>
@@ -484,7 +542,11 @@ const AdminBlogManagement: React.FC = () => {
                       </button>
                       <button
                         onClick={() => handleBulkAction('favorite')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
                         <FaHeart size={18} className="text-pink-600 dark:text-pink-400" />
                         <span>{t('admin.blog.favorite') || 'Favori'}</span>
@@ -494,14 +556,22 @@ const AdminBlogManagement: React.FC = () => {
                       </button>
                       <button
                         onClick={() => handleBulkAction('share')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
                         <FaShare size={18} className="text-purple-600 dark:text-purple-400" />
                         <span>{t('admin.blog.share') || 'Paylaş'}</span>
                       </button>
                       <button
                         onClick={() => handleBulkAction('archive')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-gray-300 hover:bg-gray-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                       >
                         <FaArchive size={18} className="text-orange-600 dark:text-orange-400" />
                         <span>{t('admin.blog.archive') || 'Arşivle'}</span>
@@ -510,12 +580,18 @@ const AdminBlogManagement: React.FC = () => {
                         )}
                       </button>
                       
-                      <div className="border-t border-gray-200 dark:border-gray-700 my-1" />
+                      <div className={`border-t my-1 ${
+                        isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                      }`} />
                       
                       {/* Danger Actions */}
                       <button
                         onClick={() => handleBulkAction('delete')}
-                        className="w-full px-4 py-2.5 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3"
+                        className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 ${
+                          isDarkMode
+                            ? 'text-red-400 hover:bg-red-900/20'
+                            : 'text-red-600 hover:bg-red-50'
+                        }`}
                       >
                         <FaTrash size={18} />
                         <span>{t('admin.blog.delete') || 'Sil'}</span>
@@ -537,11 +613,21 @@ const AdminBlogManagement: React.FC = () => {
         {/* Management Sections */}
         <div className="mb-4 sm:mb-6 space-y-4">
           {/* Blog Management */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm w-full">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <div className={`rounded-lg border shadow-sm w-full ${
+            isDarkMode
+              ? 'bg-gray-800 border-gray-700'
+              : 'bg-white border-gray-200'
+          }`}>
+            <div className={`px-6 py-4 border-b ${
+              isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            }`}>
               <div className="flex items-center gap-4">
-                <FaBlog className="text-blue-600 dark:text-blue-400 text-xl" />
-                <span className="font-semibold text-lg text-gray-900 dark:text-white">
+                <FaBlog className={`text-xl ${
+                  isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                }`} />
+                <span className={`font-semibold text-lg ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
                   {t('admin.blog.title') || 'Blog Yönetimi'}
                 </span>
               </div>
@@ -555,12 +641,18 @@ const AdminBlogManagement: React.FC = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder={t('admin.blog.search') || 'Post ara...'}
-                        className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-sm sm:text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white"
+                        className={`w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                          isDarkMode
+                            ? 'bg-gray-800 border-gray-700 text-white'
+                            : 'bg-white border-gray-200 text-gray-900'
+                        }`}
                       />
                     </div>
                     {/* Blog List Table */}
                     <div className="w-full">
-                      <React.Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-96 rounded-lg" />}>
+                      <React.Suspense fallback={<div className={`animate-pulse h-96 rounded-lg ${
+                        isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+                      }`} />}>
                         <BlogListAdmin
                           searchQuery={searchQuery}
                           onEdit={handleEdit}
@@ -572,11 +664,21 @@ const AdminBlogManagement: React.FC = () => {
           </div>
 
           {/* Project Management */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm w-full">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <div className={`rounded-lg border shadow-sm w-full ${
+            isDarkMode
+              ? 'bg-gray-800 border-gray-700'
+              : 'bg-white border-gray-200'
+          }`}>
+            <div className={`px-6 py-4 border-b ${
+              isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            }`}>
               <div className="flex items-center gap-4">
-                <FaProjectDiagram className="text-purple-600 dark:text-purple-400 text-xl" />
-                <span className="font-semibold text-lg text-gray-900 dark:text-white">
+                <FaProjectDiagram className={`text-xl ${
+                  isDarkMode ? 'text-purple-400' : 'text-purple-600'
+                }`} />
+                <span className={`font-semibold text-lg ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
                   {t('admin.projects.title') || 'Proje Yönetimi'}
                 </span>
               </div>
@@ -588,12 +690,20 @@ const AdminBlogManagement: React.FC = () => {
                       <input
                         type="text"
                         placeholder="Proje ara..."
-                        className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-sm sm:text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white"
+                        className={`w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                          isDarkMode
+                            ? 'bg-gray-800 border-gray-700 text-white'
+                            : 'bg-white border-gray-200 text-gray-900'
+                        }`}
                       />
                     </div>
                     {/* Project List Placeholder */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 text-center">
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className={`rounded-xl shadow-lg p-12 text-center ${
+                      isDarkMode ? 'bg-gray-800' : 'bg-white'
+                    }`}>
+                      <p className={`text-sm ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                      }`}>
                         {t('admin.projects.comingSoon') || 'Yakında eklenecek...'}
                       </p>
                     </div>
@@ -601,11 +711,21 @@ const AdminBlogManagement: React.FC = () => {
           </div>
 
           {/* Category Management */}
-          <div ref={categoryManagementRef} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm w-full">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <div ref={categoryManagementRef} className={`rounded-lg border shadow-sm w-full ${
+            isDarkMode
+              ? 'bg-gray-800 border-gray-700'
+              : 'bg-white border-gray-200'
+          }`}>
+            <div className={`px-6 py-4 border-b ${
+              isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            }`}>
               <div className="flex items-center gap-4">
-                <FaTags className="text-green-600 dark:text-green-400 text-xl" />
-                <span className="font-semibold text-lg text-gray-900 dark:text-white">
+                <FaTags className={`text-xl ${
+                  isDarkMode ? 'text-green-400' : 'text-green-600'
+                }`} />
+                <span className={`font-semibold text-lg ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
                   {t('admin.categories.title') || 'Kategori Yönetimi'}
                 </span>
               </div>
@@ -617,7 +737,11 @@ const AdminBlogManagement: React.FC = () => {
                       <input
                         type="text"
                         placeholder="Kategori ara..."
-                        className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-sm sm:text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 dark:text-white"
+                        className={`w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                          isDarkMode
+                            ? 'bg-gray-800 border-gray-700 text-white'
+                            : 'bg-white border-gray-200 text-gray-900'
+                        }`}
                       />
                     </div>
                     {/* Add New Category Button */}
@@ -658,7 +782,11 @@ const AdminBlogManagement: React.FC = () => {
                         };
                         
                         return (
-                          <div key={category.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                          <div key={category.id} className={`rounded-lg border shadow-sm ${
+                            isDarkMode
+                              ? 'bg-gray-800 border-gray-700'
+                              : 'bg-white border-gray-200'
+                          }`}>
                             <button
                               onClick={() => {
                                 setOpenCategoryAccordions(prev => ({

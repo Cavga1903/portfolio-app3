@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import { LoginModal, SignupModal } from '../features/auth';
 import SkeletonLoader from '../components/SkeletonLoader';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 // Lazy load blog components
 const BlogList = React.lazy(() => import('../features/blog/components/BlogList'));
@@ -12,13 +13,18 @@ const BlogFilters = React.lazy(() => import('../features/blog/components/BlogFil
 
 const Blog: React.FC = () => {
   const { t } = useTranslation();
+  const { isDarkMode } = useDarkMode();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <div className={`min-h-screen bg-gradient-to-br ${
+      isDarkMode 
+        ? 'from-gray-900 via-gray-800 to-black' 
+        : 'from-gray-50 via-white to-gray-100'
+    }`}>
       <Navbar onLoginClick={() => setShowLoginModal(true)} />
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
@@ -37,7 +43,9 @@ const Blog: React.FC = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             {t('blog.title') || 'Blog'}
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto ${
+            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             {t('blog.subtitle') || 'Discover the latest insights, tutorials, and stories'}
           </p>
 
@@ -55,7 +63,11 @@ const Blog: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('blog.searchPlaceholder') || 'Search articles...'}
-                className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white"
+                className={`w-full pl-12 pr-4 py-4 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  isDarkMode
+                    ? 'bg-gray-800 border-gray-700 text-white'
+                    : 'bg-white border-gray-200 text-gray-900'
+                }`}
               />
             </div>
           </motion.div>

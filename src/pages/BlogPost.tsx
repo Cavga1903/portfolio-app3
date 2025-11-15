@@ -9,6 +9,7 @@ import { LoginModal, SignupModal } from '../features/auth';
 import { SEOHead } from '../components/SEOHead';
 import { blogService } from '../features/blog/services/blogService';
 import SkeletonLoader from '../components/SkeletonLoader';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 // Lazy load blog components
 const BlogPostContent = React.lazy(() => import('../features/blog/components/BlogPostContent'));
@@ -18,6 +19,7 @@ const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { isDarkMode } = useDarkMode();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
 
@@ -29,7 +31,11 @@ const BlogPost: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <div className={`min-h-screen bg-gradient-to-br ${
+      isDarkMode 
+        ? 'from-gray-900 via-gray-800 to-black' 
+        : 'from-gray-50 via-white to-gray-100'
+    }`}>
       <SEOHead post={post} />
       <Navbar onLoginClick={() => setShowLoginModal(true)} />
       
@@ -40,7 +46,11 @@ const BlogPost: React.FC = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => navigate('/blog')}
-            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8"
+            className={`flex items-center gap-2 transition-colors mb-8 ${
+              isDarkMode
+                ? 'text-gray-400 hover:text-blue-400'
+                : 'text-gray-600 hover:text-blue-600'
+            }`}
           >
             <FaArrowLeft />
             <span>{t('blog.backToBlog') || 'Back to Blog'}</span>
@@ -58,7 +68,9 @@ const BlogPost: React.FC = () => {
       </section>
 
       {/* Related Posts */}
-      <section className="py-12 px-6 md:px-8 lg:px-12 bg-gray-50 dark:bg-gray-900/50">
+      <section className={`py-12 px-6 md:px-8 lg:px-12 ${
+        isDarkMode ? 'bg-gray-900/50' : 'bg-gray-50'
+      }`}>
         <div className="max-w-7xl mx-auto">
           <Suspense fallback={<SkeletonLoader type="projects" />}>
             <RelatedPosts currentSlug={slug || ''} />

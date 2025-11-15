@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { FaCode, FaRocket, FaHeart, FaGithub, FaLinkedin, FaInstagram, FaBuilding, FaBolt, FaUsers } from 'react-icons/fa';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { SEOHead } from './SEOHead';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
+  const { isDarkMode } = useDarkMode();
   const { trackEvent, trackSectionView, trackSoftSkillInteraction } = useAnalytics();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -91,7 +93,11 @@ const About: React.FC = () => {
         imageHeight={630}
         twitterCreator="@tolgacavga"
       />
-      <section ref={ref} id="about" className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-white py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden">
+      <section ref={ref} id="about" className={`relative flex flex-col items-center justify-center min-h-screen py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden ${
+        isDarkMode
+          ? 'bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white'
+          : 'bg-gradient-to-br from-white via-gray-50 to-gray-100 text-gray-900'
+      }`}>
       {/* Animated Background Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -111,7 +117,11 @@ const About: React.FC = () => {
       <div className="relative z-10 w-full max-w-5xl">
         {/* Main Content Card */}
         <motion.div 
-          className="card bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 shadow-2xl p-8 mb-8 group"
+          className={`card backdrop-blur-sm shadow-2xl p-8 mb-8 group ${
+            isDarkMode
+              ? 'bg-gray-800/50 border-gray-700/50'
+              : 'bg-white/90 border-gray-200'
+          }`}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -161,46 +171,68 @@ const About: React.FC = () => {
                 {t('about.name')}
               </h3>
               <p className="text-cyan-400 text-lg mb-4">{t('about.role')}</p>
-              <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-200">
+              <p className={`text-lg leading-relaxed ${
+                isDarkMode ? 'text-gray-200' : 'text-gray-700'
+              }`}>
                 {t('about.description')}
               </p>
             </div>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center gap-4 pt-6 border-t border-gray-200/50 dark:border-gray-700/50">
+          <div className={`flex justify-center gap-4 pt-6 border-t ${
+            isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'
+          }`}>
             <motion.a
               href="https://github.com/Cavga1903"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-100/70 dark:bg-gray-700/50 rounded-lg group cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600/50"
+              className={`p-3 rounded-lg group cursor-pointer ${
+                isDarkMode
+                  ? 'bg-gray-700/50 hover:bg-gray-600/50'
+                  : 'bg-gray-100/70 hover:bg-gray-200'
+              }`}
               title="GitHub - @Cavga1903"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(17, 24, 39, 0.5)" }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaGithub className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors group-hover:rotate-12" />
+              <FaGithub className={`text-2xl transition-colors group-hover:rotate-12 ${
+                isDarkMode
+                  ? 'text-gray-300 group-hover:text-white'
+                  : 'text-gray-700 group-hover:text-gray-900'
+              }`} />
             </motion.a>
             <motion.a
               href="https://www.linkedin.com/in/tolgaacavgaa"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-100/70 dark:bg-gray-700/50 rounded-lg group cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600/50"
+              className={`p-3 rounded-lg group cursor-pointer ${
+                isDarkMode
+                  ? 'bg-gray-700/50 hover:bg-gray-600/50'
+                  : 'bg-gray-100/70 hover:bg-gray-200'
+              }`}
               title="LinkedIn - @tolgaacavgaa"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(10, 102, 194, 0.2)" }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaLinkedin className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-[#0A66C2] transition-colors group-hover:rotate-12" />
+              <FaLinkedin className={`text-2xl transition-colors group-hover:rotate-12 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+              }`} />
             </motion.a>
             <motion.a
               href="https://www.instagram.com/codewithcavga"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-100/50 dark:bg-gray-700/50 rounded-lg group relative overflow-hidden cursor-pointer"
+              className={`p-3 rounded-lg group relative overflow-hidden cursor-pointer ${
+                isDarkMode ? 'bg-gray-700/50' : 'bg-gray-100/50'
+              }`}
               title="Instagram - @codewithcavga"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaInstagram className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-pink-500 transition-colors group-hover:rotate-12 relative z-10" />
+              <FaInstagram className={`text-2xl transition-colors group-hover:rotate-12 relative z-10 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+              }`} />
             </motion.a>
           </div>
         </motion.div>
