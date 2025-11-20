@@ -534,7 +534,7 @@ const AdminBlogManagement: React.FC = () => {
                             : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
-                        <FaBookmark size={18} className="text-yellow-600 dark:text-yellow-400" />
+                        <FaBookmark size={18} className={isDarkMode ? "text-yellow-400" : "text-yellow-600"} />
                         <span>{t('admin.blog.bookmark') || 'Yer İşareti'}</span>
                         {selectedPosts.size > 0 && (
                           <span className="ml-auto text-xs text-gray-500">({selectedPosts.size})</span>
@@ -548,7 +548,7 @@ const AdminBlogManagement: React.FC = () => {
                             : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
-                        <FaHeart size={18} className="text-pink-600 dark:text-pink-400" />
+                        <FaHeart size={18} className={isDarkMode ? "text-pink-400" : "text-pink-600"} />
                         <span>{t('admin.blog.favorite') || 'Favori'}</span>
                         {selectedPosts.size > 0 && (
                           <span className="ml-auto text-xs text-gray-500">({selectedPosts.size})</span>
@@ -562,7 +562,7 @@ const AdminBlogManagement: React.FC = () => {
                             : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
-                        <FaShare size={18} className="text-purple-600 dark:text-purple-400" />
+                        <FaShare size={18} className={isDarkMode ? "text-purple-400" : "text-purple-600"} />
                         <span>{t('admin.blog.share') || 'Paylaş'}</span>
                       </button>
                       <button
@@ -573,7 +573,7 @@ const AdminBlogManagement: React.FC = () => {
                             : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
-                        <FaArchive size={18} className="text-orange-600 dark:text-orange-400" />
+                        <FaArchive size={18} className={isDarkMode ? "text-orange-400" : "text-orange-600"} />
                         <span>{t('admin.blog.archive') || 'Arşivle'}</span>
                         {selectedPosts.size > 0 && (
                           <span className="ml-auto text-xs text-gray-500">({selectedPosts.size})</span>
@@ -794,35 +794,57 @@ const AdminBlogManagement: React.FC = () => {
                                   [category.id]: !prev[category.id]
                                 }));
                               }}
-                              className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors rounded-lg border-b border-gray-200 dark:border-gray-700"
+                              className={`w-full flex items-center justify-between px-6 py-4 text-left transition-colors rounded-lg border-b ${
+                                isDarkMode
+                                  ? 'hover:bg-gray-700/50 border-gray-700'
+                                  : 'hover:bg-gray-50 border-gray-200'
+                              }`}
                             >
                               <div className="flex items-center gap-4 flex-1">
                                 <div 
                                   className="w-4 h-4 rounded-full" 
                                   style={{ backgroundColor: editing.color || '#10B981' }}
                                 />
-                                <FaTags className="text-green-600 dark:text-green-400 text-lg" />
-                                <span className="font-semibold text-base text-gray-900 dark:text-white">
+                                <FaTags className={`text-lg ${
+                                  isDarkMode ? 'text-green-400' : 'text-green-600'
+                                }`} />
+                                <span className={`font-semibold text-base ${
+                                  isDarkMode ? 'text-white' : 'text-gray-900'
+                                }`}>
                                   {editing.name}
                                 </span>
-                                <span className="text-sm text-gray-500 dark:text-gray-400">
+                                <span className={`text-sm ${
+                                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                                }`}>
                                   ({editing.rows} satır)
                                 </span>
                                 {category.postCount !== undefined && (
-                                  <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full">
+                                  <span className={`text-xs px-2 py-1 rounded-full ${
+                                    isDarkMode
+                                      ? 'bg-gray-700 text-gray-400'
+                                      : 'bg-gray-100 text-gray-600'
+                                  }`}>
                                     {category.postCount} post
                                   </span>
                                 )}
                                 {editing.isActive === false && (
-                                  <span className="text-xs px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full">
+                                  <span className={`text-xs px-2 py-1 rounded-full ${
+                                    isDarkMode
+                                      ? 'bg-red-900/30 text-red-400'
+                                      : 'bg-red-100 text-red-600'
+                                  }`}>
                                     Pasif
                                   </span>
                                 )}
                               </div>
                               {isOpen ? (
-                                <FaChevronUp className="text-gray-500 dark:text-gray-400 text-lg" />
+                                <FaChevronUp className={`text-lg ${
+                                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                                }`} />
                               ) : (
-                                <FaChevronDown className="text-gray-500 dark:text-gray-400 text-lg" />
+                                <FaChevronDown className={`text-lg ${
+                                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                                }`} />
                               )}
                             </button>
                             <AnimatePresence initial={false}>
@@ -837,7 +859,9 @@ const AdminBlogManagement: React.FC = () => {
                                   <div className="px-6 pb-6 space-y-5 pt-4">
                                     {/* Category Name Input */}
                                     <div>
-                                      <label className="block text-base font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                                      <label className={`block text-base font-semibold mb-3 ${
+                                        isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                                      }`}>
                                         {t('admin.categories.name') || 'Kategori Adı'}
                                       </label>
                                       <input
@@ -859,13 +883,17 @@ const AdminBlogManagement: React.FC = () => {
                                             }
                                           }));
                                         }}
-                                        className="w-full px-4 py-3 text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 dark:text-white"
+                                        className={`w-full px-4 py-3 text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                                          isDarkMode
+                                            ? 'bg-gray-800 border-gray-700 text-white'
+                                            : 'bg-white border-gray-200 text-gray-900'
+                                        }`}
                                         placeholder={t('admin.categories.namePlaceholder') || 'Kategori adını girin'}
                                       />
                                     </div>
                                     {/* Category Slug Input */}
                                     <div>
-                                      <label className="block text-base font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                                      <label className={`block text-base font-semibold mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                         {t('admin.categories.slug') || 'URL Slug'}
                                       </label>
                                       <input
@@ -888,13 +916,13 @@ const AdminBlogManagement: React.FC = () => {
                                             }
                                           }));
                                         }}
-                                        className="w-full px-4 py-3 text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 dark:text-white"
+                                        className={`w-full px-4 py-3 text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${isDarkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
                                         placeholder={t('admin.categories.slugPlaceholder') || 'kategori-url-slug'}
                                       />
                                     </div>
                                     {/* Category Description Input */}
                                     <div>
-                                      <label className="block text-base font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                                      <label className={`block text-base font-semibold mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                         {t('admin.categories.description') || 'Açıklama'}
                                       </label>
                                       <textarea
@@ -924,7 +952,7 @@ const AdminBlogManagement: React.FC = () => {
                                     <div className="grid grid-cols-2 gap-4">
                                       {/* Category Color Input */}
                                       <div>
-                                        <label className="block text-base font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                                        <label className={`block text-base font-semibold mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                           {t('admin.categories.color') || 'Renk'}
                                         </label>
                                         <div className="flex items-center gap-3">
@@ -947,7 +975,7 @@ const AdminBlogManagement: React.FC = () => {
                                                 }
                                               }));
                                             }}
-                                            className="w-16 h-12 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer"
+                                            className={`w-16 h-12 rounded-lg border cursor-pointer ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}
                                           />
                                           <input
                                             type="text"
@@ -968,14 +996,14 @@ const AdminBlogManagement: React.FC = () => {
                                                 }
                                               }));
                                             }}
-                                            className="flex-1 px-4 py-3 text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 dark:text-white"
+                                            className={`flex-1 px-4 py-3 text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${isDarkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
                                             placeholder="#10B981"
                                           />
                                         </div>
                                       </div>
                                       {/* Rows Input */}
                                       <div>
-                                        <label className="block text-base font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                                        <label className={`block text-base font-semibold mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                           {t('admin.categories.rows') || 'Satır Sayısı'}
                                         </label>
                                         <input
@@ -1000,7 +1028,7 @@ const AdminBlogManagement: React.FC = () => {
                                               }
                                             }));
                                           }}
-                                          className="w-full px-4 py-3 text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 dark:text-white"
+                                          className={`w-full px-4 py-3 text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${isDarkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
                                           placeholder={t('admin.categories.rowsPlaceholder') || 'Kaç satır gösterilecek'}
                                         />
                                       </div>
@@ -1029,13 +1057,13 @@ const AdminBlogManagement: React.FC = () => {
                                           }}
                                           className="w-5 h-5 text-green-600 rounded focus:ring-green-500"
                                         />
-                                        <span className="text-base font-semibold text-gray-700 dark:text-gray-300">
+                                        <span className={`text-base font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                           {t('admin.categories.isActive') || 'Aktif'}
                                         </span>
                                       </label>
                                     </div>
                                     {/* Action Buttons */}
-                                    <div className="flex gap-3 justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                                    <div className={`flex gap-3 justify-between pt-2 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                                       <button
                                         onClick={(e) => {
                                           e.stopPropagation();
@@ -1069,7 +1097,7 @@ const AdminBlogManagement: React.FC = () => {
                                               return newState;
                                             });
                                           }}
-                                          className="px-5 py-2.5 text-base font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors flex items-center gap-2"
+                                          className={`px-5 py-2.5 text-base font-medium rounded-lg transition-colors flex items-center gap-2 ${isDarkMode ? 'text-gray-300 bg-gray-700 hover:bg-gray-600' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                                         >
                                           <FaTimes size={16} />
                                           <span>{t('admin.categories.cancel') || 'İptal'}</span>

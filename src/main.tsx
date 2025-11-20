@@ -5,6 +5,7 @@ import './index.css'
 import './i18n'
 import App from './App.tsx'
 import 'flowbite';
+import { AppThemeProvider } from './theme/ThemeProvider';
 
 // Safari uyumluluğu için DOM hazır olana kadar bekle
 const rootElement = document.getElementById('root');
@@ -15,8 +16,10 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AppThemeProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AppThemeProvider>
   </StrictMode>,
 )

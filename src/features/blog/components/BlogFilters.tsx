@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaTag } from 'react-icons/fa';
+import { useDarkMode } from '../../../hooks/useDarkMode';
 
 interface BlogFiltersProps {
   selectedCategory: string | null;
@@ -12,6 +13,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
   onCategoryChange,
 }) => {
   const { t } = useTranslation();
+  const { isDarkMode } = useDarkMode();
 
   const categories = [
     { id: 'all', name: t('blog.categories.all') || 'All Posts', count: 12 },
@@ -21,8 +23,12 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-4">
-      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+    <div className={`rounded-xl shadow-lg p-6 sticky top-4 ${
+      isDarkMode ? 'bg-gray-800' : 'bg-white'
+    }`}>
+      <h3 className={`text-lg font-bold mb-4 flex items-center gap-2 ${
+        isDarkMode ? 'text-white' : 'text-gray-900'
+      }`}>
         <FaTag />
         {t('blog.categories.title') || 'Categories'}
       </h3>
@@ -37,7 +43,9 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
               selectedCategory === category.id ||
               (category.id === 'all' && selectedCategory === null)
                 ? 'bg-blue-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                : isDarkMode
+                  ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
             <div className="flex items-center justify-between">

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaSearch } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { LoginModal, SignupModal } from '../features/auth';
 import SkeletonLoader from '../components/SkeletonLoader';
 import { useDarkMode } from '../hooks/useDarkMode';
@@ -100,6 +101,9 @@ const Blog: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
 
       {/* Auth Modals */}
       <LoginModal

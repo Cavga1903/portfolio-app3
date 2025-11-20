@@ -97,7 +97,7 @@ const ProjectPlaceholder: React.FC<{ project: Project; t: (key: string) => strin
       )}
       
       {/* Show GitHub-style placeholder if no screenshot or error */}
-      {(!imageLoaded || imageError) && renderGitHubPlaceholder(isDarkMode)}
+      {(!imageLoaded || imageError) && renderGitHubPlaceholder()}
       
       {/* Overlay for screenshot */}
       {imageLoaded && !imageError && (
@@ -338,7 +338,7 @@ const Projects: React.FC = () => {
                           : 'bg-white border-gray-200'
                       }`}>
                     {/* Project Preview */}
-                    <ProjectPlaceholder project={project} t={t} />
+                    <ProjectPlaceholder project={project} t={t} isDarkMode={isDarkMode} />
                     
                     {/* Project Info */}
                     <div className="p-4 flex-1 flex flex-col">
