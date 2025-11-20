@@ -4,10 +4,15 @@ import { FaArrowDown, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { TypeAnimation } from 'react-type-animation';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { useUIStore } from '../app/store/uiStore';
+import ParticleBackground from './ParticleBackground';
+import SnowflakeBackground from './SnowflakeBackground';
+import NetworkBackground from './NetworkBackground';
 
 const Hero: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { isDarkMode } = useDarkMode();
+  const { particleTheme } = useUIStore();
   const sectionRef = useRef<HTMLElement>(null);
   
   // Parallax scroll effect with container ref
@@ -71,8 +76,19 @@ const Hero: React.FC = () => {
           : 'bg-gradient-to-b from-white via-gray-50 to-gray-100 text-gray-900'
       }`}
     >
+      {/* Three.js Particle Background - Theme Based */}
+      {particleTheme === 'colorful' && (
+        <ParticleBackground particleCount={10000} particleSize={35} speed={0.00005} />
+      )}
+      {particleTheme === 'snowflakes' && (
+        <SnowflakeBackground particleCount={10000} speed={0.00005} />
+      )}
+      {particleTheme === 'network' && (
+        <NetworkBackground particleCount={500} minDistance={150} maxConnections={20} />
+      )}
+
       {/* Animated Background Circles with Parallax */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
         <motion.div 
           style={{ y: y1 }}
           className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
@@ -86,7 +102,7 @@ const Hero: React.FC = () => {
       {/* Content with Fade on Scroll */}
       <motion.div 
         className="relative z-10"
-        style={{ opacity }}
+        style={{ opacity, zIndex: 10 }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"

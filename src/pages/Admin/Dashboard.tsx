@@ -24,7 +24,8 @@ import {
   FaCheckCircle,
   FaTimesCircle,
   FaTh,
-  FaList
+  FaList,
+  FaCog
 } from 'react-icons/fa';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Navbar from '../../components/Navbar';
@@ -46,7 +47,7 @@ const CountryMap = React.lazy(() => import('../../features/admin/components/Dash
 const BlogListAdmin = React.lazy(() => import('../../features/admin/components/BlogManagement/BlogListAdmin'));
 const BlogEditorAdmin = React.lazy(() => import('../../features/admin/components/BlogManagement/BlogEditorAdmin'));
 
-type TabType = 'overview' | 'blog' | 'projects' | 'categories';
+type TabType = 'overview' | 'blog' | 'projects' | 'categories' | 'settings';
 
 interface Project {
   id: string;
@@ -139,7 +140,7 @@ const AdminDashboard: React.FC = () => {
   const actionsMenuRef = useRef<HTMLDivElement>(null);
   const categoryManagementRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
-  const { addToast, toasts, removeToast } = useUIStore();
+  const { addToast, toasts, removeToast, particleTheme, setParticleTheme } = useUIStore();
   const { isDarkMode } = useDarkMode();
 
   // Check if edit parameter is in URL
@@ -701,7 +702,7 @@ const AdminDashboard: React.FC = () => {
           isDarkMode ? 'border-gray-700' : 'border-gray-200'
         }`}>
           <nav className="flex space-x-8 overflow-x-auto">
-            {(['overview', 'blog', 'projects', 'categories'] as TabType[]).map((tab) => (
+            {(['overview', 'blog', 'projects', 'categories', 'settings'] as TabType[]).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -719,6 +720,7 @@ const AdminDashboard: React.FC = () => {
                 {tab === 'blog' && (t('admin.tabs.blog') || 'Blog Yönetimi')}
                 {tab === 'projects' && (t('admin.tabs.projects') || 'Proje Yönetimi')}
                 {tab === 'categories' && (t('admin.tabs.categories') || 'Kategori Yönetimi')}
+                {tab === 'settings' && (t('admin.tabs.settings') || 'Ayarlar')}
               </button>
             ))}
           </nav>
@@ -1313,6 +1315,84 @@ const AdminDashboard: React.FC = () => {
                       )}
                     </div>
                   )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {activeTab === 'settings' && (
+            <motion.div
+              key="settings"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              {/* Settings Header */}
+              <div className={`rounded-lg border shadow-sm ${
+                isDarkMode
+                  ? 'bg-gray-800 border-gray-700'
+                  : 'bg-white border-gray-200'
+              }`}>
+                <div className={`px-6 py-4 border-b ${
+                  isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                }`}>
+                  <div className="flex items-center gap-4">
+                    <FaCog className={`text-xl ${
+                      isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                    }`} />
+                    <span className={`font-semibold text-lg ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
+                      {t('admin.settings.title') || 'Ayarlar'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-6">
+                  {/* Particle Theme Selection */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-3 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
+                      {t('admin.settings.particleTheme') || 'Arka Plan Efekti Teması'}
+                    </label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                      {(['default', 'colorful', 'snowflakes', 'network'] as const).map((theme) => (
+                        <button
+                          key={theme}
+                          onClick={() => setParticleTheme(theme)}
+                          className={`p-4 rounded-lg border-2 transition-all ${
+                            particleTheme === theme
+                              ? isDarkMode
+                                ? 'border-blue-400 bg-blue-400/10'
+                                : 'border-blue-600 bg-blue-50'
+                              : isDarkMode
+                                ? 'border-gray-700 bg-gray-700/50 hover:border-gray-600'
+                                : 'border-gray-200 bg-white hover:border-gray-300'
+                          }`}
+                        >
+                          <div className={`text-sm font-medium mb-2 ${
+                            isDarkMode ? 'text-white' : 'text-gray-900'
+                          }`}>
+                            {theme === 'default' && (t('admin.settings.themeDefault') || 'Varsayılan')}
+                            {theme === 'colorful' && (t('admin.settings.themeColorful') || 'Renkli Parçacıklar')}
+                            {theme === 'snowflakes' && (t('admin.settings.themeSnowflakes') || 'Kar Taneleri')}
+                            {theme === 'network' && (t('admin.settings.themeNetwork') || 'Ağ Bağlantıları')}
+                          </div>
+                          <div className={`text-xs ${
+                            isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                          }`}>
+                            {theme === 'default' && (t('admin.settings.themeDefaultDesc') || 'Efekt yok, normal arka plan')}
+                            {theme === 'colorful' && (t('admin.settings.themeColorfulDesc') || 'Renkli parçacık efektleri')}
+                            {theme === 'snowflakes' && (t('admin.settings.themeSnowflakesDesc') || 'Yılbaşı temalı kar taneleri')}
+                            {theme === 'network' && (t('admin.settings.themeNetworkDesc') || 'Bağlantı çizgileri ile ağ efekti')}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>

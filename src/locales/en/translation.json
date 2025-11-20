@@ -709,7 +709,8 @@
       "overview": "Overview",
       "blog": "Blog Management",
       "projects": "Project Management",
-      "categories": "Category Management"
+      "categories": "Category Management",
+      "settings": "Settings"
     },
     "actions": {
       "create": "Create",
@@ -771,6 +772,18 @@
       "validationError": "Please enter category name and slug",
       "updateSuccess": "Category updated",
       "comingSoon": "Coming soon..."
+    },
+    "settings": {
+      "title": "Settings",
+      "particleTheme": "Background Effect Theme",
+      "themeDefault": "Default",
+      "themeDefaultDesc": "No effects, normal background",
+      "themeColorful": "Colorful Particles",
+      "themeColorfulDesc": "Colorful particle effects",
+      "themeSnowflakes": "Snowflakes",
+      "themeSnowflakesDesc": "New Year themed snowflakes",
+      "themeNetwork": "Network Connections",
+      "themeNetworkDesc": "Network effect with connection lines"
     },
     "activity": {
       "title": "Recent Activity"

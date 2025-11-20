@@ -33,6 +33,10 @@ interface UIState {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
   setDarkMode: (value: boolean) => void;
+  
+  // Particle theme management
+  particleTheme: 'default' | 'colorful' | 'snowflakes' | 'network';
+  setParticleTheme: (theme: 'default' | 'colorful' | 'snowflakes' | 'network') => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -169,6 +173,24 @@ export const useUIStore = create<UIState>((set) => ({
       
       return { isDarkMode: newMode };
     });
+  },
+  
+  // Particle theme state - Initialize from localStorage or default to 'default'
+  particleTheme: (() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('particleTheme');
+      if (savedTheme === 'colorful' || savedTheme === 'snowflakes' || savedTheme === 'network') {
+        return savedTheme as 'default' | 'colorful' | 'snowflakes' | 'network';
+      }
+    }
+    return 'default';
+  })(),
+  
+  setParticleTheme: (theme) => {
+    set({ particleTheme: theme });
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('particleTheme', theme);
+    }
   },
 }));
 

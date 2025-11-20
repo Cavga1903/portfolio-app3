@@ -712,7 +712,8 @@
       "overview": "Genel Bakış",
       "blog": "Blog Yönetimi",
       "projects": "Proje Yönetimi",
-      "categories": "Kategori Yönetimi"
+      "categories": "Kategori Yönetimi",
+      "settings": "Ayarlar"
     },
     "actions": {
       "create": "Oluştur",
@@ -774,6 +775,18 @@
       "validationError": "Lütfen kategori adı ve slug girin",
       "updateSuccess": "Kategori güncellendi",
       "comingSoon": "Yakında eklenecek..."
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "particleTheme": "Arka Plan Efekti Teması",
+      "themeDefault": "Varsayılan",
+      "themeDefaultDesc": "Efekt yok, normal arka plan",
+      "themeColorful": "Renkli Parçacıklar",
+      "themeColorfulDesc": "Renkli parçacık efektleri",
+      "themeSnowflakes": "Kar Taneleri",
+      "themeSnowflakesDesc": "Yılbaşı temalı kar taneleri",
+      "themeNetwork": "Ağ Bağlantıları",
+      "themeNetworkDesc": "Bağlantı çizgileri ile ağ efekti"
     },
     "activity": {
       "title": "Son Aktiviteler"
