@@ -708,6 +708,12 @@
       "noPosts": "Henüz blog post yok",
       "createFirst": "İlk Postunuzu Oluşturun"
     },
+    "tabs": {
+      "overview": "Genel Bakış",
+      "blog": "Blog Yönetimi",
+      "projects": "Proje Yönetimi",
+      "categories": "Kategori Yönetimi"
+    },
     "actions": {
       "create": "Oluştur",
       "general": "Genel İşlemler",
@@ -716,6 +722,29 @@
     "projects": {
       "title": "Proje Yönetimi",
       "create": "Yeni Proje Ekle",
+      "edit": "Proje Düzenle",
+      "total": "proje",
+      "publish": "Yayınla",
+      "delete": "Sil",
+      "search": "Proje ara...",
+      "published": "Yayınlandı",
+      "cancel": "İptal",
+      "save": "Kaydet",
+      "noResults": "Arama sonucu bulunamadı",
+      "noProjects": "Henüz proje yok",
+      "noSelection": "Lütfen en az bir proje seçin",
+      "deleteConfirm": "{{count}} projeyi silmek istediğinize emin misiniz?",
+      "deleteSuccess": "{{count}} proje silindi",
+      "publishSuccess": "{{count}} proje yayınlandı",
+      "unpublishSuccess": "{{count}} proje yayından kaldırıldı",
+      "updateSuccess": "Proje güncellendi",
+      "createSuccess": "Proje oluşturuldu",
+      "titlePlaceholder": "Proje başlığı",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Proje açıklaması",
+      "githubUrl": "GitHub URL",
+      "liveUrl": "Canlı URL",
+      "technologies": "Teknolojiler",
       "comingSoon": "Yakında eklenecek..."
     },
     "categories": {
@@ -723,6 +752,10 @@
       "create": "Kategori Ekle",
       "edit": "Kategori Düzenle",
       "addNew": "Yeni Kategori Ekle",
+      "total": "kategori",
+      "search": "Kategori ara...",
+      "noResults": "Arama sonucu bulunamadı",
+      "noCategories": "Henüz kategori yok",
       "name": "Kategori Adı",
       "namePlaceholder": "Kategori adını girin",
       "slug": "URL Slug",
@@ -737,6 +770,8 @@
       "cancel": "İptal",
       "delete": "Sil",
       "deleteConfirm": "Bu kategoriyi silmek istediğinize emin misiniz?",
+      "validationError": "Lütfen kategori adı ve slug girin",
+      "updateSuccess": "Kategori güncellendi",
       "comingSoon": "Yakında eklenecek..."
     },
     "stats": {
