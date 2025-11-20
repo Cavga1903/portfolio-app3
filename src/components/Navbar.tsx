@@ -540,24 +540,6 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               <span>{t('nav.dashboard') || 'Dashboard'}</span>
                             </a>
                           )}
-                          <a
-                            href="/admin"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsProfileDropdownOpen(false);
-                              navigate('/admin');
-                              trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
-                            }}
-                            className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.dashboard') || 'Dashboard'}</span>
-                          </a>
             </div>
 
                         {/* Logout */}
@@ -913,25 +895,6 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               <span>{t('nav.dashboard') || 'Dashboard'}</span>
                             </a>
                           )}
-                          <a
-                            href="/admin"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsProfileDropdownOpen(false);
-                              setIsMenuOpen(false);
-                              navigate('/admin');
-                              trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
-                            }}
-                            className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.dashboard') || 'Dashboard'}</span>
-                          </a>
                       </div>
                       
                         {/* Logout */}

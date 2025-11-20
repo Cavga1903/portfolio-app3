@@ -725,6 +725,7 @@
       "edit": "Proje Düzenle",
       "total": "proje",
       "publish": "Yayınla",
+      "unpublish": "Yayından Kaldır",
       "delete": "Sil",
       "search": "Proje ara...",
       "published": "Yayınlandı",
@@ -774,6 +775,23 @@
       "updateSuccess": "Kategori güncellendi",
       "comingSoon": "Yakında eklenecek..."
     },
+    "activity": {
+      "title": "Son Aktiviteler"
+    },
+    "analytics": {
+      "title": "Analitik Genel Bakış",
+      "realTime": "Canlı Veriler",
+      "countries": "Ülke Dağılımı",
+      "visitors": "Ziyaretçiler",
+      "pageViews": "Sayfa Görüntülenmeleri",
+      "topCountries": "En Çok Ziyaret Edilen Ülkeler",
+      "noData": "Veri bulunamadı",
+      "loading": "Yükleniyor...",
+      "refresh": "Yenile",
+      "lastUpdated": "Son Güncelleme",
+      "error": "Veri yüklenirken bir hata oluştu",
+      "retry": "Tekrar Dene"
+    },
     "stats": {
       "totalUsers": "Toplam Kullanıcı",
       "totalPosts": "Toplam Post",
@@ -805,6 +823,7 @@
       "draft": "Taslak",
       "publish": "Yayınla",
       "unpublish": "Yayından Kaldır",
+      "delete": "Sil",
       "bookmark": "Yer İşareti",
       "unbookmark": "Yer İşaretini Kaldır",
       "favorite": "Favori",

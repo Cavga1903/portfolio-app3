@@ -23,6 +23,7 @@ export const endpoints = {
     stats: '/admin/stats',
     users: '/admin/users',
     analytics: '/admin/analytics',
+    analyticsCountries: '/api/analytics/countries',
   },
   
   // Contact

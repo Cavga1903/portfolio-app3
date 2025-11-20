@@ -40,6 +40,7 @@ import Toast from '../../components/Toast';
 const StatsCards = React.lazy(() => import('../../features/admin/components/Dashboard/StatsCards'));
 const AnalyticsChart = React.lazy(() => import('../../features/admin/components/Dashboard/AnalyticsChart'));
 const RecentActivity = React.lazy(() => import('../../features/admin/components/Dashboard/RecentActivity'));
+const CountryMap = React.lazy(() => import('../../features/admin/components/Dashboard/CountryMap'));
 
 // Blog management components
 const BlogListAdmin = React.lazy(() => import('../../features/admin/components/BlogManagement/BlogListAdmin'));
@@ -758,6 +759,15 @@ const AdminDashboard: React.FC = () => {
                   </React.Suspense>
                 </div>
               </div>
+
+              {/* Country Distribution */}
+              <div className="mt-6">
+                <React.Suspense fallback={<div className={`animate-pulse h-96 rounded-lg ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+                }`} />}>
+                  <CountryMap />
+                </React.Suspense>
+              </div>
             </motion.div>
           )}
 
@@ -937,6 +947,22 @@ const AdminDashboard: React.FC = () => {
                       >
                         <FaEye size={14} />
                         <span>{t('admin.projects.publish') || 'Yayınla'}</span>
+                      </button>
+                      <button
+                        onClick={() => handleBulkAction('unpublish', 'project')}
+                        disabled={selectedProjects.size === 0}
+                        className={`px-3 py-1.5 text-sm rounded-lg transition-colors flex items-center gap-2 ${
+                          selectedProjects.size === 0
+                            ? isDarkMode
+                              ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                              : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : isDarkMode
+                              ? 'bg-gray-600 hover:bg-gray-700 text-white'
+                              : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        }`}
+                      >
+                        <FaEyeSlash size={14} />
+                        <span>{t('admin.projects.unpublish') || 'Yayından Kaldır'}</span>
                       </button>
                       <button
                         onClick={() => handleBulkAction('delete', 'project')}

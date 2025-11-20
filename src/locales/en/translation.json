@@ -722,6 +722,7 @@
       "edit": "Edit Project",
       "total": "projects",
       "publish": "Publish",
+      "unpublish": "Unpublish",
       "delete": "Delete",
       "search": "Search projects...",
       "published": "Published",
@@ -771,6 +772,23 @@
       "updateSuccess": "Category updated",
       "comingSoon": "Coming soon..."
     },
+    "activity": {
+      "title": "Recent Activity"
+    },
+    "analytics": {
+      "title": "Analytics Overview",
+      "realTime": "Real-Time Data",
+      "countries": "Country Distribution",
+      "visitors": "Visitors",
+      "pageViews": "Page Views",
+      "topCountries": "Top Countries",
+      "noData": "No data available",
+      "loading": "Loading...",
+      "refresh": "Refresh",
+      "lastUpdated": "Last Updated",
+      "error": "An error occurred while loading data",
+      "retry": "Retry"
+    },
     "stats": {
       "totalUsers": "Total Users",
       "totalPosts": "Total Posts",
@@ -802,6 +820,7 @@
       "draft": "Draft",
       "publish": "Publish",
       "unpublish": "Unpublish",
+      "delete": "Delete",
       "bookmark": "Bookmark",
       "unbookmark": "Remove Bookmark",
       "favorite": "Favorite",
