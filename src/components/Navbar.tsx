@@ -546,7 +546,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               e.preventDefault();
                               setIsProfileDropdownOpen(false);
                               navigate('/admin');
-                              trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
+                              trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
                             }}
                             className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
                               isDarkMode
@@ -556,7 +556,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                             style={{ textDecoration: 'none' }}
                           >
                             <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.blogManagement') || 'Blog Management'}</span>
+                            <span>{t('nav.dashboard') || 'Dashboard'}</span>
                           </a>
             </div>
 
@@ -920,7 +920,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               setIsProfileDropdownOpen(false);
                               setIsMenuOpen(false);
                               navigate('/admin');
-                              trackClick('nav_blog_management', 'navigation_link', 'Blog Management');
+                              trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
                             }}
                             className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
                               isDarkMode
@@ -930,7 +930,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                             style={{ textDecoration: 'none' }}
                           >
                             <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.blogManagement') || 'Blog Management'}</span>
+                            <span>{t('nav.dashboard') || 'Dashboard'}</span>
                           </a>
                       </div>
                       

@@ -162,6 +162,7 @@ const markdownToEditorJs = (markdown: string): OutputData => {
   }
   const blocks: EditorBlock[] = [];
   let blockId = 0;
+  const footnotes: Map<string, string> = new Map();
   const lines = markdown.split('\n');
   let i = 0;
 
@@ -187,8 +188,9 @@ const markdownToEditorJs = (markdown: string): OutputData => {
 
     // Code blocks (```)
     if (line.startsWith('```')) {
-      // Language is optional, we'll just skip it for now
-      line.slice(3).trim(); // Skip language identifier
+      // Extract language if specified (```javascript, ```python, etc.)
+      const languageMatch = line.match(/^```(\w+)?/);
+      const language = languageMatch ? (languageMatch[1] || '') : '';
       const codeLines: string[] = [];
       i++;
       while (i < lines.length && !lines[i].trim().startsWith('```')) {
@@ -200,6 +202,7 @@ const markdownToEditorJs = (markdown: string): OutputData => {
         type: 'code',
         data: {
           code: codeLines.join('\n'),
+          language: language || 'plaintext',
         },
       });
       i++;
@@ -208,57 +211,143 @@ const markdownToEditorJs = (markdown: string): OutputData => {
 
     // Blockquotes (>)
     if (line.startsWith('>')) {
-      const quoteText = line.slice(1).trim();
-      blocks.push({
-        id: `block-${blockId++}`,
-        type: 'quote',
-        data: {
-          text: quoteText,
-          caption: '',
-        },
-      });
-      i++;
-      continue;
-    }
-
-    // Unordered lists (- or *)
-    if (line.match(/^[-*]\s+/)) {
-      const items: string[] = [];
-      while (i < lines.length && lines[i].trim().match(/^[-*]\s+/)) {
-        items.push(lines[i].trim().slice(2));
+      const quoteLines: string[] = [];
+      // Handle nested quotes and multi-line quotes
+      while (i < lines.length && (lines[i].trim().startsWith('>') || lines[i].trim() === '')) {
+        if (lines[i].trim().startsWith('>')) {
+          // Remove > and any nested >>
+          const quoteText = lines[i].trim().replace(/^>+\s*/, '');
+          quoteLines.push(quoteText);
+        } else if (quoteLines.length > 0) {
+          // Empty line within quote, keep it
+          quoteLines.push('');
+        }
         i++;
       }
       blocks.push({
         id: `block-${blockId++}`,
-        type: 'list',
+        type: 'quote',
         data: {
-          style: 'unordered',
-          items: items,
+          text: quoteLines.join('\n'),
+          caption: '',
         },
       });
+      continue;
+    }
+
+    // Unordered lists (- or * or +)
+    if (line.match(/^[-*+]\s+/)) {
+      const items: string[] = [];
+      const baseIndent = line.match(/^(\s*)/)?.[1]?.length || 0;
+      
+      while (i < lines.length) {
+        const currentLine = lines[i];
+        const trimmed = currentLine.trim();
+        const currentIndent = currentLine.match(/^(\s*)/)?.[1]?.length || 0;
+        
+        // Check if it's a list item at the same or higher level
+        if (trimmed.match(/^[-*+]\s+/) && currentIndent >= baseIndent) {
+          // Extract item text, preserving inline formatting
+          let itemText = trimmed.replace(/^[-*+]\s+/, '');
+          // Process inline markdown in list items
+          itemText = itemText.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+          itemText = itemText.replace(/\*([^*]+)\*/g, '<i>$1</i>');
+          itemText = itemText.replace(/~~([^~]+)~~/g, '<s>$1</s>');
+          itemText = itemText.replace(/`([^`]+)`/g, '<code>$1</code>');
+          items.push(itemText);
+          i++;
+        } else if (trimmed === '' && items.length > 0) {
+          // Empty line, might be part of list or end of list
+          i++;
+          // Check if next line is still part of list
+          if (i < lines.length) {
+            const nextLine = lines[i];
+            const nextIndent = nextLine.match(/^(\s*)/)?.[1]?.length || 0;
+            if (!nextLine.trim().match(/^[-*+]\s+/) || nextIndent < baseIndent) {
+              break;
+            }
+          } else {
+            break;
+          }
+        } else {
+          break;
+        }
+      }
+      
+      if (items.length > 0) {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'list',
+          data: {
+            style: 'unordered',
+            items: items,
+          },
+        });
+      }
       continue;
     }
 
     // Ordered lists (1. 2. etc.)
     if (line.match(/^\d+\.\s+/)) {
       const items: string[] = [];
-      while (i < lines.length && lines[i].trim().match(/^\d+\.\s+/)) {
-        items.push(lines[i].trim().replace(/^\d+\.\s+/, ''));
-        i++;
+      const baseIndent = line.match(/^(\s*)/)?.[1]?.length || 0;
+      
+      while (i < lines.length) {
+        const currentLine = lines[i];
+        const trimmed = currentLine.trim();
+        const currentIndent = currentLine.match(/^(\s*)/)?.[1]?.length || 0;
+        
+        // Check if it's a numbered list item at the same or higher level
+        if (trimmed.match(/^\d+\.\s+/) && currentIndent >= baseIndent) {
+          // Extract item text, preserving inline formatting
+          let itemText = trimmed.replace(/^\d+\.\s+/, '');
+          // Process inline markdown in list items
+          itemText = itemText.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+          itemText = itemText.replace(/\*([^*]+)\*/g, '<i>$1</i>');
+          itemText = itemText.replace(/~~([^~]+)~~/g, '<s>$1</s>');
+          itemText = itemText.replace(/`([^`]+)`/g, '<code>$1</code>');
+          items.push(itemText);
+          i++;
+        } else if (trimmed === '' && items.length > 0) {
+          // Empty line
+          i++;
+          if (i < lines.length) {
+            const nextLine = lines[i];
+            const nextIndent = nextLine.match(/^(\s*)/)?.[1]?.length || 0;
+            if (!nextLine.trim().match(/^\d+\.\s+/) || nextIndent < baseIndent) {
+              break;
+            }
+          } else {
+            break;
+          }
+        } else {
+          break;
+        }
       }
-      blocks.push({
-        id: `block-${blockId++}`,
-        type: 'list',
-        data: {
-          style: 'ordered',
-          items: items,
-        },
-      });
+      
+      if (items.length > 0) {
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'list',
+          data: {
+            style: 'ordered',
+            items: items,
+          },
+        });
+      }
       continue;
     }
 
+    // Footnotes [^1]: definition
+    const footnoteMatch = line.match(/^\[\^([^\]]+)\]:\s*(.+)$/);
+    if (footnoteMatch) {
+      footnotes.set(footnoteMatch[1], footnoteMatch[2]);
+      i++;
+      continue;
+    }
+    
     // Horizontal rule (--- or ***)
-    if (line.match(/^[-*]{3,}$/)) {
+    if (line.match(/^[*-]{3,}$/)) {
       blocks.push({
         id: `block-${blockId++}`,
         type: 'delimiter',
@@ -297,16 +386,107 @@ const markdownToEditorJs = (markdown: string): OutputData => {
       continue;
     }
 
+    // Tables (| col1 | col2 |)
+    if (line.includes('|') && line.trim().startsWith('|')) {
+      const tableRows: string[][] = [];
+      const alignments: string[] = [];
+      let isHeaderSeparator = false;
+      
+      while (i < lines.length && lines[i].trim().includes('|')) {
+        const currentLine = lines[i].trim();
+        
+        // Check if it's a separator row (---)
+        if (currentLine.match(/^\|[\s:-]+\|$/)) {
+          // Parse alignment
+          const cells = currentLine.split('|').filter(c => c.trim());
+          cells.forEach((cell) => {
+            const trimmed = cell.trim();
+            if (trimmed.startsWith(':') && trimmed.endsWith(':')) {
+              alignments.push('center');
+            } else if (trimmed.endsWith(':')) {
+              alignments.push('right');
+            } else {
+              alignments.push('left');
+            }
+          });
+          isHeaderSeparator = true;
+          i++;
+          continue;
+        }
+        
+        // Parse table row
+        const cells = currentLine.split('|')
+          .map(c => c.trim())
+          .filter(c => c !== '');
+        
+        if (cells.length > 0) {
+          tableRows.push(cells);
+        }
+        i++;
+      }
+      
+      if (tableRows.length > 0) {
+        // Convert table rows to Editor.js format
+        const content = tableRows.map(row => row.map(cell => htmlToMarkdown(cell)));
+        blocks.push({
+          id: `block-${blockId++}`,
+          type: 'table',
+          data: {
+            content: content,
+            withHeadings: !isHeaderSeparator || tableRows.length > 1,
+            alignment: alignments.length > 0 ? alignments : new Array(tableRows[0]?.length || 0).fill('left'),
+          },
+        });
+      }
+      continue;
+    }
+
     // Regular paragraph
     if (line) {
       // Process inline markdown in paragraph
       let processedText = line;
-      // Bold **text**
+      
+      // Links [text](url) - process before other formatting
+      processedText = processedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+      
+      // Bold **text** (must be before italic to avoid conflicts)
       processedText = processedText.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
-      // Italic *text*
+      processedText = processedText.replace(/__([^_]+)__/g, '<b>$1</b>');
+      
+      // Bold and Italic ***text***
+      processedText = processedText.replace(/\*\*\*([^*]+)\*\*\*/g, '<b><i>$1</i></b>');
+      processedText = processedText.replace(/___([^_]+)___/g, '<b><i>$1</i></b>');
+      
+      // Italic *text* (after bold to avoid conflicts)
       processedText = processedText.replace(/\*([^*]+)\*/g, '<i>$1</i>');
+      processedText = processedText.replace(/_([^_]+)_/g, '<i>$1</i>');
+      
+      // Strikethrough ~~text~~
+      processedText = processedText.replace(/~~([^~]+)~~/g, '<s>$1</s>');
+      
       // Inline code `code`
       processedText = processedText.replace(/`([^`]+)`/g, '<code>$1</code>');
+      
+      // Emoji shortcuts :rocket: :fire: etc. (basic support)
+      processedText = processedText.replace(/:([a-z0-9_+-]+):/g, (match, emojiName) => {
+        // Common emoji mappings
+        const emojiMap: Record<string, string> = {
+          rocket: '🚀',
+          fire: '🔥',
+          star: '⭐',
+          heart: '❤️',
+          thumbsup: '👍',
+          thumbsdown: '👎',
+          check: '✅',
+          cross: '❌',
+          warning: '⚠️',
+          info: 'ℹ️',
+          bulb: '💡',
+          smile: '😊',
+          wink: '😉',
+        };
+        return emojiMap[emojiName.toLowerCase()] || match;
+      });
       
       blocks.push({
         id: `block-${blockId++}`,
@@ -317,6 +497,25 @@ const markdownToEditorJs = (markdown: string): OutputData => {
       });
     }
     i++;
+  }
+  
+  // Add footnotes at the end if any were found
+  if (footnotes.size > 0) {
+    blocks.push({
+      id: `block-${blockId++}`,
+      type: 'delimiter',
+      data: {},
+    });
+    
+    footnotes.forEach((text: string, id: string) => {
+      blocks.push({
+        id: `block-${blockId++}`,
+        type: 'paragraph',
+        data: {
+          text: `<a id="footnote-${id}" href="#footnote-ref-${id}"><strong>[${id}]</strong></a>: ${text}`,
+        },
+      });
+    });
   }
 
   return {
@@ -333,6 +532,59 @@ const markdownToEditorJs = (markdown: string): OutputData => {
   };
 };
 
+// Helper function to convert HTML to Markdown
+const htmlToMarkdown = (html: string): string => {
+  if (!html || typeof html !== 'string') {
+    return '';
+  }
+  
+  let text = html;
+  
+  // Remove all HTML tags and convert to plain text, but preserve formatting
+  // Handle nested tags properly - order matters!
+  
+  // Links (before other tags to preserve link text formatting)
+  text = text.replace(/<a[^>]+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, (_match, url, linkText) => {
+    const cleanText = linkText.replace(/<[^>]+>/g, ''); // Remove any nested tags in link text
+    return `[${cleanText}](${url})`;
+  });
+  
+  // Strikethrough (before bold/italic to avoid conflicts)
+  text = text.replace(/<s>(.*?)<\/s>/gi, '~~$1~~');
+  text = text.replace(/<strike>(.*?)<\/strike>/gi, '~~$1~~');
+  text = text.replace(/<del>(.*?)<\/del>/gi, '~~$1~~');
+  
+  // Bold (strong and b tags)
+  text = text.replace(/<strong>(.*?)<\/strong>/gi, '**$1**');
+  text = text.replace(/<b>(.*?)<\/b>/gi, '**$1**');
+  
+  // Italic (em and i tags)
+  text = text.replace(/<em>(.*?)<\/em>/gi, '*$1*');
+  text = text.replace(/<i>(.*?)<\/i>/gi, '*$1*');
+  
+  // Code (inline code)
+  text = text.replace(/<code>(.*?)<\/code>/gi, '`$1`');
+  
+  // Line breaks
+  text = text.replace(/<br\s*\/?>/gi, '\n');
+  text = text.replace(/<p[^>]*>/gi, '\n');
+  text = text.replace(/<\/p>/gi, '\n');
+  
+  // Remove remaining HTML tags
+  text = text.replace(/<[^>]+>/g, '');
+  
+  // Decode HTML entities
+  text = text.replace(/&nbsp;/g, ' ');
+  text = text.replace(/&amp;/g, '&');
+  text = text.replace(/&lt;/g, '<');
+  text = text.replace(/&gt;/g, '>');
+  text = text.replace(/&quot;/g, '"');
+  text = text.replace(/&#39;/g, "'");
+  text = text.replace(/&apos;/g, "'");
+  
+  return text.trim();
+};
+
 // Convert Editor.js JSON to Markdown
 const editorJsToMarkdown = (data: OutputData): string => {
   if (!data || !data.blocks || !Array.isArray(data.blocks)) {
@@ -342,58 +594,161 @@ const editorJsToMarkdown = (data: OutputData): string => {
   let markdown = '';
 
   data.blocks.forEach((block) => {
-    switch (block.type) {
-      case 'paragraph': {
-        let text = block.data.text || '';
-        // Convert HTML back to markdown
-        text = text.replace(/<b>(.*?)<\/b>/g, '**$1**');
-        text = text.replace(/<i>(.*?)<\/i>/g, '*$1*');
-        text = text.replace(/<code>(.*?)<\/code>/g, '`$1`');
-        text = text.replace(/<a href="([^"]+)"[^>]*>(.*?)<\/a>/g, '[$2]($1)');
-        markdown += text + '\n\n';
-        break;
-      }
-      case 'header': {
-        const level = block.data.level || 1;
-        const text = block.data.text || '';
-        markdown += '#'.repeat(level) + ' ' + text + '\n\n';
-        break;
-      }
-      case 'list': {
-        const items = block.data.items || [];
-        const style = block.data.style || 'unordered';
-        items.forEach((item: string) => {
-          if (style === 'ordered') {
-            markdown += '1. ' + item + '\n';
-          } else {
-            markdown += '- ' + item + '\n';
+    try {
+      switch (block.type) {
+        case 'paragraph': {
+          let text = '';
+          if (typeof block.data.text === 'string') {
+            text = block.data.text;
+          } else if (block.data.text) {
+            // If it's an object, try to extract text
+            text = String(block.data.text);
           }
-        });
-        markdown += '\n';
-        break;
+          text = htmlToMarkdown(text);
+          if (text) {
+            markdown += text + '\n\n';
+          }
+          break;
+        }
+        case 'header': {
+          const level = (block.data.level || 1) as number;
+          let text = '';
+          if (typeof block.data.text === 'string') {
+            text = block.data.text;
+          } else if (block.data.text) {
+            text = htmlToMarkdown(String(block.data.text));
+          }
+          if (text) {
+            markdown += '#'.repeat(level) + ' ' + text + '\n\n';
+          }
+          break;
+        }
+        case 'list': {
+          const items = block.data.items || [];
+          const style = (block.data.style || 'unordered') as string;
+          
+          if (Array.isArray(items) && items.length > 0) {
+            items.forEach((item: unknown, index: number) => {
+              let itemText = '';
+              if (typeof item === 'string') {
+                itemText = htmlToMarkdown(item);
+              } else if (item && typeof item === 'object') {
+                // If item is an object, try to extract text
+                itemText = htmlToMarkdown(JSON.stringify(item));
+              } else {
+                itemText = String(item || '');
+              }
+              
+              if (itemText) {
+                if (style === 'ordered') {
+                  markdown += `${index + 1}. ${itemText}\n`;
+                } else {
+                  markdown += `- ${itemText}\n`;
+                }
+              }
+            });
+            markdown += '\n';
+          }
+          break;
+        }
+        case 'quote': {
+          let text = '';
+          if (typeof block.data.text === 'string') {
+            text = block.data.text;
+          } else if (block.data.text) {
+            text = htmlToMarkdown(String(block.data.text));
+          }
+          if (text) {
+            // Handle multi-line quotes
+            const quoteLines = text.split('\n');
+            quoteLines.forEach((line) => {
+              if (line.trim()) {
+                markdown += '> ' + line + '\n';
+              }
+            });
+            markdown += '\n';
+          }
+          break;
+        }
+        case 'code': {
+          const code = (block.data.code || '') as string;
+          const language = (block.data.language || block.data.languageName || '') as string;
+          if (code) {
+            markdown += '```' + (language || '') + '\n' + code + '\n```\n\n';
+          }
+          break;
+        }
+        case 'image': {
+          const url = (block.data.url || (block.data.file as { url?: string })?.url || '') as string;
+          const caption = (block.data.caption || '') as string;
+          if (url) {
+            markdown += `![${caption || ''}](${url})\n\n`;
+          }
+          break;
+        }
+        case 'delimiter': {
+          markdown += '---\n\n';
+          break;
+        }
+        case 'checklist': {
+          const items = (block.data.items || []) as Array<{ text?: string; checked?: boolean }>;
+          if (Array.isArray(items) && items.length > 0) {
+            items.forEach((item) => {
+              const text = item.text || '';
+              const checked = item.checked ? 'x' : ' ';
+              markdown += `- [${checked}] ${htmlToMarkdown(text)}\n`;
+            });
+            markdown += '\n';
+          }
+          break;
+        }
+        case 'table': {
+          const content = block.data.content || [];
+          const withHeadings = (block.data.withHeadings || false) as boolean;
+          const alignment = (block.data.alignment || []) as string[];
+          
+          if (Array.isArray(content) && content.length > 0) {
+            content.forEach((row: unknown[], rowIndex: number) => {
+              if (Array.isArray(row)) {
+                const rowText = row.map((cell: unknown) => {
+                  const cellText = typeof cell === 'string' ? cell : String(cell || '');
+                  return htmlToMarkdown(cellText);
+                }).join(' | ');
+                markdown += '| ' + rowText + ' |\n';
+                
+                // Add header separator after first row (or after headings row if withHeadings is true)
+                const separatorRowIndex = withHeadings ? 0 : 0;
+                if (rowIndex === separatorRowIndex) {
+                  const separator = row.map((_, colIndex) => {
+                    const align = alignment && alignment[colIndex];
+                    if (align === 'center') {
+                      return ' :---: ';
+                    } else if (align === 'right') {
+                      return ' ---: ';
+                    } else {
+                      return ' --- ';
+                    }
+                  }).join('|');
+                  markdown += '|' + separator + '|\n';
+                }
+              }
+            });
+            markdown += '\n';
+          }
+          break;
+        }
+        default:
+          // For unknown block types, try to extract any text content
+          if (block.data && typeof block.data === 'object') {
+            const dataStr = JSON.stringify(block.data);
+            if (dataStr && dataStr !== '{}') {
+              console.warn(`Unknown block type: ${block.type}`, block.data);
+            }
+          }
+          break;
       }
-      case 'quote': {
-        const text = block.data.text || '';
-        markdown += '> ' + text + '\n\n';
-        break;
-      }
-      case 'code': {
-        const code = block.data.code || '';
-        markdown += '```\n' + code + '\n```\n\n';
-        break;
-      }
-      case 'image': {
-        const url = block.data.url || block.data.file?.url || '';
-        const caption = block.data.caption || '';
-        markdown += `![${caption}](${url})\n\n`;
-        break;
-      }
-      case 'delimiter': {
-        markdown += '---\n\n';
-        break;
-      }
-      default:
-        break;
+    } catch (error) {
+      console.error(`Error processing block type ${block.type}:`, error, block);
     }
   });
 
