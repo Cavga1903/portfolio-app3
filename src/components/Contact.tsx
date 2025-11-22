@@ -11,15 +11,11 @@ interface FormErrors {
   message: string;
 }
 
-// Google reCAPTCHA Enterprise window interface
+// Google reCAPTCHA v3 window interface
 interface WindowWithRecaptcha extends Window {
   grecaptcha?: {
-    enterprise?: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
-    };
-    ready?: (callback: () => void) => void;
-    execute?: (siteKey: string, options: { action: string }) => Promise<string>;
+    ready: (callback: () => void) => void;
+    execute: (siteKey: string, options: { action: string }) => Promise<string>;
   };
 }
 
@@ -45,7 +41,7 @@ const Contact: React.FC = () => {
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
   
-  // reCAPTCHA Enterprise configuration
+  // reCAPTCHA v3 configuration
   const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeBJAssAAAAAAYqpCg-88Z3_Nm250eqnxTUrZdO';
 
   // Initialize EmailJS
@@ -118,7 +114,7 @@ const Contact: React.FC = () => {
     trackFormInteraction('contact_form', 'submit_start');
 
     try {
-      // Get reCAPTCHA Enterprise token (if configured and not localhost)
+      // Get reCAPTCHA v3 token (if configured and not localhost)
       let recaptchaToken = '';
       const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       
@@ -127,51 +123,36 @@ const Contact: React.FC = () => {
         try {
           const windowWithRecaptcha = window as unknown as WindowWithRecaptcha;
           
-          // Wait for reCAPTCHA Enterprise to be ready
+          // Wait for reCAPTCHA to be ready
           if (!windowWithRecaptcha.grecaptcha) {
-            console.warn('reCAPTCHA Enterprise not loaded, waiting...');
+            console.warn('reCAPTCHA not loaded, waiting...');
             await new Promise(resolve => setTimeout(resolve, 1000));
           }
 
           if (windowWithRecaptcha.grecaptcha) {
-            // Use Enterprise ready() to ensure reCAPTCHA is fully loaded
+            // Use ready() to ensure reCAPTCHA is fully loaded
             await new Promise<void>((resolve) => {
-              if (windowWithRecaptcha.grecaptcha?.enterprise?.ready) {
-                windowWithRecaptcha.grecaptcha.enterprise.ready(() => {
-                  resolve();
-                });
-              } else if (windowWithRecaptcha.grecaptcha?.ready) {
-                // Fallback to standard ready if enterprise is not available
-                windowWithRecaptcha.grecaptcha.ready(() => {
-                  resolve();
-                });
-              } else {
+              windowWithRecaptcha.grecaptcha!.ready(() => {
                 resolve();
-              }
+              });
               // Timeout after 5 seconds
               setTimeout(() => resolve(), 5000);
             });
 
-            // Get reCAPTCHA Enterprise token
-            if (windowWithRecaptcha.grecaptcha.enterprise?.execute) {
-              recaptchaToken = await windowWithRecaptcha.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, {
-                action: 'CONTACT_FORM_SUBMIT'
-              });
-              console.log('✅ reCAPTCHA Enterprise token alındı');
-            } else if (windowWithRecaptcha.grecaptcha.execute) {
-              // Fallback to standard execute if enterprise is not available
+            // Get reCAPTCHA v3 token
+            if (windowWithRecaptcha.grecaptcha.execute) {
               recaptchaToken = await windowWithRecaptcha.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
-                action: 'CONTACT_FORM_SUBMIT'
+                action: 'contact_form_submit'
               });
-              console.log('✅ reCAPTCHA token alındı (fallback)');
+              console.log('✅ reCAPTCHA v3 token alındı');
             }
           }
         } catch (recaptchaError) {
-          console.warn('reCAPTCHA Enterprise error (continuing without token):', recaptchaError);
+          console.warn('reCAPTCHA error (continuing without token):', recaptchaError);
           // Continue without reCAPTCHA token if it fails
         }
       } else if (isLocalhost) {
-        console.log('ℹ️ Localhost - reCAPTCHA Enterprise skipped for development');
+        console.log('ℹ️ Localhost - reCAPTCHA skipped for development');
       }
 
       // Dil bilgisini al

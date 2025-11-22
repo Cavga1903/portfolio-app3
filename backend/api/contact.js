@@ -114,14 +114,11 @@ app.post('/api/contact', limiter, async (req, res) => {
       });
     }
 
-    // Google reCAPTCHA Enterprise validation
-    const recaptchaApiKey = process.env.RECAPTCHA_API_KEY;
-    const recaptchaProjectId = process.env.RECAPTCHA_PROJECT_ID || 'my-portfolio-478020';
-    const recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY || '6LeBJAssAAAAAAYqpCg-88Z3_Nm250eqnxTUrZdO';
-    const expectedAction = 'CONTACT_FORM_SUBMIT';
+    // Google reCAPTCHA v3 validation
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
 
-    if (!recaptchaApiKey) {
-      console.warn('RECAPTCHA_API_KEY not set. Skipping reCAPTCHA Enterprise verification.');
+    if (!recaptchaSecretKey) {
+      console.warn('RECAPTCHA_SECRET_KEY not set. Skipping reCAPTCHA verification.');
     } else {
       // reCAPTCHA token kontrolü - eğer token yoksa ve production değilse uyarı ver
       if (!recaptchaToken || recaptchaToken.trim() === '') {
@@ -136,90 +133,38 @@ app.post('/api/contact', limiter, async (req, res) => {
         }
       }
 
-      // Verify reCAPTCHA Enterprise token with Google Cloud API (only if token is provided)
+      // Verify reCAPTCHA token with Google (only if token is provided)
       if (recaptchaToken && recaptchaToken.trim() !== '') {
         try {
-          const recaptchaEnterpriseUrl = `https://recaptchaenterprise.googleapis.com/v1/projects/${recaptchaProjectId}/assessments?key=${recaptchaApiKey}`;
-          
-          const requestBody = {
-            event: {
-              token: recaptchaToken,
-              expectedAction: expectedAction,
-              siteKey: recaptchaSiteKey,
-            },
-          };
-
-          const verifyResponse = await fetch(recaptchaEnterpriseUrl, {
+          const recaptchaVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
+          const verifyResponse = await fetch(recaptchaVerifyUrl, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify(requestBody),
+            body: `secret=${recaptchaSecretKey}&response=${recaptchaToken}`,
           });
-
-          if (!verifyResponse.ok) {
-            const errorText = await verifyResponse.text();
-            console.error('reCAPTCHA Enterprise API error:', verifyResponse.status, errorText);
-            return res.status(500).json({ 
-              error: 'Failed to verify reCAPTCHA. Please try again later.' 
-            });
-          }
 
           const verifyData = await verifyResponse.json();
 
-          // Check if the token is valid
-          if (!verifyData.tokenProperties || !verifyData.tokenProperties.valid) {
-            const invalidReason = verifyData.tokenProperties?.invalidReason || 'unknown';
-            console.error('reCAPTCHA Enterprise token invalid:', invalidReason);
+          if (!verifyData.success) {
+            console.error('reCAPTCHA verification failed:', verifyData['error-codes']);
             return res.status(400).json({ 
               error: 'reCAPTCHA verification failed. Please try again.' 
             });
           }
 
-          // Check if the expected action was executed
-          if (verifyData.tokenProperties.action !== expectedAction) {
-            console.error('reCAPTCHA action mismatch. Expected:', expectedAction, 'Got:', verifyData.tokenProperties.action);
-            return res.status(400).json({ 
-              error: 'reCAPTCHA verification failed. Please try again.' 
-            });
-          }
-
-          // Get the risk score and assessment details
-          const riskScore = verifyData.riskAnalysis?.score || 0;
-          const assessmentId = verifyData.name?.split('/').pop() || 'unknown'; // Extract assessment ID from name
-          const reasons = verifyData.riskAnalysis?.reasons || [];
-          
-          // Log assessment details for review and annotation
-          console.log('📊 reCAPTCHA Enterprise Assessment:', {
-            assessmentId: assessmentId,
-            riskScore: riskScore,
-            action: verifyData.tokenProperties.action,
-            valid: verifyData.tokenProperties.valid,
-            reasons: reasons.length > 0 ? reasons : 'none',
-            createTime: verifyData.createTime || 'not provided'
-          });
-          
-          // Check risk score (0.0 = likely bot, 1.0 = likely human)
-          if (riskScore < 0.5) {
-            console.warn('⚠️ reCAPTCHA Enterprise risk score too low:', riskScore);
-            console.warn('Risk reasons:', reasons);
-            // Store assessment ID for potential annotation (mark as false positive if needed)
-            console.warn('Assessment ID for annotation:', assessmentId);
+          // Check score for reCAPTCHA v3 (0.0 = likely bot, 1.0 = likely human)
+          if (verifyData.score !== undefined && verifyData.score < 0.5) {
+            console.warn('reCAPTCHA score too low:', verifyData.score);
             return res.status(400).json({ 
               error: 'reCAPTCHA verification failed. Please try again.' 
             });
           }
           
-          console.log('✅ reCAPTCHA Enterprise verified successfully. Score:', riskScore);
-          if (reasons.length > 0) {
-            console.log('ℹ️ Risk reasons (for model tuning):', reasons);
-          }
-          
-          // Store assessment ID in response metadata (for future annotation if needed)
-          // You can use this ID later to annotate assessments via Google Cloud API
-          // Assessment ID format: projects/{project}/assessments/{assessment_id}
+          console.log('✅ reCAPTCHA v3 verified successfully. Score:', verifyData.score);
         } catch (recaptchaError) {
-          console.error('Error verifying reCAPTCHA Enterprise:', recaptchaError);
+          console.error('Error verifying reCAPTCHA:', recaptchaError);
           return res.status(500).json({ 
             error: 'Failed to verify reCAPTCHA. Please try again later.' 
           });

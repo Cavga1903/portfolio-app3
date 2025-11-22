@@ -112,8 +112,16 @@
     </script>
     <!-- End Google Analytics 4 -->
     
-    <!-- Google reCAPTCHA Enterprise -->
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeBJAssAAAAAAYqpCg-88Z3_Nm250eqnxTUrZdO"></script>
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeBJAssAAAAAAYqpCg-88Z3_Nm250eqnxTUrZdO"></script>
+    <!-- Hide reCAPTCHA badge -->
+    <style>
+      .grecaptcha-badge {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
     
     <!-- Facebook App ID (Placeholder - Replace with your actual Facebook App ID) -->
     <meta property="fb:app_id" content="YOUR_FACEBOOK_APP_ID" />
