@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AppProvider } from './app/providers/AppProvider';
 import { routes } from './app/router/routes';
 import GlobalBackground from './components/GlobalBackground';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           />
         ))}
         </Routes>
+        <SpeedInsights />
     </AppProvider>
       );
 };
