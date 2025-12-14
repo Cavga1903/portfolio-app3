@@ -293,14 +293,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
         <AppBar
           position="fixed"
           sx={{
-            backgroundColor: isDarkMode 
-              ? 'rgba(17, 24, 39, 0.95)' // gray-900 with 95% opacity for dark mode
-              : 'rgba(255, 255, 255, 0.95)', // white with 95% opacity for light mode
+            backgroundColor: 'rgba(17, 24, 39, 0.95)', // gray-900 with 95% opacity - always dark
             backdropFilter: 'blur(12px) saturate(180%)',
-            borderBottom: isDarkMode
-              ? '1px solid rgba(55, 65, 81, 0.6)' // gray-700 with 60% opacity
-              : '1px solid rgba(229, 231, 235, 0.8)', // gray-200 with 80% opacity
-            color: isDarkMode ? 'rgb(243, 244, 246)' : 'rgb(17, 24, 39)', // gray-100 for dark, gray-900 for light
+            borderBottom: '1px solid rgba(55, 65, 81, 0.6)', // gray-700 with 60% opacity - always dark
+            color: 'rgb(243, 244, 246)', // gray-100 - always dark
             boxShadow: 'none',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             '&.MuiAppBar-root': {
@@ -321,11 +317,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <a
                   href="/"
-                  className={`flex items-center gap-2 cursor-pointer transition-colors duration-300 group ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white'
-                      : 'text-gray-700 hover:text-gray-900'
-                  }`}
+                  className="flex items-center gap-2 cursor-pointer transition-colors duration-300 group text-gray-300 hover:text-white"
             onClick={(e) => {
               e.preventDefault();
                     if (location.pathname !== '/') {
@@ -344,11 +336,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 {/* Dark Mode Toggle - Desktop */}
                 <button
                   onClick={toggleDarkMode}
-                  className={`hidden lg:flex p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/50'
-                  }`}
+                  className="hidden lg:flex p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-300 hover:text-white hover:bg-gray-700/50"
                   aria-label="Toggle dark mode"
                 >
                   {isDarkMode ? (
@@ -361,11 +349,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 {/* Language Selector - Desktop */}
                 <button
                   onClick={cycleToNextLanguage}
-                  className={`hidden lg:flex p-2 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/50'
-                  }`}
+                  className="hidden lg:flex p-2 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95 text-gray-300 hover:text-white hover:bg-gray-700/50"
                   aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
                   title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
                 >
@@ -386,12 +370,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 href={`#${link.id}`}
                       className={`text-sm cursor-pointer transition-all duration-300 relative px-2 py-1 focus:outline-none ${
                         activeLink === link.id
-                          ? isDarkMode 
-                            ? "text-blue-400 font-medium"
-                            : "text-blue-600 font-medium"
-                          : isDarkMode
-                            ? "text-gray-300 hover:text-white"
-                            : "text-gray-700 hover:text-gray-900"
+                          ? "text-blue-400 font-medium"
+                          : "text-gray-300 hover:text-white"
                       }`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -410,7 +390,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                   
                   {/* Animated Underline */}
                   <motion.div
-                    className={`absolute bottom-0 h-0.5 ${isDarkMode ? 'bg-blue-400' : 'bg-blue-600'}`}
+                    className="absolute bottom-0 h-0.5 bg-blue-400"
                     style={{
                       x: underlineXSpring,
                       width: underlineWidthSpring,
@@ -424,11 +404,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                   href="https://github.com/Cavga1903"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                  }`}
+                  className="p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-300 hover:text-white hover:bg-gray-700/50"
                   aria-label="GitHub"
                   onClick={() => trackClick('github', 'social_link', 'GitHub')}
                   style={{ textDecoration: 'none' }}
@@ -449,20 +425,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                     {/* Dropdown Menu */}
                     <div className={`absolute right-0 mt-2 w-56 rounded-lg shadow-xl transition-all duration-200 z-[60] ${
                       isProfileDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                    } ${
-                      isDarkMode
-                        ? 'bg-gray-800 border border-gray-700/50'
-                        : 'bg-white border border-gray-200/50'
-                    }`}>
+                    } bg-gray-800 border border-gray-700/50`}>
                       <div className="p-2">
                         {/* User Info */}
-                        <div className={`px-3 py-2 text-sm border-b ${
-                          isDarkMode
-                            ? 'text-gray-300 border-gray-700'
-                            : 'text-gray-700 border-gray-200'
-                        }`}>
+                        <div className="px-3 py-2 text-sm border-b text-gray-300 border-gray-700">
                           <div className="font-semibold">{user?.name}</div>
-                          <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{user?.email}</div>
+                          <div className="text-xs text-gray-400">{user?.email}</div>
                         </div>
                         
                         {/* Navigation Links */}
@@ -483,11 +451,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               }
                               trackClick('nav_home_profile', 'navigation_link', 'Home');
                             }}
-                            className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                             style={{ textDecoration: 'none' }}
                           >
                             <FaHome className="w-4 h-4" />
@@ -502,22 +466,14 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               navigate('/blog');
                               trackClick('nav_blog_profile', 'navigation_link', 'Blog');
                             }}
-                            className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                             style={{ textDecoration: 'none' }}
                           >
                             <FaBlog className="w-4 h-4" />
                             <span>{t('nav.blog') || 'Blog'}</span>
                           </a>
                           
-                          <div className={`px-3 py-1 text-xs font-semibold uppercase tracking-wider border-t mt-1 pt-2 ${
-                            isDarkMode
-                              ? 'text-gray-400 border-gray-700'
-                              : 'text-gray-500 border-gray-200'
-                          }`}>
+                          <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border-t mt-1 pt-2 text-gray-400 border-gray-700">
                             {t('nav.admin') || 'Admin'}
                 </div>
                           {user?.role === 'admin' && (
@@ -529,11 +485,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                                 navigate('/admin/dashboard');
                                 trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
                               }}
-                              className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                              className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                               style={{ textDecoration: 'none' }}
                             >
                               <FaChartLine className="w-4 h-4" />
@@ -543,9 +495,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
             </div>
 
                         {/* Logout */}
-                        <div className={`pt-1 border-t mt-1 ${
-                          isDarkMode ? 'border-gray-700' : 'border-gray-200'
-                        }`}>
+                        <div className="pt-1 border-t mt-1 border-gray-700">
                           <button
                             onClick={async () => {
                               setIsProfileDropdownOpen(false);
@@ -553,11 +503,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               navigate('/');
                               trackClick('nav_logout', 'action', 'Logout');
                             }}
-                            className={`w-full flex items-center gap-2 text-left px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-red-400 hover:bg-gray-700'
-                                : 'text-red-600 hover:bg-gray-100'
-                            }`}
+                            className="w-full flex items-center gap-2 text-left px-3 py-2 text-sm rounded transition-colors text-red-400 hover:bg-gray-700"
                           >
                             <FaSignOutAlt className="w-4 h-4" />
                             <span>{t('auth.logout') || 'Logout'}</span>
@@ -582,7 +528,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 {/* Dark Mode Toggle - Mobile */}
                 <button
                   onClick={toggleDarkMode}
-                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="p-2 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
                   aria-label="Toggle dark mode"
                 >
                   {isDarkMode ? (
@@ -595,11 +541,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 {/* Language Selector - Mobile */}
               <button
                   onClick={cycleToNextLanguage}
-                  className={`p-2 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                  }`}
+                  className="p-2 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95 text-gray-300 hover:text-white hover:bg-gray-700/50"
                   aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
                   title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
                 >
@@ -610,11 +552,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
               <button
                 onClick={toggleMenu}
                 type="button"
-                  className={`p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                  }`}
+                  className="p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-300 hover:text-white hover:bg-gray-700/50"
                 aria-controls="mobile-menu"
                 aria-expanded={isMenuOpen}
                 aria-label="Toggle menu"
@@ -642,32 +580,20 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
         >
           {/* Backdrop */}
           <div 
-            className={`fixed inset-0 backdrop-blur-sm z-40 ${
-              isDarkMode ? 'bg-black/60' : 'bg-black/40'
-            }`}
+            className="fixed inset-0 backdrop-blur-sm z-40 bg-black/60"
             onClick={() => setIsMenuOpen(false)}
           />
           
           {/* Menu Panel */}
-          <div className={`fixed top-0 left-0 right-0 backdrop-blur-md shadow-xl z-50 border-b ${
-            isDarkMode
-              ? 'bg-gray-900/98 border-gray-700/60'
-              : 'bg-white/98 border-gray-200/80'
-          }`}>
+          <div className="fixed top-0 left-0 right-0 backdrop-blur-md shadow-xl z-50 border-b bg-gray-900/98 border-gray-700/60">
             {/* Header */}
-            <div className={`px-4 py-3 border-b ${
-              isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'
-            }`}>
+            <div className="px-4 py-3 border-b border-gray-700/50">
               <div className="flex items-center justify-between">
                 {/* Logo and Toggles */}
                 <div className="flex items-center gap-3">
                   <a
                     href="/"
-                    className={`flex items-center gap-2 transition-colors duration-300 ${
-                      isDarkMode
-                        ? 'text-gray-300 hover:text-white'
-                        : 'text-gray-700 hover:text-gray-900'
-                    }`}
+                    className="flex items-center gap-2 transition-colors duration-300 text-gray-300 hover:text-white"
                     onClick={(e) => {
                       e.preventDefault();
                       setIsMenuOpen(false);
@@ -687,11 +613,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                   {/* Dark Mode Toggle - Mobile Menu */}
                   <button
                     onClick={toggleDarkMode}
-                    className={`p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      isDarkMode
-                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                    }`}
+                    className="p-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-300 hover:text-white hover:bg-gray-700/50"
                     aria-label="Toggle dark mode"
                   >
                     {isDarkMode ? (
@@ -704,11 +626,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                   {/* Language Selector - Mobile Menu */}
                   <button
                     onClick={cycleToNextLanguage}
-                    className={`p-2 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95 ${
-                      isDarkMode
-                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                    }`}
+                    className="p-2 rounded-lg transition-all duration-200 cursor-pointer outline-none focus:outline-none hover:scale-110 active:scale-95 text-gray-300 hover:text-white hover:bg-gray-700/50"
                     aria-label={`Change language to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
                     title={`Current: ${currentLanguage.name} - Click to switch to ${languages[(currentLanguageIndex + 1) % languages.length].name}`}
                   >
@@ -719,11 +637,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 {/* Close Button */}
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                  }`}
+                  className="p-2 rounded-lg transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-700/50"
                   aria-label="Close menu"
                 >
                   <HiX className="w-6 h-6" />
@@ -737,11 +651,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                 <a
                     key={link.id}
                       href={`#${link.id}`}
-                  className={`block px-3 py-2.5 rounded-lg transition-all duration-200 relative group ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                  }`}
+                  className="block px-3 py-2.5 rounded-lg transition-all duration-200 relative group text-gray-300 hover:text-white hover:bg-gray-700/50"
                       onClick={(e) => {
                         e.preventDefault();
                         setIsMenuOpen(false);
@@ -755,28 +665,20 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                   style={{ textDecoration: 'none' }}
                 >
                   {t(link.labelKey)}
-                  <span className={`absolute left-0 bottom-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                    isDarkMode ? 'bg-blue-400' : 'bg-blue-600'
-                  }`}></span>
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 bg-blue-400"></span>
                 </a>
               ))}
             </div>
 
             {/* Footer Actions */}
-            <div className={`px-4 py-3 border-t ${
-              isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'
-            }`}>
+            <div className="px-4 py-3 border-t border-gray-700/50">
               <div className="flex items-center justify-center gap-3">
                 {/* GitHub Icon */}
                 <a
                   href="https://github.com/Cavga1903"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/70'
-                  }`}
+                  className="p-2 rounded-lg transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-700/50"
                   aria-label="GitHub"
                   onClick={() => {
                     setIsMenuOpen(false);
@@ -792,11 +694,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                   <div className="relative profile-dropdown-container w-full">
                     <button
                       onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                      className={`w-full flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                        isDarkMode
-                          ? 'text-gray-300 hover:bg-gray-700'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                       aria-label="Profile"
                     >
                       <FaUser className="w-4 h-4" />
@@ -805,20 +703,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                     {/* Dropdown Menu - Mobile */}
                     <div className={`absolute left-0 mt-2 w-full rounded-lg shadow-xl transition-all duration-200 z-[60] ${
                       isProfileDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                    } ${
-                      isDarkMode
-                        ? 'bg-gray-800 border border-gray-700/50'
-                        : 'bg-white border border-gray-200/50'
-                    }`}>
+                    } bg-gray-800 border border-gray-700/50`}>
                       <div className="p-2">
                         {/* User Info */}
-                        <div className={`px-3 py-2 text-sm border-b ${
-                          isDarkMode
-                            ? 'text-gray-300 border-gray-700'
-                            : 'text-gray-700 border-gray-200'
-                        }`}>
+                        <div className="px-3 py-2 text-sm border-b text-gray-300 border-gray-700">
                           <div className="font-semibold">{user?.name}</div>
-                          <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{user?.email}</div>
+                          <div className="text-xs text-gray-400">{user?.email}</div>
                         </div>
                         
                         {/* Navigation Links */}
@@ -836,11 +726,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               }
                               trackClick('nav_home_profile', 'navigation_link', 'Home');
                             }}
-                            className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                             style={{ textDecoration: 'none' }}
                           >
                             <FaHome className="w-4 h-4" />
@@ -856,22 +742,14 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               navigate('/blog');
                               trackClick('nav_blog_profile', 'navigation_link', 'Blog');
                             }}
-                            className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                             style={{ textDecoration: 'none' }}
                           >
                             <FaBlog className="w-4 h-4" />
                             <span>{t('nav.blog') || 'Blog'}</span>
                           </a>
                           
-                          <div className={`px-3 py-1 text-xs font-semibold uppercase tracking-wider border-t mt-1 pt-2 ${
-                            isDarkMode
-                              ? 'text-gray-400 border-gray-700'
-                              : 'text-gray-500 border-gray-200'
-                          }`}>
+                          <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border-t mt-1 pt-2 text-gray-400 border-gray-700">
                             {t('nav.admin') || 'Admin'}
                           </div>
                           {user?.role === 'admin' && (
@@ -884,11 +762,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                                 navigate('/admin/dashboard');
                                 trackClick('nav_dashboard', 'navigation_link', 'Dashboard');
                               }}
-                              className={`flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors ${
-                              isDarkMode
-                                ? 'text-gray-300 hover:bg-gray-700'
-                                : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                              className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
                               style={{ textDecoration: 'none' }}
                             >
                               <FaChartLine className="w-4 h-4" />
@@ -898,7 +772,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                       </div>
                       
                         {/* Logout */}
-                        <div className="pt-1 border-t border-gray-200 dark:border-gray-700 mt-1">
+                        <div className="pt-1 border-t border-gray-700 mt-1">
                       <button
                             onClick={async () => {
                               setIsProfileDropdownOpen(false);
@@ -907,7 +781,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                               navigate('/');
                               trackClick('nav_logout', 'action', 'Logout');
                             }}
-                            className="w-full flex items-center gap-2 text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                            className="w-full flex items-center gap-2 text-left px-3 py-2 text-sm text-red-400 hover:bg-gray-700 rounded transition-colors"
                           >
                             <FaSignOutAlt className="w-4 h-4" />
                             <span>{t('auth.logout') || 'Logout'}</span>

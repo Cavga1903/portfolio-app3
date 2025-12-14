@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaArrowDown, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { TypeAnimation } from 'react-type-animation';
-import { useDarkMode } from '../hooks/useDarkMode';
 import { useUIStore } from '../app/store/uiStore';
 import ParticleBackground from './ParticleBackground';
 import SnowflakeBackground from './SnowflakeBackground';
@@ -11,7 +10,6 @@ import NetworkBackground from './NetworkBackground';
 
 const Hero: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode } = useDarkMode();
   const { particleTheme } = useUIStore();
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -70,11 +68,7 @@ const Hero: React.FC = () => {
     <section 
       ref={sectionRef}
       id="hero" 
-      className={`relative flex flex-col items-center justify-center text-center min-h-screen py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden ${
-        isDarkMode
-          ? 'bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white'
-          : 'bg-gradient-to-b from-white via-gray-50 to-gray-100 text-gray-900'
-      }`}
+      className="relative flex flex-col items-center justify-center text-center min-h-screen py-20 md:py-24 lg:py-28 px-6 md:px-8 lg:px-12 overflow-hidden bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white"
     >
       {/* Three.js Particle Background - Theme Based */}
       {particleTheme === 'colorful' && (
@@ -134,9 +128,7 @@ const Hero: React.FC = () => {
         
         <motion.p 
           variants={itemVariants}
-          className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto ${
-            isDarkMode ? 'text-gray-300' : 'text-gray-700'
-          }`}
+          className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-gray-300"
           whileHover={{ color: '#ffffff' }}
           transition={{ duration: 0.3 }}
         >
@@ -171,11 +163,7 @@ const Hero: React.FC = () => {
           {/* Secondary Link - Projelerimi İncele */}
           <motion.a 
             href="#projects" 
-            className={`group inline-flex items-center gap-2 text-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:ring-offset-2 rounded-lg px-2 py-1 ${
-              isDarkMode
-                ? 'text-blue-400 hover:text-blue-300'
-                : 'text-blue-600 hover:text-blue-700'
-            }`}
+            className="group inline-flex items-center gap-2 text-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:ring-offset-2 rounded-lg px-2 py-1 text-blue-400 hover:text-blue-300"
             whileHover={{ 
               scale: 1.05,
               color: "#60a5fa"
@@ -199,9 +187,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ opacity: 1 }}
         >
-          <FaArrowDown className={`text-2xl opacity-70 transition-opacity duration-300 ${
-            isDarkMode ? 'text-blue-400' : 'text-blue-600'
-          }`} />
+          <FaArrowDown className="text-2xl opacity-70 transition-opacity duration-300 text-blue-400" />
         </motion.div>
       </motion.div>
     </section>

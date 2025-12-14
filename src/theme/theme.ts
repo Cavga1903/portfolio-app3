@@ -1,6 +1,6 @@
 import { palette, radius, spacing, typography, shadow } from './tokens';
 
-export type ThemeMode = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark' | 'system';
 
 export interface AppTheme {
   mode: ThemeMode;
