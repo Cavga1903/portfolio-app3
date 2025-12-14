@@ -8,34 +8,51 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { z } from 'zod';
 import { auth, db } from '../../../lib/firebase/config';
-import { User } from '../../../app/store/authStore';
 import apiClient from '../../../api/client';
 import { endpoints } from '../../../api/endpoints';
+import {
+  UserSchema,
+  User,
+  LoginRequestSchema,
+  SignupRequestSchema,
+  AuthResponseSchema,
+  type AuthResponse,
+} from '../../shared/schemas';
 
-export interface LoginResponse {
-  user: User;
-  token: string;
-}
+// Re-export for backward compatibility
+export type LoginResponse = AuthResponse;
+export type SignupResponse = AuthResponse;
 
-export interface SignupResponse {
-  user: User;
-  token: string;
-}
+/**
+ * Firebase Error Schema
+ * Type-safe error handling for Firebase Auth errors
+ */
+const FirebaseErrorSchema = z.object({
+  code: z.string(),
+  message: z.string().optional(),
+});
 
-// Convert Firebase User to App User
+/**
+ * Convert Firebase User to App User
+ * Validates output with UserSchema to ensure type safety
+ */
 const firebaseUserToAppUser = async (firebaseUser: FirebaseUser): Promise<User> => {
   // Get user data from Firestore
   const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
   const userData = userDoc.data();
   
-  return {
+  const user = {
     id: firebaseUser.uid,
     email: firebaseUser.email || '',
     name: userData?.name || firebaseUser.displayName || 'User',
-    role: userData?.role || 'user',
+    role: (userData?.role || 'user') as 'admin' | 'user',
     avatar: userData?.avatar || firebaseUser.photoURL,
   };
+  
+  // ✅ VALIDATE OUTPUT WITH ZOD
+  return UserSchema.parse(user);
 };
 
 // Allowed email domain
@@ -47,29 +64,41 @@ const isEmailDomainAllowed = (email: string): boolean => {
 };
 
 export const authService = {
-  login: async (email: string, password: string): Promise<LoginResponse> => {
+  login: async (email: string, password: string): Promise<AuthResponse> => {
     try {
-      // Check email domain
-      if (!isEmailDomainAllowed(email)) {
-        throw new Error(`Sadece ${ALLOWED_DOMAIN} domainine sahip e-posta adresleri ile giriş yapabilirsiniz.`);
-      }
+      // ✅ VALIDATE INPUT WITH ZOD
+      const validatedInput = LoginRequestSchema.parse({ email, password });
 
       // Try Firebase Auth first
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        validatedInput.email,
+        validatedInput.password
+      );
       const firebaseUser = userCredential.user;
       const appUser = await firebaseUserToAppUser(firebaseUser);
       const token = await firebaseUser.getIdToken();
       
-      return {
+      // ✅ VALIDATE OUTPUT WITH ZOD
+      const response = AuthResponseSchema.parse({
         user: appUser,
         token,
-      };
+      });
+      
+      return response;
     } catch (error) {
       console.error('Firebase login failed:', error);
       
-      // Handle specific Firebase errors
-      if (error && typeof error === 'object' && 'code' in error) {
-        const firebaseError = error as { code: string; message?: string };
+      // ✅ TYPE-SAFE ERROR HANDLING
+      if (error instanceof z.ZodError) {
+        // Input validation error
+        throw new Error(`Geçersiz giriş bilgileri: ${error.errors.map(e => e.message).join(', ')}`);
+      }
+      
+      // Handle Firebase errors with type-safe parsing
+      const parseResult = FirebaseErrorSchema.safeParse(error);
+      if (parseResult.success) {
+        const firebaseError = parseResult.data;
         
         if (firebaseError.code === 'auth/invalid-email') {
           throw new Error('Geçersiz e-posta adresi. Lütfen doğru bir e-posta adresi giriniz.');
@@ -102,11 +131,13 @@ export const authService = {
       
       // Fallback to API
       try {
-        const response = await apiClient.post<LoginResponse>(endpoints.auth.login, {
+        const response = await apiClient.post(endpoints.auth.login, {
           email,
           password,
         });
-        return response.data;
+        
+        // ✅ VALIDATE API RESPONSE
+        return AuthResponseSchema.parse(response.data);
       } catch (apiError) {
         console.error('API login also failed:', apiError);
         throw error instanceof Error ? error : new Error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
@@ -118,21 +149,23 @@ export const authService = {
     email: string,
     password: string,
     name: string
-  ): Promise<SignupResponse> => {
+  ): Promise<AuthResponse> => {
     try {
-      // Check email domain
-      if (!isEmailDomainAllowed(email)) {
-        throw new Error(`Sadece ${ALLOWED_DOMAIN} domainine sahip e-posta adresleri ile kayıt olabilirsiniz.`);
-      }
+      // ✅ VALIDATE INPUT WITH ZOD
+      const validatedInput = SignupRequestSchema.parse({ email, password, name });
 
       // Try Firebase Auth first
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        validatedInput.email,
+        validatedInput.password
+      );
       const firebaseUser = userCredential.user;
       
       // Create user document in Firestore
       await setDoc(doc(db, 'users', firebaseUser.uid), {
-        name,
-        email,
+        name: validatedInput.name,
+        email: validatedInput.email,
         role: 'user',
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
@@ -141,16 +174,26 @@ export const authService = {
       const appUser = await firebaseUserToAppUser(firebaseUser);
       const token = await firebaseUser.getIdToken();
       
-      return {
+      // ✅ VALIDATE OUTPUT WITH ZOD
+      const response = AuthResponseSchema.parse({
         user: appUser,
         token,
-      };
+      });
+      
+      return response;
     } catch (error) {
       console.error('Firebase signup failed:', error);
       
-      // Handle specific Firebase errors
-      if (error && typeof error === 'object' && 'code' in error) {
-        const firebaseError = error as { code: string; message?: string };
+      // ✅ TYPE-SAFE ERROR HANDLING
+      if (error instanceof z.ZodError) {
+        // Input validation error
+        throw new Error(`Geçersiz kayıt bilgileri: ${error.errors.map(e => e.message).join(', ')}`);
+      }
+      
+      // Handle Firebase errors with type-safe parsing
+      const parseResult = FirebaseErrorSchema.safeParse(error);
+      if (parseResult.success) {
+        const firebaseError = parseResult.data;
         
         if (firebaseError.code === 'auth/email-already-in-use') {
           throw new Error('Bu e-posta adresi zaten kullanılıyor. Lütfen giriş yapın veya farklı bir e-posta adresi kullanın.');
@@ -175,12 +218,14 @@ export const authService = {
       
       // Fallback to API
       try {
-        const response = await apiClient.post<SignupResponse>(endpoints.auth.signup, {
+        const response = await apiClient.post(endpoints.auth.signup, {
           email,
           password,
           name,
         });
-        return response.data;
+        
+        // ✅ VALIDATE API RESPONSE
+        return AuthResponseSchema.parse(response.data);
       } catch (apiError) {
         console.error('API signup also failed:', apiError);
         throw error instanceof Error ? error : new Error('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.');
@@ -210,13 +255,15 @@ export const authService = {
       if (!firebaseUser) {
         throw new Error('No user logged in');
       }
+      // ✅ Already validated in firebaseUserToAppUser
       return await firebaseUserToAppUser(firebaseUser);
     } catch (error) {
       console.error('Firebase getCurrentUser failed, trying API fallback:', error);
       // Fallback to API
       try {
-        const response = await apiClient.get<User>(endpoints.auth.me);
-        return response.data;
+        const response = await apiClient.get(endpoints.auth.me);
+        // ✅ VALIDATE API RESPONSE
+        return UserSchema.parse(response.data);
       } catch (apiError) {
         console.error('API getCurrentUser also failed:', apiError);
         throw error;
@@ -246,7 +293,7 @@ export const authService = {
   },
 
   // Google Sign-In
-  loginWithGoogle: async (): Promise<LoginResponse> => {
+  loginWithGoogle: async (): Promise<AuthResponse> => {
     try {
       const provider = new GoogleAuthProvider();
       // Add scopes if needed
@@ -279,15 +326,20 @@ export const authService = {
       const appUser = await firebaseUserToAppUser(firebaseUser);
       const token = await firebaseUser.getIdToken();
       
-      return {
+      // ✅ VALIDATE OUTPUT WITH ZOD
+      const response = AuthResponseSchema.parse({
         user: appUser,
         token,
-      };
+      });
+      
+      return response;
     } catch (error) {
       console.error('Google login failed:', error);
-      // Handle specific Firebase errors
-      if (error && typeof error === 'object' && 'code' in error) {
-        const firebaseError = error as { code: string; message?: string };
+      
+      // ✅ TYPE-SAFE ERROR HANDLING
+      const parseResult = FirebaseErrorSchema.safeParse(error);
+      if (parseResult.success) {
+        const firebaseError = parseResult.data;
         
         if (firebaseError.code === 'auth/configuration-not-found') {
           throw new Error(

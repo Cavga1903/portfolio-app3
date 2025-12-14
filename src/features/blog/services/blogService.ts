@@ -14,11 +14,20 @@ import {
   QueryDocumentSnapshot,
   FieldValue,
 } from 'firebase/firestore';
+import { z } from 'zod';
 import { db } from '../../../lib/firebase/config';
-import { BlogPost } from '../types/blog.types';
 import { generateMetaDescription } from './seoService';
+import {
+  BlogPostSchema,
+  BlogPost,
+  BlogPostSlugSchema,
+  ISODateStringSchema,
+} from '../../shared/schemas';
 
-// Helper function to convert Firestore document to BlogPost
+/**
+ * Helper function to convert Firestore document to BlogPost
+ * Validates output with BlogPostSchema to ensure type safety
+ */
 const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: string, currentLanguage?: string): BlogPost => {
   const data = docSnapshot.data();
   const translations = data.translations || {};
@@ -35,7 +44,13 @@ const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: str
     excerpt = translation.excerpt || excerpt;
   }
   
-  return {
+  // Convert Firestore Timestamp to ISO string
+  const publishedAt = data.publishedAt?.toDate?.()?.toISOString() || 
+    (typeof data.publishedAt === 'string' ? data.publishedAt : new Date().toISOString());
+  const updatedAt = data.updatedAt?.toDate?.()?.toISOString() || 
+    (typeof data.updatedAt === 'string' ? data.updatedAt : undefined);
+  
+  const blogPost = {
     id,
     title,
     slug: data.slug || '',
@@ -43,8 +58,8 @@ const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: str
     excerpt,
     translations: translations,
     author: data.author || { id: '1', name: 'Tolga Çavga' },
-    publishedAt: data.publishedAt?.toDate?.()?.toISOString() || data.publishedAt || new Date().toISOString(),
-    updatedAt: data.updatedAt?.toDate?.()?.toISOString() || data.updatedAt,
+    publishedAt,
+    updatedAt,
     tags: data.tags || [],
     category: data.category,
     image: data.image,
@@ -58,6 +73,9 @@ const docToBlogPost = (docSnapshot: QueryDocumentSnapshot<DocumentData>, id: str
     seoTitle: data.seoTitle,
     seoKeywords: data.seoKeywords || [],
   };
+  
+  // ✅ VALIDATE OUTPUT WITH ZOD
+  return BlogPostSchema.parse(blogPost);
 };
 
 export const blogService = {
@@ -74,11 +92,16 @@ export const blogService = {
       const posts: BlogPost[] = [];
       
       querySnapshot.forEach((docSnapshot) => {
+        // ✅ Already validated in docToBlogPost
         posts.push(docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage));
       });
       
       return posts;
     } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.error('Validation error fetching blog posts:', error.errors);
+        throw new Error(`Invalid blog post data: ${error.errors.map(e => e.message).join(', ')}`);
+      }
       console.error('Error fetching blog posts:', error);
       throw error;
     }
@@ -128,8 +151,14 @@ export const blogService = {
 
   getPost: async (slug: string, currentLanguage?: string): Promise<BlogPost> => {
     try {
+      // ✅ VALIDATE SLUG FORMAT
+      const slugValidation = BlogPostSlugSchema.safeParse(slug);
+      if (!slugValidation.success) {
+        throw new Error(`Invalid slug format: ${slugValidation.error.errors.map(e => e.message).join(', ')}`);
+      }
+      
       const postsRef = collection(db, 'blogPosts');
-      const q = query(postsRef, where('slug', '==', slug));
+      const q = query(postsRef, where('slug', '==', slugValidation.data));
       const querySnapshot = await getDocs(q);
       
       if (querySnapshot.empty) {
@@ -137,8 +166,13 @@ export const blogService = {
       }
       
       const docSnapshot = querySnapshot.docs[0];
+      // ✅ Already validated in docToBlogPost
       return docToBlogPost(docSnapshot, docSnapshot.id, currentLanguage);
     } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.error('Validation error fetching blog post:', error.errors);
+        throw new Error(`Invalid slug: ${error.errors.map(e => e.message).join(', ')}`);
+      }
       console.error('Error fetching blog post:', error);
       throw error;
     }
@@ -162,30 +196,41 @@ export const blogService = {
 
   createPost: async (post: Partial<BlogPost>): Promise<BlogPost> => {
     try {
+      // ✅ VALIDATE REQUIRED FIELDS
+      if (!post.title || !post.slug || !post.content || !post.excerpt || !post.author) {
+        throw new Error('Missing required fields: title, slug, content, excerpt, and author are required');
+      }
+      
+      // ✅ VALIDATE SLUG FORMAT
+      const slugValidation = BlogPostSlugSchema.safeParse(post.slug);
+      if (!slugValidation.success) {
+        throw new Error(`Invalid slug format: ${slugValidation.error.errors.map(e => e.message).join(', ')}`);
+      }
+      
       const postsRef = collection(db, 'blogPosts');
       
       // Generate meta description if not provided
       const metaDescription = post.metaDescription || 
         (post.content ? generateMetaDescription(post.content) : undefined);
       
-      // Prepare post data with proper types
-      const postData: Record<string, unknown> = {
-        title: post.title || '',
-        slug: post.slug || '',
-        content: post.content || '',
-        excerpt: post.excerpt || '',
-        author: post.author || { id: 'unknown', name: 'Unknown' },
+      // Prepare post data with validated fields
+      const postData: Record<string, FieldValue | unknown> = {
+        title: post.title,
+        slug: slugValidation.data, // ✅ Validated slug
+        content: post.content,
+        excerpt: post.excerpt,
+        author: post.author,
         tags: post.tags || [],
-        category: post.category || '',
-        image: post.image || '',
+        category: post.category || null,
+        image: post.image || null,
         isPublished: post.isPublished || false,
         isBookmarked: post.isBookmarked || false,
         isFavorited: post.isFavorited || false,
         isArchived: post.isArchived || false,
         views: post.views || 0,
         likes: post.likes || 0,
-        metaDescription: metaDescription || '',
-        seoTitle: post.seoTitle || '',
+        metaDescription: metaDescription || null,
+        seoTitle: post.seoTitle || null,
         seoKeywords: post.seoKeywords || [],
         translations: post.translations || {},
         createdAt: Timestamp.now(),
@@ -195,7 +240,12 @@ export const blogService = {
       // Only set publishedAt if post is published
       if (post.isPublished) {
         if (post.publishedAt) {
-          postData.publishedAt = Timestamp.fromDate(new Date(post.publishedAt));
+          // ✅ VALIDATE DATE FORMAT
+          const dateValidation = ISODateStringSchema.safeParse(post.publishedAt);
+          if (!dateValidation.success) {
+            throw new Error(`Invalid publishedAt date format: ${dateValidation.error.errors.map(e => e.message).join(', ')}`);
+          }
+          postData.publishedAt = Timestamp.fromDate(new Date(dateValidation.data));
         } else {
           postData.publishedAt = Timestamp.now();
         }
@@ -208,8 +258,13 @@ export const blogService = {
         throw new Error('Failed to create post');
       }
       
+      // ✅ Already validated in docToBlogPost
       return docToBlogPost(docSnapshot, docRef.id);
     } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.error('Validation error creating blog post:', error.errors);
+        throw new Error(`Invalid blog post data: ${error.errors.map(e => e.message).join(', ')}`);
+      }
       console.error('Error creating blog post:', error);
       throw error;
     }
@@ -217,34 +272,137 @@ export const blogService = {
 
   updatePost: async (id: string, post: Partial<BlogPost>): Promise<BlogPost> => {
     try {
+      // ✅ VALIDATE ID
+      if (!id || id.trim().length === 0) {
+        throw new Error('Post ID is required');
+      }
+      
       const postRef = doc(db, 'blogPosts', id);
-      const updateData: Record<string, FieldValue | unknown> = {
+      const updateData: Record<string, FieldValue> = {
         updatedAt: Timestamp.now(),
       };
       
-      // Only update fields that are provided
-      if (post.title !== undefined) updateData.title = post.title;
-      if (post.slug !== undefined) updateData.slug = post.slug;
-      if (post.content !== undefined) updateData.content = post.content;
-      if (post.excerpt !== undefined) updateData.excerpt = post.excerpt;
-      if (post.tags !== undefined) updateData.tags = post.tags;
-      if (post.category !== undefined) updateData.category = post.category;
-      if (post.image !== undefined) updateData.image = post.image;
-      if (post.isPublished !== undefined) updateData.isPublished = post.isPublished;
-      if (post.isBookmarked !== undefined) updateData.isBookmarked = post.isBookmarked;
-      if (post.isFavorited !== undefined) updateData.isFavorited = post.isFavorited;
-      if (post.isArchived !== undefined) updateData.isArchived = post.isArchived;
-      if (post.views !== undefined) updateData.views = post.views;
-      if (post.likes !== undefined) updateData.likes = post.likes;
-      if (post.metaDescription !== undefined) updateData.metaDescription = post.metaDescription;
-      if (post.seoTitle !== undefined) updateData.seoTitle = post.seoTitle;
-      if (post.seoKeywords !== undefined) updateData.seoKeywords = post.seoKeywords;
-      if (post.translations !== undefined) updateData.translations = post.translations;
+      // ✅ TYPE-SAFE FIELD UPDATES WITH VALIDATION
+      if (post.title !== undefined) {
+        const titleValidation = BlogPostSchema.shape.title.safeParse(post.title);
+        if (!titleValidation.success) {
+          throw new Error(`Invalid title: ${titleValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.title = post.title;
+      }
+      
+      if (post.slug !== undefined) {
+        // ✅ VALIDATE SLUG FORMAT
+        const slugValidation = BlogPostSlugSchema.safeParse(post.slug);
+        if (!slugValidation.success) {
+          throw new Error(`Invalid slug format: ${slugValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.slug = slugValidation.data;
+      }
+      
+      if (post.content !== undefined) {
+        const contentValidation = BlogPostSchema.shape.content.safeParse(post.content);
+        if (!contentValidation.success) {
+          throw new Error(`Invalid content: ${contentValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.content = post.content;
+      }
+      
+      if (post.excerpt !== undefined) {
+        const excerptValidation = BlogPostSchema.shape.excerpt.safeParse(post.excerpt);
+        if (!excerptValidation.success) {
+          throw new Error(`Invalid excerpt: ${excerptValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.excerpt = post.excerpt;
+      }
+      
+      if (post.tags !== undefined) {
+        updateData.tags = post.tags;
+      }
+      
+      if (post.category !== undefined) {
+        updateData.category = post.category || null;
+      }
+      
+      if (post.image !== undefined) {
+        if (post.image) {
+          // ✅ VALIDATE URL FORMAT
+          const urlValidation = BlogPostSchema.shape.image.safeParse(post.image);
+          if (!urlValidation.success) {
+            throw new Error(`Invalid image URL: ${urlValidation.error.errors.map(e => e.message).join(', ')}`);
+          }
+        }
+        updateData.image = post.image || null;
+      }
+      
+      if (post.isPublished !== undefined) {
+        updateData.isPublished = post.isPublished;
+      }
+      
+      if (post.isBookmarked !== undefined) {
+        updateData.isBookmarked = post.isBookmarked;
+      }
+      
+      if (post.isFavorited !== undefined) {
+        updateData.isFavorited = post.isFavorited;
+      }
+      
+      if (post.isArchived !== undefined) {
+        updateData.isArchived = post.isArchived;
+      }
+      
+      if (post.views !== undefined) {
+        const viewsValidation = BlogPostSchema.shape.views.safeParse(post.views);
+        if (!viewsValidation.success) {
+          throw new Error(`Invalid views: ${viewsValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.views = post.views;
+      }
+      
+      if (post.likes !== undefined) {
+        const likesValidation = BlogPostSchema.shape.likes.safeParse(post.likes);
+        if (!likesValidation.success) {
+          throw new Error(`Invalid likes: ${likesValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.likes = post.likes;
+      }
+      
+      if (post.metaDescription !== undefined) {
+        if (post.metaDescription) {
+          const metaValidation = BlogPostSchema.shape.metaDescription.safeParse(post.metaDescription);
+          if (!metaValidation.success) {
+            throw new Error(`Invalid meta description: ${metaValidation.error.errors.map(e => e.message).join(', ')}`);
+          }
+        }
+        updateData.metaDescription = post.metaDescription || null;
+      }
+      
+      if (post.seoTitle !== undefined) {
+        if (post.seoTitle) {
+          const seoTitleValidation = BlogPostSchema.shape.seoTitle.safeParse(post.seoTitle);
+          if (!seoTitleValidation.success) {
+            throw new Error(`Invalid SEO title: ${seoTitleValidation.error.errors.map(e => e.message).join(', ')}`);
+          }
+        }
+        updateData.seoTitle = post.seoTitle || null;
+      }
+      
+      if (post.seoKeywords !== undefined) {
+        updateData.seoKeywords = post.seoKeywords;
+      }
+      
+      if (post.translations !== undefined) {
+        updateData.translations = post.translations;
+      }
       
       // Handle publishedAt: only set if publishing (isPublished becomes true)
-      // If publishedAt is provided as a string, convert it to Timestamp
       if (post.publishedAt) {
-        updateData.publishedAt = Timestamp.fromDate(new Date(post.publishedAt));
+        // ✅ VALIDATE DATE FORMAT
+        const dateValidation = ISODateStringSchema.safeParse(post.publishedAt);
+        if (!dateValidation.success) {
+          throw new Error(`Invalid publishedAt date format: ${dateValidation.error.errors.map(e => e.message).join(', ')}`);
+        }
+        updateData.publishedAt = Timestamp.fromDate(new Date(dateValidation.data));
       } else if (post.isPublished === true) {
         // If publishing but no publishedAt provided, set it to now
         updateData.publishedAt = Timestamp.now();
@@ -252,15 +410,20 @@ export const blogService = {
       // If unpublishing (isPublished becomes false), we keep publishedAt for history
       // but don't need to update it
       
-      await updateDoc(postRef, updateData as Record<string, FieldValue>);
+      await updateDoc(postRef, updateData);
       const docSnapshot = await getDoc(postRef);
       
       if (!docSnapshot.exists()) {
         throw new Error('Post not found');
       }
       
+      // ✅ Already validated in docToBlogPost
       return docToBlogPost(docSnapshot, id);
     } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.error('Validation error updating blog post:', error.errors);
+        throw new Error(`Invalid blog post data: ${error.errors.map(e => e.message).join(', ')}`);
+      }
       console.error('Error updating blog post:', error);
       throw error;
     }

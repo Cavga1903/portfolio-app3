@@ -2,8 +2,8 @@ import React, { useState, FormEvent, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { VALIDATION, TIMING } from '../utils/constants';
-import { getValidationError } from '../utils/validation';
 import emailjs from '@emailjs/browser';
+import { ContactFormSubmissionSchema, ContactFormSubmission } from '../features/shared/schemas';
 
 interface FormErrors {
   name: string;
@@ -51,40 +51,6 @@ const Contact: React.FC = () => {
     }
   }, [EMAILJS_PUBLIC_KEY]);
 
-  // Validate form fields
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {
-      name: '',
-      email: '',
-      message: '',
-    };
-    let isValid = true;
-
-    // Validate name
-    const nameError = getValidationError('name', formData.name);
-    if (nameError) {
-      newErrors.name = t(nameError);
-      isValid = false;
-    }
-
-    // Validate email
-    const emailError = getValidationError('email', formData.email);
-    if (emailError) {
-      newErrors.email = t(emailError);
-      isValid = false;
-    }
-
-    // Validate message
-    const messageError = getValidationError('message', formData.message);
-    if (messageError) {
-      newErrors.message = t(messageError);
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
@@ -92,11 +58,29 @@ const Contact: React.FC = () => {
     setErrors({ name: '', email: '', message: '' });
     setErrorMessage('');
 
-    // Validate form
-    if (!validateForm()) {
+    // ✅ RUNTIME VALIDATION WITH ZOD
+    const validationResult = ContactFormSubmissionSchema.safeParse({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      message: formData.message.trim(),
+    });
+
+    if (!validationResult.success) {
+      // ✅ MAP ZOD ERRORS TO FORM ERRORS
+      const zodErrors = validationResult.error.flatten().fieldErrors;
+      
+      setErrors({
+        name: zodErrors.name?.[0] || '',
+        email: zodErrors.email?.[0] || '',
+        message: zodErrors.message?.[0] || '',
+      });
+      
       trackFormInteraction('contact_form', 'validation_error');
       return;
     }
+
+    // ✅ VALIDATED DATA (TypeScript knows this is ContactFormSubmission)
+    const validatedData: ContactFormSubmission = validationResult.data;
 
     // Check EmailJS configuration
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
@@ -164,14 +148,14 @@ const Contact: React.FC = () => {
       };
       const currentLanguage = languageNames[i18n.language.split('-')[0]] || i18n.language;
 
-      // EmailJS ile email gönder (reCAPTCHA token'ı da ekle)
+      // ✅ TYPE-SAFE TEMPLATE PARAMS (using validated data)
       const templateParams = {
-        from_name: formData.name.trim(),
-        from_email: formData.email.trim(),
-        message: formData.message.trim(),
+        from_name: validatedData.name, // ✅ Already trimmed and validated
+        from_email: validatedData.email, // ✅ Already validated as email
+        message: validatedData.message, // ✅ Already validated for length
         language: currentLanguage,
         to_name: 'Tolga',
-        recaptcha_token: recaptchaToken, // reCAPTCHA token'ı template'e ekle
+        recaptcha_token: recaptchaToken,
       };
 
       await emailjs.send(
@@ -182,19 +166,19 @@ const Contact: React.FC = () => {
       );
 
       setStatus('success');
-      trackContactSubmission(formData);
+      trackContactSubmission(validatedData); // ✅ Type-safe
       trackFormInteraction('contact_form', 'submit_success');
       setFormData({ name: '', email: '', message: '' });
       setErrors({ name: '', email: '', message: '' });
       
       // Success mesajını kaldır
       setTimeout(() => setStatus('idle'), TIMING.SUCCESS_MESSAGE_DURATION);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error('Error sending email:', error);
       setStatus('error');
       
-      // More detailed error handling
-      if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string') {
+      // ✅ TYPE-SAFE ERROR HANDLING
+      if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
         setErrorMessage(t('contact.form.error'));
@@ -245,20 +229,30 @@ const Contact: React.FC = () => {
     }, TIMING.ANALYTICS_DEBOUNCE_DELAY);
   };
 
-  // Real-time validation on blur
+  // Real-time validation on blur using Zod
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
+    const fieldName = e.target.name as keyof ContactFormSubmission;
+    const fieldValue = e.target.value.trim();
 
-    const newErrors = { ...errors };
-
-    // Use utility function for validation
-    if (fieldName === 'name' || fieldName === 'email' || fieldName === 'message') {
-      const errorKey = getValidationError(fieldName, fieldValue);
-      newErrors[fieldName] = errorKey ? t(errorKey) : '';
+    // ✅ VALIDATE INDIVIDUAL FIELD WITH ZOD
+    const fieldSchema = ContactFormSubmissionSchema.shape[fieldName];
+    if (fieldSchema) {
+      const fieldValidation = fieldSchema.safeParse(fieldValue);
+      
+      if (!fieldValidation.success) {
+        // ✅ SET FIELD-SPECIFIC ERROR (use issues instead of errors)
+        setErrors({
+          ...errors,
+          [fieldName]: fieldValidation.error.issues[0]?.message || '',
+        });
+      } else {
+        // Clear error if field is valid
+        setErrors({
+          ...errors,
+          [fieldName]: '',
+        });
+      }
     }
-
-    setErrors(newErrors);
   };
 
 
