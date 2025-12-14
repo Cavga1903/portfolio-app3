@@ -170,10 +170,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
 
   // Smooth scroll function
   const smoothScrollTo = (elementId: string) => {
-    // If blog link, navigate to /blog route
+    // If blog link, don't navigate (coming soon)
     if (elementId === 'blog') {
-      navigate('/blog');
-      setActiveLink('blog');
       return;
     }
     
@@ -361,32 +359,53 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
               <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: 2, position: 'relative' }}>
                 {/* Navigation Links */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, position: 'relative' }}>
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                      ref={(el) => {
-                        linkRefs.current[link.id] = el;
-                      }}
-                href={`#${link.id}`}
-                      className={`text-sm cursor-pointer transition-all duration-300 relative px-2 py-1 focus:outline-none ${
-                        activeLink === link.id
-                          ? "text-blue-400 font-medium"
-                          : "text-gray-300 hover:text-white"
-                      }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo(link.id);
-                  trackClick(
-                    `nav_${link.id}`,
-                    "navigation_link",
-                    t(link.labelKey)
-                  );
-                }}
-                      style={{ textDecoration: 'none' }}
-              >
-                {t(link.labelKey)}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isBlog = link.id === 'blog';
+              return (
+                <div
+                  key={link.id}
+                  className="relative group"
+                >
+                  <a
+                    ref={(el) => {
+                      linkRefs.current[link.id] = el;
+                    }}
+                    href={isBlog ? '#' : `#${link.id}`}
+                    className={`text-sm transition-all duration-300 relative px-2 py-1 focus:outline-none ${
+                      isBlog
+                        ? 'cursor-not-allowed opacity-60 text-gray-500'
+                        : activeLink === link.id
+                        ? "text-blue-400 font-medium cursor-pointer"
+                        : "text-gray-300 hover:text-white cursor-pointer"
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (isBlog) {
+                        return; // Blog linkine tıklamayı engelle
+                      }
+                      smoothScrollTo(link.id);
+                      trackClick(
+                        `nav_${link.id}`,
+                        "navigation_link",
+                        t(link.labelKey)
+                      );
+                    }}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    {t(link.labelKey)}
+                  </a>
+                  {/* Coming Soon Badge - Hover'da görünür */}
+                  {isBlog && (
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+                      <div className="bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-lg shadow-lg whitespace-nowrap">
+                        {t('blog.comingSoon') || 'Yakında'}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-500"></div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
                   
                   {/* Animated Underline */}
                   <motion.div
@@ -458,20 +477,26 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                             <span>{t('nav.home') || 'Home'}</span>
                           </a>
                           
-                          <a
-                            href="/blog"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsProfileDropdownOpen(false);
-                              navigate('/blog');
-                              trackClick('nav_blog_profile', 'navigation_link', 'Blog');
-                            }}
-                            className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.blog') || 'Blog'}</span>
-                          </a>
+                          <div className="relative group">
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                // Blog linkine tıklamayı engelle
+                              }}
+                              className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors cursor-not-allowed opacity-60 text-gray-500"
+                              style={{ textDecoration: 'none' }}
+                            >
+                              <FaBlog className="w-4 h-4" />
+                              <span>{t('nav.blog') || 'Blog'}</span>
+                            </a>
+                            {/* Coming Soon Badge - Hover'da görünür */}
+                            <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+                              <div className="bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-lg shadow-lg whitespace-nowrap">
+                                {t('blog.comingSoon') || 'Yakında'}
+                              </div>
+                            </div>
+                          </div>
                           
                           <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border-t mt-1 pt-2 text-gray-400 border-gray-700">
                             {t('nav.admin') || 'Admin'}
@@ -647,13 +672,25 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
 
             {/* Navigation Links */}
             <div className="px-4 py-4 space-y-2">
-              {navLinks.map((link) => (
-                <a
+              {navLinks.map((link) => {
+                const isBlog = link.id === 'blog';
+                return (
+                  <div
                     key={link.id}
-                      href={`#${link.id}`}
-                  className="block px-3 py-2.5 rounded-lg transition-all duration-200 relative group text-gray-300 hover:text-white hover:bg-gray-700/50"
+                    className="relative group"
+                  >
+                    <a
+                      href={isBlog ? '#' : `#${link.id}`}
+                      className={`block px-3 py-2.5 rounded-lg transition-all duration-200 relative ${
+                        isBlog
+                          ? 'cursor-not-allowed opacity-60 text-gray-500'
+                          : 'text-gray-300 hover:text-white hover:bg-gray-700/50 cursor-pointer'
+                      }`}
                       onClick={(e) => {
                         e.preventDefault();
+                        if (isBlog) {
+                          return; // Blog linkine tıklamayı engelle
+                        }
                         setIsMenuOpen(false);
                         smoothScrollTo(link.id);
                         trackClick(
@@ -662,12 +699,24 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                           t(link.labelKey)
                         );
                       }}
-                  style={{ textDecoration: 'none' }}
-                >
-                  {t(link.labelKey)}
-                  <span className="absolute left-0 bottom-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 bg-blue-400"></span>
-                </a>
-              ))}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      {t(link.labelKey)}
+                      {!isBlog && (
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 bg-blue-400"></span>
+                      )}
+                    </a>
+                    {/* Coming Soon Badge - Hover'da görünür */}
+                    {isBlog && (
+                      <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+                        <div className="bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-lg shadow-lg whitespace-nowrap">
+                          {t('blog.comingSoon') || 'Yakında'}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Footer Actions */}
@@ -733,21 +782,26 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, window }) => {
                             <span>{t('nav.home') || 'Home'}</span>
                           </a>
                           
-                          <a
-                            href="/blog"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsProfileDropdownOpen(false);
-                              setIsMenuOpen(false);
-                              navigate('/blog');
-                              trackClick('nav_blog_profile', 'navigation_link', 'Blog');
-                            }}
-                            className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors text-gray-300 hover:bg-gray-700"
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <FaBlog className="w-4 h-4" />
-                            <span>{t('nav.blog') || 'Blog'}</span>
-                          </a>
+                          <div className="relative group">
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                // Blog linkine tıklamayı engelle
+                              }}
+                              className="flex items-center gap-2 px-3 py-2 text-sm rounded transition-colors cursor-not-allowed opacity-60 text-gray-500"
+                              style={{ textDecoration: 'none' }}
+                            >
+                              <FaBlog className="w-4 h-4" />
+                              <span>{t('nav.blog') || 'Blog'}</span>
+                            </a>
+                            {/* Coming Soon Badge - Hover'da görünür */}
+                            <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+                              <div className="bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-lg shadow-lg whitespace-nowrap">
+                                {t('blog.comingSoon') || 'Yakında'}
+                              </div>
+                            </div>
+                          </div>
                           
                           <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border-t mt-1 pt-2 text-gray-400 border-gray-700">
                             {t('nav.admin') || 'Admin'}
